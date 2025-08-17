@@ -46,3 +46,24 @@ prevBtn.addEventListener('click', () => {
 nextBtn.addEventListener('click', () => {
   rail.scrollBy({ left: scrollAmount(), behavior: 'smooth' });
 });
+
+
+
+// Shorts-Scroller mit Buttons
+document.addEventListener("DOMContentLoaded", () => {
+  const row = document.querySelector(".shorts-row");
+  const prevBtn = document.querySelector(".rail-btn.prev");
+  const nextBtn = document.querySelector(".rail-btn.next");
+
+  if(row && prevBtn && nextBtn){
+    const scrollAmount = 200; // px pro Klick
+
+    prevBtn.addEventListener("click", () => {
+      row.scrollBy({ left: -scrollAmount, behavior: "smooth" });
+    });
+    nextBtn.addEventListener("click", () => {
+      row.scrollBy({ left: scrollAmount, behavior: "smooth" });
+    });
+  }
+});
+
