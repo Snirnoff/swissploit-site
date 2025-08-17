@@ -19,31 +19,32 @@
 </head>
 <body>
 <header class="site-header" role="banner">
-  <div class="wrap">
+  <div class="wrap headerbar">
+    <!-- Logo links -->
     <a class="brand" href="#top" aria-label="Swissploit Home">
       <img src="assets/+ploit3.png" alt="Swissploit Logo" height="40" />
+      <span>Swissploit</span>
     </a>
+
+    <!-- Navigation mittig -->
+    <nav class="nav" aria-label="Hauptnavigation">
+      <a href="#about">Channel</a>
+      <a href="#services">Services</a>
+      <a href="#shorts">Shorts</a>
+      <a href="#contact">Kontakt</a>
+    </nav>
+
+    <!-- iOS-Style Toggle rechts -->
+    <button id="themeToggle" class="switch" aria-pressed="false" aria-label="Darstellung umschalten" title="Dark/Light umschalten">
+      <span class="switch-track"></span>
+      <span class="switch-thumb">
+        <span class="switch-icon sun" aria-hidden="true">☀️</span>
+        <span class="switch-icon moon" aria-hidden="true">🌙</span>
+      </span>
+    </button>
   </div>
 </header>
 
-
-      <nav class="nav" aria-label="Hauptnavigation">
-        <a href="#about">Channel</a>
-        <a href="#services">Services</a>
-        <a href="#shorts">Shorts</a>
-        <a href="#contact">Kontakt</a>
-      </nav>
-
-      <!-- iOS-Style Toggle -->
-      <button id="themeToggle" class="switch" aria-pressed="false" aria-label="Darstellung umschalten" title="Dark/Light umschalten">
-        <span class="switch-track"></span>
-        <span class="switch-thumb">
-          <span class="switch-icon sun" aria-hidden="true">☀️</span>
-          <span class="switch-icon moon" aria-hidden="true">🌙</span>
-        </span>
-      </button>
-    </div>
-  </header>
 
   <main id="main">
     <!-- HERO -->
