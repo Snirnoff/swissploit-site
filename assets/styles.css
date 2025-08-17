@@ -235,9 +235,4 @@ html[data-theme="dark"] .btn.primary:hover{ background:#fff; }
   height: 100%;
   border: none;
 }
-.brand img {
-  height: 40px;
-  width: auto;
-  display: block;
-}
 
