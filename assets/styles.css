@@ -194,3 +194,45 @@ html[data-theme="dark"] .btn.primary:hover{ background:#fff; }
 @media (prefers-reduced-motion: reduce){
   *{ animation: none !important; transition: none !important; }
 }
+/* Shorts Section */
+.shorts {
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.shorts h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.shorts-container {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 1rem;
+}
+
+.short {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  width: 180px;   /* ~70% kleiner */
+  height: 320px;  /* 9:16 Format */
+  border-radius: 1rem;
+  overflow: hidden;
+  background: #000;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.short:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.3);
+}
+
+.short iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
