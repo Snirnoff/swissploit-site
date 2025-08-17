@@ -242,13 +242,7 @@ html[data-theme="dark"] .btn.primary:hover{ background:#fff; }
 }
 /* Shorts Section */
 .shorts {
-  padding: 4rem 2rem;
-  text-align: center;
-}
-
-.shorts h2 {
-  font-size: 2rem;
-  margin-bottom: 2rem;
+  padding: 2rem 0;   /* weniger Abstand */
 }
 
 .shorts-container {
