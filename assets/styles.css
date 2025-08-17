@@ -193,7 +193,7 @@ html[data-theme="dark"] .btn.primary:hover{ background:#fff; }
 .rail-btn.next{ right: -6px; }
 
 /* About */
-.section{ padding: 80px 0; }
+.section{ padding: 100px 0; }
 .section h2{ font-size: clamp(28px, 4vw, 44px); margin: 0 0 14px; letter-spacing:-.01em; color: var(--fg); }
 .section p{ font-size: 18px; color: color-mix(in oklab, var(--fg) 85%, transparent); max-width: 80ch; }
 
