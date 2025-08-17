@@ -201,7 +201,15 @@ html[data-theme="dark"] .btn.primary:hover{ background:#fff; }
 .feature{ background: var(--panel); border:1px solid var(--border); border-radius: 14px; padding: 18px; }
 
 /* Services */
-.services .cards{ display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; margin-top: 24px; }
+.services .cards{ 
+  display:grid; 
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); 
+  gap: 20px; 
+  margin-top: 24px; 
+  justify-items: center; /* NEU → letzte Karte zentrieren */
+}
+
+
 .card{
   background: var(--bg); border:1px solid var(--border); border-radius: 14px; padding: 18px; box-shadow: var(--shadow);
   transition: transform .18s ease, box-shadow .18s ease, background .18s ease, border-color .18s ease, color .18s ease;
