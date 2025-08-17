@@ -275,3 +275,15 @@ html[data-theme="dark"] .btn.primary:hover{ background:#fff; }
   height: 100%;
   border: none;
 }
+
+/* About weniger Abstand nach unten */
+#about.section {
+  padding-bottom: 20px;  /* statt 80px */
+}
+
+/* Shorts fast ohne Abstand nach oben */
+#shorts.shorts {
+  padding-top: 8px;      /* minimaler Abstand */
+  padding-bottom: 28px;  /* unten normal lassen */
+}
+
