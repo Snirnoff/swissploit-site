@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Swissploit – Tech, Cybersecurity, Schulungen</title>
-  <meta name="description" content="Swissploit: Tech-Videos, Cybersecurity-Services, Bereinigung gehackter Geräte, Schulungen und Social-Engineering-Simulationen." />
+  <meta name="description" content="Swissploit: Tech-Videos, Cybersecurity-Services, Bereinigung gehackter Geraete, Schulungen und Social-Engineering-Simulationen." />
   <meta property="og:title" content="Swissploit – Tech, Cybersecurity, Schulungen">
   <meta property="og:description" content="Tech-Channel & Services: Device-Cleanups, Schulungen, Audits, Social-Engineering-Tests und gamifizierte Awareness.">
   <meta property="og:type" content="website">
@@ -24,6 +24,7 @@
         <img src="assets/logo.svg" alt="Swissploit Logo" width="36" height="36" />
         <span>Swissploit</span>
       </a>
+
       <nav class="nav" aria-label="Hauptnavigation">
         <a href="#about">Channel</a>
         <a href="#services">Services</a>
@@ -31,10 +32,13 @@
         <a href="#contact">Kontakt</a>
       </nav>
 
-      <!-- Theme Toggle -->
-      <button id="themeToggle" class="toggle" aria-label="Darstellung umschalten" title="Dark/Light umschalten">
-        <span class="icon-sun" aria-hidden="true">☀️</span>
-        <span class="icon-moon" aria-hidden="true">🌙</span>
+      <!-- iOS-Style Toggle -->
+      <button id="themeToggle" class="switch" aria-pressed="false" aria-label="Darstellung umschalten" title="Dark/Light umschalten">
+        <span class="switch-track"></span>
+        <span class="switch-thumb">
+          <span class="switch-icon sun" aria-hidden="true">☀️</span>
+          <span class="switch-icon moon" aria-hidden="true">🌙</span>
+        </span>
       </button>
     </div>
   </header>
@@ -42,13 +46,12 @@
   <main id="main">
     <!-- HERO -->
     <section id="top" class="hero" aria-label="Einstieg">
-      <!-- weiche Lichtflächen -->
       <div class="bg-layer layer-1" data-speed="0.12"></div>
       <div class="bg-layer layer-2" data-speed="0.20"></div>
 
       <div class="content hero-copy">
         <h1><span class="muted">Tech. Security. Klar.</span><br>Swissploit</h1>
-        <p class="kicker">Der Schweizer Kanal und Service für moderne IT, Microsoft-Welt und Cybersecurity.</p>
+        <p class="kicker">Der Schweizer Kanal und Service fuer moderne IT, Microsoft-Welt und Cybersecurity.</p>
         <div class="cta-row">
           <a class="btn primary" href="#services">Services ansehen</a>
           <a class="btn ghost" href="https://www.youtube.com/@Swissploit" target="_blank" rel="noopener">YouTube Channel</a>
@@ -56,7 +59,7 @@
       </div>
     </section>
 
-    <!-- SHORTS KARUSSELL (9:16, horizontal scroll, Apple-like) -->
+    <!-- SHORTS: iPhone-Style 9:16 Karussell -->
     <section id="shorts" class="shorts section" aria-label="Swissploit Shorts">
       <div class="wrap">
         <h2>Shorts</h2>
@@ -64,33 +67,42 @@
 
         <div class="rail-wrap">
           <button class="rail-btn prev" aria-label="Nach links scrollen">‹</button>
+
           <div class="rail" id="shortsRail">
             <!-- Karte 1 -->
-            <a class="short-card" href="https://youtube.com/shorts/J9RDVdIfAyg" target="_blank" rel="noopener" aria-label="YouTube Short öffnen">
-              <div class="frame-9x16">
-                <iframe
-                  src="https://www.youtube.com/embed/J9RDVdIfAyg?modestbranding=1&rel=0"
-                  title="YouTube Short"
-                  loading="lazy"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowfullscreen></iframe>
+            <a class="short-card" href="https://youtube.com/shorts/J9RDVdIfAyg" target="_blank" rel="noopener" aria-label="YouTube Short: Shortcut Tipp">
+              <div class="phone">
+                <div class="notch"></div>
+                <div class="screen">
+                  <!-- Cropping-Trick: vertikal wie echte 9:16 Karte -->
+                  <iframe
+                    src="https://www.youtube.com/embed/J9RDVdIfAyg?modestbranding=1&rel=0&playsinline=1"
+                    title="YouTube Short"
+                    loading="lazy"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen></iframe>
+                </div>
               </div>
               <span class="short-title">Shortcut Tipp</span>
             </a>
 
             <!-- Karte 2 -->
-            <a class="short-card" href="https://youtube.com/shorts/9EWk0SbjzAQ" target="_blank" rel="noopener" aria-label="YouTube Short öffnen">
-              <div class="frame-9x16">
-                <iframe
-                  src="https://www.youtube.com/embed/9EWk0SbjzAQ?modestbranding=1&rel=0"
-                  title="YouTube Short"
-                  loading="lazy"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowfullscreen></iframe>
+            <a class="short-card" href="https://youtube.com/shorts/9EWk0SbjzAQ" target="_blank" rel="noopener" aria-label="YouTube Short: Onenote OCR">
+              <div class="phone">
+                <div class="notch"></div>
+                <div class="screen">
+                  <iframe
+                    src="https://www.youtube.com/embed/9EWk0SbjzAQ?modestbranding=1&rel=0&playsinline=1"
+                    title="YouTube Short"
+                    loading="lazy"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen></iframe>
+                </div>
               </div>
               <span class="short-title">Onenote OCR</span>
             </a>
           </div>
+
           <button class="rail-btn next" aria-label="Nach rechts scrollen">›</button>
         </div>
       </div>
@@ -100,11 +112,11 @@
     <section id="about" class="about section">
       <div class="wrap">
         <h2>Swissploit Channel</h2>
-        <p>Ich mache Tech-Content für die Schweiz: einfach, präzise und praxisnah. Themen: Microsoft 365, Windows 11, Tools, KI und Cybersecurity. Ziel: Wissen verständlich machen, damit Menschen sicherer und effizienter arbeiten.</p>
+        <p>Ich mache Tech-Content fuer die Schweiz: einfach, praezise und praxisnah. Themen: Microsoft 365, Windows 11, Tools, KI und Cybersecurity. Ziel: Wissen verstaendlich machen, damit Menschen sicherer und effizienter arbeiten.</p>
         <div class="features">
           <div class="feature">
             <h3>Videos mit Mehrwert</h3>
-            <p>Lösungen statt nur Tipps: kurze, klare Anleitungen und tiefergehende Tutorials.</p>
+            <p>Loesungen statt nur Tipps: kurze, klare Anleitungen und tiefergehende Tutorials.</p>
           </div>
           <div class="feature">
             <h3>Security im Fokus</h3>
@@ -112,7 +124,7 @@
           </div>
           <div class="feature">
             <h3>Made in Switzerland</h3>
-            <p>Relevanz für KMU, Schulen und Privathaushalte – lokal gedacht, professionell umgesetzt.</p>
+            <p>Relevanz fuer KMU, Schulen und Privathaushalte – lokal gedacht, professionell umgesetzt.</p>
           </div>
         </div>
       </div>
@@ -125,8 +137,8 @@
         <div class="cards">
           <article class="card">
             <div class="icon" aria-hidden="true">🛡️</div>
-            <h3>Bereinigung gehackter Geräte</h3>
-            <p>Forensische Analyse, Malware-Entfernung, Rücksetzung kompromittierter Konten, Hardening und Nachbetreuung.</p>
+            <h3>Bereinigung gehackter Geraete</h3>
+            <p>Forensische Analyse, Malware-Entfernung, Ruecksetzung kompromittierter Konten, Hardening und Nachbetreuung.</p>
             <ul>
               <li>Analyse von Logs und Indikatoren</li>
               <li>Neuaufsetzen optional</li>
@@ -138,14 +150,14 @@
           <article class="card">
             <div class="icon" aria-hidden="true">🎓</div>
             <h3>Cybersecurity-Schulungen</h3>
-            <p>Präsentation mit Tipps & Tricks, Live-Demos und aktuellen Fallbeispielen. Details gerne auf Anfrage.</p>
+            <p>Praesentation mit Tipps & Tricks, Live-Demos und aktuellen Fallbeispielen. Details gerne auf Anfrage.</p>
             <div class="card-cta"><a href="#contact" class="btn small">Kontakt aufnehmen</a></div>
           </article>
 
           <article class="card">
             <div class="icon" aria-hidden="true">🔍</div>
-            <h3>Security-Analysen für Unternehmen</h3>
-            <p>Übersichtliche Assessments zu Microsoft 365, Endgeräte, Identitäten und Backup-Strategie.</p>
+            <h3>Security-Analysen fuer Unternehmen</h3>
+            <p>Uebersichtliche Assessments zu Microsoft 365, Endgeraete, Identitaeten und Backup-Strategie.</p>
             <ul>
               <li>Quick-Check (1–2 Tage)</li>
               <li>Massnahmenplan</li>
@@ -157,7 +169,7 @@
           <article class="card">
             <div class="icon" aria-hidden="true">🎭</div>
             <h3>Social-Engineering Simulationen</h3>
-            <p>Realitätsnahe Phishing- und Vishing-Kampagnen inkl. Auswertung, Awareness-Material und Follow-up.</p>
+            <p>Realitaetsnahe Phishing- und Vishing-Kampagnen inkl. Auswertung, Awareness-Material und Follow-up.</p>
             <ul>
               <li>Mail, Telefon, QR, USB</li>
               <li>Reports & KPI-Dashboard</li>
@@ -185,7 +197,7 @@
     <section id="contact" class="contact section">
       <div class="wrap">
         <h2>Kontakt</h2>
-        <p>Bereit für mehr Sicherheit und klaren Tech-Content? Schreib mir kurz dein Anliegen – ich melde mich rasch.</p>
+        <p>Bereit fuer mehr Sicherheit und klaren Tech-Content? Schreib mir kurz dein Anliegen – ich melde mich rasch.</p>
         <form class="contact-form" action="https://formspree.io/f/DEINE-ID" method="POST">
           <div class="row">
             <label>
@@ -220,7 +232,6 @@
     </div>
   </footer>
 
-  <!-- Strukturierte Daten -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
