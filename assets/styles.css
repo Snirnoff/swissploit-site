@@ -359,3 +359,18 @@ html[data-theme="dark"] .btn.primary:hover{ background:#fff; }
   height: 100%;
   border: 0;
 }
+
+/* Abstand links & rechts vom Fenster */
+.shorts-container {
+  display: flex;
+  gap: 1.2rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 0 40px 8px;   /* <<< links & rechts je 40px Abstand */
+  scrollbar-width: thin;
+}
+
+/* Buttons für scrollen positionieren */
+.rail-btn.prev { left: 12px; }   /* vorher 4px */
+.rail-btn.next { right: 12px; }  /* vorher 4px */
+
