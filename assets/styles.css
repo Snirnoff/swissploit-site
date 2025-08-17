@@ -438,21 +438,3 @@ html[data-theme="dark"] .btn.primary:hover{ background:#fff; }
 }
 
 
-.socials {
-  display: flex;
-  gap: 14px;
-  margin: 0 14px;
-}
-
-.socials a {
-  font-size: 20px;
-  color: var(--fg);
-  opacity: 0.8;
-  transition: transform .18s ease, color .18s ease, opacity .18s ease;
-}
-
-.socials a:hover {
-  color: var(--accent);
-  transform: scale(1.2);
-  opacity: 1;
-}
