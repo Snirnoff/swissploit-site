@@ -47,4 +47,33 @@ nextBtn.addEventListener('click', () => {
   rail.scrollBy({ left: scrollAmount(), behavior: 'smooth' });
 });
 
+// Shorts Rail Buttons
+(function(){
+  const rail = document.getElementById('shortsRail');
+  const prevBtn = document.querySelector('#shorts .rail-btn.prev');
+  const nextBtn = document.querySelector('#shorts .rail-btn.next');
+  if(!rail || !prevBtn || !nextBtn) return;
+
+  const step = () => Math.min(rail.clientWidth * 0.8, 600);
+
+  function updateButtons(){
+    // feststellen, ob links/rechts noch Scroll-Puffer da ist
+    const maxScroll = rail.scrollWidth - rail.clientWidth;
+    const x = rail.scrollLeft;
+    prevBtn.disabled = x <= 2;
+    nextBtn.disabled = x >= maxScroll - 2;
+  }
+
+  prevBtn.addEventListener('click', () => {
+    rail.scrollBy({ left: -step(), behavior: 'smooth' });
+  });
+  nextBtn.addEventListener('click', () => {
+    rail.scrollBy({ left: step(), behavior: 'smooth' });
+  });
+
+  rail.addEventListener('scroll', updateButtons, { passive: true });
+  window.addEventListener('resize', updateButtons);
+  // Initialzustand
+  updateButtons();
+})();
 
