@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="de">
+<html lang="de" data-theme="light">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Swissploit – Tech, Cybersecurity, Schulungen</title>
-  <meta name="description" content="Swissploit: Tech-Videos, Cybersecurity-Services, Bereinigung gehackter Geräte, Schulungen und Social-Engineering-Simulationen. Apple-like Parallax Experience." />
+  <meta name="description" content="Swissploit: Tech-Videos, Cybersecurity-Services, Bereinigung gehackter Geräte, Schulungen und Social-Engineering-Simulationen." />
   <meta property="og:title" content="Swissploit – Tech, Cybersecurity, Schulungen">
   <meta property="og:description" content="Tech-Channel & Services: Device-Cleanups, Schulungen, Audits, Social-Engineering-Tests und gamifizierte Awareness.">
   <meta property="og:type" content="website">
@@ -18,8 +18,6 @@
   <script defer src="assets/app.js"></script>
 </head>
 <body>
-  <a class="skip-link" href="#main">Zum Inhalt springen</a>
-
   <header class="site-header" role="banner">
     <div class="wrap">
       <a class="brand" href="#top" aria-label="Swissploit Home">
@@ -29,18 +27,24 @@
       <nav class="nav" aria-label="Hauptnavigation">
         <a href="#about">Channel</a>
         <a href="#services">Services</a>
-        <a href="#training">Schulungen</a>
+        <a href="#shorts">Shorts</a>
         <a href="#contact">Kontakt</a>
       </nav>
+
+      <!-- Theme Toggle -->
+      <button id="themeToggle" class="toggle" aria-label="Darstellung umschalten" title="Dark/Light umschalten">
+        <span class="icon-sun" aria-hidden="true">☀️</span>
+        <span class="icon-moon" aria-hidden="true">🌙</span>
+      </button>
     </div>
   </header>
 
   <main id="main">
     <!-- HERO -->
     <section id="top" class="hero" aria-label="Einstieg">
-      <!-- weiche Lichtflächen, bewegen sich dezent -->
-      <div class="bg-layer layer-1" data-speed="0.18"></div>
-      <div class="bg-layer layer-2" data-speed="0.28"></div>
+      <!-- weiche Lichtflächen -->
+      <div class="bg-layer layer-1" data-speed="0.12"></div>
+      <div class="bg-layer layer-2" data-speed="0.20"></div>
 
       <div class="content hero-copy">
         <h1><span class="muted">Tech. Security. Klar.</span><br>Swissploit</h1>
@@ -50,34 +54,45 @@
           <a class="btn ghost" href="https://www.youtube.com/@Swissploit" target="_blank" rel="noopener">YouTube Channel</a>
         </div>
       </div>
-
-      <!-- Device rechts – weiter rausgeschoben, auf Mobile ausgeblendet -->
-      <div class="device parallax" data-speed="0.4" aria-hidden="true">
-        <div class="device-frame">
-          <div class="device-notch"></div>
-          <div class="device-screen"><div class="screen-grid"></div></div>
-        </div>
-      </div>
     </section>
 
-    <!-- APPLE-LIKE LOGO-CENTER: Plus dreht sich beim Scrollen -->
-    <section class="logo-spin section" aria-label="Swissploit Symbol">
-      <div class="wrap center">
-        <svg viewBox="0 0 200 200" class="cp-svg" role="img" aria-label="Swissploit Symbol">
-          <defs>
-            <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
-              <stop offset="0%" stop-color="#d30000"/>
-              <stop offset="100%" stop-color="#ff5959"/>
-            </linearGradient>
-          </defs>
-          <rect x="20" y="20" width="160" height="160" rx="28" ry="28" fill="url(#g)"></rect>
-          <!-- Plus als Gruppe, dreht sich via JS um die Mitte (100,100) -->
-          <g id="plus">
-            <rect x="92" y="50" width="16" height="100" fill="#fff" />
-            <rect x="50" y="92" width="100" height="16" fill="#fff" />
-          </g>
-        </svg>
-        <p class="center-sub">Schnell, minimalistisch, Apple-like – Inhalte im Fokus.</p>
+    <!-- SHORTS KARUSSELL (9:16, horizontal scroll, Apple-like) -->
+    <section id="shorts" class="shorts section" aria-label="Swissploit Shorts">
+      <div class="wrap">
+        <h2>Shorts</h2>
+        <p class="shorts-sub">Tipps und Mini-Guides – scrolle nach rechts.</p>
+
+        <div class="rail-wrap">
+          <button class="rail-btn prev" aria-label="Nach links scrollen">‹</button>
+          <div class="rail" id="shortsRail">
+            <!-- Karte 1 -->
+            <a class="short-card" href="https://youtube.com/shorts/J9RDVdIfAyg" target="_blank" rel="noopener" aria-label="YouTube Short öffnen">
+              <div class="frame-9x16">
+                <iframe
+                  src="https://www.youtube.com/embed/J9RDVdIfAyg?modestbranding=1&rel=0"
+                  title="YouTube Short"
+                  loading="lazy"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowfullscreen></iframe>
+              </div>
+              <span class="short-title">Shortcut Tipp</span>
+            </a>
+
+            <!-- Karte 2 -->
+            <a class="short-card" href="https://youtube.com/shorts/9EWk0SbjzAQ" target="_blank" rel="noopener" aria-label="YouTube Short öffnen">
+              <div class="frame-9x16">
+                <iframe
+                  src="https://www.youtube.com/embed/9EWk0SbjzAQ?modestbranding=1&rel=0"
+                  title="YouTube Short"
+                  loading="lazy"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowfullscreen></iframe>
+              </div>
+              <span class="short-title">Onenote OCR</span>
+            </a>
+          </div>
+          <button class="rail-btn next" aria-label="Nach rechts scrollen">›</button>
+        </div>
       </div>
     </section>
 
@@ -117,14 +132,14 @@
               <li>Neuaufsetzen optional</li>
               <li>2 Wochen Nachkontrolle</li>
             </ul>
-            <a href="#contact" class="btn small">Anfragen</a>
+            <div class="card-cta"><a href="#contact" class="btn small">Anfragen</a></div>
           </article>
 
           <article class="card">
             <div class="icon" aria-hidden="true">🎓</div>
             <h3>Cybersecurity-Schulungen</h3>
             <p>Präsentation mit Tipps & Tricks, Live-Demos und aktuellen Fallbeispielen. Details gerne auf Anfrage.</p>
-            <a href="#training" class="btn small">Mehr Infos</a>
+            <div class="card-cta"><a href="#contact" class="btn small">Kontakt aufnehmen</a></div>
           </article>
 
           <article class="card">
@@ -136,7 +151,7 @@
               <li>Massnahmenplan</li>
               <li>Umsetzungsempfehlungen</li>
             </ul>
-            <a href="#contact" class="btn small">Assessment anfragen</a>
+            <div class="card-cta"><a href="#contact" class="btn small">Assessment anfragen</a></div>
           </article>
 
           <article class="card">
@@ -148,7 +163,7 @@
               <li>Reports & KPI-Dashboard</li>
               <li>Management-Briefing</li>
             </ul>
-            <a href="#contact" class="btn small">Simulation planen</a>
+            <div class="card-cta"><a href="#contact" class="btn small">Simulation planen</a></div>
           </article>
 
           <article class="card">
@@ -160,19 +175,8 @@
               <li>Onsite oder Online</li>
               <li>Messbare Lerneffekte</li>
             </ul>
-            <a href="#contact" class="btn small">Pilot buchen</a>
+            <div class="card-cta"><a href="#contact" class="btn small">Pilot buchen</a></div>
           </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- TRAINING (nur Teaser, Details auf Anfrage) -->
-    <section id="training" class="training section">
-      <div class="wrap">
-        <h2>Schulungen</h2>
-        <p>Wir bieten praxisnahe Cybersecurity-Schulungen für Teams, Führung, Schulen und KMU – kompakt, verständlich, direkt anwendbar. Inhalte, Dauer und Format stimmen wir individuell ab.</p>
-        <div class="cta-row">
-          <a class="btn primary" href="#contact">Unverbindliches Angebot anfragen</a>
         </div>
       </div>
     </section>
@@ -210,7 +214,7 @@
       <nav class="foot-nav" aria-label="Footer Navigation">
         <a href="#about">Channel</a>
         <a href="#services">Services</a>
-        <a href="#training">Schulungen</a>
+        <a href="#shorts">Shorts</a>
         <a href="#contact">Kontakt</a>
       </nav>
     </div>
