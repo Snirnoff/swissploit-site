@@ -1,7 +1,7 @@
-// Jahr aktualisieren
+// Jahr
 document.getElementById('year').textContent = new Date().getFullYear();
 
-// Parallax Bewegung
+// Parallax Translation (weiche Bewegung der bg-layer & device)
 const parallaxEls = document.querySelectorAll('[data-speed]');
 window.addEventListener('scroll', () => {
   const y = window.scrollY;
@@ -11,39 +11,28 @@ window.addEventListener('scroll', () => {
   });
 }, { passive: true });
 
-// Scrollytelling
-const steps = [...document.querySelectorAll('#steps li')];
-const copy = document.getElementById('stickyCopy');
-const centerpiece = document.getElementById('centerpiece');
+// Logo-Plus dreht sich beim Scrollen
+const plus = document.getElementById('plus');
+const clamp = (n, min, max) => Math.max(min, Math.min(n, max));
 
-function applyState(step){
-  const text = step.dataset.text || '';
-  const rot = parseFloat(step.dataset.rotate || '0');
-  const scale = parseFloat(step.dataset.scale || '1');
-  copy.textContent = text;
-  centerpiece.style.transform = `rotate(${rot}deg) scale(${scale})`;
+function spinPlus(){
+  const y = window.scrollY || 0;
+  // sanfte Rotation: 0.18 Grad pro px Scroll, gedeckelt
+  const angle = clamp(y * 0.18, 0, 2880); // bis 8 volle Umdrehungen
+  // Drehung um die Mitte des SVG (100,100 im 200er ViewBox)
+  if (plus) plus.setAttribute('transform', `rotate(${angle} 100 100)`);
 }
+spinPlus();
+window.addEventListener('scroll', spinPlus, { passive: true });
 
-if(steps.length){
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting) applyState(entry.target);
-    });
-  }, { root: null, threshold: 0.6 });
-  steps.forEach(s => io.observe(s));
-  applyState(steps[0]);
-}
-
-// Tastatur-Navigation (Barrierefreiheit)
+// Tastatur-Navigation (optional)
 document.addEventListener('keydown', (e) => {
   if(e.key === 'ArrowDown' || e.key === 'PageDown'){
     e.preventDefault();
-    const next = steps.find(s => s.getBoundingClientRect().top > 10);
-    if(next) next.scrollIntoView({ behavior:'smooth', block:'start' });
+    window.scrollBy({ top: window.innerHeight * 0.9, behavior: 'smooth' });
   }
   if(e.key === 'ArrowUp' || e.key === 'PageUp'){
     e.preventDefault();
-    const prev = [...steps].reverse().find(s => s.getBoundingClientRect().top < -10);
-    if(prev) prev.scrollIntoView({ behavior:'smooth', block:'start' });
+    window.scrollBy({ top: -window.innerHeight * 0.9, behavior: 'smooth' });
   }
 });
