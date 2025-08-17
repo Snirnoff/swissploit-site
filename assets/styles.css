@@ -34,16 +34,62 @@ html[data-theme="dark"]{
 .wrap{ max-width: calc(var(--max) + 2*var(--wrap)); padding: 0 var(--wrap); margin: 0 auto; }
 
 /* Header */
-.site-header{
-  position: sticky; top: 0; z-index: 30; backdrop-filter: saturate(140%) blur(8px);
-  background: color-mix(in oklab, var(--bg) 80%, transparent);
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  backdrop-filter: saturate(140%) blur(8px);
+  background: color-mix(in oklab, var(--bg) 82%, transparent);
   border-bottom: 1px solid var(--border);
 }
-.site-header .wrap{ display:flex; align-items:center; justify-content:space-between; height: 64px; gap: 10px; }
-.brand{ display:flex; align-items:center; gap:10px; color:var(--fg); text-decoration:none; font-weight:800; letter-spacing:.2px; }
-.brand img{ display:block; }
-.nav a{ margin-left: 18px; text-decoration:none; color:var(--fg); opacity:.9; font-weight:500; }
-.nav a:hover{ color: var(--accent); opacity:1; }
+
+/* Grid: Logo | Nav | Toggle */
+.headerbar {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  column-gap: 16px;
+  height: 64px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--fg);
+  font-weight: 800;
+  letter-spacing: .2px;
+}
+.brand img {
+  height: 40px;
+  width: auto;
+  display: block;
+}
+
+.nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+.nav a {
+  text-decoration: none;
+  color: var(--fg);
+  opacity: .9;
+  font-weight: 500;
+}
+.nav a:hover {
+  color: var(--accent);
+  opacity: 1;
+}
+
+@media (max-width: 720px) {
+  .brand span { display: none; } /* nur Logo auf Mobile */
+  .nav { gap: 12px; font-size: 14px; }
+}
+
 
 /* iOS-Style Switch */
 .switch{
