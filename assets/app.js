@@ -1,7 +1,28 @@
 // Jahr
 document.getElementById('year').textContent = new Date().getFullYear();
 
-// Parallax Translation (weiche Bewegung der bg-layer & device)
+// THEME TOGGLE
+const root = document.documentElement;
+const toggle = document.getElementById('themeToggle');
+
+function applyTheme(t){
+  root.setAttribute('data-theme', t);
+  localStorage.setItem('swissploit-theme', t);
+}
+(function initTheme(){
+  const saved = localStorage.getItem('swissploit-theme');
+  if(saved){ applyTheme(saved); }
+  else {
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    applyTheme(prefersDark ? 'dark' : 'light');
+  }
+})();
+toggle.addEventListener('click', () => {
+  const cur = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  applyTheme(cur);
+});
+
+// Dezente Parallax-Übersetzung der BG-Layer
 const parallaxEls = document.querySelectorAll('[data-speed]');
 window.addEventListener('scroll', () => {
   const y = window.scrollY;
@@ -11,28 +32,15 @@ window.addEventListener('scroll', () => {
   });
 }, { passive: true });
 
-// Logo-Plus dreht sich beim Scrollen
-const plus = document.getElementById('plus');
-const clamp = (n, min, max) => Math.max(min, Math.min(n, max));
+// Shorts Rail – Buttons scrollen die Leiste
+const rail = document.getElementById('shortsRail');
+const prevBtn = document.querySelector('.rail-btn.prev');
+const nextBtn = document.querySelector('.rail-btn.next');
+const scrollAmount = () => Math.min(rail.clientWidth * 0.8, 600);
 
-function spinPlus(){
-  const y = window.scrollY || 0;
-  // sanfte Rotation: 0.18 Grad pro px Scroll, gedeckelt
-  const angle = clamp(y * 0.18, 0, 2880); // bis 8 volle Umdrehungen
-  // Drehung um die Mitte des SVG (100,100 im 200er ViewBox)
-  if (plus) plus.setAttribute('transform', `rotate(${angle} 100 100)`);
-}
-spinPlus();
-window.addEventListener('scroll', spinPlus, { passive: true });
-
-// Tastatur-Navigation (optional)
-document.addEventListener('keydown', (e) => {
-  if(e.key === 'ArrowDown' || e.key === 'PageDown'){
-    e.preventDefault();
-    window.scrollBy({ top: window.innerHeight * 0.9, behavior: 'smooth' });
-  }
-  if(e.key === 'ArrowUp' || e.key === 'PageUp'){
-    e.preventDefault();
-    window.scrollBy({ top: -window.innerHeight * 0.9, behavior: 'smooth' });
-  }
+prevBtn.addEventListener('click', () => {
+  rail.scrollBy({ left: -scrollAmount(), behavior: 'smooth' });
+});
+nextBtn.addEventListener('click', () => {
+  rail.scrollBy({ left: scrollAmount(), behavior: 'smooth' });
 });
