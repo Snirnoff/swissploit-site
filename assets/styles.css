@@ -420,28 +420,7 @@ html[data-theme="dark"] .btn.primary:hover{ background:#fff; }
 }
 
 
-/* Speziell für den YouTube-Button */
-.youtube-btn {
-  position: relative;
-  overflow: hidden;
-}
 
-/* Logo als Hintergrund beim Hover */
-.youtube-btn:hover::after,
-.youtube-btn:active::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: url("assets/+ploit3.png") center/24px no-repeat; /* Logo einfügen */
-  opacity: 0.9;
-  animation: popIn 0.3s ease;
-}
-
-/* Kleine Pop-Animation */
-@keyframes popIn {
-  from { transform: scale(0.5); opacity: 0; }
-  to   { transform: scale(1); opacity: 0.9; }
-}
 
 /* Keine Bulletpoints bei dienstleistungen */
 .card ul {
