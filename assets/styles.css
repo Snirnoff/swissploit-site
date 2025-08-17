@@ -374,3 +374,26 @@ html[data-theme="dark"] .btn.primary:hover{ background:#fff; }
 .rail-btn.prev { left: 12px; }   /* vorher 4px */
 .rail-btn.next { right: 12px; }  /* vorher 4px */
 
+
+.shorts-container {
+  display: flex;
+  gap: 1.2rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 0 40px 8px;     /* Abstand links & rechts */
+  scrollbar-width: thin;
+  justify-content: center; /* <<< sorgt dafür, dass die Inhalte mittig starten */
+}
+
+/* Grundzustand: unsichtbar & leicht verschoben */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+/* Sobald sichtbar */
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
