@@ -1,28 +1,30 @@
 // Jahr
 document.getElementById('year').textContent = new Date().getFullYear();
 
-// THEME TOGGLE
+// THEME TOGGLE (iOS-like)
 const root = document.documentElement;
 const toggle = document.getElementById('themeToggle');
 
-function applyTheme(t){
+function setTheme(t){
   root.setAttribute('data-theme', t);
   localStorage.setItem('swissploit-theme', t);
+  // aria-pressed true = dark on
+  toggle.setAttribute('aria-pressed', t === 'dark' ? 'true' : 'false');
 }
 (function initTheme(){
   const saved = localStorage.getItem('swissploit-theme');
-  if(saved){ applyTheme(saved); }
+  if(saved){ setTheme(saved); }
   else {
     const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-    applyTheme(prefersDark ? 'dark' : 'light');
+    setTheme(prefersDark ? 'dark' : 'light');
   }
 })();
 toggle.addEventListener('click', () => {
   const cur = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-  applyTheme(cur);
+  setTheme(cur);
 });
 
-// Dezente Parallax-Übersetzung der BG-Layer
+// Dezente Parallax-Translation der BG-Layer
 const parallaxEls = document.querySelectorAll('[data-speed]');
 window.addEventListener('scroll', () => {
   const y = window.scrollY;
@@ -32,7 +34,7 @@ window.addEventListener('scroll', () => {
   });
 }, { passive: true });
 
-// Shorts Rail – Buttons scrollen die Leiste
+// Shorts-Rail Pfeile
 const rail = document.getElementById('shortsRail');
 const prevBtn = document.querySelector('.rail-btn.prev');
 const nextBtn = document.querySelector('.rail-btn.next');
