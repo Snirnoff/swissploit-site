@@ -203,12 +203,12 @@ html[data-theme="dark"] .btn.primary:hover{ background:#fff; }
 /* Services */
 .services .cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, max-content));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 20px;
   margin-top: 24px;
-  justify-content: center; /* sorgt dafür, dass übrig gebliebene Kachel mittig ist */
+  justify-content: center;   /* Grid als Ganzes zentrieren */
+  justify-items: center;     /* Items in ihrer Zelle zentrieren */
 }
-
 
 
 .card{
