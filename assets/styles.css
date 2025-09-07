@@ -446,3 +446,11 @@ html[data-theme="dark"] .btn.primary:hover{ background:#fff; }
   padding-top: 36px !important;      /* vorher sehr klein */
 }
 
+.services .cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+  margin-top: 24px;
+  justify-content: center;   /* Grid als Ganzes zentrieren */
+  justify-items: center;     /* Items in ihrer Zelle zentrieren */
+}
