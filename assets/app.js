@@ -93,7 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 });
 
-// Mailto aus Formular generieren
+// Mailto aus Formular generieren (nur Nachricht)
 (function(){
   const form = document.getElementById('contactForm');
   if(!form) return;
@@ -101,23 +101,12 @@ document.addEventListener("DOMContentLoaded", () => {
   form.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    const name = (document.getElementById('cf-name')?.value || '').trim();
-    const email = (document.getElementById('cf-email')?.value || '').trim();
     const msg = (document.getElementById('cf-message')?.value || '').trim();
-
     const to = 'hello@swissploit.ch';
-    const subject = name ? `Kontakt von ${name}` : 'Kontaktanfrage Swissploit';
-    const bodyLines = [
-      name ? `Name: ${name}` : null,
-      email ? `E-Mail: ${email}` : null,
-      '',
-      'Nachricht:',
-      msg || ''
-    ].filter(Boolean);
+    const subject = 'Kontaktanfrage Swissploit';
+    const body = msg ? msg : '';
 
-    const mailto = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyLines.join('\n'))}`;
-
-    // Mail-Client oeffnen
+    const mailto = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     window.location.href = mailto;
   });
 })();
