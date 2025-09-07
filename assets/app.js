@@ -111,3 +111,51 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 })();
 
+/* ===== Apple-like Veredelungen ===== */
+
+// A) Header verstärken, sobald gescrollt
+(function(){
+  const header = document.querySelector('.site-header');
+  if(!header) return;
+  const onScroll = () => header.classList.toggle('scrolled', (window.scrollY||0) > 8);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+})();
+
+// B) Cursor-Spotlight im Hero (setzt CSS-Variablen --mx/--my)
+(function(){
+  const hero = document.querySelector('.hero');
+  if(!hero) return;
+  window.addEventListener('pointermove', (e)=>{
+    const x = (e.clientX / window.innerWidth) * 100;
+    const y = (e.clientY / window.innerHeight) * 100;
+    document.documentElement.style.setProperty('--mx', x + '%');
+    document.documentElement.style.setProperty('--my', y + '%');
+  }, { passive: true });
+})();
+
+// C) Gestaffelte Reveals für Gruppen (Features, Cards, Shorts)
+(function(){
+  const groups = document.querySelectorAll('.features, .cards, .shorts-container');
+  groups.forEach(group => {
+    const items = group.querySelectorAll('.reveal, .feature, .card, .short');
+    items.forEach((el, i) => {
+      el.style.transitionDelay = (i * 0.06) + 's';
+      el.classList.add('reveal'); // sicherstellen, dass Klasse da ist
+    });
+  });
+})();
+
+// D) Optionale „magnetische“ Buttons (füge Klasse .magnetic im HTML hinzu)
+(function(){
+  const mags = document.querySelectorAll('.btn.magnetic');
+  mags.forEach(btn => {
+    btn.addEventListener('mousemove', (e)=>{
+      const r = btn.getBoundingClientRect();
+      const x = e.clientX - (r.left + r.width/2);
+      const y = e.clientY - (r.top + r.height/2);
+      btn.style.transform = `translate(${x*0.06}px, ${y*0.06}px)`;
+    });
+    btn.addEventListener('mouseleave', ()=> btn.style.transform = 'translate(0,0)');
+  });
+})();
