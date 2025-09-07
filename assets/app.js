@@ -93,3 +93,32 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 });
 
+// Mailto aus Formular generieren
+(function(){
+  const form = document.getElementById('contactForm');
+  if(!form) return;
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const name = (document.getElementById('cf-name')?.value || '').trim();
+    const email = (document.getElementById('cf-email')?.value || '').trim();
+    const msg = (document.getElementById('cf-message')?.value || '').trim();
+
+    const to = 'hello@swissploit.ch';
+    const subject = name ? `Kontakt von ${name}` : 'Kontaktanfrage Swissploit';
+    const bodyLines = [
+      name ? `Name: ${name}` : null,
+      email ? `E-Mail: ${email}` : null,
+      '',
+      'Nachricht:',
+      msg || ''
+    ].filter(Boolean);
+
+    const mailto = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyLines.join('\n'))}`;
+
+    // Mail-Client oeffnen
+    window.location.href = mailto;
+  });
+})();
+
