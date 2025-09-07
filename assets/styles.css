@@ -454,3 +454,57 @@ html[data-theme="dark"] .btn.primary:hover{ background:#fff; }
   justify-content: center;   /* Grid als Ganzes zentrieren */
   justify-items: center;     /* Items in ihrer Zelle zentrieren */
 }
+
+
+
+/* ===== Apple-like Veredelungen ===== */
+
+/* A) Sticky-Header: mehr Glas + dezenter Schatten beim Scrollen */
+.site-header.scrolled{
+  background: color-mix(in oklab, var(--bg) 94%, transparent);
+  border-bottom-color: color-mix(in oklab, var(--fg) 10%, var(--border));
+  box-shadow: 0 6px 24px rgba(0,0,0,.06);
+}
+
+/* B) Hero-Spotlight, das dem Cursor folgt (sehr subtil) */
+.hero::after{
+  content:"";
+  position:absolute; inset:0; pointer-events:none;
+  mix-blend-mode: soft-light;
+  opacity:.35;
+  background:
+    radial-gradient(600px 600px at var(--mx,50%) var(--my,30%),
+      color-mix(in oklab, var(--accent) 18%, transparent) 0%,
+      transparent 60%);
+}
+
+/* C) Hairline-Separators zwischen Sections (1px „Lichtlinie“) */
+.section{
+  position: relative;
+  scroll-margin-top: 84px; /* Anker nicht unter den Header schieben */
+}
+.section::before{
+  content:"";
+  position:absolute; left:0; right:0; top:-1px; height:1px;
+  background: linear-gradient(90deg,
+    transparent, color-mix(in oklab, var(--fg) 10%, transparent), transparent);
+}
+
+/* D) Karten: Gradient-Hairline wie bei Apple */
+.card{
+  border:1px solid transparent;
+  background:
+    linear-gradient(var(--bg), var(--bg)) padding-box,
+    linear-gradient(180deg,
+      color-mix(in oklab, var(--fg) 10%, transparent),
+      color-mix(in oklab, var(--fg) 2%, transparent)) border-box;
+}
+
+/* E) Buttons optional „magnetisch“ (klasse .magnetic) */
+.btn.magnetic{
+  transition: transform .12s ease, box-shadow .2s ease;
+  will-change: transform;
+}
+
+/* F) Gestaffelte Reveal-Delays (wir setzen inline per JS) */
+.reveal{ /* bereits vorhanden – hier nur Erinnerung, nichts ändern */ }
