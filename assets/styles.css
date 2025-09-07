@@ -438,4 +438,11 @@ html[data-theme="dark"] .btn.primary:hover{ background:#fff; }
   margin-left: 0;
 }
 
+/* --- Abstand: About -> Shorts (Reels) erhoehen --- */
+#about.section { 
+  padding-bottom: 72px !important;   /* vorher 20px */
+}
+#shorts.shorts { 
+  padding-top: 36px !important;      /* vorher sehr klein */
+}
 
