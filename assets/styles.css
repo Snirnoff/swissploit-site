@@ -652,9 +652,9 @@ html[data-theme="dark"] .btn.primary:hover{ background:#fff; }
 }
 /* Weniger Abstand zwischen About und Shorts */
 #about.section {
-  padding-bottom: 20px;   /* sehr kleiner Abstand */
+  padding-bottom: 5px;   /* sehr kleiner Abstand */
 }
 
 #shorts.shorts {
-  padding-top: 20px;      /* sehr kleiner Abstand */
+  padding-top: 5px;      /* sehr kleiner Abstand */
 }
