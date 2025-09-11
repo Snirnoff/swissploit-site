@@ -660,3 +660,26 @@ html[data-theme="dark"] .btn.primary:hover{ background:#fff; }
   padding-top: 5px !important;      /* sehr kleiner Abstand */
 }
 
+        /* Filter-Chips */
+        .service-filters{
+          display:flex; gap:10px; justify-content:center; flex-wrap:wrap;
+          margin: 10px 0 18px;
+        }
+        .chip{
+          appearance:none; border:1px solid var(--border); background: var(--panel);
+          color: var(--fg); padding:8px 12px; border-radius:999px; cursor:pointer;
+          font-weight:600; transition: transform .15s ease, box-shadow .15s ease, background .15s ease, border-color .15s ease;
+        }
+        .chip:hover{ transform: translateY(-1px); box-shadow: var(--shadow); }
+        .chip.is-active{
+          background: color-mix(in oklab, var(--accent) 12%, var(--panel));
+          border-color: color-mix(in oklab, var(--accent) 45%, var(--border));
+        }
+        
+        /* Ausblenden der nicht passenden Kacheln (mit sanftem Effekt) */
+        .card.is-hidden{
+          pointer-events:none;
+          opacity:0;
+          transform: translateY(10px) scale(0.98);
+          transition: opacity .18s ease, transform .18s ease;
+        }
