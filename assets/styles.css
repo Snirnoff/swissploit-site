@@ -766,4 +766,40 @@ html[data-theme="dark"] .btn.primary:hover{ background:#fff; }
   color: var(--accent); /* Rot (deine Akzentfarbe #d30000) */
 }
 
+/* ============================================================
+   SNIPPET: BUTTON-HOVER MIT HINTERGRUND-LEUCHTEN
+   Ort: assets/styles.css  (unterhalb der .btn-Definitionen)
+   Zweck: Beim Hover leuchtet hinter dem Button eine weiche Aura
+   Effekt: Apple-like Glow, Farbe richtet sich nach Button-Typ
+   ============================================================ */
+
+/* Basis-Button: bekommt ein "Aura"-Shadow beim Hover */
+.btn:hover {
+  position: relative;
+  z-index: 1; /* stellt sicher, dass die Aura hinter anderen bleibt */
+  box-shadow:
+    0 0 20px 6px currentColor,       /* Glow-Farbe = Text/Farbe vom Button */
+    0 12px 28px rgba(0,0,0,.16);     /* zusaetzlicher tiefer Schatten */
+}
+
+/* Primary-Buttons: schwarzer Hintergrund → weisser Glow */
+.btn.primary:hover {
+  box-shadow:
+    0 0 20px 8px rgba(255,255,255,0.6),  /* weisse Aura */
+    0 12px 28px rgba(0,0,0,.25);
+}
+
+/* YouTube-Buttons: roter Hintergrund → rotes Leuchten */
+.btn.youtube:hover {
+  box-shadow:
+    0 0 22px 10px rgba(255,0,0,0.6),    /* rotes Glow passend zu YouTube */
+    0 12px 28px rgba(0,0,0,.25);
+}
+
+/* Ghost-Buttons: transparenter Hintergrund → Akzentfarbe leuchtet */
+.btn.ghost:hover {
+  box-shadow:
+    0 0 20px 8px var(--accent),         /* Akzentfarbe aus Theme */
+    0 12px 28px rgba(0,0,0,.16);
+}
 
