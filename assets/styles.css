@@ -266,7 +266,7 @@ html[data-theme="dark"] .btn.primary:hover{ background:#fff; }
 }
 /* Shorts Section */
 .shorts {
-  padding: 1rem 0;   /* weniger Abstand */
+  padding: 0.5rem 0;   /* weniger Abstand */
 }
 
 .shorts-container {
