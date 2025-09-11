@@ -159,3 +159,37 @@ document.addEventListener("DOMContentLoaded", () => {
     btn.addEventListener('mouseleave', ()=> btn.style.transform = 'translate(0,0)');
   });
 })();
+
+
+// Smooth Anti-Magnet Effekt für Hero "Swissploit"
+(function(){
+  const brand = document.querySelector('.hero-brand');
+  if(!brand) return;
+  const letters = brand.querySelectorAll('span');
+
+  window.addEventListener('mousemove', (e)=>{
+    const rect = brand.getBoundingClientRect();
+    const mouseX = e.clientX;
+    const mouseY = e.clientY;
+
+    letters.forEach(letter => {
+      const lRect = letter.getBoundingClientRect();
+      const dx = mouseX - (lRect.left + lRect.width/2);
+      const dy = mouseY - (lRect.top + lRect.height/2);
+      const dist = Math.sqrt(dx*dx + dy*dy);
+
+      // nur reagieren, wenn die Maus relativ nahe am Buchstaben ist
+      if(dist < 120){
+        const angle = Math.atan2(dy, dx);
+        const offset = (120 - dist) * 0.3; // Stärke des Ausweichens
+        const x = Math.cos(angle) * -offset;
+        const y = Math.sin(angle) * -offset;
+        letter.style.transform = `translate(${x}px, ${y}px)`;
+      } else {
+        // langsam zurück
+        letter.style.transform = `translate(0,0)`;
+      }
+    });
+  }, { passive: true });
+})();
+
