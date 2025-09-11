@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
         observer.unobserve(entry.target); // nur einmal animieren
       }
     });
-  }, { threshold: 0.1 });
+  }, { threshold: 0.07 });
 
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 });
