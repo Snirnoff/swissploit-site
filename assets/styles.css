@@ -650,11 +650,13 @@ html[data-theme="dark"] .btn.primary:hover{ background:#fff; }
 .shorts-container {
   overflow: visible !important;
 }
+
 /* Weniger Abstand zwischen About und Shorts */
 #about.section {
-  padding-bottom: 5px;   /* sehr kleiner Abstand */
+  padding-bottom: 5px !important;   /* sehr kleiner Abstand */
 }
 
 #shorts.shorts {
-  padding-top: 5px;      /* sehr kleiner Abstand */
+  padding-top: 5px !important;      /* sehr kleiner Abstand */
 }
+
