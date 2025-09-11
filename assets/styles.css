@@ -767,39 +767,49 @@ html[data-theme="dark"] .btn.primary:hover{ background:#fff; }
 }
 
 /* ============================================================
-   SNIPPET: BUTTON-HOVER MIT HINTERGRUND-LEUCHTEN
-   Ort: assets/styles.css  (unterhalb der .btn-Definitionen)
-   Zweck: Beim Hover leuchtet hinter dem Button eine weiche Aura
-   Effekt: Apple-like Glow, Farbe richtet sich nach Button-Typ
+   SNIPPET: BUTTON-HOVER MIT DEUTLICHEM NEON-GLOW
+   Ort: assets/styles.css (unterhalb der Button-Styles)
+   Zweck: Buttons heben sich beim Hover durch auffälligen Glow ab
    ============================================================ */
 
-/* Basis-Button: bekommt ein "Aura"-Shadow beim Hover */
+/* Standard-Transition für sanftes Rein-/Rausfaden */
+.btn {
+  transition:
+    transform .2s ease,
+    box-shadow .3s ease,
+    background .2s ease,
+    color .2s ease,
+    border-color .2s ease;
+}
+
+/* Standard-Glow: starke Aura um den Button */
 .btn:hover {
   position: relative;
-  z-index: 1; /* stellt sicher, dass die Aura hinter anderen bleibt */
-  box-shadow:
-    0 0 20px 6px currentColor,       /* Glow-Farbe = Text/Farbe vom Button */
-    0 12px 28px rgba(0,0,0,.16);     /* zusaetzlicher tiefer Schatten */
+  z-index: 1;
+  transform: translateY(-2px) scale(1.05); /* zusätzlich leichtes Anheben */
 }
 
-/* Primary-Buttons: schwarzer Hintergrund → weisser Glow */
+/* Schwarzer Primary-Button → kräftiger weißer Glow */
 .btn.primary:hover {
   box-shadow:
-    0 0 20px 8px rgba(255,255,255,0.6),  /* weisse Aura */
-    0 12px 28px rgba(0,0,0,.25);
+    0 0 40px 14px rgba(255,255,255,0.8),   /* großer heller Glow */
+    0 0 12px rgba(255,255,255,0.6),        /* innerer Glow */
+    0 14px 28px rgba(0,0,0,0.3);           /* tiefer Drop-Shadow */
 }
 
-/* YouTube-Buttons: roter Hintergrund → rotes Leuchten */
+/* YouTube-Button → knallroter Glow */
 .btn.youtube:hover {
   box-shadow:
-    0 0 22px 10px rgba(255,0,0,0.6),    /* rotes Glow passend zu YouTube */
-    0 12px 28px rgba(0,0,0,.25);
+    0 0 40px 14px rgba(255,0,0,0.8),       /* äußerer Neon-Glow */
+    0 0 16px rgba(255,0,0,0.7),            /* innerer Glow */
+    0 14px 28px rgba(0,0,0,0.3);
 }
 
-/* Ghost-Buttons: transparenter Hintergrund → Akzentfarbe leuchtet */
+/* Ghost-Button (transparent) → Akzentfarbe Glow */
 .btn.ghost:hover {
   box-shadow:
-    0 0 20px 8px var(--accent),         /* Akzentfarbe aus Theme */
-    0 12px 28px rgba(0,0,0,.16);
+    0 0 38px 12px color-mix(in oklab, var(--accent) 80%, transparent),
+    0 0 14px color-mix(in oklab, var(--accent) 60%, transparent),
+    0 14px 28px rgba(0,0,0,0.25);
 }
 
