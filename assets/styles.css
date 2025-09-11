@@ -683,3 +683,22 @@ html[data-theme="dark"] .btn.primary:hover{ background:#fff; }
           transform: translateY(10px) scale(0.98);
           transition: opacity .18s ease, transform .18s ease;
         }
+        /* Filter-States fuer Cards */
+        .card.is-hidden { display: none; }            /* komplett aus Layout entfernen */
+        .card.will-hide {                             /* Vorstufe: ausblenden (bleibt kurz im Flow) */
+          opacity: 0;
+          transform: translateY(10px) scale(0.98);
+          transition: opacity .22s ease, transform .22s ease;
+          pointer-events: none;
+        }
+        .card.will-show {                             /* Vorstufe: einblenden */
+          display: block;      /* falls vorher .is-hidden */
+          opacity: 0;
+          transform: translateY(10px) scale(0.98);
+        }
+        .card.appearing {                             /* animierter Einblend-abschluss */
+          transition: opacity .24s ease, transform .28s ease;
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+
