@@ -302,7 +302,7 @@ html[data-theme="dark"] .btn.primary:hover{ background:#fff; }
 
 /* About weniger Abstand nach unten */
 #about.section {
-  padding-bottom: 20px;  /* statt 80px */
+  padding-bottom: 5px;  /* statt 80px */
 }
 
 /* Shorts fast ohne Abstand nach oben */
