@@ -193,30 +193,133 @@ document.addEventListener("DOMContentLoaded", () => {
   }, { passive: true });
 })();
 
-      // Service-Filter
-      (function(){
-        const container = document.querySelector('.services .cards');
-        const chips = document.querySelectorAll('.service-filters .chip');
-        if(!container || !chips.length) return;
-      
-        const cards = Array.from(container.querySelectorAll('.card'));
-      
-        function applyFilter(cat){
-          cards.forEach(card => {
-            const cats = (card.getAttribute('data-cat') || '').split(',').map(s => s.trim());
-            const match = (cat === 'all') || cats.includes(cat);
-            card.classList.toggle('is-hidden', !match);
-          });
-        }
-      
-        chips.forEach(chip => {
-          chip.addEventListener('click', () => {
-            chips.forEach(c => { c.classList.remove('is-active'); c.setAttribute('aria-selected','false'); });
-            chip.classList.add('is-active'); chip.setAttribute('aria-selected','true');
-            applyFilter(chip.dataset.filter);
-          });
-        });
-      
-        // Initial: "Alle"
-        applyFilter('all');
-      })();
+            
+
+
+
+
+
+// Service-Filter
+            (function(){
+              const container = document.querySelector('.services .cards');
+              const chips = document.querySelectorAll('.service-filters .chip');
+              if(!container || !chips.length) return;
+            
+              const cards = Array.from(container.querySelectorAll('.card'));
+            
+              function applyFilter(cat){
+                cards.forEach(card => {
+                  const cats = (card.getAttribute('data-cat') || '').split(',').map(s => s.trim());
+                  const match = (cat === 'all') || cats.includes(cat);
+                  card.classList.toggle('is-hidden', !match);
+                });
+              }
+            
+              chips.forEach(chip => {
+                chip.addEventListener('click', () => {
+                  chips.forEach(c => { c.classList.remove('is-active'); c.setAttribute('aria-selected','false'); });
+                  chip.classList.add('is-active'); chip.setAttribute('aria-selected','true');
+                  applyFilter(chip.dataset.filter);
+                });
+              });
+            
+              // Initial: "Alle"
+              applyFilter('all');
+            })();
+              // Service-Filter mit FLIP-Animation (Apple-like)
+          (function(){
+            const container = document.querySelector('.services .cards');
+            const chips = document.querySelectorAll('.service-filters .chip');
+            if(!container || !chips.length) return;
+          
+            const cards = Array.from(container.querySelectorAll('.card'));
+          
+            function getRects() {
+              const map = new Map();
+              cards.forEach(c => map.set(c, c.getBoundingClientRect()));
+              return map;
+            }
+          
+            function flipAnimate(firstRects) {
+              const lastRects = getRects();
+              cards.forEach(card => {
+                const f = firstRects.get(card);
+                const l = lastRects.get(card);
+                if(!f || !l) return;
+                const dx = f.left - l.left;
+                const dy = f.top  - l.top;
+                if (dx || dy) {
+                  card.style.transform = `translate(${dx}px, ${dy}px)`;
+                  // reflow erzwingen
+                  card.getBoundingClientRect();
+                  card.style.transition = 'transform .35s cubic-bezier(.2,.8,.2,1)';
+                  card.style.transform = '';
+                  card.addEventListener('transitionend', () => {
+                    card.style.transition = '';
+                  }, { once: true });
+                }
+              });
+            }
+          
+            function applyFilter(cat){
+              // 1) Erste Positionen merken
+              const first = getRects();
+          
+              // 2) Zielzustand markieren (ohne sofort display:none zu setzen)
+              cards.forEach(card => {
+                const cats = (card.getAttribute('data-cat') || '').split(',').map(s => s.trim());
+                const match = (cat === 'all') || cats.includes(cat);
+          
+                // bereits sichtbare → ggf. ausblenden vorbereiten
+                if(!match && !card.classList.contains('is-hidden')) {
+                  card.classList.add('will-hide');
+                }
+          
+                // versteckte → einblenden vorbereiten
+                if(match && card.classList.contains('is-hidden')) {
+                  card.classList.remove('is-hidden');
+                  card.classList.add('will-show');
+                }
+              });
+          
+              // 3) FLIP: Positionswechsel smooth animieren
+              flipAnimate(first);
+          
+              // 4) Nach kurzer Zeit finalisieren
+              //    - will-hide → wirklich entfernen (display:none)
+              //    - will-show → sichtbar animieren
+              window.setTimeout(() => {
+                cards.forEach(card => {
+                  if(card.classList.contains('will-hide')) {
+                    card.classList.remove('will-hide');
+                    card.classList.add('is-hidden');
+                  }
+                });
+          
+                // Einblend-Animation fuer neu sichtbare
+                cards.forEach(card => {
+                  if(card.classList.contains('will-show')) {
+                    // reflow, dann appearing fuer fade-in/slide-in
+                    card.getBoundingClientRect();
+                    card.classList.add('appearing');
+                    card.classList.remove('will-show');
+                    card.addEventListener('transitionend', () => {
+                      card.classList.remove('appearing');
+                    }, { once: true });
+                  }
+                });
+              }, 240); // muss groesser als will-hide Transition sein
+            }
+          
+            // UI-Events
+            chips.forEach(chip => {
+              chip.addEventListener('click', () => {
+                chips.forEach(c => { c.classList.remove('is-active'); c.setAttribute('aria-selected','false'); });
+                chip.classList.add('is-active'); chip.setAttribute('aria-selected','true');
+                applyFilter(chip.dataset.filter);
+              });
+            });
+          
+            // Initial: Alle
+            applyFilter('all');
+          })();
