@@ -883,3 +883,18 @@ html[data-theme="dark"] .btn.primary:hover{ background:#fff; }
   }
 }
 
+* "👉"-Zeilen wirken wie ein Callout */
+#about p:has(> .callout) {
+  margin-top: 1.8rem;
+}
+
+.callout {
+  display: block;
+  margin: 1.4rem 0;
+  padding: 1rem 1.2rem;
+  border-left: 4px solid var(--accent);
+  background: color-mix(in oklab, var(--accent) 6%, transparent);
+  border-radius: 6px;
+  font-weight: 600;
+  color: var(--fg);
+}
