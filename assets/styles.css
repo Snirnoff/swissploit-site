@@ -883,6 +883,17 @@ html[data-theme="dark"] .btn.primary:hover{ background:#fff; }
   }
 }
 
+/* Bestimmte Wörter hervorheben */
+#about p strong,
+#about p em {
+  font-weight: 600;
+  color: var(--fg);
+  background: color-mix(in oklab, var(--accent) 10%, transparent);
+  padding: 0 4px;
+  border-radius: 4px;
+}
+
+
 * "👉"-Zeilen wirken wie ein Callout */
 #about p:has(> .callout) {
   margin-top: 1.8rem;
