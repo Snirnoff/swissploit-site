@@ -817,3 +817,71 @@ html[data-theme="dark"] .btn.primary::after {
   color: var(--accent); /* Rot (deine Akzentfarbe #d30000) */
 }
 
+/* ============================================================
+   SNIPPET: BUTTON-GLOW FIX (sichtbar machen)
+   Ort: assets/styles.css (unter Button-Styles)
+   Zweck: Glow-Effekt wird korrekt über dem Hintergrund sichtbar
+   ============================================================ */
+
+.btn {
+  position: relative;     /* notwendig für ::after-Positionierung */
+  overflow: hidden;       /* Glow bleibt innerhalb der Rundung */
+  z-index: 0;             /* Basis-Layer */
+}
+
+.btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+
+  /* Standard: unsichtbar, wird nur bei Hover eingeblendet */
+  opacity: 0;
+  transition: opacity .35s ease, transform .35s ease;
+  transform: scale(1.4);
+
+  /* Glow soll ÜBER dem Button-Hintergrund liegen */
+  z-index: 1;
+
+  /* weiches Leuchten – wird je nach Button überschrieben */
+  background: radial-gradient(circle at center,
+    currentColor 0%, transparent 70%);
+}
+
+/* Inhalt des Buttons (Text, Icons) immer ganz oben */
+.btn span,
+.btn i,
+.btn svg {
+  position: relative;
+  z-index: 2;
+}
+
+/* --- GLOW-FARBEN PRO BUTTON-TYP --- */
+
+/* Primary Button (schwarz/weiß) */
+.btn.primary::after {
+  background: radial-gradient(circle at center,
+    #111 0%, transparent 70%);
+}
+html[data-theme="dark"] .btn.primary::after {
+  background: radial-gradient(circle at center,
+    #e4e7eb 0%, transparent 70%);
+}
+
+/* YouTube Button (rot) */
+.btn.youtube::after {
+  background: radial-gradient(circle at center,
+    #ff0000 0%, transparent 70%);
+}
+
+/* Ghost Button (grau) */
+.btn.ghost::after {
+  background: radial-gradient(circle at center,
+    rgba(128,128,128,0.5) 0%, transparent 70%);
+}
+
+/* --- HOVER: Effekt aktivieren --- */
+.btn:hover::after {
+  opacity: 0.35;          /* Intensität */
+  transform: scale(1.1);  /* Fokus */
+}
