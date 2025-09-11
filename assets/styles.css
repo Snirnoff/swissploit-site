@@ -767,49 +767,118 @@ html[data-theme="dark"] .btn.primary:hover{ background:#fff; }
 }
 
 /* ============================================================
-   SNIPPET: BUTTON-HOVER MIT DEUTLICHEM NEON-GLOW
+   SNIPPET: BUTTON-HOVER MIT PULSIERENDEM NEON-GLOW
    Ort: assets/styles.css (unterhalb der Button-Styles)
-   Zweck: Buttons heben sich beim Hover durch auffälligen Glow ab
+   Zweck: Buttons leuchten beim Hover sichtbar und "atmen" sanft
    ============================================================ */
 
-/* Standard-Transition für sanftes Rein-/Rausfaden */
+/* Keyframes: Glow pulsiert sanft rein/raus */
+@keyframes pulse-glow {
+  0% {
+    box-shadow:
+      0 0 32px 10px rgba(255,255,255,0.6),
+      0 0 14px rgba(255,255,255,0.4),
+      0 12px 24px rgba(0,0,0,0.25);
+  }
+  50% {
+    box-shadow:
+      0 0 44px 16px rgba(255,255,255,0.9),
+      0 0 22px rgba(255,255,255,0.7),
+      0 16px 32px rgba(0,0,0,0.3);
+  }
+  100% {
+    box-shadow:
+      0 0 32px 10px rgba(255,255,255,0.6),
+      0 0 14px rgba(255,255,255,0.4),
+      0 12px 24px rgba(0,0,0,0.25);
+  }
+}
+
+/* Basis: Animation vorbereiten */
 .btn {
-  transition:
-    transform .2s ease,
-    box-shadow .3s ease,
-    background .2s ease,
-    color .2s ease,
-    border-color .2s ease;
+  transition: transform .2s ease, background .2s ease, color .2s ease, border-color .2s ease;
 }
 
-/* Standard-Glow: starke Aura um den Button */
+/* Standard-Verhalten beim Hover */
 .btn:hover {
-  position: relative;
-  z-index: 1;
-  transform: translateY(-2px) scale(1.05); /* zusätzlich leichtes Anheben */
+  transform: translateY(-2px) scale(1.05);
+  animation: pulse-glow 2s ease-in-out infinite; /* Endlos-Atmen */
 }
 
-/* Schwarzer Primary-Button → kräftiger weißer Glow */
+/* Primary-Button (schwarz/hell) */
 .btn.primary:hover {
-  box-shadow:
-    0 0 40px 14px rgba(255,255,255,0.8),   /* großer heller Glow */
-    0 0 12px rgba(255,255,255,0.6),        /* innerer Glow */
-    0 14px 28px rgba(0,0,0,0.3);           /* tiefer Drop-Shadow */
+  animation-name: pulse-glow-primary;
 }
 
-/* YouTube-Button → knallroter Glow */
+@keyframes pulse-glow-primary {
+  0% {
+    box-shadow:
+      0 0 32px 10px rgba(255,255,255,0.6),
+      0 0 14px rgba(255,255,255,0.4),
+      0 12px 24px rgba(0,0,0,0.25);
+  }
+  50% {
+    box-shadow:
+      0 0 46px 18px rgba(255,255,255,0.9),
+      0 0 26px rgba(255,255,255,0.7),
+      0 18px 36px rgba(0,0,0,0.3);
+  }
+  100% {
+    box-shadow:
+      0 0 32px 10px rgba(255,255,255,0.6),
+      0 0 14px rgba(255,255,255,0.4),
+      0 12px 24px rgba(0,0,0,0.25);
+  }
+}
+
+/* YouTube-Button (rot) */
 .btn.youtube:hover {
-  box-shadow:
-    0 0 40px 14px rgba(255,0,0,0.8),       /* äußerer Neon-Glow */
-    0 0 16px rgba(255,0,0,0.7),            /* innerer Glow */
-    0 14px 28px rgba(0,0,0,0.3);
+  animation-name: pulse-glow-youtube;
 }
 
-/* Ghost-Button (transparent) → Akzentfarbe Glow */
+@keyframes pulse-glow-youtube {
+  0% {
+    box-shadow:
+      0 0 32px 10px rgba(255,0,0,0.6),
+      0 0 14px rgba(255,0,0,0.4),
+      0 12px 24px rgba(0,0,0,0.25);
+  }
+  50% {
+    box-shadow:
+      0 0 46px 18px rgba(255,0,0,0.9),
+      0 0 26px rgba(255,0,0,0.7),
+      0 18px 36px rgba(0,0,0,0.3);
+  }
+  100% {
+    box-shadow:
+      0 0 32px 10px rgba(255,0,0,0.6),
+      0 0 14px rgba(255,0,0,0.4),
+      0 12px 24px rgba(0,0,0,0.25);
+  }
+}
+
+/* Ghost-Button (transparent → Akzentfarbe) */
 .btn.ghost:hover {
-  box-shadow:
-    0 0 38px 12px color-mix(in oklab, var(--accent) 80%, transparent),
-    0 0 14px color-mix(in oklab, var(--accent) 60%, transparent),
-    0 14px 28px rgba(0,0,0,0.25);
+  animation-name: pulse-glow-ghost;
 }
 
+@keyframes pulse-glow-ghost {
+  0% {
+    box-shadow:
+      0 0 32px 10px color-mix(in oklab, var(--accent) 60%, transparent),
+      0 0 14px color-mix(in oklab, var(--accent) 40%, transparent),
+      0 12px 24px rgba(0,0,0,0.2);
+  }
+  50% {
+    box-shadow:
+      0 0 46px 18px color-mix(in oklab, var(--accent) 95%, transparent),
+      0 0 26px color-mix(in oklab, var(--accent) 75%, transparent),
+      0 18px 36px rgba(0,0,0,0.3);
+  }
+  100% {
+    box-shadow:
+      0 0 32px 10px color-mix(in oklab, var(--accent) 60%, transparent),
+      0 0 14px color-mix(in oklab, var(--accent) 40%, transparent),
+      0 12px 24px rgba(0,0,0,0.2);
+  }
+}
