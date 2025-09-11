@@ -795,3 +795,25 @@ html[data-theme="dark"] .btn.primary::after {
   opacity: 0.35;           /* Intensität anpassen (0.2–0.5 wirkt am besten) */
   transform: scale(1.1);   /* Fokus-Effekt beim Hover */
 }
+
+/* ============================================================
+   SNIPPET: BRAND (@Swissploit) IM HEADER BEIM HOVER ROT
+   Ort: assets/styles.css (unter Header-Styles, bei .brand)
+   Zweck: Einheitliches Hover-Verhalten wie bei .nav a
+   ============================================================ */
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--fg);     /* Standard: aktuelle Vordergrundfarbe */
+  font-weight: 800;
+  letter-spacing: .2px;
+  transition: color .25s ease;
+}
+
+.brand:hover {
+  color: var(--accent); /* Rot (deine Akzentfarbe #d30000) */
+}
+
