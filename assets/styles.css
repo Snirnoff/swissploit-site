@@ -129,6 +129,21 @@ html[data-theme="dark"] .btn.primary{ background:#e4e7eb; color:#0c0c0f; border-
 .btn.primary:hover{ background:#000; }
 html[data-theme="dark"] .btn.primary:hover{ background:#fff; }
 
+/* YouTube Button Style */
+.btn.youtube {
+  background: #ff0000;     /* YouTube-Rot */
+  color: #fff;
+  border-color: #ff0000;
+}
+
+.btn.youtube:hover {
+  background: #cc0000;     /* dunkleres Rot beim Hover */
+  border-color: #cc0000;
+  transform: translateY(-2px) scale(1.04); /* bleibt "Apple-like" */
+  box-shadow: 0 12px 28px rgba(255,0,0,.25);
+}
+
+
 /* Hero */
 .hero{
   position: relative; min-height: 88vh; display:flex; align-items:center; justify-content:center; overflow:hidden;
