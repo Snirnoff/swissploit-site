@@ -702,3 +702,44 @@ html[data-theme="dark"] .btn.primary:hover{ background:#fff; }
           transform: translateY(0) scale(1);
         }
 
+
+/* ============================================================
+   SNIPPET: SERVICES-KACHELN OPTIK AN ABOUT-KACHELN ANGLEICHEN
+   Ort: assets/styles.css  (beste Stelle: bei .card, bestehende Regel ersetzen)
+   Zweck: Gleicher Panel-Hintergrund, Border und Stil wie .feature (About)
+   Wirkung: Konsistentes Kachel-Design in Services und About
+   ============================================================ */
+
+.card {
+  /* Hintergrund wie bei About-Kacheln (.feature): Panel statt Seitenhintergrund */
+  background: var(--panel);
+
+  /* Dezente Haarlinien-Grenze fuer Tiefe, identisch zur About-Optik */
+  border: 1px solid var(--border);
+
+  /* Abgerundete Ecken fuer das "Apple-like" Karten-Feeling */
+  border-radius: 14px;
+
+  /* Innenabstand: Luft fuer Inhalte (Icon, Titel, Text, CTA) */
+  padding: 18px;
+
+  /* Sanfter Schatten fuer Tiefe; in Dark/Light ueber Tokens gesteuert */
+  box-shadow: var(--shadow);
+
+  /* Animations-Uebergaenge bei Hover (Anheben/Glow) */
+  transition:
+    transform .18s ease,
+    box-shadow .18s ease,
+    background .18s ease,
+    border-color .18s ease,
+    color .18s ease;
+
+  /* Flex-Layout, damit CTA unten sauber positioniert werden kann */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+
+  /* Zentrierte Typo wie bei deinen anderen Kacheln */
+  text-align: center;
+}
