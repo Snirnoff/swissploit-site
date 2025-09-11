@@ -523,3 +523,10 @@ html[data-theme="dark"] .btn.primary:hover{ background:#fff; }
 
 /* F) Gestaffelte Reveal-Delays (wir setzen inline per JS) */
 .reveal{ /* bereits vorhanden – hier nur Erinnerung, nichts ändern */ }
+
+.hero-brand span {
+  display: inline-block;
+  transition: transform 0.25s ease;
+  will-change: transform;
+}
+
