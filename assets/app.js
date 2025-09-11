@@ -193,3 +193,30 @@ document.addEventListener("DOMContentLoaded", () => {
   }, { passive: true });
 })();
 
+      // Service-Filter
+      (function(){
+        const container = document.querySelector('.services .cards');
+        const chips = document.querySelectorAll('.service-filters .chip');
+        if(!container || !chips.length) return;
+      
+        const cards = Array.from(container.querySelectorAll('.card'));
+      
+        function applyFilter(cat){
+          cards.forEach(card => {
+            const cats = (card.getAttribute('data-cat') || '').split(',').map(s => s.trim());
+            const match = (cat === 'all') || cats.includes(cat);
+            card.classList.toggle('is-hidden', !match);
+          });
+        }
+      
+        chips.forEach(chip => {
+          chip.addEventListener('click', () => {
+            chips.forEach(c => { c.classList.remove('is-active'); c.setAttribute('aria-selected','false'); });
+            chip.classList.add('is-active'); chip.setAttribute('aria-selected','true');
+            applyFilter(chip.dataset.filter);
+          });
+        });
+      
+        // Initial: "Alle"
+        applyFilter('all');
+      })();
