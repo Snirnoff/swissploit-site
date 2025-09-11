@@ -166,7 +166,7 @@
 <div class="service-filters" role="tablist" aria-label="Dienstleistungen filtern">
   <button class="chip is-active" role="tab" aria-selected="true" data-filter="all">Alle</button>
   <button class="chip" role="tab" aria-selected="false" data-filter="cyber">Cybersecurity</button>
-  <button class="chip" role="tab" aria-selected="false" data-filter="it">IT-Services</button>
+  <button class="chip" role="tab" aria-selected="false" data-filter="it">IT-Support</button>
   <button class="chip" role="tab" aria-selected="false" data-filter="digital">Digital Business</button>
 </div>
 
@@ -174,35 +174,35 @@
         <div class="cards">
 
           
-          <article class="card reveal">
+          <article class="card reveal" data-cat="it,cyber">
             <div class="icon" aria-hidden="true">🛡️</div>
             <h3>Bereinigung gehackter Geräte</h3>
             <p>Wir entfernen Schadsoftware, sichern Ihre Geräte wieder ab und helfen dabei, Ihre Konten und Daten zuverlässig zu schützen.</p>
                 <div class="card-cta"><a href="#contact" class="btn small">Anfragen</a></div>
           </article>
 
-          <article class="card reveal">
+          <article class="card reveal" data-cat="cyber">
             <div class="icon" aria-hidden="true">🎓</div>
             <h3>Cybersecurity-Schulungen</h3>
             <p>Präsentation mit Tipps & Tricks, Live-Demos und aktuellen Fallbeispielen.</p>
             <div class="card-cta"><a href="#contact" class="btn small">Kontakt aufnehmen</a></div>
           </article>
 
-          <article class="card reveal">
+          <article class="card reveal" data-cat="cyber">
             <div class="icon" aria-hidden="true">🔍</div>
             <h3>Security-Analysen</h3>
             <p>Wir prüfen Ihre IT auf Schwachstellen und zeigen klar auf, wie Sie Ihre Systeme und Daten besser schützen können.</p>
             <div class="card-cta"><a href="#contact" class="btn small">Assessment anfragen</a></div>
           </article>
 
-          <article class="card reveal">
+          <article class="card reveal" data-cat="cyber">
             <div class="icon" aria-hidden="true">🎭</div>
             <h3>Social-Engineering Simulationen</h3>
             <p>Wir simulieren echte Angriffe – Phishing & OnSite – mit Auswertung, Awareness-Material und Follow-up.</p>
             <div class="card-cta"><a href="#contact" class="btn small">Simulation planen</a></div>
           </article>
 
-          <article class="card reveal">
+          <article class="card reveal" data-cat="cyber">
             <div class="icon" aria-hidden="true">🎮</div>
             <h3>Gamifizierte Awareness</h3>
             <p>Spielerische Schulung – Team-Event mit Minigame.</p>
@@ -210,7 +210,7 @@
           </article>
 
           <!-- Datenwiederherstellung -->
-          <article class="card reveal">
+          <article class="card reveal" data-cat="cyber">
             <div class="icon" aria-hidden="true">💾</div>
             <h3>Datenwiederherstellung</h3>
             <p>Gelöschte oder verlorene Dateien retten. Sorgfältig & transparent.</p>
@@ -218,7 +218,7 @@
           </article>
           
           <!-- Datensicherung -->
-          <article class="card reveal">
+          <article class="card reveal" data-cat="it,cyber">
             <div class="icon" aria-hidden="true">🗄️</div>
             <h3>Datensicherung</h3>
             <p>Wir sorgen dafür, dass Ihre Daten sicher gespeichert und im Notfall jederzeit wiederhergestellt werden können – egal ob lokal oder in der Cloud.</p>
@@ -226,7 +226,7 @@
           </article>
           
           <!-- Geräteverkauf -->
-          <article class="card reveal">
+          <article class="card reveal" data-cat="it">
             <div class="icon" aria-hidden="true">💻</div>
             <h3>Geräteverkauf</h3>
             <p>Ob für die Schule, Büro oder zum Gamen! Sicher vorkonfiguriert und auf Wunsch mit Hardening & Basis-Tools.</p>
@@ -234,7 +234,7 @@
           </article>
 
           <!-- Security Beratung für HomeOffice -->
-          <article class="card reveal">
+          <article class="card reveal" data-cat="cyber">
             <div class="icon" aria-hidden="true">🔒</div>
             <h3>Sicherheit Zuhause</h3>
             <p>Wir analysieren Ihr Zuhause, beraten Sie individuell und setzen passende Lösungen um – von Firewalls über Netzwerksegmentierung bis hin zu Videoüberwachung.</p>
@@ -244,7 +244,7 @@
           </article>
 
           <!-- IT selber betreiben -->
-          <article class="card reveal">
+          <article class="card reveal" data-cat="digital">
             <div class="icon" aria-hidden="true">🚀</div>
             <h3>IT selbst betreiben</h3>
             <p>In praxisnahen Kursen vermitteln wir, wie Sie die IT Ihres Unternehmens eigenständig und effizient verwalten können – ganz ohne Abhängigkeit von einem IT-Dienstleister.</p>
@@ -254,17 +254,17 @@
           </article>
 
            <!-- Programmieren -->
-          <article class="card reveal">
+          <article class="card reveal" data-cat="digital">
             <div class="icon" aria-hidden="true">👨‍💻</div>
             <h3>Individuelle Programmierungen</h3>
-            <p>Wir entwickeln für Sie massgeschneiderte Tools, Automatisierungen und Schnittstellen – exakt nach Ihren Anforderungen.</p>
+            <p>Wir entwickeln für Sie massgeschneiderte Software, Automatisierungen und Schnittstellen.</p>
             <div class="card-cta">
-              <a class="btn small" href="#contact">Das will ich</a>
+              <a class="btn small" href="#contact">Code it</a>
             </div>
           </article>
 
           <!-- Webseiten -->
-          <article class="card reveal">
+          <article class="card reveal" data-cat="digital">
             <div class="icon" aria-hidden="true">🛠️</div>
             <h3>Webseiten erstellen</h3>
             <p>Wir erstellen moderne, sichere und mobiloptimierte Webseiten und kümmern uns auch um Pflege und Updates.</p>
@@ -274,7 +274,7 @@
           </article>
 
           <!-- Social SEO -->
-          <article class="card reveal">
+          <article class="card reveal" data-cat="digital">
             <div class="icon" aria-hidden="true">📈</div>
             <h3>Social SEO</h3>
             <p>Wir optimieren Ihre Sichtbarkeit auf Plattformen wie YouTube, Instagram und TikTok – für mehr Reichweite und echte Interaktion.</p>
@@ -284,7 +284,7 @@
           </article>
 
           <!-- Podcast -->
-          <article class="card reveal">
+          <article class="card reveal" data-cat="digital">
             <div class="icon" aria-hidden="true">🎙️</div>
             <h3>Podcast as a Service</h3>
             <p>Wir kommen vorbei, richten alles ein und stellen die komplette Technik zur Verfügung – damit Sie sofort mit Ihrem eigenen Podcast starten können.</p>
