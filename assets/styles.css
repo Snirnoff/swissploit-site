@@ -909,3 +909,28 @@ html[data-theme="dark"] .btn.primary:hover{ background:#fff; }
   font-weight: 600;
   color: var(--fg);
 }
+
+/* TikTok Button */
+.btn.tiktok {
+  background: linear-gradient(135deg, #25F4EE, #FE2C55);
+  color: #fff;
+  border: none;
+}
+.btn.tiktok:hover {
+  background: linear-gradient(135deg, #20d9d5, #d8264a);
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 12px 28px rgba(254, 44, 85, .3);
+}
+
+/* Instagram Button */
+.btn.instagram {
+  background: linear-gradient(135deg, #f58529, #dd2a7b, #8134af, #515bd4);
+  color: #fff;
+  border: none;
+}
+.btn.instagram:hover {
+  background: linear-gradient(135deg, #f58529, #e95950, #bc2a8d, #515bd4);
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 12px 28px rgba(221, 42, 123, .3);
+}
+
