@@ -323,3 +323,75 @@ document.addEventListener("DOMContentLoaded", () => {
             // Initial: Alle
             applyFilter('all');
           })();
+
+
+/* ============================================================
+   SNIPPET: ABOUT – INTERACTION CONTROLLER (REVEAL + 3D-TILT)
+   Ort: assets/app.js (GANZ ANS ENDE anfuegen)
+   Zweck:
+     - Staggered Reveal aktivieren (setzt .visible auf .about-card)
+     - 3D-Neigung zum Mauszeiger:
+       Berechnet Winkel relativ zum Kartenmittelpunkt und schreibt
+       diese als CSS-Variablen --tiltX / --tiltY in die Grid-Huelle.
+   Hinweise:
+     - Greift nur auf #about .about-grid; stoert nix anderes.
+     - Touch-Geraete: Kein Tilt (es bleibt der schoene Reveal).
+   ============================================================ */
+(function(){
+  const grid = document.querySelector('#about .about-grid');
+  if(!grid) return;
+
+  // 1) Reveal via IntersectionObserver (nutzt deine bestehende "reveal" Klasse-Logik kompatibel)
+  const cards = grid.querySelectorAll('.about-card');
+  const obs = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.classList.add('visible');
+        obs.unobserve(e.target); // einmalig
+      }
+    });
+  }, { threshold: 0.14 });
+  cards.forEach(c => obs.observe(c));
+
+  // 2) 3D-Tilt: Mausbewegung ueber der Grid-Huelle
+  const maxTilt = 6; // Grad, sanft halten
+  let raf = null;
+  function onMove(ev){
+    // Touch? → nichts tun
+    if(ev.touches) return;
+
+    const rect = grid.getBoundingClientRect();
+    const x = ev.clientX - rect.left;
+    const y = ev.clientY - rect.top;
+    const cx = rect.width / 2;
+    const cy = rect.height / 2;
+
+    // Normierung in [-1, 1]
+    const nx = (x - cx) / cx;
+    const ny = (y - cy) / cy;
+
+    // Zielwinkel berechnen (Y bewegt X-Achse, X bewegt Y-Achse, wie ein Joystick)
+    const tiltX = (+ny * maxTilt).toFixed(2) + 'deg';
+    const tiltY = (-nx * maxTilt).toFixed(2) + 'deg';
+
+    // via rAF weich schreiben
+    if(!raf){
+      raf = requestAnimationFrame(()=>{
+        grid.style.setProperty('--tiltX', tiltX);
+        grid.style.setProperty('--tiltY', tiltY);
+        raf = null;
+      });
+    }
+  }
+
+  function onLeave(){
+    grid.style.setProperty('--tiltX', '0deg');
+    grid.style.setProperty('--tiltY', '0deg');
+  }
+
+  grid.addEventListener('mousemove', onMove, { passive: true });
+  grid.addEventListener('mouseleave', onLeave);
+
+  // Mobile/Touch: kein Tilt – Sicherheitsnetz
+  grid.addEventListener('touchstart', ()=>{}, { passive: true });
+})();
