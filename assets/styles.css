@@ -934,3 +934,148 @@ html[data-theme="dark"] .btn.primary:hover{ background:#fff; }
   box-shadow: 0 12px 28px rgba(221, 42, 123, .3);
 }
 
+/* ============================================================
+   SNIPPET: ABOUT – CINEMATIC REVEAL, 3D-TILT, GLANZ-SWEEP
+   Ort: assets/styles.css (GANZ ANS ENDE stellen, damit es gewinnt)
+   Zweck:
+     - Macht aus den Absätzen hochwertige Karten (Panel-Look)
+     - Cineastischer Reveal pro Karte (Stagger, Clip-Path-Wipe)
+     - 3D-Neigung zum Mauszeiger + weicher Glow beim Hover
+     - Akzent-Underline fuer <strong> und animierter Glanz
+   Barrierefreiheit:
+     - Respektiert prefers-reduced-motion (deaktiviert Animationen)
+   ============================================================ */
+
+/* Grid-Layout fuer 3 Karten: untereinander auf Mobile, 2-Spaltig ab 900px */
+.about-grid{
+  display: grid;
+  gap: 16px;
+  perspective: 1000px;               /* noetig fuer 3D-Rotation */
+  --tiltX: 0deg;                      /* wird via JS gesetzt */
+  --tiltY: 0deg;                      /* wird via JS gesetzt */
+}
+@media (min-width: 900px){
+  .about-grid{ grid-template-columns: 1fr 1fr; }
+  .about-grid .about-card[data-i="1"]{ grid-column: span 2; } /* erste Karte ueber volle Breite */
+}
+
+/* Basis-Look der Karten: Apple-Panel, Hairline, leichter Shadow */
+.about-card{
+  position: relative;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: clamp(16px, 2.4vw, 22px);
+  color: color-mix(in oklab, var(--fg) 86%, transparent);
+  line-height: 1.85;
+  max-width: 84ch;
+  margin: 0 auto;
+  /* 3D-Ausgangsstellung – die eigentliche Neigung kommt auf Hover + Maus */
+  transform-style: preserve-3d;
+  will-change: transform, opacity, clip-path, box-shadow, border-color;
+  overflow: hidden;                   /* fuer Glanz-Sweep */
+  box-shadow: var(--shadow);
+  transition:
+    transform .5s cubic-bezier(.2,.8,.2,1),
+    box-shadow .35s ease,
+    border-color .25s ease,
+    background .25s ease;
+}
+
+/* Cineastischer Entry: Karten wischen von unten nach oben auf (Clip-Path) */
+.about-card{
+  opacity: 0;
+  transform: translateY(24px);
+  clip-path: inset(24% 0 24% 0 round 16px);   /* „geschlossene Klappe“ */
+}
+.about-card.visible{
+  opacity: 1;
+  transform: translateY(0);
+  clip-path: inset(0 0 0 0 round 16px);       /* „Klappe geht auf“ */
+  transition:
+    transform .7s cubic-bezier(.2,.8,.2,1),
+    opacity .7s ease,
+    clip-path .8s cubic-bezier(.2,.8,.2,1);
+}
+
+/* Stagger: leichte Verzoegerung je nach data-i, damit Karten nacheinander erscheinen */
+.about-card.visible[data-i="1"]{ transition-delay: .0s; }
+.about-card.visible[data-i="2"]{ transition-delay: .08s; }
+.about-card.visible[data-i="3"]{ transition-delay: .16s; }
+
+/* 3D-Neigung + Glow beim Hover, Winkel aus CSS-Variablen (per JS) */
+.about-card:hover{
+  transform:
+    rotateX(var(--tiltX))
+    rotateY(var(--tiltY))
+    translateZ(0);
+  box-shadow:
+    0 22px 44px rgba(0,0,0,.18),
+    0 10px 28px rgba(211,0,0,.18);            /* leichter Akzent-Glow */
+  border-color: color-mix(in oklab, var(--accent) 35%, var(--border));
+}
+
+/* Glanz-Sweep (lichtreflex) – diagonal wandernder Highlight-Film */
+.about-card::after{
+  content:"";
+  position:absolute; inset:-40%;
+  background:
+    linear-gradient( 60deg,
+      transparent 0%,
+      rgba(255,255,255,.14) 45%,
+      rgba(255,255,255,.22) 50%,
+      rgba(255,255,255,.14) 55%,
+      transparent 100%);
+  transform: translateX(-30%) rotate(8deg);
+  opacity: 0;
+  transition: opacity .35s ease, transform .8s ease;
+  pointer-events: none;
+}
+.about-card:hover::after{
+  opacity: 1;
+  transform: translateX(30%) rotate(8deg);
+}
+
+/* Typografie-Finishing */
+.about-card strong{
+  position: relative;
+  color: var(--fg);
+  font-weight: 700;
+  padding-bottom: 2px;
+  /* Akzent-Hairline unterhalb von <strong> */
+  background:
+    linear-gradient(currentColor, currentColor) 0 100% / 0% 2px no-repeat;
+  transition: background-size .5s ease;
+}
+.about-card:hover strong{
+  background-size: 100% 2px; /* Unterstreichung faehrt animiert ein */
+}
+
+/* Zusaetzlicher Glanz nur auf <strong> – ganz subtil */
+.about-card strong::after{
+  content:"";
+  position:absolute; left:-6%; right:-6%; top:-6px; height: 6px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.4), transparent);
+  transform: translateX(-30%);
+  opacity: .0;
+  transition: transform .6s ease, opacity .6s ease;
+}
+.about-card:hover strong::after{
+  transform: translateX(30%);
+  opacity: .6;
+}
+
+/* Ruhiger Modus fuer Menschen mit Bewegungsreduktion */
+@media (prefers-reduced-motion: reduce){
+  .about-card,
+  .about-card::after,
+  .about-card strong::after{
+    transition: none !important;
+    animation: none !important;
+  }
+  .about-card{
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: none !important;
+  }
+}
