@@ -326,72 +326,44 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 /* ============================================================
-   SNIPPET: ABOUT – INTERACTION CONTROLLER (REVEAL + 3D-TILT)
-   Ort: assets/app.js (GANZ ANS ENDE anfuegen)
+   SNIPPET: ABOUT PARALLAX + REVEAL-STAGGER
+   Ort: assets/app.js  (GANZ ans Ende einfügen)
    Zweck:
-     - Staggered Reveal aktivieren (setzt .visible auf .about-card)
-     - 3D-Neigung zum Mauszeiger:
-       Berechnet Winkel relativ zum Kartenmittelpunkt und schreibt
-       diese als CSS-Variablen --tiltX / --tiltY in die Grid-Huelle.
-   Hinweise:
-     - Greift nur auf #about .about-grid; stoert nix anderes.
-     - Touch-Geraete: Kein Tilt (es bleibt der schoene Reveal).
+     - Setzt .visible auf jede Chat-Nachricht, sobald sie im Viewport ist
+     - Parallax: Elemente mit data-depth bewegen sich subtil gegen Scroll
+       (sowohl die Blobs im Hintergrund als auch die .msg selbst)
+   Abhängigkeiten:
+     - HTML nutzt data-depth auf .blob und .msg
+     - .reveal-Klasse brauchst du hier nicht zwingend; .visible steuert Effekte
    ============================================================ */
 (function(){
-  const grid = document.querySelector('#about .about-grid');
-  if(!grid) return;
-
-  // 1) Reveal via IntersectionObserver (nutzt deine bestehende "reveal" Klasse-Logik kompatibel)
-  const cards = grid.querySelectorAll('.about-card');
-  const obs = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{
-      if(e.isIntersecting){
-        e.target.classList.add('visible');
-        obs.unobserve(e.target); // einmalig
-      }
-    });
-  }, { threshold: 0.14 });
-  cards.forEach(c => obs.observe(c));
-
-  // 2) 3D-Tilt: Mausbewegung ueber der Grid-Huelle
-  const maxTilt = 6; // Grad, sanft halten
-  let raf = null;
-  function onMove(ev){
-    // Touch? → nichts tun
-    if(ev.touches) return;
-
-    const rect = grid.getBoundingClientRect();
-    const x = ev.clientX - rect.left;
-    const y = ev.clientY - rect.top;
-    const cx = rect.width / 2;
-    const cy = rect.height / 2;
-
-    // Normierung in [-1, 1]
-    const nx = (x - cx) / cx;
-    const ny = (y - cy) / cy;
-
-    // Zielwinkel berechnen (Y bewegt X-Achse, X bewegt Y-Achse, wie ein Joystick)
-    const tiltX = (+ny * maxTilt).toFixed(2) + 'deg';
-    const tiltY = (-nx * maxTilt).toFixed(2) + 'deg';
-
-    // via rAF weich schreiben
-    if(!raf){
-      raf = requestAnimationFrame(()=>{
-        grid.style.setProperty('--tiltX', tiltX);
-        grid.style.setProperty('--tiltY', tiltY);
-        raf = null;
+  // 1) Reveal: Nachrichten wie im Messenger „poppen“ nacheinander auf
+  const msgs = document.querySelectorAll('#about .msg');
+  if (msgs.length){
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          io.unobserve(e.target); // jedes Element nur einmal animieren
+        }
       });
-    }
+    }, { threshold: 0.12 });
+    msgs.forEach(m => io.observe(m));
   }
 
-  function onLeave(){
-    grid.style.setProperty('--tiltX', '0deg');
-    grid.style.setProperty('--tiltY', '0deg');
+  // 2) Parallax: alles mit data-depth sanft gegenscrollen
+  const parallaxEls = document.querySelectorAll('#about [data-depth]');
+  if (parallaxEls.length){
+    const onScroll = () => {
+      const y = window.scrollY || window.pageYOffset;
+      parallaxEls.forEach(el => {
+        const d = parseFloat(el.getAttribute('data-depth')) || 0;
+        // kleinere Multiplikation für sehr sanften Effekt
+        el.style.transform = `translate3d(0, ${Math.round(y * d)}px, 0)`;
+      });
+    };
+    // initial + scroll
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
   }
-
-  grid.addEventListener('mousemove', onMove, { passive: true });
-  grid.addEventListener('mouseleave', onLeave);
-
-  // Mobile/Touch: kein Tilt – Sicherheitsnetz
-  grid.addEventListener('touchstart', ()=>{}, { passive: true });
 })();
