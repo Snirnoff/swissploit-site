@@ -1,12 +1,12 @@
 /* ============================================================
-   Swissploit Stylesheet (fixed)
+   Swissploit Stylesheet (final, hover-zoom fixed)
    1) Reset & Base
    2) Theme Tokens (Light / Dark)
    3) Layout (Header, Footer, Sections)
    4) Components (Switch, Buttons, Hero, Shorts, Features, Cards, Chips, Contact)
-   5) Utilities (Reveal as animation, Reduced Motion, Filter helpers)
+   5) Utilities (Reveal via translate, Reduced Motion, Filter helpers)
    6) Effects (spotlight, separators, magnetic, letters)
-   7) Hovers & Animations (Zoom, Neon Pulse)
+   7) Hovers & Animations (Zoom via scale, Neon Pulse)
    ============================================================ */
 
 
@@ -152,12 +152,14 @@ html[data-theme="dark"] .switch-track{ background: color-mix(in oklab, var(--fg)
 .btn{
   display:inline-block; padding: 14px 18px; border-radius: 12px; text-decoration:none; font-weight:600;
   border:1px solid var(--border); color: var(--fg);
-  transition: transform .18s ease, box-shadow .18s ease, background .18s ease, color .18s ease, border-color .18s ease;
+  transition: scale .18s ease, box-shadow .18s ease, background .18s ease, color .18s ease, border-color .18s ease;
+  /* use scale transition (not transform) so reveal delay never blocks hover */
+  scale: 1;
 }
 .btn.small{ padding: 10px 14px; font-size: 14px; }
 .btn.primary{ background: #111; color:#fff; border-color: #111; }
 html[data-theme="dark"] .btn.primary{ background:#e4e7eb; color:#0c0c0f; border-color:#e4e7eb; }
-.btn:hover{ transform: translateY(-2px) scale(1.03); box-shadow: 0 12px 28px rgba(0,0,0,.16); }
+.btn:hover{ scale: 1.03; box-shadow: 0 12px 28px rgba(0,0,0,.16); }
 .btn.primary:hover{ background:#000; }
 html[data-theme="dark"] .btn.primary:hover{ background:#fff; }
 
@@ -200,7 +202,11 @@ html[data-theme="dark"] .btn.primary:hover{ background:#fff; }
 .short{
   flex: 0 0 auto; width: 176px; height: 312px; /* 9:16 */
   border-radius: 1rem; overflow: hidden; background: #000; border: 1px solid var(--border);
-  box-shadow: var(--shadow); transition: transform .18s ease, box-shadow .18s ease; position: relative; z-index: 0;
+  box-shadow: var(--shadow);
+  /* use scale for hover, translate reserved for reveal */
+  translate: 0 0; scale: 1;
+  transition: translate .8s ease, opacity .8s ease, scale .18s ease, box-shadow .18s ease, border-color .18s ease;
+  position: relative; z-index: 0;
 }
 .short iframe{ width: 100%; height: 100%; border: 0; }
 
@@ -219,7 +225,8 @@ html[data-theme="dark"] .btn.primary:hover{ background:#fff; }
 .features{ display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; margin-top: 18px; }
 .feature{
   background: var(--panel); border:1px solid var(--border); border-radius: 14px; padding: 18px; box-shadow: var(--shadow);
-  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  translate: 0 0; scale: 1;
+  transition: translate .8s ease, opacity .8s ease, scale .18s ease, box-shadow .18s ease, border-color .18s ease;
 }
 .feature .icon{
   font-size: 32px; width: 60px; height: 60px; margin: 0 auto 10px; display:grid; place-items:center;
@@ -235,13 +242,13 @@ html[data-theme="dark"] .btn.primary:hover{ background:#fff; }
 .card{
   background: var(--panel); border:1px solid var(--border); border-radius: 14px; padding: 18px; box-shadow: var(--shadow);
   text-align: center; display:flex; flex-direction:column; align-items:stretch; justify-content:flex-start;
-  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
-  transition-delay: 0s !important; /* ensure no hover lag from JS inline delays */
+  translate: 0 0; scale: 1;
+  transition: translate .8s ease, opacity .8s ease, scale .18s ease, box-shadow .18s ease, border-color .18s ease;
 }
 .card .icon{
   font-size: 34px; width:64px; height:64px; margin: 4px auto 6px; display:grid; place-items:center;
   border-radius: 16px; background: color-mix(in oklab, var(--accent) 10%, transparent);
-  transition: transform .18s ease, background .18s ease; transition-delay: 0s !important;
+  transition: transform .18s ease, background .18s ease;
 }
 .card h3{ margin: 10px 0; }
 .card-cta{ margin-top: 14px; display:flex; justify-content:center; }
@@ -280,31 +287,27 @@ html[data-theme="dark"] .btn.primary:hover{ background:#fff; }
 
 
 /* ========== 5) UTILITIES ========== */
-/* Reveal: use animation so hover transitions never inherit delays */
-.reveal{ opacity: 0; transform: translateY(40px); }
-.reveal.visible{
-  animation: reveal-in .8s ease forwards;
-  animation-delay: var(--reveal-delay, 0s);
-}
-/* ensure interactive items never wait */
-.card, .feature, .short{ transition-delay: 0s !important; }
-
-@keyframes reveal-in{
-  to { opacity: 1; transform: translateY(0); }
+/* Reveal: use translate/opacity so hover scale never inherits reveal delay */
+.reveal { opacity: 0; translate: 0 40px; }
+.reveal.visible {
+  opacity: 1; translate: 0 0;
+  /* Only translate/opacity get a (staggered) delay, scale has none */
+  transition: translate .8s ease var(--reveal-delay, 0s), opacity .8s ease var(--reveal-delay, 0s);
 }
 
 /* Filter state helpers (used by JS FLIP logic) */
 .card.is-hidden{ display: none; }
 .card.will-hide{
-  opacity:0; transform: translateY(10px) scale(0.98);
-  transition: opacity .22s ease, transform .22s ease; pointer-events:none;
+  opacity:0; translate: 0 10px; scale: .98;
+  transition: opacity .22s ease, translate .22s ease, scale .22s ease;
+  pointer-events:none;
 }
 .card.will-show{
-  display:block; opacity:0; transform: translateY(10px) scale(0.98);
+  display:block; opacity:0; translate: 0 10px; scale: .98;
 }
 .card.appearing{
-  transition: opacity .24s ease, transform .28s ease;
-  opacity:1; transform: translateY(0) scale(1);
+  transition: opacity .24s ease, translate .28s ease, scale .28s ease;
+  opacity:1; translate: 0 0; scale: 1;
 }
 
 /* Reduced motion */
@@ -342,14 +345,14 @@ html[data-theme="dark"] .btn.primary:hover{ background:#fff; }
 
 
 /* ========== 7) HOVERS & ANIMATIONS ========== */
-/* Hover zoom + red hairline */
+/* Hover zoom (scale) + red hairline */
 .card:hover{
-  transform: translateY(-6px) scale(1.03);
+  scale: 1.03;
   box-shadow: 0 18px 36px rgba(211,0,0,.18), 0 6px 18px rgba(0,0,0,.08);
   border-color: color-mix(in oklab, var(--accent) 45%, var(--border));
 }
 .feature:hover{
-  transform: translateY(-6px) scale(1.03);
+  scale: 1.03;
   box-shadow: 0 18px 36px rgba(211,0,0,.18), 0 6px 18px rgba(0,0,0,.08);
   border-color: color-mix(in oklab, var(--accent) 45%, var(--border));
 }
@@ -358,7 +361,7 @@ html[data-theme="dark"] .btn.primary:hover{ background:#fff; }
   transform: scale(1.08);
 }
 .short:hover{
-  transform: translateY(-6px) scale(1.05);
+  scale: 1.05;
   box-shadow: 0 18px 36px rgba(211,0,0,.18), 0 6px 18px rgba(0,0,0,.08);
   z-index: 10;
 }
