@@ -385,4 +385,12 @@ html[data-theme="dark"] .btn.primary:hover { background: #fff; }
 /* Section separators (hairline gradient) */
 .section::before {
   content: "";
-  position: absolute; left: 0; right: 0; top: -1px; height
+  position: absolute; left: 0; right: 0; top: -1px; height: 1px;
+  background: linear-gradient(90deg, transparent, color-mix(in oklab, var(--fg) 10%, transparent), transparent);
+}
+
+/* Magnetic buttons */
+.btn.magnetic { transition: transform .12s ease, box-shadow .2s ease; }
+
+/* Hero brand letters */
+.hero-brand span { display: inline-block; transition: transform .25s ease; will-change: transform; }
