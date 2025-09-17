@@ -386,3 +386,20 @@ html[data-theme="dark"] .btn.primary:hover{ background:#fff; }
 .btn:hover{ animation: pulse-glow-ghost 2s ease-in-out infinite; }
 .btn.primary:hover{ animation: pulse-glow-primary 2s ease-in-out infinite; }
 .btn.youtube:hover{ animation: pulse-glow-youtube 2s ease-in-out infinite; }
+
+/* Tuning */
+
+/* --- Tighten spacing between "Hier einige Videos" and the shorts rail --- */
+#shorts h2 { 
+  margin-bottom: 8px;    /* vorher 1.5rem (~24px) */
+}
+
+/* Optional: noch etwas kompakter – nur nutzen, wenn du es wirklich enger willst */
+#shorts .rail-wrap { 
+  margin-top: 0;         /* falls irgendwo Margin drauf kommt */
+}
+#shorts .shorts-container { 
+  padding-top: 0;        /* vertikales Padding oben entfernen */
+}
+
+
