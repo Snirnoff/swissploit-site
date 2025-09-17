@@ -416,3 +416,7 @@ html[data-theme="dark"] .btn.primary:hover{ background:#fff; }
   filter: drop-shadow(0 6px 16px rgba(0,0,0,.22)); /* weicher Glow wie „über der Karte“ */
 }
 
+/* --- #3 Reduce bottom spacing after "Über mich" cards --- */
+#about.section {
+  padding-bottom: 40px;   /* vorher 100px (Default Section) */
+}
