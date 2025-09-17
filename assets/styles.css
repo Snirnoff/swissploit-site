@@ -389,7 +389,7 @@ html[data-theme="dark"] .btn.primary:hover{ background:#fff; }
 
 /* Tuning */
 
-/* --- Tighten spacing between "Hier einige Videos" and the shorts rail --- */
+/* --- #1 Tighten spacing between "Hier einige Videos" and the shorts rail --- */
 #shorts h2 { 
   margin-bottom: 8px;    /* vorher 1.5rem (~24px) */
 }
@@ -402,4 +402,24 @@ html[data-theme="dark"] .btn.primary:hover{ background:#fff; }
   padding-top: 0;        /* vertikales Padding oben entfernen */
 }
 
+/* --- #2 Services: icon "pop out" on hover like in About --- */
+.services .cards .card {
+  overflow: visible;       /* damit das Icon über den Rand hinausragen darf */
+  position: relative;      /* Basis für z-index der Karte */
+}
+
+.services .cards .card:hover {
+  z-index: 5;              /* Karte über Nachbarn legen, damit nichts abgeschnitten wird */
+}
+
+.services .cards .card .icon {
+  will-change: transform, filter, background;
+  transition: transform .18s ease, background .18s ease, filter .18s ease;
+}
+
+.services .cards .card:hover .icon {
+  transform: scale(1.12) translateY(-2px);  /* sichtbarer „pop out“ */
+  background: color-mix(in oklab, var(--accent) 18%, transparent);
+  filter: drop-shadow(0 6px 16px rgba(0,0,0,.22)); /* weicher Glow wie „über der Karte“ */
+}
 
