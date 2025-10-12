@@ -416,7 +416,51 @@ html[data-theme="dark"] .btn.primary:hover{ background:#fff; }
   filter: drop-shadow(0 6px 16px rgba(0,0,0,.22)); /* weicher Glow wie „über der Karte“ */
 }
 
+/**********/
 /* --- #3 Reduce bottom spacing after "Über mich" cards --- */
 #about.section {
   padding-bottom: 40px;   /* vorher 100px (Default Section) */
 }
+/**********/
+
+/**********/
+/* --- #4 Services: exactly 3 columns on desktop, then 2 / 1 responsive */
+.services .cards{
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr)); /* <<< exactly 3 */
+  gap: 20px;
+  margin-top: 24px;
+  justify-items: stretch; /* cards stretch to full column width */
+}
+
+/* ≤ 1024px: 2 columns */
+@media (max-width: 1024px){
+  .services .cards{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* ≤ 640px: 1 column */
+@media (max-width: 640px){
+  .services .cards{
+    grid-template-columns: 1fr;
+  }
+}
+/**********/
+
+/**********/
+/* --- #5 Make cards flex columns so content grows and CTA sits at the bottom */
+.services .cards .card{
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  height: 100%;              /* let the card fill its grid cell */
+}
+
+/* Push the CTA block to the bottom regardless of text length */
+.services .cards .card .card-cta{
+  margin-top: auto;          /* <<< key line */
+  display: flex;
+  justify-content: center;
+}
+/**********/
