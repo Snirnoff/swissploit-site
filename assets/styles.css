@@ -522,7 +522,7 @@ html[data-theme="dark"] .btn.primary:hover{ background:#fff; }
    --peek = "Vorschau" an den Kanten (Karte ragt halb rein) */
 .shorts-carousel {
   position: relative;
-  --visible: 3;
+  --visible: 4;
   --gap: 20px;
   --peek: 32px;           /* Desktop-Peek */
 }
