@@ -95,6 +95,21 @@ html[data-theme="dark"] {
   font-weight: 700;
   color: var(--fg);
 }
+/* === Small looping video inside brand area === */
+.brand-video {
+  display: block;
+  height: 40px;          /* fixe Höhe wie das alte Logo */
+  width: auto;           /* passt Breite proportional an */
+  max-width: 60px;       /* Sicherheitslimit, falls Video zu breit ist */
+  object-fit: cover;     /* füllt das Element aus ohne Verzerrung */
+  border-radius: 6px;    /* optional, weiche Ecken */
+  margin-right: 6px;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,.3)); /* subtiler Kontrast */
+  pointer-events: none;  /* kein Klick möglich, damit Link funktioniert */
+}
+
+
+
 
 
 
