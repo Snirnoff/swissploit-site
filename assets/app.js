@@ -34,6 +34,9 @@ window.addEventListener('scroll', () => {
   });
 }, { passive: true });
 
+
+
+/*
 // Shorts-Rail Pfeile
 const rail = document.getElementById('shortsRail');
 const prevBtn = document.querySelector('.rail-btn.prev');
@@ -77,7 +80,7 @@ nextBtn.addEventListener('click', () => {
   updateButtons();
 })();
 
-
+*/
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -324,4 +327,139 @@ document.addEventListener("DOMContentLoaded", () => {
             applyFilter('all');
           })();
 
+/* =========================================================
+   START: SHORTS CAROUSEL (with edge "peek")
+   - zeigt 3/2/1 Karten (Desktop/Tablet/Mobile)
+   - Peeking links/rechts via Viewport-Padding
+   - Buttons + Swipe/Drag
+   ========================================================= */
+(function shortsCarousel() {
+  const car = document.querySelector('.shorts-carousel');
+  if (!car) return;
+
+  const viewport = car.querySelector('.sc-viewport');
+  const track = car.querySelector('.sc-track');
+  const items = Array.from(track.querySelectorAll('.short'));
+  const prev = car.querySelector('.sc-btn.prev');
+  const next = car.querySelector('.sc-btn.next');
+
+  let index = 0;        // aktuelle "Seite"
+  let visible = 3;      // 3/2/1 – wird dynamisch ermittelt
+  let gapPx = 20;       // aus CSS --gap
+  let peekPx = 32;      // aus CSS --peek
+
+  // liest eine CSS-Variable (px) vom Element und gibt Number zurück
+  function readCssPx(el, varName, fallback) {
+    const val = getComputedStyle(el).getPropertyValue(varName).trim();
+    const n = parseFloat(val || '');
+    return Number.isFinite(n) ? n : fallback;
+  }
+
+  // 3/2/1 je nach Containerbreite (wie Services)
+  function computeVisible() {
+    const w = viewport.clientWidth;
+    if (w < 640) return 1;
+    if (w < 1024) return 2;
+    return 3;
+  }
+
+  // Gesamtseitenzahl
+  function maxIndexFor(count, vis) {
+    return Math.max(0, Math.ceil(count / vis) - 1);
+  }
+
+  // Translate berechnen: seitenweise in PX schieben (robust mit Peek/Gaps)
+  function translateFor(indexVal) {
+    // Breite einer Karte inkl. Gap ausmessen
+    const itemW = items[0]?.getBoundingClientRect().width || 0;
+    const pageWidth = (itemW * visible) + (gapPx * (visible - 1));
+    return -(indexVal * pageWidth);
+  }
+
+  function applyLayout() {
+    visible = computeVisible();
+    car.style.setProperty('--visible', String(visible));
+    gapPx = readCssPx(car, '--gap', 20);
+    peekPx = readCssPx(car, '--peek', 32);
+
+    // Index ggf. clampen
+    const maxIdx = maxIndexFor(items.length, visible);
+    if (index > maxIdx) index = maxIdx;
+
+    update(false);
+  }
+
+  function update(animate = true) {
+    // optional Animation
+    track.style.transition = animate ? 'transform .36s cubic-bezier(.2,.8,.2,1)' : 'none';
+    const x = translateFor(index);
+    track.style.transform = `translateX(${x}px)`;
+
+    // Buttons
+    prev.disabled = (index === 0);
+    next.disabled = (index >= maxIndexFor(items.length, visible));
+  }
+
+  // Buttons
+  prev.addEventListener('click', () => { index = Math.max(0, index - 1); update(); });
+  next.addEventListener('click', () => {
+    const maxIdx = maxIndexFor(items.length, visible);
+    index = Math.min(maxIdx, index + 1);
+    update();
+  });
+
+  // Swipe/Drag
+  let dragging = false, startX = 0, curX = 0, startTx = 0;
+
+  function currentTranslateFromStyle() {
+    const m = /translateX\((-?\d+(?:\.\d+)?)px\)/.exec(track.style.transform || '');
+    return m ? parseFloat(m[1]) : translateFor(index);
+  }
+
+  function onDown(e) {
+    dragging = true;
+    startX = (e.touches ? e.touches[0].clientX : e.clientX) || 0;
+    startTx = currentTranslateFromStyle();
+    track.style.transition = 'none';
+  }
+  function onMove(e) {
+    if (!dragging) return;
+    curX = (e.touches ? e.touches[0].clientX : e.clientX) || startX;
+    const dx = curX - startX;
+    track.style.transform = `translateX(${startTx + dx}px)`;
+  }
+  function onUp() {
+    if (!dragging) return;
+    dragging = false;
+    track.style.transition = 'transform .36s cubic-bezier(.2,.8,.2,1)';
+
+    const dx = (curX - startX) || 0;
+    const threshold = Math.max(60, viewport.clientWidth * 0.15); // ~15% oder min 60px
+    if (dx > threshold) index = Math.max(0, index - 1);
+    else if (dx < -threshold) {
+      const maxIdx = maxIndexFor(items.length, visible);
+      index = Math.min(maxIdx, index + 1);
+    }
+    update();
+  }
+
+  viewport.addEventListener('pointerdown', onDown);
+  window.addEventListener('pointermove', onMove, { passive: true });
+  window.addEventListener('pointerup', onUp);
+
+  // Touch Fallback (ältere iOS)
+  viewport.addEventListener('touchstart', onDown, { passive: true });
+  window.addEventListener('touchmove', onMove, { passive: true });
+  window.addEventListener('touchend', onUp);
+
+  // Re-Layout bei Resize (auch Schriftgrößenwechsel etc.)
+  const ro = new ResizeObserver(() => applyLayout());
+  ro.observe(viewport);
+
+  // Init
+  applyLayout();
+})();
+ /* =========================================================
+    END: SHORTS CAROUSEL
+    ========================================================= */
 
