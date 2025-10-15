@@ -506,3 +506,91 @@ html[data-theme="dark"] .btn.primary:hover{ background:#fff; }
   justify-content: center;
 }
 /**********/
+
+
+/* =========================================================
+   START: SHORTS CAROUSEL (with edge "peek")
+   ========================================================= */
+
+/* Basis */
+.shorts { padding: 8px 0 28px; }
+#shorts h2 { margin-bottom: 10px; }
+
+/* Carousel Container:
+   --visible = wie viele Karten pro Sicht (JS setzt 3/2/1)
+   --gap = Abstand zwischen Karten
+   --peek = "Vorschau" an den Kanten (Karte ragt halb rein) */
+.shorts-carousel {
+  position: relative;
+  --visible: 3;
+  --gap: 20px;
+  --peek: 32px;           /* Desktop-Peek */
+}
+
+/* Viewport mit seitlichem Padding für Peeking */
+.sc-viewport {
+  overflow: hidden;
+  width: 100%;
+  padding-inline: var(--peek);
+}
+
+/* Track – horizontales Flexband */
+.sc-track {
+  display: flex;
+  gap: var(--gap);
+  will-change: transform;
+  transition: transform .36s cubic-bezier(.2,.8,.2,1);
+  touch-action: pan-y;
+}
+
+/* Karte: Breite exakt: (ViewportBreite - Peek links/rechts - Gaps) / visible */
+.short {
+  flex: 0 0 calc((100% - (2 * var(--peek)) - (var(--gap) * (var(--visible) - 1))) / var(--visible));
+  height: 312px; /* 9:16 passt gut; ggf. anpassen */
+  border-radius: 1rem;
+  overflow: hidden;
+  background: #000;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  translate: 0 0; scale: 1;
+  transition: scale .18s ease, box-shadow .18s ease, border-color .18s ease;
+  position: relative;
+}
+.short iframe { width: 100%; height: 100%; border: 0; }
+
+/* Buttons */
+.sc-btn {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 40px; height: 40px; border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--panel); color: var(--fg);
+  display: grid; place-items: center; cursor: pointer;
+  transition: opacity .15s ease, transform .15s ease, box-shadow .15s ease;
+  box-shadow: var(--shadow);
+  opacity: .95;
+  z-index: 2;
+}
+.sc-btn:hover { transform: translateY(-50%) scale(1.06); }
+.sc-btn:disabled { opacity: .25; pointer-events: none; }
+.sc-btn.prev { left: 6px; }
+.sc-btn.next { right: 6px; }
+
+/* Hover (dein bestehender Look) */
+.short:hover {
+  scale: 1.05;
+  box-shadow: 0 18px 36px rgba(211,0,0,.18), 0 6px 18px rgba(0,0,0,.08);
+  z-index: 1;
+}
+
+/* Responsive Fallback (falls JS mal nicht greift) */
+@media (max-width: 1024px) {
+  .shorts-carousel { --visible: 2; --peek: 24px; }
+}
+@media (max-width: 640px) {
+  .shorts-carousel { --visible: 1; --peek: 16px; }
+}
+
+/* =========================================================
+   END: SHORTS CAROUSEL
+   ========================================================= */
+
