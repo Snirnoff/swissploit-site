@@ -53,6 +53,21 @@ html[data-theme="dark"] {
   --shadow: 0 10px 30px rgba(0,0,0,.5);
 }
 
+/* =========================================================
+   CUSTOM PLUS CURSOR – separate SVGs für Light/Dark
+   Hotspot auf der Mitte (12 12 bei 24x24)
+   ========================================================= */
+
+/* Light Mode → schwarzes Plus */
+html {
+  cursor: url("assets/plus-black.svg") 12 12, auto;
+}
+
+/* Dark Mode → weißes Plus (dein bestehendes plus.svg) */
+html[data-theme="dark"] {
+  cursor: url("assets/plus.svg") 12 12, auto;
+}
+
 
 /* ========== 3) LAYOUT ========== */
 /* Header */
