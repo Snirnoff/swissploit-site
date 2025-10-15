@@ -72,6 +72,33 @@ html[data-theme="dark"] {
   height: 64px;
 }
 
+
+/* --- Small looping video instead of static logo --- */
+.brand-video {
+  height: 40px;           /* gleiche Höhe wie das alte Logo */
+  width: auto;
+  border-radius: 8px;     /* optional, falls du weiche Ecken willst */
+  object-fit: cover;
+  display: block;
+  margin-right: 8px;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,.3)); /* leichter Kontrast */
+}
+
+/* sorgt für gute Ausrichtung im Header */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.brand span {
+  font-weight: 700;
+  color: var(--fg);
+}
+
+
+
+
 /* Brand & Nav */
 .brand {
   display: flex; align-items: center; gap: 10px;
