@@ -65,7 +65,7 @@ html {
 
 /* Dark Mode → weißes Plus (dein bestehendes plus.svg) */
 html[data-theme="dark"] {
-  cursor: url("assets/plus.svg") 12 12, auto;
+  cursor: url("assets/JustPlus.png") 12 12, auto;
 }
 
 
