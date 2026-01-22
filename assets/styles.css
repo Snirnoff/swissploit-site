@@ -310,6 +310,24 @@ html[data-theme="dark"] .btn.primary:hover{ background:#fff; }
 .card h3{ margin: 10px 0; }
 .card-cta{ margin-top: 14px; display:flex; justify-content:center; }
 
+.card-eyebrow {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #888;
+  margin-bottom: 0.4rem;
+}
+
+.card-micro-usp {
+  margin-top: 0.8rem;
+  font-size: 0.7rem;
+  color: #999;
+  text-align: center;
+}
+
+
 /* 4.7) Filter chips */
 .service-filters{
   display:flex; gap:10px; justify-content:center; flex-wrap:wrap;
