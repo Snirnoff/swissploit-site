@@ -463,3 +463,53 @@ document.addEventListener("DOMContentLoaded", () => {
     END: SHORTS CAROUSEL
     ========================================================= */
 
+
+/* =========================================================
+   PAGE TRANSITIONS (Blur/Fade) – internal links
+   ========================================================= */
+(function pageTransitions(){
+  const body = document.body;
+
+  // Fade-in when page loads
+  function ready(){
+    // small delay avoids flicker on very fast paints
+    requestAnimationFrame(() => body.classList.add('is-ready'));
+  }
+
+  // If page restored from bfcache (back/forward), ensure correct state
+  window.addEventListener('pageshow', () => {
+    body.classList.remove('is-leaving');
+    ready();
+  });
+
+  document.addEventListener('DOMContentLoaded', ready);
+
+  // Intercept internal links with data-transition
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest('a[data-transition]');
+    if(!a) return;
+
+    const href = a.getAttribute('href');
+    if(!href) return;
+
+    // Ignore hash-only
+    if(href.startsWith('#')) return;
+
+    // Ignore new tab / modifier keys
+    if(a.target === '_blank' || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+
+    // Only same-origin navigations
+    const url = new URL(href, window.location.href);
+    if(url.origin !== window.location.origin) return;
+
+    e.preventDefault();
+
+    body.classList.add('is-leaving');
+
+    // match CSS duration (~320ms)
+    window.setTimeout(() => {
+      window.location.href = url.href;
+    }, 320);
+  });
+})();
+
