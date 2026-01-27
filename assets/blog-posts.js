@@ -12,10 +12,10 @@ window.SWISSPLOIT_BLOG_POSTS = [
         title: "Echter Angriff: WeTransfer-Phishing → HTML-Datei → Fake OneDrive Login",
         excerpt:
           "So wurde ein Microsoft-Konto übernommen: WeTransfer-Link, HTML-Download, gefälschtes OneDrive-Login.",
-        content: `
+        content: content: `
 <p><strong>WeTransfer-Phishing</strong> ist aktuell eine der fiesesten Methoden, um <strong>Microsoft 365 / OneDrive / Outlook Accounts</strong> zu übernehmen – weil der Ablauf “normal” wirkt: Download-Link, Datei öffnen, Login.</p>
 
-<p>In diesem Beitrag zeige ich dir den Angriff <strong>Schritt für Schritt</strong> anhand eines realen Falls – inklusive Video – und erkläre, <strong>warum eine HTML-Datei gefährlich sein kann</strong>, obwohl sie auf den ersten Blick harmlos aussieht.</p>
+<p>In diesem Beitrag zeige ich dir den Angriff anhand eines realen Falls – inklusive Video – und erkläre, <strong>warum eine HTML-Datei gefährlich sein kann</strong>, obwohl sie auf den ersten Blick harmlos aussieht.</p>
 
 <div class="blog-callout">
   <p><strong>Worum geht’s?</strong><br>
@@ -23,108 +23,67 @@ window.SWISSPLOIT_BLOG_POSTS = [
 </div>
 
 <h2>Warum ausgerechnet WeTransfer?</h2>
-<p>Viele kennen WeTransfer als seriösen Dienst zum Teilen von Dateien. Genau dieses Vertrauen wird ausgenutzt. Ein Link zu WeTransfer löst bei vielen weniger Misstrauen aus als “random-file-share.com”. Für Angreifer ist das perfekt: hoher Klick-Faktor, geringe Alarmglocken.</p>
+<p>Viele kennen WeTransfer als seriösen Dienst zum Teilen von Dateien. Genau dieses Vertrauen wird ausgenutzt. Ein Link zu WeTransfer löst bei vielen weniger Misstrauen aus als eine unbekannte File-Share-Seite – und genau das erhöht die Klickrate.</p>
 
-<h2>Der Angriff – technisch einfach, aber effektiv</h2>
-<p>Der typische Ablauf sieht so aus (vereinfacht, aber realistisch):</p>
-<ul>
-  <li>📩 Du erhältst eine E-Mail, die nach Bestellung, Dokumenten oder “freigegebenen Dateien” aussieht.</li>
-  <li>🔗 Der Link führt auf eine Seite, die wie ein normaler WeTransfer-Download wirkt.</li>
-  <li>📄 Du lädst eine Datei herunter – oft mit Namen wie <em>Rechnung.html</em> oder <em>Dokumente.html</em>.</li>
-  <li>🌐 Beim Öffnen startet dein Browser und zeigt eine <strong>täuschend echte OneDrive/Microsoft-Anmeldeseite</strong>.</li>
-  <li>🔐 Du meldest dich an – und gibst deine Zugangsdaten direkt an den Angreifer.</li>
-</ul>
+<h2>So läuft der Angriff ab</h2>
+<p>Das Muster ist fast immer gleich: Du bekommst eine Mail, die nach Dokumenten, Bestellung oder “freigegebenen Dateien” klingt. Der Link führt auf eine Seite, die wie ein normaler Download wirkt. Du lädst eine Datei herunter – häufig mit Namen wie <em>Rechnung.html</em> oder <em>Dokumente.html</em>.</p>
 
-<h2>Was macht die HTML-Datei so gefährlich?</h2>
-<p>Eine HTML-Datei ist im Prinzip “eine Webseite als Datei”. Öffnest du sie, kann sie:</p>
-<ul>
-  <li>eine Login-Seite nachbauen (optisch 1:1 wie Microsoft)</li>
-  <li>dich auf eine Phishing-Domain weiterleiten</li>
-  <li>Formulareingaben (E-Mail/Passwort) an einen Server senden</li>
-</ul>
-<p>Das Gemeine: Viele erwarten bei “Datei öffnen” kein Login-Fenster – und interpretieren es als “normaler Cloud-Flow”.</p>
+<p>Und jetzt kommt der Trick: Beim Öffnen startet dein Browser und zeigt eine <strong>täuschend echte OneDrive/Microsoft-Anmeldeseite</strong>. Viele denken: “Ah, Microsoft will kurz bestätigen” – und tippen ihre Zugangsdaten ein.</p>
 
-<h2>Woran du den Fake erkennst (Quick Checks)</h2>
-<ul>
-  <li><strong>Domain prüfen:</strong> Steht dort wirklich <em>login.microsoftonline.com</em> (oder eine saubere Microsoft-Domain)?</li>
-  <li><strong>Dateityp prüfen:</strong> Warum ist es eine <strong>.html</strong> statt PDF/DOCX?</li>
-  <li><strong>Druck erzeugt:</strong> “Sofort ansehen”, “dringend”, “läuft ab” – klassischer Social-Engineering-Trick.</li>
-  <li><strong>Absender-Kontext:</strong> Passt das wirklich zu deiner aktuellen Arbeit? Im Zweifel kurz nachfragen.</li>
-</ul>
+<h2>Warum die HTML-Datei der kritische Punkt ist</h2>
+<p>Eine HTML-Datei ist im Prinzip “eine Webseite als Datei”. Öffnest du sie, kann sie eine Login-Seite nachbauen, dich weiterleiten oder Formulareingaben an einen Server senden. Das Gemeine: Ein “Dokument” wirkt harmlos – aber im Browser wird daraus plötzlich ein Login.</p>
+
+<h2>So erkennst du den Fake schnell</h2>
+<p>Schau dir die Adresse im Browser an: Ist das wirklich eine saubere Microsoft-Domain? Und frag dich: Warum ist das ein <strong>.html</strong> und kein PDF/DOCX? Wenn zusätzlich Druck aufgebaut wird (“läuft ab”, “dringend”, “sofort ansehen”), ist das fast immer ein Warnsignal.</p>
 
 <h2>So schützt du dein Microsoft 365 Konto nachhaltig</h2>
-<ul>
-  <li><strong>MFA aktivieren</strong> (Authenticator-App bevorzugt) – das stoppt viele Übernahmen sofort.</li>
-  <li><strong>Passwort-Manager</strong> nutzen: Der füllt nur auf der echten Domain automatisch aus.</li>
-  <li><strong>Security Defaults / Conditional Access</strong> (für KMU): Login-Risiken reduzieren.</li>
-  <li><strong>Awareness im Team:</strong> Kurz erklären: “HTML-Datei ≠ Dokument”.</li>
-  <li><strong>Verdacht?</strong> Passwort ändern, Sessions abmelden, Geräte prüfen, Logins checken.</li>
-</ul>
+<p>Aktiviere <strong>MFA</strong> (am besten per Authenticator-App), nutze einen <strong>Passwort-Manager</strong> und prüfe verdächtige Logins. Für KMU lohnt sich zusätzlich Security Defaults oder Conditional Access. Und ganz wichtig: Im Team kurz erklären, dass “HTML-Datei ≠ Dokument” ist.</p>
 
-<h2>Video zum Fall (inkl. Ablauf)</h2>
-<p>Im Video zeige ich dir den Ablauf als Beispiel und erkläre, worauf du achten musst.</p>
+<h2>Video zum Fall</h2>
+<p>Im Video zeige ich dir den Ablauf im Detail und worauf du in der Praxis achten solltest.</p>
 
-<p><strong>Takeaway:</strong> WeTransfer ist nicht “das Problem” – der Angreifer nutzt den Download-Flow als Tarnung. Kritisch wird es, sobald eine HTML-Datei ein Login auslöst.</p>
-        `,
+<p><strong>Takeaway:</strong> WeTransfer ist nicht “das Problem”. Der Angreifer nutzt den vertrauten Download-Flow als Tarnung. Kritisch wird es, wenn eine HTML-Datei ein Login auslöst.</p>
+`
+,
       },
 
       en: {
         title: "Real Attack: WeTransfer Phishing → HTML File → Fake OneDrive Login",
         excerpt:
           "A real Microsoft account takeover via a WeTransfer phishing page that delivered a malicious HTML file.",
-        content: `
+        content: content: `
 <p><strong>WeTransfer phishing</strong> is currently one of the most effective ways to compromise <strong>Microsoft 365 / OneDrive / Outlook accounts</strong> — because the flow looks normal: download link, open file, login.</p>
 
-<p>In this post I break down a real-world incident (with the video embedded) and explain <strong>what actually happens</strong> during the attack and <strong>why an HTML file can be dangerous</strong> even when it looks harmless.</p>
+<p>In this post I break down a real incident (with the video embedded) and explain <strong>what actually happens</strong> and <strong>why an HTML file can be dangerous</strong> even when it looks harmless.</p>
 
 <div class="blog-callout">
   <p><strong>What this attack is about</strong><br>
-  The attacker uses a “legit-looking” WeTransfer download to deliver an <strong>HTML file</strong>. When opened, it launches a browser and shows a <strong>fake OneDrive/Microsoft login page</strong>. If the victim types credentials, the attacker captures them and can take over the account.</p>
+  Attackers use a legit-looking WeTransfer download to deliver an <strong>HTML file</strong>. When opened, it launches a browser and shows a <strong>fake OneDrive/Microsoft login page</strong>. If you type credentials, they get captured.</p>
 </div>
 
 <h2>Why WeTransfer is used so often</h2>
-<p>WeTransfer is widely trusted for sharing files. Attackers exploit that trust: people are more likely to click a WeTransfer link than an unknown file-hosting site. That high trust = high click rate.</p>
+<p>WeTransfer is widely trusted. Attackers exploit that trust to increase clicks and reduce suspicion, compared to unknown file-hosting domains.</p>
 
-<h2>The attack flow (simple but effective)</h2>
-<ul>
-  <li>📩 A fake email claims documents, invoices, or shared files are available.</li>
-  <li>🔗 The link opens a WeTransfer-style download page.</li>
-  <li>📄 The download is often named like <em>invoice.html</em> or <em>documents.html</em>.</li>
-  <li>🌐 Opening the file launches a browser with a <strong>convincing OneDrive/Microsoft login</strong>.</li>
-  <li>🔐 Credentials entered → sent to the attacker.</li>
-</ul>
+<h2>How the attack unfolds</h2>
+<p>You receive an email that looks like shared files, invoices, or documents. The link opens a download-style page. Instead of a PDF/DOCX, you download something like <em>invoice.html</em> or <em>documents.html</em>.</p>
 
-<h2>Why HTML files are risky</h2>
-<p>An HTML file is essentially “a web page saved as a file”. When opened, it can:</p>
-<ul>
-  <li>render a realistic login page</li>
-  <li>redirect you to a phishing domain</li>
-  <li>submit your email/password to an attacker-controlled server</li>
-</ul>
-<p>The trick works because many people don’t expect a login page after “opening a file”.</p>
+<p>When you open it, your browser shows a convincing <strong>OneDrive/Microsoft login</strong>. Many people assume it’s a normal cloud authentication step — and enter their password.</p>
+
+<h2>Why the HTML file is the key risk</h2>
+<p>An HTML file is basically “a web page saved as a file”. When opened, it can render a fake login page, redirect you, or submit what you type to an attacker-controlled server. That’s why “opening a file” can suddenly turn into a credential theft moment.</p>
 
 <h2>How to spot it quickly</h2>
-<ul>
-  <li><strong>Check the domain:</strong> is it a real Microsoft domain (e.g. <em>login.microsoftonline.com</em>)?</li>
-  <li><strong>Check the file type:</strong> why is it <strong>.html</strong> instead of PDF/DOCX?</li>
-  <li><strong>Urgency cues:</strong> “expires soon”, “urgent”, “view now” are common pressure tactics.</li>
-  <li><strong>Context check:</strong> does this email match something you actually expect?</li>
-</ul>
+<p>Check the browser address: is it a real Microsoft domain? Also ask: why is this <strong>.html</strong> instead of a document? If the message adds urgency (“expires soon”, “urgent”, “view now”), treat it as a strong warning sign.</p>
 
 <h2>How to protect your Microsoft 365 account</h2>
-<ul>
-  <li><strong>Enable MFA</strong> (Authenticator app preferred).</li>
-  <li>Use a <strong>password manager</strong> — it auto-fills only on the real domain.</li>
-  <li>For businesses: use <strong>Security Defaults / Conditional Access</strong>.</li>
-  <li>Train your team: “HTML file ≠ document”.</li>
-  <li>If you suspect compromise: change password, revoke sessions, review sign-in logs.</li>
-</ul>
+<p>Enable <strong>MFA</strong> (Authenticator preferred), use a <strong>password manager</strong>, and review suspicious sign-ins. For businesses, consider Security Defaults or Conditional Access. And teach teams that “HTML file ≠ document”.</p>
 
-<h2>Video (real incident walkthrough)</h2>
+<h2>Video</h2>
 <p>The embedded video shows the incident flow and what to look for in real life.</p>
 
-<p><strong>Key takeaway:</strong> WeTransfer itself isn’t the threat — the attacker uses the trusted download flow as camouflage. The danger starts when an HTML file triggers a login prompt.</p>
-        `,
+<p><strong>Key takeaway:</strong> WeTransfer itself isn’t the threat. Attackers use the trusted download flow as camouflage. The danger starts when an HTML file triggers a login prompt.</p>
+`,
+
       },
     },
   },
