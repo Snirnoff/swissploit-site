@@ -37,13 +37,18 @@
   <main id="main">
     <section class="section blog-hero">
       <div class="wrap">
-        <h1 class="blog-title">Swissploit Blog</h1>
-        <p class="blog-subtitle">Retro-Style. Klare IT-Tipps. Security ohne Bullshit.</p>
+        <h1 class="blog-title" data-i18n="blogTitle">Swissploit Blog</h1>
+        <p class="blog-subtitle" data-i18n="blogSubtitle">Retro-Style. Klare IT-Tipps. Security ohne Bullshit.</p>
 
         <div class="blog-search">
           <label class="sr-only" for="blogSearch">Blog durchsuchen</label>
           <input id="blogSearch" type="search" placeholder="Suche nach Phishing, Windows, M365, OneDrive…" autocomplete="off">
-          <span class="blog-search-hint">Suche durchsucht Titel, Kurztext und Tags.</span>
+          <span class="blog-search-hint" data-i18n="searchHint">Suche durchsucht Titel, Kurztext und Tags.</span>
+        </div>
+
+        <div class="lang-toggle" role="group" aria-label="Sprache wählen">
+          <button class="lang-btn" data-lang="de" type="button">DE</button>
+          <button class="lang-btn" data-lang="en" type="button">EN</button>
         </div>
       </div>
     </section>
@@ -51,7 +56,7 @@
     <section class="section blog-grid-section">
       <div class="wrap">
         <div id="blogGrid" class="blog-grid" aria-live="polite"></div>
-        <p id="noResults" class="blog-no-results" hidden>Keine Treffer. Versuch es mit einem anderen Begriff.</p>
+        <p id="noResults" class="blog-no-results" hidden data-i18n="noResults">Keine Treffer. Versuch es mit einem anderen Begriff.</p>
       </div>
     </section>
   </main>
@@ -67,10 +72,9 @@
     </div>
   </footer>
 
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 
+  <script src="assets/transition.js"></script>
   <script src="assets/blog-posts.js"></script>
   <script src="assets/blog.js"></script>
 </body>
