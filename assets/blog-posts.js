@@ -12,7 +12,7 @@ window.SWISSPLOIT_BLOG_POSTS = [
         title: "Angriff mit HTML",
         excerpt:
           "So wurde ein Microsoft-Konto übernommen!",
-        content: content: `
+        content: `
 <p><strong>WeTransfer-Phishing</strong> ist aktuell eine der fiesesten Methoden, um <strong>Microsoft 365 / OneDrive / Outlook Accounts</strong> zu übernehmen – weil der Ablauf “normal” wirkt: Download-Link, Datei öffnen, Login.</p>
 
 <p>In diesem Beitrag zeige ich dir den Angriff anhand eines realen Falls – inklusive Video – und erkläre, <strong>warum eine HTML-Datei gefährlich sein kann</strong>, obwohl sie auf den ersten Blick harmlos aussieht.</p>
@@ -51,7 +51,7 @@ window.SWISSPLOIT_BLOG_POSTS = [
         title: "HTML Attack",
         excerpt:
           "A real Microsoft account takeover!",
-        content: content: `
+        content: `
 <p><strong>WeTransfer phishing</strong> is currently one of the most effective ways to compromise <strong>Microsoft 365 / OneDrive / Outlook accounts</strong> — because the flow looks normal: download link, open file, login.</p>
 
 <p>In this post I break down a real incident (with the video embedded) and explain <strong>what actually happens</strong> and <strong>why an HTML file can be dangerous</strong> even when it looks harmless.</p>
