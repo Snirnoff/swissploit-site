@@ -72,11 +72,16 @@
       return `
         <article class="blog-card">
           <a class="blog-card-link" href="blog-post.html?id=${encodeURIComponent(p.id)}">
-            <div class="blog-thumb">
-              <div class="blog-thumb-inner">
-                <span class="blog-thumb-label">POST</span>
-              </div>
-            </div>
+<div class="blog-thumb">
+  ${p.thumb ? `
+    <img class="blog-thumb-img" src="${escapeHtml(p.thumb)}" alt="${escapeHtml(t.title)}">
+  ` : `
+    <div class="blog-thumb-inner">
+      <span class="blog-thumb-label">POST</span>
+    </div>
+  `}
+</div>
+
 
             <div class="blog-card-body">
               <div class="blog-meta">
