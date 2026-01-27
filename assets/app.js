@@ -463,5 +463,32 @@ document.addEventListener("DOMContentLoaded", () => {
     END: SHORTS CAROUSEL
     ========================================================= */
 
+ /* =========================================================
+    page transition
+    ========================================================= */
+(function pageTransitions(){
+  const body = document.body;
 
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest('a[data-transition]');
+    if(!a) return;
+
+    const href = a.getAttribute('href');
+    if(!href) return;
+    if(href.startsWith('#')) return;
+
+    if(a.target === '_blank' || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+
+    const url = new URL(href, window.location.href);
+    if(url.origin !== window.location.origin) return;
+
+    e.preventDefault();
+
+    body.classList.add('is-leaving');
+
+    window.setTimeout(() => {
+      window.location.href = url.href;
+    }, 320);
+  });
+})();
 
