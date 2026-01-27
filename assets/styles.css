@@ -617,9 +617,6 @@ html[data-theme="dark"] .btn.primary:hover{ background:#fff; }
   .shorts-carousel { --visible: 1; --peek: 16px; }
 }
 
-.short {
-  flex: 0 0 clamp(140px, 22vw, 180px);
-}
 
 /* =========================================================
    END: SHORTS CAROUSEL
