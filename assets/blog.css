@@ -436,3 +436,15 @@ html[data-blog-theme="retro"] .nav a.is-active{
   margin-left: auto;
   margin-right: auto;
 }
+
+
+/* Kachel-Untertitel (Excerpt): hellgrau + Retro-Neon */
+.blog-card .blog-excerpt{
+  color: rgba(235,235,235,.88);
+  text-shadow:
+    0 0 10px rgba(0, 245, 255, .20),
+    0 0 18px rgba(255, 45, 149, .14);
+  letter-spacing: .02em;
+  font-size: 0.95rem;
+  line-height: 1.35;
+}
