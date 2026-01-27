@@ -506,7 +506,7 @@ html[data-theme="dark"] .btn.primary:hover{ background:#fff; }
 
 
 /* =========================================================
-   START: SHORTS CAROUSEL (with edge "peek")
+   START: SHORTS CAROUSEL (with edge "peek") — FIXED (no side clipping on hover)
    ========================================================= */
 
 /* Basis */
@@ -515,20 +515,26 @@ html[data-theme="dark"] .btn.primary:hover{ background:#fff; }
 /* Carousel Container:
    --visible = wie viele Karten pro Sicht (JS setzt 3/2/1)
    --gap = Abstand zwischen Karten
-   --peek = "Vorschau" an den Kanten (Karte ragt halb rein) */
+   --peek = "Vorschau" an den Kanten
+   --hover-pad = extra Luft, damit Hover-Zoom NICHT abgeschnitten wird
+*/
 .shorts-carousel {
   position: relative;
-  overflow: hidden;         /* Slides bleiben sauber begrenzt */
   --visible: 3;
   --gap: 20px;
   --peek: 32px;
+
+  /* NEU: Luft für Hover-Zoom */
+  --hover-pad: 22px;
+  --pad: calc(var(--peek) + var(--hover-pad));
 }
 
-/* Viewport mit seitlichem Padding für Peeking */
+/* Viewport:
+   clippen fürs Carousel, aber mit mehr Padding (pad) damit Hover nicht schneidet */
 .sc-viewport {
-  overflow: visible;
+  overflow: hidden;
   width: 100%;
-  padding-inline: var(--peek);
+  padding-inline: var(--pad);
 }
 
 /* Track – horizontales Flexband */
@@ -540,21 +546,29 @@ html[data-theme="dark"] .btn.primary:hover{ background:#fff; }
   touch-action: pan-y;
 }
 
-/* Karte: Breite exakt: (ViewportBreite - Peek links/rechts - Gaps) / visible */
-.short {
-  flex: 0 0 calc((100% - (2 * var(--peek)) - (var(--gap) * (var(--visible) - 1))) / var(--visible));
-  aspect-ratio: 9 / 16; 
-  height: auto; /* 9:16 passt gut; ggf. anpassen */
+/* Karte: Breite berücksichtigt jetzt PAD (Peek + Hover-Luft) */
+.shorts-carousel .short {
+  flex: 0 0 calc((100% - (2 * var(--pad)) - (var(--gap) * (var(--visible) - 1))) / var(--visible));
+  aspect-ratio: 9 / 16;
+  height: auto;
+
   border-radius: 1rem;
   overflow: hidden;
   background: #000;
   border: 1px solid var(--border);
   box-shadow: var(--shadow);
-  translate: 0 0; scale: 1;
-  transition: scale .18s ease, box-shadow .18s ease, border-color .18s ease;
+
+  translate: 0 0;
+  scale: 1;
+  transform-origin: center;
+
+  /* bisschen z-index, damit Hover über Nachbarn liegt */
   position: relative;
+  z-index: 0;
+
+  transition: scale .18s ease, box-shadow .18s ease, border-color .18s ease;
 }
-.short iframe { width: 100%; height: 100%; border: 0; }
+.shorts-carousel .short iframe { width: 100%; height: 100%; border: 0; }
 
 /* Buttons */
 .sc-btn {
@@ -566,30 +580,29 @@ html[data-theme="dark"] .btn.primary:hover{ background:#fff; }
   transition: opacity .15s ease, transform .15s ease, box-shadow .15s ease;
   box-shadow: var(--shadow);
   opacity: .95;
-  z-index: 2;
+  z-index: 3; /* über den Cards */
 }
 .sc-btn:hover { transform: translateY(-50%) scale(1.06); }
 .sc-btn:disabled { opacity: .25; pointer-events: none; }
 .sc-btn.prev { left: 6px; }
 .sc-btn.next { right: 6px; }
 
-/* Hover (dein bestehender Look) */
-.short:hover {
+/* Hover (Zoom + Schatten ohne Abschneiden) */
+.shorts-carousel .short:hover {
   scale: 1.05;
   box-shadow: 0 18px 36px rgba(211,0,0,.18), 0 6px 18px rgba(0,0,0,.08);
-  z-index: 1;
+  z-index: 2;
 }
 
 /* Responsive Fallback (falls JS mal nicht greift) */
 @media (max-width: 1024px) {
-  .shorts-carousel { --visible: 2; --peek: 24px; }
+  .shorts-carousel { --visible: 2; --peek: 24px; --hover-pad: 18px; }
 }
 @media (max-width: 640px) {
-  .shorts-carousel { --visible: 1; --peek: 16px; }
+  .shorts-carousel { --visible: 1; --peek: 16px; --hover-pad: 14px; }
 }
 
-.short { transform-origin: center; }
-
+/* Subline + Badge + CTA */
 .shorts-subline{
   display:flex;
   align-items:center;
@@ -598,13 +611,11 @@ html[data-theme="dark"] .btn.primary:hover{ background:#fff; }
   margin: 8px auto 18px;
   max-width: 80ch;
 }
-
 .shorts-subline p{
   margin: 0;
   font-size: 16px;
   color: color-mix(in oklab, var(--fg) 78%, transparent);
 }
-
 .badge{
   display:inline-flex;
   align-items:center;
@@ -624,10 +635,10 @@ html[data-theme="dark"] .btn.primary:hover{ background:#fff; }
   margin-top: 18px;
 }
 
-
 /* =========================================================
    END: SHORTS CAROUSEL
    ========================================================= */
+
 
 
 
