@@ -63,7 +63,7 @@ content: `
   <p>Im Video zeige ich dir den Ablauf als Beispiel und erkläre, worauf du achten musst.</p>
 
   <p><strong>Takeaway:</strong> WeTransfer ist nicht “das Problem” – der Angreifer nutzt den Download-Flow als Tarnung. Kritisch wird es, sobald eine HTML-Datei ein Login auslöst.</p>
-`,
+`},
 
 
       en: {
