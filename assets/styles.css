@@ -590,6 +590,35 @@ html[data-theme="dark"] .btn.primary:hover{ background:#fff; }
 
 .short { transform-origin: center; }
 
+.shorts-subline{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  margin: 8px auto 18px;
+  max-width: 80ch;
+}
+
+.shorts-subline p{
+  margin: 0;
+  font-size: 16px;
+  color: color-mix(in oklab, var(--fg) 78%, transparent);
+}
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  height: 26px;
+  padding: 0 10px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: color-mix(in oklab, var(--panel) 80%, transparent);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: .08em;
+}
+
 
 /* =========================================================
    END: SHORTS CAROUSEL
