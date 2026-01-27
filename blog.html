@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="de" data-theme="light" data-blog-theme="retro">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Swissploit Blog</title>
+
+  <link rel="stylesheet" href="assets/styles.css" />
+  <link rel="stylesheet" href="assets/blog.css" />
+
+  <!-- Retro Fonts (Google Fonts) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <header class="site-header" role="banner">
+    <div class="wrap headerbar">
+      <a class="brand" href="index.html" aria-label="Swissploit Home">
+        <video autoplay muted loop playsinline preload="auto" class="brand-video">
+          <source src="assets/Swissploit Intro_1.mp4" type="video/mp4">
+        </video>
+      </a>
+
+      <nav class="nav" aria-label="Hauptnavigation">
+        <a href="index.html#about">Über mich</a>
+        <a href="index.html#featured">Neuestes Video</a>
+        <a href="index.html#shorts">Shorts (EN)</a>
+        <a class="is-active" href="blog.html">Blog</a>
+      </nav>
+
+      <!-- Optional: Theme Toggle kannst du auch weglassen oder später übernehmen -->
+      <span></span>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="section blog-hero">
+      <div class="wrap">
+        <h1 class="blog-title">Swissploit Blog</h1>
+        <p class="blog-subtitle">Retro-Style. Klare IT-Tipps. Security ohne Bullshit.</p>
+
+        <div class="blog-search">
+          <label class="sr-only" for="blogSearch">Blog durchsuchen</label>
+          <input id="blogSearch" type="search" placeholder="Suche nach Windows, Phishing, VPN, M365…" autocomplete="off">
+          <span class="blog-search-hint">Tipp: Suche durchsucht Titel + Beschreibung</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section blog-grid-section">
+      <div class="wrap">
+        <div id="blogGrid" class="blog-grid" aria-live="polite"></div>
+        <p id="noResults" class="blog-no-results" hidden>Keine Treffer. Versuch es mit einem anderen Begriff.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="wrap">
+      <p>© <span id="year"></span> Swissploit.</p>
+      <nav class="foot-nav" aria-label="Footer Navigation">
+        <a href="index.html#about">Über mich</a>
+        <a href="index.html#featured">Neuestes Video</a>
+        <a href="index.html#shorts">Shorts (EN)</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
+  <script src="assets/blog-posts.js"></script>
+  <script src="assets/blog.js"></script>
+</body>
+</html>
