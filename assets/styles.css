@@ -723,3 +723,27 @@ body.is-leaving{
   }
 }
 
+
+/* =========================================================
+   BLOG CARD EXCERPT – brighter + neon retro
+   ========================================================= */
+
+/* Falls deine Klasse anders heisst: siehe Hinweis unten */
+.blog-card .blog-excerpt,
+.blog-card .excerpt,
+.blog-card p.excerpt{
+  color: rgba(245, 245, 245, 0.92) !important;   /* deutlich heller */
+  font-size: 0.95rem;
+  line-height: 1.35;
+
+  /* Retro Neon Glow */
+  text-shadow:
+    0 0 6px rgba(0, 245, 255, 0.35),
+    0 0 14px rgba(0, 245, 255, 0.22),
+    0 0 10px rgba(255, 45, 149, 0.18),
+    0 0 18px rgba(255, 45, 149, 0.12);
+
+  letter-spacing: 0.02em;
+  opacity: 1 !important;
+}
+
