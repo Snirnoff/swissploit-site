@@ -247,7 +247,7 @@ html[data-theme="dark"] .btn.primary:hover{ background:#fff; }
 .layer-2{ background: radial-gradient(600px 300px at 88% 28%, color-mix(in oklab, var(--accent) 18%, transparent) 0%, transparent 60%); mix-blend-mode: multiply; }
 
 /* 4.4) Shorts */
-.shorts { padding: 8px 0 28px; text-align: center; }
+
 .shorts h2 { margin-bottom: 1.5rem; }
 .rail-wrap{ position: relative; padding-inline: 16px; }
 .shorts-container{
@@ -464,11 +464,6 @@ html[data-theme="dark"] .btn.primary:hover{ background:#fff; }
 
 /* Tuning */
 
-/* --- #1 Tighten spacing above "Hier einige Videos" heading --- */
-#shorts.shorts {
-  padding-top: 0;   /* war 8px, jetzt ohne Abstand */
-}
-
 
 /* --- #2 Services: icon "pop out" on hover like in About --- */
 .services .cards .card {
@@ -546,7 +541,6 @@ html[data-theme="dark"] .btn.primary:hover{ background:#fff; }
    ========================================================= */
 
 /* Basis */
-.shorts { padding: 8px 0 28px; }
 #shorts h2 { margin-bottom: 10px; }
 
 /* Carousel Container:
