@@ -5,7 +5,7 @@ window.SWISSPLOIT_BLOG_POSTS = [
     title: "This HTML File Stole a Microsoft 365 Account!",
     excerpt: "In this video, I show you a REAL hacking incident where a client’s Microsoft account got compromised through a WeTransfer phishing attack.",
     date: "2026-01-27",
-    image: "assets/blog/phishing.jpg",
+    image: "assets/blog/h355-014.png",
     tags: ["security", "phishing"]
     videoUrl: "https://www.youtube.com/watch?v=5aVeWRinSxM"
   },
