@@ -616,7 +616,7 @@ html[data-theme="dark"] .btn.primary:hover{ background:#fff; }
 @media (max-width: 640px) {
   .shorts-carousel { --visible: 1; --peek: 16px; }
 }
-#shorts.section{ padding: 100px 0; }
+
 
 
 /* =========================================================
