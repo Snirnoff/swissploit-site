@@ -631,3 +631,45 @@ html[data-theme="dark"] .btn.primary:hover{ background:#fff; }
    END: SHORTS CAROUSEL
    ========================================================= */
 
+
+
+/* =========================================================
+   START: FEATURED VIDEO
+   ========================================================= */
+
+/* Featured Video */
+.video-card{
+  margin-top: 22px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  padding: 16px;
+}
+
+.video-embed{
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #000;
+}
+
+.video-embed iframe{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.video-meta{
+  display: flex;
+  justify-content: center;
+  margin-top: 14px;
+}
+
+/* =========================================================
+   END: FEATURED VIDEO
+   ========================================================= */
