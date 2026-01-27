@@ -504,40 +504,38 @@ html[data-theme="dark"] .btn.primary:hover{ background:#fff; }
 }
 /**********/
 
-
 /* =========================================================
-   START: SHORTS CAROUSEL (with edge "peek") — FIXED (no side clipping on hover)
+   START: SHORTS CAROUSEL (with edge "peek") — FIXED
+   - Untertitel untereinander
+   - Hover-Zoom wird nicht mehr oben/unten abgeschnitten
    ========================================================= */
 
 /* Basis */
 #shorts h2 { margin-bottom: 10px; }
 
-/* Carousel Container:
-   --visible = wie viele Karten pro Sicht (JS setzt 3/2/1)
-   --gap = Abstand zwischen Karten
-   --peek = "Vorschau" an den Kanten
-   --hover-pad = extra Luft, damit Hover-Zoom NICHT abgeschnitten wird
-*/
+/* Carousel Container Vars */
 .shorts-carousel {
   position: relative;
   --visible: 3;
   --gap: 20px;
   --peek: 32px;
 
-  /* NEU: Luft für Hover-Zoom */
-  --hover-pad: 22px;
-  --pad: calc(var(--peek) + var(--hover-pad));
+  /* Extra Luft für Hover (seitlich + vertikal) */
+  --hover-pad-x: 22px;
+  --hover-pad-y: 18px;
+
+  --pad-x: calc(var(--peek) + var(--hover-pad-x));
 }
 
-/* Viewport:
-   clippen fürs Carousel, aber mit mehr Padding (pad) damit Hover nicht schneidet */
+/* Viewport: clippt den Track, hat aber Luft oben/unten für Hover */
 .sc-viewport {
   overflow: hidden;
   width: 100%;
-  padding-inline: var(--pad);
+  padding-inline: var(--pad-x);
+  padding-block: var(--hover-pad-y); /* <<< KEY: verhindert Top/Bottom-Clipping */
 }
 
-/* Track – horizontales Flexband */
+/* Track */
 .sc-track {
   display: flex;
   gap: var(--gap);
@@ -546,9 +544,9 @@ html[data-theme="dark"] .btn.primary:hover{ background:#fff; }
   touch-action: pan-y;
 }
 
-/* Karte: Breite berücksichtigt jetzt PAD (Peek + Hover-Luft) */
+/* Cards */
 .shorts-carousel .short {
-  flex: 0 0 calc((100% - (2 * var(--pad)) - (var(--gap) * (var(--visible) - 1))) / var(--visible));
+  flex: 0 0 calc((100% - (2 * var(--pad-x)) - (var(--gap) * (var(--visible) - 1))) / var(--visible));
   aspect-ratio: 9 / 16;
   height: auto;
 
@@ -558,11 +556,9 @@ html[data-theme="dark"] .btn.primary:hover{ background:#fff; }
   border: 1px solid var(--border);
   box-shadow: var(--shadow);
 
-  translate: 0 0;
   scale: 1;
   transform-origin: center;
 
-  /* bisschen z-index, damit Hover über Nachbarn liegt */
   position: relative;
   z-index: 0;
 
@@ -580,46 +576,39 @@ html[data-theme="dark"] .btn.primary:hover{ background:#fff; }
   transition: opacity .15s ease, transform .15s ease, box-shadow .15s ease;
   box-shadow: var(--shadow);
   opacity: .95;
-  z-index: 3; /* über den Cards */
+  z-index: 3;
 }
 .sc-btn:hover { transform: translateY(-50%) scale(1.06); }
 .sc-btn:disabled { opacity: .25; pointer-events: none; }
 .sc-btn.prev { left: 6px; }
 .sc-btn.next { right: 6px; }
 
-/* Hover (Zoom + Schatten ohne Abschneiden) */
+/* Hover */
 .shorts-carousel .short:hover {
   scale: 1.05;
   box-shadow: 0 18px 36px rgba(211,0,0,.18), 0 6px 18px rgba(0,0,0,.08);
   z-index: 2;
 }
 
-/* Responsive Fallback (falls JS mal nicht greift) */
+/* Responsive */
 @media (max-width: 1024px) {
-  .shorts-carousel { --visible: 2; --peek: 24px; --hover-pad: 18px; }
+  .shorts-carousel { --visible: 2; --peek: 24px; --hover-pad-x: 18px; --hover-pad-y: 16px; }
 }
 @media (max-width: 640px) {
-  .shorts-carousel { --visible: 1; --peek: 16px; --hover-pad: 14px; }
+  .shorts-carousel { --visible: 1; --peek: 16px; --hover-pad-x: 14px; --hover-pad-y: 14px; }
 }
 
-/* Subline + Badge + CTA */
+/* Subline + Badge + CTA (Untertitel untereinander) */
 .shorts-subline{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:10px;
-  margin: 8px auto 18px;
   max-width: 80ch;
+  margin: 8px auto 18px;
+  text-align: center;
 }
-.shorts-subline p{
-  margin: 0;
-  font-size: 16px;
-  color: color-mix(in oklab, var(--fg) 78%, transparent);
-}
-.badge{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
+
+.shorts-subline .badge{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   height: 26px;
   padding: 0 10px;
   border-radius: 999px;
@@ -628,7 +617,20 @@ html[data-theme="dark"] .btn.primary:hover{ background:#fff; }
   font-weight: 700;
   font-size: 12px;
   letter-spacing: .08em;
+  margin-bottom: 10px; /* Badge über Text */
 }
+
+.shorts-subline p{
+  margin: 0;
+  font-size: 16px;
+  color: color-mix(in oklab, var(--fg) 78%, transparent);
+}
+
+/* Abstand zwischen den zwei Absätzen */
+.shorts-subline p + p{
+  margin-top: 10px;
+}
+
 .shorts-cta{
   display: flex;
   justify-content: center;
@@ -638,6 +640,7 @@ html[data-theme="dark"] .btn.primary:hover{ background:#fff; }
 /* =========================================================
    END: SHORTS CAROUSEL
    ========================================================= */
+
 
 
 
