@@ -687,43 +687,6 @@ html[data-theme="dark"] .btn.primary:hover{ background:#fff; }
    ========================================================= */
 
 
-/* =========================================================
-   PAGE TRANSITIONS (Blur/Fade) – for internal page navigation
-   ========================================================= */
-
-body{
-  opacity: 0;
-  filter: blur(10px);
-  transition: opacity .32s ease, filter .32s ease;
-}
-
-/* Page is ready (fade in) */
-body.is-ready{
-  opacity: 1;
-  filter: blur(0);
-}
-
-/* Leaving (fade out) */
-body.is-leaving{
-  opacity: 0;
-  filter: blur(10px);
-}
-
-/* Reduced motion */
-@media (prefers-reduced-motion: reduce){
-  body{
-    opacity: 1;
-    filter: none;
-    transition: none;
-  }
-  body.is-ready,
-  body.is-leaving{
-    opacity: 1;
-    filter: none;
-  }
-}
-
-
 
 
 /* =========================================================
