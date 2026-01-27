@@ -5,7 +5,7 @@ window.SWISSPLOIT_BLOG_POSTS = [
     date: "2026-01-27",
     tags: ["security", "phishing", "microsoft365", "onedrive", "outlook"],
     videoUrl: "https://www.youtube.com/watch?v=5aVeWRinSxM",
-
+      thumb: "assets/blog/h355-014.png",
     i18n: {
       de: {
         title: "Echter Angriff: WeTransfer-Phishing → HTML-Datei → Fake OneDrive Login",
