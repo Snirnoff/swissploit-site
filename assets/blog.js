@@ -66,7 +66,7 @@
   }
 
   posts.sort((a, b) => String(b.date).localeCompare(String(a.date)));
-  выпад: render(posts);
+  render(posts);
 
   let t;
   input.addEventListener("input", () => {
