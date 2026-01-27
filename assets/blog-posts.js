@@ -9,9 +9,9 @@ window.SWISSPLOIT_BLOG_POSTS = [
 
     i18n: {
       de: {
-        title: "Echter Angriff: WeTransfer-Phishing → HTML-Datei → Fake OneDrive Login",
+        title: "Angriff mit HTML",
         excerpt:
-          "So wurde ein Microsoft-Konto übernommen: WeTransfer-Link, HTML-Download, gefälschtes OneDrive-Login.",
+          "So wurde ein Microsoft-Konto übernommen!",
         content: content: `
 <p><strong>WeTransfer-Phishing</strong> ist aktuell eine der fiesesten Methoden, um <strong>Microsoft 365 / OneDrive / Outlook Accounts</strong> zu übernehmen – weil der Ablauf “normal” wirkt: Download-Link, Datei öffnen, Login.</p>
 
@@ -48,9 +48,9 @@ window.SWISSPLOIT_BLOG_POSTS = [
       },
 
       en: {
-        title: "Real Attack: WeTransfer Phishing → HTML File → Fake OneDrive Login",
+        title: "HTML Attack",
         excerpt:
-          "A real Microsoft account takeover via a WeTransfer phishing page that delivered a malicious HTML file.",
+          "A real Microsoft account takeover!",
         content: content: `
 <p><strong>WeTransfer phishing</strong> is currently one of the most effective ways to compromise <strong>Microsoft 365 / OneDrive / Outlook accounts</strong> — because the flow looks normal: download link, open file, login.</p>
 
