@@ -723,3 +723,33 @@ body.is-leaving{
   }
 }
 
+
+
+
+/* =========================================================
+   PAGE TRANSITIONS (safe) – never hides page on load
+   ========================================================= */
+
+body{
+  opacity: 1;              /* <<< WICHTIG: immer sichtbar */
+  filter: none;
+  transition: opacity .32s ease, filter .32s ease;
+}
+
+/* Only animate when leaving */
+body.is-leaving{
+  opacity: 0;
+  filter: blur(10px);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce){
+  body{
+    transition: none;
+  }
+  body.is-leaving{
+    opacity: 1;
+    filter: none;
+  }
+}
+
