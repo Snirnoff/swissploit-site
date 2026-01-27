@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="de" data-theme="light" data-blog-theme="retro">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Swissploit Blog</title>
+
+  <link rel="stylesheet" href="assets/styles.css" />
+  <link rel="stylesheet" href="assets/blog.css" />
+
+  <!-- Retro Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <header class="site-header" role="banner">
+    <div class="wrap headerbar">
+      <a class="brand" href="index.html" aria-label="Swissploit Home">
+        <video autoplay muted loop playsinline preload="auto" class="brand-video">
+          <source src="assets/Swissploit Intro_1.mp4" type="video/mp4">
+        </video>
+      </a>
+
+      <nav class="nav" aria-label="Hauptnavigation">
+        <a href="index.html#about">Über mich</a>
+        <a href="index.html#featured">Neuestes Video</a>
+        <a href="index.html#shorts">Shorts (EN)</a>
+        <a class="is-active" href="blog.html">Blog</a>
+      </nav>
+
+      <span></span>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="section blog-post">
+      <div class="wrap blog-post-wrap">
+        <a class="blog-back" href="blog.html">← Zurück zum Blog</a>
+
+        <div id="postHeader" class="blog-post-header"></div>
+        <div id="postBody" class="blog-post-body"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="wrap">
+      <p>© <span id="year"></span> Swissploit.</p>
+    </div>
+  </footer>
+
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script src="assets/blog-posts.js"></script>
+  <script src="assets/blog-post.js"></script>
+</body>
+</html>
