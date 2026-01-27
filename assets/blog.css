@@ -1,0 +1,203 @@
+/* assets/blog.css */
+
+/* Retro Tokens (nur Blog) */
+html[data-blog-theme="retro"]{
+  --retro-bg1: #0b0b12;
+  --retro-bg2: #140b2d;
+  --retro-neon: #ff3bd4;
+  --retro-cyan: #00f5ff;
+  --retro-yellow: #ffe066;
+
+  /* Override Swissploit Akzent dezent */
+  --accent: var(--retro-neon);
+}
+
+/* Retro Background + Scanlines */
+body{
+  background:
+    radial-gradient(900px 500px at 50% 10%, rgba(255,59,212,.18), transparent 60%),
+    radial-gradient(900px 500px at 20% 80%, rgba(0,245,255,.12), transparent 60%),
+    linear-gradient(180deg, var(--retro-bg1), var(--retro-bg2));
+}
+
+body::before{
+  content:"";
+  position: fixed;
+  inset: 0;
+  pointer-events:none;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255,255,255,.06) 0px,
+    rgba(255,255,255,.06) 1px,
+    transparent 2px,
+    transparent 6px
+  );
+  mix-blend-mode: soft-light;
+  opacity: .35;
+  z-index: 0;
+}
+
+.site-header, main, footer{ position: relative; z-index: 1; }
+
+/* Typography */
+.blog-title{
+  font-family: "Press Start 2P", system-ui;
+  font-size: clamp(22px, 3vw, 34px);
+  letter-spacing: .02em;
+  margin: 0 0 14px;
+  text-shadow: 0 0 22px rgba(255,59,212,.35);
+}
+
+.blog-subtitle{
+  font-family: "VT323", ui-monospace;
+  font-size: 24px;
+  opacity: .95;
+}
+
+.blog-hero .wrap{
+  max-width: 980px;
+}
+
+/* Search */
+.blog-search{
+  margin-top: 18px;
+  display: grid;
+  gap: 8px;
+  justify-items: center;
+}
+
+.blog-search input{
+  width: min(860px, 100%);
+  padding: 14px 14px;
+  border-radius: 14px;
+  border: 1px solid color-mix(in oklab, var(--retro-cyan) 45%, var(--border));
+  background: color-mix(in oklab, #000 55%, transparent);
+  color: var(--fg);
+  outline: none;
+  font-family: "VT323", ui-monospace;
+  font-size: 22px;
+  box-shadow: 0 0 0 1px rgba(0,245,255,.12), 0 18px 38px rgba(0,0,0,.35);
+}
+
+.blog-search input:focus{
+  box-shadow:
+    0 0 0 1px rgba(0,245,255,.20),
+    0 0 26px rgba(0,245,255,.18),
+    0 0 26px rgba(255,59,212,.12);
+}
+
+.blog-search-hint{
+  font-family: "VT323", ui-monospace;
+  font-size: 18px;
+  opacity: .85;
+}
+
+/* Grid */
+.blog-grid{
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+@media (max-width: 1024px){
+  .blog-grid{ grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px){
+  .blog-grid{ grid-template-columns: 1fr; }
+}
+
+/* Cards */
+.blog-card{
+  border-radius: 18px;
+  border: 1px solid rgba(0,245,255,.18);
+  background: color-mix(in oklab, #000 45%, var(--panel));
+  box-shadow: 0 16px 42px rgba(0,0,0,.38);
+  overflow: hidden;
+  position: relative;
+}
+
+.blog-card::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background: radial-gradient(500px 220px at 30% 20%, rgba(255,59,212,.18), transparent 60%);
+  opacity: .8;
+}
+
+.blog-card-link{
+  display: grid;
+  grid-template-rows: auto 1fr;
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+  z-index: 1;
+}
+
+.blog-thumb{
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(0,245,255,.14);
+}
+
+.blog-thumb img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display:block;
+  filter: saturate(1.1) contrast(1.05);
+}
+
+.blog-card-body{
+  padding: 14px 14px 16px;
+}
+
+.blog-meta{
+  display:flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-family: "VT323", ui-monospace;
+  font-size: 18px;
+  opacity: .9;
+}
+
+.blog-date{ color: var(--retro-yellow); }
+.blog-tags{ color: var(--retro-cyan); text-shadow: 0 0 14px rgba(0,245,255,.18); }
+
+.blog-card-title{
+  margin: 10px 0 8px;
+  font-family: "Press Start 2P", system-ui;
+  font-size: 14px;
+  line-height: 1.4;
+  text-shadow: 0 0 18px rgba(255,59,212,.22);
+}
+
+.blog-card-excerpt{
+  margin: 0;
+  font-family: "VT323", ui-monospace;
+  font-size: 22px;
+  opacity: .92;
+}
+
+/* Hover */
+.blog-card:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 22px 58px rgba(0,0,0,.48), 0 0 36px rgba(255,59,212,.10);
+  border-color: rgba(255,59,212,.22);
+}
+
+.blog-no-results{
+  margin-top: 18px;
+  font-family: "VT323", ui-monospace;
+  font-size: 22px;
+  opacity: .9;
+}
+
+/* Helper: screenreader only label */
+.sr-only{
+  position:absolute;
+  width:1px; height:1px;
+  padding:0; margin:-1px;
+  overflow:hidden; clip:rect(0,0,0,0);
+  white-space:nowrap; border:0;
+}
