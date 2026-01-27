@@ -451,5 +451,17 @@ html[data-blog-theme="retro"] .nav a.is-active{
 
 
 
-body{ opacity: 1 !important; filter: none !important; }
+/* BLOG GRID CARD: Excerpt heller + Retro-Neon */
+.blog-grid .blog-card .excerpt,
+.blog-grid .blog-card .blog-excerpt,
+.blog-grid .blog-card p[data-excerpt],
+.blog-grid .blog-card p {
+  color: rgba(245, 245, 245, 0.92) !important;
+  text-shadow:
+    0 0 6px rgba(0, 245, 255, 0.35),
+    0 0 14px rgba(0, 245, 255, 0.22),
+    0 0 10px rgba(255, 45, 149, 0.18),
+    0 0 18px rgba(255, 45, 149, 0.12);
+}
+
 
