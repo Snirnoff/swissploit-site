@@ -618,6 +618,11 @@ html[data-theme="dark"] .btn.primary:hover{ background:#fff; }
   font-size: 12px;
   letter-spacing: .08em;
 }
+.shorts-cta{
+  display: flex;
+  justify-content: center;
+  margin-top: 18px;
+}
 
 
 /* =========================================================
