@@ -588,6 +588,7 @@ html[data-theme="dark"] .btn.primary:hover{ background:#fff; }
   .shorts-carousel { --visible: 1; --peek: 16px; }
 }
 
+.short { transform-origin: center; }
 
 
 /* =========================================================
