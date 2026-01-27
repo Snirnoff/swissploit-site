@@ -79,6 +79,16 @@ body::before{
   box-shadow: 0 0 0 1px rgba(0,245,255,.12), 0 18px 38px rgba(0,0,0,.35);
 }
 
+.blog-search input{
+  color: #ffffff;                 /* Text weiss */
+  caret-color: #ffffff;           /* Cursor weiss */
+}
+
+.blog-search input::placeholder{
+  color: rgba(255,255,255,.55);   /* Placeholder gut lesbar */
+}
+
+
 .blog-search input:focus{
   box-shadow:
     0 0 0 1px rgba(0,245,255,.20),
@@ -200,4 +210,62 @@ body::before{
   padding:0; margin:-1px;
   overflow:hidden; clip:rect(0,0,0,0);
   white-space:nowrap; border:0;
+}
+
+.blog-card-body{
+  padding: 12px 12px 14px;   /* kompakter */
+}
+
+.blog-card-title{
+  font-size: 13px;           /* minimal kleiner */
+  line-height: 1.35;
+  margin: 10px 0 6px;
+
+  display: -webkit-box;      /* 2-Zeilen Clamp */
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.blog-card-excerpt{
+  font-size: 20px;           /* etwas kleiner */
+  line-height: 1.2;
+
+  display: -webkit-box;      /* 2-Zeilen Clamp */
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.blog-grid{
+  gap: 14px;                 /* weniger Abstand */
+}
+
+/* Blog Header: einheitlicher Retro-Background */
+html[data-blog-theme="retro"] .site-header{
+  backdrop-filter: none;
+  background: color-mix(in oklab, #000 35%, transparent);
+  border-bottom: 1px solid rgba(0,245,255,.18);
+}
+
+/* Nav Links sollen "poppen" */
+html[data-blog-theme="retro"] .nav a{
+  font-family: "Press Start 2P", system-ui;
+  font-size: 11px;
+  letter-spacing: .06em;
+  color: #ffffff;
+  opacity: .95;
+  text-shadow: 0 0 14px rgba(0,245,255,.18);
+}
+
+html[data-blog-theme="retro"] .nav a:hover{
+  color: var(--retro-cyan);
+  text-shadow: 0 0 18px rgba(0,245,255,.28), 0 0 18px rgba(255,59,212,.12);
+}
+
+/* Aktiver Menüpunkt */
+html[data-blog-theme="retro"] .nav a.is-active{
+  color: var(--retro-yellow);
+  opacity: 1;
+  text-shadow: 0 0 18px rgba(255,224,102,.25);
 }
