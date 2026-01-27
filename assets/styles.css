@@ -246,37 +246,6 @@ html[data-theme="dark"] .btn.primary:hover{ background:#fff; }
 .layer-1{ background: radial-gradient(500px 400px at 12% 88%, color-mix(in oklab, var(--accent) 30%, transparent) 0%, transparent 60%); }
 .layer-2{ background: radial-gradient(600px 300px at 88% 28%, color-mix(in oklab, var(--accent) 18%, transparent) 0%, transparent 60%); mix-blend-mode: multiply; }
 
-/* 4.4) Shorts */
-
-.shorts h2 { margin-bottom: 1.5rem; }
-.rail-wrap{ position: relative; padding-inline: 16px; }
-.shorts-container{
-  display: flex; gap: 1.2rem; overflow-x: auto; scroll-snap-type: x mandatory;
-  padding: 0 40px 8px; scrollbar-width: thin; justify-content: center;
-}
-.shorts-container::-webkit-scrollbar{ height: 8px; }
-.shorts-container::-webkit-scrollbar-thumb{ background: color-mix(in oklab, var(--fg) 20%, transparent); border-radius: 8px; }
-.short{
-  flex: 0 0 auto; width: 176px; height: 312px; /* 9:16 */
-  border-radius: 1rem; overflow: hidden; background: #000; border: 1px solid var(--border);
-  box-shadow: var(--shadow);
-  /* use scale for hover, translate reserved for reveal */
-  translate: 0 0; scale: 1;
-  transition: translate .8s ease, opacity .8s ease, scale .18s ease, box-shadow .18s ease, border-color .18s ease;
-  position: relative; z-index: 0;
-}
-.short iframe{ width: 100%; height: 100%; border: 0; }
-
-.rail-btn{
-  position:absolute; top:50%; transform: translateY(-50%);
-  width:40px; height:40px; border-radius:50%; border:1px solid var(--border);
-  background: var(--panel); color: var(--fg); display:grid; place-items:center; cursor:pointer;
-  opacity: .2; transition: opacity .15s ease, transform .15s ease;
-}
-.rail-btn:hover{ opacity: 1; transform: translateY(-50%) scale(1.06); }
-.rail-btn.prev{ left: 12px; }
-.rail-btn.next{ right: 12px; }
-.rail-btn[disabled]{ opacity: .08; pointer-events: none; }
 
 /* 4.5) Features (About) */
 .features{ display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; margin-top: 18px; }
@@ -549,14 +518,15 @@ html[data-theme="dark"] .btn.primary:hover{ background:#fff; }
    --peek = "Vorschau" an den Kanten (Karte ragt halb rein) */
 .shorts-carousel {
   position: relative;
+  overflow: hidden;         /* Slides bleiben sauber begrenzt */
   --visible: 3;
   --gap: 20px;
-  --peek: 32px;           /* Desktop-Peek */
+  --peek: 32px;
 }
 
 /* Viewport mit seitlichem Padding für Peeking */
 .sc-viewport {
-  overflow: hidden;
+  overflow: visible;
   width: 100%;
   padding-inline: var(--peek);
 }
@@ -573,7 +543,8 @@ html[data-theme="dark"] .btn.primary:hover{ background:#fff; }
 /* Karte: Breite exakt: (ViewportBreite - Peek links/rechts - Gaps) / visible */
 .short {
   flex: 0 0 calc((100% - (2 * var(--peek)) - (var(--gap) * (var(--visible) - 1))) / var(--visible));
-  height: 312px; /* 9:16 passt gut; ggf. anpassen */
+  aspect-ratio: 9 / 16; 
+  height: auto; /* 9:16 passt gut; ggf. anpassen */
   border-radius: 1rem;
   overflow: hidden;
   background: #000;
