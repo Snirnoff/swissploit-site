@@ -422,3 +422,17 @@ html[data-blog-theme="retro"] .nav a.is-active{
   color: rgba(220,220,220,.85);
   text-shadow: 0 0 10px rgba(0,245,255,.08);
 }
+
+/* Blog-Artikel: echte Mitte + angenehme Lesebreite */
+.blog-post {
+  max-width: 78ch;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.blog-post p,
+.blog-post h1,
+.blog-post h2 {
+  margin-left: auto;
+  margin-right: auto;
+}
