@@ -9,28 +9,40 @@
   const langBtns = document.querySelectorAll(".lang-btn");
 
   const UI = {
-    de: { back: "← Zurück zum Blog" },
-    en: { back: "← Back to blog" }
+    de: { back: "← Zurück zum Blog", watch: "▶ Video ansehen", notFoundTitle: "Artikel nicht gefunden", notFoundLead: "Der Link ist ungültig oder der Beitrag existiert nicht.", overview: "Zur Übersicht" },
+    en: { back: "← Back to blog", watch: "▶ Watch video", notFoundTitle: "Post not found", notFoundLead: "The link is invalid or the post doesn’t exist.", overview: "Back to overview" }
   };
 
   let currentLang = localStorage.getItem("swissploit-blog-lang") || "de";
   const post = posts.find(p => p.id === id);
 
   function esc(s){
-    return String(s||"").replace(/[&<>"']/g, (m) => ({
+    return String(s || "").replace(/[&<>"']/g, (m) => ({
       "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;"
     }[m]));
   }
 
+  // Unterstützt: watch?v=, youtu.be/, youtube.com/shorts/
   function youtubeEmbed(url){
     try{
       const u = new URL(url);
-      if(u.hostname.includes("youtube.com") && u.searchParams.get("v")){
-        return `https://www.youtube.com/embed/${u.searchParams.get("v")}`;
+
+      // youtube.com/watch?v=VIDEOID
+      const v = u.searchParams.get("v");
+      if(u.hostname.includes("youtube.com") && v){
+        return `https://www.youtube.com/embed/${v}`;
       }
+
+      // youtu.be/VIDEOID
       if(u.hostname.includes("youtu.be")){
-        const vid = u.pathname.replace("/","");
-        return `https://www.youtube.com/embed/${vid}`;
+        const vid = u.pathname.replace("/", "").trim();
+        if(vid) return `https://www.youtube.com/embed/${vid}`;
+      }
+
+      // youtube.com/shorts/VIDEOID
+      if(u.hostname.includes("youtube.com") && u.pathname.startsWith("/shorts/")){
+        const vid = u.pathname.split("/shorts/")[1]?.split(/[?&#/]/)[0];
+        if(vid) return `https://www.youtube.com/embed/${vid}`;
       }
     }catch(e){}
     return null;
@@ -42,6 +54,7 @@
 
   function applyUiLanguage(){
     const ui = UI[currentLang] || UI.de;
+
     document.querySelectorAll("[data-i18n]").forEach(el=>{
       const key = el.getAttribute("data-i18n");
       if(ui[key]) el.textContent = ui[key];
@@ -51,10 +64,19 @@
   }
 
   function render(){
+    const ui = UI[currentLang] || UI.de;
+
+    if(!headerEl || !bodyEl){
+      console.warn("blog-post.js: postHeader/postBody nicht gefunden.");
+      return;
+    }
+
     if(!post){
-      headerEl.innerHTML = `<h1 class="blog-post-title">Artikel nicht gefunden</h1>`;
-      bodyEl.innerHTML = `<p class="blog-post-lead">Der Link ist ungültig oder der Beitrag existiert nicht.</p>
-                          <a class="blog-mini-btn" href="blog.html">Zur Übersicht</a>`;
+      headerEl.innerHTML = `<h1 class="blog-post-title">${esc(ui.notFoundTitle)}</h1>`;
+      bodyEl.innerHTML = `
+        <p class="blog-post-lead">${esc(ui.notFoundLead)}</p>
+        <a class="blog-mini-btn" href="blog.html" data-transition>${esc(ui.overview)}</a>
+      `;
       return;
     }
 
@@ -64,7 +86,10 @@
     const embed = post.videoUrl ? youtubeEmbed(post.videoUrl) : null;
 
     headerEl.innerHTML = `
+      <a class="blog-back" href="blog.html" data-transition>${esc(ui.back)}</a>
+
       <h1 class="blog-post-title">${esc(txt.title || "")}</h1>
+
       <div class="blog-meta blog-meta-post">
         <span class="blog-date">${esc(post.date || "")}</span>
         <span class="blog-tags">${(post.tags||[]).map(t=>`#${esc(t)}`).join(" ")}</span>
@@ -81,7 +106,7 @@
                 allowfullscreen></iframe>
             </div>
           ` : `
-            <a class="blog-mini-btn" href="${esc(post.videoUrl)}" target="_blank" rel="noopener">▶ Video ansehen</a>
+            <a class="blog-mini-btn" href="${esc(post.videoUrl)}" target="_blank" rel="noopener">${esc(ui.watch)}</a>
           `}
         </div>
       ` : ""}
