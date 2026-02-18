@@ -154,16 +154,20 @@
 }
 
 
-/* ===== Blog Title exakt wie Hero Titel auf index.html ===== */
+/* ===== Blog Titel exakt wie .hero h1 auf der Hauptseite ===== */
 .blog-hero .blog-title{
   margin: 0 0 12px;
-}
-
-/* gleiche Typo wie: .hero h1 */
-.blog-hero .blog-title .hero-brand{
-  display: inline-block;
-  font-size: clamp(42px, 8vw, 88px);
+  font-size: clamp(42px, 8vw, 88px);   /* <- das ist die Hero-Größe */
   line-height: 1.05;
   letter-spacing: -0.02em;
   color: var(--fg);
+}
+
+/* hero-brand erbt jetzt nur noch */
+.blog-hero .blog-title .hero-brand{
+  display: inline-block;
+  font-size: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  color: inherit;
 }
