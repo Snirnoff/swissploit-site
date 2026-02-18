@@ -261,23 +261,8 @@
   border:0;
 }
 
-
-
-
-
-/* --- Fix: Thumbnail unten nicht mehr abschneiden --- */
-.blog-thumb{
-  overflow: hidden;          /* bleibt ok */
-  padding: 6px;              /* << gibt Luft, damit nichts unten clippt */
-  box-sizing: border-box;
-}
-
 .blog-thumb-img{
-  width: 100%;
-  height: 100%;
-  object-fit: contain !important;
-  object-position: center center;   /* << sauber zentrieren */
-  display: block;
-  vertical-align: middle;           /* << verhindert baseline-artefakte */
-  transform: translateZ(0);         /* << reduziert subpixel clipping */
+  aspect-ratio: 16 / 9;
 }
+
+
