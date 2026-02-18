@@ -208,3 +208,9 @@
   border:0;
 }
 
+.blog-card-thumb{
+  width: 100%;
+  aspect-ratio: 3 / 2;  /* statt 16/9 -> kompakter */
+  background: #000;
+  overflow: hidden;
+}
