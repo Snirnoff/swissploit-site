@@ -214,3 +214,50 @@
   background: #000;
   overflow: hidden;
 }
+
+.blog-card{
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  text-decoration: none;
+  color: var(--fg);
+  display: flex;
+  flex-direction: column;
+
+  /* kompakter */
+  max-width: 100%;
+}
+
+.blog-card-body{
+  padding: 12px 12px 14px;  /* weniger padding = weniger tiefe */
+  text-align: left;
+  display: grid;
+  gap: 6px;                 /* enger */
+}
+
+.blog-card-title{
+  margin: 0;
+  font-size: 15px;          /* minimal kleiner */
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;     /* max 2 Zeilen */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.blog-card-excerpt{
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.35;
+  color: color-mix(in oklab, var(--fg) 82%, transparent);
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;     /* max 2 Zeilen */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
