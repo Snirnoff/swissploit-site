@@ -135,7 +135,8 @@
 /* THUMBNAIL: kompakt + ganzes 16:9 Bild sichtbar (NICHT crop) */
 .blog-thumb{
   width: 100%;
-  height: clamp(120px, 16vw, 160px); /* <- macht die Kachel deutlich kürzer */
+    height: clamp(132px, 15.4vw, 176px); /* ~10% höher */
+
   background: #000;
   display: grid;
   place-items: center;
