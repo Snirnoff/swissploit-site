@@ -1,37 +1,6 @@
-/* assets/blog.css – Swissploit Style (no retro) */
+/* assets/blog.css – Swissploit Style (clean, no retro) */
 
-/* ===== Hero ===== */
-.blog-hero{
-  padding-top: 90px;
-  padding-bottom: 60px;
-}
-
-/* Title: Swissploit wie Hero */
-.blog-hero .blog-title{
-  margin: 0 0 12px;
-  display: grid;
-  justify-content: center;
-  gap: 10px;
-}
-
-.blog-hero .blog-brand{
-  display: inline-block;
-  font-size: clamp(42px, 8vw, 88px);
-  line-height: 1.05;
-  letter-spacing: -0.02em;
-  color: var(--fg);
-}
-
-/* Kicker wie auf Hauptseite (Tech.Security.Klar Style) */
-.blog-kicker{
-  display: inline-block;
-  font-size: clamp(16px, 2.2vw, 22px);
-  font-weight: 300;
-  color: color-mix(in oklab, var(--fg) 85%, transparent);
-  letter-spacing: .02em;
-}
-
-/* Screenreader helper */
+/* ===== A11y helper ===== */
 .sr-only{
   position:absolute;
   width:1px;
@@ -42,6 +11,38 @@
   clip:rect(0,0,0,0);
   white-space:nowrap;
   border:0;
+}
+
+/* ===== Blog Hero – gleiche Section-Logik wie Hauptseite ===== */
+.blog-hero{
+  padding-top: 90px;
+  padding-bottom: 60px;
+}
+
+/* ===== Titelblock: Swissploit wie Hero + Kicker wie Tech.Security.Klar ===== */
+.blog-hero .blog-title{
+  margin: 0 0 12px;
+  display: grid;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* Swissploit-Schriftzug (du nutzt hero-brand spans im HTML) */
+.blog-hero .blog-brand{
+  display: inline-block;
+  font-size: clamp(42px, 8vw, 88px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--fg);
+}
+
+/* Kicker unter Swissploit (wie Tech.Security.Klar) */
+.blog-kicker{
+  display: inline-block;
+  font-size: clamp(16px, 2.2vw, 22px);
+  font-weight: 300;
+  color: color-mix(in oklab, var(--fg) 85%, transparent);
+  letter-spacing: .02em;
 }
 
 /* ===== Suche ===== */
@@ -66,6 +67,7 @@
   color: color-mix(in oklab, var(--fg) 55%, transparent);
 }
 
+/* Such-Hinweis */
 .blog-search-hint{
   display: block;
   margin-top: 10px;
@@ -73,7 +75,7 @@
   color: color-mix(in oklab, var(--fg) 72%, transparent);
 }
 
-/* ===== Language Buttons ===== */
+/* ===== Language Buttons – wie Chips/Buttons ===== */
 .lang-toggle{
   display: flex;
   justify-content: center;
@@ -108,21 +110,27 @@
   padding-top: 60px;
 }
 
+/* Cards zentrieren, damit sie nicht „gezogen“ wirken */
 .blog-grid{
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 20px;
+  justify-items: center;
+  align-items: start;
 }
 
 @media (max-width: 1024px){
   .blog-grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
+
 @media (max-width: 640px){
   .blog-grid{ grid-template-columns: 1fr; }
 }
 
 /* ===== Card ===== */
 .blog-card{
+  width: 100%;
+  max-width: 360px;
   background: var(--panel);
   border: 1px solid var(--border);
   border-radius: 14px;
@@ -142,27 +150,30 @@
   border-color: color-mix(in oklab, var(--accent) 45%, var(--border));
 }
 
-/* ===== Thumbnail (FIX: NICHT mehr riesig + NICHT mehr gecroppt) ===== */
-/* Wir begrenzen die Höhe der Thumbnail-Zone und zeigen das Bild komplett (contain). */
+/* ===== Thumbnail – WICHTIG: kleiner + ganzes Bild sichtbar =====
+   - height fix -> Kachel wird nicht langgezogen
+   - object-fit: contain -> kein Abschneiden, komplettes Bild sichtbar
+*/
 .blog-card-thumb{
   width: 100%;
-  height: clamp(110px, 16vw, 160px);   /* <<< macht die Kachel deutlich "kürzer" */
+  height: 120px;            /* <<< hier kleiner machen (z.B. 110–140) */
   background: #000;
   overflow: hidden;
-
   display: grid;
-  place-items: center;                /* Bild sauber zentrieren */
-  padding: 8px;                       /* kleiner Rahmen, sieht edel aus */
+  place-items: center;
+  padding: 10px;            /* sorgt dafür, dass Hochformat-Thumbs nicht „kleben“ */
+  border-bottom: 1px solid var(--border);
 }
 
 .blog-card-thumb img{
   width: 100%;
   height: 100%;
-  object-fit: contain;                /* <<< zeigt komplettes Thumbnail */
+  object-fit: contain;      /* <<< KEY-FIX */
+  object-position: center;
   display: block;
 }
 
-/* ===== Textbereich (kompakt) ===== */
+/* ===== Textbereich – kompakt ===== */
 .blog-card-body{
   padding: 12px 12px 14px;
   text-align: left;
@@ -170,6 +181,7 @@
   gap: 6px;
 }
 
+/* Titel: max 2 Zeilen */
 .blog-card-title{
   margin: 0;
   font-size: 15px;
@@ -177,21 +189,20 @@
   overflow-wrap: anywhere;
 
   display: -webkit-box;
-  -webkit-line-clamp: 2;              /* max 2 Zeilen */
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
+/* Excerpt: heller + kompakt (2 Zeilen) */
 .blog-card-excerpt{
   margin: 0;
   font-size: 13px;
   line-height: 1.35;
-
-  /* heller & Swissploit-like (kein Neon) */
-  color: color-mix(in oklab, var(--fg) 82%, transparent);
+  color: color-mix(in oklab, var(--fg) 88%, transparent);
 
   display: -webkit-box;
-  -webkit-line-clamp: 2;              /* max 2 Zeilen */
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -201,4 +212,20 @@
   margin-top: 18px;
   color: color-mix(in oklab, var(--fg) 75%, transparent);
   text-align: center;
+}
+
+/* ===== HARD OVERRIDES (falls irgendwas reinfunkt) ===== */
+.blog-grid .blog-card{
+  height: auto !important;
+  min-height: 0 !important;
+  align-self: start !important;
+}
+
+.blog-grid .blog-card-thumb{
+  height: 120px !important;        /* <<< gleiche Höhe wie oben */
+  aspect-ratio: auto !important;   /* sicher */
+}
+
+.blog-grid .blog-card-thumb img{
+  object-fit: contain !important;  /* <<< sicher */
 }
