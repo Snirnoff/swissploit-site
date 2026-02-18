@@ -130,13 +130,23 @@
 }
 
 /* =========================
-   CARD (fix stretched height)
+   CARD (ULTRA COMPACT)
    ========================= */
 
-/* Card has a max width so it doesn't look like a phone screenshot in a huge column */
+/* Grid centered so a single card doesn't look weird */
+.blog-grid{
+  justify-items: center;
+  align-items: start;
+}
+
+/* Compact card */
 .blog-card{
   width: 100%;
-  max-width: 360px;                 /* <<< key: stops "endless tall look" */
+  max-width: 340px;
+
+  /* prevent "long" look */
+  height: auto;
+  max-height: 260px;        /* <<< hard cap */
   background: var(--panel);
   border: 1px solid var(--border);
   border-radius: 14px;
@@ -144,8 +154,9 @@
   overflow: hidden;
   text-decoration: none;
   color: var(--fg);
-  display: grid;                    /* thumb + body */
-  grid-template-rows: auto 1fr;
+
+  display: grid;
+  grid-template-rows: 120px 1fr;  /* <<< thumb fixed small */
   transition: scale .18s ease, box-shadow .18s ease, border-color .18s ease;
   scale: 1;
 }
@@ -156,14 +167,13 @@
   border-color: color-mix(in oklab, var(--accent) 45%, var(--border));
 }
 
-/* Thumbnail: fixed height (most robust, no surprises) */
+/* Thumbnail: FIX SMALL */
 .blog-card-thumb{
   width: 100%;
-  height: 180px;                    /* <<< compact thumbnail height */
+  height: 120px;            /* <<< smaller thumbnail */
   background: #000;
   overflow: hidden;
 }
-
 .blog-card-thumb img{
   width: 100%;
   height: 100%;
@@ -171,14 +181,53 @@
   display: block;
 }
 
-/* Body: compact and not influenced by global .section styles */
+/* Body: tight, no global .section p influence */
 .blog-card-body{
-  padding: 12px 12px 14px;
+  padding: 10px 12px 12px;
   text-align: left;
 
   display: grid;
   gap: 6px;
+
+  /* prevents body from expanding the card too much */
+  overflow: hidden;
 }
+
+/* HARD RESET against styles.css (.section p etc.) */
+.blog-card-body *{
+  max-width: none !important;
+}
+.blog-card-body p,
+.blog-card-body h3{
+  margin: 0 !important;
+  font-size: inherit; /* stop inheriting big section p sizes */
+}
+
+/* Title: max 2 lines */
+.blog-card-title{
+  margin: 0 !important;
+  font-size: 14px;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Excerpt: max 1 line and brighter */
+.blog-card-excerpt{
+  margin: 0 !important;
+  font-size: 12.5px;
+  line-height: 1.25;
+  color: color-mix(in oklab, var(--fg) 88%, transparent);
+
+  white-space: nowrap;      /* <<< keeps it compact */
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 
 /* IMPORTANT OVERRIDES against styles.css:
    your global .section p sets font-size/max-width/margins.
