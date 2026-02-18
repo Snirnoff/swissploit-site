@@ -1,17 +1,34 @@
 <!doctype html>
-<html lang="de" data-theme="light" data-blog-theme="retro">
+<html lang="de">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Swissploit Blog</title>
+  <title>Swissploit – Blog</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/JustPlus.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/JustPlus.png">
+  <link rel="apple-touch-icon" href="assets/JustPlus.png">
+  <meta name="theme-color" content="#ffffff">
+
+  <!-- Theme boot (damit Dark/Light korrekt übernimmt, ohne Flash) -->
+  <script>
+    (function () {
+      const saved = localStorage.getItem('swissploit-theme');
+      if (saved) document.documentElement.setAttribute('data-theme', saved);
+      else {
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
+      }
+    })();
+  </script>
 
   <link rel="stylesheet" href="assets/styles.css" />
-  <link rel="stylesheet" href="assets/blog.css" />
+  <link rel="stylesheet" href="assets/blog-post.css" />
 
-  <!-- Retro Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -35,17 +52,24 @@
   </header>
 
   <main id="main">
-    <section class="section blog-post">
-      <div class="wrap blog-post-wrap">
-        <a class="blog-back" href="blog.html" data-i18n="back">← Zurück zum Blog</a>
-
-        <div class="lang-toggle" role="group" aria-label="Sprache wählen">
-          <button class="lang-btn" data-lang="de" type="button">DE</button>
-          <button class="lang-btn" data-lang="en" type="button">EN</button>
+    <section class="section post-hero">
+      <div class="wrap">
+        <div class="post-topbar">
+          <a class="post-back" href="blog.html" data-transition>← Zurück</a>
         </div>
 
-        <div id="postHeader" class="blog-post-header"></div>
-        <div id="postBody" class="blog-post-body"></div>
+        <h1 class="post-title" id="postTitle">…</h1>
+        <p class="post-subline" id="postSubtitle"></p>
+
+        <div class="post-meta" id="postMeta"></div>
+      </div>
+    </section>
+
+    <section class="section post-wrap">
+      <div class="wrap">
+        <article class="post-content" id="postContent">
+          <!-- kommt per JS -->
+        </article>
       </div>
     </section>
   </main>
@@ -53,6 +77,11 @@
   <footer class="site-footer" role="contentinfo">
     <div class="wrap">
       <p>© <span id="year"></span> Swissploit.</p>
+      <nav class="foot-nav" aria-label="Footer Navigation">
+        <a href="index.html#about">Über mich</a>
+        <a href="index.html#featured">Neuestes Video</a>
+        <a href="index.html#shorts">H355</a>
+      </nav>
     </div>
   </footer>
 
