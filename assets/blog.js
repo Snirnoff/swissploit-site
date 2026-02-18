@@ -1,143 +1,237 @@
-// assets/blog.js
-(function () {
-  const posts = (window.SWISSPLOIT_BLOG_POSTS || []).slice();
+/* assets/blog.css – Swissploit Blog (same style as main site)
+   - fixes "stretched" blog cards
+   - overrides global .section styles inside cards
+*/
 
-  const grid = document.getElementById("blogGrid");
-  const input = document.getElementById("blogSearch");
-  const noResults = document.getElementById("noResults");
-  const langBtns = document.querySelectorAll(".lang-btn");
+/* =========================
+   HERO / TITLE
+   ========================= */
 
-  const I18N_UI = {
-    de: {
-      blogTitle: "Swissploit Blog",
-      blogSubtitle: "Retro-Style. Klare IT-Tipps. Security ohne Bullshit.",
-      searchHint: "Suche durchsucht Titel, Kurztext und Tags.",
-      noResults: "Keine Treffer. Versuch es mit einem anderen Begriff.",
-      searchPlaceholder: "Suche nach Phishing, Windows, M365, OneDrive…"
-    },
-    en: {
-      blogTitle: "Swissploit Blog",
-      blogSubtitle: "Retro style. Practical tech & security. No fluff.",
-      searchHint: "Search scans title, excerpt and tags.",
-      noResults: "No results. Try another keyword.",
-      searchPlaceholder: "Search phishing, Windows, M365, OneDrive…"
-    }
-  };
+.blog-hero{
+  padding-top: 90px;
+  padding-bottom: 60px;
+}
 
-  let currentLang = localStorage.getItem("swissploit-blog-lang") || "de";
+/* H1 block like hero */
+.blog-title{
+  margin: 0 0 12px;
+  display: grid;
+  justify-content: center;
+  gap: 10px;
+}
 
-  function escapeHtml(str) {
-    return String(str).replace(/[&<>"']/g, (m) => ({
-      "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;"
-    }[m]));
-  }
+/* Swissploit word = same scale as .hero h1 */
+.blog-brand{
+  display: inline-block;
+  font-size: clamp(42px, 8vw, 88px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--fg);
+}
 
-  function trimText(s, n = 110) {
-    s = String(s || "");
-    return s.length > n ? s.slice(0, n - 1) + "…" : s;
-  }
+/* Kicker like: Tech.Security.Klar. (your style) */
+.blog-kicker{
+  display: inline-block;
+  font-size: clamp(16px, 2.2vw, 22px);
+  font-weight: 300;
+  color: color-mix(in oklab, var(--fg) 85%, transparent);
+  letter-spacing: .02em;
+}
 
-  function getText(post){
-    const t = post?.i18n?.[currentLang] || post?.i18n?.de || {};
-    return {
-      title: t.title || "",
-      excerpt: t.excerpt || ""
-    };
-  }
+/* =========================
+   SEARCH
+   ========================= */
 
-  function applyUiLanguage(){
-    const ui = I18N_UI[currentLang] || I18N_UI.de;
+.blog-search{
+  margin: 18px auto 0;
+  max-width: 720px;
+  text-align: left;
+}
 
-    document.querySelectorAll("[data-i18n]").forEach(el=>{
-      const key = el.getAttribute("data-i18n");
-      if(ui[key]) el.textContent = ui[key];
-    });
+.blog-search input{
+  width: 100%;
+  padding: 14px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--panel);
+  color: var(--fg);
+  font-size: 16px;
+  outline: none;
+}
 
-    if(input) input.placeholder = ui.searchPlaceholder || input.placeholder;
-    if(noResults) noResults.textContent = ui.noResults || noResults.textContent;
+.blog-search input::placeholder{
+  color: color-mix(in oklab, var(--fg) 55%, transparent);
+}
 
-    langBtns.forEach(b => b.classList.toggle("is-active", b.dataset.lang === currentLang));
-  }
+.blog-search-hint{
+  display: block;
+  margin-top: 10px;
+  font-size: 14px;
+  color: color-mix(in oklab, var(--fg) 72%, transparent);
+}
 
-  function render(list) {
-    grid.innerHTML = list.map(p => {
-      const t = getText(p);
-      const tags = (p.tags || []).slice(0, 4).map(x => `#${escapeHtml(x)}`).join(" ");
-      const excerpt = trimText(t.excerpt, 105);
+/* =========================
+   LANG TOGGLE
+   ========================= */
 
-      const videoBtn = p.videoUrl
-        ? `<a class="blog-mini-btn" href="${escapeHtml(p.videoUrl)}" target="_blank" rel="noopener">▶ Video</a>`
-        : "";
+.lang-toggle{
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 16px;
+}
 
-      return `
-        <article class="blog-card">
-          <a class="blog-card-link" href="blog-post.html?id=${encodeURIComponent(p.id)}">
-<div class="blog-thumb">
-  ${p.thumb ? `
-    <img class="blog-thumb-img" src="${escapeHtml(p.thumb)}" alt="${escapeHtml(t.title)}">
-  ` : `
-    <div class="blog-thumb-inner">
-      <span class="blog-thumb-label">POST</span>
-    </div>
-  `}
-</div>
+.lang-btn{
+  appearance: none;
+  padding: 10px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--panel);
+  color: var(--fg);
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+}
 
+.lang-btn:hover{
+  transform: translateY(-1px);
+  box-shadow: var(--shadow);
+}
 
-            <div class="blog-card-body">
-              <div class="blog-meta">
-                <span class="blog-date">${escapeHtml(p.date || "")}</span>
-                <span class="blog-tags" title="${escapeHtml((p.tags||[]).join(" "))}">${tags}</span>
-              </div>
+.lang-btn.is-active{
+  border-color: color-mix(in oklab, var(--accent) 55%, var(--border));
+  background: color-mix(in oklab, var(--accent) 12%, var(--panel));
+}
 
-              <h2 class="blog-card-title">${escapeHtml(t.title)}</h2>
-              <p class="blog-card-excerpt">${escapeHtml(excerpt)}</p>
-            </div>
-          </a>
+/* =========================
+   GRID
+   ========================= */
 
-          <div class="blog-card-actions">
-            <a class="blog-mini-btn" href="blog-post.html?id=${encodeURIComponent(p.id)}">${currentLang === "de" ? "Artikel" : "Read"}</a>
-            ${videoBtn}
-          </div>
-        </article>
-      `;
-    }).join("");
+.blog-grid-section{
+  padding-top: 60px;
+}
 
-    noResults.hidden = list.length !== 0;
-  }
+/* IMPORTANT: center cards + avoid a single card becoming huge */
+.blog-grid{
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
 
-  function filter(q) {
-    const s = q.trim().toLowerCase();
-    if (!s) return posts;
+  justify-items: center; /* <<< makes single-card layout look normal */
+  align-items: start;
+}
 
-    return posts.filter(p => {
-      const hay = [
-        p.i18n?.de?.title, p.i18n?.de?.excerpt,
-        p.i18n?.en?.title, p.i18n?.en?.excerpt,
-        (p.tags || []).join(" ")
-      ].join(" ").toLowerCase();
+@media (max-width: 1024px){
+  .blog-grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
 
-      return hay.includes(s);
-    });
-  }
+@media (max-width: 640px){
+  .blog-grid{ grid-template-columns: 1fr; }
+}
 
-  // events
-  langBtns.forEach(btn=>{
-    btn.addEventListener("click", ()=>{
-      currentLang = btn.dataset.lang || "de";
-      localStorage.setItem("swissploit-blog-lang", currentLang);
-      applyUiLanguage();
-      render(filter(input.value));
-    });
-  });
+/* =========================
+   CARD (fix stretched height)
+   ========================= */
 
-  let t;
-  input.addEventListener("input", () => {
-    clearTimeout(t);
-    t = setTimeout(() => render(filter(input.value)), 70);
-  });
+/* Card has a max width so it doesn't look like a phone screenshot in a huge column */
+.blog-card{
+  width: 100%;
+  max-width: 360px;                 /* <<< key: stops "endless tall look" */
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  text-decoration: none;
+  color: var(--fg);
+  display: grid;                    /* thumb + body */
+  grid-template-rows: auto 1fr;
+  transition: scale .18s ease, box-shadow .18s ease, border-color .18s ease;
+  scale: 1;
+}
 
-  // init
-  posts.sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")));
-  applyUiLanguage();
-  render(posts);
-})();
+.blog-card:hover{
+  scale: 1.02;
+  box-shadow: 0 18px 36px rgba(211,0,0,.18), 0 6px 18px rgba(0,0,0,.08);
+  border-color: color-mix(in oklab, var(--accent) 45%, var(--border));
+}
+
+/* Thumbnail: fixed height (most robust, no surprises) */
+.blog-card-thumb{
+  width: 100%;
+  height: 180px;                    /* <<< compact thumbnail height */
+  background: #000;
+  overflow: hidden;
+}
+
+.blog-card-thumb img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Body: compact and not influenced by global .section styles */
+.blog-card-body{
+  padding: 12px 12px 14px;
+  text-align: left;
+
+  display: grid;
+  gap: 6px;
+}
+
+/* IMPORTANT OVERRIDES against styles.css:
+   your global .section p sets font-size/max-width/margins.
+   We reset it here so cards look tight and clean.
+*/
+.blog-card-body p,
+.blog-card-body h3,
+.blog-card-body .blog-card-title,
+.blog-card-body .blog-card-excerpt{
+  max-width: none !important;
+  margin: 0 !important;
+}
+
+/* Title: 2 lines max, no ugly cutoff */
+.blog-card-title{
+  font-size: 15px;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;           /* <<< max 2 lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Excerpt: brighter + 2 lines max */
+.blog-card-excerpt{
+  font-size: 13px;
+  line-height: 1.35;
+  color: color-mix(in oklab, var(--fg) 88%, transparent); /* <<< clearly readable */
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;           /* <<< max 2 lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* No results */
+.blog-no-results{
+  margin-top: 18px;
+  color: color-mix(in oklab, var(--fg) 75%, transparent);
+  text-align: center;
+}
+
+/* A11y helper (if you use sr-only labels) */
+.sr-only{
+  position:absolute;
+  width:1px;
+  height:1px;
+  padding:0;
+  margin:-1px;
+  overflow:hidden;
+  clip:rect(0,0,0,0);
+  white-space:nowrap;
+  border:0;
+}
