@@ -171,3 +171,27 @@
   letter-spacing: inherit;
   color: inherit;
 }
+/* Title: Swissploit wie Hero */
+.blog-hero .blog-title{
+  margin: 0 0 12px;
+  display: grid;
+  justify-content: center;
+  gap: 10px;
+}
+
+.blog-hero .blog-brand{
+  display: inline-block;
+  font-size: clamp(42px, 8vw, 88px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--fg);
+}
+
+/* Kicker wie auf Hauptseite (Tech.Security.Klar) */
+.blog-kicker{
+  display: inline-block;
+  font-size: clamp(16px, 2.2vw, 22px);
+  font-weight: 300;
+  color: color-mix(in oklab, var(--fg) 85%, transparent);
+  letter-spacing: .02em;
+}
