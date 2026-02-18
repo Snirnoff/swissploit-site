@@ -92,7 +92,7 @@ window.SWISSPLOIT_BLOG_POSTS = [
 
     i18n: {
       de: {
-        title: "Outlook zeigt é, ü, ® nur noch als ? – Ursache & Fix (Classic Outlook)",
+        title: "Outlook zeigt Umlaute als ?",
         excerpt: "In Classic Outlook werden Sonderzeichen zu Fragezeichen. So löst du es (UTF-8, OWA, Rollback).",
         content: `
 <p>Wenn in <strong>Classic Outlook</strong> plötzlich aus Sonderzeichen wie <strong>é, ü, ñ, ® oder £</strong> nur noch <strong>Fragezeichen</strong> werden, wirkt das wie ein Font-Problem – ist es aber meistens nicht. In der Praxis ist es fast immer ein Thema rund um <strong>Zeichenkodierung</strong> und ein aktuelles Outlook-Update.</p>
@@ -120,7 +120,7 @@ window.SWISSPLOIT_BLOG_POSTS = [
       },
 
       en: {
-        title: "Classic Outlook turns é, ü, ® into ? – Cause & Fix (UTF-8 / Workarounds)",
+        title: "Classic Outlook turns äöü into ?",
         excerpt: "Special characters become question marks in Classic Outlook. Here’s why—and how to fix it (UTF-8, OWA, rollback).",
         content: `
 <p>If <strong>Classic Outlook</strong> suddenly replaces characters like <strong>é, ü, ñ, ® or £</strong> with <strong>question marks</strong>, it looks like a font issue at first—but it usually isn’t. In most real cases, it’s a <strong>character encoding</strong> problem triggered by a recent Outlook update.</p>
