@@ -152,3 +152,18 @@
   color: color-mix(in oklab, var(--fg) 75%, transparent);
   text-align: center;
 }
+
+
+/* ===== Blog Title exakt wie Hero Titel auf index.html ===== */
+.blog-hero .blog-title{
+  margin: 0 0 12px;
+}
+
+/* gleiche Typo wie: .hero h1 */
+.blog-hero .blog-title .hero-brand{
+  display: inline-block;
+  font-size: clamp(42px, 8vw, 88px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--fg);
+}
