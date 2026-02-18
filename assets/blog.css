@@ -1,27 +1,20 @@
-/* assets/blog.css – Swissploit Blog (same style as main site)
-   - fixes "stretched" blog cards
-   - overrides global .section styles inside cards
-*/
+/* assets/blog.css – Swissploit Style (no retro) */
 
-/* =========================
-   HERO / TITLE
-   ========================= */
-
+/* ===== Hero ===== */
 .blog-hero{
   padding-top: 90px;
   padding-bottom: 60px;
 }
 
-/* H1 block like hero */
-.blog-title{
+/* Title: Swissploit wie Hero */
+.blog-hero .blog-title{
   margin: 0 0 12px;
   display: grid;
   justify-content: center;
   gap: 10px;
 }
 
-/* Swissploit word = same scale as .hero h1 */
-.blog-brand{
+.blog-hero .blog-brand{
   display: inline-block;
   font-size: clamp(42px, 8vw, 88px);
   line-height: 1.05;
@@ -29,7 +22,7 @@
   color: var(--fg);
 }
 
-/* Kicker like: Tech.Security.Klar. (your style) */
+/* Kicker wie auf Hauptseite (Tech.Security.Klar Style) */
 .blog-kicker{
   display: inline-block;
   font-size: clamp(16px, 2.2vw, 22px);
@@ -38,10 +31,20 @@
   letter-spacing: .02em;
 }
 
-/* =========================
-   SEARCH
-   ========================= */
+/* Screenreader helper */
+.sr-only{
+  position:absolute;
+  width:1px;
+  height:1px;
+  padding:0;
+  margin:-1px;
+  overflow:hidden;
+  clip:rect(0,0,0,0);
+  white-space:nowrap;
+  border:0;
+}
 
+/* ===== Suche ===== */
 .blog-search{
   margin: 18px auto 0;
   max-width: 720px;
@@ -70,10 +73,7 @@
   color: color-mix(in oklab, var(--fg) 72%, transparent);
 }
 
-/* =========================
-   LANG TOGGLE
-   ========================= */
-
+/* ===== Language Buttons ===== */
 .lang-toggle{
   display: flex;
   justify-content: center;
@@ -103,50 +103,26 @@
   background: color-mix(in oklab, var(--accent) 12%, var(--panel));
 }
 
-/* =========================
-   GRID
-   ========================= */
-
+/* ===== Grid ===== */
 .blog-grid-section{
   padding-top: 60px;
 }
 
-/* IMPORTANT: center cards + avoid a single card becoming huge */
 .blog-grid{
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 20px;
-
-  justify-items: center; /* <<< makes single-card layout look normal */
-  align-items: start;
 }
 
 @media (max-width: 1024px){
   .blog-grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
-
 @media (max-width: 640px){
   .blog-grid{ grid-template-columns: 1fr; }
 }
 
-/* =========================
-   CARD (ULTRA COMPACT)
-   ========================= */
-
-/* Grid centered so a single card doesn't look weird */
-.blog-grid{
-  justify-items: center;
-  align-items: start;
-}
-
-/* Compact card */
+/* ===== Card ===== */
 .blog-card{
-  width: 100%;
-  max-width: 340px;
-
-  /* prevent "long" look */
-  height: auto;
-  max-height: 260px;        /* <<< hard cap */
   background: var(--panel);
   border: 1px solid var(--border);
   border-radius: 14px;
@@ -154,9 +130,8 @@
   overflow: hidden;
   text-decoration: none;
   color: var(--fg);
-
-  display: grid;
-  grid-template-rows: 120px 1fr;  /* <<< thumb fixed small */
+  display: flex;
+  flex-direction: column;
   transition: scale .18s ease, box-shadow .18s ease, border-color .18s ease;
   scale: 1;
 }
@@ -167,120 +142,63 @@
   border-color: color-mix(in oklab, var(--accent) 45%, var(--border));
 }
 
-/* Thumbnail: FIX SMALL */
+/* ===== Thumbnail (FIX: NICHT mehr riesig + NICHT mehr gecroppt) ===== */
+/* Wir begrenzen die Höhe der Thumbnail-Zone und zeigen das Bild komplett (contain). */
 .blog-card-thumb{
   width: 100%;
-  height: 120px;            /* <<< smaller thumbnail */
+  height: clamp(110px, 16vw, 160px);   /* <<< macht die Kachel deutlich "kürzer" */
   background: #000;
   overflow: hidden;
+
+  display: grid;
+  place-items: center;                /* Bild sauber zentrieren */
+  padding: 8px;                       /* kleiner Rahmen, sieht edel aus */
 }
+
 .blog-card-thumb img{
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;                /* <<< zeigt komplettes Thumbnail */
   display: block;
 }
 
-/* Body: tight, no global .section p influence */
+/* ===== Textbereich (kompakt) ===== */
 .blog-card-body{
-  padding: 10px 12px 12px;
+  padding: 12px 12px 14px;
   text-align: left;
-
   display: grid;
   gap: 6px;
-
-  /* prevents body from expanding the card too much */
-  overflow: hidden;
 }
 
-/* HARD RESET against styles.css (.section p etc.) */
-.blog-card-body *{
-  max-width: none !important;
-}
-.blog-card-body p,
-.blog-card-body h3{
-  margin: 0 !important;
-  font-size: inherit; /* stop inheriting big section p sizes */
-}
-
-/* Title: max 2 lines */
 .blog-card-title{
-  margin: 0 !important;
-  font-size: 14px;
-  line-height: 1.2;
-  overflow-wrap: anywhere;
-
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-/* Excerpt: max 1 line and brighter */
-.blog-card-excerpt{
-  margin: 0 !important;
-  font-size: 12.5px;
-  line-height: 1.25;
-  color: color-mix(in oklab, var(--fg) 88%, transparent);
-
-  white-space: nowrap;      /* <<< keeps it compact */
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-
-/* IMPORTANT OVERRIDES against styles.css:
-   your global .section p sets font-size/max-width/margins.
-   We reset it here so cards look tight and clean.
-*/
-.blog-card-body p,
-.blog-card-body h3,
-.blog-card-body .blog-card-title,
-.blog-card-body .blog-card-excerpt{
-  max-width: none !important;
-  margin: 0 !important;
-}
-
-/* Title: 2 lines max, no ugly cutoff */
-.blog-card-title{
+  margin: 0;
   font-size: 15px;
   line-height: 1.2;
   overflow-wrap: anywhere;
 
   display: -webkit-box;
-  -webkit-line-clamp: 2;           /* <<< max 2 lines */
+  -webkit-line-clamp: 2;              /* max 2 Zeilen */
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
-/* Excerpt: brighter + 2 lines max */
 .blog-card-excerpt{
+  margin: 0;
   font-size: 13px;
   line-height: 1.35;
-  color: color-mix(in oklab, var(--fg) 88%, transparent); /* <<< clearly readable */
+
+  /* heller & Swissploit-like (kein Neon) */
+  color: color-mix(in oklab, var(--fg) 82%, transparent);
 
   display: -webkit-box;
-  -webkit-line-clamp: 2;           /* <<< max 2 lines */
+  -webkit-line-clamp: 2;              /* max 2 Zeilen */
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
-/* No results */
+/* ===== No results ===== */
 .blog-no-results{
   margin-top: 18px;
   color: color-mix(in oklab, var(--fg) 75%, transparent);
   text-align: center;
-}
-
-/* A11y helper (if you use sr-only labels) */
-.sr-only{
-  position:absolute;
-  width:1px;
-  height:1px;
-  padding:0;
-  margin:-1px;
-  overflow:hidden;
-  clip:rect(0,0,0,0);
-  white-space:nowrap;
-  border:0;
 }
