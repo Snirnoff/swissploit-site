@@ -212,3 +212,24 @@
   color: color-mix(in oklab, var(--fg) 75%, transparent);
   text-align: center;
 }
+
+
+/* ===== HARD OVERRIDES (gegen styles.css Überschreibungen) ===== */
+.blog-grid .blog-card{
+  height: auto !important;
+  min-height: 0 !important;
+  align-self: start !important;
+}
+
+.blog-grid{
+  align-items: start !important;
+}
+
+.blog-grid .blog-card-thumb{
+  height: 170px !important;     /* fix, damit es kompakt bleibt */
+  aspect-ratio: auto !important; /* falls irgendwo aspect-ratio reinfunkt */
+}
+
+.blog-grid .blog-card-body{
+  flex: 0 0 auto !important;   /* verhindert „zieht sich“ */
+}
