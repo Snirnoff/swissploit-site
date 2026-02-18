@@ -1,6 +1,39 @@
-/* assets/blog.css – Swissploit Style (clean, no retro) */
+/* assets/blog.css – Swissploit Style (clean, like main site) */
 
-/* ===== A11y helper ===== */
+
+/* ========== HERO / HEADER AREA ========== */
+.blog-hero{
+  padding-top: 90px;
+  padding-bottom: 60px;
+}
+
+/* Title block centered */
+.blog-title{
+  margin: 0 0 12px;
+  display: grid;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* Swissploit title same size/feel as hero h1 */
+.blog-brand{
+  display: inline-block;
+  font-size: clamp(42px, 8vw, 88px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--fg);
+}
+
+/* Kicker like main page (Tech.Security.Klar style) */
+.blog-kicker{
+  display: inline-block;
+  font-size: clamp(16px, 2.2vw, 22px);
+  font-weight: 300;
+  color: color-mix(in oklab, var(--fg) 85%, transparent);
+  letter-spacing: .02em;
+}
+
+/* sr-only helper (label remains accessible) */
 .sr-only{
   position:absolute;
   width:1px;
@@ -13,39 +46,8 @@
   border:0;
 }
 
-/* ===== Blog Hero – gleiche Section-Logik wie Hauptseite ===== */
-.blog-hero{
-  padding-top: 90px;
-  padding-bottom: 60px;
-}
 
-/* ===== Titelblock: Swissploit wie Hero + Kicker wie Tech.Security.Klar ===== */
-.blog-hero .blog-title{
-  margin: 0 0 12px;
-  display: grid;
-  justify-content: center;
-  gap: 10px;
-}
-
-/* Swissploit-Schriftzug (du nutzt hero-brand spans im HTML) */
-.blog-hero .blog-brand{
-  display: inline-block;
-  font-size: clamp(42px, 8vw, 88px);
-  line-height: 1.05;
-  letter-spacing: -0.02em;
-  color: var(--fg);
-}
-
-/* Kicker unter Swissploit (wie Tech.Security.Klar) */
-.blog-kicker{
-  display: inline-block;
-  font-size: clamp(16px, 2.2vw, 22px);
-  font-weight: 300;
-  color: color-mix(in oklab, var(--fg) 85%, transparent);
-  letter-spacing: .02em;
-}
-
-/* ===== Suche ===== */
+/* ========== SEARCH ========== */
 .blog-search{
   margin: 18px auto 0;
   max-width: 720px;
@@ -63,11 +65,11 @@
   outline: none;
 }
 
+/* typed text + placeholder readable */
 .blog-search input::placeholder{
   color: color-mix(in oklab, var(--fg) 55%, transparent);
 }
 
-/* Such-Hinweis */
 .blog-search-hint{
   display: block;
   margin-top: 10px;
@@ -75,7 +77,8 @@
   color: color-mix(in oklab, var(--fg) 72%, transparent);
 }
 
-/* ===== Language Buttons – wie Chips/Buttons ===== */
+
+/* ========== LANGUAGE TOGGLE (chips style) ========== */
 .lang-toggle{
   display: flex;
   justify-content: center;
@@ -105,18 +108,16 @@
   background: color-mix(in oklab, var(--accent) 12%, var(--panel));
 }
 
-/* ===== Grid ===== */
+
+/* ========== GRID SECTION ========== */
 .blog-grid-section{
   padding-top: 60px;
 }
 
-/* Cards zentrieren, damit sie nicht „gezogen“ wirken */
 .blog-grid{
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 20px;
-  justify-items: center;
-  align-items: start;
 }
 
 @media (max-width: 1024px){
@@ -127,10 +128,9 @@
   .blog-grid{ grid-template-columns: 1fr; }
 }
 
-/* ===== Card ===== */
+
+/* ========== BLOG CARD (compact, not stretched) ========== */
 .blog-card{
-  width: 100%;
-  max-width: 360px;
   background: var(--panel);
   border: 1px solid var(--border);
   border-radius: 14px;
@@ -140,8 +140,8 @@
   color: var(--fg);
   display: flex;
   flex-direction: column;
-  transition: scale .18s ease, box-shadow .18s ease, border-color .18s ease;
   scale: 1;
+  transition: scale .18s ease, box-shadow .18s ease, border-color .18s ease;
 }
 
 .blog-card:hover{
@@ -150,30 +150,30 @@
   border-color: color-mix(in oklab, var(--accent) 45%, var(--border));
 }
 
-/* ===== Thumbnail – WICHTIG: kleiner + ganzes Bild sichtbar =====
-   - height fix -> Kachel wird nicht langgezogen
-   - object-fit: contain -> kein Abschneiden, komplettes Bild sichtbar
-*/
+
+/* ========== THUMBNAIL (16:9, smaller, show full image) ========== */
+/* Key: 16:9 stays, BUT the box is limited in height => card becomes compact.
+   object-fit: contain shows the full 16:9 thumbnail (no crop). */
 .blog-card-thumb{
   width: 100%;
-  height: 120px;            /* <<< hier kleiner machen (z.B. 110–140) */
-  background: #000;
-  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  max-height: 150px;        /* <<< kleiner machen: 130–170px */
+  background: #0b0b0e;
   display: grid;
   place-items: center;
-  padding: 10px;            /* sorgt dafür, dass Hochformat-Thumbs nicht „kleben“ */
-  border-bottom: 1px solid var(--border);
+  padding: 10px;            /* gives contain some breathing room */
+  overflow: hidden;
 }
 
 .blog-card-thumb img{
   width: 100%;
   height: 100%;
-  object-fit: contain;      /* <<< KEY-FIX */
-  object-position: center;
+  object-fit: contain;      /* <<< FULL IMAGE, NO CROPPING */
   display: block;
 }
 
-/* ===== Textbereich – kompakt ===== */
+
+/* ========== TEXT AREA (compact + no right cut) ========== */
 .blog-card-body{
   padding: 12px 12px 14px;
   text-align: left;
@@ -181,51 +181,42 @@
   gap: 6px;
 }
 
-/* Titel: max 2 Zeilen */
 .blog-card-title{
   margin: 0;
   font-size: 15px;
-  line-height: 1.2;
+  line-height: 1.25;
   overflow-wrap: anywhere;
 
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 2;     /* max 2 lines */
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
-/* Excerpt: heller + kompakt (2 Zeilen) */
 .blog-card-excerpt{
   margin: 0;
   font-size: 13px;
   line-height: 1.35;
-  color: color-mix(in oklab, var(--fg) 88%, transparent);
+  color: color-mix(in oklab, var(--fg) 88%, transparent); /* <<< deutlich heller */
 
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 2;     /* max 2 lines */
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
-/* ===== No results ===== */
+
+/* ========== EMPTY STATE ========== */
 .blog-no-results{
   margin-top: 18px;
   color: color-mix(in oklab, var(--fg) 75%, transparent);
   text-align: center;
 }
 
-/* ===== HARD OVERRIDES (falls irgendwas reinfunkt) ===== */
-.blog-grid .blog-card{
-  height: auto !important;
-  min-height: 0 !important;
-  align-self: start !important;
-}
 
-.blog-grid .blog-card-thumb{
-  height: 120px !important;        /* <<< gleiche Höhe wie oben */
-  aspect-ratio: auto !important;   /* sicher */
-}
-
-.blog-grid .blog-card-thumb img{
-  object-fit: contain !important;  /* <<< sicher */
-}
+/* =========================================================
+   FORCE (nur falls styles.css / andere Regeln reinfunken)
+   Wenn alles stabil ist, kannst du diesen Block später entfernen.
+   ========================================================= */
+.blog-card-thumb{ max-height: 150px !important; aspect-ratio: 16 / 9 !important; }
+.blog-card-thumb img{ object-fit: contain !important; }
