@@ -1,24 +1,58 @@
-/* assets/blog.css – Swissploit Style (no retro) */
+/* assets/blog.css – Swissploit Style (clean, no retro) */
 
-/* Blog Hero – gleiche Section-Logik wie Hauptseite */
-.blog-hero {
-  padding-top: 90px; /* etwas weniger als Default */
+/* ===== A11y helper ===== */
+.sr-only{
+  position:absolute;
+  width:1px;
+  height:1px;
+  padding:0;
+  margin:-1px;
+  overflow:hidden;
+  clip:rect(0,0,0,0);
+  white-space:nowrap;
+  border:0;
+}
+
+/* ===== Blog Hero – gleiche Section-Logik wie Hauptseite ===== */
+.blog-hero{
+  padding-top: 90px;
   padding-bottom: 60px;
 }
 
-/* Title Block */
-.blog-title {
-  margin: 0 0 10px;
+/* ===== Titelblock: Swissploit wie Hero + Kicker wie Tech.Security.Klar ===== */
+.blog-hero .blog-title{
+  margin: 0 0 12px;
+  display: grid;
+  justify-content: center;
+  gap: 10px;
 }
 
-/* Suche */
-.blog-search {
+/* Swissploit-Schriftzug (du nutzt hero-brand spans im HTML) */
+.blog-hero .blog-brand{
+  display: inline-block;
+  font-size: clamp(42px, 8vw, 88px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--fg);
+}
+
+/* Kicker unter Swissploit (wie Tech.Security.Klar) */
+.blog-kicker{
+  display: inline-block;
+  font-size: clamp(16px, 2.2vw, 22px);
+  font-weight: 300;
+  color: color-mix(in oklab, var(--fg) 85%, transparent);
+  letter-spacing: .02em;
+}
+
+/* ===== Suche ===== */
+.blog-search{
   margin: 18px auto 0;
   max-width: 720px;
   text-align: left;
 }
 
-.blog-search input {
+.blog-search input{
   width: 100%;
   padding: 14px 14px;
   border-radius: 12px;
@@ -29,27 +63,33 @@
   outline: none;
 }
 
-.blog-search input::placeholder {
+/* Eingabetext besser sichtbar */
+.blog-search input,
+.blog-search input:focus{
+  color: var(--fg);
+}
+
+.blog-search input::placeholder{
   color: color-mix(in oklab, var(--fg) 55%, transparent);
 }
 
 /* Such-Hinweis */
-.blog-search-hint {
+.blog-search-hint{
   display: block;
   margin-top: 10px;
   font-size: 14px;
   color: color-mix(in oklab, var(--fg) 72%, transparent);
 }
 
-/* Language Buttons – wie Chips/Buttons */
-.lang-toggle {
+/* ===== Language Buttons – wie Chips/Buttons ===== */
+.lang-toggle{
   display: flex;
   justify-content: center;
   gap: 10px;
   margin-top: 16px;
 }
 
-.lang-btn {
+.lang-btn{
   appearance: none;
   padding: 10px 12px;
   border-radius: 999px;
@@ -61,37 +101,41 @@
   transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
 }
 
-.lang-btn:hover {
+.lang-btn:hover{
   transform: translateY(-1px);
   box-shadow: var(--shadow);
 }
 
-.lang-btn.is-active {
+.lang-btn.is-active{
   border-color: color-mix(in oklab, var(--accent) 55%, var(--border));
   background: color-mix(in oklab, var(--accent) 12%, var(--panel));
 }
 
-/* Grid */
-.blog-grid-section {
+/* ===== Grid ===== */
+.blog-grid-section{
   padding-top: 60px;
 }
 
-.blog-grid {
+/* NEW: Cards zentriert, damit sie nicht “gezogen” wirken */
+.blog-grid{
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 20px;
+  justify-items: center; /* <<< wichtig */
 }
 
-@media (max-width: 1024px) {
-  .blog-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 1024px){
+  .blog-grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
-@media (max-width: 640px) {
-  .blog-grid { grid-template-columns: 1fr; }
+@media (max-width: 640px){
+  .blog-grid{ grid-template-columns: 1fr; }
 }
 
-/* Card */
-.blog-card {
+/* ===== Card ===== */
+.blog-card{
+  width: 100%;
+  max-width: 360px;      /* <<< verhindert langgezogene Kacheln */
   background: var(--panel);
   border: 1px solid var(--border);
   border-radius: 14px;
@@ -105,159 +149,66 @@
   scale: 1;
 }
 
-.blog-card:hover {
+.blog-card:hover{
   scale: 1.02;
   box-shadow: 0 18px 36px rgba(211,0,0,.18), 0 6px 18px rgba(0,0,0,.08);
   border-color: color-mix(in oklab, var(--accent) 45%, var(--border));
 }
 
-/* Thumbnail */
-.blog-card-thumb {
+/* ===== Thumbnail – kompakt & stabil ===== */
+.blog-card-thumb{
   width: 100%;
-  aspect-ratio: 16 / 9;
+  height: clamp(140px, 18vw, 190px); /* <<< kompakt statt "unendlich hoch" */
   background: #000;
   overflow: hidden;
 }
 
-.blog-card-thumb img {
+.blog-card-thumb img{
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
 }
 
-/* Text */
-.blog-card-body {
-  padding: 14px 14px 16px;
-  text-align: left;
-}
-
-.blog-card-title {
-  margin: 0 0 8px;
-  font-size: 16px;           /* kleiner, damit nichts abschneidet */
-  line-height: 1.25;
-  overflow-wrap: anywhere;   /* verhindert rechts abschneiden */
-}
-
-.blog-card-excerpt {
-  margin: 0;
-  font-size: 14px;
-  line-height: 1.45;
-  color: color-mix(in oklab, var(--fg) 80%, transparent); /* heller, gut lesbar */
-}
-
-/* No results */
-.blog-no-results {
-  margin-top: 18px;
-  color: color-mix(in oklab, var(--fg) 75%, transparent);
-  text-align: center;
-}
-
-
-/* ===== Blog Titel exakt wie .hero h1 auf der Hauptseite ===== */
-.blog-hero .blog-title{
-  margin: 0 0 12px;
-  font-size: clamp(42px, 8vw, 88px);   /* <- das ist die Hero-Größe */
-  line-height: 1.05;
-  letter-spacing: -0.02em;
-  color: var(--fg);
-}
-
-/* hero-brand erbt jetzt nur noch */
-.blog-hero .blog-title .hero-brand{
-  display: inline-block;
-  font-size: inherit;
-  line-height: inherit;
-  letter-spacing: inherit;
-  color: inherit;
-}
-/* Title: Swissploit wie Hero */
-.blog-hero .blog-title{
-  margin: 0 0 12px;
-  display: grid;
-  justify-content: center;
-  gap: 10px;
-}
-
-.blog-hero .blog-brand{
-  display: inline-block;
-  font-size: clamp(42px, 8vw, 88px);
-  line-height: 1.05;
-  letter-spacing: -0.02em;
-  color: var(--fg);
-}
-
-/* Kicker wie auf Hauptseite (Tech.Security.Klar) */
-.blog-kicker{
-  display: inline-block;
-  font-size: clamp(16px, 2.2vw, 22px);
-  font-weight: 300;
-  color: color-mix(in oklab, var(--fg) 85%, transparent);
-  letter-spacing: .02em;
-}
-
-.sr-only{
-  position:absolute;
-  width:1px;
-  height:1px;
-  padding:0;
-  margin:-1px;
-  overflow:hidden;
-  clip:rect(0,0,0,0);
-  white-space:nowrap;
-  border:0;
-}
-
-.blog-card-thumb{
-  width: 100%;
-  aspect-ratio: 3 / 2;  /* statt 16/9 -> kompakter */
-  background: #000;
-  overflow: hidden;
-}
-
-.blog-card{
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  box-shadow: var(--shadow);
-  overflow: hidden;
-  text-decoration: none;
-  color: var(--fg);
-  display: flex;
-  flex-direction: column;
-
-  /* kompakter */
-  max-width: 100%;
-}
-
+/* ===== Textbereich – kompakt ===== */
 .blog-card-body{
-  padding: 12px 12px 14px;  /* weniger padding = weniger tiefe */
+  padding: 12px 12px 14px; /* weniger Tiefe */
   text-align: left;
   display: grid;
-  gap: 6px;                 /* enger */
+  gap: 6px;
 }
 
+/* Titel: max 2 Zeilen, kein Abschneiden rechts */
 .blog-card-title{
   margin: 0;
-  font-size: 15px;          /* minimal kleiner */
+  font-size: 15px;
   line-height: 1.2;
   overflow-wrap: anywhere;
 
   display: -webkit-box;
-  -webkit-line-clamp: 2;     /* max 2 Zeilen */
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
+/* Excerpt: sehr gut lesbar + max 1 Zeile für kompakte Kachel */
 .blog-card-excerpt{
   margin: 0;
   font-size: 13px;
   line-height: 1.35;
-  color: color-mix(in oklab, var(--fg) 82%, transparent);
+
+  /* heller, Swissploit-like */
+  color: color-mix(in oklab, var(--fg) 88%, transparent);
 
   display: -webkit-box;
-  -webkit-line-clamp: 2;     /* max 2 Zeilen */
+  -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
+/* ===== No results ===== */
+.blog-no-results{
+  margin-top: 18px;
+  color: color-mix(in oklab, var(--fg) 75%, transparent);
+  text-align: center;
+}
