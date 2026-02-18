@@ -135,7 +135,7 @@
 /* THUMBNAIL: kompakt + ganzes 16:9 Bild sichtbar (NICHT crop) */
 .blog-thumb{
   width: 100%;
-    height: clamp(132px, 15.4vw, 176px); /* ~10% höher */
+  height: clamp(145px, 17vw, 194px);
 
   background: #000;
   display: grid;
