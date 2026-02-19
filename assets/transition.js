@@ -1,20 +1,43 @@
 // assets/transition.js
-(function(){
-  document.body.classList.add("page-transition");
+(function pageTransitions(){
+  const body = document.body;
 
-  document.addEventListener("click", (e)=>{
-    const a = e.target.closest("a");
+  // Entfernt "leaving" Zustände zuverlässig
+  function resetTransitionState(){
+    body.classList.remove('is-leaving');
+  }
+
+  // Beim normalen Laden
+  resetTransitionState();
+
+  // Wichtig: Beim Zurück/Weiter (bfcache) wird oft KEIN Reload gemacht.
+  window.addEventListener('pageshow', (e) => {
+    // e.persisted === true -> aus bfcache
+    resetTransitionState();
+  });
+
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest('a[data-transition]');
     if(!a) return;
 
-    const href = a.getAttribute("href") || "";
-    const target = a.getAttribute("target");
+    const href = a.getAttribute('href');
+    if(!href) return;
+    if(href.startsWith('#')) return;
 
-    if(target === "_blank") return;
-    if(href.startsWith("#") || href.startsWith("mailto:") || href.startsWith("tel:")) return;
-    if(href.startsWith("http")) return;
+    if(a.target === '_blank' || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+
+    const url = new URL(href, window.location.href);
+    if(url.origin !== window.location.origin) return;
 
     e.preventDefault();
-    document.body.classList.add("is-leaving");
-    setTimeout(()=>{ window.location.href = href; }, 220);
+
+    // falls wir aus bfcache kommen und noch was hängt:
+    resetTransitionState();
+
+    body.classList.add('is-leaving');
+
+    window.setTimeout(() => {
+      window.location.href = url.href;
+    }, 320);
   });
 })();
