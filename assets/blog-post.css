@@ -198,3 +198,70 @@ html[data-theme="dark"] .post-content .blog-callout{
   .post-content p{ font-size: 17px; }
   .post-title{ font-size: clamp(30px, 8vw, 44px); }
 }
+
+
+/* ===== Language Toggle (Single Post) ===== */
+.post-topbar{
+  gap: 12px;
+  align-items: center;
+}
+
+/* rechts ausrichten, Back bleibt links */
+.post-topbar .lang-toggle{
+  margin-left: auto;
+}
+
+/* gleiche Optik wie Swissploit Chips */
+.lang-toggle{
+  display: inline-flex;
+  gap: 8px;
+  padding: 6px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: color-mix(in oklab, var(--panel) 90%, transparent);
+  box-shadow: 0 10px 30px rgba(0,0,0,.06);
+}
+
+html[data-theme="dark"] .lang-toggle{
+  box-shadow: 0 10px 30px rgba(0,0,0,.35);
+}
+
+.lang-btn{
+  appearance: none;
+  border: 1px solid transparent;
+  background: transparent;
+  color: color-mix(in oklab, var(--fg) 78%, transparent);
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: .08em;
+  padding: 8px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: scale .18s ease, background .18s ease, border-color .18s ease, color .18s ease, box-shadow .18s ease;
+  scale: 1;
+}
+
+.lang-btn:hover{
+  scale: 1.03;
+  color: var(--fg);
+  background: color-mix(in oklab, var(--fg) 6%, transparent);
+  border-color: color-mix(in oklab, var(--fg) 10%, transparent);
+}
+
+.lang-btn.is-active{
+  color: var(--fg);
+  background: color-mix(in oklab, var(--accent) 12%, var(--panel));
+  border-color: color-mix(in oklab, var(--accent) 55%, var(--border));
+  box-shadow: 0 12px 28px rgba(211,0,0,.18);
+}
+
+/* Mobile: Toggle unter Back statt gequetscht */
+@media (max-width: 640px){
+  .post-topbar{
+    flex-wrap: wrap;
+  }
+  .post-topbar .lang-toggle{
+    margin-left: 0;
+  }
+}
+
