@@ -1,136 +1,155 @@
 // assets/blog-post.js
-(function(){
+(function () {
   const posts = window.SWISSPLOIT_BLOG_POSTS || [];
   const params = new URLSearchParams(location.search);
   const id = params.get("id");
 
-  const headerEl = document.getElementById("postHeader");
-  const bodyEl = document.getElementById("postBody");
+  const titleEl = document.getElementById("postTitle");
+  const subtitleEl = document.getElementById("postSubtitle");
+  const metaEl = document.getElementById("postMeta");
+  const contentEl = document.getElementById("postContent");
+  const backEl = document.querySelector(".post-back");
   const langBtns = document.querySelectorAll(".lang-btn");
 
   const UI = {
-    de: { back: "← Zurück zum Blog", watch: "▶ Video ansehen", notFoundTitle: "Artikel nicht gefunden", notFoundLead: "Der Link ist ungültig oder der Beitrag existiert nicht.", overview: "Zur Übersicht" },
-    en: { back: "← Back to blog", watch: "▶ Watch video", notFoundTitle: "Post not found", notFoundLead: "The link is invalid or the post doesn’t exist.", overview: "Back to overview" }
+    de: {
+      back: "← Zurück",
+      notFoundTitle: "Artikel nicht gefunden",
+      notFoundBody: "Der Link ist ungültig oder der Beitrag existiert nicht.",
+      watch: "▶ Video ansehen",
+      overview: "Zur Übersicht"
+    },
+    en: {
+      back: "← Back",
+      notFoundTitle: "Post not found",
+      notFoundBody: "The link is invalid or the post doesn’t exist.",
+      watch: "▶ Watch video",
+      overview: "Back to overview"
+    }
   };
 
   let currentLang = localStorage.getItem("swissploit-blog-lang") || "de";
   const post = posts.find(p => p.id === id);
 
-  function esc(s){
+  function esc(s) {
     return String(s || "").replace(/[&<>"']/g, (m) => ({
       "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;"
     }[m]));
   }
 
-  // Unterstützt: watch?v=, youtu.be/, youtube.com/shorts/
-  function youtubeEmbed(url){
-    try{
+  function youtubeEmbed(url) {
+    try {
       const u = new URL(url);
 
-      // youtube.com/watch?v=VIDEOID
       const v = u.searchParams.get("v");
-      if(u.hostname.includes("youtube.com") && v){
-        return `https://www.youtube.com/embed/${v}`;
-      }
+      if (u.hostname.includes("youtube.com") && v) return `https://www.youtube.com/embed/${v}`;
 
-      // youtu.be/VIDEOID
-      if(u.hostname.includes("youtu.be")){
+      if (u.hostname.includes("youtu.be")) {
         const vid = u.pathname.replace("/", "").trim();
-        if(vid) return `https://www.youtube.com/embed/${vid}`;
+        if (vid) return `https://www.youtube.com/embed/${vid}`;
       }
 
-      // youtube.com/shorts/VIDEOID
-      if(u.hostname.includes("youtube.com") && u.pathname.startsWith("/shorts/")){
+      if (u.hostname.includes("youtube.com") && u.pathname.startsWith("/shorts/")) {
         const vid = u.pathname.split("/shorts/")[1]?.split(/[?&#/]/)[0];
-        if(vid) return `https://www.youtube.com/embed/${vid}`;
+        if (vid) return `https://www.youtube.com/embed/${vid}`;
       }
-    }catch(e){}
+    } catch (e) {}
     return null;
   }
 
-  function getTxt(){
+  function getTxt() {
     return (post?.i18n?.[currentLang]) || (post?.i18n?.de) || {};
   }
 
-  function applyUiLanguage(){
-    const ui = UI[currentLang] || UI.de;
-
-    document.querySelectorAll("[data-i18n]").forEach(el=>{
-      const key = el.getAttribute("data-i18n");
-      if(ui[key]) el.textContent = ui[key];
-    });
-
+  function setLangUI() {
+    document.documentElement.lang = currentLang;
     langBtns.forEach(b => b.classList.toggle("is-active", b.dataset.lang === currentLang));
+
+    const ui = UI[currentLang] || UI.de;
+    if (backEl) backEl.textContent = ui.back;
   }
 
-  function render(){
+  function renderNotFound() {
+    const ui = UI[currentLang] || UI.de;
+    document.title = `Swissploit – Blog`;
+
+    if (titleEl) titleEl.textContent = ui.notFoundTitle;
+    if (subtitleEl) subtitleEl.textContent = "";
+    if (metaEl) metaEl.innerHTML = "";
+    if (contentEl) {
+      contentEl.innerHTML = `
+        <div class="post-callout">
+          <p>${esc(ui.notFoundBody)}</p>
+          <p><a class="post-back" href="blog.html" data-transition>${esc(ui.overview)}</a></p>
+        </div>
+      `;
+    }
+  }
+
+  function render() {
+    setLangUI();
+
+    if (!post) return renderNotFound();
+    const txt = getTxt();
     const ui = UI[currentLang] || UI.de;
 
-    if(!headerEl || !bodyEl){
-      console.warn("blog-post.js: postHeader/postBody nicht gefunden.");
-      return;
-    }
+    const tTitle = txt.title || "";
+    const tExcerpt = txt.excerpt || "";
 
-    if(!post){
-      headerEl.innerHTML = `<h1 class="blog-post-title">${esc(ui.notFoundTitle)}</h1>`;
-      bodyEl.innerHTML = `
-        <p class="blog-post-lead">${esc(ui.notFoundLead)}</p>
-        <a class="blog-mini-btn" href="blog.html" data-transition>${esc(ui.overview)}</a>
+    document.title = `${tTitle || "Blog"} – Swissploit`;
+
+    if (titleEl) titleEl.textContent = tTitle;
+    if (subtitleEl) subtitleEl.textContent = tExcerpt;
+
+    const tags = (post.tags || []).map(t => `#${esc(t)}`).join(" ");
+    if (metaEl) {
+      metaEl.innerHTML = `
+        ${post.date ? `<span class="blog-date">${esc(post.date)}</span>` : ""}
+        ${tags ? `<span class="blog-tags">${tags}</span>` : ""}
       `;
-      return;
     }
 
-    const txt = getTxt();
-    document.title = `${txt.title || "Blog"} – Swissploit`;
+    const hasVideo = !!(post.videoUrl && String(post.videoUrl).trim());
+    const embed = hasVideo ? youtubeEmbed(post.videoUrl) : null;
 
-    const embed = post.videoUrl ? youtubeEmbed(post.videoUrl) : null;
-
-    headerEl.innerHTML = `
-      <a class="blog-back" href="blog.html" data-transition>${esc(ui.back)}</a>
-
-      <h1 class="blog-post-title">${esc(txt.title || "")}</h1>
-
-      <div class="blog-meta blog-meta-post">
-        <span class="blog-date">${esc(post.date || "")}</span>
-        <span class="blog-tags">${(post.tags||[]).map(t=>`#${esc(t)}`).join(" ")}</span>
-      </div>
-
-      ${post.videoUrl ? `
-        <div class="blog-post-video">
-          ${embed ? `
-            <div class="video-embed">
-              <iframe
-                src="${esc(embed)}"
-                title="${esc(txt.title || "Video")}"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen></iframe>
+    const videoHtml = hasVideo
+      ? (embed
+          ? `
+            <div class="post-video">
+              <div class="video-embed">
+                <iframe
+                  src="${esc(embed)}"
+                  title="${esc(tTitle || "Video")}"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen></iframe>
+              </div>
             </div>
-          ` : `
-            <a class="blog-mini-btn" href="${esc(post.videoUrl)}" target="_blank" rel="noopener">${esc(ui.watch)}</a>
-          `}
-        </div>
-      ` : ""}
-    `;
+          `
+          : `<p><a class="post-back" href="${esc(post.videoUrl)}" target="_blank" rel="noopener">${esc(ui.watch)}</a></p>`
+        )
+      : "";
 
-    const content = txt.content || "";
-    bodyEl.innerHTML = `
-      <article class="blog-article">
-        ${content.includes("<") ? content : `<p>${esc(content)}</p>`}
-      </article>
-    `;
+    const body = txt.content || "";
+    const bodyHtml = body.includes("<") ? body : `<p>${esc(body)}</p>`;
+
+    if (contentEl) {
+      contentEl.innerHTML = `
+        ${videoHtml}
+        <div class="post-article">
+          ${bodyHtml}
+        </div>
+      `;
+    }
   }
 
-  // language buttons
-  langBtns.forEach(btn=>{
-    btn.addEventListener("click", ()=>{
+  langBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
       currentLang = btn.dataset.lang || "de";
       localStorage.setItem("swissploit-blog-lang", currentLang);
-      applyUiLanguage();
       render();
     });
   });
 
-  // init
-  applyUiLanguage();
+  setLangUI();
   render();
 })();
