@@ -1,144 +1,98 @@
-// assets/blog-post.js
-(function () {
-  const posts = window.SWISSPLOIT_BLOG_POSTS || [];
-  const params = new URLSearchParams(location.search);
-  const id = params.get("id");
+<!doctype html>
+<html lang="de" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Swissploit – Blog</title>
 
-  // ✅ Deine IDs aus blog-post.html
-  const titleEl = document.getElementById("postTitle");
-  const subtitleEl = document.getElementById("postSubtitle");
-  const metaEl = document.getElementById("postMeta");
-  const contentEl = document.getElementById("postContent");
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/JustPlus.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/JustPlus.png">
+  <link rel="apple-touch-icon" href="assets/JustPlus.png">
+  <meta name="theme-color" content="#ffffff">
 
-  const backEl = document.querySelector(".post-back"); // existiert bereits im HTML
-  const langBtns = document.querySelectorAll(".lang-btn"); // falls du später addest
-
-  const UI = {
-    de: { back: "← Zurück", notFoundTitle: "Artikel nicht gefunden", notFoundBody: "Der Link ist ungültig oder der Beitrag existiert nicht.", watch: "▶ Video ansehen" },
-    en: { back: "← Back", notFoundTitle: "Post not found", notFoundBody: "The link is invalid or the post doesn’t exist.", watch: "▶ Watch video" }
-  };
-
-  // Sprache wie im Blog-Listing
-  let currentLang = localStorage.getItem("swissploit-blog-lang") || "de";
-  const post = posts.find(p => p.id === id);
-
-  function esc(s) {
-    return String(s || "").replace(/[&<>"']/g, (m) => ({
-      "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;"
-    }[m]));
-  }
-
-  // Unterstützt: watch?v=, youtu.be/, youtube.com/shorts/
-  function youtubeEmbed(url) {
-    try {
-      const u = new URL(url);
-
-      const v = u.searchParams.get("v");
-      if (u.hostname.includes("youtube.com") && v) {
-        return `https://www.youtube.com/embed/${v}`;
+  <!-- Theme boot (damit Dark/Light korrekt übernimmt, ohne Flash) -->
+  <script>
+    (function () {
+      const saved = localStorage.getItem('swissploit-theme');
+      if (saved) document.documentElement.setAttribute('data-theme', saved);
+      else {
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
       }
+    })();
+  </script>
 
-      if (u.hostname.includes("youtu.be")) {
-        const vid = u.pathname.replace("/", "").trim();
-        if (vid) return `https://www.youtube.com/embed/${vid}`;
-      }
+  <link rel="stylesheet" href="assets/styles.css" />
+  <link rel="stylesheet" href="assets/blog-post.css" />
 
-      if (u.hostname.includes("youtube.com") && u.pathname.startsWith("/shorts/")) {
-        const vid = u.pathname.split("/shorts/")[1]?.split(/[?&#/]/)[0];
-        if (vid) return `https://www.youtube.com/embed/${vid}`;
-      }
-    } catch (e) {}
-    return null;
-  }
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
 
-  function getTxt() {
-    return (post?.i18n?.[currentLang]) || (post?.i18n?.de) || {};
-  }
+<body>
+  <header class="site-header" role="banner">
+    <div class="wrap headerbar">
+      <a class="brand" href="index.html" aria-label="Swissploit Home" data-transition>
+        <video autoplay muted loop playsinline preload="auto" class="brand-video">
+          <source src="assets/Swissploit Intro_1.mp4" type="video/mp4">
+        </video>
+      </a>
 
-  function setBackText() {
-    const ui = UI[currentLang] || UI.de;
-    if (backEl) backEl.textContent = ui.back;
-  }
+      <nav class="nav" aria-label="Hauptnavigation">
+        <a href="index.html#about" data-transition>Über mich</a>
+        <a href="index.html#featured" data-transition>Neuestes Video</a>
+        <a href="index.html#shorts" data-transition>H355</a>
+        <a class="is-active" href="blog.html" data-transition>Blog</a>
+      </nav>
 
-  function renderNotFound() {
-    const ui = UI[currentLang] || UI.de;
-    document.title = `Swissploit – Blog`;
+      <span></span>
+    </div>
+  </header>
 
-    if (titleEl) titleEl.textContent = ui.notFoundTitle;
-    if (subtitleEl) subtitleEl.textContent = "";
-    if (metaEl) metaEl.innerHTML = "";
-    if (contentEl) {
-      contentEl.innerHTML = `
-        <p>${esc(ui.notFoundBody)}</p>
-        <p><a class="btn small" href="blog.html" data-transition>${esc(currentLang === "de" ? "Zur Übersicht" : "Back to overview")}</a></p>
-      `;
-    }
-  }
+  <main id="main">
+    <section class="section post-hero">
+      <div class="wrap">
+        <div class="post-topbar">
+          <a class="post-back" href="blog.html" data-transition>← Zurück</a>
 
-  function render() {
-    setBackText();
-
-    if (!post) return renderNotFound();
-
-    const txt = getTxt();
-    const ui = UI[currentLang] || UI.de;
-
-    // Title + Subtitle
-    if (titleEl) titleEl.textContent = txt.title || "";
-    if (subtitleEl) subtitleEl.textContent = txt.excerpt || ""; // du kannst hier später eigenes "lead" Feld nutzen
-
-    // Meta
-    const tags = (post.tags || []).map(t => `#${esc(t)}`).join(" ");
-    if (metaEl) {
-      metaEl.innerHTML = `
-        <span class="blog-date">${esc(post.date || "")}</span>
-        <span class="blog-tags">${tags}</span>
-      `;
-    }
-
-    // SEO Title
-    document.title = `${txt.title || "Blog"} – Swissploit`;
-
-    // Video (falls vorhanden)
-    const embed = post.videoUrl ? youtubeEmbed(post.videoUrl) : null;
-    const videoHtml = post.videoUrl
-      ? (embed
-          ? `
-            <div class="post-video">
-              <div class="video-embed">
-                <iframe
-                  src="${esc(embed)}"
-                  title="${esc(txt.title || "Video")}"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen></iframe>
-              </div>
-            </div>`
-          : `<p><a class="btn small" href="${esc(post.videoUrl)}" target="_blank" rel="noopener">${esc(ui.watch)}</a></p>`
-        )
-      : "";
-
-    // Content (dein content ist HTML → direkt einfügen)
-    const body = txt.content || "";
-    const bodyHtml = body.includes("<") ? body : `<p>${esc(body)}</p>`;
-
-    if (contentEl) {
-      contentEl.innerHTML = `
-        ${videoHtml}
-        <div class="post-article">
-          ${bodyHtml}
+          <!-- Optional: Language Toggle auch in Einzelsicht -->
+          <div class="lang-toggle" role="group" aria-label="Sprache wählen">
+            <button class="lang-btn" data-lang="de" type="button">DE</button>
+            <button class="lang-btn" data-lang="en" type="button">EN</button>
+          </div>
         </div>
-      `;
-    }
-  }
 
-  // Optional: wenn du später Language Buttons auf blog-post.html einfügst
-  langBtns.forEach(btn => {
-    btn.addEventListener("click", () => {
-      currentLang = btn.dataset.lang || "de";
-      localStorage.setItem("swissploit-blog-lang", currentLang);
-      render();
-    });
-  });
+        <h1 class="post-title" id="postTitle">…</h1>
+        <p class="post-subline" id="postSubtitle"></p>
 
-  render();
-})();
+        <div class="post-meta" id="postMeta"></div>
+      </div>
+    </section>
+
+    <section class="section post-wrap">
+      <div class="wrap">
+        <article class="post-content" id="postContent"></article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="wrap">
+      <p>© <span id="year"></span> Swissploit.</p>
+      <nav class="foot-nav" aria-label="Footer Navigation">
+        <a href="index.html#about" data-transition>Über mich</a>
+        <a href="index.html#featured" data-transition>Neuestes Video</a>
+        <a href="index.html#shorts" data-transition>H355</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+
+  <script src="assets/transition.js"></script>
+  <script src="assets/blog-posts.js"></script>
+  <script src="assets/blog-post.js"></script>
+</body>
+</html>
