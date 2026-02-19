@@ -82,7 +82,7 @@ window.SWISSPLOIT_BLOG_POSTS = [
     }
   },
 
-  // ✅ NEUER POST (hier eingefügt)
+  // ✅ POST 2
   {
     id: "outlook-fragezeichen-zeichenkodierung-utf8",
     date: "2026-02-19",
@@ -107,6 +107,14 @@ window.SWISSPLOIT_BLOG_POSTS = [
 
 <h2>Workaround in Classic Outlook: UTF-8 / Kodierung erzwingen</h2>
 <p>Wenn du Classic Outlook zwingend brauchst, hilft es in vielen Fällen, die automatische Auswahl der Kodierung abzuschalten und stattdessen eine stabile Kodierung zu erzwingen. In der Praxis funktioniert <strong>UTF-8</strong> am zuverlässigsten, weil es Sonderzeichen sauber abbildet und in modernen Umgebungen Standard ist. Genau dieser Schritt verhindert häufig, dass Outlook “falsch rät” und Zeichen beim Senden kaputt macht.</p>
+<figure class="post-figure">
+  <img src="assets/blog/Outlutf-8.png" alt="Outlook: Codierung auf Unicode (UTF-8) umstellen">
+  <figcaption>Hier müssen diese zwei Optionen auf Unicode UTF-8 gewechselt werden.</figcaption>
+</figure>
+
+<figure class="post-figure">
+  <img src="assets/blog/Outlutf-8_2.png" alt="Outlook: weitere UTF-8 Einstellung">
+</figure>
 
 <h2>Workaround: auf eine ältere Version zurück</h2>
 <p>Wenn das Problem mit einem Update gekommen ist und du dringend stabil arbeiten musst, kannst du testweise auf eine vorherige Version zurückgehen. Microsoft nennt dafür eine bekannte, funktionierende Version und beschreibt den Rollback über <em>officec2rclient.exe</em>. Danach solltest du Office-Updates temporär pausieren, damit es nicht direkt wieder auf den problematischen Build springt.</p>
@@ -135,6 +143,14 @@ window.SWISSPLOIT_BLOG_POSTS = [
 
 <h2>Classic Outlook workaround: force UTF-8 / avoid auto-encoding</h2>
 <p>If you must stay on Classic Outlook, a common fix is to disable the automatic selection of outgoing encoding and use a stable encoding instead. In practice, <strong>UTF-8</strong> is the most reliable choice because it cleanly supports special characters and is the modern standard. This prevents Outlook from “guessing” and damaging characters during sending.</p>
+<figure class="post-figure">
+  <img src="assets/blog/Outlutf-8.png" alt="Outlook: switch encoding to Unicode (UTF-8)">
+  <figcaption>Switch these two options to Unicode (UTF-8).</figcaption>
+</figure>
+
+<figure class="post-figure">
+  <img src="assets/blog/Outlutf-8_2.png" alt="Outlook: additional UTF-8 setting">
+</figure>
 
 <h2>Rollback option if you need stability</h2>
 <p>If the problem started right after an update, you can roll back to a previous working version as a temporary stabilization step. Microsoft describes the rollback via <em>officec2rclient.exe</em>, and then recommends pausing updates to avoid jumping back onto the problematic build.</p>
