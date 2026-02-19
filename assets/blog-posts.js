@@ -88,7 +88,7 @@ window.SWISSPLOIT_BLOG_POSTS = [
     date: "2026-02-19",
     tags: ["outlook", "microsoft365", "encoding", "utf-8", "classic-outlook", "windows"],
     videoUrl: "",
-    thumb: "assets/blog/outluml.png",
+    thumb: "assets/blog/OutlookUml.png",
 
     i18n: {
       de: {
