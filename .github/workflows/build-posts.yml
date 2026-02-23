@@ -1,12 +1,14 @@
 name: Build blog posts
 
 on:
+  workflow_dispatch:
   push:
     branches: [ "main" ]
     paths:
       - "posts/**"
       - "scripts/**"
       - "package.json"
+      # package-lock.json ist optional, darum nicht nötig als Trigger
       - "package-lock.json"
 
 permissions:
@@ -23,7 +25,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "20"
-          cache: "npm"
 
       - name: Install
         run: npm install
