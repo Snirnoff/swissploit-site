@@ -37,6 +37,22 @@
     }[m]));
   }
 
+  // ✅ Friendly date formatting (expects "YYYY-MM-DD")
+  function formatDate(dateStr){
+    const s = String(dateStr || "").trim();
+    if (!s) return "";
+
+    const d = new Date(s + "T00:00:00");
+    if (Number.isNaN(d.getTime())) return s;
+
+    const locale = currentLang === "de" ? "de-CH" : "en-GB";
+    return d.toLocaleDateString(locale, {
+      year: "numeric",
+      month: "short",
+      day: "2-digit"
+    });
+  }
+
   function youtubeEmbed(url) {
     try {
       const u = new URL(url);
@@ -122,7 +138,7 @@
     const tags = (post.tags || []).map(t => `#${esc(t)}`).join(" ");
     if (metaEl) {
       metaEl.innerHTML = `
-        ${post.date ? `<span class="blog-date">${esc(post.date)}</span>` : ""}
+        ${post.date ? `<span class="blog-date">${esc(formatDate(post.date))}</span>` : ""}
         ${tags ? `<span class="blog-tags">${tags}</span>` : ""}
       `;
     }
