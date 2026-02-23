@@ -71,7 +71,7 @@ window.SWISSPLOIT_BLOG_POSTS = [
     "videoUrl": "",
     "i18n": {
       "de": {
-        "title": "OneDrive - Gelöschte Dateien wiederherstellen!",
+        "title": "OneDrive Dateien wiederherstellen!",
         "excerpt": "So stellst du Dateien und Ordner in Sekunden wieder her.",
         "videoUrl": "",
         "content": "<h2>Problem</h2>\n<p>Du hast in OneDrive aus Versehen eine Datei oder einen Ordner gelöscht und findest es nicht mehr.</p>\n<h2>Lösung (Schritt für Schritt)</h2>\n<ol>\n<li>Klicke auf das <strong>OneDrive-Symbol</strong> unten rechts in Windows.</li>\n<li>Wähle <strong>Online anzeigen</strong> (öffnet OneDrive im Browser).</li>\n<li>Klicke links auf <strong>Papierkorb</strong>.</li>\n<li>Markiere die gelöschten <strong>Dateien oder Ordner</strong>.</li>\n<li>Klicke auf <strong>Wiederherstellen</strong>.</li>\n</ol>\n<h2>Ergebnis</h2>\n<p>Zurück im OneDrive-Ordner ist alles wieder <strong>genau dort</strong>, wo du es gelöscht hast.</p>\n<h2>Profi-Tipp</h2>\n<p>Wenn du das OneDrive-Symbol nicht siehst: Startmenü öffnen, nach <strong>OneDrive</strong> suchen, anmelden – und nochmals prüfen.</p>\n<h2>Verwandte Themen</h2>\n<ul>\n<li>OneDrive Basics: Synchronisiert vs. „Nur online“</li>\n<li>Backup-Tipps für Microsoft 365 (Privat &amp; KMU)</li>\n</ul>"
