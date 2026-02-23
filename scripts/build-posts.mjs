@@ -30,6 +30,30 @@ function pickFirst(...vals) {
   return "";
 }
 
+// ✅ Always normalize to "YYYY-MM-DD"
+function normalizeDate(v) {
+  if (!v) return "";
+
+  // YAML can deliver a real Date object
+  if (v instanceof Date) {
+    return v.toISOString().slice(0, 10);
+  }
+
+  const s = String(v).trim();
+  if (!s) return "";
+
+  // Already normalized
+  if (/^\d{4}-\d{2}-\d{2}$/.test(s)) return s;
+
+  // Try parsing strings like "Tue Jan 27 2026 ..."
+  const d = new Date(s);
+  if (!Number.isNaN(d.getTime())) {
+    return d.toISOString().slice(0, 10);
+  }
+
+  return s;
+}
+
 async function readMd(filePath) {
   const raw = await fs.readFile(filePath, "utf8");
   const parsed = matter(raw);
@@ -65,7 +89,7 @@ async function main() {
 
     const meta = {
       id: pickFirst(de?.data?.id, en?.data?.id, postId),
-      date: pickFirst(de?.data?.date, en?.data?.date, ""),
+      date: normalizeDate(pickFirst(de?.data?.date, en?.data?.date, "")),
       tags: asArray(pickFirst(de?.data?.tags, en?.data?.tags, "")),
       thumb: pickFirst(de?.data?.thumb, en?.data?.thumb, ""),
       // Optional: a global video if you want one URL for both languages
@@ -103,7 +127,7 @@ async function main() {
     posts.push({ ...meta, i18n });
   }
 
-  // Sort newest first
+  // Sort newest first (string compare works with YYYY-MM-DD)
   posts.sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")));
 
   const out = `// assets/blog-posts.js\n// AUTO-GENERATED FILE. Do not edit directly.\n// Edit Markdown files in /posts and run: npm run build:posts\n\nwindow.SWISSPLOIT_BLOG_POSTS = ${JSON.stringify(posts, null, 2)};\n`;
