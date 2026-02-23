@@ -45,20 +45,14 @@
     };
   }
 
-  // ✅ Friendly date formatting (expects "YYYY-MM-DD")
-  function formatDate(dateStr){
+  // ✅ Show date everywhere as DD.MM.YYYY
+  function formatDate(dateStr) {
     const s = String(dateStr || "").trim();
     if (!s) return "";
-
-    const d = new Date(s + "T00:00:00");
-    if (Number.isNaN(d.getTime())) return s;
-
-    const locale = currentLang === "de" ? "de-CH" : "en-GB";
-    return d.toLocaleDateString(locale, {
-      year: "numeric",
-      month: "short",
-      day: "2-digit"
-    });
+    const m = s.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+    if (!m) return s;
+    const yyyy = m[1], mm = m[2], dd = m[3];
+    return `${dd}.${mm}.${yyyy}`;
   }
 
   // Video logic:
