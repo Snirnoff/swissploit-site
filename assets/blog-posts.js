@@ -4,33 +4,36 @@
 
 window.SWISSPLOIT_BLOG_POSTS = [
   {
-    "id": "wetransfer-phishing-html-onedrive",
-    "date": "Tue Jan 27 2026 00:00:00 GMT+0000 (Coordinated Universal Time)",
+    "id": "onedrive-restore-deleted-files",
+    "date": "2026-02-23",
     "tags": [
-      "security",
-      "phishing",
-      "microsoft365",
       "onedrive",
-      "outlook"
+      "microsoft-365",
+      "windows",
+      "cloud",
+      "backup",
+      "papierkorb"
     ],
-    "thumb": "assets/blog/h355-014.png",
-    "videoUrl": "https://www.youtube.com/watch?v=5aVeWRinSxM",
+    "thumb": "assets/blog/onedrive-restore.png",
+    "videoUrl": "",
     "i18n": {
       "de": {
-        "title": "Angriff mit HTML",
-        "excerpt": "So wurde ein Microsoft-Konto übernommen!",
-        "content": "<p><strong>WeTransfer-Phishing</strong> ist aktuell eine der fiesesten Methoden, um <strong>Microsoft 365 / OneDrive / Outlook Accounts</strong> zu übernehmen – weil der Ablauf “normal” wirkt: Download-Link, Datei öffnen, Login.</p>\n\n<p>In diesem Beitrag zeige ich dir den Angriff anhand eines realen Falls – inklusive Video – und erkläre, <strong>warum eine HTML-Datei gefährlich sein kann</strong>, obwohl sie auf den ersten Blick harmlos aussieht.</p>\n\n<div class=\"blog-callout\">\n  <p><strong>Worum geht’s?</strong><br>\n  Ein Angreifer lockt dich über einen scheinbar legitimen WeTransfer-Link zu einem Download. Statt eines PDFs oder Dokuments bekommst du eine <strong>HTML-Datei</strong>, die ein <strong>Fake OneDrive-Login</strong> öffnet. Sobald du dort dein Passwort eingibst, kann dein Microsoft-Konto kompromittiert werden.</p>\n</div>\n\n<h2>Warum ausgerechnet WeTransfer?</h2>\n<p>Viele kennen WeTransfer als seriösen Dienst zum Teilen von Dateien. Genau dieses Vertrauen wird ausgenutzt. Ein Link zu WeTransfer löst bei vielen weniger Misstrauen aus als eine unbekannte File-Share-Seite – und genau das erhöht die Klickrate.</p>\n\n<h2>So läuft der Angriff ab</h2>\n<p>Das Muster ist fast immer gleich: Du bekommst eine Mail, die nach Dokumenten, Bestellung oder “freigegebenen Dateien” klingt. Der Link führt auf eine Seite, die wie ein normaler Download wirkt. Du lädst eine Datei herunter – häufig mit Namen wie <em>Rechnung.html</em> oder <em>Dokumente.html</em>.</p>\n\n<p>Beim Öffnen startet dein Browser und zeigt eine <strong>täuschend echte OneDrive/Microsoft-Anmeldeseite</strong>. Viele denken: “Ah, Microsoft will kurz bestätigen” – und tippen ihre Zugangsdaten ein.</p>\n\n<h2>Warum die HTML-Datei der kritische Punkt ist</h2>\n<p>Eine HTML-Datei ist im Prinzip “eine Webseite als Datei”. Öffnest du sie, kann sie eine Login-Seite nachbauen, dich weiterleiten oder Formulareingaben an einen Server senden. Das Gemeine: Ein “Dokument” wirkt harmlos – aber im Browser wird daraus plötzlich ein Login.</p>\n\n<h2>So erkennst du den Fake schnell</h2>\n<p>Schau dir die Adresse im Browser an: Ist das wirklich eine saubere Microsoft-Domain? Und frag dich: Warum ist das ein <strong>.html</strong> und kein PDF/DOCX? Wenn zusätzlich Druck aufgebaut wird (“läuft ab”, “dringend”, “sofort ansehen”), ist das fast immer ein Warnsignal.</p>\n\n<h2>So schützt du dein Microsoft 365 Konto nachhaltig</h2>\n<p>Aktiviere <strong>MFA</strong> (am besten per Authenticator-App), nutze einen <strong>Passwort-Manager</strong> und prüfe verdächtige Logins. Für KMU lohnt sich zusätzlich Security Defaults oder Conditional Access. Und ganz wichtig: Im Team kurz erklären, dass “HTML-Datei ≠ Dokument” ist.</p>\n\n<h2>Video zum Fall</h2>\n<p>Im Video zeige ich dir den Ablauf im Detail und worauf du in der Praxis achten solltest.</p>\n\n<p><strong>Takeaway:</strong> WeTransfer ist nicht “das Problem”. Der Angreifer nutzt den vertrauten Download-Flow als Tarnung. Kritisch wird es, wenn eine HTML-Datei ein Login auslöst.</p>"
+        "title": "OneDrive Dateien zurückholen!",
+        "excerpt": "So stellst du Dateien und Ordner in Sekunden wieder her.",
+        "videoUrl": "",
+        "content": "<h2>Problem</h2>\n<p>Du hast in OneDrive aus Versehen eine Datei oder einen Ordner gelöscht und findest es nicht mehr.</p>\n<h2>Lösung (Schritt für Schritt)</h2>\n<ol>\n<li>Klicke auf das <strong>OneDrive-Symbol</strong> unten rechts in Windows.</li>\n<li>Wähle <strong>Online anzeigen</strong> (öffnet OneDrive im Browser).</li>\n<li>Klicke links auf <strong>Papierkorb</strong>.</li>\n<li>Markiere die gelöschten <strong>Dateien oder Ordner</strong>.</li>\n<li>Klicke auf <strong>Wiederherstellen</strong>.</li>\n</ol>\n<h2>Ergebnis</h2>\n<p>Zurück im OneDrive-Ordner ist alles wieder <strong>genau dort</strong>, wo du es gelöscht hast.</p>\n<h2>Profi-Tipp</h2>\n<p>Wenn du das OneDrive-Symbol nicht siehst: Startmenü öffnen, nach <strong>OneDrive</strong> suchen, anmelden – und nochmals prüfen. 😉</p>"
       },
       "en": {
-        "title": "HTML Attack",
-        "excerpt": "A real Microsoft account takeover!",
-        "content": "<p><strong>WeTransfer phishing</strong> is currently one of the most effective ways to compromise <strong>Microsoft 365 / OneDrive / Outlook accounts</strong> — because the flow looks normal: download link, open file, login.</p>\n\n<p>In this post I break down a real incident (with the video embedded) and explain <strong>what actually happens</strong> and <strong>why an HTML file can be dangerous</strong> even when it looks harmless.</p>\n\n<div class=\"blog-callout\">\n  <p><strong>What this attack is about</strong><br>\n  Attackers use a legit-looking WeTransfer download to deliver an <strong>HTML file</strong>. When opened, it launches a browser and shows a <strong>fake OneDrive/Microsoft login page</strong>. If you type credentials, they get captured.</p>\n</div>\n\n<h2>Why WeTransfer is used so often</h2>\n<p>WeTransfer is widely trusted. Attackers exploit that trust to increase clicks and reduce suspicion, compared to unknown file-hosting domains.</p>\n\n<h2>How the attack unfolds</h2>\n<p>You receive an email that looks like shared files, invoices, or documents. The link opens a download-style page. Instead of a PDF/DOCX, you download something like <em>invoice.html</em> or <em>documents.html</em>.</p>\n\n<p>When you open it, your browser shows a convincing <strong>OneDrive/Microsoft login</strong>. Many people assume it’s a normal cloud authentication step — and enter their password.</p>\n\n<h2>Why the HTML file is the key risk</h2>\n<p>An HTML file is basically “a web page saved as a file”. When opened, it can render a fake login page, redirect you, or submit what you type to an attacker-controlled server. That’s why “opening a file” can suddenly turn into a credential theft moment.</p>\n\n<h2>How to spot it quickly</h2>\n<p>Check the browser address: is it a real Microsoft domain? Also ask: why is this <strong>.html</strong> instead of a document? If the message adds urgency (“expires soon”, “urgent”, “view now”), treat it as a strong warning sign.</p>\n\n<h2>How to protect your Microsoft 365 account</h2>\n<p>Enable <strong>MFA</strong> (Authenticator preferred), use a <strong>password manager</strong>, and review suspicious sign-ins. For businesses, consider Security Defaults or Conditional Access. And teach teams that “HTML file ≠ document”.</p>\n\n<h2>Video</h2>\n<p>The embedded video shows the incident flow and what to look for in real life.</p>\n\n<p><strong>Key takeaway:</strong> WeTransfer itself isn’t the threat. Attackers use the trusted download flow as camouflage. The danger starts when an HTML file triggers a login prompt.</p>"
+        "title": "Restore deleted files in OneDrive",
+        "excerpt": "Here’s how to restore files and folders from the Recycle Bin in seconds.",
+        "videoUrl": "https://youtube.com/shorts/wK_7kSkfQ_g?si=54cgcVFK9d2fzl4a",
+        "content": "<h2>Problem</h2>\n<p>You deleted a file or folder in OneDrive and can’t find it anymore.</p>\n<h2>Solution (Step-by-step)</h2>\n<ol>\n<li>Click the <strong>OneDrive icon</strong> in the <strong>bottom-right</strong> corner of Windows.</li>\n<li>Select <strong>View online</strong> to open OneDrive in your browser.</li>\n<li>In the left menu, click <strong>Recycle bin</strong>.</li>\n<li>Select the deleted <strong>files or folders</strong>.</li>\n<li>Click <strong>Restore</strong>.</li>\n</ol>\n<h2>Result</h2>\n<p>Go back to your OneDrive folder — everything is back <strong>exactly where it was</strong>.</p>\n<h2>Pro tip</h2>\n<p>If you don’t see the OneDrive icon, open the Start menu and search for <strong>OneDrive</strong>, then sign in and try again.</p>"
       }
     }
   },
   {
     "id": "outlook-fragezeichen-zeichenkodierung-utf8",
-    "date": "Thu Feb 19 2026 00:00:00 GMT+0000 (Coordinated Universal Time)",
+    "date": "2026-02-19",
     "tags": [
       "outlook",
       "microsoft365",
@@ -57,30 +60,27 @@ window.SWISSPLOIT_BLOG_POSTS = [
     }
   },
   {
-    "id": "onedrive-restore-deleted-files",
-    "date": "Mon Feb 23 2026 00:00:00 GMT+0000 (Coordinated Universal Time)",
+    "id": "wetransfer-phishing-html-onedrive",
+    "date": "2026-01-27",
     "tags": [
+      "security",
+      "phishing",
+      "microsoft365",
       "onedrive",
-      "microsoft-365",
-      "windows",
-      "cloud",
-      "backup",
-      "papierkorb"
+      "outlook"
     ],
-    "thumb": "assets/blog/onedrive-restore.png",
-    "videoUrl": "",
+    "thumb": "assets/blog/h355-014.png",
+    "videoUrl": "https://www.youtube.com/watch?v=5aVeWRinSxM",
     "i18n": {
       "de": {
-        "title": "OneDrive Dateien zurückholen!",
-        "excerpt": "So stellst du Dateien und Ordner in Sekunden wieder her.",
-        "videoUrl": "",
-        "content": "<h2>Problem</h2>\n<p>Du hast in OneDrive aus Versehen eine Datei oder einen Ordner gelöscht und findest es nicht mehr.</p>\n<h2>Lösung (Schritt für Schritt)</h2>\n<ol>\n<li>Klicke auf das <strong>OneDrive-Symbol</strong> unten rechts in Windows.</li>\n<li>Wähle <strong>Online anzeigen</strong> (öffnet OneDrive im Browser).</li>\n<li>Klicke links auf <strong>Papierkorb</strong>.</li>\n<li>Markiere die gelöschten <strong>Dateien oder Ordner</strong>.</li>\n<li>Klicke auf <strong>Wiederherstellen</strong>.</li>\n</ol>\n<h2>Ergebnis</h2>\n<p>Zurück im OneDrive-Ordner ist alles wieder <strong>genau dort</strong>, wo du es gelöscht hast.</p>\n<h2>Profi-Tipp</h2>\n<p>Wenn du das OneDrive-Symbol nicht siehst: Startmenü öffnen, nach <strong>OneDrive</strong> suchen, anmelden – und nochmals prüfen. 😉</p>"
+        "title": "Angriff mit HTML",
+        "excerpt": "So wurde ein Microsoft-Konto übernommen!",
+        "content": "<p><strong>WeTransfer-Phishing</strong> ist aktuell eine der fiesesten Methoden, um <strong>Microsoft 365 / OneDrive / Outlook Accounts</strong> zu übernehmen – weil der Ablauf “normal” wirkt: Download-Link, Datei öffnen, Login.</p>\n\n<p>In diesem Beitrag zeige ich dir den Angriff anhand eines realen Falls – inklusive Video – und erkläre, <strong>warum eine HTML-Datei gefährlich sein kann</strong>, obwohl sie auf den ersten Blick harmlos aussieht.</p>\n\n<div class=\"blog-callout\">\n  <p><strong>Worum geht’s?</strong><br>\n  Ein Angreifer lockt dich über einen scheinbar legitimen WeTransfer-Link zu einem Download. Statt eines PDFs oder Dokuments bekommst du eine <strong>HTML-Datei</strong>, die ein <strong>Fake OneDrive-Login</strong> öffnet. Sobald du dort dein Passwort eingibst, kann dein Microsoft-Konto kompromittiert werden.</p>\n</div>\n\n<h2>Warum ausgerechnet WeTransfer?</h2>\n<p>Viele kennen WeTransfer als seriösen Dienst zum Teilen von Dateien. Genau dieses Vertrauen wird ausgenutzt. Ein Link zu WeTransfer löst bei vielen weniger Misstrauen aus als eine unbekannte File-Share-Seite – und genau das erhöht die Klickrate.</p>\n\n<h2>So läuft der Angriff ab</h2>\n<p>Das Muster ist fast immer gleich: Du bekommst eine Mail, die nach Dokumenten, Bestellung oder “freigegebenen Dateien” klingt. Der Link führt auf eine Seite, die wie ein normaler Download wirkt. Du lädst eine Datei herunter – häufig mit Namen wie <em>Rechnung.html</em> oder <em>Dokumente.html</em>.</p>\n\n<p>Beim Öffnen startet dein Browser und zeigt eine <strong>täuschend echte OneDrive/Microsoft-Anmeldeseite</strong>. Viele denken: “Ah, Microsoft will kurz bestätigen” – und tippen ihre Zugangsdaten ein.</p>\n\n<h2>Warum die HTML-Datei der kritische Punkt ist</h2>\n<p>Eine HTML-Datei ist im Prinzip “eine Webseite als Datei”. Öffnest du sie, kann sie eine Login-Seite nachbauen, dich weiterleiten oder Formulareingaben an einen Server senden. Das Gemeine: Ein “Dokument” wirkt harmlos – aber im Browser wird daraus plötzlich ein Login.</p>\n\n<h2>So erkennst du den Fake schnell</h2>\n<p>Schau dir die Adresse im Browser an: Ist das wirklich eine saubere Microsoft-Domain? Und frag dich: Warum ist das ein <strong>.html</strong> und kein PDF/DOCX? Wenn zusätzlich Druck aufgebaut wird (“läuft ab”, “dringend”, “sofort ansehen”), ist das fast immer ein Warnsignal.</p>\n\n<h2>So schützt du dein Microsoft 365 Konto nachhaltig</h2>\n<p>Aktiviere <strong>MFA</strong> (am besten per Authenticator-App), nutze einen <strong>Passwort-Manager</strong> und prüfe verdächtige Logins. Für KMU lohnt sich zusätzlich Security Defaults oder Conditional Access. Und ganz wichtig: Im Team kurz erklären, dass “HTML-Datei ≠ Dokument” ist.</p>\n\n<h2>Video zum Fall</h2>\n<p>Im Video zeige ich dir den Ablauf im Detail und worauf du in der Praxis achten solltest.</p>\n\n<p><strong>Takeaway:</strong> WeTransfer ist nicht “das Problem”. Der Angreifer nutzt den vertrauten Download-Flow als Tarnung. Kritisch wird es, wenn eine HTML-Datei ein Login auslöst.</p>"
       },
       "en": {
-        "title": "Restore deleted files in OneDrive",
-        "excerpt": "Here’s how to restore files and folders from the Recycle Bin in seconds.",
-        "videoUrl": "https://youtube.com/shorts/wK_7kSkfQ_g?si=54cgcVFK9d2fzl4a",
-        "content": "<h2>Problem</h2>\n<p>You deleted a file or folder in OneDrive and can’t find it anymore.</p>\n<h2>Solution (Step-by-step)</h2>\n<ol>\n<li>Click the <strong>OneDrive icon</strong> in the <strong>bottom-right</strong> corner of Windows.</li>\n<li>Select <strong>View online</strong> to open OneDrive in your browser.</li>\n<li>In the left menu, click <strong>Recycle bin</strong>.</li>\n<li>Select the deleted <strong>files or folders</strong>.</li>\n<li>Click <strong>Restore</strong>.</li>\n</ol>\n<h2>Result</h2>\n<p>Go back to your OneDrive folder — everything is back <strong>exactly where it was</strong>.</p>\n<h2>Pro tip</h2>\n<p>If you don’t see the OneDrive icon, open the Start menu and search for <strong>OneDrive</strong>, then sign in and try again.</p>"
+        "title": "HTML Attack",
+        "excerpt": "A real Microsoft account takeover!",
+        "content": "<p><strong>WeTransfer phishing</strong> is currently one of the most effective ways to compromise <strong>Microsoft 365 / OneDrive / Outlook accounts</strong> — because the flow looks normal: download link, open file, login.</p>\n\n<p>In this post I break down a real incident (with the video embedded) and explain <strong>what actually happens</strong> and <strong>why an HTML file can be dangerous</strong> even when it looks harmless.</p>\n\n<div class=\"blog-callout\">\n  <p><strong>What this attack is about</strong><br>\n  Attackers use a legit-looking WeTransfer download to deliver an <strong>HTML file</strong>. When opened, it launches a browser and shows a <strong>fake OneDrive/Microsoft login page</strong>. If you type credentials, they get captured.</p>\n</div>\n\n<h2>Why WeTransfer is used so often</h2>\n<p>WeTransfer is widely trusted. Attackers exploit that trust to increase clicks and reduce suspicion, compared to unknown file-hosting domains.</p>\n\n<h2>How the attack unfolds</h2>\n<p>You receive an email that looks like shared files, invoices, or documents. The link opens a download-style page. Instead of a PDF/DOCX, you download something like <em>invoice.html</em> or <em>documents.html</em>.</p>\n\n<p>When you open it, your browser shows a convincing <strong>OneDrive/Microsoft login</strong>. Many people assume it’s a normal cloud authentication step — and enter their password.</p>\n\n<h2>Why the HTML file is the key risk</h2>\n<p>An HTML file is basically “a web page saved as a file”. When opened, it can render a fake login page, redirect you, or submit what you type to an attacker-controlled server. That’s why “opening a file” can suddenly turn into a credential theft moment.</p>\n\n<h2>How to spot it quickly</h2>\n<p>Check the browser address: is it a real Microsoft domain? Also ask: why is this <strong>.html</strong> instead of a document? If the message adds urgency (“expires soon”, “urgent”, “view now”), treat it as a strong warning sign.</p>\n\n<h2>How to protect your Microsoft 365 account</h2>\n<p>Enable <strong>MFA</strong> (Authenticator preferred), use a <strong>password manager</strong>, and review suspicious sign-ins. For businesses, consider Security Defaults or Conditional Access. And teach teams that “HTML file ≠ document”.</p>\n\n<h2>Video</h2>\n<p>The embedded video shows the incident flow and what to look for in real life.</p>\n\n<p><strong>Key takeaway:</strong> WeTransfer itself isn’t the threat. Attackers use the trusted download flow as camouflage. The danger starts when an HTML file triggers a login prompt.</p>"
       }
     }
   }
