@@ -23,7 +23,3 @@ Go back to your OneDrive folder — everything is back **exactly where it was**.
 
 ## Pro tip
 If you don’t see the OneDrive icon, open the Start menu and search for **OneDrive**, then sign in and try again.
-
-## Related
-- OneDrive basics: sync vs. online-only files
-- Microsoft 365 backup tips for home users and small businesses
