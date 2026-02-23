@@ -45,6 +45,22 @@
     };
   }
 
+  // ✅ Friendly date formatting (expects "YYYY-MM-DD")
+  function formatDate(dateStr){
+    const s = String(dateStr || "").trim();
+    if (!s) return "";
+
+    const d = new Date(s + "T00:00:00");
+    if (Number.isNaN(d.getTime())) return s;
+
+    const locale = currentLang === "de" ? "de-CH" : "en-GB";
+    return d.toLocaleDateString(locale, {
+      year: "numeric",
+      month: "short",
+      day: "2-digit"
+    });
+  }
+
   // Video logic:
   // 1) language-specific videoUrl (post.i18n[lang].videoUrl)
   // 2) global videoUrl (post.videoUrl)
@@ -101,10 +117,9 @@
   `}
 </div>
 
-
             <div class="blog-card-body">
               <div class="blog-meta">
-                <span class="blog-date">${escapeHtml(p.date || "")}</span>
+                <span class="blog-date">${escapeHtml(formatDate(p.date || ""))}</span>
                 <span class="blog-tags" title="${escapeHtml((p.tags||[]).join(" "))}">${tags}</span>
               </div>
 
