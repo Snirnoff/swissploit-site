@@ -1,8 +1,8 @@
 ---
 id: onedrive-restore-deleted-files
 date: 2026-02-23
-title: Restore deleted files in OneDrive (Recycle Bin)
-excerpt: Deleted something in OneDrive by accident? Here’s how to restore files and folders from the Recycle Bin in seconds.
+title: Restore deleted files in OneDrive
+excerpt: Here’s how to restore files and folders from the Recycle Bin in seconds.
 tags: [onedrive, microsoft-365, windows, cloud, backup, recycle-bin]
 videoUrl: https://youtube.com/shorts/wK_7kSkfQ_g?si=54cgcVFK9d2fzl4a
 thumb: assets/blog/onedrive-restore.png
