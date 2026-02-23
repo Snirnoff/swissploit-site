@@ -61,6 +61,24 @@
     return (post?.i18n?.[currentLang]) || (post?.i18n?.de) || {};
   }
 
+  // Video logic:
+  // 1) language-specific videoUrl (post.i18n[lang].videoUrl)
+  // 2) global videoUrl (post.videoUrl)
+  // 3) fallback to any other language videoUrl (so one video shows for both languages)
+  function resolveVideoUrl(){
+    const direct = post?.i18n?.[currentLang]?.videoUrl;
+    if (direct && String(direct).trim()) return String(direct).trim();
+
+    const global = post?.videoUrl;
+    if (global && String(global).trim()) return String(global).trim();
+
+    const otherLang = currentLang === "de" ? "en" : "de";
+    const fallback = post?.i18n?.[otherLang]?.videoUrl;
+    if (fallback && String(fallback).trim()) return String(fallback).trim();
+
+    return "";
+  }
+
   function setLangUI() {
     document.documentElement.lang = currentLang;
     langBtns.forEach(b => b.classList.toggle("is-active", b.dataset.lang === currentLang));
@@ -109,8 +127,9 @@
       `;
     }
 
-    const hasVideo = !!(post.videoUrl && String(post.videoUrl).trim());
-    const embed = hasVideo ? youtubeEmbed(post.videoUrl) : null;
+    const videoUrl = resolveVideoUrl();
+    const hasVideo = !!(videoUrl && String(videoUrl).trim());
+    const embed = hasVideo ? youtubeEmbed(videoUrl) : null;
 
     const videoHtml = hasVideo
       ? (embed
@@ -125,7 +144,7 @@
               </div>
             </div>
           `
-          : `<p><a class="post-back" href="${esc(post.videoUrl)}" target="_blank" rel="noopener">${esc(ui.watch)}</a></p>`
+          : `<p><a class="post-back" href="${esc(videoUrl)}" target="_blank" rel="noopener">${esc(ui.watch)}</a></p>`
         )
       : "";
 
