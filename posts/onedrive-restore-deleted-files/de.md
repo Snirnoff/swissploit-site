@@ -1,7 +1,7 @@
 ---
 id: onedrive-restore-deleted-files
 date: 2026-02-23
-title: OneDrive Dateien wiederherstellen!
+title: OneDrive Dateien zurückholen!
 excerpt: So stellst du Dateien und Ordner in Sekunden wieder her.
 tags: [onedrive, microsoft-365, windows, cloud, backup, papierkorb]
 thumb: assets/blog/onedrive-restore.png
@@ -22,7 +22,3 @@ Zurück im OneDrive-Ordner ist alles wieder **genau dort**, wo du es gelöscht h
 
 ## Profi-Tipp
 Wenn du das OneDrive-Symbol nicht siehst: Startmenü öffnen, nach **OneDrive** suchen, anmelden – und nochmals prüfen.
-
-## Verwandte Themen
-- OneDrive Basics: Synchronisiert vs. „Nur online“
-- Backup-Tipps für Microsoft 365 (Privat & KMU)
