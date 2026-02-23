@@ -2,7 +2,7 @@
 id: onedrive-restore-deleted-files
 date: 2026-02-23
 title: OneDrive - Gelöschte Dateien wiederherstellen
-excerpt: So stellst du Dateien und Ordner in Sekunden aus dem Papierkorb wieder her.
+excerpt: So stellst du Dateien und Ordner in Sekunden wieder her.
 tags: [onedrive, microsoft-365, windows, cloud, backup, papierkorb]
 thumb: assets/blog/onedrive-restore.png
 ---
