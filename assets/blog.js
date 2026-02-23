@@ -45,6 +45,24 @@
     };
   }
 
+  // Video logic:
+  // 1) language-specific videoUrl (post.i18n[lang].videoUrl)
+  // 2) global videoUrl (post.videoUrl)
+  // 3) fallback to any other language videoUrl (so one video shows for both languages)
+  function resolveVideoUrl(post){
+    const direct = post?.i18n?.[currentLang]?.videoUrl;
+    if (direct && String(direct).trim()) return String(direct).trim();
+
+    const global = post?.videoUrl;
+    if (global && String(global).trim()) return String(global).trim();
+
+    const otherLang = currentLang === "de" ? "en" : "de";
+    const fallback = post?.i18n?.[otherLang]?.videoUrl;
+    if (fallback && String(fallback).trim()) return String(fallback).trim();
+
+    return "";
+  }
+
   function applyUiLanguage(){
     const ui = I18N_UI[currentLang] || I18N_UI.de;
 
@@ -65,8 +83,9 @@
       const tags = (p.tags || []).slice(0, 4).map(x => `#${escapeHtml(x)}`).join(" ");
       const excerpt = trimText(t.excerpt, 105);
 
-      const videoBtn = p.videoUrl
-        ? `<a class="blog-mini-btn" href="${escapeHtml(p.videoUrl)}" target="_blank" rel="noopener">▶ Video</a>`
+      const videoUrl = resolveVideoUrl(p);
+      const videoBtn = videoUrl
+        ? `<a class="blog-mini-btn" href="${escapeHtml(videoUrl)}" target="_blank" rel="noopener">▶ Video</a>`
         : "";
 
       return `
