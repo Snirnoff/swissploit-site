@@ -447,7 +447,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const links = Array.from(nav.querySelectorAll("a"));
   const header = document.querySelector(".site-header");
+
+  // +8px safety, plus a small early-activation margin for click UX
   const headerOffset = (header ? header.offsetHeight : 72) + 8;
+  const CLICK_EARLY_MARGIN = 24; // makes it activate a bit earlier after click
 
   // Blog pages: keep Blog active
   const p = (location.pathname || "").toLowerCase();
@@ -464,11 +467,21 @@ document.addEventListener("DOMContentLoaded", () => {
       const href = a.getAttribute("href") || "";
       const hash = href.includes("#") ? href.split("#")[1] : "";
       const el = hash ? document.getElementById(hash) : null;
-      return el ? { a, el } : null;
+      return el ? { a, el, hash } : null;
     })
     .filter(Boolean);
 
   if (!items.length) return;
+
+  function clearActive() {
+    links.forEach(a => a.classList.remove("is-active"));
+  }
+
+  function setActiveLink(a) {
+    if (!a) return;
+    clearActive();
+    a.classList.add("is-active");
+  }
 
   function updateActive() {
     const y = window.scrollY || document.documentElement.scrollTop || 0;
@@ -479,35 +492,51 @@ document.addEventListener("DOMContentLoaded", () => {
       if (top <= y + headerOffset) active = it;
     }
 
-    links.forEach(a => a.classList.remove("is-active"));
+    clearActive();
     if (active) active.a.classList.add("is-active");
   }
 
+  // Throttled scroll update
   let raf = 0;
   window.addEventListener("scroll", () => {
     if (raf) return;
     raf = requestAnimationFrame(() => {
       raf = 0;
-
-      // ✅ Update immediately after clicking nav links (anchor jump)
-links.forEach(a => {
-  a.addEventListener("click", () => {
-    // browser updates scroll position after the click -> run a tiny bit later
-    setTimeout(updateActive, 0);
-    setTimeout(updateActive, 80);
-  });
-});
-
-// ✅ Also update when hash changes (back/forward or programmatic)
-window.addEventListener("hashchange", () => {
-  setTimeout(updateActive, 0);
-  setTimeout(updateActive, 80);
-});
-      
       updateActive();
     });
   }, { passive: true });
 
   window.addEventListener("resize", updateActive);
+
+  // ✅ Click: instantly mark the clicked link active, then re-evaluate after the jump
+  items.forEach(it => {
+    it.a.addEventListener("click", () => {
+      setActiveLink(it.a);
+
+      // After anchor jump/smooth scroll settles, align with section-top logic
+      setTimeout(() => {
+        // small early margin improves "clicked state" even if section top is slightly above header
+        const y = window.scrollY || document.documentElement.scrollTop || 0;
+        const top = it.el.getBoundingClientRect().top + y;
+
+        if (top <= y + headerOffset + CLICK_EARLY_MARGIN) {
+          setActiveLink(it.a);
+        } else {
+          // fallback to computed active if jump didn't land exactly
+          updateActive();
+        }
+      }, 0);
+
+      setTimeout(updateActive, 120);
+    });
+  });
+
+  // ✅ Hash changes (back/forward) should update immediately too
+  window.addEventListener("hashchange", () => {
+    setTimeout(updateActive, 0);
+    setTimeout(updateActive, 120);
+  });
+
+  // Init
   updateActive();
 })();
