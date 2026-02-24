@@ -4,6 +4,9 @@ import fg from "fast-glob";
 import matter from "gray-matter";
 import { marked } from "marked";
 
+const SITEMAP_FILE = path.join(ROOT, "sitemap.xml");
+const BASE_URL = "https://swissploit.ch";
+
 const ROOT = process.cwd();
 const POSTS_DIR = path.join(ROOT, "posts");
 const OUT_FILE = path.join(ROOT, "assets", "blog-posts.js");
@@ -133,6 +136,20 @@ async function main() {
   const out = `// assets/blog-posts.js\n// AUTO-GENERATED FILE. Do not edit directly.\n// Edit Markdown files in /posts and run: npm run build:posts\n\nwindow.SWISSPLOIT_BLOG_POSTS = ${JSON.stringify(posts, null, 2)};\n`;
   await fs.writeFile(OUT_FILE, out, "utf8");
 
+    const urls = [
+    `${BASE_URL}/`,
+    `${BASE_URL}/blog.html`,
+    ...posts.map(p => `${BASE_URL}/blog-post.html?id=${encodeURIComponent(p.id)}`)
+  ];
+
+  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n` +
+    `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
+    urls.map(u => `  <url><loc>${u}</loc></url>`).join("\n") +
+    `\n</urlset>\n`;
+
+  await fs.writeFile(SITEMAP_FILE, sitemap, "utf8");
+  console.log(`✅ Generated ${SITEMAP_FILE}`);
+
   console.log(`✅ Generated ${OUT_FILE} (${posts.length} posts)`);
 }
 
@@ -140,3 +157,5 @@ main().catch((err) => {
   console.error("❌ build-posts failed:\n", err);
   process.exit(1);
 });
+
+
