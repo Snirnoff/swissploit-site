@@ -448,7 +448,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const links = Array.from(nav.querySelectorAll("a"));
   const header = document.querySelector(".site-header");
 
-  const headerOffset = (header ? header.offsetHeight : 72) + 50;
+  const headerOffset = (header ? header.offsetHeight : 72) + 70;
 
   // Blog pages: keep Blog active
   const p = (location.pathname || "").toLowerCase();
