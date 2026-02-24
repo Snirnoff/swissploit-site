@@ -726,3 +726,21 @@ body.is-leaving{
   font-weight: 700;
 }
 
+
+/* ===== Ensure theme toggle is clickable ===== */
+#themeToggle {
+  position: relative;
+  z-index: 9999;
+  pointer-events: auto;
+}
+
+.site-header,
+.site-header * {
+  pointer-events: auto;
+}
+
+/* Falls du ein Overlay im Header hast (z.B. ::before / ::after) */
+.site-header::before,
+.site-header::after {
+  pointer-events: none;
+}
