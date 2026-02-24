@@ -440,62 +440,58 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 })();
 
-
-// ===== NAV ACTIVE SECTION (Click/Hash based, no scroll spy) =====
+// ===== NAV ACTIVE SECTION (robust: active only after section top reaches header) =====
 (function () {
   const nav = document.querySelector(".site-header .nav");
   if (!nav) return;
 
   const links = Array.from(nav.querySelectorAll("a"));
+  const header = document.querySelector(".site-header");
+  const headerOffset = (header ? header.offsetHeight : 72) + 8;
 
-  function clearActive() {
-    links.forEach((a) => a.classList.remove("is-active"));
+  // Blog pages: keep Blog active
+  const p = (location.pathname || "").toLowerCase();
+  if (p.includes("blog.html") || p.includes("blog-post.html")) {
+    const blogLink = links.find(a => (a.getAttribute("href") || "").toLowerCase().includes("blog.html"));
+    links.forEach(a => a.classList.remove("is-active"));
+    if (blogLink) blogLink.classList.add("is-active");
+    return;
   }
 
-  function setActiveLink(a) {
-    if (!a) return;
-    clearActive();
-    a.classList.add("is-active");
+  // Map links with hashes to sections on the page
+  const items = links
+    .map(a => {
+      const href = a.getAttribute("href") || "";
+      const hash = href.includes("#") ? href.split("#")[1] : "";
+      const el = hash ? document.getElementById(hash) : null;
+      return el ? { a, el } : null;
+    })
+    .filter(Boolean);
+
+  if (!items.length) return;
+
+  function updateActive() {
+    const y = window.scrollY || document.documentElement.scrollTop || 0;
+
+    let active = null;
+    for (const it of items) {
+      const top = it.el.getBoundingClientRect().top + y;
+      if (top <= y + headerOffset) active = it;
+    }
+
+    links.forEach(a => a.classList.remove("is-active"));
+    if (active) active.a.classList.add("is-active");
   }
 
-  function setActiveFromUrl() {
-    const path = (location.pathname || "").toLowerCase();
-
-    // Blog pages: activate Blog link
-    if (path.includes("blog.html") || path.includes("blog-post.html")) {
-      const blogLink = links.find((a) => (a.getAttribute("href") || "").toLowerCase().includes("blog.html"));
-      if (blogLink) setActiveLink(blogLink);
-      return;
-    }
-
-    // Homepage sections: activate based on current hash (only)
-    const hash = (location.hash || "").trim();
-    if (hash) {
-      const target = links.find((a) => (a.getAttribute("href") || "").includes(hash));
-      if (target) setActiveLink(target);
-      return;
-    }
-
-    // No hash: keep whatever user last clicked (if saved), otherwise don't force anything
-    const saved = sessionStorage.getItem("swissploit-active-nav");
-    if (saved) {
-      const target = links.find((a) => (a.getAttribute("href") || "") === saved);
-      if (target) setActiveLink(target);
-    }
-  }
-
-  // On click: set active and remember (no scroll logic)
-  links.forEach((a) => {
-    a.addEventListener("click", () => {
-      setActiveLink(a);
-      sessionStorage.setItem("swissploit-active-nav", a.getAttribute("href") || "");
-      // If it has a hash, the URL will update; we'll also handle hashchange
+  let raf = 0;
+  window.addEventListener("scroll", () => {
+    if (raf) return;
+    raf = requestAnimationFrame(() => {
+      raf = 0;
+      updateActive();
     });
-  });
+  }, { passive: true });
 
-  // If URL hash changes (e.g. back/forward), keep menu consistent
-  window.addEventListener("hashchange", setActiveFromUrl);
-
-  // Init
-  setActiveFromUrl();
+  window.addEventListener("resize", updateActive);
+  updateActive();
 })();
