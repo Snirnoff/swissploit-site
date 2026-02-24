@@ -441,55 +441,61 @@ document.addEventListener("DOMContentLoaded", () => {
 })();
 
 
+// ===== NAV ACTIVE SECTION (Click/Hash based, no scroll spy) =====
+(function () {
+  const nav = document.querySelector(".site-header .nav");
+  if (!nav) return;
 
-// ===== NAV ACTIVE SECTION (Scroll Spy) =====
-(function(){
-  const nav = document.querySelector('.site-header .nav');
-  if(!nav) return;
+  const links = Array.from(nav.querySelectorAll("a"));
 
-  const links = Array.from(nav.querySelectorAll('a'));
-  // Map: sectionId -> link
-  const map = new Map();
+  function clearActive() {
+    links.forEach((a) => a.classList.remove("is-active"));
+  }
 
-  links.forEach(a => {
-    const href = a.getAttribute('href') || '';
-    const hashIndex = href.indexOf('#');
-    if(hashIndex === -1) return;
-    const id = href.slice(hashIndex + 1).trim();
-    if(!id) return;
+  function setActiveLink(a) {
+    if (!a) return;
+    clearActive();
+    a.classList.add("is-active");
+  }
 
-    const section = document.getElementById(id);
-    if(!section) return; // only on pages where section exists
-    map.set(id, a);
+  function setActiveFromUrl() {
+    const path = (location.pathname || "").toLowerCase();
+
+    // Blog pages: activate Blog link
+    if (path.includes("blog.html") || path.includes("blog-post.html")) {
+      const blogLink = links.find((a) => (a.getAttribute("href") || "").toLowerCase().includes("blog.html"));
+      if (blogLink) setActiveLink(blogLink);
+      return;
+    }
+
+    // Homepage sections: activate based on current hash (only)
+    const hash = (location.hash || "").trim();
+    if (hash) {
+      const target = links.find((a) => (a.getAttribute("href") || "").includes(hash));
+      if (target) setActiveLink(target);
+      return;
+    }
+
+    // No hash: keep whatever user last clicked (if saved), otherwise don't force anything
+    const saved = sessionStorage.getItem("swissploit-active-nav");
+    if (saved) {
+      const target = links.find((a) => (a.getAttribute("href") || "") === saved);
+      if (target) setActiveLink(target);
+    }
+  }
+
+  // On click: set active and remember (no scroll logic)
+  links.forEach((a) => {
+    a.addEventListener("click", () => {
+      setActiveLink(a);
+      sessionStorage.setItem("swissploit-active-nav", a.getAttribute("href") || "");
+      // If it has a hash, the URL will update; we'll also handle hashchange
+    });
   });
 
-  // If we're not on the homepage sections, do nothing (prevents overriding Blog state)
-  if(map.size === 0) return;
+  // If URL hash changes (e.g. back/forward), keep menu consistent
+  window.addEventListener("hashchange", setActiveFromUrl);
 
-  const sections = Array.from(map.keys()).map(id => document.getElementById(id)).filter(Boolean);
-
-  function setActive(id){
-    links.forEach(a => a.classList.remove('is-active'));
-    const activeLink = map.get(id);
-    if(activeLink) activeLink.classList.add('is-active');
-  }
-
-  const obs = new IntersectionObserver((entries)=>{
-    // take the most visible section
-    const visible = entries
-      .filter(e => e.isIntersecting)
-      .sort((a,b)=> (b.intersectionRatio || 0) - (a.intersectionRatio || 0))[0];
-
-    if(visible && visible.target && visible.target.id){
-      setActive(visible.target.id);
-    }
-  }, { threshold: [0.15, 0.3, 0.45, 0.6] });
-
-  sections.forEach(s => obs.observe(s));
-
-  // On load, if hash is set, activate it
-  if(location.hash){
-    const id = location.hash.replace('#','');
-    if(map.has(id)) setActive(id);
-  }
+  // Init
+  setActiveFromUrl();
 })();
