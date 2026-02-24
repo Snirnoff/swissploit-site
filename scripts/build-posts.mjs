@@ -4,12 +4,13 @@ import fg from "fast-glob";
 import matter from "gray-matter";
 import { marked } from "marked";
 
-const SITEMAP_FILE = path.join(ROOT, "sitemap.xml");
-const BASE_URL = "https://swissploit.ch";
-
 const ROOT = process.cwd();
 const POSTS_DIR = path.join(ROOT, "posts");
 const OUT_FILE = path.join(ROOT, "assets", "blog-posts.js");
+
+const BASE_URL = "https://swissploit.ch";
+const SITEMAP_FILE = path.join(ROOT, "sitemap.xml");
+
 
 function asArray(v) {
   if (!v) return [];
