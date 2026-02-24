@@ -488,6 +488,22 @@ document.addEventListener("DOMContentLoaded", () => {
     if (raf) return;
     raf = requestAnimationFrame(() => {
       raf = 0;
+
+      // ✅ Update immediately after clicking nav links (anchor jump)
+links.forEach(a => {
+  a.addEventListener("click", () => {
+    // browser updates scroll position after the click -> run a tiny bit later
+    setTimeout(updateActive, 0);
+    setTimeout(updateActive, 80);
+  });
+});
+
+// ✅ Also update when hash changes (back/forward or programmatic)
+window.addEventListener("hashchange", () => {
+  setTimeout(updateActive, 0);
+  setTimeout(updateActive, 80);
+});
+      
       updateActive();
     });
   }, { passive: true });
