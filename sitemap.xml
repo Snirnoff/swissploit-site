@@ -1,22 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <!-- Main pages -->
-  <url>
-    <loc>https://swissploit.ch/</loc>
-    <priority>1.0</priority>
-  </url>
-
-  <url>
-    <loc>https://swissploit.ch/blog.html</loc>
-    <priority>0.9</priority>
-  </url>
-
-  <!-- Blog posts (add one <url> per post id) -->
-  <!-- Example: -->
-  <!--
-  <url>
-    <loc>https://swissploit.ch/blog-post.html?id=onedrive-restore-deleted-files</loc>
-    <priority>0.8</priority>
-  </url>
-  -->
+  <url><loc>https://swissploit.ch/</loc></url>
+  <url><loc>https://swissploit.ch/blog.html</loc></url>
+  <url><loc>https://swissploit.ch/blog-post.html?id=onedrive-restore-deleted-files</loc></url>
+  <url><loc>https://swissploit.ch/blog-post.html?id=outlook-fragezeichen-zeichenkodierung-utf8</loc></url>
+  <url><loc>https://swissploit.ch/blog-post.html?id=wetransfer-phishing-html-onedrive</loc></url>
 </urlset>
