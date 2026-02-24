@@ -440,7 +440,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 })();
 
-// ===== NAV ACTIVE SECTION (robust: active only after section top reaches header) =====
+// ===== NAV ACTIVE SECTION (robust: click locks active until anchor jump finishes) =====
 (function () {
   const nav = document.querySelector(".site-header .nav");
   if (!nav) return;
@@ -448,9 +448,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const links = Array.from(nav.querySelectorAll("a"));
   const header = document.querySelector(".site-header");
 
-  // +8px safety, plus a small early-activation margin for click UX
   const headerOffset = (header ? header.offsetHeight : 72) + 8;
-  const CLICK_EARLY_MARGIN = 24; // makes it activate a bit earlier after click
 
   // Blog pages: keep Blog active
   const p = (location.pathname || "").toLowerCase();
@@ -461,7 +459,6 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  // Map links with hashes to sections on the page
   const items = links
     .map(a => {
       const href = a.getAttribute("href") || "";
@@ -483,7 +480,18 @@ document.addEventListener("DOMContentLoaded", () => {
     a.classList.add("is-active");
   }
 
+  // Lock to prevent updateActive() from overriding click state during anchor jump
+  let lockedUntil = 0;
+  function lock(ms = 450) {
+    lockedUntil = Date.now() + ms;
+  }
+  function isLocked() {
+    return Date.now() < lockedUntil;
+  }
+
   function updateActive() {
+    if (isLocked()) return;
+
     const y = window.scrollY || document.documentElement.scrollTop || 0;
 
     let active = null;
@@ -506,35 +514,29 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }, { passive: true });
 
-  window.addEventListener("resize", updateActive);
+  window.addEventListener("resize", () => updateActive());
 
-  // ✅ Click: instantly mark the clicked link active, then re-evaluate after the jump
+  // ✅ Click: set active immediately and lock updates until jump is done
   items.forEach(it => {
     it.a.addEventListener("click", () => {
       setActiveLink(it.a);
+      lock(650); // long enough for smooth scroll + transition
 
-      // After anchor jump/smooth scroll settles, align with section-top logic
+      // After the browser has moved, unlock & recompute once
       setTimeout(() => {
-        // small early margin improves "clicked state" even if section top is slightly above header
-        const y = window.scrollY || document.documentElement.scrollTop || 0;
-        const top = it.el.getBoundingClientRect().top + y;
-
-        if (top <= y + headerOffset + CLICK_EARLY_MARGIN) {
-          setActiveLink(it.a);
-        } else {
-          // fallback to computed active if jump didn't land exactly
-          updateActive();
-        }
-      }, 0);
-
-      setTimeout(updateActive, 120);
+        lockedUntil = 0;
+        updateActive();
+      }, 700);
     });
   });
 
-  // ✅ Hash changes (back/forward) should update immediately too
+  // ✅ Back/forward: lock briefly so it doesn't flash wrong
   window.addEventListener("hashchange", () => {
-    setTimeout(updateActive, 0);
-    setTimeout(updateActive, 120);
+    lock(400);
+    setTimeout(() => {
+      lockedUntil = 0;
+      updateActive();
+    }, 450);
   });
 
   // Init
