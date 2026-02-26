@@ -1,7 +1,7 @@
 ---
 id: notfall-checkliste-phishing-microsoft-365
 date: "2026-02-26"
-title: "Phishing-Notfall-Checkliste"
+title: "Phishing-Notfall-Checkliste für Microsoft 365 & Entra ID"
 excerpt: "Phishing passiert schnell: Diese Notfall-Checkliste für Microsoft 365/Entra ID zeigt, wie du Konten sofort absicherst und Folgeschäden minimierst."
 tags: [phishing, incident-response, microsoft-365, entra-id, azure-ad, exchange-online, mfa, conditional-access, audit-logs, onedrive]
 thumb: ""
@@ -31,9 +31,16 @@ Konto als **kompromittiert** behandeln. **Vollständige Checkliste** durchlaufen
 2. **Alle aktiven Sitzungen abmelden**
    - **Microsoft 365 admin center:** User auswählen → **“Sign out from all sessions”**
    - Zusätzlich in **Entra ID:** User auswählen → **Revoke sessions**
-   
-   ![Microsoft 365: User von allen Sessions abmelden (Sign out from all sessions)](assets/blog/image-20260226-125126.webp)
-   ![Entra ID: Sessions des Users widerrufen (Revoke sessions)](assets/blog/image-20260226-125428.webp)
+
+<figure class="post-figure">
+  <img src="assets/blog/image-20260226-125126.webp" alt="Microsoft 365 Admin Center: Sign out from all sessions">
+  <figcaption>Im Microsoft 365 Admin Center kannst du den User über „Sign out from all sessions“ aus allen aktiven Sessions abmelden.</figcaption>
+</figure>
+
+<figure class="post-figure">
+  <img src="assets/blog/image-20260226-125428.webp" alt="Entra ID: Revoke sessions beim Benutzer">
+  <figcaption>Zusätzlich in Entra ID: Sessions des Benutzers über „Revoke sessions“ widerrufen.</figcaption>
+</figure>
 
 3. **MFA (Multi-Faktor-Authentifizierung) überprüfen**
    Prüfe in **Entra ID → User → Authentication methods**:
@@ -43,7 +50,10 @@ Konto als **kompromittiert** behandeln. **Vollständige Checkliste** durchlaufen
    ➜ **Unbekannte Methoden sofort entfernen**  
    ➜ MFA bei Bedarf **komplett neu registrieren** lassen
 
-   ![Entra ID: Authentication methods prüfen und unbekannte MFA-Methoden entfernen](assets/blog/image-20260226-125651.webp)
+<figure class="post-figure">
+  <img src="assets/blog/image-20260226-125651.webp" alt="Entra ID: Authentication methods prüfen">
+  <figcaption>Unter „Authentication methods“ erkennst du schnell unbekannte MFA-Methoden und kannst sie entfernen.</figcaption>
+</figure>
 
 4. **Mailbox-Regeln und Weiterleitungen prüfen**
    In **Exchange Online** kontrollieren:
@@ -62,7 +72,10 @@ Konto als **kompromittiert** behandeln. **Vollständige Checkliste** durchlaufen
    - **Shared by you**
    - Nach **Recently shared** sortieren
 
-   ![OneDrive: Freigaben „Shared by you“ nach „Recently shared“ sortieren](assets/blog/image-20260226-125948.webp)
+<figure class="post-figure">
+  <img src="assets/blog/image-20260226-125948.webp" alt="OneDrive: Shared by you nach Recently shared sortieren">
+  <figcaption>„Shared by you“ nach „Recently shared“ sortieren, um verdächtige Freigaben schnell zu finden.</figcaption>
+</figure>
 
 6. **Endgeräte prüfen**
    - Malware-Scan durchführen (EDR/Defender/AV)
@@ -78,7 +91,10 @@ Konto als **kompromittiert** behandeln. **Vollständige Checkliste** durchlaufen
    - „Impossible travel“-Muster / riskante Sign-ins
    - Auffällige User-Agent-/Device-Wechsel
 
-   ![Entra ID: Sign-in logs prüfen (ungewöhnliche Standorte, Impossible Travel)](assets/blog/image-20260226-123042.webp)
+<figure class="post-figure">
+  <img src="assets/blog/image-20260226-123042.webp" alt="Entra ID: Sign-in logs prüfen">
+  <figcaption>In den Sign-in Logs erkennst du auffällige Standorte und riskante Anmeldemuster (z. B. Impossible Travel).</figcaption>
+</figure>
 
 8. **Azure/Entra Rollen & Admin-Aktivitäten prüfen**
    - Wurden Rollen zugewiesen?
@@ -98,7 +114,10 @@ Konto als **kompromittiert** behandeln. **Vollständige Checkliste** durchlaufen
      - Wurden **Named Locations** hinzugefügt?
    Tipp: In Entra nach **Erstellt/Geändert** sortieren, um Änderungen schnell zu sehen.
 
-   ![Entra ID: Risk-based Conditional Access und Named locations auf Änderungen prüfen](assets/blog/image-20260226-124257.webp)
+<figure class="post-figure">
+  <img src="assets/blog/image-20260226-124257.webp" alt="Entra ID: Risk-based Conditional Access und Named locations prüfen">
+  <figcaption>Sortiere Policies nach „Erstellt/Geändert“, und prüfe Named locations auf neue Einträge.</figcaption>
+</figure>
 
 11. **Registrierte Apps / Enterprise Applications prüfen (OAuth-Consent)**
    In **Entra ID → User → Applications** (bzw. Enterprise Applications):
@@ -106,7 +125,10 @@ Konto als **kompromittiert** behandeln. **Vollständige Checkliste** durchlaufen
    - Gibt es neue OAuth-Consent-Einträge (User/Admin Consent)?
    - Unbekannte Anwendungen entfernen, Admin-Consent validieren
 
-   ![Entra ID: User Applications – Consent und Berechtigungen prüfen](assets/blog/image-20260226-123558.webp)
+<figure class="post-figure">
+  <img src="assets/blog/image-20260226-123558.webp" alt="Entra ID: User Applications und Consent prüfen">
+  <figcaption>Unter „Applications“ siehst du, welchen Apps der Benutzer zugestimmt hat – inklusive Berechtigungen und Consent-Typ.</figcaption>
+</figure>
 
 12. **Optional – je nach Schweregrad**
    - Passwort-Reset für alle Admin-Konten
