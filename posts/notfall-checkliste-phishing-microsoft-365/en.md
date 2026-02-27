@@ -1,7 +1,7 @@
 ---
 id: notfall-checkliste-phishing-microsoft-365
 date: "2026-02-26"
-title: "Phishing Emergency Checklist for Microsoft 365 & Entra ID"
+title: "Phishing Checkliste"
 excerpt: "Phishing happens fast: this Microsoft 365/Entra ID emergency checklist shows how to secure accounts immediately and minimize follow-up damage."
 tags: [phishing, incident-response, microsoft-365, entra-id, azure-ad, exchange-online, mfa, conditional-access, audit-logs, onedrive]
 thumb: "assets/blog/Laptop-repair-in-phishing-crisis.webp"
