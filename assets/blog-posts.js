@@ -18,7 +18,7 @@ window.SWISSPLOIT_BLOG_POSTS = [
       "audit-logs",
       "onedrive"
     ],
-    "thumb": "",
+    "thumb": "assets/blog/Laptop-repair-in-phishing-crisis.webp",
     "videoUrl": "",
     "i18n": {
       "de": {
