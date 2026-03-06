@@ -751,15 +751,26 @@ body.is-leaving{
   blog short video 
    ========================================================= */
 
+/* ===== YouTube Shorts: force real 9:16 (override legacy 16:9 embed CSS) ===== */
+.video-embed.video-embed--shorts{
+  /* override old 16:9 padding hack if present */
+  padding-top: 0 !important;
+  height: auto !important;
 
-/* Shorts: 9:16 instead of 16:9 */
-.video-embed.video-embed--shorts {
-  max-width: 420px;           /* sieht nice aus auf Desktop */
+  position: relative;
+  width: 100%;
+  max-width: 420px;           /* desktop: nice centered */
   margin: 0 auto;
-  aspect-ratio: 9 / 16;
+
+  aspect-ratio: 9 / 16;       /* real shorts ratio */
+  overflow: hidden;
+  border-radius: 14px;        /* optional – looks nice */
 }
 
-.video-embed.video-embed--shorts iframe {
+.video-embed.video-embed--shorts iframe{
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
+}
 }
