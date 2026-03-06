@@ -47,21 +47,27 @@
     return `${dd}.${mm}.${yyyy}`;
   }
 
-  function youtubeEmbed(url) {
+  // ✅ Return embed URL + detect Shorts
+  function youtubeEmbedInfo(url) {
     try {
       const u = new URL(url);
 
+      // Standard watch?v=
       const v = u.searchParams.get("v");
-      if (u.hostname.includes("youtube.com") && v) return `https://www.youtube.com/embed/${v}`;
-
-      if (u.hostname.includes("youtu.be")) {
-        const vid = u.pathname.replace("/", "").trim();
-        if (vid) return `https://www.youtube.com/embed/${vid}`;
+      if (u.hostname.includes("youtube.com") && v) {
+        return { embed: `https://www.youtube.com/embed/${v}`, isShort: false };
       }
 
+      // youtu.be/<id>
+      if (u.hostname.includes("youtu.be")) {
+        const vid = u.pathname.replace("/", "").trim();
+        if (vid) return { embed: `https://www.youtube.com/embed/${vid}`, isShort: false };
+      }
+
+      // youtube.com/shorts/<id>
       if (u.hostname.includes("youtube.com") && u.pathname.startsWith("/shorts/")) {
         const vid = u.pathname.split("/shorts/")[1]?.split(/[?&#/]/)[0];
-        if (vid) return `https://www.youtube.com/embed/${vid}`;
+        if (vid) return { embed: `https://www.youtube.com/embed/${vid}`, isShort: true };
       }
     } catch (e) {}
     return null;
@@ -139,13 +145,16 @@
 
     const videoUrl = resolveVideoUrl();
     const hasVideo = !!(videoUrl && String(videoUrl).trim());
-    const embed = hasVideo ? youtubeEmbed(videoUrl) : null;
+
+    const info = hasVideo ? youtubeEmbedInfo(videoUrl) : null;
+    const embed = info?.embed || null;
+    const isShort = !!info?.isShort;
 
     const videoHtml = hasVideo
       ? (embed
           ? `
             <div class="post-video">
-              <div class="video-embed">
+              <div class="video-embed ${isShort ? "video-embed--shorts" : ""}">
                 <iframe
                   src="${esc(embed)}"
                   title="${esc(tTitle || "Video")}"
