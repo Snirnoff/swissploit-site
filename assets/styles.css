@@ -762,7 +762,7 @@ body.is-leaving{
   aspect-ratio: 9 / 16 !important;
   height: auto !important;
 
-  width: min(420px, 100%);
+  width: min(210px, 100%);
   margin: 0 auto;
 
   position: relative;
