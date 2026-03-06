@@ -750,19 +750,22 @@ body.is-leaving{
 /* =========================================================
   blog short video 
    ========================================================= */
-
-/* ===== BLOG: YouTube Shorts wirklich 9:16 (smaller) ===== */
+/* ===== BLOG: YouTube Shorts (kleiner & garantiert) ===== */
 .post-video{
   display: flex;
   justify-content: center;
+  align-items: flex-start;
 }
 
 .video-embed.video-embed--shorts{
+  /* erzwinge echtes 9:16 + fixe kleinere Breite */
   aspect-ratio: 9 / 16 !important;
-  height: auto !important;
 
-  width: min(260px, 100%);   /* Desktop: kleiner */
-  margin: 0 auto;
+  width: 220px !important;       /* <- kleiner machen (half-ish) */
+  max-width: 220px !important;   /* <- verhindert Stretch auf 100% */
+  flex: 0 0 220px !important;    /* <- verhindert Flex-Stretch */
+
+  margin: 0 auto !important;
 
   position: relative;
   overflow: hidden;
@@ -778,9 +781,11 @@ body.is-leaving{
   border: 0;
 }
 
-/* Mobile: wieder etwas grösser */
+/* Mobile optional etwas grösser */
 @media (max-width: 700px){
   .video-embed.video-embed--shorts{
-    width: min(340px, 100%);
+    width: 280px !important;
+    max-width: 280px !important;
+    flex-basis: 280px !important;
   }
 }
