@@ -1,8 +1,8 @@
 ---
 id: mfa-aktivieren-microsoft-authenticator
 date: "2026-03-05"
-title: "MFA aktivieren mit Microsoft Authenticator: Konto in Minuten absichern"
-excerpt: "Wenn jemand dein Microsoft-Passwort kennt, kann er dein Konto übernehmen. So aktivierst du MFA mit Microsoft Authenticator in wenigen Minuten – Schritt für Schritt."
+title: "MFA aktivieren: Microsoft Authenticator"
+excerpt: "So aktivierst du MFA mit Microsoft Authenticator in wenigen Minuten – Schritt für Schritt."
 tags: [mfa, microsoft-authenticator, konto-sicherheit, microsoft-konto, entra-id, two-factor-authentication, security, identity, phishing, login]
 thumb: assets/blog/021_tn.webp
 videoUrl: "https://youtube.com/shorts/Sg2nFP_aDu0?si=r5M1WGa254fFR6c-"
@@ -91,4 +91,4 @@ Aktiviere nach dem Setup **mindestens eine Backup-Option** (z. B. zweite Methode
 
 Wenn du das Gefühl hast, in einen Angriff oder eine Phishing-Mail reingefallen zu sein (z. B. Link geklickt oder Passwort eingegeben), dann arbeite diese Sofortmassnahmen durch:
 
-- [Phishing-Notfall-Checkliste für Microsoft 365 & Entra ID](/blog/notfall-checkliste-phishing-microsoft-365)
+- [Phishing-Notfall-Checkliste für Microsoft 365 & Entra ID](https://swissploit.ch/blog-post.html?id=notfall-checkliste-phishing-microsoft-365)
