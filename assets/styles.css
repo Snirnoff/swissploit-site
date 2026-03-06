@@ -751,20 +751,24 @@ body.is-leaving{
   blog short video 
    ========================================================= */
 
-/* ===== YouTube Shorts: force real 9:16 (override legacy 16:9 embed CSS) ===== */
+/* ===== BLOG: YouTube Shorts wirklich 9:16 ===== */
+.post-video{
+  display: flex;
+  justify-content: center;
+}
+
 .video-embed.video-embed--shorts{
-  /* override old 16:9 padding hack if present */
-  padding-top: 0 !important;
+  /* kill any legacy sizing */
+  aspect-ratio: 9 / 16 !important;
   height: auto !important;
 
-  position: relative;
-  width: 100%;
-  max-width: 420px;           /* desktop: nice centered */
+  width: min(420px, 100%);
   margin: 0 auto;
 
-  aspect-ratio: 9 / 16;       /* real shorts ratio */
+  position: relative;
   overflow: hidden;
-  border-radius: 14px;        /* optional – looks nice */
+  border-radius: 14px;
+  background: #000;
 }
 
 .video-embed.video-embed--shorts iframe{
@@ -772,5 +776,5 @@ body.is-leaving{
   inset: 0;
   width: 100%;
   height: 100%;
-}
+  border: 0;
 }
