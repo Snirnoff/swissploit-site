@@ -4,7 +4,7 @@ date: "2026-03-11"
 title: "CyberSeal erklärt: Für wen das Label gedacht ist – und was es wirklich aussagt"
 excerpt: "CyberSeal ist ein Schweizer Gütesiegel für IT-Dienstleister im KMU-Umfeld. Was es wirklich bedeutet, welche Anforderungen dahinterstehen – und was nicht."
 tags: [cybersecurity, schweiz, kmu, it-dienstleister, cyberseal, audit, patch-management, backup, incident-response, datenschutz]
-thumb: ""
+thumb: "assets/blog/cyberseal_TN.webp"
 ---
 
 CyberSeal ist ein Schweizer Gütesiegel für IT-Dienstleister, die IT-Infrastrukturen für kleine und mittlere Unternehmen (KMU) aufbauen, betreiben oder mitverantworten. Es wurde geschaffen, weil viele KMU ihre IT-Sicherheit nicht alleine abdecken können – und in der Praxis stark von ihrem externen IT-Partner abhängig sind.
