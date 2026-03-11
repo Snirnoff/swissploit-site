@@ -101,8 +101,8 @@ Nicht direkt. Zwar beschäftigen sich beide mit Informationssicherheit, jedoch m
 - **CyberSeal**: fokussiert auf wirksame Cybersecurity-Massnahmen im KMU-Alltag, praxisnah und Schweizer Kontext
 
 <div class="callout info">
-  <div class="callout-title"><strong>ℹ️ Merksatz</strong></div>
-  Die ISO 27001 bewertet ein umfassendes Managementsystem. CyberSeal hingegen prüft, ob die wichtigsten Sicherheitsgrundlagen für KMU wirksam umgesetzt sind.
+  <div class="callout-title"><strong>ℹ️ Merke:</strong></div>
+  Die ISO 27001 bewertet ein umfassendes Managementsystem. CyberSeal hingegen prüft, ob die wichtigsten Sicherheitsgrundlagen wirksam umgesetzt sind.
 </div>
 
 ## Fazit
