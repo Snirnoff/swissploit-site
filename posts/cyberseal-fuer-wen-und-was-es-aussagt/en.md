@@ -4,7 +4,7 @@ date: "2026-03-11"
 title: "CyberSeal explained: Who the label is for – and what it really proves"
 excerpt: "CyberSeal is a Swiss quality label for IT service providers serving SMBs. What it actually means, what’s required, and what it does not guarantee."
 tags: [cybersecurity, switzerland, smb, it-service-provider, cyberseal, audit, patch-management, backup, incident-response, data-protection]
-thumb: ""
+thumb: "assets/blog/cyberseal_TN.webp"
 ---
 
 CyberSeal is a Swiss quality label for IT service providers who build, operate, or share responsibility for IT infrastructures in small and medium-sized businesses (SMBs). It exists because many SMBs can’t ensure cybersecurity alone and depend heavily on external IT partners.
