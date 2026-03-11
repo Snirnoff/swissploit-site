@@ -77,9 +77,11 @@ Meist ja (SMS/Anruf), aber **Authenticator ist empfehlenswert**, weil bequemer u
 **Was, wenn ich mein Handy verliere?**  
 Lege (falls möglich) eine zweite Methode/Backup an (z. B. zweites Gerät oder alternative Methode), damit du nicht ausgesperrt wirst.
 
-## Profi-Tipp
+<div class="callout tip">
+  <div class="callout-title"><strong>💡 Tipp</strong></div>
+  Aktiviere nach dem Setup <strong>mindestens eine Backup-Option</strong> (z. B. zweite Methode), damit du bei Gerätewechsel oder Verlust weiterhin Zugriff hast.
+</div>
 
-Aktiviere nach dem Setup **mindestens eine Backup-Option** (z. B. zweite Methode), damit du bei Gerätewechsel oder Verlust weiterhin Zugriff hast.
 
 ## Kurzfassung
 
