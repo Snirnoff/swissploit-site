@@ -789,3 +789,172 @@ body.is-leaving{
     flex-basis: 280px !important;
   }
 }
+
+
+/* =========================================================
+   BLOG POST REDESIGN – readability + sections + callouts
+   ========================================================= */
+
+.post-article{
+  max-width: 78ch;
+  margin: 0 auto;
+  text-align: left;
+  font-size: 18px;
+  line-height: 1.75;
+}
+
+/* Headings */
+.post-article h2{
+  margin: 42px 0 14px;
+  padding-top: 18px;
+  border-top: 1px solid var(--border);
+  font-size: clamp(22px, 2.6vw, 30px);
+  line-height: 1.25;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.post-article h3{
+  margin: 26px 0 10px;
+  font-size: 20px;
+  line-height: 1.3;
+  opacity: .95;
+}
+
+/* Optional: emoji marker in headings if user uses them */
+.post-article h2 .h-emoji,
+.post-article h3 .h-emoji{
+  font-size: 1.05em;
+}
+
+/* Paragraph spacing */
+.post-article p{
+  margin: 0 0 14px;
+  color: color-mix(in oklab, var(--fg) 92%, transparent);
+}
+
+/* Lists */
+.post-article ul, .post-article ol{
+  margin: 10px 0 18px 22px;
+  padding: 0;
+}
+.post-article li{
+  margin: 8px 0;
+}
+.post-article ol li::marker{
+  font-weight: 800;
+  color: var(--accent);
+}
+
+/* Links */
+.post-article a{
+  color: color-mix(in oklab, var(--accent) 90%, var(--fg));
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.post-article a:hover{
+  opacity: .9;
+}
+
+/* Horizontal rule (manual divider if needed) */
+.post-article hr{
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
+  margin: 28px 0;
+}
+
+/* Figures / images */
+.post-article figure{
+  margin: 18px 0 22px;
+  padding: 14px;
+  border-radius: 14px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+}
+.post-article img{
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 12px;
+}
+.post-article figcaption{
+  margin-top: 10px;
+  font-size: 14px;
+  opacity: .8;
+}
+
+/* Callout boxes (use classes in markdown/html) */
+.post-callout,
+.blog-callout{
+  margin: 18px 0 22px;
+  padding: 16px 16px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: color-mix(in oklab, var(--panel) 88%, transparent);
+  box-shadow: var(--shadow);
+}
+
+.callout{
+  margin: 18px 0 22px;
+  padding: 16px 16px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: color-mix(in oklab, var(--panel) 88%, transparent);
+}
+.callout strong{ font-weight: 800; }
+.callout.tip{ border-left: 5px solid #16a34a; }
+.callout.warn{ border-left: 5px solid #d97706; }
+.callout.info{ border-left: 5px solid #2563eb; }
+
+/* Quote */
+.post-article blockquote{
+  margin: 18px 0 22px;
+  padding: 14px 16px;
+  border-left: 4px solid var(--accent);
+  background: color-mix(in oklab, var(--panel) 80%, transparent);
+  border-radius: 12px;
+  opacity: .95;
+}
+
+/* Quick Summary box (auto inserted by JS below) */
+.post-summary{
+  margin: 18px 0 24px;
+  padding: 16px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: color-mix(in oklab, var(--accent) 8%, var(--panel));
+}
+.post-summary h3{
+  margin: 0 0 10px;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.post-summary ul{ margin: 0 0 0 22px; }
+
+/* Table of contents (auto) */
+.post-toc{
+  margin: 18px 0 24px;
+  padding: 16px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: var(--panel);
+}
+.post-toc h3{
+  margin: 0 0 10px;
+  font-size: 18px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.post-toc a{
+  text-decoration: none;
+}
+.post-toc a:hover{
+  text-decoration: underline;
+}
+.post-toc ul{
+  margin: 0 0 0 18px;
+}
