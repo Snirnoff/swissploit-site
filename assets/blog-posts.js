@@ -41,12 +41,8 @@ window.SWISSPLOIT_BLOG_POSTS = [
     "tags": [
       "mfa",
       "microsoft-authenticator",
-      "microsoft-konto",
       "two-factor-authentication",
-      "security",
-      "identity",
-      "phishing",
-      "login"
+      "security"
     ],
     "thumb": "assets/blog/021_tn.webp",
     "videoUrl": "",
