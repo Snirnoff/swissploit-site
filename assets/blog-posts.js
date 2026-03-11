@@ -8,6 +8,9 @@ window.SWISSPLOIT_BLOG_POSTS = [
     "date": "2026-03-11",
     "tags": [
       "cybersecurity",
+      "Schweiz",
+      "KNU",
+      "IT-Dienstleister",
       "cyberseal"
     ],
     "thumb": "assets/blog/cyberseal_TN.webp",
