@@ -132,24 +132,6 @@
   flex-direction: column;
 }
 
-/* THUMBNAIL: kompakt + ganzes 16:9 Bild sichtbar (NICHT crop) */
-.blog-thumb{
-  width: 100%;
-  height: clamp(145px, 17vw, 194px);
-
-  background: #000;
-  display: grid;
-  place-items: center;
-  overflow: hidden;
-}
-
-/* WICHTIG: contain statt cover => kein Abschneiden */
-.blog-thumb-img{
-  width: 100%;
-  height: 100%;
-  object-fit: contain !important;
-  display: block;
-}
 
 /* Fallback wenn kein Bild */
 .blog-thumb-inner{
@@ -262,33 +244,23 @@
   border:0;
 }
 
-.blog-thumb-img{
-  aspect-ratio: 16 / 9;
-}
-
-
-
-/* ===== Blog thumbnails: no black bars on mobile ===== */
+/* ===== BLOG THUMBNAIL (clean + no bars on mobile) ===== */
 .blog-thumb{
-  position: relative;
   width: 100%;
+  aspect-ratio: 16 / 9;         /* einheitlich */
+  background: var(--panel);     /* falls Bild noch lädt */
   overflow: hidden;
   border-radius: 14px;
-  background: var(--panel); /* statt schwarz */
 }
 
-/* Bild immer vollflächig */
 .blog-thumb-img{
-  display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;         /* <-- kill black bars */
+  display: block;
+  object-fit: cover;            /* füllt immer, keine Balken */
   object-position: center;
 }
 
-/* Mobile: stabiles Ratio, damit Karten gleichmässig sind */
 @media (max-width: 720px){
-  .blog-thumb{
-    aspect-ratio: 16 / 9;    /* oder 4/3 falls du es “höher” willst */
-  }
+  .blog-thumb{ aspect-ratio: 4 / 3; }
 }
