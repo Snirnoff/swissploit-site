@@ -9,7 +9,7 @@ window.SWISSPLOIT_BLOG_POSTS = [
     "tags": [
       "cybersecurity",
       "Schweiz",
-      "KNU",
+      "KMU",
       "IT-Dienstleister",
       "cyberseal"
     ],
