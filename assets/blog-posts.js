@@ -18,7 +18,7 @@ window.SWISSPLOIT_BLOG_POSTS = [
       "incident-response",
       "datenschutz"
     ],
-    "thumb": "",
+    "thumb": "assets/blog/cyberseal_TN.webp",
     "videoUrl": "",
     "i18n": {
       "de": {
