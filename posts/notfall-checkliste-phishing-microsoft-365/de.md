@@ -138,7 +138,7 @@ Wenn Apps plötzlich weitreichende Rechte haben (Mail lesen, Files, Teams), ohne
 
 <div class="callout tip">
   <div class="callout-title"><strong>💡 Tipp</strong></div>
-  Lege diese Checkliste als **runbook** ab und ergänze sie um eure Standard-Tools (EDR, Ticketing, SIEM) – im Ernstfall sparen klare Klickpfade Minuten.
+  Lege diese Checkliste als <strong>runbook</strong> ab und ergänze sie um eure Standard-Tools – im Ernstfall sparen klare Klickpfade Minuten.
 </div>
 
 ## Kurzfassung
