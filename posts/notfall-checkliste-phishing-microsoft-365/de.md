@@ -9,20 +9,7 @@ thumb: "assets/blog/Laptop-repair-in-phishing-crisis.webp"
 
 Phishing ist oft in Minuten passiert – und genau dann zählt ein klarer Ablauf. Diese Checkliste hilft dir, ein betroffenes Microsoft-365/Entra-ID-Konto **schnell zu stabilisieren**, den **Schaden zu begrenzen** und **weitere Kompromittierungen** zu verhindern.
 
-## Was ist passiert?
-
-Für die erste Einschätzung brauchst du zwei Kerninfos:
-
-- Wurde **nur der Link** geklickt?
-- Wurde **auch ein Passwort** eingegeben?
-
-**Szenario A – Nur Link geklickt**  
-Risiko meist geringer (kein Passwort eingegeben). Fokus: **Endgerät prüfen** (Downloads, Malware, Browser/Session).
-
-**Szenario B – Passwort eingegeben**  
-Konto als **kompromittiert** behandeln. **Vollständige Checkliste** durchlaufen.
-
-## Schritt-für-Schritt Lösung
+## Schritt-für-Schritt Lösung für Administratoren
 
 1. **Passwort sofort ändern**
    - **Hybrid-User (AD On-Prem → Entra synchronisiert):** Starkes neues Passwort **im On-Prem AD** setzen und dem User **per Telefon** mitteilen.
@@ -30,13 +17,11 @@ Konto als **kompromittiert** behandeln. **Vollständige Checkliste** durchlaufen
 
 2. **Alle aktiven Sitzungen abmelden**
    - **Microsoft 365 admin center:** User auswählen → **“Sign out from all sessions”**
-   - Zusätzlich in **Entra ID:** User auswählen → **Revoke sessions**
-
 <figure class="post-figure">
   <img src="assets/blog/image-20260226-125126.webp" alt="Microsoft 365 Admin Center: Sign out from all sessions">
   <figcaption>Im Microsoft 365 Admin Center kannst du den User über „Sign out from all sessions“ aus allen aktiven Sessions abmelden.</figcaption>
-</figure>
-
+</figure>  
+   - Alternativ in **Entra ID:** User auswählen → **Revoke sessions**
 <figure class="post-figure">
   <img src="assets/blog/image-20260226-125428.webp" alt="Entra ID: Revoke sessions beim Benutzer">
   <figcaption>Zusätzlich in Entra ID: Sessions des Benutzers über „Revoke sessions“ widerrufen.</figcaption>
@@ -66,7 +51,8 @@ Konto als **kompromittiert** behandeln. **Vollständige Checkliste** durchlaufen
    Suche nach ungewöhnlichen Datenabflüssen:
    - Kürzlich erstellte Freigaben
    - Ungewöhnliche externe Shares
-   - Neue anonyme Links  
+   - Neue anonyme Links
+   
    Vorgehen (Beispiel OneDrive):
    - OneDrive im Browser öffnen → **Shared**
    - **Shared by you**
@@ -78,10 +64,9 @@ Konto als **kompromittiert** behandeln. **Vollständige Checkliste** durchlaufen
 </figure>
 
 6. **Endgeräte prüfen**
-   - Malware-Scan durchführen (EDR/Defender/AV)
-   - Session-Cookies löschen, Browser komplett schliessen
-   - Cookies/Cache löschen
-   - Browser-Passwörter als kompromittiert betrachten:
+   - Malware-Scan durchführen
+   - Cookies/Cache in den Browsern löschen
+   - Im Browser gespeicherte Passwörter als kompromittiert betrachten:
      - gespeicherte Passwörter prüfen
      - sensible Passwörter (z. B. Banking) ändern
 
@@ -104,8 +89,7 @@ Konto als **kompromittiert** behandeln. **Vollständige Checkliste** durchlaufen
 9. **Weitere betroffene Konten prüfen**
    - Wurde die Phishing-Mail intern weitergeleitet?
    - **Message Trace** durchführen
-   - Wenn möglich: Mail tenantweit löschen
-   - Benutzer informieren (kurze Guidance: Passwort/MFA/Endgerät)
+   - Benutzer informieren
 
 10. **Conditional Access / Security Defaults prüfen**
    - Wenn **Security Defaults** aktiv sind: kein klassisches Conditional Access.
@@ -152,9 +136,10 @@ Auf Regeln, die Mails **weiterleiten**, **löschen**, „als gelesen markieren�
 **Wie erkenne ich OAuth-Phishing?**  
 Wenn Apps plötzlich weitreichende Rechte haben (Mail lesen, Files, Teams), ohne dass das bewusst freigegeben wurde: **Consent entziehen**, App entfernen, Logs prüfen.
 
-## Profi-Tipp
-
-Lege diese Checkliste als **runbook** ab und ergänze sie um eure Standard-Tools (EDR, Ticketing, SIEM) – im Ernstfall sparen klare Klickpfade Minuten.
+<div class="callout tip">
+  <div class="callout-title"><strong>💡 Tipp</strong></div>
+  Lege diese Checkliste als **runbook** ab und ergänze sie um eure Standard-Tools (EDR, Ticketing, SIEM) – im Ernstfall sparen klare Klickpfade Minuten.
+</div>
 
 ## Kurzfassung
 
