@@ -33,24 +33,44 @@ body {
 :root {
   --wrap: clamp(16px, 4vw, 28px);
   --max: 1200px;
-  --accent: #d30000;
-  --muted: #6b7280;
 
-  /* Light */
-  --bg: #ffffff;
-  --fg: #0f0f12;
-  --panel: #fafafa;
-  --border: rgba(0,0,0,.08);
-  --shadow: 0 10px 30px rgba(0,0,0,.08);
+  --accent: #ff2b2b;
+  --accent-2: #86f7ff;
+  --muted: #93a0b3;
+
+  /* Default = dark futuristic */
+  --bg: #05070b;
+  --bg-2: #0c111a;
+  --fg: #f5f7fb;
+
+  --panel: rgba(14, 18, 27, 0.72);
+  --panel-strong: rgba(18, 24, 35, 0.9);
+  --border: rgba(255,255,255,.09);
+  --border-strong: rgba(255,255,255,.16);
+
+  --shadow: 0 18px 50px rgba(0,0,0,.42);
+  --glow:
+    0 0 0 1px rgba(255,255,255,.04),
+    0 20px 60px rgba(0,0,0,.42),
+    0 0 40px rgba(255,43,43,.08);
 }
 
-html[data-theme="dark"] {
-  /* Dark */
-  --bg: #0c0c0f;
-  --fg: #f4f6f8;
-  --panel: #15161a;
-  --border: rgba(255,255,255,.12);
-  --shadow: 0 10px 30px rgba(0,0,0,.5);
+/* optional light mode bleibt erhalten */
+html[data-theme="light"] {
+  --bg: #f3f6fb;
+  --bg-2: #e8eef8;
+  --fg: #0d1016;
+
+  --panel: rgba(255,255,255,.72);
+  --panel-strong: rgba(255,255,255,.9);
+  --border: rgba(12,18,28,.08);
+  --border-strong: rgba(12,18,28,.14);
+
+  --shadow: 0 18px 50px rgba(8,15,30,.10);
+  --glow:
+    0 0 0 1px rgba(255,255,255,.45),
+    0 18px 40px rgba(8,15,30,.08),
+    0 0 30px rgba(255,43,43,.05);
 }
 
 
