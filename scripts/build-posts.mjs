@@ -578,7 +578,7 @@ function renderBlogIndexPage(posts, lang) {
         <h1 class="blog-title">
           <span class="hero-brand blog-brand" aria-label="Swissploit">
             <span>S</span><span>w</span><span>i</span><span>s</span><span>s</span><span>p</span><span>l</span><span>o</span><span>i</span><span>t</span>
-            <span class="blog-kicker">${isEn ? "BLOG. ENGLISH." : "BLOG."}</span>
+            <span class="blog-kicker">${isEn ? "BLOG." : "BLOG."}</span>
           </span>
         </h1>
 
