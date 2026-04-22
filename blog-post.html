@@ -1,119 +1,52 @@
 <!doctype html>
-<html lang="de" data-theme="light">
+<html lang="de">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Swissploit – Blog</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Swissploit Blog Redirect</title>
+  <meta name="robots" content="noindex,follow" />
+  <meta name="description" content="Legacy blog redirect page for older Swissploit article links." />
+  <link rel="canonical" href="https://swissploit.ch/blog.html" />
 
-  <meta name="description" content="Artikel von Swissploit zu Cybersecurity, Microsoft 365, Windows und moderner IT." />
-
-<meta property="og:title" content="Swissploit – Blog">
-<meta property="og:description" content="Artikel von Swissploit zu Cybersecurity, Microsoft 365, Windows und moderner IT.">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://swissploit.ch/blog-post.html">
-<meta property="og:image" content="https://swissploit.ch/assets/JustPlus.png">
-
-<link rel="canonical" href="https://swissploit.ch/blog-post.html" />
-
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/JustPlus.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="assets/JustPlus.png">
-  <link rel="apple-touch-icon" href="assets/JustPlus.png">
-  <meta name="theme-color" content="#ffffff">
-
-  <!-- Theme boot (damit Dark/Light korrekt übernimmt, ohne Flash) -->
+  <script src="/assets/blog-posts.js"></script>
   <script>
     (function () {
-      const saved = localStorage.getItem('swissploit-theme');
-      if (saved) document.documentElement.setAttribute('data-theme', saved);
-      else {
-        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-        document.documentElement.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
-      }
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get("id");
+      const explicitLang = params.get("lang");
+      const savedLang = localStorage.getItem("swissploit-blog-lang");
+      const preferredLang = explicitLang || savedLang || "de";
+
+      const posts = window.SWISSPLOIT_BLOG_POSTS || [];
+      const match = posts.find((post) => post.id === id || post.slug === id);
+
+      const target =
+        (preferredLang === "en" && match?.urls?.en) ||
+        match?.urls?.de ||
+        match?.urls?.en ||
+        "/blog.html";
+
+      window.location.replace(target);
     })();
   </script>
 
-  <link rel="stylesheet" href="assets/styles.css" />
-  <link rel="stylesheet" href="assets/blog-post.css" />
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font: 16px/1.5 Inter, system-ui, sans-serif;
+      display: grid;
+      min-height: 100vh;
+      place-items: center;
+      padding: 24px;
+    }
+    main { max-width: 680px; text-align: center; }
+  </style>
 </head>
-
 <body>
-  <header class="site-header" role="banner">
-    <div class="wrap headerbar">
-      <a class="brand" href="index.html" aria-label="Swissploit Home" data-transition>
-        <video autoplay muted loop playsinline preload="auto" class="brand-video">
-          <source src="assets/Swissploit Intro_1.mp4" type="video/mp4">
-        </video>
-      </a>
-
-      <nav class="nav" aria-label="Hauptnavigation">
-        <a href="index.html#about" data-transition>Über mich</a>
-        <a href="index.html#featured" data-transition>Neuestes Video</a>
-        <a href="index.html#shorts" data-transition>H355</a>
-        <a class="is-active" href="blog.html" data-transition>Blog</a>
-      </nav>
-
-     <button id="themeToggle"
-        class="switch"
-        aria-pressed="false"
-        aria-label="Darstellung umschalten"
-        title="Dark/Light umschalten">
-  <span class="switch-track"></span>
-  <span class="switch-thumb">
-    <span class="switch-icon sun" aria-hidden="true">☀️</span>
-    <span class="switch-icon moon" aria-hidden="true">🌙</span>
-  </span>
-</button>
-    </div>
-  </header>
-
-  <main id="main">
-    <section class="section post-hero">
-      <div class="wrap">
-        <div class="post-topbar">
-          <a class="post-back" href="blog.html" data-transition>← Zurück</a>
-
-          <!-- Optional: Language Toggle auch in Einzelsicht -->
-          <div class="lang-toggle" role="group" aria-label="Sprache wählen">
-            <button class="lang-btn" data-lang="de" type="button">DE</button>
-            <button class="lang-btn" data-lang="en" type="button">EN</button>
-          </div>
-        </div>
-
-        <h1 class="post-title" id="postTitle">…</h1>
-        <p class="post-subline" id="postSubtitle"></p>
-
-        <div class="post-meta" id="postMeta"></div>
-      </div>
-    </section>
-
-    <section class="section post-wrap">
-      <div class="wrap">
-        <article class="post-content" id="postContent"></article>
-      </div>
-    </section>
+  <main>
+    <h1>Weiterleitung…</h1>
+    <p>Der Blogartikel wurde auf eine statische URL umgestellt.</p>
+    <p><a href="/blog.html">Zur Blog-Übersicht</a></p>
   </main>
-
-  <footer class="site-footer" role="contentinfo">
-    <div class="wrap">
-      <p>© <span id="year"></span> Swissploit.</p>
-      <nav class="foot-nav" aria-label="Footer Navigation">
-        <a href="index.html#about" data-transition>Über mich</a>
-        <a href="index.html#featured" data-transition>Neuestes Video</a>
-        <a href="index.html#shorts" data-transition>H355</a>
-      </nav>
-    </div>
-  </footer>
-
-  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
-
-<script src="assets/transition.js"></script>
-<script src="assets/app.js"></script>
-<script src="assets/blog-posts.js"></script>
-<script src="assets/blog-post.js"></script>
 </body>
 </html>

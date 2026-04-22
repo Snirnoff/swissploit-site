@@ -2,9 +2,35 @@
    nutzt Variablen aus styles.css: --bg --fg --panel --border --shadow --accent
 */
 
+.blog-breadcrumbs{
+  padding-top: 98px;
+}
+
+.breadcrumb-list{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  color: color-mix(in oklab, var(--fg) 72%, transparent);
+  font-size: 14px;
+}
+
+.breadcrumb-list li + li::before{
+  content: "/";
+  margin-right: 8px;
+  color: color-mix(in oklab, var(--fg) 45%, transparent);
+}
+
+.breadcrumb-list a{
+  color: inherit;
+  text-decoration: none;
+}
+
 /* ===== Hero ===== */
 .post-hero{
-  padding-top: 90px;
+  padding-top: 32px;
   padding-bottom: 28px;
   text-align: center;
 }
@@ -36,7 +62,6 @@
   color: color-mix(in oklab, var(--fg) 70%, transparent);
 }
 
-/* passt zu deinem JS: blog-date + blog-tags */
 .post-meta .blog-date{
   padding: 6px 10px;
   border: 1px solid var(--border);
@@ -46,6 +71,11 @@
   font-size: 12px;
   letter-spacing: .02em;
   color: color-mix(in oklab, var(--fg) 88%, transparent);
+}
+
+.post-meta .blog-date-updated{
+  border-color: color-mix(in oklab, var(--accent) 35%, var(--border));
+  background: color-mix(in oklab, var(--accent) 10%, var(--panel));
 }
 
 .post-meta .blog-tags{
@@ -59,7 +89,7 @@
   color: color-mix(in oklab, var(--fg) 82%, transparent);
 }
 
-/* ===== Content column (Apple: ruhige Lesespalte, links) ===== */
+/* ===== Content column ===== */
 .post-wrap{
   padding-top: 22px;
   padding-bottom: 90px;
@@ -102,7 +132,6 @@
   font-weight: 700;
 }
 
-/* ===== Callout (dezent, Apple-like) ===== */
 .post-content .post-callout,
 .post-content .blog-callout{
   margin: 18px 0 22px;
@@ -126,7 +155,6 @@ html[data-theme="dark"] .post-content .blog-callout{
   color: color-mix(in oklab, var(--fg) 90%, transparent);
 }
 
-/* ===== Divider ===== */
 .post-content .post-divider{
   height: 1px;
   margin: 22px 0;
@@ -138,7 +166,6 @@ html[data-theme="dark"] .post-content .blog-callout{
   );
 }
 
-/* ===== Video embed (passt zu deinem JS: .post-video > .video-embed > iframe) ===== */
 .post-video{
   margin: 20px 0 26px;
   border-radius: 16px;
@@ -148,7 +175,6 @@ html[data-theme="dark"] .post-content .blog-callout{
   box-shadow: var(--shadow);
 }
 
-/* dein JS nutzt video-embed bereits auf anderen Seiten -> wir übernehmen exakt */
 .post-video .video-embed{
   position: relative;
   width: 100%;
@@ -163,12 +189,13 @@ html[data-theme="dark"] .post-content .blog-callout{
   border: 0;
 }
 
-/* ===== Back row ===== */
 .post-topbar{
   max-width: 760px;
   margin: 0 auto 10px;
   display: flex;
   justify-content: flex-start;
+  gap: 12px;
+  align-items: center;
 }
 
 .post-back{
@@ -193,25 +220,10 @@ html[data-theme="dark"] .post-content .blog-callout{
   border-color: color-mix(in oklab, var(--accent) 45%, var(--border));
 }
 
-/* ===== Mobile ===== */
-@media (max-width: 640px){
-  .post-content p{ font-size: 17px; }
-  .post-title{ font-size: clamp(30px, 8vw, 44px); }
-}
-
-
-/* ===== Language Toggle (Single Post) ===== */
-.post-topbar{
-  gap: 12px;
-  align-items: center;
-}
-
-/* rechts ausrichten, Back bleibt links */
 .post-topbar .lang-toggle{
   margin-left: auto;
 }
 
-/* gleiche Optik wie Swissploit Chips */
 .lang-toggle{
   display: inline-flex;
   gap: 8px;
@@ -226,7 +238,10 @@ html[data-theme="dark"] .lang-toggle{
   box-shadow: 0 10px 30px rgba(0,0,0,.35);
 }
 
-.lang-btn{
+.lang-link{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   appearance: none;
   border: 1px solid transparent;
   background: transparent;
@@ -237,35 +252,87 @@ html[data-theme="dark"] .lang-toggle{
   padding: 8px 12px;
   border-radius: 999px;
   cursor: pointer;
+  text-decoration: none;
   transition: scale .18s ease, background .18s ease, border-color .18s ease, color .18s ease, box-shadow .18s ease;
   scale: 1;
 }
 
-.lang-btn:hover{
+.lang-link:hover{
   scale: 1.03;
   color: var(--fg);
   background: color-mix(in oklab, var(--fg) 6%, transparent);
   border-color: color-mix(in oklab, var(--fg) 10%, transparent);
 }
 
-.lang-btn.is-active{
+.lang-link.is-active{
   color: var(--fg);
   background: color-mix(in oklab, var(--accent) 12%, var(--panel));
   border-color: color-mix(in oklab, var(--accent) 55%, var(--border));
   box-shadow: 0 12px 28px rgba(211,0,0,.18);
 }
 
-/* Mobile: Toggle unter Back statt gequetscht */
-@media (max-width: 640px){
-  .post-topbar{
-    flex-wrap: wrap;
-  }
-  .post-topbar .lang-toggle{
-    margin-left: 0;
-  }
+.post-related{
+  max-width: 980px;
+  margin: 40px auto 0;
 }
 
-/* Images inside posts (Apple-like) */
+.post-related h2{
+  margin: 0 0 14px;
+  font-size: 22px;
+  letter-spacing: -0.01em;
+}
+
+.post-related-grid{
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.post-related-card{
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--panel);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.post-related-card-link{
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.post-related-thumb{
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+}
+
+.post-related-body{
+  padding: 14px;
+}
+
+.post-related-date{
+  display: inline-block;
+  margin-bottom: 8px;
+  font-size: 12px;
+  color: color-mix(in oklab, var(--fg) 70%, transparent);
+}
+
+.post-related-title{
+  margin: 0 0 8px;
+  font-size: 16px;
+  line-height: 1.3;
+}
+
+.post-related-excerpt{
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: color-mix(in oklab, var(--fg) 86%, transparent);
+}
+
 .post-figure{
   margin: 18px 0 22px;
 }
@@ -286,4 +353,23 @@ html[data-theme="dark"] .lang-toggle{
   text-align: center;
   font-size: 14px;
   color: color-mix(in oklab, var(--fg) 72%, transparent);
+}
+
+@media (max-width: 900px){
+  .post-related-grid{
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px){
+  .post-content p{ font-size: 17px; }
+  .post-title{ font-size: clamp(30px, 8vw, 44px); }
+
+  .post-topbar{
+    flex-wrap: wrap;
+  }
+
+  .post-topbar .lang-toggle{
+    margin-left: 0;
+  }
 }

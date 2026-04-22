@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="de" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MFA aktivieren: Authenticator – Swissploit</title>
+
+  <meta name="description" content="So aktivierst du MFA mit Microsoft Authenticator in wenigen Minuten" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+
+  <meta property="og:title" content="MFA aktivieren: Authenticator">
+  <meta property="og:description" content="So aktivierst du MFA mit Microsoft Authenticator in wenigen Minuten">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://swissploit.ch/blog/mfa-aktivieren-microsoft-authenticator/">
+  <meta property="og:image" content="https://swissploit.ch/assets/blog/021_tn.webp">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="MFA aktivieren: Authenticator">
+  <meta name="twitter:description" content="So aktivierst du MFA mit Microsoft Authenticator in wenigen Minuten">
+  <meta name="twitter:image" content="https://swissploit.ch/assets/blog/021_tn.webp">
+
+  <link rel="canonical" href="https://swissploit.ch/blog/mfa-aktivieren-microsoft-authenticator/" />
+  <link rel="alternate" hreflang="de" href="https://swissploit.ch/blog/mfa-aktivieren-microsoft-authenticator/" />
+  <link rel="alternate" hreflang="en" href="https://swissploit.ch/en/blog/mfa-aktivieren-microsoft-authenticator/" />
+  <link rel="alternate" hreflang="x-default" href="https://swissploit.ch/blog/mfa-aktivieren-microsoft-authenticator/" />
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/JustPlus.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/JustPlus.png">
+  <link rel="apple-touch-icon" href="/assets/JustPlus.png">
+  <meta name="theme-color" content="#ffffff">
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"MFA aktivieren: Authenticator","description":"So aktivierst du MFA mit Microsoft Authenticator in wenigen Minuten","datePublished":"2026-03-05","dateModified":"2026-03-05","image":"https://swissploit.ch/assets/blog/021_tn.webp","url":"https://swissploit.ch/blog/mfa-aktivieren-microsoft-authenticator/","mainEntityOfPage":"https://swissploit.ch/blog/mfa-aktivieren-microsoft-authenticator/","inLanguage":"de","author":{"@type":"Person","name":"Swissploit"},"publisher":{"@type":"Organization","name":"Swissploit","logo":{"@type":"ImageObject","url":"https://swissploit.ch/assets/JustPlus.png"}},"keywords":"mfa, microsoft-authenticator, two-factor-authentication, security"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://swissploit.ch/index.html"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://swissploit.ch/blog/"},{"@type":"ListItem","position":3,"name":"MFA aktivieren: Authenticator","item":"https://swissploit.ch/blog/mfa-aktivieren-microsoft-authenticator/"}]}</script>
+
+  <script>
+    (function () {
+      const saved = localStorage.getItem("swissploit-theme");
+      if (saved) document.documentElement.setAttribute("data-theme", saved);
+      else {
+        const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+        document.documentElement.setAttribute("data-theme", prefersDark ? "dark" : "light");
+      }
+    })();
+  </script>
+
+  <link rel="stylesheet" href="/assets/styles.css" />
+  <link rel="stylesheet" href="/assets/blog-post.css" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <header class="site-header" role="banner">
+    <div class="wrap headerbar">
+      <a class="brand" href="/index.html" aria-label="Swissploit Home" data-transition>
+        <video autoplay muted loop playsinline preload="auto" class="brand-video">
+          <source src="/assets/Swissploit Intro_1.mp4" type="video/mp4">
+        </video>
+      </a>
+
+      <nav class="nav" aria-label="Hauptnavigation">
+        <a href="/index.html#about" data-transition>Über mich</a>
+        <a href="/index.html#featured" data-transition>Neuestes Video</a>
+        <a href="/index.html#shorts" data-transition>H355</a>
+        <a class="is-active" href="/blog/" data-transition>Blog</a>
+      </nav>
+
+      <button id="themeToggle"
+        class="switch"
+        aria-pressed="false"
+        aria-label="Darstellung umschalten"
+        title="Dark/Light umschalten">
+        <span class="switch-track"></span>
+        <span class="switch-thumb">
+          <span class="switch-icon sun" aria-hidden="true">☀️</span>
+          <span class="switch-icon moon" aria-hidden="true">🌙</span>
+        </span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+    <nav class="wrap blog-breadcrumbs" aria-label="Breadcrumb">
+      <ol class="breadcrumb-list">
+        <li><a href="/index.html" data-transition>Home</a></li>
+        <li><a href="/blog/" data-transition>Blog</a></li>
+        <li aria-current="page">MFA aktivieren: Authenticator</li>
+      </ol>
+    </nav>
+
+    <section class="section post-hero">
+      <div class="wrap">
+        <div class="post-topbar">
+          <a class="post-back" href="/blog/" data-transition>← Zurück</a>
+          
+    <nav class="lang-toggle" aria-label="Sprache wählen">
+      <a class="lang-link is-active" href="/blog/mfa-aktivieren-microsoft-authenticator/" hreflang="de" lang="de" data-lang-switch="de">DE</a><a class="lang-link " href="/en/blog/mfa-aktivieren-microsoft-authenticator/" hreflang="en" lang="en" data-lang-switch="en">EN</a>
+    </nav>
+  
+        </div>
+
+        <h1 class="post-title" id="postTitle">MFA aktivieren: Authenticator</h1>
+        <p class="post-subline" id="postSubtitle">So aktivierst du MFA mit Microsoft Authenticator in wenigen Minuten</p>
+        <div class="post-meta" id="postMeta"><time class="blog-date" datetime="2026-03-05">05.03.2026</time>
+    
+    <span class="blog-tags">#mfa #microsoft-authenticator #two-factor-authentication #security</span></div>
+      </div>
+    </section>
+
+    <section class="section post-wrap">
+      <div class="wrap">
+        <article class="post-content" id="postContent" aria-labelledby="postTitle">
+          
+    <div class="post-video">
+      <div class="video-embed video-embed--shorts">
+        <iframe
+          src="https://www.youtube.com/embed/Sg2nFP_aDu0"
+          title="MFA aktivieren: Authenticator"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen></iframe>
+      </div>
+    </div>
+  
+          <div class="post-article">
+            <p>Wenn jemand dein Microsoft-Passwort hat, kann er dein Konto übernehmen – oft ohne dass du’s sofort merkst. Mit <strong>MFA (Multi-Faktor-Authentifizierung)</strong> reicht das Passwort allein nicht mehr: Für den Login braucht es zusätzlich eine Bestätigung auf deinem Handy. Das ist eine der schnellsten Sicherheitsmassnahmen überhaupt – und in wenigen Minuten eingerichtet.</p>
+<h2>Was ist passiert?</h2>
+<ul>
+<li><strong>Passwort allein ist nicht genug Schutz</strong>: Es kann geleakt, erraten oder via Phishing abgegriffen werden.</li>
+<li><strong>Angreifer loggen sich oft „leise“ ein</strong> und richten z. B. Weiterleitungen oder Apps ein.</li>
+<li><strong>MFA stoppt viele Kontoübernahmen</strong>, weil ein zweiter Faktor (dein Gerät) nötig ist.</li>
+</ul>
+<h2>Schritt-für-Schritt Lösung</h2>
+<ol>
+<li><p><strong>Setup-Seite öffnen</strong></p>
+<ul>
+<li>Öffne den Browser und gehe auf:<ul>
+<li><code>aka.ms/mfasetup</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>Mit deinem Microsoft-Konto anmelden</strong></p>
+<ul>
+<li>Melde dich mit deinem Microsoft-Konto an.</li>
+<li>Du solltest danach auf der Seite <strong>Sicherheitsinfos</strong> landen.</li>
+</ul>
+</li>
+<li><p><strong>Falls du nicht bei „Sicherheitsinfos“ bist</strong></p>
+<ul>
+<li>Öffne direkt:<ul>
+<li><code>mysignins.microsoft.com/security-info</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>Anmeldemethode hinzufügen</strong></p>
+<ul>
+<li>Klicke auf <strong>„Anmeldemethode hinzufügen“</strong>.</li>
+</ul>
+</li>
+<li><p><strong>Microsoft Authenticator auswählen</strong></p>
+<ul>
+<li>Du siehst mehrere Optionen.</li>
+<li>Empfehlung: <strong>Microsoft Authenticator</strong> (schnell, sicher, bequem).</li>
+<li>Wähle <strong>Microsoft Authenticator</strong> und klicke <strong>Weiter</strong>.</li>
+</ul>
+</li>
+<li><p><strong>Microsoft Authenticator am Handy installieren</strong></p>
+<ul>
+<li>Öffne <strong>App Store</strong> oder <strong>Google Play Store</strong></li>
+<li>Suche nach <strong>Microsoft Authenticator</strong></li>
+<li>Installieren und danach öffnen</li>
+</ul>
+</li>
+<li><p><strong>QR-Code am PC anzeigen lassen</strong></p>
+<ul>
+<li>Am PC auf <strong>Weiter</strong> klicken – es erscheint ein <strong>QR-Code</strong>.</li>
+</ul>
+</li>
+<li><p><strong>QR-Code mit dem Handy scannen</strong></p>
+<ul>
+<li>In der Authenticator-App:<ul>
+<li>Tippe auf <strong>Konto hinzufügen</strong> / <strong>+</strong> / das <strong>QR-Code-Icon</strong></li>
+<li>Scanne den QR-Code am Bildschirm</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>Test bestätigen (Zahl am Handy bestätigen)</strong></p>
+<ul>
+<li>Microsoft macht danach einen Test:<ul>
+<li>Am PC erscheint eine <strong>Zahl</strong></li>
+<li>Diese musst du am Handy <strong>bestätigen</strong> bzw. <strong>eingeben</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>Fertig: Bestätigung prüfen</strong></p>
+</li>
+</ol>
+<ul>
+<li>Wenn alles klappt, bekommst du eine Bestätigung.</li>
+<li>Du siehst dein Handy jetzt unter <strong>Sicherheitsinfos</strong> als neue Anmeldemethode.</li>
+</ul>
+<h2>Häufige Fragen / Troubleshooting</h2>
+<p><strong>Ich sehe die Seite „Sicherheitsinfos“ nicht – wo muss ich hin?</strong><br>Gehe direkt auf <code>mysignins.microsoft.com/security-info</code> und melde dich an.</p>
+<p><strong>Ich finde das QR-Code-Symbol im Authenticator nicht.</strong><br>Öffne die App und suche nach „Konto hinzufügen“/„+“ oder dem QR-Symbol. Je nach Version ist es unten rechts oder im Menü.</p>
+<p><strong>Der Zahlentest kommt nicht oder schlägt fehl.</strong><br>Prüfe Internetverbindung am Handy, schliesse die Authenticator-App komplett und öffne sie neu. Starte den Vorgang am PC nochmals mit „Weiter“.</p>
+<p><strong>Kann ich MFA auch ohne Authenticator-App nutzen?</strong><br>Meist ja (SMS/Anruf), aber <strong>Authenticator ist empfehlenswert</strong>, weil bequemer und in der Regel sicherer.</p>
+<p><strong>Was, wenn ich mein Handy verliere?</strong><br>Lege (falls möglich) eine zweite Methode/Backup an (z. B. zweites Gerät oder alternative Methode), damit du nicht ausgesperrt wirst.</p>
+<div class="callout tip">
+  <div class="callout-title"><strong>💡 Tipp</strong></div>
+  Aktiviere nach dem Setup <strong>mindestens eine Backup-Option</strong> (z. B. zweite Methode), damit du bei Gerätewechsel oder Verlust weiterhin Zugriff hast.
+</div>
+
+
+<h2>Kurzfassung</h2>
+<ul>
+<li>Öffne <code>aka.ms/mfasetup</code> und melde dich an.</li>
+<li><strong>Microsoft Authenticator</strong> auswählen, App installieren, <strong>QR-Code scannen</strong>.</li>
+<li>Zahlentest bestätigen – danach ist MFA aktiv und dein Konto deutlich besser geschützt.</li>
+</ul>
+<h2>Weiterführender Hinweis bei Verdacht auf Phishing</h2>
+<p>Wenn du das Gefühl hast, in einen Angriff oder eine Phishing-Mail reingefallen zu sein (z. B. Link geklickt oder Passwort eingegeben), dann arbeite diese Sofortmassnahmen durch:</p>
+<ul>
+<li><a href="https://swissploit.ch/blog-post.html?id=notfall-checkliste-phishing-microsoft-365">Phishing-Notfall-Checkliste für Microsoft 365 &amp; Entra ID</a></li>
+</ul>
+          </div>
+        </article>
+
+        
+    <aside class="post-related" aria-labelledby="relatedPostsHeading">
+      <h2 id="relatedPostsHeading">Weitere Artikel</h2>
+      <div class="post-related-grid">
+        
+            <article class="post-related-card">
+              <a class="post-related-card-link" href="/blog/notfall-checkliste-phishing-microsoft-365/" aria-label="Phishing Checkliste">
+                <img class="post-related-thumb" src="/assets/blog/Laptop-repair-in-phishing-crisis.webp" alt="Phishing Checkliste" loading="lazy" decoding="async">
+                <div class="post-related-body">
+                  <time class="post-related-date" datetime="2026-02-26">26.02.2026</time>
+                  <h3 class="post-related-title">Phishing Checkliste</h3>
+                  <p class="post-related-excerpt">Phishing passiert schnell: Diese Notfall-Checkliste für Microsoft 365/Entra ID zeigt, wie du Konten sofort absicherst und Folgeschäden minimierst.</p>
+                </div>
+              </a>
+            </article>
+          
+            <article class="post-related-card">
+              <a class="post-related-card-link" href="/blog/wetransfer-phishing-html-onedrive/" aria-label="Angriff mit HTML">
+                <img class="post-related-thumb" src="/assets/blog/h355-014.png" alt="Angriff mit HTML" loading="lazy" decoding="async">
+                <div class="post-related-body">
+                  <time class="post-related-date" datetime="2026-01-27">27.01.2026</time>
+                  <h3 class="post-related-title">Angriff mit HTML</h3>
+                  <p class="post-related-excerpt">So wurde ein Microsoft-Konto übernommen!</p>
+                </div>
+              </a>
+            </article>
+          
+            <article class="post-related-card">
+              <a class="post-related-card-link" href="/blog/cyberseal-fuer-wen-und-was-es-aussagt/" aria-label="CyberSeal erklärt">
+                <img class="post-related-thumb" src="/assets/blog/cyberseal_TN.webp" alt="CyberSeal erklärt" loading="lazy" decoding="async">
+                <div class="post-related-body">
+                  <time class="post-related-date" datetime="2026-03-11">11.03.2026</time>
+                  <h3 class="post-related-title">CyberSeal erklärt</h3>
+                  <p class="post-related-excerpt">CyberSeal ist ein Schweizer Gütesiegel für IT-Dienstleister im KMU-Umfeld. Was es wirklich bedeutet, welche Anforderungen dahinterstehen – und was nicht.</p>
+                </div>
+              </a>
+            </article>
+          
+      </div>
+    </aside>
+  
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="wrap">
+      <p>© <span id="year"></span> Swissploit.</p>
+      <nav class="foot-nav" aria-label="Footer Navigation">
+        <a href="/index.html#about" data-transition>Über mich</a>
+        <a href="/index.html#featured" data-transition>Neuestes Video</a>
+        <a href="/index.html#shorts" data-transition>H355</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+    window.SWISSPLOIT_CURRENT_LANG = "de";
+  </script>
+
+  <script src="/assets/transition.js"></script>
+  <script src="/assets/app.js"></script>
+  <script src="/assets/blog-index-static.js"></script>
+</body>
+</html>

@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HTML Attack – Swissploit</title>
+
+  <meta name="description" content="A real Microsoft account takeover!" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+
+  <meta property="og:title" content="HTML Attack">
+  <meta property="og:description" content="A real Microsoft account takeover!">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://swissploit.ch/en/blog/wetransfer-phishing-html-onedrive/">
+  <meta property="og:image" content="https://swissploit.ch/assets/blog/h355-014.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="HTML Attack">
+  <meta name="twitter:description" content="A real Microsoft account takeover!">
+  <meta name="twitter:image" content="https://swissploit.ch/assets/blog/h355-014.png">
+
+  <link rel="canonical" href="https://swissploit.ch/en/blog/wetransfer-phishing-html-onedrive/" />
+  <link rel="alternate" hreflang="de" href="https://swissploit.ch/blog/wetransfer-phishing-html-onedrive/" />
+  <link rel="alternate" hreflang="en" href="https://swissploit.ch/en/blog/wetransfer-phishing-html-onedrive/" />
+  <link rel="alternate" hreflang="x-default" href="https://swissploit.ch/blog/wetransfer-phishing-html-onedrive/" />
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/JustPlus.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/JustPlus.png">
+  <link rel="apple-touch-icon" href="/assets/JustPlus.png">
+  <meta name="theme-color" content="#ffffff">
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"HTML Attack","description":"A real Microsoft account takeover!","datePublished":"2026-01-27","dateModified":"2026-01-27","image":"https://swissploit.ch/assets/blog/h355-014.png","url":"https://swissploit.ch/en/blog/wetransfer-phishing-html-onedrive/","mainEntityOfPage":"https://swissploit.ch/en/blog/wetransfer-phishing-html-onedrive/","inLanguage":"en","author":{"@type":"Person","name":"Swissploit"},"publisher":{"@type":"Organization","name":"Swissploit","logo":{"@type":"ImageObject","url":"https://swissploit.ch/assets/JustPlus.png"}},"keywords":"security, phishing, microsoft365, onedrive, outlook"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://swissploit.ch/index.html"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://swissploit.ch/en/blog/"},{"@type":"ListItem","position":3,"name":"HTML Attack","item":"https://swissploit.ch/en/blog/wetransfer-phishing-html-onedrive/"}]}</script>
+
+  <script>
+    (function () {
+      const saved = localStorage.getItem("swissploit-theme");
+      if (saved) document.documentElement.setAttribute("data-theme", saved);
+      else {
+        const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+        document.documentElement.setAttribute("data-theme", prefersDark ? "dark" : "light");
+      }
+    })();
+  </script>
+
+  <link rel="stylesheet" href="/assets/styles.css" />
+  <link rel="stylesheet" href="/assets/blog-post.css" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <header class="site-header" role="banner">
+    <div class="wrap headerbar">
+      <a class="brand" href="/index.html" aria-label="Swissploit Home" data-transition>
+        <video autoplay muted loop playsinline preload="auto" class="brand-video">
+          <source src="/assets/Swissploit Intro_1.mp4" type="video/mp4">
+        </video>
+      </a>
+
+      <nav class="nav" aria-label="Main navigation">
+        <a href="/index.html#about" data-transition>About me</a>
+        <a href="/index.html#featured" data-transition>Latest video</a>
+        <a href="/index.html#shorts" data-transition>H355</a>
+        <a class="is-active" href="/en/blog/" data-transition>Blog</a>
+      </nav>
+
+      <button id="themeToggle"
+        class="switch"
+        aria-pressed="false"
+        aria-label="Darstellung umschalten"
+        title="Dark/Light umschalten">
+        <span class="switch-track"></span>
+        <span class="switch-thumb">
+          <span class="switch-icon sun" aria-hidden="true">☀️</span>
+          <span class="switch-icon moon" aria-hidden="true">🌙</span>
+        </span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+    <nav class="wrap blog-breadcrumbs" aria-label="Breadcrumb">
+      <ol class="breadcrumb-list">
+        <li><a href="/index.html" data-transition>Home</a></li>
+        <li><a href="/en/blog/" data-transition>Blog</a></li>
+        <li aria-current="page">HTML Attack</li>
+      </ol>
+    </nav>
+
+    <section class="section post-hero">
+      <div class="wrap">
+        <div class="post-topbar">
+          <a class="post-back" href="/en/blog/" data-transition>← Back</a>
+          
+    <nav class="lang-toggle" aria-label="Choose language">
+      <a class="lang-link " href="/blog/wetransfer-phishing-html-onedrive/" hreflang="de" lang="de" data-lang-switch="de">DE</a><a class="lang-link is-active" href="/en/blog/wetransfer-phishing-html-onedrive/" hreflang="en" lang="en" data-lang-switch="en">EN</a>
+    </nav>
+  
+        </div>
+
+        <h1 class="post-title" id="postTitle">HTML Attack</h1>
+        <p class="post-subline" id="postSubtitle">A real Microsoft account takeover!</p>
+        <div class="post-meta" id="postMeta"><time class="blog-date" datetime="2026-01-27">27.01.2026</time>
+    
+    <span class="blog-tags">#security #phishing #microsoft365 #onedrive #outlook</span></div>
+      </div>
+    </section>
+
+    <section class="section post-wrap">
+      <div class="wrap">
+        <article class="post-content" id="postContent" aria-labelledby="postTitle">
+          
+    <div class="post-video">
+      <div class="video-embed ">
+        <iframe
+          src="https://www.youtube.com/embed/5aVeWRinSxM"
+          title="HTML Attack"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen></iframe>
+      </div>
+    </div>
+  
+          <div class="post-article">
+            <p><strong>WeTransfer phishing</strong> is currently one of the most effective ways to compromise <strong>Microsoft 365 / OneDrive / Outlook accounts</strong> — because the flow looks normal: download link, open file, login.</p>
+
+<p>In this post I break down a real incident (with the video embedded) and explain <strong>what actually happens</strong> and <strong>why an HTML file can be dangerous</strong> even when it looks harmless.</p>
+
+<div class="blog-callout">
+  <p><strong>What this attack is about</strong><br>
+  Attackers use a legit-looking WeTransfer download to deliver an <strong>HTML file</strong>. When opened, it launches a browser and shows a <strong>fake OneDrive/Microsoft login page</strong>. If you type credentials, they get captured.</p>
+</div>
+
+<h2>Why WeTransfer is used so often</h2>
+<p>WeTransfer is widely trusted. Attackers exploit that trust to increase clicks and reduce suspicion, compared to unknown file-hosting domains.</p>
+
+<h2>How the attack unfolds</h2>
+<p>You receive an email that looks like shared files, invoices, or documents. The link opens a download-style page. Instead of a PDF/DOCX, you download something like <em>invoice.html</em> or <em>documents.html</em>.</p>
+
+<p>When you open it, your browser shows a convincing <strong>OneDrive/Microsoft login</strong>. Many people assume it’s a normal cloud authentication step — and enter their password.</p>
+
+<h2>Why the HTML file is the key risk</h2>
+<p>An HTML file is basically “a web page saved as a file”. When opened, it can render a fake login page, redirect you, or submit what you type to an attacker-controlled server. That’s why “opening a file” can suddenly turn into a credential theft moment.</p>
+
+<h2>How to spot it quickly</h2>
+<p>Check the browser address: is it a real Microsoft domain? Also ask: why is this <strong>.html</strong> instead of a document? If the message adds urgency (“expires soon”, “urgent”, “view now”), treat it as a strong warning sign.</p>
+
+<h2>How to protect your Microsoft 365 account</h2>
+<p>Enable <strong>MFA</strong> (Authenticator preferred), use a <strong>password manager</strong>, and review suspicious sign-ins. For businesses, consider Security Defaults or Conditional Access. And teach teams that “HTML file ≠ document”.</p>
+
+<h2>Video</h2>
+<p>The embedded video shows the incident flow and what to look for in real life.</p>
+
+<p><strong>Key takeaway:</strong> WeTransfer itself isn’t the threat. Attackers use the trusted download flow as camouflage. The danger starts when an HTML file triggers a login prompt.</p>
+          </div>
+        </article>
+
+        
+    <aside class="post-related" aria-labelledby="relatedPostsHeading">
+      <h2 id="relatedPostsHeading">Related posts</h2>
+      <div class="post-related-grid">
+        
+            <article class="post-related-card">
+              <a class="post-related-card-link" href="/en/blog/notfall-checkliste-phishing-microsoft-365/" aria-label="Phishing Checkliste">
+                <img class="post-related-thumb" src="/assets/blog/Laptop-repair-in-phishing-crisis.webp" alt="Phishing Checkliste" loading="lazy" decoding="async">
+                <div class="post-related-body">
+                  <time class="post-related-date" datetime="2026-02-26">26.02.2026</time>
+                  <h3 class="post-related-title">Phishing Checkliste</h3>
+                  <p class="post-related-excerpt">Phishing happens fast: this Microsoft 365/Entra ID emergency checklist shows how to secure accounts immediately and minimize follow-up damage.</p>
+                </div>
+              </a>
+            </article>
+          
+            <article class="post-related-card">
+              <a class="post-related-card-link" href="/en/blog/outlook-fragezeichen-zeichenkodierung-utf8/" aria-label="Classic Outlook turns äöü into ?">
+                <img class="post-related-thumb" src="/assets/blog/OutlookUml.png" alt="Classic Outlook turns äöü into ?" loading="lazy" decoding="async">
+                <div class="post-related-body">
+                  <time class="post-related-date" datetime="2026-02-19">19.02.2026</time>
+                  <h3 class="post-related-title">Classic Outlook turns äöü into ?</h3>
+                  <p class="post-related-excerpt">Special characters become question marks in Classic Outlook. Here’s why—and how to fix it (UTF-8, OWA, rollback).</p>
+                </div>
+              </a>
+            </article>
+          
+            <article class="post-related-card">
+              <a class="post-related-card-link" href="/en/blog/mfa-aktivieren-microsoft-authenticator/" aria-label="Enable MFA with Microsoft Authenticator: secure your account in minutes">
+                <img class="post-related-thumb" src="/assets/blog/021_tn.webp" alt="Enable MFA with Microsoft Authenticator: secure your account in minutes" loading="lazy" decoding="async">
+                <div class="post-related-body">
+                  <time class="post-related-date" datetime="2026-03-05">05.03.2026</time>
+                  <h3 class="post-related-title">Enable MFA with Microsoft Authenticator: secure your account in minutes</h3>
+                  <p class="post-related-excerpt">If someone has your Microsoft password, they can take over your account. Here’s how to enable MFA with Microsoft Authenticator in a few minutes, step by step.</p>
+                </div>
+              </a>
+            </article>
+          
+      </div>
+    </aside>
+  
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="wrap">
+      <p>© <span id="year"></span> Swissploit.</p>
+      <nav class="foot-nav" aria-label="Footer Navigation">
+        <a href="/index.html#about" data-transition>About me</a>
+        <a href="/index.html#featured" data-transition>Latest video</a>
+        <a href="/index.html#shorts" data-transition>H355</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+    window.SWISSPLOIT_CURRENT_LANG = "en";
+  </script>
+
+  <script src="/assets/transition.js"></script>
+  <script src="/assets/app.js"></script>
+  <script src="/assets/blog-index-static.js"></script>
+</body>
+</html>

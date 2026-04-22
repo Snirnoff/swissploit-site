@@ -1,6 +1,31 @@
-/* assets/blog.css – Swissploit Style (matches blog.js markup) */
+/* assets/blog.css – shared styling for static DE/EN blog index pages */
 
-/* Blog Hero */
+.blog-breadcrumbs{
+  padding-top: 98px;
+}
+
+.breadcrumb-list{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  color: color-mix(in oklab, var(--fg) 72%, transparent);
+  font-size: 14px;
+}
+
+.breadcrumb-list li + li::before{
+  content: "/";
+  margin-right: 8px;
+  color: color-mix(in oklab, var(--fg) 45%, transparent);
+}
+
+.breadcrumb-list a{
+  color: inherit;
+  text-decoration: none;
+}
+
 .blog-hero{
   padding-top: 90px;
   padding-bottom: 60px;
@@ -13,7 +38,6 @@
   gap: 10px;
 }
 
-/* Swissploit wie Hero */
 .blog-hero .blog-brand{
   display: inline-block;
   font-size: clamp(42px, 8vw, 88px);
@@ -22,7 +46,6 @@
   color: var(--fg);
 }
 
-/* Kicker wie Tech.Security.Klar */
 .blog-kicker{
   display: inline-block;
   font-size: clamp(16px, 2.2vw, 22px);
@@ -31,12 +54,12 @@
   letter-spacing: .02em;
 }
 
-/* Suche */
 .blog-search{
   margin: 18px auto 0;
   max-width: 720px;
   text-align: left;
 }
+
 .blog-search input{
   width: 100%;
   padding: 14px 14px;
@@ -47,9 +70,11 @@
   font-size: 16px;
   outline: none;
 }
+
 .blog-search input::placeholder{
   color: color-mix(in oklab, var(--fg) 55%, transparent);
 }
+
 .blog-search-hint{
   display: block;
   margin-top: 10px;
@@ -57,15 +82,19 @@
   color: color-mix(in oklab, var(--fg) 72%, transparent);
 }
 
-/* Language Buttons */
 .lang-toggle{
   display: flex;
   justify-content: center;
   gap: 10px;
   margin-top: 16px;
 }
-.lang-btn{
+
+.lang-btn,
+.lang-link{
   appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   padding: 10px 12px;
   border-radius: 999px;
   border: 1px solid var(--border);
@@ -73,36 +102,40 @@
   color: var(--fg);
   font-weight: 700;
   cursor: pointer;
+  text-decoration: none;
   transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
 }
-.lang-btn:hover{
+
+.lang-btn:hover,
+.lang-link:hover{
   transform: translateY(-1px);
   box-shadow: var(--shadow);
 }
-.lang-btn.is-active{
+
+.lang-btn.is-active,
+.lang-link.is-active{
   border-color: color-mix(in oklab, var(--accent) 55%, var(--border));
   background: color-mix(in oklab, var(--accent) 12%, var(--panel));
 }
 
-/* Grid */
 .blog-grid-section{
   padding-top: 60px;
 }
+
 .blog-grid{
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 20px;
 }
+
 @media (max-width: 1024px){
   .blog-grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
+
 @media (max-width: 640px){
   .blog-grid{ grid-template-columns: 1fr; }
 }
 
-/* ========= KACHEL (wichtig) ========= */
-
-/* Falls styles.css irgendwas mit article/img macht: hart überschreiben */
 .blog-card{
   background: var(--panel);
   border: 1px solid var(--border);
@@ -124,7 +157,6 @@
   border-color: color-mix(in oklab, var(--accent) 45%, var(--border));
 }
 
-/* Der Link soll das Layout tragen */
 .blog-card-link{
   text-decoration: none;
   color: inherit;
@@ -132,21 +164,34 @@
   flex-direction: column;
 }
 
+.blog-thumb{
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: var(--panel);
+  overflow: hidden;
+  border-radius: 14px;
+}
 
-/* Fallback wenn kein Bild */
+.blog-thumb-img{
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
 .blog-thumb-inner{
   width: 100%;
   height: 100%;
   display: grid;
   place-items: center;
 }
+
 .blog-thumb-label{
   font-weight: 800;
   letter-spacing: .12em;
   opacity: .8;
 }
 
-/* Body: kompakt */
 .blog-card-body{
   padding: 12px 12px 10px;
   text-align: left;
@@ -154,17 +199,18 @@
   gap: 6px;
 }
 
-/* Meta-Zeile (Datum/Tags) optional hübsch, kompakt */
 .blog-meta{
   display: flex;
   gap: 10px;
   align-items: baseline;
   flex-wrap: wrap;
 }
+
 .blog-date{
   font-size: 12px;
   color: color-mix(in oklab, var(--fg) 70%, transparent);
 }
+
 .blog-tags{
   font-size: 12px;
   color: color-mix(in oklab, var(--fg) 70%, transparent);
@@ -174,7 +220,6 @@
   max-width: 100%;
 }
 
-/* Titel: max 2 Zeilen */
 .blog-card-title{
   margin: 0;
   font-size: 15px;
@@ -182,11 +227,11 @@
   overflow-wrap: anywhere;
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
-/* Excerpt: heller + max 2 Zeilen */
 .blog-card-excerpt{
   margin: 0;
   font-size: 13px;
@@ -194,18 +239,17 @@
   color: color-mix(in oklab, var(--fg) 86%, transparent);
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
-/* Actions: optional, aber klein halten damit Karte nicht lang wird */
 .blog-card-actions{
   padding: 0 12px 12px;
   display: flex;
   gap: 10px;
 }
 
-/* Mini Buttons im Swissploit-Look */
 .blog-mini-btn{
   display: inline-block;
   padding: 10px 12px;
@@ -219,19 +263,18 @@
   transition: scale .18s ease, box-shadow .18s ease;
   scale: 1;
 }
+
 .blog-mini-btn:hover{
   scale: 1.03;
   box-shadow: var(--shadow);
 }
 
-/* No results */
 .blog-no-results{
   margin-top: 18px;
   color: color-mix(in oklab, var(--fg) 75%, transparent);
   text-align: center;
 }
 
-/* Screenreader helper */
 .sr-only{
   position:absolute;
   width:1px;
@@ -242,25 +285,4 @@
   clip:rect(0,0,0,0);
   white-space:nowrap;
   border:0;
-}
-
-/* ===== BLOG THUMBNAIL (clean + no bars on mobile) ===== */
-.blog-thumb{
-  width: 100%;
-  aspect-ratio: 16 / 9;         /* einheitlich */
-  background: var(--panel);     /* falls Bild noch lädt */
-  overflow: hidden;
-  border-radius: 14px;
-}
-
-.blog-thumb-img{
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: cover;            /* füllt immer, keine Balken */
-  object-position: center;
-}
-
-@media (max-width: 720px){
-  .blog-thumb{ aspect-ratio: 4 / 3; }
 }

@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="de" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>OneDrive Dateien zurückholen! – Swissploit</title>
+
+  <meta name="description" content="So stellst du Dateien und Ordner in Sekunden wieder her." />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+
+  <meta property="og:title" content="OneDrive Dateien zurückholen!">
+  <meta property="og:description" content="So stellst du Dateien und Ordner in Sekunden wieder her.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://swissploit.ch/blog/onedrive-restore-deleted-files/">
+  <meta property="og:image" content="https://swissploit.ch/assets/blog/onedrive-restore.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="OneDrive Dateien zurückholen!">
+  <meta name="twitter:description" content="So stellst du Dateien und Ordner in Sekunden wieder her.">
+  <meta name="twitter:image" content="https://swissploit.ch/assets/blog/onedrive-restore.png">
+
+  <link rel="canonical" href="https://swissploit.ch/blog/onedrive-restore-deleted-files/" />
+  <link rel="alternate" hreflang="de" href="https://swissploit.ch/blog/onedrive-restore-deleted-files/" />
+  <link rel="alternate" hreflang="en" href="https://swissploit.ch/en/blog/onedrive-restore-deleted-files/" />
+  <link rel="alternate" hreflang="x-default" href="https://swissploit.ch/blog/onedrive-restore-deleted-files/" />
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/JustPlus.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/JustPlus.png">
+  <link rel="apple-touch-icon" href="/assets/JustPlus.png">
+  <meta name="theme-color" content="#ffffff">
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"OneDrive Dateien zurückholen!","description":"So stellst du Dateien und Ordner in Sekunden wieder her.","datePublished":"2026-02-23","dateModified":"2026-02-23","image":"https://swissploit.ch/assets/blog/onedrive-restore.png","url":"https://swissploit.ch/blog/onedrive-restore-deleted-files/","mainEntityOfPage":"https://swissploit.ch/blog/onedrive-restore-deleted-files/","inLanguage":"de","author":{"@type":"Person","name":"Swissploit"},"publisher":{"@type":"Organization","name":"Swissploit","logo":{"@type":"ImageObject","url":"https://swissploit.ch/assets/JustPlus.png"}},"keywords":"onedrive, microsoft-365, windows, cloud, backup, papierkorb"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://swissploit.ch/index.html"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://swissploit.ch/blog/"},{"@type":"ListItem","position":3,"name":"OneDrive Dateien zurückholen!","item":"https://swissploit.ch/blog/onedrive-restore-deleted-files/"}]}</script>
+
+  <script>
+    (function () {
+      const saved = localStorage.getItem("swissploit-theme");
+      if (saved) document.documentElement.setAttribute("data-theme", saved);
+      else {
+        const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+        document.documentElement.setAttribute("data-theme", prefersDark ? "dark" : "light");
+      }
+    })();
+  </script>
+
+  <link rel="stylesheet" href="/assets/styles.css" />
+  <link rel="stylesheet" href="/assets/blog-post.css" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <header class="site-header" role="banner">
+    <div class="wrap headerbar">
+      <a class="brand" href="/index.html" aria-label="Swissploit Home" data-transition>
+        <video autoplay muted loop playsinline preload="auto" class="brand-video">
+          <source src="/assets/Swissploit Intro_1.mp4" type="video/mp4">
+        </video>
+      </a>
+
+      <nav class="nav" aria-label="Hauptnavigation">
+        <a href="/index.html#about" data-transition>Über mich</a>
+        <a href="/index.html#featured" data-transition>Neuestes Video</a>
+        <a href="/index.html#shorts" data-transition>H355</a>
+        <a class="is-active" href="/blog/" data-transition>Blog</a>
+      </nav>
+
+      <button id="themeToggle"
+        class="switch"
+        aria-pressed="false"
+        aria-label="Darstellung umschalten"
+        title="Dark/Light umschalten">
+        <span class="switch-track"></span>
+        <span class="switch-thumb">
+          <span class="switch-icon sun" aria-hidden="true">☀️</span>
+          <span class="switch-icon moon" aria-hidden="true">🌙</span>
+        </span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+    <nav class="wrap blog-breadcrumbs" aria-label="Breadcrumb">
+      <ol class="breadcrumb-list">
+        <li><a href="/index.html" data-transition>Home</a></li>
+        <li><a href="/blog/" data-transition>Blog</a></li>
+        <li aria-current="page">OneDrive Dateien zurückholen!</li>
+      </ol>
+    </nav>
+
+    <section class="section post-hero">
+      <div class="wrap">
+        <div class="post-topbar">
+          <a class="post-back" href="/blog/" data-transition>← Zurück</a>
+          
+    <nav class="lang-toggle" aria-label="Sprache wählen">
+      <a class="lang-link is-active" href="/blog/onedrive-restore-deleted-files/" hreflang="de" lang="de" data-lang-switch="de">DE</a><a class="lang-link " href="/en/blog/onedrive-restore-deleted-files/" hreflang="en" lang="en" data-lang-switch="en">EN</a>
+    </nav>
+  
+        </div>
+
+        <h1 class="post-title" id="postTitle">OneDrive Dateien zurückholen!</h1>
+        <p class="post-subline" id="postSubtitle">So stellst du Dateien und Ordner in Sekunden wieder her.</p>
+        <div class="post-meta" id="postMeta"><time class="blog-date" datetime="2026-02-23">23.02.2026</time>
+    
+    <span class="blog-tags">#onedrive #microsoft-365 #windows #cloud #backup #papierkorb</span></div>
+      </div>
+    </section>
+
+    <section class="section post-wrap">
+      <div class="wrap">
+        <article class="post-content" id="postContent" aria-labelledby="postTitle">
+          
+    <div class="post-video">
+      <div class="video-embed video-embed--shorts">
+        <iframe
+          src="https://www.youtube.com/embed/wK_7kSkfQ_g"
+          title="OneDrive Dateien zurückholen!"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen></iframe>
+      </div>
+    </div>
+  
+          <div class="post-article">
+            <h2>Problem</h2>
+<p>Du hast in OneDrive aus Versehen eine Datei oder einen Ordner gelöscht und findest es nicht mehr.</p>
+<h2>Lösung (Schritt für Schritt)</h2>
+<ol>
+<li>Klicke auf das <strong>OneDrive-Symbol</strong> unten rechts in Windows.</li>
+<li>Wähle <strong>Online anzeigen</strong> (öffnet OneDrive im Browser).</li>
+<li>Klicke links auf <strong>Papierkorb</strong>.</li>
+<li>Markiere die gelöschten <strong>Dateien oder Ordner</strong>.</li>
+<li>Klicke auf <strong>Wiederherstellen</strong>.</li>
+</ol>
+<h2>Ergebnis</h2>
+<p>Zurück im OneDrive-Ordner ist alles wieder <strong>genau dort</strong>, wo du es gelöscht hast.</p>
+<h2>Profi-Tipp</h2>
+<p>Wenn du das OneDrive-Symbol nicht siehst: Startmenü öffnen, nach <strong>OneDrive</strong> suchen, anmelden – und nochmals prüfen. 😉</p>
+          </div>
+        </article>
+
+        
+    <aside class="post-related" aria-labelledby="relatedPostsHeading">
+      <h2 id="relatedPostsHeading">Weitere Artikel</h2>
+      <div class="post-related-grid">
+        
+            <article class="post-related-card">
+              <a class="post-related-card-link" href="/blog/notfall-checkliste-phishing-microsoft-365/" aria-label="Phishing Checkliste">
+                <img class="post-related-thumb" src="/assets/blog/Laptop-repair-in-phishing-crisis.webp" alt="Phishing Checkliste" loading="lazy" decoding="async">
+                <div class="post-related-body">
+                  <time class="post-related-date" datetime="2026-02-26">26.02.2026</time>
+                  <h3 class="post-related-title">Phishing Checkliste</h3>
+                  <p class="post-related-excerpt">Phishing passiert schnell: Diese Notfall-Checkliste für Microsoft 365/Entra ID zeigt, wie du Konten sofort absicherst und Folgeschäden minimierst.</p>
+                </div>
+              </a>
+            </article>
+          
+            <article class="post-related-card">
+              <a class="post-related-card-link" href="/blog/outlook-fragezeichen-zeichenkodierung-utf8/" aria-label="Outlook zeigt Umlaute als ?">
+                <img class="post-related-thumb" src="/assets/blog/OutlookUml.png" alt="Outlook zeigt Umlaute als ?" loading="lazy" decoding="async">
+                <div class="post-related-body">
+                  <time class="post-related-date" datetime="2026-02-19">19.02.2026</time>
+                  <h3 class="post-related-title">Outlook zeigt Umlaute als ?</h3>
+                  <p class="post-related-excerpt">In Classic Outlook werden Sonderzeichen zu Fragezeichen. So löst du es (UTF-8, OWA, Rollback).</p>
+                </div>
+              </a>
+            </article>
+          
+            <article class="post-related-card">
+              <a class="post-related-card-link" href="/blog/wetransfer-phishing-html-onedrive/" aria-label="Angriff mit HTML">
+                <img class="post-related-thumb" src="/assets/blog/h355-014.png" alt="Angriff mit HTML" loading="lazy" decoding="async">
+                <div class="post-related-body">
+                  <time class="post-related-date" datetime="2026-01-27">27.01.2026</time>
+                  <h3 class="post-related-title">Angriff mit HTML</h3>
+                  <p class="post-related-excerpt">So wurde ein Microsoft-Konto übernommen!</p>
+                </div>
+              </a>
+            </article>
+          
+      </div>
+    </aside>
+  
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="wrap">
+      <p>© <span id="year"></span> Swissploit.</p>
+      <nav class="foot-nav" aria-label="Footer Navigation">
+        <a href="/index.html#about" data-transition>Über mich</a>
+        <a href="/index.html#featured" data-transition>Neuestes Video</a>
+        <a href="/index.html#shorts" data-transition>H355</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+    window.SWISSPLOIT_CURRENT_LANG = "de";
+  </script>
+
+  <script src="/assets/transition.js"></script>
+  <script src="/assets/app.js"></script>
+  <script src="/assets/blog-index-static.js"></script>
+</body>
+</html>

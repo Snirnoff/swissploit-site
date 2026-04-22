@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="de" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Phishing Checkliste – Swissploit</title>
+
+  <meta name="description" content="Phishing passiert schnell: Diese Notfall-Checkliste für Microsoft 365/Entra ID zeigt, wie du Konten sofort absicherst und Folgeschäden minimierst." />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+
+  <meta property="og:title" content="Phishing Checkliste">
+  <meta property="og:description" content="Phishing passiert schnell: Diese Notfall-Checkliste für Microsoft 365/Entra ID zeigt, wie du Konten sofort absicherst und Folgeschäden minimierst.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://swissploit.ch/blog/notfall-checkliste-phishing-microsoft-365/">
+  <meta property="og:image" content="https://swissploit.ch/assets/blog/Laptop-repair-in-phishing-crisis.webp">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Phishing Checkliste">
+  <meta name="twitter:description" content="Phishing passiert schnell: Diese Notfall-Checkliste für Microsoft 365/Entra ID zeigt, wie du Konten sofort absicherst und Folgeschäden minimierst.">
+  <meta name="twitter:image" content="https://swissploit.ch/assets/blog/Laptop-repair-in-phishing-crisis.webp">
+
+  <link rel="canonical" href="https://swissploit.ch/blog/notfall-checkliste-phishing-microsoft-365/" />
+  <link rel="alternate" hreflang="de" href="https://swissploit.ch/blog/notfall-checkliste-phishing-microsoft-365/" />
+  <link rel="alternate" hreflang="en" href="https://swissploit.ch/en/blog/notfall-checkliste-phishing-microsoft-365/" />
+  <link rel="alternate" hreflang="x-default" href="https://swissploit.ch/blog/notfall-checkliste-phishing-microsoft-365/" />
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/JustPlus.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/JustPlus.png">
+  <link rel="apple-touch-icon" href="/assets/JustPlus.png">
+  <meta name="theme-color" content="#ffffff">
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Phishing Checkliste","description":"Phishing passiert schnell: Diese Notfall-Checkliste für Microsoft 365/Entra ID zeigt, wie du Konten sofort absicherst und Folgeschäden minimierst.","datePublished":"2026-02-26","dateModified":"2026-02-26","image":"https://swissploit.ch/assets/blog/Laptop-repair-in-phishing-crisis.webp","url":"https://swissploit.ch/blog/notfall-checkliste-phishing-microsoft-365/","mainEntityOfPage":"https://swissploit.ch/blog/notfall-checkliste-phishing-microsoft-365/","inLanguage":"de","author":{"@type":"Person","name":"Swissploit"},"publisher":{"@type":"Organization","name":"Swissploit","logo":{"@type":"ImageObject","url":"https://swissploit.ch/assets/JustPlus.png"}},"keywords":"phishing, incident-response, microsoft-365, entra-id, azure-ad, exchange-online, mfa, conditional-access, audit-logs, onedrive"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://swissploit.ch/index.html"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://swissploit.ch/blog/"},{"@type":"ListItem","position":3,"name":"Phishing Checkliste","item":"https://swissploit.ch/blog/notfall-checkliste-phishing-microsoft-365/"}]}</script>
+
+  <script>
+    (function () {
+      const saved = localStorage.getItem("swissploit-theme");
+      if (saved) document.documentElement.setAttribute("data-theme", saved);
+      else {
+        const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+        document.documentElement.setAttribute("data-theme", prefersDark ? "dark" : "light");
+      }
+    })();
+  </script>
+
+  <link rel="stylesheet" href="/assets/styles.css" />
+  <link rel="stylesheet" href="/assets/blog-post.css" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <header class="site-header" role="banner">
+    <div class="wrap headerbar">
+      <a class="brand" href="/index.html" aria-label="Swissploit Home" data-transition>
+        <video autoplay muted loop playsinline preload="auto" class="brand-video">
+          <source src="/assets/Swissploit Intro_1.mp4" type="video/mp4">
+        </video>
+      </a>
+
+      <nav class="nav" aria-label="Hauptnavigation">
+        <a href="/index.html#about" data-transition>Über mich</a>
+        <a href="/index.html#featured" data-transition>Neuestes Video</a>
+        <a href="/index.html#shorts" data-transition>H355</a>
+        <a class="is-active" href="/blog/" data-transition>Blog</a>
+      </nav>
+
+      <button id="themeToggle"
+        class="switch"
+        aria-pressed="false"
+        aria-label="Darstellung umschalten"
+        title="Dark/Light umschalten">
+        <span class="switch-track"></span>
+        <span class="switch-thumb">
+          <span class="switch-icon sun" aria-hidden="true">☀️</span>
+          <span class="switch-icon moon" aria-hidden="true">🌙</span>
+        </span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+    <nav class="wrap blog-breadcrumbs" aria-label="Breadcrumb">
+      <ol class="breadcrumb-list">
+        <li><a href="/index.html" data-transition>Home</a></li>
+        <li><a href="/blog/" data-transition>Blog</a></li>
+        <li aria-current="page">Phishing Checkliste</li>
+      </ol>
+    </nav>
+
+    <section class="section post-hero">
+      <div class="wrap">
+        <div class="post-topbar">
+          <a class="post-back" href="/blog/" data-transition>← Zurück</a>
+          
+    <nav class="lang-toggle" aria-label="Sprache wählen">
+      <a class="lang-link is-active" href="/blog/notfall-checkliste-phishing-microsoft-365/" hreflang="de" lang="de" data-lang-switch="de">DE</a><a class="lang-link " href="/en/blog/notfall-checkliste-phishing-microsoft-365/" hreflang="en" lang="en" data-lang-switch="en">EN</a>
+    </nav>
+  
+        </div>
+
+        <h1 class="post-title" id="postTitle">Phishing Checkliste</h1>
+        <p class="post-subline" id="postSubtitle">Phishing passiert schnell: Diese Notfall-Checkliste für Microsoft 365/Entra ID zeigt, wie du Konten sofort absicherst und Folgeschäden minimierst.</p>
+        <div class="post-meta" id="postMeta"><time class="blog-date" datetime="2026-02-26">26.02.2026</time>
+    
+    <span class="blog-tags">#phishing #incident-response #microsoft-365 #entra-id #azure-ad #exchange-online #mfa #conditional-access #audit-logs #onedrive</span></div>
+      </div>
+    </section>
+
+    <section class="section post-wrap">
+      <div class="wrap">
+        <article class="post-content" id="postContent" aria-labelledby="postTitle">
+          
+          <div class="post-article">
+            <p>Phishing ist oft in Minuten passiert – und genau dann zählt ein klarer Ablauf. Diese Checkliste hilft dir, ein betroffenes Microsoft-365/Entra-ID-Konto <strong>schnell zu stabilisieren</strong>, den <strong>Schaden zu begrenzen</strong> und <strong>weitere Kompromittierungen</strong> zu verhindern.</p>
+<h2>Schritt-für-Schritt Lösung für Administratoren</h2>
+<ol>
+<li><p><strong>Passwort sofort ändern</strong></p>
+<ul>
+<li><strong>Hybrid-User (AD On-Prem → Entra synchronisiert):</strong> Starkes neues Passwort <strong>im On-Prem AD</strong> setzen und dem User <strong>per Telefon</strong> mitteilen.</li>
+<li><strong>Cloud-only Account:</strong> Starkes neues Passwort <strong>in Entra ID (Azure AD)</strong> setzen und dem User <strong>per Telefon</strong> mitteilen.</li>
+</ul>
+</li>
+<li><p><strong>Alle aktiven Sitzungen abmelden</strong></p>
+<ul>
+<li><strong>Microsoft 365 admin center:</strong> User auswählen → <strong>“Sign out from all sessions”</strong><figure class="post-figure">
+<img loading="lazy" decoding="async" src="/assets/blog/image-20260226-125126.webp" alt="Microsoft 365 Admin Center: Sign out from all sessions">
+<figcaption>Im Microsoft 365 Admin Center kannst du den User über „Sign out from all sessions“ aus allen aktiven Sessions abmelden.</figcaption>
+</figure>  </li>
+<li>Alternativ in <strong>Entra ID:</strong> User auswählen → <strong>Revoke sessions</strong><figure class="post-figure">
+<img loading="lazy" decoding="async" src="/assets/blog/image-20260226-125428.webp" alt="Entra ID: Revoke sessions beim Benutzer">
+<figcaption>Zusätzlich in Entra ID: Sessions des Benutzers über „Revoke sessions“ widerrufen.</figcaption>
+</figure></li>
+</ul>
+</li>
+<li><p><strong>MFA (Multi-Faktor-Authentifizierung) überprüfen</strong>
+Prüfe in <strong>Entra ID → User → Authentication methods</strong>:</p>
+<ul>
+<li>Wurden neue Authenticator-Geräte hinzugefügt?</li>
+<li>Wurden neue Telefonnummern hinterlegt?</li>
+<li>Wurden alternative Methoden ergänzt?<br>➜ <strong>Unbekannte Methoden sofort entfernen</strong><br>➜ MFA bei Bedarf <strong>komplett neu registrieren</strong> lassen</li>
+</ul>
+</li>
+</ol>
+<figure class="post-figure">
+  <img loading="lazy" decoding="async" src="/assets/blog/image-20260226-125651.webp" alt="Entra ID: Authentication methods prüfen">
+  <figcaption>Unter „Authentication methods“ erkennst du schnell unbekannte MFA-Methoden und kannst sie entfernen.</figcaption>
+</figure>
+
+<ol start="4">
+<li><p><strong>Mailbox-Regeln und Weiterleitungen prüfen</strong>
+In <strong>Exchange Online</strong> kontrollieren:</p>
+<ul>
+<li>Inbox-Regeln (v. a. <strong>Weiterleitungs- &amp; Löschregeln</strong>)</li>
+<li>Weiterleitungen / automatische Antworten</li>
+<li>Transportregeln (falls Admin-Konto betroffen)<br>➜ Unbekannte Weiterleitungen <strong>sofort entfernen</strong></li>
+</ul>
+</li>
+<li><p><strong>(Optional, aber empfohlen) OneDrive/Teams/SharePoint prüfen</strong>
+Suche nach ungewöhnlichen Datenabflüssen:</p>
+<ul>
+<li>Kürzlich erstellte Freigaben</li>
+<li>Ungewöhnliche externe Shares</li>
+<li>Neue anonyme Links</li>
+</ul>
+<p>Vorgehen (Beispiel OneDrive):</p>
+<ul>
+<li>OneDrive im Browser öffnen → <strong>Shared</strong></li>
+<li><strong>Shared by you</strong></li>
+<li>Nach <strong>Recently shared</strong> sortieren</li>
+</ul>
+</li>
+</ol>
+<figure class="post-figure">
+  <img loading="lazy" decoding="async" src="/assets/blog/image-20260226-125948.webp" alt="OneDrive: Shared by you nach Recently shared sortieren">
+  <figcaption>„Shared by you“ nach „Recently shared“ sortieren, um verdächtige Freigaben schnell zu finden.</figcaption>
+</figure>
+
+<ol start="6">
+<li><p><strong>Endgeräte prüfen</strong></p>
+<ul>
+<li>Malware-Scan durchführen</li>
+<li>Cookies/Cache in den Browsern löschen</li>
+<li>Im Browser gespeicherte Passwörter als kompromittiert betrachten:<ul>
+<li>gespeicherte Passwörter prüfen</li>
+<li>sensible Passwörter (z. B. Banking) ändern</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>Audit-Logs prüfen (Sign-ins)</strong>
+In <strong>Entra ID → User → Sign-in logs</strong>:</p>
+<ul>
+<li>Ungewöhnliche Login-Standorte</li>
+<li>„Impossible travel“-Muster / riskante Sign-ins</li>
+<li>Auffällige User-Agent-/Device-Wechsel</li>
+</ul>
+</li>
+</ol>
+<figure class="post-figure">
+  <img loading="lazy" decoding="async" src="/assets/blog/image-20260226-123042.webp" alt="Entra ID: Sign-in logs prüfen">
+  <figcaption>In den Sign-in Logs erkennst du auffällige Standorte und riskante Anmeldemuster (z. B. Impossible Travel).</figcaption>
+</figure>
+
+<ol start="8">
+<li><p><strong>Azure/Entra Rollen &amp; Admin-Aktivitäten prüfen</strong></p>
+<ul>
+<li>Wurden Rollen zugewiesen?</li>
+<li>Wurden neue Benutzer erstellt?</li>
+<li>Sind privilegierte Rollen betroffen (Global Admin, App Admin, Exchange Admin)?</li>
+</ul>
+</li>
+<li><p><strong>Weitere betroffene Konten prüfen</strong></p>
+<ul>
+<li>Wurde die Phishing-Mail intern weitergeleitet?</li>
+<li><strong>Message Trace</strong> durchführen</li>
+<li>Benutzer informieren</li>
+</ul>
+</li>
+<li><p><strong>Conditional Access / Security Defaults prüfen</strong></p>
+</li>
+</ol>
+<ul>
+<li>Wenn <strong>Security Defaults</strong> aktiv sind: kein klassisches Conditional Access.</li>
+<li>Ansonsten prüfen:<ul>
+<li>Wurden Policies geändert oder neu erstellt?</li>
+<li>Wurden <strong>Named Locations</strong> hinzugefügt?
+ Tipp: In Entra nach <strong>Erstellt/Geändert</strong> sortieren, um Änderungen schnell zu sehen.</li>
+</ul>
+</li>
+</ul>
+<figure class="post-figure">
+  <img loading="lazy" decoding="async" src="/assets/blog/image-20260226-124257.webp" alt="Entra ID: Risk-based Conditional Access und Named locations prüfen">
+  <figcaption>Sortiere Policies nach „Erstellt/Geändert“, und prüfe Named locations auf neue Einträge.</figcaption>
+</figure>
+
+<ol start="11">
+<li><strong>Registrierte Apps / Enterprise Applications prüfen (OAuth-Consent)</strong>
+   In <strong>Entra ID → User → Applications</strong> (bzw. Enterprise Applications):</li>
+</ol>
+<ul>
+<li>Wurden neue Apps mit Berechtigungen hinzugefügt?</li>
+<li>Gibt es neue OAuth-Consent-Einträge (User/Admin Consent)?</li>
+<li>Unbekannte Anwendungen entfernen, Admin-Consent validieren</li>
+</ul>
+<figure class="post-figure">
+  <img loading="lazy" decoding="async" src="/assets/blog/image-20260226-123558.webp" alt="Entra ID: User Applications und Consent prüfen">
+  <figcaption>Unter „Applications“ siehst du, welchen Apps der Benutzer zugestimmt hat – inklusive Berechtigungen und Consent-Typ.</figcaption>
+</figure>
+
+<ol start="12">
+<li><strong>Optional – je nach Schweregrad</strong></li>
+</ol>
+<ul>
+<li>Passwort-Reset für alle Admin-Konten</li>
+<li>Global Sign-out für die gesamte Organisation</li>
+<li>Meldung an Datenschutzbeauftragten (bei möglichem Datenabfluss)</li>
+</ul>
+<h2>Häufige Fragen / Troubleshooting</h2>
+<p><strong>Muss ich die ganze Liste machen, wenn „nur“ der Link geklickt wurde?</strong><br>Empfohlen ja – mindestens <strong>Endgeräteprüfung + Sessions abmelden + MFA-Check</strong>, weil Drive-by-Downloads und Session-Theft möglich sind.</p>
+<p><strong>Warum soll das neue Passwort per Telefon mitgeteilt werden?</strong><br>Weil E-Mail/Chat-Kanäle im Incident-Fall potenziell kompromittiert oder mitgelesen sein können.</p>
+<p><strong>Reicht „Passwort ändern“ allein?</strong><br>Meist nicht. Wenn ein Angreifer bereits ein Token/Session hat, bleibt der Zugriff ohne <strong>Sign-out/Revoke sessions</strong> oft bestehen.</p>
+<p><strong>Worauf muss ich bei Inbox-Regeln besonders achten?</strong><br>Auf Regeln, die Mails <strong>weiterleiten</strong>, <strong>löschen</strong>, „als gelesen markieren“ oder Betreff/Absender filtern – das sind klassische Angreifer-Tricks.</p>
+<p><strong>Wie erkenne ich OAuth-Phishing?</strong><br>Wenn Apps plötzlich weitreichende Rechte haben (Mail lesen, Files, Teams), ohne dass das bewusst freigegeben wurde: <strong>Consent entziehen</strong>, App entfernen, Logs prüfen.</p>
+<div class="callout tip">
+  <div class="callout-title"><strong>💡 Tipp</strong></div>
+  Lege diese Checkliste als <strong>runbook</strong> ab und ergänze sie um eure Standard-Tools – im Ernstfall sparen klare Klickpfade Minuten.
+</div>
+
+<h2>Kurzfassung</h2>
+<ul>
+<li><strong>Passwort ändern + Sessions beenden + MFA bereinigen</strong> sind die ersten Pflichtschritte.</li>
+<li>Danach <strong>Mailbox-Regeln, Freigaben, Logs, Rollen und Apps</strong> prüfen.</li>
+<li>Bei Verdacht auf Datenabfluss: <strong>Organisationweit eskalieren</strong> (Admin-Resets, global sign-out, Datenschutz).</li>
+</ul>
+          </div>
+        </article>
+
+        
+    <aside class="post-related" aria-labelledby="relatedPostsHeading">
+      <h2 id="relatedPostsHeading">Weitere Artikel</h2>
+      <div class="post-related-grid">
+        
+            <article class="post-related-card">
+              <a class="post-related-card-link" href="/blog/onedrive-restore-deleted-files/" aria-label="OneDrive Dateien zurückholen!">
+                <img class="post-related-thumb" src="/assets/blog/onedrive-restore.png" alt="OneDrive Dateien zurückholen!" loading="lazy" decoding="async">
+                <div class="post-related-body">
+                  <time class="post-related-date" datetime="2026-02-23">23.02.2026</time>
+                  <h3 class="post-related-title">OneDrive Dateien zurückholen!</h3>
+                  <p class="post-related-excerpt">So stellst du Dateien und Ordner in Sekunden wieder her.</p>
+                </div>
+              </a>
+            </article>
+          
+            <article class="post-related-card">
+              <a class="post-related-card-link" href="/blog/wetransfer-phishing-html-onedrive/" aria-label="Angriff mit HTML">
+                <img class="post-related-thumb" src="/assets/blog/h355-014.png" alt="Angriff mit HTML" loading="lazy" decoding="async">
+                <div class="post-related-body">
+                  <time class="post-related-date" datetime="2026-01-27">27.01.2026</time>
+                  <h3 class="post-related-title">Angriff mit HTML</h3>
+                  <p class="post-related-excerpt">So wurde ein Microsoft-Konto übernommen!</p>
+                </div>
+              </a>
+            </article>
+          
+            <article class="post-related-card">
+              <a class="post-related-card-link" href="/blog/mfa-aktivieren-microsoft-authenticator/" aria-label="MFA aktivieren: Authenticator">
+                <img class="post-related-thumb" src="/assets/blog/021_tn.webp" alt="MFA aktivieren: Authenticator" loading="lazy" decoding="async">
+                <div class="post-related-body">
+                  <time class="post-related-date" datetime="2026-03-05">05.03.2026</time>
+                  <h3 class="post-related-title">MFA aktivieren: Authenticator</h3>
+                  <p class="post-related-excerpt">So aktivierst du MFA mit Microsoft Authenticator in wenigen Minuten</p>
+                </div>
+              </a>
+            </article>
+          
+      </div>
+    </aside>
+  
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="wrap">
+      <p>© <span id="year"></span> Swissploit.</p>
+      <nav class="foot-nav" aria-label="Footer Navigation">
+        <a href="/index.html#about" data-transition>Über mich</a>
+        <a href="/index.html#featured" data-transition>Neuestes Video</a>
+        <a href="/index.html#shorts" data-transition>H355</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+    window.SWISSPLOIT_CURRENT_LANG = "de";
+  </script>
+
+  <script src="/assets/transition.js"></script>
+  <script src="/assets/app.js"></script>
+  <script src="/assets/blog-index-static.js"></script>
+</body>
+</html>

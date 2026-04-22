@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CyberSeal explained – Swissploit</title>
+
+  <meta name="description" content="CyberSeal is a Swiss quality label for IT service providers in the SMB space. What it really means, which requirements are behind it — and what it does not." />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+
+  <meta property="og:title" content="CyberSeal explained">
+  <meta property="og:description" content="CyberSeal is a Swiss quality label for IT service providers in the SMB space. What it really means, which requirements are behind it — and what it does not.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://swissploit.ch/en/blog/cyberseal-fuer-wen-und-was-es-aussagt/">
+  <meta property="og:image" content="https://swissploit.ch/assets/blog/cyberseal_TN.webp">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CyberSeal explained">
+  <meta name="twitter:description" content="CyberSeal is a Swiss quality label for IT service providers in the SMB space. What it really means, which requirements are behind it — and what it does not.">
+  <meta name="twitter:image" content="https://swissploit.ch/assets/blog/cyberseal_TN.webp">
+
+  <link rel="canonical" href="https://swissploit.ch/en/blog/cyberseal-fuer-wen-und-was-es-aussagt/" />
+  <link rel="alternate" hreflang="de" href="https://swissploit.ch/blog/cyberseal-fuer-wen-und-was-es-aussagt/" />
+  <link rel="alternate" hreflang="en" href="https://swissploit.ch/en/blog/cyberseal-fuer-wen-und-was-es-aussagt/" />
+  <link rel="alternate" hreflang="x-default" href="https://swissploit.ch/blog/cyberseal-fuer-wen-und-was-es-aussagt/" />
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/JustPlus.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/JustPlus.png">
+  <link rel="apple-touch-icon" href="/assets/JustPlus.png">
+  <meta name="theme-color" content="#ffffff">
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"CyberSeal explained","description":"CyberSeal is a Swiss quality label for IT service providers in the SMB space. What it really means, which requirements are behind it — and what it does not.","datePublished":"2026-03-11","dateModified":"2026-03-11","image":"https://swissploit.ch/assets/blog/cyberseal_TN.webp","url":"https://swissploit.ch/en/blog/cyberseal-fuer-wen-und-was-es-aussagt/","mainEntityOfPage":"https://swissploit.ch/en/blog/cyberseal-fuer-wen-und-was-es-aussagt/","inLanguage":"en","author":{"@type":"Person","name":"Swissploit"},"publisher":{"@type":"Organization","name":"Swissploit","logo":{"@type":"ImageObject","url":"https://swissploit.ch/assets/JustPlus.png"}},"keywords":"cybersecurity, Schweiz, KMU, IT-Dienstleister, cyberseal"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://swissploit.ch/index.html"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://swissploit.ch/en/blog/"},{"@type":"ListItem","position":3,"name":"CyberSeal explained","item":"https://swissploit.ch/en/blog/cyberseal-fuer-wen-und-was-es-aussagt/"}]}</script>
+
+  <script>
+    (function () {
+      const saved = localStorage.getItem("swissploit-theme");
+      if (saved) document.documentElement.setAttribute("data-theme", saved);
+      else {
+        const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+        document.documentElement.setAttribute("data-theme", prefersDark ? "dark" : "light");
+      }
+    })();
+  </script>
+
+  <link rel="stylesheet" href="/assets/styles.css" />
+  <link rel="stylesheet" href="/assets/blog-post.css" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <header class="site-header" role="banner">
+    <div class="wrap headerbar">
+      <a class="brand" href="/index.html" aria-label="Swissploit Home" data-transition>
+        <video autoplay muted loop playsinline preload="auto" class="brand-video">
+          <source src="/assets/Swissploit Intro_1.mp4" type="video/mp4">
+        </video>
+      </a>
+
+      <nav class="nav" aria-label="Main navigation">
+        <a href="/index.html#about" data-transition>About me</a>
+        <a href="/index.html#featured" data-transition>Latest video</a>
+        <a href="/index.html#shorts" data-transition>H355</a>
+        <a class="is-active" href="/en/blog/" data-transition>Blog</a>
+      </nav>
+
+      <button id="themeToggle"
+        class="switch"
+        aria-pressed="false"
+        aria-label="Darstellung umschalten"
+        title="Dark/Light umschalten">
+        <span class="switch-track"></span>
+        <span class="switch-thumb">
+          <span class="switch-icon sun" aria-hidden="true">☀️</span>
+          <span class="switch-icon moon" aria-hidden="true">🌙</span>
+        </span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+    <nav class="wrap blog-breadcrumbs" aria-label="Breadcrumb">
+      <ol class="breadcrumb-list">
+        <li><a href="/index.html" data-transition>Home</a></li>
+        <li><a href="/en/blog/" data-transition>Blog</a></li>
+        <li aria-current="page">CyberSeal explained</li>
+      </ol>
+    </nav>
+
+    <section class="section post-hero">
+      <div class="wrap">
+        <div class="post-topbar">
+          <a class="post-back" href="/en/blog/" data-transition>← Back</a>
+          
+    <nav class="lang-toggle" aria-label="Choose language">
+      <a class="lang-link " href="/blog/cyberseal-fuer-wen-und-was-es-aussagt/" hreflang="de" lang="de" data-lang-switch="de">DE</a><a class="lang-link is-active" href="/en/blog/cyberseal-fuer-wen-und-was-es-aussagt/" hreflang="en" lang="en" data-lang-switch="en">EN</a>
+    </nav>
+  
+        </div>
+
+        <h1 class="post-title" id="postTitle">CyberSeal explained</h1>
+        <p class="post-subline" id="postSubtitle">CyberSeal is a Swiss quality label for IT service providers in the SMB space. What it really means, which requirements are behind it — and what it does not.</p>
+        <div class="post-meta" id="postMeta"><time class="blog-date" datetime="2026-03-11">11.03.2026</time>
+    
+    <span class="blog-tags">#cybersecurity #Schweiz #KMU #IT-Dienstleister #cyberseal</span></div>
+      </div>
+    </section>
+
+    <section class="section post-wrap">
+      <div class="wrap">
+        <article class="post-content" id="postContent" aria-labelledby="postTitle">
+          
+          <div class="post-article">
+            <p>CyberSeal is a Swiss quality label for IT service providers who build, operate, or share responsibility for IT infrastructures for companies.</p>
+<div class="callout info">
+  <div class="callout-title"><strong>ℹ️ CyberSeal</strong></div>
+  is primarily a guide for SMBs. It shows that an IT service provider has implemented key security fundamentals in a structured way and has passed an audit.
+</div>
+
+<h2>Who is CyberSeal for?</h2>
+<p>CyberSeal is aimed at IT service providers in Switzerland and is designed to define technical and organizational standards that strengthen cyber resilience.</p>
+<p>For IT service providers, the label is relevant because it brings several advantages:</p>
+<ul>
+<li>Reduced operational and security risks</li>
+<li>Increased trust through proven security competence</li>
+<li>Competitive advantage when acquiring customers and when dealing with insurers</li>
+</ul>
+<p>For SMBs, the label is particularly relevant because they benefit in the following ways:</p>
+<ul>
+<li>Better protection against cyberattacks</li>
+<li>Faster response and lower costs in case of an incident</li>
+<li>Easier selection of an IT service provider thanks to the independent quality label</li>
+</ul>
+<div class="callout tip">
+  <div class="callout-title"><strong>💡 Tip for SMBs:</strong></div>
+  Use CyberSeal as a checklist in your selection process: “How do you handle patch management? How is access to customer systems governed? How do you test restores?”
+</div>
+
+<h2>What does CyberSeal really say — and what does it not?</h2>
+<p>CyberSeal does not mean “unhackable.” That would be unrealistic. What it does mean is: <strong>security is not accidental</strong>, but <strong>organized, documented, and verifiable</strong>.</p>
+<p>In practice, the label stands for:</p>
+<ul>
+<li>defined responsibilities,</li>
+<li>traceable processes,</li>
+<li>and minimum requirements that are checked in an audit.</li>
+</ul>
+<div class="callout warn">
+  <div class="callout-title"><strong>⚠️ Important</strong></div>
+  CyberSeal is not a guarantee of absolute security. It is a sign that the most important security fundamentals in the SMB environment are implemented systematically — not “perfectly,” but at least verifiably.
+</div>
+
+<h2>What requirements must a company meet?</h2>
+<p>CyberSeal is based on a checklist with clearly defined requirements — and a <strong>prioritization</strong>:</p>
+<ul>
+<li><strong>Priority 1:</strong> minimum requirements (must be met) — otherwise a critical deficiency  </li>
+<li><strong>Priority 2:</strong> best practice (should be implemented)  </li>
+<li><strong>Priority 3:</strong> useful, but not mandatory in every SMB scenario</li>
+</ul>
+<p>The focus is not only on individual technical controls, but on a <strong>traceable security level</strong>: organized, documented, and verifiable.</p>
+<h2>Typical areas (practical focus)</h2>
+<p>CyberSeal includes, among other things, topics that repeatedly determine security — or an incident — in day-to-day SMB operations:</p>
+<ul>
+<li><strong>Secure email infrastructure</strong> (because email is often an entry point)</li>
+<li><strong>Updates &amp; patch management</strong>, including handling of critical vulnerabilities</li>
+<li><strong>Management of mobile devices</strong> (e.g., MDM/policies)</li>
+<li><strong>Hardening process</strong> for servers/clients/systems</li>
+<li><strong>Firewall ruleset</strong> + regular review</li>
+<li><strong>Emergency concept</strong> (outages, attacks, compromises)</li>
+<li><strong>Secure access</strong> to customer environments (remote access, traceability)</li>
+<li><strong>Minimum documentation</strong> of customer environments</li>
+<li><strong>Backup &amp; restore</strong> (separated/protected) + regular recovery tests</li>
+<li><strong>Policies for remote work/home office</strong></li>
+<li><strong>Rules for AI and sensitive data</strong></li>
+<li><strong>Security training</strong> for employees</li>
+<li><strong>Physical security/access controls</strong></li>
+<li><strong>Data protection and regulatory requirements</strong></li>
+</ul>
+<div class="callout tip">
+  <div class="callout-title"><strong>💡 Practical interpretation</strong></div>
+  CyberSeal means more than “we have a firewall.” It means firewall rules are traceable, reviewed, and fit into an overall security concept (including backup/restore, access, and processes).
+</div>
+
+<h2>What can an SMB expect from a CyberSeal partner?</h2>
+<p>An SMB can expect security topics to be anchored not only in theory, but also in daily operations. In particular:</p>
+<ul>
+<li>clear responsibilities (who does what — and who verifies it?),</li>
+<li>controlled and traceable access to customer systems</li>
+<li>properly managed offboarding (former employees lose access)</li>
+<li>separation of customer environments (no “mixing”)</li>
+<li>a minimum level of documentation, emergency preparedness, and recovery capability</li>
+<li>transparent communication on security-relevant topics</li>
+</ul>
+<h2>CyberSeal vs. ISO 27001: is it comparable?</h2>
+<p>Not directly. Both deal with information security, but with different approaches and scope.</p>
+<ul>
+<li><strong>ISO/IEC 27001</strong>: comprehensive information security management system (international, broader and more demanding)</li>
+<li><strong>CyberSeal</strong>: focused on effective cybersecurity measures in the SMB day-to-day reality, practical and tailored to the Swiss context</li>
+</ul>
+<div class="callout info">
+  <div class="callout-title"><strong>ℹ️ Key takeaway</strong></div>
+  ISO 27001 evaluates a comprehensive management system. CyberSeal checks whether the most important security fundamentals for SMBs are effectively implemented.
+</div>
+
+<h2>Conclusion</h2>
+<p>CyberSeal is particularly interesting for SMBs that want to assess the security posture of their IT service provider. It does not replace standards and it is not proof of perfect security. But it is a clear signal that a provider meets defined minimum requirements and takes key cybersecurity topics seriously.</p>
+<p>If you are currently evaluating an IT partner, don’t just ask “Do you have CyberSeal?” — ask them to show you how processes like patch management, access control, backup/restore, and emergency planning are actually lived in day-to-day operations.</p>
+          </div>
+        </article>
+
+        
+    <aside class="post-related" aria-labelledby="relatedPostsHeading">
+      <h2 id="relatedPostsHeading">Related posts</h2>
+      <div class="post-related-grid">
+        
+            <article class="post-related-card">
+              <a class="post-related-card-link" href="/en/blog/mfa-aktivieren-microsoft-authenticator/" aria-label="Enable MFA with Microsoft Authenticator: secure your account in minutes">
+                <img class="post-related-thumb" src="/assets/blog/021_tn.webp" alt="Enable MFA with Microsoft Authenticator: secure your account in minutes" loading="lazy" decoding="async">
+                <div class="post-related-body">
+                  <time class="post-related-date" datetime="2026-03-05">05.03.2026</time>
+                  <h3 class="post-related-title">Enable MFA with Microsoft Authenticator: secure your account in minutes</h3>
+                  <p class="post-related-excerpt">If someone has your Microsoft password, they can take over your account. Here’s how to enable MFA with Microsoft Authenticator in a few minutes, step by step.</p>
+                </div>
+              </a>
+            </article>
+          
+            <article class="post-related-card">
+              <a class="post-related-card-link" href="/en/blog/notfall-checkliste-phishing-microsoft-365/" aria-label="Phishing Checkliste">
+                <img class="post-related-thumb" src="/assets/blog/Laptop-repair-in-phishing-crisis.webp" alt="Phishing Checkliste" loading="lazy" decoding="async">
+                <div class="post-related-body">
+                  <time class="post-related-date" datetime="2026-02-26">26.02.2026</time>
+                  <h3 class="post-related-title">Phishing Checkliste</h3>
+                  <p class="post-related-excerpt">Phishing happens fast: this Microsoft 365/Entra ID emergency checklist shows how to secure accounts immediately and minimize follow-up damage.</p>
+                </div>
+              </a>
+            </article>
+          
+            <article class="post-related-card">
+              <a class="post-related-card-link" href="/en/blog/onedrive-restore-deleted-files/" aria-label="Restore deleted files in OneDrive">
+                <img class="post-related-thumb" src="/assets/blog/onedrive-restore.png" alt="Restore deleted files in OneDrive" loading="lazy" decoding="async">
+                <div class="post-related-body">
+                  <time class="post-related-date" datetime="2026-02-23">23.02.2026</time>
+                  <h3 class="post-related-title">Restore deleted files in OneDrive</h3>
+                  <p class="post-related-excerpt">Here’s how to restore files and folders from the Recycle Bin in seconds.</p>
+                </div>
+              </a>
+            </article>
+          
+      </div>
+    </aside>
+  
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="wrap">
+      <p>© <span id="year"></span> Swissploit.</p>
+      <nav class="foot-nav" aria-label="Footer Navigation">
+        <a href="/index.html#about" data-transition>About me</a>
+        <a href="/index.html#featured" data-transition>Latest video</a>
+        <a href="/index.html#shorts" data-transition>H355</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+    window.SWISSPLOIT_CURRENT_LANG = "en";
+  </script>
+
+  <script src="/assets/transition.js"></script>
+  <script src="/assets/app.js"></script>
+  <script src="/assets/blog-index-static.js"></script>
+</body>
+</html>

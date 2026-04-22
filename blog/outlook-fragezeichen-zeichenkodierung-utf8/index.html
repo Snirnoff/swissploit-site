@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="de" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Outlook zeigt Umlaute als ? – Swissploit</title>
+
+  <meta name="description" content="In Classic Outlook werden Sonderzeichen zu Fragezeichen. So löst du es (UTF-8, OWA, Rollback)." />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+
+  <meta property="og:title" content="Outlook zeigt Umlaute als ?">
+  <meta property="og:description" content="In Classic Outlook werden Sonderzeichen zu Fragezeichen. So löst du es (UTF-8, OWA, Rollback).">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://swissploit.ch/blog/outlook-fragezeichen-zeichenkodierung-utf8/">
+  <meta property="og:image" content="https://swissploit.ch/assets/blog/OutlookUml.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Outlook zeigt Umlaute als ?">
+  <meta name="twitter:description" content="In Classic Outlook werden Sonderzeichen zu Fragezeichen. So löst du es (UTF-8, OWA, Rollback).">
+  <meta name="twitter:image" content="https://swissploit.ch/assets/blog/OutlookUml.png">
+
+  <link rel="canonical" href="https://swissploit.ch/blog/outlook-fragezeichen-zeichenkodierung-utf8/" />
+  <link rel="alternate" hreflang="de" href="https://swissploit.ch/blog/outlook-fragezeichen-zeichenkodierung-utf8/" />
+  <link rel="alternate" hreflang="en" href="https://swissploit.ch/en/blog/outlook-fragezeichen-zeichenkodierung-utf8/" />
+  <link rel="alternate" hreflang="x-default" href="https://swissploit.ch/blog/outlook-fragezeichen-zeichenkodierung-utf8/" />
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/JustPlus.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/JustPlus.png">
+  <link rel="apple-touch-icon" href="/assets/JustPlus.png">
+  <meta name="theme-color" content="#ffffff">
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Outlook zeigt Umlaute als ?","description":"In Classic Outlook werden Sonderzeichen zu Fragezeichen. So löst du es (UTF-8, OWA, Rollback).","datePublished":"2026-02-19","dateModified":"2026-02-19","image":"https://swissploit.ch/assets/blog/OutlookUml.png","url":"https://swissploit.ch/blog/outlook-fragezeichen-zeichenkodierung-utf8/","mainEntityOfPage":"https://swissploit.ch/blog/outlook-fragezeichen-zeichenkodierung-utf8/","inLanguage":"de","author":{"@type":"Person","name":"Swissploit"},"publisher":{"@type":"Organization","name":"Swissploit","logo":{"@type":"ImageObject","url":"https://swissploit.ch/assets/JustPlus.png"}},"keywords":"outlook, microsoft365, encoding, utf-8, classic-outlook, windows"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://swissploit.ch/index.html"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://swissploit.ch/blog/"},{"@type":"ListItem","position":3,"name":"Outlook zeigt Umlaute als ?","item":"https://swissploit.ch/blog/outlook-fragezeichen-zeichenkodierung-utf8/"}]}</script>
+
+  <script>
+    (function () {
+      const saved = localStorage.getItem("swissploit-theme");
+      if (saved) document.documentElement.setAttribute("data-theme", saved);
+      else {
+        const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+        document.documentElement.setAttribute("data-theme", prefersDark ? "dark" : "light");
+      }
+    })();
+  </script>
+
+  <link rel="stylesheet" href="/assets/styles.css" />
+  <link rel="stylesheet" href="/assets/blog-post.css" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <header class="site-header" role="banner">
+    <div class="wrap headerbar">
+      <a class="brand" href="/index.html" aria-label="Swissploit Home" data-transition>
+        <video autoplay muted loop playsinline preload="auto" class="brand-video">
+          <source src="/assets/Swissploit Intro_1.mp4" type="video/mp4">
+        </video>
+      </a>
+
+      <nav class="nav" aria-label="Hauptnavigation">
+        <a href="/index.html#about" data-transition>Über mich</a>
+        <a href="/index.html#featured" data-transition>Neuestes Video</a>
+        <a href="/index.html#shorts" data-transition>H355</a>
+        <a class="is-active" href="/blog/" data-transition>Blog</a>
+      </nav>
+
+      <button id="themeToggle"
+        class="switch"
+        aria-pressed="false"
+        aria-label="Darstellung umschalten"
+        title="Dark/Light umschalten">
+        <span class="switch-track"></span>
+        <span class="switch-thumb">
+          <span class="switch-icon sun" aria-hidden="true">☀️</span>
+          <span class="switch-icon moon" aria-hidden="true">🌙</span>
+        </span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+    <nav class="wrap blog-breadcrumbs" aria-label="Breadcrumb">
+      <ol class="breadcrumb-list">
+        <li><a href="/index.html" data-transition>Home</a></li>
+        <li><a href="/blog/" data-transition>Blog</a></li>
+        <li aria-current="page">Outlook zeigt Umlaute als ?</li>
+      </ol>
+    </nav>
+
+    <section class="section post-hero">
+      <div class="wrap">
+        <div class="post-topbar">
+          <a class="post-back" href="/blog/" data-transition>← Zurück</a>
+          
+    <nav class="lang-toggle" aria-label="Sprache wählen">
+      <a class="lang-link is-active" href="/blog/outlook-fragezeichen-zeichenkodierung-utf8/" hreflang="de" lang="de" data-lang-switch="de">DE</a><a class="lang-link " href="/en/blog/outlook-fragezeichen-zeichenkodierung-utf8/" hreflang="en" lang="en" data-lang-switch="en">EN</a>
+    </nav>
+  
+        </div>
+
+        <h1 class="post-title" id="postTitle">Outlook zeigt Umlaute als ?</h1>
+        <p class="post-subline" id="postSubtitle">In Classic Outlook werden Sonderzeichen zu Fragezeichen. So löst du es (UTF-8, OWA, Rollback).</p>
+        <div class="post-meta" id="postMeta"><time class="blog-date" datetime="2026-02-19">19.02.2026</time>
+    
+    <span class="blog-tags">#outlook #microsoft365 #encoding #utf-8 #classic-outlook #windows</span></div>
+      </div>
+    </section>
+
+    <section class="section post-wrap">
+      <div class="wrap">
+        <article class="post-content" id="postContent" aria-labelledby="postTitle">
+          
+          <div class="post-article">
+            <p>Wenn in <strong>Classic Outlook</strong> plötzlich aus Sonderzeichen wie <strong>é, ü, ñ, ® oder £</strong> nur noch <strong>Fragezeichen</strong> werden, wirkt das wie ein Font-Problem – ist es aber meistens nicht. In der Praxis ist es fast immer ein Thema rund um <strong>Zeichenkodierung</strong> und ein aktuelles Outlook-Update.</p>
+
+<p>Microsoft führt dieses Verhalten als bekanntes Problem, das laut bisherigen Rückmeldungen vor allem in <strong>Version 2601 (Build 19628.20150 und höher)</strong> auftritt. Der Status steht aktuell auf “Untersuchung läuft”.</p>
+
+<h2>Was genau passiert hier?</h2>
+<p>Outlook muss beim Versenden entscheiden, in welcher Kodierung eine Mail rausgeht. Wenn dabei nicht sauber <strong>Unicode/UTF-8</strong> verwendet wird, sondern eine eingeschränkte Kodierung, können Zeichen außerhalb von ASCII nicht korrekt dargestellt werden. Das Ergebnis sieht dann so aus: statt “Grüsse, Zürich®” steht beim Empfänger “Gr??e, Z?rich?”.</p>
+
+<h2>Schnelle Lösung: OWA oder Neues Outlook</h2>
+<p>Wenn du sofort wieder korrekt schreiben musst, ist der schnellste Weg, vorübergehend auf <strong>Outlook Web Access (OWA)</strong> oder das <strong>Neue Outlook</strong> zu wechseln. Dort tritt das Problem typischerweise nicht auf, weil die Verarbeitung moderner und konsequent Unicode-basiert ist.</p>
+
+<h2>Workaround in Classic Outlook: UTF-8 / Kodierung erzwingen</h2>
+<p>Wenn du Classic Outlook zwingend brauchst, hilft es in vielen Fällen, die automatische Auswahl der Kodierung abzuschalten und stattdessen eine stabile Kodierung zu erzwingen. In der Praxis funktioniert <strong>UTF-8</strong> am zuverlässigsten, weil es Sonderzeichen sauber abbildet und in modernen Umgebungen Standard ist. Genau dieser Schritt verhindert häufig, dass Outlook “falsch rät” und Zeichen beim Senden kaputt macht.</p>
+
+<figure class="post-figure">
+  <img loading="lazy" decoding="async" src="/assets/blog/Outlutf-8.png" alt="Outlook: Codierung auf Unicode (UTF-8) umstellen">
+  <figcaption>Hier müssen diese zwei Optionen auf Unicode UTF-8 gewechselt werden.</figcaption>
+</figure>
+
+<figure class="post-figure">
+  <img loading="lazy" decoding="async" src="/assets/blog/Outlutf-8_2.png" alt="Outlook: weitere UTF-8 Einstellung">
+</figure>
+
+<h2>Workaround: auf eine ältere Version zurück</h2>
+<p>Wenn das Problem mit einem Update gekommen ist und du dringend stabil arbeiten musst, kannst du testweise auf eine vorherige Version zurückgehen. Microsoft nennt dafür eine bekannte, funktionierende Version und beschreibt den Rollback über <em>officec2rclient.exe</em>. Danach solltest du Office-Updates temporär pausieren, damit es nicht direkt wieder auf den problematischen Build springt.</p>
+
+<h2>Wann kommt der Fix?</h2>
+<p>Im Microsoft-Artikel wird als praktischer Reminder explizit der <strong>10. März</strong> genannt, um Einstellungen oder Updates wieder zu aktivieren. Realistisch ist daher, dass eine offizielle Korrektur eher mit dem nächsten Patch-Zyklus greifbar wird – also rund um den <strong>Patchday am 10. März</strong>.</p>
+
+<h2>Quelle</h2>
+<p>Microsoft Support (Known Issue): <a href="https://support.microsoft.com/de-de/topic/das-klassische-outlook-ersetzt-akzentierte-und-erweiterte-zeichen-durch-fragezeichen-c1fdb067-38ca-464a-bcb1-bd657a85e1d3" target="_blank" rel="noopener">Das klassische Outlook ersetzt akzentierte und erweiterte Zeichen durch Fragezeichen</a></p>
+          </div>
+        </article>
+
+        
+    <aside class="post-related" aria-labelledby="relatedPostsHeading">
+      <h2 id="relatedPostsHeading">Weitere Artikel</h2>
+      <div class="post-related-grid">
+        
+            <article class="post-related-card">
+              <a class="post-related-card-link" href="/blog/wetransfer-phishing-html-onedrive/" aria-label="Angriff mit HTML">
+                <img class="post-related-thumb" src="/assets/blog/h355-014.png" alt="Angriff mit HTML" loading="lazy" decoding="async">
+                <div class="post-related-body">
+                  <time class="post-related-date" datetime="2026-01-27">27.01.2026</time>
+                  <h3 class="post-related-title">Angriff mit HTML</h3>
+                  <p class="post-related-excerpt">So wurde ein Microsoft-Konto übernommen!</p>
+                </div>
+              </a>
+            </article>
+          
+            <article class="post-related-card">
+              <a class="post-related-card-link" href="/blog/onedrive-restore-deleted-files/" aria-label="OneDrive Dateien zurückholen!">
+                <img class="post-related-thumb" src="/assets/blog/onedrive-restore.png" alt="OneDrive Dateien zurückholen!" loading="lazy" decoding="async">
+                <div class="post-related-body">
+                  <time class="post-related-date" datetime="2026-02-23">23.02.2026</time>
+                  <h3 class="post-related-title">OneDrive Dateien zurückholen!</h3>
+                  <p class="post-related-excerpt">So stellst du Dateien und Ordner in Sekunden wieder her.</p>
+                </div>
+              </a>
+            </article>
+          
+            <article class="post-related-card">
+              <a class="post-related-card-link" href="/blog/cyberseal-fuer-wen-und-was-es-aussagt/" aria-label="CyberSeal erklärt">
+                <img class="post-related-thumb" src="/assets/blog/cyberseal_TN.webp" alt="CyberSeal erklärt" loading="lazy" decoding="async">
+                <div class="post-related-body">
+                  <time class="post-related-date" datetime="2026-03-11">11.03.2026</time>
+                  <h3 class="post-related-title">CyberSeal erklärt</h3>
+                  <p class="post-related-excerpt">CyberSeal ist ein Schweizer Gütesiegel für IT-Dienstleister im KMU-Umfeld. Was es wirklich bedeutet, welche Anforderungen dahinterstehen – und was nicht.</p>
+                </div>
+              </a>
+            </article>
+          
+      </div>
+    </aside>
+  
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="wrap">
+      <p>© <span id="year"></span> Swissploit.</p>
+      <nav class="foot-nav" aria-label="Footer Navigation">
+        <a href="/index.html#about" data-transition>Über mich</a>
+        <a href="/index.html#featured" data-transition>Neuestes Video</a>
+        <a href="/index.html#shorts" data-transition>H355</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+    window.SWISSPLOIT_CURRENT_LANG = "de";
+  </script>
+
+  <script src="/assets/transition.js"></script>
+  <script src="/assets/app.js"></script>
+  <script src="/assets/blog-index-static.js"></script>
+</body>
+</html>

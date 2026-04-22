@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Swissploit Blog – English</title>
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/JustPlus.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/JustPlus.png">
+  <link rel="apple-touch-icon" href="/assets/JustPlus.png">
+  <meta name="theme-color" content="#ffffff">
+
+  <meta name="description" content="Swissploit blog with practical posts about cybersecurity, Microsoft 365, Windows, phishing and modern IT." />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+
+  <meta property="og:title" content="Swissploit Blog – English">
+  <meta property="og:description" content="Practical posts about cybersecurity, Microsoft 365, Windows, phishing and modern IT.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://swissploit.ch/en/blog/">
+  <meta property="og:image" content="https://swissploit.ch/assets/JustPlus.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Swissploit Blog – English">
+  <meta name="twitter:description" content="Practical posts about cybersecurity, Microsoft 365, Windows, phishing and modern IT.">
+  <meta name="twitter:image" content="https://swissploit.ch/assets/JustPlus.png">
+
+  <link rel="canonical" href="https://swissploit.ch/en/blog/" />
+  <link rel="alternate" hreflang="de" href="https://swissploit.ch/blog/" />
+  <link rel="alternate" hreflang="en" href="https://swissploit.ch/en/blog/" />
+  <link rel="alternate" hreflang="x-default" href="https://swissploit.ch/blog/" />
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Swissploit Blog – English","url":"https://swissploit.ch/en/blog/","inLanguage":"en","mainEntity":{"@type":"ItemList","itemListElement":[{"@type":"ListItem","position":1,"url":"https://swissploit.ch/en/blog/cyberseal-fuer-wen-und-was-es-aussagt/","name":"CyberSeal explained"},{"@type":"ListItem","position":2,"url":"https://swissploit.ch/en/blog/mfa-aktivieren-microsoft-authenticator/","name":"Enable MFA with Microsoft Authenticator: secure your account in minutes"},{"@type":"ListItem","position":3,"url":"https://swissploit.ch/en/blog/notfall-checkliste-phishing-microsoft-365/","name":"Phishing Checkliste"},{"@type":"ListItem","position":4,"url":"https://swissploit.ch/en/blog/onedrive-restore-deleted-files/","name":"Restore deleted files in OneDrive"},{"@type":"ListItem","position":5,"url":"https://swissploit.ch/en/blog/outlook-fragezeichen-zeichenkodierung-utf8/","name":"Classic Outlook turns äöü into ?"},{"@type":"ListItem","position":6,"url":"https://swissploit.ch/en/blog/wetransfer-phishing-html-onedrive/","name":"HTML Attack"}]}}</script>
+
+  <script>
+    (function () {
+      const saved = localStorage.getItem("swissploit-theme");
+      if (saved) document.documentElement.setAttribute("data-theme", saved);
+      else {
+        const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+        document.documentElement.setAttribute("data-theme", prefersDark ? "dark" : "light");
+      }
+    })();
+  </script>
+
+  <link rel="stylesheet" href="/assets/styles.css" />
+  <link rel="stylesheet" href="/assets/blog.css" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <header class="site-header" role="banner">
+    <div class="wrap headerbar">
+      <a class="brand" href="/index.html" aria-label="Swissploit Home" data-transition>
+        <video autoplay muted loop playsinline preload="auto" class="brand-video">
+          <source src="/assets/Swissploit Intro_1.mp4" type="video/mp4">
+        </video>
+      </a>
+
+      <nav class="nav" aria-label="Main navigation">
+        <a href="/index.html#about" data-transition>About me</a>
+        <a href="/index.html#featured" data-transition>Latest video</a>
+        <a href="/index.html#shorts" data-transition>H355</a>
+        <a class="is-active" href="/en/blog/" data-transition>Blog</a>
+      </nav>
+
+      <button id="themeToggle"
+        class="switch"
+        aria-pressed="false"
+        aria-label="Darstellung umschalten"
+        title="Dark/Light umschalten">
+        <span class="switch-track"></span>
+        <span class="switch-thumb">
+          <span class="switch-icon sun" aria-hidden="true">☀️</span>
+          <span class="switch-icon moon" aria-hidden="true">🌙</span>
+        </span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+    <nav class="wrap blog-breadcrumbs" aria-label="Breadcrumb">
+      <ol class="breadcrumb-list">
+        <li><a href="/index.html">Home</a></li>
+        <li aria-current="page">Blog</li>
+      </ol>
+    </nav>
+
+    <section class="section blog-hero">
+      <div class="wrap">
+        <h1 class="blog-title">
+          <span class="hero-brand blog-brand" aria-label="Swissploit">
+            <span>S</span><span>w</span><span>i</span><span>s</span><span>s</span><span>p</span><span>l</span><span>o</span><span>i</span><span>t</span>
+            <span class="blog-kicker">BLOG. ENGLISH.</span>
+          </span>
+        </h1>
+
+        <div class="blog-search">
+          <label class="sr-only" for="blogSearch">Search blog</label>
+          <input id="blogSearch" type="search" placeholder="Search phishing, Windows, M365, OneDrive…" autocomplete="off">
+          <span class="blog-search-hint">Search scans title, excerpt and tags.</span>
+        </div>
+
+        <nav class="lang-toggle" aria-label="Choose language">
+          <a class="lang-link " href="/blog/" hreflang="de" lang="de" data-lang-switch="de">DE</a>
+          <a class="lang-link is-active" href="/en/blog/" hreflang="en" lang="en" data-lang-switch="en">EN</a>
+        </nav>
+      </div>
+    </section>
+
+    <section class="section blog-grid-section">
+      <div class="wrap">
+        <section aria-labelledby="blogListHeading">
+          <h2 id="blogListHeading" class="sr-only">Blog posts</h2>
+          <div id="blogGrid" class="blog-grid" aria-live="polite">
+            
+    <article
+      class="blog-card"
+      aria-labelledby="blog-card-title-0"
+      data-search="cyberseal explained cyberseal is a swiss quality label for it service providers in the smb space. what it really means, which requirements are behind it — and what it does not. cybersecurity schweiz kmu it-dienstleister cyberseal">
+      <a class="blog-card-link" href="/en/blog/cyberseal-fuer-wen-und-was-es-aussagt/" aria-label="CyberSeal explained">
+        <div class="blog-thumb">
+          
+            <img
+              class="blog-thumb-img"
+              src="/assets/blog/cyberseal_TN.webp"
+              alt="CyberSeal explained"
+              loading="lazy"
+              decoding="async">
+          
+        </div>
+
+        <div class="blog-card-body">
+          <div class="blog-meta">
+            <time class="blog-date" datetime="2026-03-11">11.03.2026</time>
+            <span class="blog-tags" title="cybersecurity Schweiz KMU IT-Dienstleister cyberseal">#cybersecurity #Schweiz #KMU #IT-Dienstleister</span>
+          </div>
+
+          <h2 class="blog-card-title" id="blog-card-title-0">CyberSeal explained</h2>
+          <p class="blog-card-excerpt">CyberSeal is a Swiss quality label for IT service providers in the SMB space. What it really means, which requirements are behind it — and what it does not.</p>
+        </div>
+      </a>
+
+      <div class="blog-card-actions">
+        <a class="blog-mini-btn" href="/en/blog/cyberseal-fuer-wen-und-was-es-aussagt/">Read</a>
+      </div>
+    </article>
+  
+    <article
+      class="blog-card"
+      aria-labelledby="blog-card-title-1"
+      data-search="enable mfa with microsoft authenticator: secure your account in minutes if someone has your microsoft password, they can take over your account. here’s how to enable mfa with microsoft authenticator in a few minutes, step by step. mfa microsoft-authenticator two-factor-authentication security">
+      <a class="blog-card-link" href="/en/blog/mfa-aktivieren-microsoft-authenticator/" aria-label="Enable MFA with Microsoft Authenticator: secure your account in minutes">
+        <div class="blog-thumb">
+          
+            <img
+              class="blog-thumb-img"
+              src="/assets/blog/021_tn.webp"
+              alt="Enable MFA with Microsoft Authenticator: secure your account in minutes"
+              loading="lazy"
+              decoding="async">
+          
+        </div>
+
+        <div class="blog-card-body">
+          <div class="blog-meta">
+            <time class="blog-date" datetime="2026-03-05">05.03.2026</time>
+            <span class="blog-tags" title="mfa microsoft-authenticator two-factor-authentication security">#mfa #microsoft-authenticator #two-factor-authentication #security</span>
+          </div>
+
+          <h2 class="blog-card-title" id="blog-card-title-1">Enable MFA with Microsoft Authenticator: secure your account in minutes</h2>
+          <p class="blog-card-excerpt">If someone has your Microsoft password, they can take over your account. Here’s how to enable MFA with Microsoft Authenticator in a few minutes, step by step.</p>
+        </div>
+      </a>
+
+      <div class="blog-card-actions">
+        <a class="blog-mini-btn" href="/en/blog/mfa-aktivieren-microsoft-authenticator/">Read</a>
+      </div>
+    </article>
+  
+    <article
+      class="blog-card"
+      aria-labelledby="blog-card-title-2"
+      data-search="phishing checkliste phishing happens fast: this microsoft 365/entra id emergency checklist shows how to secure accounts immediately and minimize follow-up damage. phishing incident-response microsoft-365 entra-id azure-ad exchange-online mfa conditional-access audit-logs onedrive">
+      <a class="blog-card-link" href="/en/blog/notfall-checkliste-phishing-microsoft-365/" aria-label="Phishing Checkliste">
+        <div class="blog-thumb">
+          
+            <img
+              class="blog-thumb-img"
+              src="/assets/blog/Laptop-repair-in-phishing-crisis.webp"
+              alt="Phishing Checkliste"
+              loading="lazy"
+              decoding="async">
+          
+        </div>
+
+        <div class="blog-card-body">
+          <div class="blog-meta">
+            <time class="blog-date" datetime="2026-02-26">26.02.2026</time>
+            <span class="blog-tags" title="phishing incident-response microsoft-365 entra-id azure-ad exchange-online mfa conditional-access audit-logs onedrive">#phishing #incident-response #microsoft-365 #entra-id</span>
+          </div>
+
+          <h2 class="blog-card-title" id="blog-card-title-2">Phishing Checkliste</h2>
+          <p class="blog-card-excerpt">Phishing happens fast: this Microsoft 365/Entra ID emergency checklist shows how to secure accounts immediately and minimize follow-up damage.</p>
+        </div>
+      </a>
+
+      <div class="blog-card-actions">
+        <a class="blog-mini-btn" href="/en/blog/notfall-checkliste-phishing-microsoft-365/">Read</a>
+      </div>
+    </article>
+  
+    <article
+      class="blog-card"
+      aria-labelledby="blog-card-title-3"
+      data-search="restore deleted files in onedrive here’s how to restore files and folders from the recycle bin in seconds. onedrive microsoft-365 windows cloud backup papierkorb">
+      <a class="blog-card-link" href="/en/blog/onedrive-restore-deleted-files/" aria-label="Restore deleted files in OneDrive">
+        <div class="blog-thumb">
+          
+            <img
+              class="blog-thumb-img"
+              src="/assets/blog/onedrive-restore.png"
+              alt="Restore deleted files in OneDrive"
+              loading="lazy"
+              decoding="async">
+          
+        </div>
+
+        <div class="blog-card-body">
+          <div class="blog-meta">
+            <time class="blog-date" datetime="2026-02-23">23.02.2026</time>
+            <span class="blog-tags" title="onedrive microsoft-365 windows cloud backup papierkorb">#onedrive #microsoft-365 #windows #cloud</span>
+          </div>
+
+          <h2 class="blog-card-title" id="blog-card-title-3">Restore deleted files in OneDrive</h2>
+          <p class="blog-card-excerpt">Here’s how to restore files and folders from the Recycle Bin in seconds.</p>
+        </div>
+      </a>
+
+      <div class="blog-card-actions">
+        <a class="blog-mini-btn" href="/en/blog/onedrive-restore-deleted-files/">Read</a>
+      </div>
+    </article>
+  
+    <article
+      class="blog-card"
+      aria-labelledby="blog-card-title-4"
+      data-search="classic outlook turns äöü into ? special characters become question marks in classic outlook. here’s why—and how to fix it (utf-8, owa, rollback). outlook microsoft365 encoding utf-8 classic-outlook windows">
+      <a class="blog-card-link" href="/en/blog/outlook-fragezeichen-zeichenkodierung-utf8/" aria-label="Classic Outlook turns äöü into ?">
+        <div class="blog-thumb">
+          
+            <img
+              class="blog-thumb-img"
+              src="/assets/blog/OutlookUml.png"
+              alt="Classic Outlook turns äöü into ?"
+              loading="lazy"
+              decoding="async">
+          
+        </div>
+
+        <div class="blog-card-body">
+          <div class="blog-meta">
+            <time class="blog-date" datetime="2026-02-19">19.02.2026</time>
+            <span class="blog-tags" title="outlook microsoft365 encoding utf-8 classic-outlook windows">#outlook #microsoft365 #encoding #utf-8</span>
+          </div>
+
+          <h2 class="blog-card-title" id="blog-card-title-4">Classic Outlook turns äöü into ?</h2>
+          <p class="blog-card-excerpt">Special characters become question marks in Classic Outlook. Here’s why—and how to fix it (UTF-8, OWA, rollback).</p>
+        </div>
+      </a>
+
+      <div class="blog-card-actions">
+        <a class="blog-mini-btn" href="/en/blog/outlook-fragezeichen-zeichenkodierung-utf8/">Read</a>
+      </div>
+    </article>
+  
+    <article
+      class="blog-card"
+      aria-labelledby="blog-card-title-5"
+      data-search="html attack a real microsoft account takeover! security phishing microsoft365 onedrive outlook">
+      <a class="blog-card-link" href="/en/blog/wetransfer-phishing-html-onedrive/" aria-label="HTML Attack">
+        <div class="blog-thumb">
+          
+            <img
+              class="blog-thumb-img"
+              src="/assets/blog/h355-014.png"
+              alt="HTML Attack"
+              loading="lazy"
+              decoding="async">
+          
+        </div>
+
+        <div class="blog-card-body">
+          <div class="blog-meta">
+            <time class="blog-date" datetime="2026-01-27">27.01.2026</time>
+            <span class="blog-tags" title="security phishing microsoft365 onedrive outlook">#security #phishing #microsoft365 #onedrive</span>
+          </div>
+
+          <h2 class="blog-card-title" id="blog-card-title-5">HTML Attack</h2>
+          <p class="blog-card-excerpt">A real Microsoft account takeover!</p>
+        </div>
+      </a>
+
+      <div class="blog-card-actions">
+        <a class="blog-mini-btn" href="/en/blog/wetransfer-phishing-html-onedrive/">Read</a>
+      </div>
+    </article>
+  
+          </div>
+          <p id="noResults" class="blog-no-results" hidden>No results. Try another keyword.</p>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="wrap">
+      <p>© <span id="year"></span> Swissploit.</p>
+      <nav class="foot-nav" aria-label="Footer Navigation">
+        <a href="/index.html#about" data-transition>About me</a>
+        <a href="/index.html#featured" data-transition>Latest video</a>
+        <a href="/index.html#shorts" data-transition>H355</a>
+        <a href="/en/blog/" data-transition>Blog</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+    window.SWISSPLOIT_INDEX_LANG = "en";
+  </script>
+  <script src="/assets/transition.js"></script>
+  <script src="/assets/blog-index-static.js"></script>
+  <script defer src="/assets/app.js"></script>
+</body>
+</html>
