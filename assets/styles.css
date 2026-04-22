@@ -249,6 +249,32 @@ html[data-theme="dark"] .switch-track{ background: color-mix(in oklab, var(--fg)
   /* use scale transition (not transform) so reveal delay never blocks hover */
   scale: 1;
 }
+
+.btn{
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.btn::before{
+  content:"";
+  position:absolute;
+  inset:-20%;
+  background: linear-gradient(
+    115deg,
+    transparent 20%,
+    rgba(255,255,255,.22) 45%,
+    transparent 70%
+  );
+  transform: translateX(-140%) rotate(10deg);
+  transition: transform .65s ease;
+  pointer-events: none;
+}
+
+.btn:hover::before{
+  transform: translateX(140%) rotate(10deg);
+}
+
 .btn.small{ padding: 10px 14px; font-size: 14px; }
 .btn.primary{ background: #111; color:#fff; border-color: #111; }
 html[data-theme="dark"] .btn.primary{ background:#e4e7eb; color:#0c0c0f; border-color:#e4e7eb; }
