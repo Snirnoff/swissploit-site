@@ -717,6 +717,37 @@ html[data-theme="dark"] .btn.primary:hover{ background:#fff; }
 
 }
 
+@media (max-width: 768px){
+  .about-sequence.is-mobile-reveal{
+    min-height: auto;
+  }
+
+  .about-sequence.is-mobile-reveal .wrap{
+    position: static;
+    top: auto;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .about-mobile-reveal{
+    opacity: 0;
+    translate: 0 28px;
+    transition: opacity .68s ease, translate .68s ease;
+    will-change: opacity, translate;
+  }
+
+  .about-mobile-reveal.visible{
+    opacity: 1;
+    translate: 0 0;
+  }
+
+  .about-sequence.is-mobile-reveal .about-highlight,
+  .about-sequence.is-mobile-reveal .about-quote{
+    scale: 1;
+    filter: none;
+  }
+}
+
 @media (max-width: 640px){
   .about-sequence.is-sequenced{
     min-height: clamp(940px, 176svh, 1480px);
