@@ -212,7 +212,7 @@ function renderPostCard(post, lang, idx) {
       class="blog-card"
       aria-labelledby="blog-card-title-${idx}"
       data-search="${escapeAttr(searchText)}">
-      <a class="blog-card-link" href="${escapeAttr(href.replace(BASE_URL, ""))}" aria-label="${escapeAttr(txt.title || "")}">
+      <a class="blog-card-link" href="${escapeAttr(href.replace(BASE_URL, ""))}" aria-label="${escapeAttr(txt.title || "")}" data-transition>
         <div class="blog-thumb">
           ${post.thumb ? `
             <img
@@ -238,10 +238,6 @@ function renderPostCard(post, lang, idx) {
           <p class="blog-card-excerpt">${escapeHtml(excerpt)}</p>
         </div>
       </a>
-
-      <div class="blog-card-actions">
-        <a class="blog-mini-btn" href="${escapeAttr(href.replace(BASE_URL, ""))}">${lang === "de" ? "Artikel" : "Read"}</a>
-      </div>
     </article>
   `;
 }
@@ -337,13 +333,13 @@ function renderRelatedPostsHtml(post, allPosts, lang) {
             "/blog/";
 
           return `
-            <article class="post-related-card">
-              <a class="post-related-card-link" href="${escapeAttr(href.replace(BASE_URL, ""))}" aria-label="${escapeAttr(txt.title || "")}">
-                ${item.thumb ? `<img class="post-related-thumb" src="/${escapeAttr(String(item.thumb).replace(/^\/+/, ""))}" alt="${escapeAttr(txt.title || "")}" loading="lazy" decoding="async">` : ""}
-                <div class="post-related-body">
-                  ${item.date ? `<time class="post-related-date" datetime="${escapeAttr(item.date)}">${escapeHtml(formatDate(item.date))}</time>` : ""}
-                  <h3 class="post-related-title">${escapeHtml(txt.title || "")}</h3>
-                  ${txt.excerpt ? `<p class="post-related-excerpt">${escapeHtml(txt.excerpt)}</p>` : ""}
+            <article class="post-related-card blog-card">
+              <a class="post-related-card-link blog-card-link" href="${escapeAttr(href.replace(BASE_URL, ""))}" aria-label="${escapeAttr(txt.title || "")}" data-transition>
+                ${item.thumb ? `<div class="post-related-thumb blog-thumb"><img class="blog-thumb-img" src="/${escapeAttr(String(item.thumb).replace(/^\/+/, ""))}" alt="${escapeAttr(txt.title || "")}" loading="lazy" decoding="async"></div>` : ""}
+                <div class="post-related-body blog-card-body">
+                  ${item.date ? `<time class="post-related-date blog-date" datetime="${escapeAttr(item.date)}">${escapeHtml(formatDate(item.date))}</time>` : ""}
+                  <h3 class="post-related-title blog-card-title">${escapeHtml(txt.title || "")}</h3>
+                  ${txt.excerpt ? `<p class="post-related-excerpt blog-card-excerpt">${escapeHtml(txt.excerpt)}</p>` : ""}
                 </div>
               </a>
             </article>

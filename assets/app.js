@@ -62,6 +62,182 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+// About section staged scroll sequence
+(function(){
+  const about = document.querySelector('.about-sequence');
+  if(!about) return;
+
+  const reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)');
+  const cards = Array.from(about.querySelectorAll('[data-about-card]'));
+  const panel = about.querySelector('[data-about-panel]');
+  const panelLinks = panel ? Array.from(panel.querySelectorAll('a')) : [];
+
+  function clamp(value, min, max){
+    return Math.min(Math.max(value, min), max);
+  }
+
+  function ease(value){
+    const t = clamp(value, 0, 1);
+    return t * t * (3 - 2 * t);
+  }
+
+  function getAboutStickyTop(viewportW, viewportH){
+    if(viewportW <= 640){
+      return 66 + (viewportH * 0.02);
+    }
+    if(viewportW <= 960){
+      return 70 + (viewportH * 0.02);
+    }
+    return 74 + (viewportH * 0.04);
+  }
+
+
+  if(reducedMotion && reducedMotion.matches){
+    setStaticState();
+    return;
+  }
+
+  about.classList.add('is-sequenced');
+
+  let ticking = false;
+
+function updateAboutSequence(){
+  ticking = false;
+
+  const rect = about.getBoundingClientRect();
+  const viewportH = window.innerHeight || document.documentElement.clientHeight;
+  const viewportW = window.innerWidth || document.documentElement.clientWidth;
+
+  if(viewportW <= 640){
+    setStaticState();
+    return;
+  }
+
+  about.classList.add('is-sequenced');
+    const stickyTop = getAboutStickyTop(viewportW, viewportH);
+    const lockTravel = Math.max(rect.height - stickyTop - (viewportH * 0.55), viewportH * 0.52);
+    const progress = clamp((stickyTop - rect.top) / lockTravel, 0, 1);
+
+    const revealProgress = clamp(progress / 0.72, 0, 1);
+
+const headlineFade = ease((revealProgress - 0.08) / 0.24);
+about.style.setProperty('--about-headline-fade', headlineFade.toFixed(4));
+
+    cards.forEach((card, index) => {
+  const start = 0.18 + (index * 0.14);
+  const reveal = ease((revealProgress - start) / 0.16);
+  card.style.setProperty('--about-reveal', reveal.toFixed(4));
+    });
+
+    const panelReveal = ease((revealProgress - 0.62) / 0.32);
+    if(panel){
+      panel.style.setProperty('--about-panel-reveal', panelReveal.toFixed(4));
+      panel.style.pointerEvents = panelReveal > 0.96 ? 'auto' : 'none';
+    }
+
+    panelLinks.forEach(link => {
+      link.tabIndex = panelReveal > 0.96 ? 0 : -1;
+    });
+  }
+
+
+
+
+
+const featuredProof = document.querySelector('.featured-proof');
+
+if(featuredProof){
+  const featuredCopy = featuredProof.querySelector('.featured-copy');
+  const featuredMedia = featuredProof.querySelector('.featured-media');
+
+  const clamp01 = (value) => Math.min(1, Math.max(0, value));
+  const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
+
+  const updateFeaturedProof = () => {
+    const rect = featuredProof.getBoundingClientRect();
+    const viewportH = window.innerHeight || document.documentElement.clientHeight;
+
+    const sectionStart = viewportH * 0.88;
+    const sectionEnd = viewportH * 0.18;
+    const rawProgress = (sectionStart - rect.top) / (sectionStart - sectionEnd);
+    const progress = clamp01(rawProgress);
+
+    const copyReveal = easeOutCubic(clamp01((progress - 0.03) / 0.42));
+    const videoReveal = easeOutCubic(clamp01((progress - 0.25) / 0.5));
+
+    featuredProof.style.setProperty('--featured-copy-reveal', copyReveal.toFixed(4));
+    featuredProof.style.setProperty('--featured-video-reveal', videoReveal.toFixed(4));
+
+    if(progress > 0.42){
+      featuredProof.classList.add('is-active');
+    } else {
+      featuredProof.classList.remove('is-active');
+    }
+  };
+
+  updateFeaturedProof();
+  window.addEventListener('scroll', updateFeaturedProof, { passive: true });
+  window.addEventListener('resize', updateFeaturedProof);
+}
+
+
+const shortsSection = document.querySelector('.shorts');
+
+if(shortsSection){
+  const clamp01 = (value) => Math.min(1, Math.max(0, value));
+  const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
+
+  const updateShortsSequence = () => {
+    const rect = shortsSection.getBoundingClientRect();
+    const viewportH = window.innerHeight || document.documentElement.clientHeight;
+
+    const sectionStart = viewportH * 0.9;
+    const sectionEnd = viewportH * 0.16;
+    const rawProgress = (sectionStart - rect.top) / (sectionStart - sectionEnd);
+    const progress = clamp01(rawProgress);
+
+    const copyReveal = easeOutCubic(clamp01((progress - 0.02) / 0.4));
+    const trackReveal = easeOutCubic(clamp01((progress - 0.5) / 0.5));
+
+    shortsSection.style.setProperty('--shorts-copy-reveal', copyReveal.toFixed(4));
+    shortsSection.style.setProperty('--shorts-track-reveal', trackReveal.toFixed(4));
+
+    if(progress > 0.46){
+      shortsSection.classList.add('is-active');
+    } else {
+      shortsSection.classList.remove('is-active');
+    }
+  };
+
+  updateShortsSequence();
+  window.addEventListener('scroll', updateShortsSequence, { passive: true });
+  window.addEventListener('resize', updateShortsSequence);
+}
+
+
+  function requestUpdate(){
+    if(ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(updateAboutSequence);
+  }
+
+  updateAboutSequence();
+  window.addEventListener('scroll', requestUpdate, { passive: true });
+  window.addEventListener('resize', requestUpdate);
+
+  if(reducedMotion){
+    reducedMotion.addEventListener('change', () => {
+      if(reducedMotion.matches){
+        setStaticState();
+      } else {
+        about.classList.add('is-sequenced');
+        requestUpdate();
+      }
+    });
+  }
+})();
+
+
 // Mailto aus Formular generieren (nur Nachricht)
 (function(){
   const form = document.getElementById('contactForm');
@@ -106,9 +282,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // C) Gestaffelte Reveals für Gruppen (Features, Cards, Shorts)
 (function(){
-  const groups = document.querySelectorAll('.features, .cards, .shorts-container, .blog-grid');
+  const groups = document.querySelectorAll('.cards, .shorts-container, .blog-grid');
   groups.forEach(group => {
-    const items = group.querySelectorAll('.reveal, .feature, .card, .short, .blog-card');
+    const items = group.querySelectorAll('.reveal, .card, .short, .blog-card');
     items.forEach((el, i) => {
       el.style.transitionDelay = (i * 0.06) + 's';
       el.classList.add('reveal'); // sicherstellen, dass Klasse da ist
@@ -358,7 +534,34 @@ document.addEventListener("DOMContentLoaded", () => {
     update();
   });
 
-  let dragging = false, startX = 0, curX = 0, startTx = 0;
+  let dragging = false, startX = 0, startY = 0, curX = 0, startTx = 0;
+  let hasDragged = false;
+  let suppressTapUntil = 0;
+  const tapThreshold = 10;
+
+  function shortUrlFromEmbed(src) {
+    const match = /\/embed\/([^?&/]+)/.exec(src || '');
+    return match ? `https://youtube.com/shorts/${match[1]}` : src;
+  }
+
+  items.forEach((item) => {
+    const iframe = item.querySelector('iframe');
+    const shortUrl = shortUrlFromEmbed(iframe?.src || '');
+    if (shortUrl) item.dataset.shortUrl = shortUrl;
+
+    item.addEventListener('click', (e) => {
+      if (performance.now() < suppressTapUntil) {
+        e.preventDefault();
+        e.stopPropagation();
+        return;
+      }
+
+      if (!window.matchMedia('(hover: none), (pointer: coarse)').matches) return;
+      if (!item.dataset.shortUrl) return;
+
+      window.open(item.dataset.shortUrl, '_blank', 'noopener');
+    });
+  });
 
   function currentTranslateFromStyle() {
     const m = /translateX\((-?\d+(?:\.\d+)?)px\)/.exec(track.style.transform || '');
@@ -368,14 +571,22 @@ document.addEventListener("DOMContentLoaded", () => {
   function onDown(e) {
     dragging = true;
     startX = (e.touches ? e.touches[0].clientX : e.clientX) || 0;
+    startY = (e.touches ? e.touches[0].clientY : e.clientY) || 0;
     curX = startX;
     startTx = currentTranslateFromStyle();
+    hasDragged = false;
     track.style.transition = 'none';
   }
   function onMove(e) {
     if (!dragging) return;
-    curX = (e.touches ? e.touches[0].clientX : e.clientX) || startX;
+    const point = e.touches ? e.touches[0] : e;
+    curX = point?.clientX || startX;
+    const curY = point?.clientY || startY;
     const dx = curX - startX;
+    const dy = curY - startY;
+    if (!hasDragged && Math.abs(dx) > tapThreshold && Math.abs(dx) > Math.abs(dy)) {
+      hasDragged = true;
+    }
     track.style.transform = `translateX(${startTx + dx}px)`;
   }
   function onUp() {
@@ -384,6 +595,7 @@ document.addEventListener("DOMContentLoaded", () => {
     track.style.transition = 'transform .36s cubic-bezier(.2,.8,.2,1)';
 
     const dx = (curX - startX) || 0;
+    if (hasDragged) suppressTapUntil = performance.now() + 400;
     const threshold = Math.max(60, viewport.clientWidth * 0.15);
     if (dx > threshold) index = Math.max(0, index - 1);
     else if (dx < -threshold) {
@@ -400,6 +612,7 @@ document.addEventListener("DOMContentLoaded", () => {
   viewport.addEventListener('touchstart', onDown, { passive: true });
   window.addEventListener('touchmove', onMove, { passive: true });
   window.addEventListener('touchend', onUp);
+  window.addEventListener('touchcancel', onUp);
 
   const ro = new ResizeObserver(() => applyLayout());
   ro.observe(viewport);
