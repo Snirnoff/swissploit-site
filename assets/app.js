@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function applyMobileSectionReveal(isMobile) {
-    const sections = Array.from(document.querySelectorAll('section'));
+    const sections = Array.from(document.querySelectorAll('section:not(#about)'));
     if (!isMobile) {
       disconnectMobileSectionObserver();
       return;
@@ -111,214 +111,123 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-// About section staged scroll sequence
+// About section Anime.js reveal
 (function(){
-  const about = document.querySelector('.about-sequence');
+  const about = document.getElementById('about');
   if(!about) return;
+
+  const items = Array.from(about.querySelectorAll('.about-anime'));
+  if(!items.length) return;
 
   const reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)');
   const mobileQuery = window.matchMedia && window.matchMedia('(max-width: 768px)');
-  const cards = Array.from(about.querySelectorAll('[data-about-card]'));
-  const panel = about.querySelector('[data-about-panel]');
-  const panelLinks = panel ? Array.from(panel.querySelectorAll('a')) : [];
-  const mobileRevealItems = [
-    about.querySelector('.about-eyebrow'),
-    about.querySelector('.about-headline'),
-    about.querySelector('.about-lead'),
-    about.querySelector('.about-copy'),
-    ...cards,
-    panel
-  ].filter(Boolean);
+  let observer = null;
+  let aboutAnimation = null;
+  let hasAnimated = false;
 
-  let ticking = false;
-  let desktopActive = false;
-  let mobileObserver = null;
-
-  function clamp(value, min, max){
-    return Math.min(Math.max(value, min), max);
+  function shouldAnimate(){
+    return !(reducedMotion && reducedMotion.matches) && !(mobileQuery && mobileQuery.matches);
   }
 
-  function ease(value){
-    const t = clamp(value, 0, 1);
-    return t * t * (3 - 2 * t);
-  }
-
-  function getAboutStickyTop(viewportW, viewportH){
-    if(viewportW <= 960){
-      return 70 + (viewportH * 0.02);
+  function disconnectObserver(){
+    if(observer){
+      observer.disconnect();
+      observer = null;
     }
-    return 74 + (viewportH * 0.04);
   }
 
-  function resetSequenceState(){
-    about.classList.remove('is-sequenced');
-    about.style.removeProperty('--about-headline-fade');
+  function stopAboutAnimation(){
+    if(aboutAnimation && typeof aboutAnimation.cancel === 'function'){
+      aboutAnimation.cancel();
+    }
+    aboutAnimation = null;
+  }
 
-    cards.forEach(card => {
-      card.style.removeProperty('--about-reveal');
+  function showStatic(){
+    disconnectObserver();
+    stopAboutAnimation();
+    items.forEach(item => {
+      item.style.opacity = '1';
+      item.style.transform = 'none';
+      item.style.filter = 'none';
+      item.style.willChange = 'auto';
     });
+    about.classList.add('is-about-anime-complete');
+  }
 
-    if(panel){
-      panel.style.removeProperty('--about-panel-reveal');
-      panel.style.pointerEvents = '';
-    }
-
-    panelLinks.forEach(link => {
-      link.removeAttribute('tabindex');
+  function resetForAnimation(){
+    items.forEach(item => {
+      item.style.removeProperty('opacity');
+      item.style.removeProperty('transform');
+      item.style.removeProperty('translate');
+      item.style.removeProperty('filter');
+      item.style.removeProperty('will-change');
     });
+    about.classList.remove('is-about-anime-complete');
   }
 
-  function disconnectMobileObserver(){
-    if(mobileObserver){
-      mobileObserver.disconnect();
-      mobileObserver = null;
-    }
-  }
+  function runAboutAnimation(){
+    if(hasAnimated) return;
+    hasAnimated = true;
+    disconnectObserver();
 
-  function clearMobileReveal(){
-    disconnectMobileObserver();
-    about.classList.remove('is-mobile-reveal');
-    mobileRevealItems.forEach(item => {
-      item.classList.remove('about-mobile-reveal', 'visible');
-    });
-  }
-
-  function unlockDocumentScroll(){
-    document.documentElement.style.overflow = '';
-    document.body.style.overflow = '';
-  }
-
-  function disableDesktopSequence(){
-    if(desktopActive){
-      window.removeEventListener('scroll', requestUpdate);
-      window.removeEventListener('resize', requestUpdate);
-      desktopActive = false;
-    }
-
-    ticking = false;
-    resetSequenceState();
-  }
-
-  function setStaticState(){
-    disableDesktopSequence();
-    clearMobileReveal();
-    unlockDocumentScroll();
-  }
-
-  function updateAboutSequence(){
-    ticking = false;
-
-    if(!desktopActive || (reducedMotion && reducedMotion.matches) || (mobileQuery && mobileQuery.matches)){
+    const animeApi = window.anime;
+    if(!animeApi || typeof animeApi.animate !== 'function' || typeof animeApi.stagger !== 'function'){
+      showStatic();
       return;
     }
 
-    const rect = about.getBoundingClientRect();
-    const viewportH = window.innerHeight || document.documentElement.clientHeight;
-    const viewportW = window.innerWidth || document.documentElement.clientWidth;
-    const stickyTop = getAboutStickyTop(viewportW, viewportH);
-    const lockTravel = Math.max(rect.height - stickyTop - (viewportH * 0.55), viewportH * 0.52);
-    const progress = clamp((stickyTop - rect.top) / lockTravel, 0, 1);
-    const revealProgress = clamp(progress / 0.72, 0, 1);
-    const headlineFade = ease((revealProgress - 0.08) / 0.24);
-
-    about.style.setProperty('--about-headline-fade', headlineFade.toFixed(4));
-
-    cards.forEach((card, index) => {
-      const start = 0.18 + (index * 0.14);
-      const reveal = ease((revealProgress - start) / 0.16);
-      card.style.setProperty('--about-reveal', reveal.toFixed(4));
-    });
-
-    const panelReveal = ease((revealProgress - 0.62) / 0.32);
-    if(panel){
-      panel.style.setProperty('--about-panel-reveal', panelReveal.toFixed(4));
-      panel.style.pointerEvents = panelReveal > 0.96 ? 'auto' : 'none';
-    }
-
-    panelLinks.forEach(link => {
-      link.tabIndex = panelReveal > 0.96 ? 0 : -1;
+    const { animate, stagger } = animeApi;
+    aboutAnimation = animate(items, {
+      opacity: [0, 1],
+      translateY: [32, 0],
+      filter: ['blur(14px)', 'blur(0px)'],
+      duration: 1100,
+      delay: stagger(120),
+      ease: 'outExpo',
+      onComplete: () => {
+        aboutAnimation = null;
+        about.classList.add('is-about-anime-complete');
+      }
     });
   }
 
-  function requestUpdate(){
-    if(ticking) return;
-    ticking = true;
-    window.requestAnimationFrame(updateAboutSequence);
-  }
+  function setupAboutReveal(){
+    disconnectObserver();
 
-  function enableDesktopSequence(){
-    clearMobileReveal();
-    unlockDocumentScroll();
-
-    if(reducedMotion && reducedMotion.matches){
-      resetSequenceState();
+    if(!shouldAnimate() || !('IntersectionObserver' in window)){
+      showStatic();
       return;
     }
 
-    about.classList.add('is-sequenced');
-
-    if(!desktopActive){
-      desktopActive = true;
-      window.addEventListener('scroll', requestUpdate, { passive: true });
-      window.addEventListener('resize', requestUpdate);
-    }
-
-    updateAboutSequence();
-  }
-
-  function enableMobileReveal(){
-    disableDesktopSequence();
-    unlockDocumentScroll();
-
-    about.classList.add('is-mobile-reveal');
-    mobileRevealItems.forEach(item => {
-      item.classList.add('about-mobile-reveal');
-      item.classList.remove('visible');
-    });
-
-    if((reducedMotion && reducedMotion.matches) || !('IntersectionObserver' in window)){
-      mobileRevealItems.forEach(item => item.classList.add('visible'));
+    if(hasAnimated){
+      showStatic();
       return;
     }
 
-    disconnectMobileObserver();
-    mobileObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if(!entry.isIntersecting) return;
-        entry.target.classList.add('visible');
-        mobileObserver.unobserve(entry.target);
-      });
+    resetForAnimation();
+    observer = new IntersectionObserver((entries) => {
+      if(entries.some(entry => entry.isIntersecting)){
+        runAboutAnimation();
+      }
     }, {
-      rootMargin: '0px 0px -12% 0px',
-      threshold: 0.12
+      threshold: 0.22,
+      rootMargin: '0px 0px -12% 0px'
     });
 
-    mobileRevealItems.forEach(item => mobileObserver.observe(item));
-  }
-
-  function applyAboutMode(){
-    if(reducedMotion && reducedMotion.matches){
-      setStaticState();
-      return;
-    }
-
-    if(mobileQuery && mobileQuery.matches){
-      enableMobileReveal();
-    } else {
-      enableDesktopSequence();
-    }
+    observer.observe(about);
   }
 
   function listenToMediaQuery(query){
     if(!query) return;
     if(query.addEventListener){
-      query.addEventListener('change', applyAboutMode);
+      query.addEventListener('change', setupAboutReveal);
     } else if(query.addListener){
-      query.addListener(applyAboutMode);
+      query.addListener(setupAboutReveal);
     }
   }
 
-  applyAboutMode();
+  setupAboutReveal();
   listenToMediaQuery(mobileQuery);
   listenToMediaQuery(reducedMotion);
 })();
