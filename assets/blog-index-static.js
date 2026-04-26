@@ -1,8 +1,8 @@
 // assets/blog-index-static.js
 (function () {
-  const input = document.getElementById("blogSearch");
-  const grid = document.getElementById("blogGrid");
-  const noResults = document.getElementById("noResults");
+  const searchInput = document.querySelector("#blog-search");
+  const blogGrid = document.querySelector("#blogGrid");
+  const emptyState = document.querySelector("#blog-empty-state");
   const lang = window.SWISSPLOIT_INDEX_LANG || document.documentElement.lang || "de";
 
   if (lang) {
@@ -18,26 +18,49 @@
     });
   });
 
-  if (!grid || !input) return;
-
-  const cards = Array.from(grid.querySelectorAll(".blog-card"));
-
-  function applyFilter() {
-    const q = String(input.value || "").trim().toLowerCase();
-    let visible = 0;
-
-    cards.forEach((card) => {
-      const haystack = String(card.getAttribute("data-search") || "");
-      const show = !q || haystack.includes(q);
-      card.hidden = !show;
-      if (show) visible += 1;
-    });
-
-    if (noResults) {
-      noResults.hidden = visible !== 0;
+  function normalize(value) {
+    const text = String(value || "");
+    try {
+      return text
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toLowerCase();
+    } catch (err) {
+      return text.toLowerCase();
     }
   }
 
-  input.addEventListener("input", applyFilter);
-  applyFilter();
+  function initBlogSearch() {
+    if (!searchInput || !blogGrid) return;
+
+    const blogCards = Array.from(blogGrid.querySelectorAll(".blog-card"));
+
+    function filterCards() {
+      const query = normalize(searchInput.value).trim();
+      let visibleCount = 0;
+
+      blogCards.forEach((card) => {
+        const text = normalize(card.textContent);
+        const matches = !query || text.includes(query);
+        card.style.display = matches ? "" : "none";
+        if (matches) visibleCount += 1;
+      });
+
+      if (emptyState) {
+        emptyState.hidden = visibleCount !== 0;
+      }
+    }
+
+    searchInput.addEventListener("input", filterCards);
+    searchInput.addEventListener("search", filterCards);
+    searchInput.addEventListener("change", filterCards);
+    searchInput.addEventListener("keyup", filterCards);
+    filterCards();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initBlogSearch);
+  } else {
+    initBlogSearch();
+  }
 })();
