@@ -59,6 +59,55 @@ document.addEventListener("DOMContentLoaded", () => {
   }, { threshold: 0.07 });
 
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  const mobileSectionQuery = window.matchMedia && window.matchMedia('(max-width: 768px)');
+  let mobileSectionObserver = null;
+
+  function disconnectMobileSectionObserver() {
+    if (mobileSectionObserver) {
+      mobileSectionObserver.disconnect();
+      mobileSectionObserver = null;
+    }
+  }
+
+  function applyMobileSectionReveal(isMobile) {
+    const sections = Array.from(document.querySelectorAll('section'));
+    if (!isMobile) {
+      disconnectMobileSectionObserver();
+      return;
+    }
+
+    sections.forEach(section => section.classList.add('reveal'));
+    if (!('IntersectionObserver' in window) || (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) {
+      sections.forEach(section => section.classList.add('visible'));
+      return;
+    }
+
+    disconnectMobileSectionObserver();
+    mobileSectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        } else {
+          entry.target.classList.remove('visible');
+        }
+      });
+    }, {
+      threshold: 0.12,
+      rootMargin: '0px 0px -12% 0px'
+    });
+
+    sections.forEach(section => mobileSectionObserver.observe(section));
+  }
+
+  if (mobileSectionQuery) {
+    applyMobileSectionReveal(mobileSectionQuery.matches);
+    if ('addEventListener' in mobileSectionQuery) {
+      mobileSectionQuery.addEventListener('change', (event) => applyMobileSectionReveal(event.matches));
+    } else if ('addListener' in mobileSectionQuery) {
+      mobileSectionQuery.addListener((event) => applyMobileSectionReveal(event.matches));
+    }
+  }
 });
 
 

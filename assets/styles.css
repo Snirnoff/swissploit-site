@@ -1119,6 +1119,13 @@ html[data-theme="dark"] .btn.primary:hover{ background:#fff; }
   touch-action: pan-x;
 }
 
+@media (hover: none), (pointer: coarse) {
+  .sc-viewport,
+  .sc-track {
+    touch-action: pan-y;
+  }
+}
+
 /* Cards */
 .shorts-carousel .short {
   flex: 0 0 calc((100% - (2 * var(--pad-x)) - (var(--gap) * (var(--visible) - 1))) / var(--visible));

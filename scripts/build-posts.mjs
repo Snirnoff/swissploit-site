@@ -477,6 +477,7 @@ function renderBlogIndexPage(posts, lang) {
     : "Beiträge zu Cybersecurity, Microsoft 365, Windows, Phishing und moderner IT – verständlich und praxisnah.";
   const pageUrl = isEn ? `${BASE_URL}/en/blog/` : `${BASE_URL}/blog/`;
   const blogHref = isEn ? "/en/blog/" : "/blog/";
+  const navBlogHref = "/blog.html";
   const cardsHtml = posts
     .filter((post) => Boolean(post.i18n?.[lang] || post.i18n?.[post.defaultLang]))
     .map((post, idx) => renderPostCard(post, lang, idx))
@@ -541,10 +542,10 @@ function renderBlogIndexPage(posts, lang) {
       </a>
 
       <nav class="nav" aria-label="${isEn ? "Main navigation" : "Hauptnavigation"}">
-        <a href="/index.html#about" data-transition>${isEn ? "About me" : "Über mich"}</a>
-        <a href="/index.html#featured" data-transition>${isEn ? "Latest video" : "Neuestes Video"}</a>
+        <a href="/index.html#about" data-transition>About</a>
+        <a href="/index.html#featured" data-transition>Content</a>
         <a href="/index.html#shorts" data-transition>H355</a>
-        <a class="is-active" href="${blogHref}" data-transition>Blog</a>
+        <a class="is-active" href="${navBlogHref}" data-transition>Blog</a>
       </nav>
 
       <button id="themeToggle"
@@ -608,10 +609,10 @@ function renderBlogIndexPage(posts, lang) {
     <div class="wrap">
       <p>© <span id="year"></span> Swissploit.</p>
       <nav class="foot-nav" aria-label="Footer Navigation">
-        <a href="/index.html#about" data-transition>${isEn ? "About me" : "Über mich"}</a>
-        <a href="/index.html#featured" data-transition>${isEn ? "Latest video" : "Neuestes Video"}</a>
+        <a href="/index.html#about" data-transition>About</a>
+        <a href="/index.html#featured" data-transition>Content</a>
         <a href="/index.html#shorts" data-transition>H355</a>
-        <a href="${blogHref}" data-transition>Blog</a>
+        <a href="${navBlogHref}" data-transition>Blog</a>
       </nav>
     </div>
   </footer>
@@ -638,18 +639,19 @@ function renderStaticPostPage(post, lang, allPosts) {
     post?.urls?.en ||
     `${BASE_URL}/blog/`;
   const blogHref = lang === "en" ? "/en/blog/" : "/blog/";
+  const navBlogHref = "/blog.html";
   const ui = lang === "de"
     ? {
-        about: "Über mich",
-        latest: "Neuestes Video",
+        about: "About",
+        latest: "Content",
         shorts: "H355",
         blog: "Blog",
         back: "← Zurück",
         watch: "▶ Video ansehen"
       }
     : {
-        about: "About me",
-        latest: "Latest video",
+        about: "About",
+        latest: "Content",
         shorts: "H355",
         blog: "Blog",
         back: "← Back",
@@ -723,7 +725,7 @@ function renderStaticPostPage(post, lang, allPosts) {
         <a href="/index.html#about" data-transition>${ui.about}</a>
         <a href="/index.html#featured" data-transition>${ui.latest}</a>
         <a href="/index.html#shorts" data-transition>${ui.shorts}</a>
-        <a class="is-active" href="${blogHref}" data-transition>${ui.blog}</a>
+        <a class="is-active" href="${navBlogHref}" data-transition>${ui.blog}</a>
       </nav>
 
       <button id="themeToggle"
@@ -783,6 +785,7 @@ function renderStaticPostPage(post, lang, allPosts) {
         <a href="/index.html#about" data-transition>${ui.about}</a>
         <a href="/index.html#featured" data-transition>${ui.latest}</a>
         <a href="/index.html#shorts" data-transition>${ui.shorts}</a>
+        <a href="${navBlogHref}" data-transition>${ui.blog}</a>
       </nav>
     </div>
   </footer>
