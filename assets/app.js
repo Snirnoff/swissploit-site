@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function applyMobileSectionReveal(isMobile) {
-    const sections = Array.from(document.querySelectorAll('section:not(#about):not(#top)'));
+    const sections = Array.from(document.querySelectorAll('section:not(#about):not(#top):not(#featured):not(#shorts)'));
     if (!isMobile) {
       disconnectMobileSectionObserver();
       return;
@@ -183,27 +183,142 @@ document.addEventListener("DOMContentLoaded", () => {
 })();
 
 
+// Premium mobile reveal for main content sections
+(function(){
+  const sectionSelectors = ['#about', '#featured', '#shorts'];
+  const mobileQuery = window.matchMedia && window.matchMedia('(max-width: 768px)');
+  const reducedMotionQuery = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)');
+  let mobileRevealObserver = null;
+
+  function getMobileRevealItems(){
+    return sectionSelectors.flatMap(selector => {
+      const section = document.querySelector(selector);
+      return section ? Array.from(section.querySelectorAll('.mobile-reveal')) : [];
+    });
+  }
+
+  function disconnectMobileRevealObserver(){
+    if(mobileRevealObserver){
+      mobileRevealObserver.disconnect();
+      mobileRevealObserver = null;
+    }
+  }
+
+  function clearMobileRevealState(items){
+    items.forEach(item => {
+      item.classList.remove('is-visible');
+      item.style.removeProperty('--mobile-reveal-delay');
+    });
+  }
+
+  function showMobileRevealStatic(items){
+    disconnectMobileRevealObserver();
+    items.forEach(item => {
+      item.classList.add('is-visible');
+      item.style.removeProperty('--mobile-reveal-delay');
+    });
+  }
+
+  function applyMobileReveal(){
+    const items = getMobileRevealItems();
+    const isMobile = mobileQuery ? mobileQuery.matches : window.innerWidth <= 768;
+    const shouldReduceMotion = reducedMotionQuery && reducedMotionQuery.matches;
+
+    disconnectMobileRevealObserver();
+
+    if(!isMobile){
+      clearMobileRevealState(items);
+      return;
+    }
+
+    if(shouldReduceMotion || !('IntersectionObserver' in window)){
+      showMobileRevealStatic(items);
+      return;
+    }
+
+    mobileRevealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add('is-visible');
+        } else {
+          entry.target.classList.remove('is-visible');
+        }
+      });
+    }, { threshold: 0.18 });
+
+    sectionSelectors.forEach(selector => {
+      const section = document.querySelector(selector);
+      if(!section) return;
+
+      Array.from(section.querySelectorAll('.mobile-reveal')).forEach((item, index) => {
+        item.style.setProperty('--mobile-reveal-delay', `${Math.min(index * 60, 420)}ms`);
+        mobileRevealObserver.observe(item);
+      });
+    });
+  }
+
+  applyMobileReveal();
+
+  [mobileQuery, reducedMotionQuery].forEach(query => {
+    if(!query) return;
+    if('addEventListener' in query){
+      query.addEventListener('change', applyMobileReveal);
+    } else if('addListener' in query){
+      query.addListener(applyMobileReveal);
+    }
+  });
+})();
+
+
 // About section reversible reveal
 (function(){
   const items = document.querySelectorAll('.about-anime');
   if(!items.length) return;
 
-  if(!('IntersectionObserver' in window)){
-    items.forEach(el => el.classList.add('is-visible'));
-    return;
+  const mobileQuery = window.matchMedia && window.matchMedia('(max-width: 768px)');
+  let observer = null;
+
+  function disconnectAboutObserver(){
+    if(observer){
+      observer.disconnect();
+      observer = null;
+    }
   }
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting){
-        entry.target.classList.add('is-visible');
-      } else {
-        entry.target.classList.remove('is-visible');
-      }
-    });
-  }, { threshold: 0.2 });
+  function setupAboutReveal(){
+    disconnectAboutObserver();
 
-  items.forEach(el => observer.observe(el));
+    if(mobileQuery && mobileQuery.matches){
+      return;
+    }
+
+    if(!('IntersectionObserver' in window)){
+      items.forEach(el => el.classList.add('is-visible'));
+      return;
+    }
+
+    observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add('is-visible');
+        } else {
+          entry.target.classList.remove('is-visible');
+        }
+      });
+    }, { threshold: 0.2 });
+
+    items.forEach(el => observer.observe(el));
+  }
+
+  setupAboutReveal();
+
+  if(mobileQuery){
+    if('addEventListener' in mobileQuery){
+      mobileQuery.addEventListener('change', setupAboutReveal);
+    } else if('addListener' in mobileQuery){
+      mobileQuery.addListener(setupAboutReveal);
+    }
+  }
 })();
 
 
