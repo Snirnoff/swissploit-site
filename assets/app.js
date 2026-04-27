@@ -248,9 +248,9 @@ if(shortsSection){
 
 // C) Gestaffelte Reveals für Gruppen (Features, Cards, Shorts)
 (function(){
-  const groups = document.querySelectorAll('.cards, .shorts-container, .blog-grid');
+  const groups = document.querySelectorAll('.cards, .shorts-container');
   groups.forEach(group => {
-    const items = group.querySelectorAll('.reveal, .card, .short, .blog-card');
+    const items = group.querySelectorAll('.reveal, .card, .short');
     items.forEach((el, i) => {
       el.style.transitionDelay = (i * 0.06) + 's';
       el.classList.add('reveal'); // sicherstellen, dass Klasse da ist

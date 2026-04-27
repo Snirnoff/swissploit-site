@@ -1361,6 +1361,22 @@ html[data-theme="dark"] .btn.primary:hover{ background:#fff; }
   }
 }
 
+@media (max-width: 768px){
+  #featured .featured-copy,
+  #featured .featured-copy .about-eyebrow,
+  #featured .featured-copy .about-headline,
+  #featured .featured-copy .featured-lead{
+    text-align: left;
+  }
+
+  #featured .featured-copy .about-eyebrow,
+  #featured .featured-copy .about-headline,
+  #featured .featured-copy .featured-lead{
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
 
 
 .featured-proof{
