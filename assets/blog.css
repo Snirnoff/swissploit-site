@@ -165,9 +165,13 @@
     filter: blur(0);
   }
 
+}
+
+@media (max-width: 768px){
   .blog-card:first-child{
     opacity: 1 !important;
     transform: none !important;
+    translate: 0 0 !important;
     filter: none !important;
   }
 }

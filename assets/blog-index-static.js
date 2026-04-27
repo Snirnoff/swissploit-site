@@ -138,6 +138,11 @@
         return;
       }
 
+      if (mode === "mobile" && card === cards[0]) {
+        card.classList.add("is-visible");
+        return;
+      }
+
       blogCardObserver.observe(card);
     });
   }
@@ -146,12 +151,16 @@
     if (!blogCardObserver) return;
 
     const cards = getBlogCards();
-    syncBlogCardDelays(cards, getBlogRevealMode());
+    const mode = getBlogRevealMode();
+    syncBlogCardDelays(cards, mode);
 
     cards.forEach((card) => {
       if (card.style.display === "none") {
         blogCardObserver.unobserve(card);
         card.classList.remove("is-visible");
+      } else if (mode === "mobile" && card === cards[0]) {
+        blogCardObserver.unobserve(card);
+        card.classList.add("is-visible");
       } else {
         blogCardObserver.observe(card);
       }

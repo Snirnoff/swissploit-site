@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function applyMobileSectionReveal(isMobile) {
-    const sections = Array.from(document.querySelectorAll('section:not(#about)'));
+    const sections = Array.from(document.querySelectorAll('section:not(#about):not(#top)'));
     if (!isMobile) {
       disconnectMobileSectionObserver();
       return;
@@ -109,6 +109,78 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 });
+
+
+// Mobile Hero reversible reveal
+(function(){
+  const heroItems = Array.from(document.querySelectorAll('.hero-mobile-reveal'));
+  if(!heroItems.length) return;
+
+  const mobileQuery = window.matchMedia && window.matchMedia('(max-width: 768px)');
+  const reducedMotionQuery = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)');
+  let heroObserver = null;
+
+  function disconnectHeroObserver(){
+    if(heroObserver){
+      heroObserver.disconnect();
+      heroObserver = null;
+    }
+  }
+
+  function clearHeroDelays(){
+    heroItems.forEach(item => item.style.removeProperty('transition-delay'));
+  }
+
+  function showHeroItemsStatic(){
+    disconnectHeroObserver();
+    clearHeroDelays();
+    heroItems.forEach(item => item.classList.add('is-visible'));
+  }
+
+  function setupHeroMobileReveal(){
+    const isMobile = mobileQuery ? mobileQuery.matches : window.innerWidth <= 768;
+    const shouldReduceMotion = reducedMotionQuery && reducedMotionQuery.matches;
+
+    disconnectHeroObserver();
+
+    if(!isMobile){
+      clearHeroDelays();
+      heroItems.forEach(item => item.classList.remove('is-visible'));
+      return;
+    }
+
+    if(shouldReduceMotion || !('IntersectionObserver' in window)){
+      showHeroItemsStatic();
+      return;
+    }
+
+    heroObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if(entry.isIntersecting){
+          entry.target.classList.add('is-visible');
+        } else {
+          entry.target.classList.remove('is-visible');
+        }
+      });
+    }, { threshold: 0.25 });
+
+    heroItems.forEach((item, index) => {
+      item.style.transitionDelay = `${index * 80}ms`;
+      heroObserver.observe(item);
+    });
+  }
+
+  setupHeroMobileReveal();
+
+  [mobileQuery, reducedMotionQuery].forEach((query) => {
+    if(!query) return;
+    if('addEventListener' in query){
+      query.addEventListener('change', setupHeroMobileReveal);
+    } else if('addListener' in query){
+      query.addListener(setupHeroMobileReveal);
+    }
+  });
+})();
 
 
 // About section reversible reveal
