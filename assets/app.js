@@ -111,125 +111,27 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-// About section Anime.js reveal
+// About section reversible reveal
 (function(){
-  const about = document.getElementById('about');
-  if(!about) return;
-
-  const items = Array.from(about.querySelectorAll('.about-anime'));
+  const items = document.querySelectorAll('.about-anime');
   if(!items.length) return;
 
-  const reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)');
-  const mobileQuery = window.matchMedia && window.matchMedia('(max-width: 768px)');
-  let observer = null;
-  let aboutAnimation = null;
-  let hasAnimated = false;
-
-  function shouldAnimate(){
-    return !(reducedMotion && reducedMotion.matches) && !(mobileQuery && mobileQuery.matches);
+  if(!('IntersectionObserver' in window)){
+    items.forEach(el => el.classList.add('is-visible'));
+    return;
   }
 
-  function disconnectObserver(){
-    if(observer){
-      observer.disconnect();
-      observer = null;
-    }
-  }
-
-  function stopAboutAnimation(){
-    if(aboutAnimation && typeof aboutAnimation.cancel === 'function'){
-      aboutAnimation.cancel();
-    }
-    aboutAnimation = null;
-  }
-
-  function showStatic(){
-    disconnectObserver();
-    stopAboutAnimation();
-    items.forEach(item => {
-      item.style.opacity = '1';
-      item.style.transform = 'none';
-      item.style.filter = 'none';
-      item.style.willChange = 'auto';
-    });
-    about.classList.add('is-about-anime-complete');
-  }
-
-  function resetForAnimation(){
-    items.forEach(item => {
-      item.style.removeProperty('opacity');
-      item.style.removeProperty('transform');
-      item.style.removeProperty('translate');
-      item.style.removeProperty('filter');
-      item.style.removeProperty('will-change');
-    });
-    about.classList.remove('is-about-anime-complete');
-  }
-
-  function runAboutAnimation(){
-    if(hasAnimated) return;
-    hasAnimated = true;
-    disconnectObserver();
-
-    const animeApi = window.anime;
-    if(!animeApi || typeof animeApi.animate !== 'function' || typeof animeApi.stagger !== 'function'){
-      showStatic();
-      return;
-    }
-
-    const { animate, stagger } = animeApi;
-    aboutAnimation = animate(items, {
-      opacity: [0, 1],
-      translateY: [32, 0],
-      filter: ['blur(14px)', 'blur(0px)'],
-      duration: 1100,
-      delay: stagger(120),
-      ease: 'outExpo',
-      onComplete: () => {
-        aboutAnimation = null;
-        about.classList.add('is-about-anime-complete');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('is-visible');
+      } else {
+        entry.target.classList.remove('is-visible');
       }
     });
-  }
+  }, { threshold: 0.2 });
 
-  function setupAboutReveal(){
-    disconnectObserver();
-
-    if(!shouldAnimate() || !('IntersectionObserver' in window)){
-      showStatic();
-      return;
-    }
-
-    if(hasAnimated){
-      showStatic();
-      return;
-    }
-
-    resetForAnimation();
-    observer = new IntersectionObserver((entries) => {
-      if(entries.some(entry => entry.isIntersecting)){
-        runAboutAnimation();
-      }
-    }, {
-      threshold: 0.22,
-      rootMargin: '0px 0px -12% 0px'
-    });
-
-    observer.observe(about);
-  }
-
-  function listenToMediaQuery(query){
-    if(!query) return;
-    if(query.addEventListener){
-      query.addEventListener('change', setupAboutReveal);
-    } else if(query.addListener){
-      query.addListener(setupAboutReveal);
-    }
-  }
-
-  setupAboutReveal();
-  listenToMediaQuery(mobileQuery);
-  listenToMediaQuery(reducedMotion);
+  items.forEach(el => observer.observe(el));
 })();
 
 
