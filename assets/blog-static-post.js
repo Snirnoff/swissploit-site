@@ -118,7 +118,7 @@
   function updateSeo(txt) {
     const title = txt.title || "Swissploit – Blog";
     const description = (txt.excerpt || post?.seo?.description || "").slice(0, 160);
-    const image = post?.seo?.image || "https://swissploit.ch/assets/JustPlus.png";
+    const image = post?.seo?.image || "https://swissploit.ch/assets/swissploit-og.png";
     const url = post?.seo?.url || window.location.href;
 
     document.title = `${title} – Swissploit`;

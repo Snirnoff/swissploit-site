@@ -4,308 +4,879 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <title>Swissploit</title>
+  <title>Swissploit | Datenschutz, Cybersecurity, SOC Light &amp; KMU Sicherheits-Check Schweiz</title>
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/JustPlus.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="assets/JustPlus.png">
-  <link rel="apple-touch-icon" href="assets/JustPlus.png">
-  <meta name="theme-color" content="#ffffff">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon-192x192.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="assets/JustPlus.png">
+  <meta name="theme-color" content="#05070b">
 
-  <meta name="description" content="Swissploit: Tech-Videos, Cybersecurity-Services, Bereinigung gehackter Geraete, Schulungen und Social-Engineering-Simulationen." />
+  <meta name="description" content="Swissploit unterstützt Schweizer KMU mit Datenschutz, Cybersecurity und Compliance: KMU Sicherheits-Check, Website-, Cookie- &amp; Tracking-Check, IT-Sicherheits- &amp; Compliance-Check, Schulung, Notfallplanung, Cyberversicherung- &amp; Audit-Readiness und SOC Light Monitoring für Microsoft 365 – verständlich, pragmatisch und umsetzbar." />
+  <meta name="keywords" content="Datenschutz Schweiz KMU, Cybersecurity KMU Schweiz, Datenschutz-Check Schweiz, Website Cookie Tracking Check, IT-Sicherheits- &amp; Compliance-Check, Datenpannen Notfallplan, Mitarbeiterschulung Datenschutz, Cyberversicherung Audit Readiness, Compliance KMU Schweiz">
 
-  <meta property="og:title" content="Swissploit - Tech, Cybersecurity, Schulungen">
-  <meta property="og:description" content="Tech-Channel & Services: Device-Cleanups, Schulungen, Audits, Social-Engineering-Tests und gamifizierte Awareness.">
+  <meta property="og:title" content="Swissploit - KMU Sicherheits-Check, Datenschutz &amp; Cybersecurity für Schweizer KMU">
+  <meta property="og:description" content="Datenschutz, Cybersecurity und Compliance verständlich einordnen: Swissploit zeigt Schweizer KMU Risiken, Prioritäten und konkrete nächste Schritte.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://swissploit.ch/">
-  <meta property="og:image" content="https://swissploit.ch/assets/JustPlus.png">
+  <meta property="og:image" content="https://swissploit.ch/assets/swissploit-og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Swissploit - KMU Sicherheits-Check &amp; Cybersecurity für KMU">
+  <meta name="twitter:description" content="Swissploit unterstützt Schweizer KMU dabei, Datenschutz-, Cybersecurity- und Compliance-Risiken verständlich einzuordnen und konkrete Schutzmassnahmen umzusetzen.">
+  <meta name="twitter:image" content="https://swissploit.ch/assets/swissploit-og.png">
 
   <link rel="canonical" href="https://swissploit.ch/" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
+  <script>document.documentElement.classList.add('js');document.documentElement.setAttribute('data-theme','dark');try{localStorage.setItem('swissploit-theme','dark')}catch(e){}</script>
   <link rel="stylesheet" href="assets/styles.css" />
-
   <script defer src="assets/app.js"></script>
 </head>
-<body>
+<body class="home-page">
   <header class="site-header" role="banner">
     <div class="wrap headerbar">
-      <!-- Logo links
-      <a class="brand" href="#top" aria-label="Swissploit Home">
-        <img src="assets/+ploit3.png" alt="Swissploit Logo" height="40" />
-        <span>@Swissploit</span>
-      </a>
-      -->
-      <a class="brand" href="#top" aria-label="Swissploit Home">
-        <video autoplay muted loop playsinline preload="auto" class="brand-video">
-          <source src="assets/Swissploit Intro_1.mp4" type="video/mp4">
-        </video>
+      <a class="brand" href="#intro" aria-label="Swissploit Home">
+        <img class="header-logo-image" src="assets/swissploit-brand-logo.png" alt="Swissploit Logo" width="120" height="49" decoding="async">
+        <span class="brand-text">Swissploit</span>
       </a>
 
-      <nav class="nav" aria-label="Hauptnavigation">
-        <a href="#about">About</a>
-        <a href="#featured">Content</a>
-        <a href="#shorts">H355</a>
-        <a href="blog.html" data-transition>Blog</a>
+      <nav id="primaryNav" class="nav" aria-label="Hauptnavigation">
+        <a href="#services">Leistungen</a>
+        <a href="#sicherheitslage">Sicherheitslage</a>
+        <a href="#ueber">Über Swissploit</a>
+        <a href="#kontakt">Kontakt</a>
       </nav>
 
-      <button id="themeToggle"
-              class="switch"
-              aria-pressed="false"
-              aria-label="Darstellung umschalten"
-              title="Dark/Light umschalten">
-        <span class="switch-track"></span>
-        <span class="switch-thumb">
-          <span class="switch-icon sun" aria-hidden="true">☀️</span>
-          <span class="switch-icon moon" aria-hidden="true">🌙</span>
-        </span>
-      </button>
+      <div class="header-actions">
+        <a class="header-cta" href="#kontakt">Erstgespräch</a>
+        <button id="menuToggle" class="menu-toggle" type="button" aria-expanded="false" aria-controls="primaryNav" aria-label="Menü öffnen">
+          <span></span><span></span>
+        </button>
+      </div>
     </div>
   </header>
 
   <main id="main">
-    <!-- HERO -->
-    <section id="top" class="hero" aria-label="Einstieg">
-      <div class="bg-layer layer-1" data-speed="0.12"></div>
-      <div class="bg-layer layer-2" data-speed="0.20"></div>
-
-      <div class="content hero-copy">
-        <h1>
-          <span class="muted hero-mobile-reveal">Tech. Security. Klar.</span><br>
-          <span class="hero-brand hero-mobile-reveal">
-            <span>S</span><span>w</span><span>i</span><span>s</span><span>s</span><span>p</span><span>l</span><span>o</span><span>i</span><span>t</span>
-          </span>
-        </h1>
-        <p class="kicker hero-mobile-reveal">Der Schweizer Kanal für moderne IT und Cybersecurity.</p>
-        <div class="cta-row">
-          <a class="btn primary magnetic hero-mobile-reveal" href="https://www.youtube.com/@Swissploit?sub_confirmation=1">Abonnieren</a>
-          <a class="btn youtube magnetic hero-mobile-reveal" href="https://www.youtube.com/@Swissploit" target="_blank" rel="noopener">YouTube Kanal</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ABOUT -->
-    <section id="about" class="about section">
-      <div class="wrap">
-        <div class="about-editorial">
-          <div class="about-story">
-            <p class="about-eyebrow about-anime mobile-reveal">About Swissploit</p>
-            <h2 class="about-headline about-anime mobile-reveal">
-              Klarheit für moderne IT und Cybersecurity – gemacht für den Alltag.
-            </h2>
-            <p class="about-lead about-anime mobile-reveal">
-              Swissploit erkl&auml;rt digitale Themen verst&auml;ndlich und ohne Umwege. Praktische Inhalte, klare Empfehlungen und Fokus auf das, was wirklich hilft.
-            </p>
-            <div class="about-copy about-anime mobile-reveal">
-              <p>
-                Von Windows 11 &uuml;ber Microsoft 365 bis zu KI und Sicherheit &ndash; ruhig, verl&auml;sslich und auf das Wesentliche reduziert.
-              </p>
-            </div>
-          </div>
-
-          <div class="about-highlights">
-            <article class="about-highlight about-highlight-primary about-anime mobile-reveal" data-about-card="1">
-              <span class="about-highlight-kicker">01</span>
-              <h3>Videos mit Mehrwert</h3>
-              <p>L&ouml;sungen statt nur Tipps: kurze, klare Anleitungen und tiefergehende Tutorials.</p>
-            </article>
-            <article class="about-highlight about-highlight-secondary about-anime mobile-reveal" data-about-card="2">
-              <span class="about-highlight-kicker">02</span>
-              <h3>Security mit Augenmass</h3>
-              <p>Schutz, der zum Alltag passt &ndash; ohne Panik und ohne &Uuml;bertreibung.</p>
-            </article>
-            <article class="about-highlight about-highlight-muted about-anime mobile-reveal" data-about-card="3">
-              <span class="about-highlight-kicker">03</span>
-              <h3>Made in Switzerland</h3>
-              <p>Relevanz f&uuml;r KMU, Schulen und Privathaushalte &ndash; lokal gedacht, professionell umgesetzt.</p>
-            </article>
-          </div>
-        </div>
-
-        <div class="about-quote about-anime mobile-reveal" data-about-panel>
-          <div class="about-supporting">
-            <div class="about-cta-copy">
-              <p class="about-cta-eyebrow mobile-reveal">Content Hub</p>
-              <h3 class="about-cta-title mobile-reveal">Bleib dran - auf allen Kanälen.</h3>
-              <p class="about-support-note mobile-reveal">
-                Shorts und Videos für schnelle Updates, der Blog für tiefere Einordnung und klare Anleitungen.
-              </p>
-            </div>
-            <nav class="about-links" aria-label="Swissploit Content Links">
-              <a class="about-link about-link-blog mobile-reveal" href="blog.html" data-transition>Blog entdecken</a>
-              <a class="about-link mobile-reveal" href="https://www.youtube.com/@Swissploit" target="_blank" rel="noopener">YouTube</a>
-              <a class="about-link mobile-reveal" href="https://www.tiktok.com/@swissploit" target="_blank" rel="noopener">TikTok</a>
-              <a class="about-link mobile-reveal" href="https://www.instagram.com/swissploit" target="_blank" rel="noopener">Instagram</a>
-            </nav>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- =========================================================
-     START: Featured Video
-     ========================================================= -->
-<section id="featured" class="section featured-proof reveal" aria-label="Empfohlenes Swissploit Video">
-  <div class="wrap">
-    <div class="featured-layout">
-      <div class="featured-copy reveal">
-        <p class="about-eyebrow mobile-reveal">Kanal Swissploit</p>
-        <h2 class="about-headline mobile-reveal">Ein Beispiel, wie Swissploit Wissen praktisch macht.</h2>
-        <p class="featured-lead mobile-reveal">
-          Nachvollziehbar erklärt, sauber aufgebaut und sofort im Alltag nutzbar. Genau dafür steht der Kanal.
+    <section id="intro" class="intro-section" aria-label="Swissploit Intro">
+      <div class="intro-glow" aria-hidden="true"></div>
+      <div class="intro-grid" aria-hidden="true"></div>
+      <div class="intro-content">
+        <p class="intro-wordmark" aria-label="Swissploit">
+          <span class="intro-letter" data-x="-140" data-y="-80" data-r="-8">S</span>
+          <span class="intro-letter" data-x="-110" data-y="70" data-r="7">w</span>
+          <span class="intro-letter" data-x="-55" data-y="-100" data-r="-5">i</span>
+          <span class="intro-letter" data-x="-25" data-y="90" data-r="5">s</span>
+          <span class="intro-letter" data-x="15" data-y="-70" data-r="-4">s</span>
+          <span class="intro-letter" data-x="60" data-y="80" data-r="6">p</span>
+          <span class="intro-letter" data-x="105" data-y="-60" data-r="-6">l</span>
+          <span class="intro-letter" data-x="145" data-y="65" data-r="8">o</span>
+          <span class="intro-letter" data-x="185" data-y="-85" data-r="-5">i</span>
+          <span class="intro-letter" data-x="220" data-y="55" data-r="6">t</span>
         </p>
-
-        <ul class="featured-points">
-          <li class="mobile-reveal">klare Handlungsempfehlungen statt Buzzwords</li>
-          <li class="mobile-reveal">ruhig erklärt, ohne Alarmismus</li>
-          <li class="mobile-reveal">praxisnah für echte IT- und Security-Fragen</li>
-        </ul>
-
-        <div class="cta-row featured-actions">
-          <a class="btn primary magnetic mobile-reveal" href="https://www.youtube.com/embed/n_2DYwpVsS4" target="_blank" rel="noopener">
-            Video direkt ansehen
-          </a>
-          <a class="btn youtube magnetic mobile-reveal" href="https://www.youtube.com/@Swissploit" target="_blank" rel="noopener">
-            Zum YouTube Kanal
-          </a>
-        </div>
+        <p class="intro-subtitle">Cyber Security einfach erklärt. Für Schweizer KMU.</p>
+        <p class="intro-scroll-hint">Scrollen, um Risiken sichtbar zu machen.</p>
+        <a class="intro-arrow" href="#hero" aria-label="Zum Hauptversprechen scrollen">↓</a>
       </div>
+    </section>
 
-      <div class="featured-media reveal">
-        <div class="video-card mobile-reveal">
-          <div class="video-embed">
-            <iframe
-              src="https://www.youtube.com/embed/n_2DYwpVsS4"
-              title="Swissploit Featured Video"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen>
-            </iframe>
-          </div>
-
-          <div class="video-meta">
-            <span class="featured-badge">Aktuelles Beispiel aus dem Kanal</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-    <!-- =========================================================
-     START: SHORTS CAROUSEL
-     ========================================================= -->
-    <section id="shorts" class="shorts section reveal" aria-label="Shorts Karussell">
-      <div class="wrap">
-        <div class="shorts-intro featured-copy">
-            <p class="about-eyebrow mobile-reveal">H355</p>
-            <div class="shorts-heading-row">
-              <div class="shorts-heading-text">
-                <h2 class="about-headline mobile-reveal">Mein englischer Tech-Kanal</h2>
-              </div>
-              <div class="shorts-heading-action">
-                <a class="btn small youtube magnetic shorts-channel-link mobile-reveal" href="https://www.youtube.com/@H355_official" target="_blank" rel="noopener">
-                  Zum Kanal: H355
-                </a>
-              </div>
-            </div>
-        </div>
-
-        <div class="shorts-carousel" data-index="0" aria-roledescription="carousel">
-          <button class="sc-btn prev mobile-reveal" aria-label="Vorherige Videos" disabled>‹</button>
-
-          <div class="sc-viewport" aria-live="polite">
-            <div class="sc-track">
-              
-                            <article class="short mobile-reveal">
-                <iframe src="https://youtube.com/embed/JrVCo13fxCQ"
-                  title="Swissploit Short 6" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen></iframe>
-              </article>
-
-              <article class="short mobile-reveal">
-                <iframe src="https://youtube.com/embed/EiptJZeMyDM"
-                  title="Swissploit Short 7" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen></iframe>
-              </article>
-
-              <article class="short mobile-reveal">
-                <iframe src="https://youtube.com/embed/wK_7kSkfQ_g"
-                  title="Swissploit Short 8" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen></iframe>
-              </article>
-
-              <article class="short mobile-reveal">
-                <iframe src="https://youtube.com/embed/sPabYo6NBwI"
-                  title="Swissploit Short 9" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen></iframe>
-              </article>
-              
-              <article class="short mobile-reveal">
-                <iframe src="https://youtube.com/embed/TAYRaRY2-VE"
-                  title="Swissploit Short 1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen></iframe>
-              </article>
-
-              <article class="short mobile-reveal">
-                <iframe src="https://youtube.com/embed/sEOl7115TcE"
-                  title="Swissploit Short 2" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen></iframe>
-              </article>
-
-              <article class="short mobile-reveal">
-                <iframe src="https://youtube.com/embed/2dFPp8j9nms"
-                  title="Swissploit Short 3" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen></iframe>
-              </article>
-
-              <article class="short mobile-reveal">
-                <iframe src="https://youtube.com/embed/dOPOOCutcyk"
-                  title="Swissploit Short 4" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen></iframe>
-              </article>
-
-              <article class="short mobile-reveal">
-                <iframe src="https://youtube.com/embed/Gs4mO3oG4iI"
-                  title="Swissploit Short 5" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen></iframe>
-              </article>
-
-
-            </div>
-          </div>
-
-          <button class="sc-btn next mobile-reveal" aria-label="Naechste Videos">›</button>
+    <section id="hero" class="section kmu-hero-v7" aria-label="Hauptversprechen">
+      <div class="wrap kmu-hero-wrap-v7">
+        <p class="spl-eyebrow">Für Schweizer KMU</p>
+        <h1>Datenschutz &amp; Cybersecurity für Schweizer KMU – verständlich, konkret und ohne Panikmache.</h1>
+        <p class="hero-lead-v7">Swissploit bringt Ordnung in Datenschutz, Cybersecurity und Compliance: Sie sehen klar, wo Ihr KMU gut aufgestellt ist, wo unnötige Risiken bestehen und welche Massnahmen zuerst sinnvoll sind.</p>
+        <div class="cta-row hero-actions-v7">
+          <a class="btn primary magnetic" href="#kontakt">Kostenloses Erstgespräch anfragen</a>
+          <a class="btn magnetic" href="#services">Leistungen ansehen</a>
         </div>
       </div>
     </section>
-    <!-- =========================================================
-     END: SHORTS CAROUSEL
-     ========================================================= -->
+
+
+    <section id="kmu-sicherheits-check" class="section kmu-check-section reveal" aria-label="KMU Sicherheits-Check">
+      <div class="wrap kmu-check-wrap">
+        <div class="kmu-check-copy">
+          <p class="spl-eyebrow">Einstieg</p>
+          <h2 class="spl-section-title">KMU Sicherheits-Check</h2>
+          <p class="spl-section-lead">Der klare erste Schritt, wenn Datenschutz, Website-Tracking, IT-Sicherheit, SOC Light Monitoring oder Notfallplanung noch unübersichtlich wirken.</p>
+          <p class="kmu-check-text">Der KMU Sicherheits-Check bringt Ordnung in offene Sicherheits- und Datenschutzfragen. Sie erhalten eine verständliche Standortbestimmung, eine priorisierte Massnahmenliste und eine klare Empfehlung, ob Datenschutz, Website-Tracking, IT-Sicherheit, SOC Light Monitoring, Schulung oder Notfallplanung zuerst sinnvoll ist.</p>
+          <p class="kmu-check-text">Der Umfang wird vorab klar vereinbart. Keine langfristige Verpflichtung, kein unnötiger Fachbericht und keine Panikmache – sondern konkrete nächste Schritte, die im Alltag umsetzbar sind.</p>
+          <div class="kmu-check-before-after" aria-label="Vorher und nachher">
+            <div>
+              <span>Vorher</span>
+              <p>Unklar, ob Datenschutz, Website, IT-Sicherheit oder Schulung Priorität hat.</p>
+            </div>
+            <div>
+              <span>Nachher</span>
+              <p>Klare Einschätzung, priorisierte Risiken und konkrete nächste Schritte.</p>
+            </div>
+          </div>
+          <div class="cta-row kmu-check-actions">
+            <a class="btn primary magnetic" href="mailto:hello@swissploit.ch?subject=KMU%20Sicherheits-Check%20anfragen&body=Hallo%20Swissploit%0A%0AIch%20interessiere%20mich%20f%C3%BCr%20den%20KMU%20Sicherheits-Check.%0A%0AFirma%3A%20%0AAnliegen%3A%20">KMU Sicherheits-Check anfragen</a>
+            <a class="btn magnetic" href="#services">Mehr zu den Leistungen</a>
+          </div>
+        </div>
+        <aside class="kmu-check-result" aria-label="Ergebnis des KMU Sicherheits-Checks">
+          <h3>Nach dem Check wissen Sie:</h3>
+          <ul>
+            <li>welche Risiken Priorität haben</li>
+            <li>welche Datenschutz- und Security-Punkte dringend sind</li>
+            <li>wo Ihre Website oder Tools unnötige Risiken verursachen</li>
+            <li>welche Massnahmen kurzfristig sinnvoll sind</li>
+            <li>welcher nächste Schritt für Ihr KMU am meisten Wirkung bringt</li>
+          </ul>
+          <div class="kmu-check-note">
+            <strong>Einfacher Einstieg.</strong>
+            <span>Keine langfristige Verpflichtung. Keine Panikmache. Keine Berichte, die niemand liest.</span>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+<section id="finder" class="section problem-finder-section reveal" aria-label="Service-Finder">
+      <div class="wrap problem-finder-wrap">
+        <div class="section-heading-left">
+          <p class="spl-eyebrow">Orientierung</p>
+          <h2 class="spl-section-title">Wobei braucht Ihr KMU Klarheit?</h2>
+          <p class="spl-section-lead">Wählen Sie die Frage, die am besten zu Ihrer aktuellen Situation passt. Swissploit zeigt Ihnen den sinnvollsten Einstieg.</p>
+        </div>
+
+        <div class="problem-finder-grid">
+          <div class="problem-options" role="tablist" aria-label="Problem auswählen">
+            <div class="problem-option-wrap is-active" data-problem-wrap="0">
+              <button class="problem-option" type="button" data-problem-option="0" aria-selected="true">
+                <span>01</span><strong>Bin ich beim Datenschutz sicher?</strong>
+              </button>
+              <div class="problem-mobile-detail" data-problem-mobile="0"></div>
+            </div>
+            <div class="problem-option-wrap" data-problem-wrap="1">
+              <button class="problem-option" type="button" data-problem-option="1" aria-selected="false">
+                <span>02</span><strong>Ist meine Website rechtlich sauber?</strong>
+              </button>
+              <div class="problem-mobile-detail" data-problem-mobile="1"></div>
+            </div>
+            <div class="problem-option-wrap" data-problem-wrap="2">
+              <button class="problem-option" type="button" data-problem-option="2" aria-selected="false">
+                <span>03</span><strong>Wie angreifbar ist meine IT?</strong>
+              </button>
+              <div class="problem-mobile-detail" data-problem-mobile="2"></div>
+            </div>
+            <div class="problem-option-wrap" data-problem-wrap="3">
+              <button class="problem-option" type="button" data-problem-option="3" aria-selected="false">
+                <span>04</span><strong>Was tun bei einer Datenpanne?</strong>
+              </button>
+              <div class="problem-mobile-detail" data-problem-mobile="3"></div>
+            </div>
+            <div class="problem-option-wrap" data-problem-wrap="4">
+              <button class="problem-option" type="button" data-problem-option="4" aria-selected="false">
+                <span>05</span><strong>Wie schule ich mein Team?</strong>
+              </button>
+              <div class="problem-mobile-detail" data-problem-mobile="4"></div>
+            </div>
+            <div class="problem-option-wrap" data-problem-wrap="5">
+              <button class="problem-option" type="button" data-problem-option="5" aria-selected="false">
+                <span>06</span><strong>Was verlangt meine Cyberversicherung?</strong>
+              </button>
+              <div class="problem-mobile-detail" data-problem-mobile="5"></div>
+            </div>
+          </div>
+
+          <article class="problem-detail-card" id="problemDetail" aria-live="polite">
+            <p class="detail-kicker" id="problemKicker">01 · Datenschutz-Check Schweiz</p>
+            <h3 id="problemTitle">Bin ich beim Datenschutz sicher?</h3>
+            <dl class="problem-detail-list">
+              <div>
+                <dt>Worum geht es?</dt>
+                <dd id="problemAbout">Eine klare Standortbestimmung zu Datenschutz, Datenbearbeitungen und internen Abläufen.</dd>
+              </div>
+              <div>
+                <dt>Warum ist es wichtig?</dt>
+                <dd id="problemWhy">KMU müssen wissen, welche Daten sie bearbeiten, wer Zugriff hat und wo Risiken entstehen.</dd>
+              </div>
+              <div>
+                <dt>Was macht Swissploit?</dt>
+                <dd id="problemAction">Wir prüfen zentrale Datenschutzanforderungen und übersetzen Risiken in verständliche Massnahmen.</dd>
+              </div>
+              <div>
+                <dt>Was erhalten Sie?</dt>
+                <dd id="problemResult">Eine Einschätzung, priorisierte Risiken und konkrete nächste Schritte für den Alltag.</dd>
+              </div>
+            </dl>
+            <a id="problemLink" class="inline-action" href="#service-datenschutz-check-schweiz">Passende Leistung ansehen</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="section services-v7 reveal" aria-label="Swissploit Leistungen">
+      <div class="wrap">
+        <div class="section-heading-center">
+          <p class="spl-eyebrow">Leistungen</p>
+          <h2 class="spl-section-title">Leistungen für Datenschutz, Cybersecurity und Compliance.</h2>
+          <p class="spl-section-lead">Sechs klare Kernleistungen für Schweizer KMU – ergänzt durch bezahlbares Security Monitoring auf Microsoft-Basis.</p>
+        </div>
+
+        <div class="service-card-grid-v7 service-accordion-grid">
+          <details id="service-datenschutz-check-schweiz" class="service-card-v7 service-accordion reveal">
+            <summary class="service-summary">
+              <span class="service-title">Datenschutz-Check Schweiz</span>
+              <span class="service-toggle" aria-hidden="true"></span>
+            </summary>
+            <div class="service-accordion-body">
+              <p class="service-problem-lead">Unsicher, ob Ihr Unternehmen beim Datenschutz sauber aufgestellt ist?</p>
+              <div class="service-block">
+                <h4>Für wen ist das?</h4>
+                <p>Für KMU, die wissen möchten, ob Datenbearbeitungen, Zugriffe, Aufbewahrung und externe Dienstleister sauber geregelt sind.</p>
+              </div>
+              <div class="service-block">
+                <h4>Was wird geprüft?</h4>
+                <ul>
+                  <li>Datenschutzerklärung und Datenschutzinformationen</li>
+                  <li>Datenbearbeitungen, Zuständigkeiten und Aufbewahrung</li>
+                  <li>Zugriffe auf Kunden-, Mitarbeiter- und Geschäftsdaten</li>
+                  <li>Drittanbieter, Tools und Datenflüsse</li>
+                </ul>
+              </div>
+              <div class="service-block result">
+                <h4>Was erhalten Sie?</h4>
+                <p>Sie erhalten eine klare Einschätzung, priorisierte Risiken und konkrete nächste Schritte für die Umsetzung im KMU-Alltag.</p>
+              </div>
+              <a class="inline-action service-page-link" href="/leistungen/datenschutz-check-schweiz/">Mehr zur Leistung</a>
+            </div>
+          </details>
+          <details id="service-website-cookie-tracking-check" class="service-card-v7 service-accordion reveal">
+            <summary class="service-summary">
+              <span class="service-title">Website-, Cookie- &amp; Tracking-Check</span>
+              <span class="service-toggle" aria-hidden="true"></span>
+            </summary>
+            <div class="service-accordion-body">
+              <p class="service-problem-lead">Unsicher, ob Website, Cookies, Formulare oder Tracking unnötige Datenschutzrisiken verursachen?</p>
+              <div class="service-block">
+                <h4>Für wen ist das?</h4>
+                <p>Für Unternehmen, die online sichtbar sind und sicherstellen möchten, dass ihre Website keine unnötigen Datenschutzrisiken verursacht.</p>
+              </div>
+              <div class="service-block">
+                <h4>Was wird geprüft?</h4>
+                <ul>
+                  <li>Datenschutzerklärung und Kontaktformulare</li>
+                  <li>Newsletter, Cookies und Consent-Hinweise</li>
+                  <li>Tracking-Tools und Analyse-Dienste</li>
+                  <li>eingebundene Drittanbieter und externe Dienste</li>
+                </ul>
+              </div>
+              <div class="service-block result">
+                <h4>Was erhalten Sie?</h4>
+                <p>Sie erhalten konkrete Korrekturpunkte für einen professionelleren, vertrauenswürdigeren und datenschutzfreundlicheren Online-Auftritt.</p>
+              </div>
+              <a class="inline-action service-page-link" href="/leistungen/website-cookie-tracking-check/">Mehr zur Leistung</a>
+            </div>
+          </details>
+          <details id="service-it-sicherheits-compliance-check" class="service-card-v7 service-accordion reveal">
+            <summary class="service-summary">
+              <span class="service-title">IT-Sicherheits- &amp; Compliance-Check</span>
+              <span class="service-toggle" aria-hidden="true"></span>
+            </summary>
+            <div class="service-accordion-body">
+              <p class="service-problem-lead">Unsicher, ob Passwörter, MFA, Backups, Geräte und Cloud-Zugriffe ausreichend geschützt sind?</p>
+              <div class="service-block">
+                <h4>Für wen ist das?</h4>
+                <p>Für KMU, die zentrale Sicherheitsbereiche verstehen und technische Risiken frühzeitig reduzieren möchten.</p>
+              </div>
+              <div class="service-block">
+                <h4>Was wird geprüft?</h4>
+                <ul>
+                  <li>Benutzerrechte, Passwörter und MFA</li>
+                  <li>E-Mail-Sicherheit, Geräte und Zugriffe</li>
+                  <li>Backups, Updates und Wiederherstellung</li>
+                  <li>Cloud-Dienste, Freigaben und externe Zugänge</li>
+                </ul>
+              </div>
+              <div class="service-block result">
+                <h4>Was erhalten Sie?</h4>
+                <p>Sie erhalten eine verständliche Schwachstellenübersicht und konkrete Empfehlungen zur Verbesserung Ihrer IT-Sicherheit.</p>
+              </div>
+              <a class="inline-action service-page-link" href="/leistungen/it-sicherheits-compliance-check/">Mehr zur Leistung</a>
+            </div>
+          </details>
+          <details id="service-datenpannen-cyber-notfallplan" class="service-card-v7 service-accordion reveal">
+            <summary class="service-summary">
+              <span class="service-title">Datenpannen- &amp; Cyber-Notfallplan</span>
+              <span class="service-toggle" aria-hidden="true"></span>
+            </summary>
+            <div class="service-accordion-body">
+              <p class="service-problem-lead">Unsicher, was im Ernstfall bei Datenverlust, Phishing oder gehackten Konten zuerst passieren muss?</p>
+              <div class="service-block">
+                <h4>Für wen ist das?</h4>
+                <p>Für Unternehmen, die bei Datenverlust, Phishing, gehackten Konten oder Cyberangriffen nicht improvisieren möchten.</p>
+              </div>
+              <div class="service-block">
+                <h4>Was wird vorbereitet?</h4>
+                <ul>
+                  <li>Zuständigkeiten und Meldewege</li>
+                  <li>Sofortmassnahmen bei Verdachtsfällen</li>
+                  <li>Meldeprüfung und Dokumentation</li>
+                  <li>Kommunikation mit Kunden, Partnern und Behörden</li>
+                </ul>
+              </div>
+              <div class="service-block result">
+                <h4>Was erhalten Sie?</h4>
+                <p>Sie erhalten einen praxistauglichen Notfallplan mit klaren Schritten für kritische Situationen.</p>
+              </div>
+              <a class="inline-action service-page-link" href="/leistungen/datenpannen-cyber-notfallplan/">Mehr zur Leistung</a>
+            </div>
+          </details>
+          <details id="service-mitarbeiterschulung-datenschutz-cybersecurity" class="service-card-v7 service-accordion reveal">
+            <summary class="service-summary">
+              <span class="service-title">Mitarbeiterschulung Datenschutz &amp; Cybersecurity</span>
+              <span class="service-toggle" aria-hidden="true"></span>
+            </summary>
+            <div class="service-accordion-body">
+              <p class="service-problem-lead">Unsicher, ob Ihr Team Phishing, Kundendaten, Passwörter und KI-Tools im Alltag sicher handhabt?</p>
+              <div class="service-block">
+                <h4>Für wen ist das?</h4>
+                <p>Für Teams, die im Alltag sicherer mit E-Mails, Passwörtern, Kundendaten, KI-Tools und Phishing umgehen sollen.</p>
+              </div>
+              <div class="service-block">
+                <h4>Was wird geschult?</h4>
+                <ul>
+                  <li>Phishing, Betrugsmaschen und Fake-Links</li>
+                  <li>Passwörter, MFA und E-Mail-Sicherheit</li>
+                  <li>Kundendaten und Datenschutz im Arbeitsalltag</li>
+                  <li>sicherer Einsatz von KI-Tools</li>
+                </ul>
+              </div>
+              <div class="service-block result">
+                <h4>Was erhalten Sie?</h4>
+                <p>Ihr Team erhält praxisnahe Schulung, realistische Beispiele und direkt nutzbare Regeln für den Arbeitsalltag.</p>
+              </div>
+              <a class="inline-action service-page-link" href="/leistungen/mitarbeiterschulung-datenschutz-cybersecurity/">Mehr zur Leistung</a>
+            </div>
+          </details>
+          <details id="service-cyberversicherung-audit-readiness" class="service-card-v7 service-accordion reveal">
+            <summary class="service-summary">
+              <span class="service-title">Cyberversicherung- &amp; Audit-Readiness</span>
+              <span class="service-toggle" aria-hidden="true"></span>
+            </summary>
+            <div class="service-accordion-body">
+              <p class="service-problem-lead">Unsicher, ob Ihre Nachweise für Kunden, Cyberversicherungen oder Audits ausreichen?</p>
+              <div class="service-block">
+                <h4>Für wen ist das?</h4>
+                <p>Für KMU, die Sicherheitsmassnahmen gegenüber Kunden, Versicherungen oder Auditoren nachvollziehbar nachweisen müssen.</p>
+              </div>
+              <div class="service-block">
+                <h4>Was wird geprüft?</h4>
+                <ul>
+                  <li>bestehende Dokumentation und Richtlinien</li>
+                  <li>Sicherheitsmassnahmen und Prozesse</li>
+                  <li>Nachweise für Kundenfragebögen</li>
+                  <li>Vorbereitung auf Cyberversicherungen</li>
+                </ul>
+              </div>
+              <div class="service-block result">
+                <h4>Was erhalten Sie?</h4>
+                <p>Sie erhalten Struktur, eine Lückenübersicht und konkrete Vorbereitung für Nachweisanforderungen.</p>
+              </div>
+              <a class="inline-action service-page-link" href="/leistungen/cyberversicherung-audit-readiness/">Mehr zur Leistung</a>
+            </div>
+          </details>
+        </div>
+
+        <div class="soc-light-section reveal" id="soc-light" aria-label="SOC Light Leistung">
+          <div class="soc-light-heading">
+            <p class="spl-eyebrow">SOC Light</p>
+            <h3>SOC Light für KMU</h3>
+            <p class="soc-light-subtitle">Bezahlbares Security Monitoring für Microsoft 365.</p>
+            <p>Microsoft 365 ist für viele KMU längst der wichtigste digitale Arbeits- und Datenraum. SOC Light hilft, relevante Sicherheitsereignisse laufend zu erkennen, einzuordnen und nachvollziehbar zu dokumentieren – verständlich, klar abgegrenzt und bezahlbar.</p>
+          </div>
+
+          <div class="soc-explainer reveal" aria-label="Was ist ein SOC">
+            <div>
+              <p class="spl-eyebrow">Kurz erklärt</p>
+              <h4>Was ist ein SOC?</h4>
+            </div>
+            <p>Ein SOC ist eine zentrale Sicherheitsüberwachung für Ihre IT. Es hilft dabei, verdächtige Anmeldungen, Phishing, Malware und andere sicherheitsrelevante Ereignisse frühzeitig zu erkennen.</p>
+            <p>SOC Light macht dieses Prinzip für KMU bezahlbar: weniger komplex als ein klassisches 24/7 SOC, aber mit klarer Überwachung, verständlichen Reports und konkreten Handlungsempfehlungen.</p>
+          </div>
+
+          <div class="soc-light-grid single-package-grid" aria-label="SOC Light Angebot">
+            <article class="soc-card pricing-card single-soc-package reveal">
+              <h4>SOC Light</h4>
+              <p class="soc-lead">Bezahlbares Security Monitoring für Microsoft 365.</p>
+              <p>Für KMU, die ihre Microsoft-365-Umgebung professionell überwachen lassen möchten – ohne die hohen Kosten eines klassischen SOC.</p>
+
+              <div class="soc-price-box" aria-label="Preis SOC Light">
+                <p><strong>ab CHF 590</strong> / Monat</p>
+                <span>bis 50 Benutzer inklusive · zusätzliche Benutzer + CHF 10 / Benutzer / Monat · Setup einmalig ab CHF 2’500</span>
+              </div>
+
+              <details class="soc-detail-accordion">
+                <summary>
+                  <span>Was ist enthalten?</span>
+                  <span class="accordion-plus" aria-hidden="true"></span>
+                </summary>
+                <div class="soc-detail-body">
+                  <p>Swissploit prüft sicherheitsrelevante Meldungen, verdächtige Anmeldungen, Defender-Alarme, Phishing-Risiken, gefährdete Geräte und bekannte Schwachstellen installierter Applikationen.</p>
+                  <ul>
+                    <li>Überwachung sicherheitsrelevanter Microsoft-365-Meldungen</li>
+                    <li>Kontrolle verdächtiger Anmeldungen und möglicher Kontoübernahmen</li>
+                    <li>Prüfung von Microsoft Defender Sicherheitsalarmen</li>
+                    <li>Phishing-, Malware- und Mail-Security-Kontrolle</li>
+                    <li>Schwachstellenübersicht installierter Applikationen inklusive CVE-/Risikobewertung</li>
+                    <li>Monatlicher Security-Report mit klaren Handlungsempfehlungen</li>
+                    <li>Eskalation kritischer Auffälligkeiten während Geschäftszeiten</li>
+                  </ul>
+                  <p class="soc-tech-base"><strong>Technische Basis:</strong> Microsoft 365 Business Premium mit Microsoft Defender for Business</p>
+                </div>
+              </details>
+
+              <a class="btn primary magnetic soc-card-action" href="mailto:hello@swissploit.ch?subject=SOC%20Light%20anfragen&body=Hallo%20Swissploit%0A%0AIch%20interessiere%20mich%20f%C3%BCr%20SOC%20Light.%0A%0AFirma%3A%20%0ABenutzeranzahl%3A%20%0AMicrosoft%20365%20Business%20Premium%20vorhanden%3A%20%0AAnliegen%3A%20">SOC Light anfragen</a>
+            </article>
+          </div>
+
+          <div class="soc-accordion-stack reveal" aria-label="Weitere Informationen zu SOC Light">
+            <details class="soc-info-accordion">
+              <summary>
+                <span>Warum braucht ein KMU SOC Light?</span>
+                <span class="accordion-plus" aria-hidden="true"></span>
+              </summary>
+              <div class="soc-info-body">
+                <p><strong>Microsoft 365 ist oft Ihr wichtigster Datenraum.</strong> Cyberversicherungen, Kunden und Audits verlangen zunehmend nachvollziehbare Sicherheitsmassnahmen. Eine einmalige Prüfung reicht oft nicht mehr aus – entscheidend ist, ob Risiken auch laufend erkannt, bewertet und dokumentiert werden.</p>
+                <p>SOC Light setzt genau hier an: Swissploit überwacht definierte Sicherheitsereignisse in Ihrer Microsoft-365-Umgebung und auf geschützten Windows-Geräten. So erhalten KMU mehr Transparenz, bessere Nachweise und eine klare Grundlage für Sicherheitsentscheidungen.</p>
+                <div class="soc-reason-list">
+                  <article>
+                    <span>01</span>
+                    <h5>Ihre Daten liegen nicht mehr nur auf dem Server</h5>
+                    <p>Geschäftsdaten befinden sich heute in Outlook, Teams, OneDrive, SharePoint, OneNote und auf synchronisierten Geräten.</p>
+                  </article>
+                  <article>
+                    <span>02</span>
+                    <h5>Ein gehacktes Konto kann grossen Schaden anrichten</h5>
+                    <p>Ein Angreifer kann Zugriff auf E-Mails, Dateien, Teams-Chats, SharePoint-Daten und interne Informationen erhalten.</p>
+                  </article>
+                  <article>
+                    <span>03</span>
+                    <h5>Ein infiziertes Gerät gefährdet auch Cloud-Daten</h5>
+                    <p>Durch synchronisierte Dateien, gespeicherte Sitzungen und Microsoft-365-Zugriff kann ein kompromittiertes Gerät Unternehmensdaten gefährden.</p>
+                  </article>
+                  <article>
+                    <span>04</span>
+                    <h5>Defender for Endpoint ist mehr als normaler Windows Defender</h5>
+                    <p>Der erweiterte Schutz liefert Sicherheits- und Diagnosedaten zu Malware, verdächtigen Prozessen, gefährdeten Geräten und Schwachstellen.</p>
+                  </article>
+                  <article>
+                    <span>05</span>
+                    <h5>Schneller reagieren, bevor grösserer Schaden entsteht</h5>
+                    <p>Bei kritischen Auffälligkeiten können Massnahmen schneller eingeleitet werden – von der Bewertung verdächtiger Anmeldungen bis zur Isolation eines betroffenen Geräts.</p>
+                  </article>
+                </div>
+              </div>
+            </details>
+
+            <details class="soc-info-accordion">
+              <summary>
+                <span>Wichtig zu wissen</span>
+                <span class="accordion-plus" aria-hidden="true"></span>
+              </summary>
+              <div class="soc-info-body">
+                <p>SOC Light ersetzt kein klassisches 24/7 Enterprise-SOC. Das Angebot bietet KMU eine bezahlbare und klar abgegrenzte Sicherheitsüberwachung auf Basis der Microsoft-Sicherheitsplattform.</p>
+                <p>Nicht automatisch enthalten sind 24/7-Bereitschaft, umfassende Forensik, vollständige Incident Response, Wiederherstellung nach Angriffen sowie die Überwachung nicht angebundener Systeme. Diese Leistungen können bei Bedarf separat vereinbart werden.</p>
+                <p>Alle Preise verstehen sich exkl. MwSt. und basieren auf dem definierten Leistungsumfang sowie der angegebenen Benutzeranzahl.</p>
+              </div>
+            </details>
+          </div>
+
+          <div class="soc-cta reveal">
+            <div>
+              <h4>Ist SOC Light für Ihr Unternehmen sinnvoll?</h4>
+              <p>Wir prüfen gemeinsam Ihre Microsoft-365-Umgebung und zeigen, ob laufendes Security Monitoring für Ihr KMU bereits sinnvoll ist.</p>
+            </div>
+            <a class="btn primary magnetic" href="mailto:hello@swissploit.ch?subject=SOC%20Light%20Ersteinsch%C3%A4tzung&body=Hallo%20Swissploit%0A%0AIch%20m%C3%B6chte%20eine%20kostenlose%20Ersteinsch%C3%A4tzung%20zu%20SOC%20Light.%0A%0AFirma%3A%20%0ABenutzeranzahl%3A%20%0AMicrosoft%20365%20vorhanden%3A%20%0AAnliegen%3A%20">Kostenlose Ersteinschätzung anfragen</a>
+          </div>
+        </div>      </div>
+    </section>
+
+    <section id="einwaende" class="section objections-section reveal" aria-label="Häufige Unsicherheiten bei KMU">
+      <div class="wrap">
+        <div class="section-heading-center">
+          <p class="spl-eyebrow">Einordnung</p>
+          <h2 class="spl-section-title">Häufige Unsicherheiten bei KMU</h2>
+          <p class="spl-section-lead">Viele Unternehmen wissen, dass Datenschutz und Cybersecurity wichtig sind – aber nicht, wo sie anfangen sollen.</p>
+        </div>
+        <div class="objection-grid">
+          <article class="objection-card reveal">
+            <h3>„Wir sind zu klein dafür.“</h3>
+            <p>Gerade kleine Unternehmen arbeiten mit Kundendaten, E-Mail, Cloud-Tools, Websites und Zahlungsprozessen. Viele Risiken lassen sich mit einfachen Massnahmen deutlich reduzieren.</p>
+          </article>
+          <article class="objection-card reveal">
+            <h3>„Wir haben bereits IT-Support.“</h3>
+            <p>Gut. Swissploit ersetzt nicht zwingend Ihren IT-Support, sondern ergänzt ihn mit Datenschutz-Einordnung, Security-Prioritäten und auf Wunsch SOC Light Monitoring für Microsoft 365.</p>
+          </article>
+          <article class="objection-card reveal">
+            <h3>„Wir brauchen keine grosse Beratung.“</h3>
+            <p>Genau deshalb startet Swissploit pragmatisch: mit Klarheit, Prioritäten und konkreten nächsten Schritten statt mit unnötiger Komplexität.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="prozess" class="section process-section reveal" aria-label="So läuft die Zusammenarbeit ab">
+      <div class="wrap">
+        <div class="section-heading-center">
+          <p class="spl-eyebrow">Ablauf</p>
+          <h2 class="spl-section-title">So läuft die Zusammenarbeit ab</h2>
+          <p class="spl-section-lead">Klar, verständlich und ohne unnötige Komplexität.</p>
+        </div>
+        <div class="process-timeline" aria-label="Vier Schritte der Zusammenarbeit">
+          <article class="process-step reveal">
+            <span>01</span>
+            <h3>Kurzes Erstgespräch</h3>
+            <p>Wir klären, wo aktuell Unsicherheit besteht: Datenschutz, Website-Tracking, IT-Sicherheit, SOC Light Monitoring, Mitarbeiterschulung oder Notfallplanung.</p>
+          </article>
+          <article class="process-step reveal">
+            <span>02</span>
+            <h3>Einschätzung der Risiken</h3>
+            <p>Swissploit prüft die wichtigsten Punkte und ordnet ein, welche Risiken für Ihr KMU wirklich relevant sind.</p>
+          </article>
+          <article class="process-step reveal">
+            <span>03</span>
+            <h3>Klare Empfehlungen</h3>
+            <p>Sie erhalten verständliche Prioritäten und konkrete Massnahmen statt unübersichtlicher Theorie.</p>
+          </article>
+          <article class="process-step reveal">
+            <span>04</span>
+            <h3>Umsetzung oder Begleitung</h3>
+            <p>Je nach Bedarf unterstützt Swissploit bei nächsten Schritten, Schulung, Vorbereitung, SOC-Light-Einrichtung oder Umsetzung.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="passung" class="section fit-section reveal" aria-label="Passt Swissploit zu Ihrem KMU">
+      <div class="wrap fit-wrap">
+        <div class="fit-copy">
+          <p class="spl-eyebrow">Arbeitsweise</p>
+          <h2 class="spl-section-title">Klarheit statt Alarmismus.</h2>
+          <p class="spl-section-lead">Swissploit arbeitet nicht mit Angst, sondern mit sauberer Einordnung: Was ist kritisch? Was ist sinnvoll? Was kann warten? Wo lohnt sich ein einmaliger Check – und wann ist laufendes Monitoring sinnvoll?</p>
+        </div>
+        <div class="fit-grid">
+          <article class="fit-card fit-positive reveal">
+            <h3>Passend, wenn Sie …</h3>
+            <ul>
+              <li>digitale Risiken verständlich einordnen möchten</li>
+              <li>konkrete Massnahmen statt Theorie brauchen</li>
+              <li>eine pragmatische Grundlage für Entscheidungen suchen</li>
+            </ul>
+          </article>
+          <article class="fit-card reveal">
+            <h3>Weniger passend, wenn …</h3>
+            <ul>
+              <li>nur ein generischer Bericht ohne Umsetzung gewünscht ist</li>
+              <li>keine Massnahmen oder Zuständigkeiten geklärt werden sollen</li>
+              <li>Angstmacherei wichtiger ist als sachliche Priorisierung</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="sicherheitslage" class="section stats-v7 reveal" aria-label="Sicherheitslage für Schweizer KMU">
+      <div class="wrap stats-v7-wrap">
+        <div class="section-heading-left stats-heading-v7">
+          <p class="spl-eyebrow">Sicherheitslage</p>
+          <h2 class="spl-section-title">Warum KMU digitale Risiken ernst nehmen sollten</h2>
+          <p class="spl-section-lead">Die wichtigsten Zahlen sind nicht nur eindrucksvoll. Sie zeigen, welche einfachen Schutzmassnahmen im KMU-Alltag Priorität haben sollten.</p>
+        </div>
+
+        <div class="stats-card-grid-v7">
+          <article class="stat-card-v7 reveal">
+            <div class="stat-value"><span>Über</span><strong><span class="stat-number" data-count="35000">0</span></strong></div>
+            <h3>gemeldete Cybervorfälle</h3>
+            <div class="stat-explain">
+              <h4>Was bedeutet das?</h4>
+              <p>Viele Vorfälle beginnen nicht mit komplexem Hacking, sondern mit Betrug, Phishing oder falschen Klicks.</p>
+            </div>
+            <div class="stat-explain">
+              <h4>Was sollte ein KMU daraus lernen?</h4>
+              <p>Mitarbeitende brauchen klare Regeln, woran sie gefährliche Nachrichten erkennen und wie sie Verdachtsfälle melden.</p>
+            </div>
+            <small><a href="https://www.admin.ch/de/newnsb/NFgD8v9pZqmtdgaaZqV9D" target="_blank" rel="noopener">Quelle: BACS / admin.ch, 2025</a></small>
+          </article>
+
+          <article class="stat-card-v7 reveal">
+            <div class="stat-value"><strong><span class="stat-number" data-count="58">0</span><i>%</i></strong></div>
+            <h3>Betrugsanteil bei Meldungen</h3>
+            <div class="stat-explain">
+              <h4>Was bedeutet das?</h4>
+              <p>Betrug bleibt ein zentrales Risiko für Unternehmen, besonders über E-Mail, Fake-Rechnungen und manipulierte Nachrichten.</p>
+            </div>
+            <div class="stat-explain">
+              <h4>Was sollte ein KMU daraus lernen?</h4>
+              <p>Awareness, Zahlungsfreigaben und Prüfprozesse schützen nicht nur Geld, sondern auch Kunden- und Geschäftsdaten.</p>
+            </div>
+            <small><a href="https://www.admin.ch/de/newnsb/NFgD8v9pZqmtdgaaZqV9D" target="_blank" rel="noopener">Quelle: BACS / admin.ch, 2025</a></small>
+          </article>
+
+          <article class="stat-card-v7 reveal">
+            <div class="stat-value"><strong><span class="stat-number" data-count="99.2" data-decimals="1">0</span><i>%</i></strong></div>
+            <h3>MFA-Schutzwirkung</h3>
+            <div class="stat-explain">
+              <h4>Was bedeutet das?</h4>
+              <p>Microsoft beschreibt Multi-Faktor-Authentifizierung als sehr wirksamen Schutz gegen Kontoübernahmen.</p>
+            </div>
+            <div class="stat-explain">
+              <h4>Was sollte ein KMU daraus lernen?</h4>
+              <p>MFA sollte für E-Mail, Cloud, Admin-Konten und sensible Zugriffe konsequent aktiviert und überprüft werden.</p>
+            </div>
+            <small><a href="https://learn.microsoft.com/en-us/entra/identity/authentication/concept-mandatory-multifactor-authentication" target="_blank" rel="noopener">Quelle: Microsoft Learn</a></small>
+          </article>
+
+          <article class="stat-card-v7 reveal">
+            <div class="stat-value"><strong><span class="stat-number" data-count="60">0</span><i>%</i></strong></div>
+            <h3>menschlicher Faktor</h3>
+            <div class="stat-explain">
+              <h4>Was bedeutet das?</h4>
+              <p>Viele Datenpannen entstehen durch alltägliche Fehler, missbrauchte Zugangsdaten oder Social Engineering.</p>
+            </div>
+            <div class="stat-explain">
+              <h4>Was sollte ein KMU daraus lernen?</h4>
+              <p>Schulungen müssen verständlich, praxisnah und wiederholbar sein — nicht trocken oder rein theoretisch.</p>
+            </div>
+            <small><a href="https://www.verizon.com/business/resources/reports/2025-dbir-executive-summary.pdf" target="_blank" rel="noopener">Quelle: Verizon DBIR 2025</a></small>
+          </article>
+        </div>
+      </div>
+    </section>
+
+
+    <section id="ueber" class="section trust-section-v7 reveal" aria-label="Über Swissploit">
+      <div class="wrap trust-wrap-v7">
+        <div class="trust-copy-v7">
+          <p class="spl-eyebrow">Schweizer Marke</p>
+          <h2 class="spl-section-title">Über Swissploit</h2>
+          <p>Swissploit ist eine Schweizer Cybersecurity- und Datenschutzmarke für KMU.</p>
+          <p>Der Anspruch: digitale Risiken verständlich erklären, konkrete Schutzmassnahmen aufzeigen und Schweizer Unternehmen dabei unterstützen, Datenschutz und IT-Sicherheit pragmatisch umzusetzen.</p>
+          <p>Ohne Panikmache. Ohne unnötige Fachsprache. Mit Fokus auf Vertrauen, Schweizer Qualität und umsetzbare Sicherheit im Alltag.</p>
+        </div>
+        <div class="about-brand-media-v7" aria-label="Swissploit Markenelement">
+          <img class="about-brand-image" src="assets/swissploit-brand-logo.png" alt="Swissploit Logo" loading="lazy" decoding="async">
+        </div>
+      </div>
+    </section>
+
+    <section id="socials" class="section knowledge-section-v7 reveal" aria-label="Kostenlos lernen mit Swissploit">
+      <div class="wrap knowledge-wrap-v7">
+        <p class="spl-eyebrow">Socials</p>
+        <h2 class="spl-section-title">Kostenlos lernen mit Swissploit</h2>
+        <p class="spl-section-lead">Auf meinen Kanälen erkläre ich kostenlos, wie Betrugsmaschen, Datenschutzrisiken und einfache Schutzmassnahmen im digitalen Alltag funktionieren. Über jedes Follow freue ich mich.</p>
+        <div class="social-button-grid-v7" aria-label="Swissploit Plattformen">
+          <a class="btn primary magnetic" href="https://www.youtube.com/@Swissploit" target="_blank" rel="noopener">YouTube</a>
+          <a class="btn magnetic" href="https://www.tiktok.com/@swissploit" target="_blank" rel="noopener">TikTok</a>
+          <a class="btn magnetic" href="https://www.instagram.com/swissploit" target="_blank" rel="noopener">Instagram</a>
+          <a class="btn magnetic" href="https://www.linkedin.com/company/swissploit/" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+        <p class="knowledge-blog-link">Zusätzliche kostenlose Guides finden Sie im <a href="blog/" data-transition>Swissploit Blog</a>.</p>
+      </div>
+    </section>
+
+    <section id="kontakt" class="section contact-v7 reveal" aria-label="Kontakt">
+      <div class="wrap contact-wrap-v7">
+        <p class="spl-eyebrow">Kontakt</p>
+        <h2 class="spl-section-title">Nicht sicher, womit Ihr KMU beginnen soll?</h2>
+        <p>In einem kurzen Erstgespräch klären wir, ob bei Ihnen Datenschutz, Website-Tracking, IT-Sicherheit, SOC Light Monitoring, Schulung oder Notfallplanung der sinnvollste erste Schritt ist.</p>
+        <p class="contact-orientation-v13">Das Erstgespräch dient zur Orientierung: Sie erfahren, ob Swissploit passend ist, welche Risiken wahrscheinlich relevant sind und ob ein einmaliger Check, eine Schulung, ein Notfallplan oder laufendes SOC Light Monitoring am meisten Sinn macht.</p>
+        <div class="cta-row contact-actions-v7">
+          <a class="btn primary magnetic" href="mailto:hello@swissploit.ch?subject=Kostenloses%20Erstgespr%C3%A4ch%20Swissploit&body=Hallo%20Swissploit%0A%0AIch%20interessiere%20mich%20f%C3%BCr%20ein%20kurzes%20Erstgespr%C3%A4ch.%0A%0AFirma%3A%20%0AAnliegen%3A%20">Kostenloses Erstgespräch anfragen</a>
+          <a class="btn magnetic" href="#finder">Passende Leistung finden</a>
+        </div>
+        <p class="trust-sentence-v7">Unverbindlich. Verständlich. Keine Verkaufspräsentation, sondern eine erste Orientierung für Schweizer KMU.</p>
+      </div>
+    </section>
   </main>
+
+  <a class="mobile-sticky-cta" href="#kontakt">Erstgespräch anfragen</a>
 
   <footer class="site-footer" role="contentinfo">
     <div class="wrap">
       <p>© <span id="year"></span> Swissploit. Alle Rechte vorbehalten.</p>
       <nav class="foot-nav" aria-label="Footer Navigation">
-        <a href="#about">About</a>
-        <a href="#featured">Content</a>
-        <a href="#shorts">H355</a>
-        <a href="blog.html" data-transition>Blog</a>
+        <a href="#services">Leistungen</a>
+        <a href="#sicherheitslage">Sicherheitslage</a>
+        <a href="#ueber">Über Swissploit</a>
+        <a href="#kontakt">Kontakt</a>
       </nav>
     </div>
   </footer>
 
+  <script id="problemFinderData" type="application/json">[
+    {
+        "num": "01",
+        "kicker": "Datenschutz-Check Schweiz",
+        "question": "Bin ich beim Datenschutz sicher?",
+        "about": "Eine klare Standortbestimmung zu Datenschutz, Datenbearbeitungen und internen Abläufen.",
+        "why": "KMU müssen wissen, welche Daten sie bearbeiten, wer Zugriff hat und wo Risiken entstehen.",
+        "action": "Swissploit prüft zentrale Datenschutzanforderungen und übersetzt Risiken in verständliche Massnahmen.",
+        "result": "Sie erhalten eine klare Einschätzung, priorisierte Risiken und konkrete nächste Schritte für die Umsetzung im KMU-Alltag.",
+        "target": "#service-datenschutz-check-schweiz"
+    },
+    {
+        "num": "02",
+        "kicker": "Website-, Cookie- & Tracking-Check",
+        "question": "Ist meine Website rechtlich sauber?",
+        "about": "Es geht um Datenschutzerklärung, Formulare, Cookies, Tracking und eingebundene Drittanbieter.",
+        "why": "Die Website ist oft der sichtbarste Compliance-Punkt und prägt sofort Vertrauen bei Kunden.",
+        "action": "Swissploit prüft Ihren Webauftritt auf typische Datenschutz- und Tracking-Risiken.",
+        "result": "Sie erhalten konkrete Korrekturpunkte für einen professionelleren, vertrauenswürdigeren und datenschutzfreundlicheren Online-Auftritt.",
+        "target": "#service-website-cookie-tracking-check"
+    },
+    {
+        "num": "03",
+        "kicker": "IT-Sicherheits- & Compliance-Check",
+        "question": "Wie angreifbar ist meine IT?",
+        "about": "Es geht um Zugriffe, Passwörter, MFA, Backups, Geräte, Cloud-Dienste und E-Mail-Sicherheit.",
+        "why": "Technische Schwächen werden schnell zu Datenverlust, Betriebsunterbruch oder Vertrauensverlust.",
+        "action": "Swissploit bewertet zentrale Sicherheitsbereiche pragmatisch und ohne unnötige Komplexität.",
+        "result": "Sie erhalten eine verständliche Schwachstellenübersicht und konkrete Empfehlungen zur Verbesserung Ihrer IT-Sicherheit.",
+        "target": "#service-it-sicherheits-compliance-check"
+    },
+    {
+        "num": "04",
+        "kicker": "Datenpannen- & Cyber-Notfallplan",
+        "question": "Was tun bei einer Datenpanne?",
+        "about": "Es geht um klare Abläufe bei Datenverlust, Phishing, gehackten Konten und Verdachtsfällen.",
+        "why": "In kritischen Situationen zählt ein vorbereiteter Plan mehr als improvisierte Einzelentscheidungen.",
+        "action": "Swissploit erstellt mit Ihnen Zuständigkeiten, Sofortmassnahmen, Meldeprüfung und Kommunikation.",
+        "result": "Sie erhalten einen praxistauglichen Notfallplan mit klaren Schritten für kritische Situationen.",
+        "target": "#service-datenpannen-cyber-notfallplan"
+    },
+    {
+        "num": "05",
+        "kicker": "Mitarbeiterschulung Datenschutz & Cybersecurity",
+        "question": "Wie schule ich mein Team?",
+        "about": "Es geht um sicheres Verhalten bei E-Mails, Passwörtern, Kundendaten, KI-Tools und Phishing.",
+        "why": "Viele Risiken entstehen im Alltag und lassen sich durch einfache Regeln deutlich reduzieren.",
+        "action": "Swissploit schult verständlich, praxisnah und mit realistischen Beispielen aus dem KMU-Alltag.",
+        "result": "Ihr Team erhält praxisnahe Schulung, realistische Beispiele und direkt nutzbare Regeln für den Arbeitsalltag.",
+        "target": "#service-mitarbeiterschulung-datenschutz-cybersecurity"
+    },
+    {
+        "num": "06",
+        "kicker": "Cyberversicherung- & Audit-Readiness",
+        "question": "Was verlangt meine Cyberversicherung?",
+        "about": "Es geht um Nachweise, Dokumentation, Sicherheitsmassnahmen und Anforderungen von Kunden oder Versicherungen.",
+        "why": "Immer mehr KMU müssen zeigen können, dass angemessene Schutzmassnahmen umgesetzt sind.",
+        "action": "Swissploit prüft vorhandene Unterlagen, Prozesse und Massnahmen und bereitet Sie auf Fragebögen oder Audits vor.",
+        "result": "Sie erhalten Struktur, eine Lückenübersicht und konkrete Vorbereitung für Nachweisanforderungen.",
+        "target": "#service-cyberversicherung-audit-readiness"
+    }
+]</script>
+
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "Swissploit",
-    "url": "https://example.com",
-    "logo": "https://example.com/assets/Logo.svg",
-    "sameAs": ["https://www.youtube.com/@Swissploit"]
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "Swissploit",
+  "url": "https://swissploit.ch/",
+  "logo": "https://swissploit.ch/assets/swissploit-brand-logo.png",
+  "description": "KMU Sicherheits-Check, Datenschutz, Cybersecurity, Compliance und SOC Light Monitoring für Schweizer KMU – verständlich, konkret und ohne Panikmache.",
+  "areaServed": {
+    "@type": "Country",
+    "name": "Switzerland"
+  },
+  "serviceType": [
+    "Datenschutz",
+    "Cybersecurity",
+    "Compliance",
+    "IT-Sicherheit",
+    "Mitarbeiterschulung",
+    "Audit Readiness",
+    "SOC Light",
+    "Security Monitoring"
+  ],
+  "sameAs": [
+    "https://www.youtube.com/@Swissploit",
+    "https://www.tiktok.com/@swissploit",
+    "https://www.instagram.com/swissploit",
+    "https://www.linkedin.com/company/swissploit/"
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Swissploit Leistungen für Schweizer KMU",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "KMU Sicherheits-Check",
+          "description": "Einstiegsangebot zur Einordnung von Datenschutz, Website-Tracking, IT-Sicherheit, SOC Light Monitoring, Mitarbeiterrisiken und Notfallvorbereitung."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Datenschutz-Check Schweiz",
+          "url": "https://swissploit.ch/leistungen/datenschutz-check-schweiz/",
+          "description": "Swissploit prüft Datenschutz, Datenbearbeitungen, Zugriffe, Aufbewahrung und Drittanbieter für Schweizer KMU – verständlich, pragmatisch und ohne Fachsprache."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Website-, Cookie- & Tracking-Check",
+          "url": "https://swissploit.ch/leistungen/website-cookie-tracking-check/",
+          "description": "Website-, Cookie- und Tracking-Check für Schweizer KMU: Swissploit prüft Datenschutzerklärung, Formulare, Newsletter, Cookies, Tracking-Tools und Drittanbieter."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "IT-Sicherheits- & Compliance-Check",
+          "url": "https://swissploit.ch/leistungen/it-sicherheits-compliance-check/",
+          "description": "IT-Sicherheits- und Compliance-Check für Schweizer KMU: Swissploit prüft MFA, Passwörter, Benutzerrechte, Backups, Geräte, Cloud-Dienste, E-Mail-Sicherheit und Zugriffe."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Datenpannen- & Cyber-Notfallplan",
+          "url": "https://swissploit.ch/leistungen/datenpannen-cyber-notfallplan/",
+          "description": "Datenpannen- und Cyber-Notfallplan für Schweizer KMU: klare Abläufe für Datenverlust, Phishing, gehackte Konten, Meldeprüfung und Kommunikation."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Mitarbeiterschulung Datenschutz & Cybersecurity",
+          "url": "https://swissploit.ch/leistungen/mitarbeiterschulung-datenschutz-cybersecurity/",
+          "description": "Mitarbeiterschulung Datenschutz und Cybersecurity für Schweizer KMU: praxisnahe Schulung zu Phishing, Passwörtern, Kundendaten, KI-Tools und sicheren Arbeitsweisen."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Cyberversicherung- & Audit-Readiness",
+          "url": "https://swissploit.ch/leistungen/cyberversicherung-audit-readiness/",
+          "description": "Cyberversicherung- und Audit-Readiness für Schweizer KMU: Swissploit prüft Dokumentation, Sicherheitsmassnahmen und Prozesse für Versicherungen, Kundenfragebögen und Audits."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "SOC Light",
+          "description": "SOC Light: bezahlbares Security Monitoring für KMU bis 50 Benutzer auf Basis von Microsoft 365 Business Premium und Microsoft Defender for Business. Swissploit überwacht definierte Sicherheitsereignisse in Microsoft 365 und auf geschützten Windows-Geräten.",
+          "offers": {"@type": "Offer", "priceCurrency": "CHF", "price": "590", "description": "ab CHF 590 pro Monat, bis 50 Benutzer inklusive, zusätzliche Benutzer + CHF 10 pro Benutzer und Monat, Setup ab CHF 2500 exkl. MwSt."}
+        }
+      }
+    ]
   }
+}
   </script>
 </body>
 </html>

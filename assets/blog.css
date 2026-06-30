@@ -308,3 +308,8 @@
   white-space:nowrap;
   border:0;
 }
+
+
+/* SWISSPLOIT BLOG V9 COLOR GUARD */
+:root { --accent: #4ab3c3 !important; --accent-2: #4ab3c3 !important; }
+a, .blog-tags, .blog-kicker, .post-kicker { text-decoration-color: rgba(74,179,195,.45); }

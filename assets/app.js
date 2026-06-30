@@ -1,5 +1,31 @@
 // assets/app.js
 
+
+// KMU mobile navigation
+(function(){
+  const toggle = document.getElementById('menuToggle');
+  const nav = document.getElementById('primaryNav');
+  if(!toggle || !nav) return;
+
+  function closeMenu(){
+    nav.classList.remove('is-open');
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', 'Menü öffnen');
+  }
+
+  toggle.addEventListener('click', () => {
+    const isOpen = nav.classList.toggle('is-open');
+    toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    toggle.setAttribute('aria-label', isOpen ? 'Menü schliessen' : 'Menü öffnen');
+  });
+
+  nav.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
+
+  window.addEventListener('resize', () => {
+    if(window.innerWidth > 760) closeMenu();
+  }, { passive: true });
+})();
+
 // Jahr (falls vorhanden)
 (function(){
   const y = document.getElementById('year');
@@ -907,4 +933,368 @@ if(shortsSection){
 
   // Init
   updateActive();
+})();
+
+/* =========================================================
+   FINAL KMU UPDATE - repeat counters
+   ========================================================= */
+
+(function(){
+  const counters = Array.from(document.querySelectorAll('.stat-number[data-count]'));
+  if(!counters.length || !('IntersectionObserver' in window)) return;
+
+  const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const animations = new WeakMap();
+
+  function format(value, decimals){
+    return Number(value).toLocaleString('de-CH', {
+      minimumFractionDigits: decimals,
+      maximumFractionDigits: decimals
+    });
+  }
+
+  function resetCounter(el){
+    const frame = animations.get(el);
+    if(frame) cancelAnimationFrame(frame);
+    const decimals = Number(el.getAttribute('data-decimals') || '0');
+    el.textContent = format(0, decimals);
+  }
+
+  function animateCounter(el){
+    const frame = animations.get(el);
+    if(frame) cancelAnimationFrame(frame);
+
+    const target = Number(el.getAttribute('data-count') || '0');
+    const decimals = Number(el.getAttribute('data-decimals') || '0');
+    const duration = prefersReduced ? 0 : 1250;
+    const start = performance.now();
+
+    if(duration === 0){
+      el.textContent = format(target, decimals);
+      return;
+    }
+
+    function tick(now){
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const value = decimals ? target * eased : Math.round(target * eased);
+      el.textContent = format(value, decimals);
+      if(progress < 1){
+        animations.set(el, requestAnimationFrame(tick));
+      }
+    }
+
+    resetCounter(el);
+    animations.set(el, requestAnimationFrame(tick));
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const el = entry.target;
+      if(entry.isIntersecting){
+        animateCounter(el);
+      } else {
+        resetCounter(el);
+      }
+    });
+  }, { threshold: 0.55, rootMargin: '0px 0px -8% 0px' });
+
+  counters.forEach(counter => {
+    resetCounter(counter);
+    observer.observe(counter);
+  });
+})();
+
+/* =========================================================
+   SWISSPLOIT V5 - Service navigator
+   ========================================================= */
+(function(){
+  const dataEl = document.getElementById('serviceNavigatorData');
+  const options = Array.from(document.querySelectorAll('[data-service-nav]'));
+  const detail = document.getElementById('serviceNavigatorDetail');
+  const kicker = document.getElementById('serviceNavigatorKicker');
+  const title = document.getElementById('serviceNavigatorTitle');
+  const headline = document.getElementById('serviceNavigatorHeadline');
+  const text = document.getElementById('serviceNavigatorText');
+  const link = document.getElementById('serviceNavigatorLink');
+  if(!dataEl || !options.length || !detail || !kicker || !title || !headline || !text || !link) return;
+
+  let services = [];
+  try { services = JSON.parse(dataEl.textContent || '[]'); } catch(e) { services = []; }
+  if(!services.length) return;
+
+  function setActive(index){
+    const service = services[index];
+    if(!service) return;
+
+    options.forEach(option => {
+      const active = Number(option.dataset.serviceNav || '0') === index;
+      option.classList.toggle('is-active', active);
+      option.setAttribute('aria-selected', active ? 'true' : 'false');
+    });
+
+    detail.classList.add('is-changing');
+    window.setTimeout(() => {
+      kicker.textContent = `${service.num} · ${service.kicker}`;
+      title.textContent = service.name;
+      headline.textContent = service.headline;
+      text.textContent = service.text;
+      link.setAttribute('href', service.target);
+      detail.classList.remove('is-changing');
+    }, 160);
+  }
+
+  options.forEach(option => {
+    option.addEventListener('click', () => setActive(Number(option.dataset.serviceNav || '0')));
+    option.addEventListener('keydown', (event) => {
+      const keys = ['ArrowRight','ArrowLeft','ArrowDown','ArrowUp'];
+      if(!keys.includes(event.key)) return;
+      event.preventDefault();
+      const current = Math.max(0, Number(option.dataset.serviceNav || '0'));
+      const direction = (event.key === 'ArrowRight' || event.key === 'ArrowDown') ? 1 : -1;
+      const next = (current + direction + options.length) % options.length;
+      options[next].focus();
+      setActive(next);
+    });
+  });
+})();
+
+/* =========================================================
+   SWISSPLOIT V6 - Hero service finder
+   ========================================================= */
+(function(){
+  const dataEl = document.getElementById('boardServicesData');
+  const options = Array.from(document.querySelectorAll('[data-board-service]'));
+  const panel = document.getElementById('serviceDetailPanel');
+  const kicker = document.getElementById('serviceDetailKicker');
+  const title = document.getElementById('serviceDetailTitle');
+  const text = document.getElementById('serviceDetailText');
+  const link = document.getElementById('serviceDetailLink');
+  if(!dataEl || !options.length || !panel || !kicker || !title || !text || !link) return;
+
+  let services = [];
+  try { services = JSON.parse(dataEl.textContent || '[]'); } catch(e) { services = []; }
+  if(!services.length) return;
+
+  function setActive(index){
+    const service = services[index];
+    if(!service) return;
+
+    options.forEach(option => {
+      const active = Number(option.dataset.boardService || '0') === index;
+      option.classList.toggle('is-active', active);
+      option.setAttribute('aria-selected', active ? 'true' : 'false');
+    });
+
+    panel.classList.add('is-flipping');
+    window.setTimeout(() => {
+      kicker.textContent = `${service.num} · ${service.kicker}`;
+      title.textContent = service.name;
+      text.textContent = service.text;
+      link.setAttribute('href', service.target);
+      panel.classList.remove('is-flipping');
+    }, 160);
+  }
+
+  options.forEach(option => {
+    option.addEventListener('click', () => setActive(Number(option.dataset.boardService || '0')));
+    option.addEventListener('keydown', (event) => {
+      const keys = ['ArrowRight','ArrowLeft','ArrowDown','ArrowUp'];
+      if(!keys.includes(event.key)) return;
+      event.preventDefault();
+      const current = Math.max(0, Number(option.dataset.boardService || '0'));
+      const direction = (event.key === 'ArrowRight' || event.key === 'ArrowDown') ? 1 : -1;
+      const next = (current + direction + options.length) % options.length;
+      options[next].focus();
+      setActive(next);
+    });
+  });
+})();
+
+/* =========================================================
+   SWISSPLOIT V7 - Intro scrollytelling + problem finder
+   ========================================================= */
+(function(){
+  const body = document.body;
+  if(!body || !body.classList.contains('home-page')) return;
+
+  const header = document.querySelector('.site-header');
+  const stickyCta = document.querySelector('.mobile-sticky-cta');
+  const letters = Array.from(document.querySelectorAll('.intro-letter'));
+  const reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  let ticking = false;
+  let vh = Math.max(window.innerHeight || 1, 1);
+
+  const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+  const easeOutCubic = value => 1 - Math.pow(1 - value, 3);
+
+  function updateHeaderAndCta(scrollY){
+    if(header){
+      header.classList.toggle('is-intro-passed', scrollY > Math.min(180, vh * 0.18));
+    }
+    if(stickyCta){
+      stickyCta.classList.toggle('is-visible', window.innerWidth <= 760 && scrollY > vh * 1.15);
+    }
+  }
+
+  function updateIntroLetters(scrollY){
+    if(!letters.length) return;
+
+    if(reducedMotion){
+      letters.forEach(letter => {
+        letter.style.transform = 'translate3d(0,0,0) rotate(0deg)';
+        letter.style.opacity = '1';
+        letter.style.filter = 'none';
+      });
+      return;
+    }
+
+    const isMobile = window.innerWidth < 768;
+    const multiplier = isMobile ? 0.4 : 1;
+    const maxDistance = vh * (isMobile ? 0.58 : 0.72);
+    const progress = easeOutCubic(clamp(scrollY / maxDistance, 0, 1));
+
+    letters.forEach(letter => {
+      const x = Number(letter.dataset.x || 0) * multiplier * progress;
+      const y = Number(letter.dataset.y || 0) * multiplier * progress;
+      const rotate = Number(letter.dataset.r || 0) * multiplier * progress;
+      letter.style.transform = `translate3d(${x}px, ${y}px, 0) rotate(${rotate}deg)`;
+      letter.style.opacity = String(1 - (0.25 * progress));
+      letter.style.filter = isMobile ? 'none' : `blur(${0.5 * progress}px)`;
+    });
+  }
+
+  function onScroll(){
+    if(ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(() => {
+      const y = window.scrollY || 0;
+      updateHeaderAndCta(y);
+      updateIntroLetters(y);
+      ticking = false;
+    });
+  }
+
+  function onResize(){
+    vh = Math.max(window.innerHeight || 1, 1);
+    onScroll();
+  }
+
+  onResize();
+  window.addEventListener('scroll', onScroll, { passive:true });
+  window.addEventListener('resize', onResize, { passive:true });
+})();
+
+(function(){
+  const dataEl = document.getElementById('problemFinderData');
+  const detail = document.getElementById('problemDetail');
+  const options = Array.from(document.querySelectorAll('[data-problem-option]'));
+  const wraps = Array.from(document.querySelectorAll('[data-problem-wrap]'));
+  const mobileDetails = Array.from(document.querySelectorAll('[data-problem-mobile]'));
+  if(!dataEl || !options.length || !wraps.length) return;
+
+  let items = [];
+  try { items = JSON.parse(dataEl.textContent || '[]'); } catch(e) { items = []; }
+  if(!items.length) return;
+
+  const fields = {
+    kicker: document.getElementById('problemKicker'),
+    title: document.getElementById('problemTitle'),
+    about: document.getElementById('problemAbout'),
+    why: document.getElementById('problemWhy'),
+    action: document.getElementById('problemAction'),
+    result: document.getElementById('problemResult'),
+    link: document.getElementById('problemLink')
+  };
+
+  function mobileHtml(item){
+    return `
+      <div class="mobile-detail-block"><strong>Worum geht es?</strong><span>${item.about}</span></div>
+      <div class="mobile-detail-block"><strong>Warum wichtig?</strong><span>${item.why}</span></div>
+      <div class="mobile-detail-block"><strong>Was macht Swissploit?</strong><span>${item.action}</span></div>
+      <div class="mobile-detail-block"><strong>Was erhalten Sie?</strong><span>${item.result}</span></div>
+      <a class="mobile-detail-link" href="${item.target}">Passende Leistung ansehen</a>`;
+  }
+
+  mobileDetails.forEach(el => {
+    const item = items[Number(el.dataset.problemMobile || '0')];
+    if(item) el.innerHTML = mobileHtml(item);
+  });
+
+  function setActive(index){
+    const item = items[index];
+    if(!item) return;
+
+    wraps.forEach(wrap => wrap.classList.toggle('is-active', Number(wrap.dataset.problemWrap || '0') === index));
+    options.forEach(option => {
+      const active = Number(option.dataset.problemOption || '0') === index;
+      option.classList.toggle('is-active', active);
+      option.setAttribute('aria-selected', active ? 'true' : 'false');
+    });
+
+    if(detail && fields.kicker && fields.title && fields.about && fields.why && fields.action && fields.result && fields.link){
+      detail.classList.add('is-changing');
+      window.setTimeout(() => {
+        fields.kicker.textContent = `${item.num} · ${item.kicker}`;
+        fields.title.textContent = item.question;
+        fields.about.textContent = item.about;
+        fields.why.textContent = item.why;
+        fields.action.textContent = item.action;
+        fields.result.textContent = item.result;
+        fields.link.setAttribute('href', item.target);
+        detail.classList.remove('is-changing');
+      }, 140);
+    }
+  }
+
+  options.forEach(option => {
+    option.addEventListener('click', () => setActive(Number(option.dataset.problemOption || '0')));
+    option.addEventListener('keydown', event => {
+      const keys = ['ArrowRight', 'ArrowLeft', 'ArrowDown', 'ArrowUp'];
+      if(!keys.includes(event.key)) return;
+      event.preventDefault();
+      const current = Number(option.dataset.problemOption || '0');
+      const direction = (event.key === 'ArrowRight' || event.key === 'ArrowDown') ? 1 : -1;
+      const next = (current + direction + options.length) % options.length;
+      options[next].focus();
+      setActive(next);
+    });
+  });
+
+  setActive(0);
+})();
+
+
+/* =========================================================
+   SWISSPLOIT V10 - service accordion anchor behaviour
+   ========================================================= */
+(function(){
+  const serviceDetails = Array.from(document.querySelectorAll('details.service-accordion[id]'));
+  if(!serviceDetails.length) return;
+
+  function openServiceFromHash(){
+    const hash = window.location.hash || '';
+    if(!hash.startsWith('#service-')) return;
+    const target = document.querySelector(hash);
+    if(!target || !target.matches('details.service-accordion')) return;
+    serviceDetails.forEach(detail => { if(detail !== target) detail.removeAttribute('open'); });
+    target.setAttribute('open','');
+    window.setTimeout(() => target.scrollIntoView({ behavior: 'smooth', block: 'start' }), 30);
+  }
+
+  serviceDetails.forEach(detail => {
+    detail.addEventListener('toggle', () => {
+      if(!detail.open) return;
+      serviceDetails.forEach(other => { if(other !== detail) other.removeAttribute('open'); });
+    });
+  });
+
+  window.addEventListener('hashchange', openServiceFromHash);
+  document.addEventListener('click', event => {
+    const link = event.target.closest('a[href^="#service-"]');
+    if(!link) return;
+    window.setTimeout(openServiceFromHash, 0);
+  });
+  openServiceFromHash();
 })();

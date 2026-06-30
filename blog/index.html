@@ -1,44 +1,41 @@
 <!doctype html>
-<html lang="de" data-theme="light">
+<html lang="de" data-theme="dark">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Swissploit Blog</title>
+  <title>Swissploit Wissen | Kostenloser IT-Security-Blog</title>
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/assets/JustPlus.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/assets/JustPlus.png">
-  <link rel="apple-touch-icon" href="/assets/JustPlus.png">
-  <meta name="theme-color" content="#ffffff">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon-192x192.png">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/assets/JustPlus.png">
+  <meta name="theme-color" content="#05070b">
 
-  <meta name="description" content="Blog von Swissploit mit Beiträgen zu Cybersecurity, Phishing, Microsoft 365, Windows und praxisnahen IT-Tipps." />
+  <meta name="description" content="Kostenlose Swissploit Guides zu Cybersecurity, Phishing, Datenschutzrisiken, Microsoft 365 und praktischer digitaler Sicherheit." />
   <meta name="robots" content="index,follow,max-image-preview:large" />
 
-  <meta property="og:title" content="Swissploit Blog">
+  <meta property="og:title" content="Swissploit Wissen">
   <meta property="og:description" content="Beiträge zu Cybersecurity, Microsoft 365, Windows, Phishing und moderner IT – verständlich und praxisnah.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://swissploit.ch/blog/">
-  <meta property="og:image" content="https://swissploit.ch/assets/JustPlus.png">
+  <meta property="og:image" content="https://swissploit.ch/assets/swissploit-og.png">
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Swissploit Blog">
+  <meta name="twitter:title" content="Swissploit Wissen">
   <meta name="twitter:description" content="Beiträge zu Cybersecurity, Microsoft 365, Windows, Phishing und moderner IT – verständlich und praxisnah.">
-  <meta name="twitter:image" content="https://swissploit.ch/assets/JustPlus.png">
+  <meta name="twitter:image" content="https://swissploit.ch/assets/swissploit-og.png">
 
   <link rel="canonical" href="https://swissploit.ch/blog/" />
   <link rel="alternate" hreflang="de" href="https://swissploit.ch/blog/" />
   <link rel="alternate" hreflang="en" href="https://swissploit.ch/en/blog/" />
   <link rel="alternate" hreflang="x-default" href="https://swissploit.ch/blog/" />
 
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Swissploit Blog","url":"https://swissploit.ch/blog/","inLanguage":"de","mainEntity":{"@type":"ItemList","itemListElement":[{"@type":"ListItem","position":1,"url":"https://swissploit.ch/blog/cyberseal-fuer-wen-und-was-es-aussagt/","name":"CyberSeal erklärt"},{"@type":"ListItem","position":2,"url":"https://swissploit.ch/blog/mfa-aktivieren-microsoft-authenticator/","name":"MFA aktivieren: Authenticator"},{"@type":"ListItem","position":3,"url":"https://swissploit.ch/blog/notfall-checkliste-phishing-microsoft-365/","name":"Phishing Checkliste"},{"@type":"ListItem","position":4,"url":"https://swissploit.ch/blog/onedrive-restore-deleted-files/","name":"OneDrive Dateien zurückholen!"},{"@type":"ListItem","position":5,"url":"https://swissploit.ch/blog/outlook-fragezeichen-zeichenkodierung-utf8/","name":"Outlook zeigt Umlaute als ?"},{"@type":"ListItem","position":6,"url":"https://swissploit.ch/blog/wetransfer-phishing-html-onedrive/","name":"Angriff mit HTML"}]}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Swissploit Wissen","url":"https://swissploit.ch/blog/","inLanguage":"de","mainEntity":{"@type":"ItemList","itemListElement":[{"@type":"ListItem","position":1,"url":"https://swissploit.ch/blog/cyberseal-fuer-wen-und-was-es-aussagt/","name":"CyberSeal erklärt"},{"@type":"ListItem","position":2,"url":"https://swissploit.ch/blog/mfa-aktivieren-microsoft-authenticator/","name":"MFA aktivieren: Authenticator"},{"@type":"ListItem","position":3,"url":"https://swissploit.ch/blog/notfall-checkliste-phishing-microsoft-365/","name":"Phishing Checkliste"},{"@type":"ListItem","position":4,"url":"https://swissploit.ch/blog/onedrive-restore-deleted-files/","name":"OneDrive Dateien zurückholen!"},{"@type":"ListItem","position":5,"url":"https://swissploit.ch/blog/outlook-fragezeichen-zeichenkodierung-utf8/","name":"Outlook zeigt Umlaute als ?"},{"@type":"ListItem","position":6,"url":"https://swissploit.ch/blog/wetransfer-phishing-html-onedrive/","name":"Angriff mit HTML"}]}}</script>
 
   <script>
     (function () {
-      const saved = localStorage.getItem("swissploit-theme");
-      if (saved) document.documentElement.setAttribute("data-theme", saved);
-      else {
-        const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
-        document.documentElement.setAttribute("data-theme", prefersDark ? "dark" : "light");
-      }
+      document.documentElement.setAttribute("data-theme", "dark");
+      try { localStorage.setItem("swissploit-theme", "dark"); } catch (e) {}
     })();
   </script>
 
@@ -54,16 +51,14 @@
   <header class="site-header" role="banner">
     <div class="wrap headerbar">
       <a class="brand" href="/index.html" aria-label="Swissploit Home" data-transition>
-        <video autoplay muted loop playsinline preload="auto" class="brand-video">
-          <source src="/assets/Swissploit Intro_1.mp4" type="video/mp4">
-        </video>
+        <img class="brand-logo-image header-logo-image" src="/assets/swissploit-brand-logo.png" alt="Swissploit Logo" width="120" height="49" decoding="async">
       </a>
 
       <nav class="nav" aria-label="Hauptnavigation">
-        <a href="/index.html#about" data-transition>About</a>
-        <a href="/index.html#featured" data-transition>Content</a>
-        <a href="/index.html#shorts" data-transition>H355</a>
-        <a class="is-active" href="/blog.html" data-transition>Blog</a>
+        <a href="/index.html#services" data-transition>Leistungen</a>
+        <a href="/index.html#sicherheitslage" data-transition>Sicherheitslage</a>
+        <a href="/index.html#ueber" data-transition>Über Swissploit</a>
+        <a href="/index.html#kontakt" data-transition>Kontakt</a>
       </nav>
 
       <button id="themeToggle"
@@ -84,7 +79,7 @@
     <nav class="wrap blog-breadcrumbs" aria-label="Breadcrumb">
       <ol class="breadcrumb-list">
         <li><a href="/index.html">Home</a></li>
-        <li aria-current="page">Blog</li>
+        <li aria-current="page">Wissen</li>
       </ol>
     </nav>
 
@@ -289,16 +284,30 @@
         </section>
       </div>
     </section>
+
+    <section class="section blog-index-cta-section" aria-label="Swissploit Leistungen">
+      <div class="wrap">
+        <div class="blog-index-cta">
+          <p class="spl-eyebrow">Vom Wissen zur Umsetzung</p>
+          <h2>Gratis Guides sind ein guter Start. Für KMU braucht es klare Prioritäten.</h2>
+          <p>Wenn Sie wissen möchten, welche Datenschutz- und Cybersecurity-Massnahmen in Ihrem Unternehmen zuerst sinnvoll sind, starten Sie mit dem KMU Sicherheits-Check.</p>
+          <div class="cta-row">
+            <a class="btn primary magnetic" href="/index.html#kmu-sicherheits-check" data-transition>KMU Sicherheits-Check anfragen</a>
+            <a class="btn magnetic" href="/index.html#services" data-transition>Leistungen ansehen</a>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer class="site-footer" role="contentinfo">
     <div class="wrap">
       <p>© <span id="year"></span> Swissploit.</p>
       <nav class="foot-nav" aria-label="Footer Navigation">
-        <a href="/index.html#about" data-transition>About</a>
-        <a href="/index.html#featured" data-transition>Content</a>
-        <a href="/index.html#shorts" data-transition>H355</a>
-        <a href="/blog.html" data-transition>Blog</a>
+        <a href="/index.html#services" data-transition>Leistungen</a>
+        <a href="/index.html#sicherheitslage" data-transition>Sicherheitslage</a>
+        <a href="/index.html#ueber" data-transition>Über Swissploit</a>
+        <a href="/index.html#kontakt" data-transition>Kontakt</a>
       </nav>
     </div>
   </footer>

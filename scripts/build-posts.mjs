@@ -435,7 +435,7 @@ function renderPostJsonLd(post, lang, txt) {
       name: "Swissploit",
       logo: {
         "@type": "ImageObject",
-        url: `${BASE_URL}/assets/JustPlus.png`
+        url: `${BASE_URL}/assets/swissploit-og.png`
       }
     },
     keywords: (post.tags || []).join(", ") || undefined
@@ -477,23 +477,24 @@ function renderBlogIndexPage(posts, lang) {
     : "Beiträge zu Cybersecurity, Microsoft 365, Windows, Phishing und moderner IT – verständlich und praxisnah.";
   const pageUrl = isEn ? `${BASE_URL}/en/blog/` : `${BASE_URL}/blog/`;
   const blogHref = isEn ? "/en/blog/" : "/blog/";
-  const navBlogHref = "/blog.html";
+  const navBlogHref = blogHref;
   const cardsHtml = posts
     .filter((post) => Boolean(post.i18n?.[lang] || post.i18n?.[post.defaultLang]))
     .map((post, idx) => renderPostCard(post, lang, idx))
     .join("");
 
   return `<!doctype html>
-<html lang="${lang}" data-theme="light">
+<html lang="${lang}" data-theme="dark">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>${escapeHtml(pageTitle)}</title>
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/assets/JustPlus.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/assets/JustPlus.png">
-  <link rel="apple-touch-icon" href="/assets/JustPlus.png">
-  <meta name="theme-color" content="#ffffff">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon-192x192.png">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/assets/JustPlus.png">
+  <meta name="theme-color" content="#05070b">
 
   <meta name="description" content="${escapeAttr(metaDescription)}" />
   <meta name="robots" content="index,follow,max-image-preview:large" />
@@ -502,12 +503,12 @@ function renderBlogIndexPage(posts, lang) {
   <meta property="og:description" content="${escapeAttr(ogDescription)}">
   <meta property="og:type" content="website">
   <meta property="og:url" content="${escapeAttr(pageUrl)}">
-  <meta property="og:image" content="${BASE_URL}/assets/JustPlus.png">
+  <meta property="og:image" content="${BASE_URL}/assets/swissploit-og.png">
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${escapeAttr(pageTitle)}">
   <meta name="twitter:description" content="${escapeAttr(ogDescription)}">
-  <meta name="twitter:image" content="${BASE_URL}/assets/JustPlus.png">
+  <meta name="twitter:image" content="${BASE_URL}/assets/swissploit-og.png">
 
   ${renderIndexAlternateLinks(lang)}
 
@@ -515,12 +516,8 @@ function renderBlogIndexPage(posts, lang) {
 
   <script>
     (function () {
-      const saved = localStorage.getItem("swissploit-theme");
-      if (saved) document.documentElement.setAttribute("data-theme", saved);
-      else {
-        const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
-        document.documentElement.setAttribute("data-theme", prefersDark ? "dark" : "light");
-      }
+      document.documentElement.setAttribute("data-theme", "dark");
+      try { localStorage.setItem("swissploit-theme", "dark"); } catch (e) {}
     })();
   </script>
 
@@ -536,16 +533,14 @@ function renderBlogIndexPage(posts, lang) {
   <header class="site-header" role="banner">
     <div class="wrap headerbar">
       <a class="brand" href="/index.html" aria-label="Swissploit Home" data-transition>
-        <video autoplay muted loop playsinline preload="auto" class="brand-video">
-          <source src="/assets/Swissploit Intro_1.mp4" type="video/mp4">
-        </video>
+        <img class="brand-logo-image header-logo-image" src="/assets/swissploit-brand-logo.png" alt="Swissploit Logo" width="120" height="49" decoding="async">
       </a>
 
       <nav class="nav" aria-label="${isEn ? "Main navigation" : "Hauptnavigation"}">
-        <a href="/index.html#about" data-transition>About</a>
-        <a href="/index.html#featured" data-transition>Content</a>
-        <a href="/index.html#shorts" data-transition>H355</a>
-        <a class="is-active" href="${navBlogHref}" data-transition>Blog</a>
+        <a href="/index.html#services" data-transition>Leistungen</a>
+        <a class="is-active" href="${navBlogHref}" data-transition>Wissen</a>
+        <a href="/index.html#ueber" data-transition>Über Swissploit</a>
+        <a href="/index.html#kontakt" data-transition>Kontakt</a>
       </nav>
 
       <button id="themeToggle"
@@ -566,7 +561,7 @@ function renderBlogIndexPage(posts, lang) {
     <nav class="wrap blog-breadcrumbs" aria-label="Breadcrumb">
       <ol class="breadcrumb-list">
         <li><a href="/index.html">Home</a></li>
-        <li aria-current="page">Blog</li>
+        <li aria-current="page">Wissen</li>
       </ol>
     </nav>
 
@@ -609,10 +604,10 @@ function renderBlogIndexPage(posts, lang) {
     <div class="wrap">
       <p>© <span id="year"></span> Swissploit.</p>
       <nav class="foot-nav" aria-label="Footer Navigation">
-        <a href="/index.html#about" data-transition>About</a>
-        <a href="/index.html#featured" data-transition>Content</a>
-        <a href="/index.html#shorts" data-transition>H355</a>
-        <a href="${navBlogHref}" data-transition>Blog</a>
+        <a href="/index.html#services" data-transition>Leistungen</a>
+        <a href="${navBlogHref}" data-transition>Wissen</a>
+        <a href="/index.html#ueber" data-transition>Über Swissploit</a>
+        <a href="/index.html#kontakt" data-transition>Kontakt</a>
       </nav>
     </div>
   </footer>
@@ -632,27 +627,27 @@ function renderStaticPostPage(post, lang, allPosts) {
   const txt = post.i18n?.[lang] || post.i18n?.[post.defaultLang] || post.i18n?.de || post.i18n?.en || {};
   const title = txt.title || "Swissploit – Blog";
   const description = (txt.excerpt || post?.seo?.description?.[lang] || post?.seo?.description?.de || post?.seo?.description?.en || "").slice(0, 160);
-  const image = post?.seo?.image || `${BASE_URL}/assets/JustPlus.png`;
+  const image = post?.seo?.image || `${BASE_URL}/assets/swissploit-og.png`;
   const canonical =
     (lang === "en" && post?.urls?.en) ||
     post?.urls?.de ||
     post?.urls?.en ||
     `${BASE_URL}/blog/`;
   const blogHref = lang === "en" ? "/en/blog/" : "/blog/";
-  const navBlogHref = "/blog.html";
+  const navBlogHref = blogHref;
   const ui = lang === "de"
     ? {
-        about: "About",
-        latest: "Content",
-        shorts: "H355",
+        about: "Über Swissploit",
+        latest: "Wissen",
+        shorts: "Leistungen",
         blog: "Blog",
         back: "← Zurück",
         watch: "▶ Video ansehen"
       }
     : {
-        about: "About",
-        latest: "Content",
-        shorts: "H355",
+        about: "Über Swissploit",
+        latest: "Wissen",
+        shorts: "Leistungen",
         blog: "Blog",
         back: "← Back",
         watch: "▶ Watch video"
@@ -663,7 +658,7 @@ function renderStaticPostPage(post, lang, allPosts) {
   const bodyHtml = txt.content || "";
 
   return `<!doctype html>
-<html lang="${lang}" data-theme="light">
+<html lang="${lang}" data-theme="dark">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -685,22 +680,19 @@ function renderStaticPostPage(post, lang, allPosts) {
 
   ${renderPostAlternateLinks(post, lang)}
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/assets/JustPlus.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/assets/JustPlus.png">
-  <link rel="apple-touch-icon" href="/assets/JustPlus.png">
-  <meta name="theme-color" content="#ffffff">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon-192x192.png">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/assets/JustPlus.png">
+  <meta name="theme-color" content="#05070b">
 
   <script type="application/ld+json">${renderPostJsonLd(post, lang, txt)}</script>
   <script type="application/ld+json">${renderBreadcrumbJsonLd(post, lang, title)}</script>
 
   <script>
     (function () {
-      const saved = localStorage.getItem("swissploit-theme");
-      if (saved) document.documentElement.setAttribute("data-theme", saved);
-      else {
-        const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
-        document.documentElement.setAttribute("data-theme", prefersDark ? "dark" : "light");
-      }
+      document.documentElement.setAttribute("data-theme", "dark");
+      try { localStorage.setItem("swissploit-theme", "dark"); } catch (e) {}
     })();
   </script>
 
@@ -716,16 +708,14 @@ function renderStaticPostPage(post, lang, allPosts) {
   <header class="site-header" role="banner">
     <div class="wrap headerbar">
       <a class="brand" href="/index.html" aria-label="Swissploit Home" data-transition>
-        <video autoplay muted loop playsinline preload="auto" class="brand-video">
-          <source src="/assets/Swissploit Intro_1.mp4" type="video/mp4">
-        </video>
+        <img class="brand-logo-image header-logo-image" src="/assets/swissploit-brand-logo.png" alt="Swissploit Logo" width="120" height="49" decoding="async">
       </a>
 
       <nav class="nav" aria-label="${lang === "de" ? "Hauptnavigation" : "Main navigation"}">
-        <a href="/index.html#about" data-transition>${ui.about}</a>
-        <a href="/index.html#featured" data-transition>${ui.latest}</a>
-        <a href="/index.html#shorts" data-transition>${ui.shorts}</a>
-        <a class="is-active" href="${navBlogHref}" data-transition>${ui.blog}</a>
+        <a href="/index.html#services" data-transition>Leistungen</a>
+        <a class="is-active" href="${navBlogHref}" data-transition>Wissen</a>
+        <a href="/index.html#ueber" data-transition>Über Swissploit</a>
+        <a href="/index.html#kontakt" data-transition>Kontakt</a>
       </nav>
 
       <button id="themeToggle"
@@ -746,7 +736,7 @@ function renderStaticPostPage(post, lang, allPosts) {
     <nav class="wrap blog-breadcrumbs" aria-label="Breadcrumb">
       <ol class="breadcrumb-list">
         <li><a href="/index.html" data-transition>Home</a></li>
-        <li><a href="${blogHref}" data-transition>Blog</a></li>
+        <li><a href="${blogHref}" data-transition>Wissen</a></li>
         <li aria-current="page">${escapeHtml(title)}</li>
       </ol>
     </nav>
@@ -782,10 +772,10 @@ function renderStaticPostPage(post, lang, allPosts) {
     <div class="wrap">
       <p>© <span id="year"></span> Swissploit.</p>
       <nav class="foot-nav" aria-label="Footer Navigation">
-        <a href="/index.html#about" data-transition>${ui.about}</a>
-        <a href="/index.html#featured" data-transition>${ui.latest}</a>
-        <a href="/index.html#shorts" data-transition>${ui.shorts}</a>
-        <a href="${navBlogHref}" data-transition>${ui.blog}</a>
+        <a href="/index.html#services" data-transition>Leistungen</a>
+        <a href="${navBlogHref}" data-transition>Wissen</a>
+        <a href="/index.html#ueber" data-transition>Über Swissploit</a>
+        <a href="/index.html#kontakt" data-transition>Kontakt</a>
       </nav>
     </div>
   </footer>
@@ -878,7 +868,7 @@ async function main() {
     };
 
     const seo = {
-      image: meta.thumb ? absoluteUrl(meta.thumb) : `${BASE_URL}/assets/JustPlus.png`,
+      image: meta.thumb ? absoluteUrl(meta.thumb) : `${BASE_URL}/assets/swissploit-og.png`,
       description: {
         de: pickFirst(
           i18n.de?.excerpt,
