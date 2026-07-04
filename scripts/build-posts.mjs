@@ -538,6 +538,7 @@ function renderBlogIndexPage(posts, lang) {
 
       <nav class="nav" aria-label="${isEn ? "Main navigation" : "Hauptnavigation"}">
         <a href="/index.html#services" data-transition>Leistungen</a>
+        <a href="/index.html#soc-light" data-transition>SOC Light</a>
         <a class="is-active" href="${navBlogHref}" data-transition>Wissen</a>
         <a href="/index.html#ueber" data-transition>Über Swissploit</a>
         <a href="/index.html#kontakt" data-transition>Kontakt</a>
@@ -605,6 +606,7 @@ function renderBlogIndexPage(posts, lang) {
       <p>© <span id="year"></span> Swissploit.</p>
       <nav class="foot-nav" aria-label="Footer Navigation">
         <a href="/index.html#services" data-transition>Leistungen</a>
+        <a href="/index.html#soc-light" data-transition>SOC Light</a>
         <a href="${navBlogHref}" data-transition>Wissen</a>
         <a href="/index.html#ueber" data-transition>Über Swissploit</a>
         <a href="/index.html#kontakt" data-transition>Kontakt</a>
@@ -713,6 +715,7 @@ function renderStaticPostPage(post, lang, allPosts) {
 
       <nav class="nav" aria-label="${lang === "de" ? "Hauptnavigation" : "Main navigation"}">
         <a href="/index.html#services" data-transition>Leistungen</a>
+        <a href="/index.html#soc-light" data-transition>SOC Light</a>
         <a class="is-active" href="${navBlogHref}" data-transition>Wissen</a>
         <a href="/index.html#ueber" data-transition>Über Swissploit</a>
         <a href="/index.html#kontakt" data-transition>Kontakt</a>
@@ -773,6 +776,7 @@ function renderStaticPostPage(post, lang, allPosts) {
       <p>© <span id="year"></span> Swissploit.</p>
       <nav class="foot-nav" aria-label="Footer Navigation">
         <a href="/index.html#services" data-transition>Leistungen</a>
+        <a href="/index.html#soc-light" data-transition>SOC Light</a>
         <a href="${navBlogHref}" data-transition>Wissen</a>
         <a href="/index.html#ueber" data-transition>Über Swissploit</a>
         <a href="/index.html#kontakt" data-transition>Kontakt</a>

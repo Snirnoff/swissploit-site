@@ -858,7 +858,12 @@ if(shortsSection){
       const el = hash ? document.getElementById(hash) : null;
       return el ? { a, el, hash } : null;
     })
-    .filter(Boolean);
+    .filter(Boolean)
+    .sort((a, b) => {
+      const ay = a.el.getBoundingClientRect().top + (window.scrollY || document.documentElement.scrollTop || 0);
+      const by = b.el.getBoundingClientRect().top + (window.scrollY || document.documentElement.scrollTop || 0);
+      return ay - by;
+    });
 
   if (!items.length) return;
 

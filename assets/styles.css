@@ -9328,3 +9328,678 @@ body.home-page::after{
     grid-column:auto;
   }
 }
+
+/* =========================================================
+   SWISSPLOIT V20 - simplified services UX
+   ========================================================= */
+.home-page .service-topic-grid{
+  display:grid;
+  grid-template-columns:repeat(3, minmax(0, 1fr));
+  gap:18px;
+  align-items:stretch;
+  margin-top:34px;
+}
+.home-page .service-topic-card{
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  min-width:0;
+  padding:clamp(22px, 2.5vw, 30px);
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:30px;
+  background:
+    radial-gradient(520px 240px at 0% 0%, rgba(74,179,195,.09), transparent 62%),
+    linear-gradient(180deg, rgba(255,255,255,.048), rgba(255,255,255,.020));
+  box-shadow:0 22px 62px rgba(0,0,0,.24), inset 0 1px 0 rgba(255,255,255,.045);
+  overflow:hidden;
+}
+.home-page .service-topic-card::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:30px;
+  width:3px;
+  height:48px;
+  border-radius:0 999px 999px 0;
+  background:#4ab3c3;
+  opacity:.68;
+}
+.home-page .service-topic-head{
+  padding-bottom:20px;
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+.home-page .topic-kicker{
+  display:inline-flex;
+  align-items:center;
+  min-height:28px;
+  padding:0 10px;
+  border:1px solid rgba(74,179,195,.20);
+  border-radius:999px;
+  color:#4ab3c3;
+  background:rgba(74,179,195,.055);
+  font-size:11px;
+  font-weight:850;
+  letter-spacing:.10em;
+  text-transform:uppercase;
+}
+.home-page .service-topic-head h3{
+  margin:16px 0 10px;
+  color:#fff;
+  font-size:clamp(23px, 2.3vw, 34px);
+  line-height:1.04;
+  letter-spacing:-.055em;
+}
+.home-page .service-topic-head p{
+  margin:0;
+  color:rgba(245,247,251,.74);
+  font-size:15.5px;
+  line-height:1.58;
+  text-align:left;
+}
+.home-page .service-mini-list{
+  display:grid;
+  gap:14px;
+  padding-top:18px;
+}
+.home-page .service-mini-card{
+  padding:18px;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:22px;
+  background:rgba(255,255,255,.028);
+}
+.home-page .service-mini-card h4{
+  margin:0 0 14px;
+  color:#fff;
+  font-size:18px;
+  line-height:1.2;
+  letter-spacing:-.025em;
+}
+.home-page .service-mini-card dl{
+  display:grid;
+  gap:12px;
+  margin:0;
+}
+.home-page .service-mini-card dt{
+  margin:0 0 4px;
+  color:#4ab3c3;
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+.home-page .service-mini-card dd{
+  margin:0;
+  color:rgba(245,247,251,.73);
+  font-size:14px;
+  line-height:1.5;
+}
+.home-page .service-mini-card .inline-action{
+  margin-top:16px;
+  font-size:14px;
+}
+.home-page .service-decision-cta{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:22px;
+  margin:34px auto 0;
+  padding:24px;
+  border:1px solid rgba(74,179,195,.18);
+  border-radius:26px;
+  background:
+    radial-gradient(480px 180px at 0 0, rgba(74,179,195,.085), transparent 70%),
+    rgba(255,255,255,.026);
+  box-shadow:0 22px 58px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.04);
+}
+.home-page .service-decision-cta h3{
+  margin:0 0 6px;
+  color:#fff;
+  font-size:clamp(20px, 2vw, 27px);
+  letter-spacing:-.035em;
+}
+.home-page .service-decision-cta p{
+  margin:0;
+  max-width:64ch;
+  color:rgba(245,247,251,.76);
+  font-size:15px;
+  line-height:1.55;
+  text-align:left;
+}
+.home-page #services,
+.home-page #soc-light,
+.home-page #sicherheitslage,
+.home-page #ueber,
+.home-page #kontakt{
+  scroll-margin-top:96px;
+}
+@media (max-width:1100px){
+  .home-page .service-topic-grid{ grid-template-columns:1fr; }
+  .home-page .service-topic-card{ max-width:860px; margin-inline:auto; }
+}
+@media (max-width:760px){
+  .home-page .service-topic-grid{ margin-top:24px; gap:16px; }
+  .home-page .service-topic-card{ border-radius:24px; padding:22px; }
+  .home-page .service-mini-card{ padding:16px; border-radius:18px; }
+  .home-page .service-decision-cta{ display:grid; padding:20px; }
+  .home-page .service-decision-cta .btn{ width:100%; }
+}
+
+/* =========================================================
+   SWISSPLOIT V21 - conversion focused service experience
+   ========================================================= */
+.home-page .service-choice-strip{
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  align-items:center;
+  gap:18px;
+  max-width:980px;
+  margin:30px auto 0;
+  padding:16px 18px;
+  border:1px solid rgba(74,179,195,.16);
+  border-radius:20px;
+  background:rgba(74,179,195,.045);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.04);
+}
+.home-page .service-choice-strip span{
+  color:#4ab3c3;
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  white-space:nowrap;
+}
+.home-page .service-choice-strip p{
+  margin:0;
+  color:rgba(245,247,251,.76);
+  font-size:14.5px;
+  line-height:1.5;
+  text-align:left;
+}
+.home-page .service-path-grid{
+  display:grid;
+  grid-template-columns:repeat(3, minmax(0, 1fr));
+  gap:18px;
+  align-items:start;
+  margin-top:28px;
+}
+.home-page .service-path-card{
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  min-width:0;
+  min-height:100%;
+  padding:clamp(22px, 2.4vw, 30px);
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:30px;
+  background:
+    radial-gradient(560px 260px at 12% -10%, rgba(74,179,195,.085), transparent 58%),
+    linear-gradient(180deg, rgba(255,255,255,.046), rgba(255,255,255,.018));
+  box-shadow:0 22px 62px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.045);
+  overflow:hidden;
+}
+.home-page .service-path-card::before{
+  content:"";
+  position:absolute;
+  inset:0 auto 0 0;
+  width:3px;
+  background:linear-gradient(180deg, transparent, rgba(74,179,195,.72), transparent);
+  opacity:.78;
+}
+.home-page .service-path-top{
+  display:grid;
+  gap:12px;
+}
+.home-page .service-path-pill{
+  justify-self:start;
+  display:inline-flex;
+  align-items:center;
+  min-height:28px;
+  padding:0 10px;
+  border:1px solid rgba(74,179,195,.20);
+  border-radius:999px;
+  color:#4ab3c3;
+  background:rgba(74,179,195,.055);
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+.home-page .service-path-card h3{
+  margin:0;
+  max-width:11ch;
+  color:#fff;
+  font-size:clamp(23px, 2.2vw, 32px);
+  line-height:1.04;
+  letter-spacing:-.052em;
+}
+.home-page .service-path-top p{
+  margin:0;
+  color:rgba(245,247,251,.74);
+  font-size:15.5px;
+  line-height:1.58;
+  text-align:left;
+}
+.home-page .service-path-fit{
+  display:grid;
+  gap:6px;
+  margin:22px 0 0;
+  padding:14px 15px;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:18px;
+  background:rgba(255,255,255,.025);
+}
+.home-page .service-path-fit strong{
+  color:#4ab3c3;
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+.home-page .service-path-fit span{
+  color:rgba(245,247,251,.84);
+  font-size:14.5px;
+  line-height:1.45;
+}
+.home-page .service-path-list{
+  display:grid;
+  gap:10px;
+  margin:18px 0 0;
+  padding:0;
+  list-style:none;
+}
+.home-page .service-path-list li{
+  position:relative;
+  padding-left:18px;
+  color:rgba(245,247,251,.84);
+  font-size:14.5px;
+  line-height:1.45;
+}
+.home-page .service-path-list li::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:.62em;
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:#4ab3c3;
+  box-shadow:0 0 12px rgba(74,179,195,.28);
+}
+.home-page .service-path-details{
+  margin-top:20px;
+  border:1px solid rgba(255,255,255,.09);
+  border-radius:18px;
+  background:rgba(0,0,0,.12);
+  overflow:hidden;
+}
+.home-page .service-path-details summary{
+  min-height:50px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  padding:0 16px;
+  cursor:pointer;
+  color:#fff;
+  font-size:14px;
+  font-weight:850;
+  list-style:none;
+}
+.home-page .service-path-details summary::-webkit-details-marker{ display:none; }
+.home-page .service-path-details[open] summary{
+  border-bottom:1px solid rgba(255,255,255,.08);
+  color:#4ab3c3;
+}
+.home-page .service-path-detail-body{
+  display:grid;
+  gap:12px;
+  padding:14px;
+}
+.home-page .service-compact-block{
+  padding:14px;
+  border:1px solid rgba(255,255,255,.075);
+  border-radius:16px;
+  background:rgba(255,255,255,.024);
+}
+.home-page .service-compact-block h4{
+  margin:0 0 10px;
+  color:#fff;
+  font-size:16px;
+  line-height:1.22;
+  letter-spacing:-.015em;
+}
+.home-page .service-compact-block p{
+  margin:8px 0 0;
+  color:rgba(245,247,251,.72);
+  font-size:13.5px;
+  line-height:1.48;
+  text-align:left;
+}
+.home-page .service-compact-block p strong{
+  color:rgba(245,247,251,.90);
+}
+.home-page .service-compact-block .inline-action{
+  margin-top:12px;
+  font-size:13.5px;
+}
+.home-page .compact-service-cta{
+  margin-top:28px;
+}
+@media (max-width:1100px){
+  .home-page .service-path-grid{
+    grid-template-columns:1fr;
+    max-width:880px;
+    margin-inline:auto;
+  }
+  .home-page .service-path-card h3{ max-width:18ch; }
+}
+@media (max-width:760px){
+  .home-page .service-choice-strip{
+    grid-template-columns:1fr;
+    gap:10px;
+    margin-top:22px;
+    padding:16px;
+  }
+  .home-page .service-choice-strip .inline-action{ justify-self:start; }
+  .home-page .service-path-grid{ margin-top:20px; gap:16px; }
+  .home-page .service-path-card{ border-radius:24px; padding:22px; }
+  .home-page .service-path-card h3{ max-width:none; }
+  .home-page .service-path-fit{ margin-top:18px; }
+  .home-page .service-path-details summary{ min-height:48px; padding-inline:14px; }
+}
+
+
+/* =========================================================
+   V22 refinements - service links, buttons, service pages
+   ========================================================= */
+.home-page .service-choice-strip .service-choice-button{
+  justify-self:end;
+  min-width:154px;
+}
+.home-page .service-path-list li{
+  padding-left:0 !important;
+}
+.home-page .service-path-list li::before{
+  display:none !important;
+  content:none !important;
+}
+.home-page .service-path-link{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  min-height:48px;
+  padding:0 14px;
+  border:1px solid rgba(255,255,255,.09);
+  border-radius:15px;
+  color:rgba(245,247,251,.90);
+  background:rgba(255,255,255,.026);
+  text-decoration:none;
+  font-weight:760;
+  line-height:1.25;
+  transition:color .2s ease, background .2s ease, border-color .2s ease, transform .2s ease;
+}
+.home-page .service-path-link::after{
+  content:"→";
+  color:#4ab3c3;
+  font-weight:900;
+  flex:0 0 auto;
+}
+.home-page .service-path-link:hover{
+  color:#fff;
+  border-color:rgba(74,179,195,.30);
+  background:rgba(74,179,195,.055);
+  transform:translateY(-1px);
+}
+.home-page .service-card-cta{
+  width:100%;
+  margin-top:18px;
+}
+.service-page .header-cta{
+  display:inline-flex;
+  min-height:40px;
+  align-items:center;
+  justify-content:center;
+  padding:0 16px;
+  border-radius:999px;
+  color:#061014;
+  background:linear-gradient(135deg, #6fc9d5, var(--accent));
+  text-decoration:none;
+  font-size:13px;
+  font-weight:850;
+  box-shadow:0 14px 34px rgba(74,179,195,.20);
+  white-space:nowrap;
+}
+.service-page .service-landing-wrap{
+  display:grid;
+  justify-items:center;
+  text-align:center;
+}
+.service-page .service-landing-title{
+  text-align:center;
+}
+.service-page .service-landing-lead{
+  margin-left:auto !important;
+  margin-right:auto !important;
+  text-align:center !important;
+}
+.service-page .hero-actions-v7{
+  justify-content:center;
+}
+.service-page .service-main-card ul,
+.service-page .service-side-card ul{
+  gap:12px !important;
+}
+.service-page .service-main-card li,
+.service-page .service-side-card li{
+  padding-left:0 !important;
+  border:1px solid rgba(255,255,255,.075);
+  border-radius:14px;
+  background:rgba(255,255,255,.024);
+  padding:12px 14px !important;
+}
+.service-page .service-main-card li::before,
+.service-page .service-side-card li::before{
+  display:none !important;
+  content:none !important;
+}
+@media (max-width:760px){
+  .home-page .service-choice-strip .service-choice-button{
+    justify-self:start;
+    width:100%;
+  }
+  .service-page .header-cta{
+    display:none;
+  }
+}
+
+
+/* =========================================================
+   SWISSPLOIT V23 - conversion polish, landing pages and SOC detail
+   ========================================================= */
+.home-page .service-path-card h3{
+  max-width: 18ch;
+}
+.home-page .soc-before-after{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+  margin:18px 0 6px;
+}
+.home-page .soc-before-after > div{
+  padding:15px 16px;
+  border:1px solid rgba(255,255,255,.09);
+  border-radius:18px;
+  background:linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.018));
+}
+.home-page .soc-before-after span{
+  display:block;
+  margin:0 0 7px;
+  color:#4ab3c3;
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+.home-page .soc-before-after p{
+  margin:0;
+  color:rgba(245,247,251,.76);
+  font-size:14px;
+  line-height:1.5;
+}
+.home-page .soc-action-row{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+  margin-top:auto;
+}
+.home-page .trust-proof-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px;
+  margin-top:24px;
+}
+.home-page .trust-proof-grid span{
+  display:flex;
+  align-items:center;
+  min-height:44px;
+  padding:0 14px;
+  border:1px solid rgba(74,179,195,.18);
+  border-radius:16px;
+  background:rgba(74,179,195,.055);
+  color:rgba(245,247,251,.84);
+  font-size:13px;
+  font-weight:800;
+}
+.home-page .trust-proof-grid span::before{
+  content:"";
+  width:7px;
+  height:7px;
+  margin-right:10px;
+  border-radius:999px;
+  background:#4ab3c3;
+  box-shadow:0 0 16px rgba(74,179,195,.32);
+}
+.contact-trust-note-v23{
+  margin:16px auto 0 !important;
+  color:rgba(245,247,251,.82) !important;
+  font-weight:800;
+}
+.service-page .service-landing-wrap{
+  text-align:center;
+}
+.service-page .service-landing-title,
+.service-page .service-landing-lead{
+  margin-left:auto;
+  margin-right:auto;
+  text-align:center;
+}
+.service-page .service-landing-wrap .cta-row{
+  justify-content:center;
+}
+.service-page .service-main-card h3,
+.service-page .service-side-card h3{
+  margin:28px 0 10px;
+  color:#fff;
+  font-size:14px;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+}
+.service-page .service-main-card li,
+.service-page .service-side-card li,
+.soc-page .service-main-card li,
+.soc-page .service-side-card li{
+  padding-left:0 !important;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:14px;
+  padding:12px 14px !important;
+  background:rgba(255,255,255,.025);
+}
+.service-page .service-main-card li::before,
+.service-page .service-side-card li::before,
+.soc-page .service-main-card li::before,
+.soc-page .service-side-card li::before{
+  display:none !important;
+}
+.service-page .service-situation-card,
+.service-page .service-outcome-card,
+.soc-page .service-situation-card,
+.soc-page .service-outcome-card{
+  padding:20px;
+  margin:22px 0;
+  border:1px solid rgba(74,179,195,.16);
+  border-radius:22px;
+  background:radial-gradient(360px 160px at 0 0, rgba(74,179,195,.08), transparent 70%), rgba(255,255,255,.025);
+}
+.service-page .service-situation-card h3,
+.service-page .service-outcome-card h3{
+  margin-top:0;
+}
+.service-page .service-outcome-card p,
+.service-page .service-situation-card p{
+  margin:0;
+}
+.service-page .side-note-v23{
+  margin-top:20px;
+  padding:16px;
+  border-radius:18px;
+  background:rgba(74,179,195,.06);
+  color:rgba(245,247,251,.78);
+  line-height:1.55;
+}
+.soc-page .soc-landing-price{
+  margin:24px auto 0;
+  max-width:720px;
+  padding:22px;
+  border:1px solid rgba(74,179,195,.22);
+  border-radius:24px;
+  background:radial-gradient(420px 180px at 0 0, rgba(74,179,195,.10), transparent 70%), rgba(255,255,255,.035);
+}
+.soc-page .soc-landing-price strong{
+  color:#fff;
+  font-size:clamp(26px,3vw,38px);
+}
+@media (max-width:760px){
+  .home-page .soc-before-after,
+  .home-page .soc-action-row,
+  .home-page .trust-proof-grid{
+    grid-template-columns:1fr;
+  }
+  .home-page .service-path-card h3{ max-width:none; }
+}
+
+/* v24: align SOC action buttons consistently */
+.home-page .soc-action-row .btn{
+  width:100% !important;
+  min-height:52px !important;
+  height:52px !important;
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  margin-top:0 !important;
+  padding:0 20px !important;
+  line-height:1 !important;
+  text-align:center !important;
+  white-space:normal;
+}
+.home-page .soc-action-row .soc-card-secondary{
+  border-color:rgba(74,179,195,.26) !important;
+  background:rgba(255,255,255,.045) !important;
+  color:#f7f9fc !important;
+}
+.home-page .soc-action-row .soc-card-secondary:hover,
+.home-page .soc-action-row .soc-card-secondary:focus-visible{
+  border-color:rgba(74,179,195,.42) !important;
+  box-shadow:0 0 0 4px rgba(74,179,195,.10) !important;
+}
+@media (max-width:760px){
+  .home-page .soc-action-row .btn{
+    min-height:50px !important;
+    height:50px !important;
+  }
+}
+
+/* v25: give SOC action buttons more breathing room after the package details */
+.home-page .soc-card.single-soc-package .soc-action-row{
+  margin-top:clamp(24px, 3.2vw, 36px) !important;
+}
