@@ -73,16 +73,17 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 
 
-// Reveal Observer
+// Reveal Observer — reversible for premium scroll animations
 document.addEventListener("DOMContentLoaded", () => {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add("visible");
-        observer.unobserve(entry.target); // nur einmal animieren
+      } else {
+        entry.target.classList.remove("visible");
       }
     });
-  }, { threshold: 0.07 });
+  }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
 
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
@@ -1302,4 +1303,59 @@ if(shortsSection){
     window.setTimeout(openServiceFromHash, 0);
   });
   openServiceFromHash();
+})();
+
+
+// v27 Count-up animations: restart every time the number enters the viewport
+(function(){
+  const counters = Array.from(document.querySelectorAll('.count-up, .count-365'));
+  if(!counters.length) return;
+
+  const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const formatterCH = (value) => Math.round(value).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '’');
+
+  function formatValue(el, value){
+    const suffix = el.getAttribute('data-suffix') || '';
+    const format = el.getAttribute('data-format');
+    const base = format === 'ch' ? formatterCH(value) : String(Math.round(value));
+    return base + suffix;
+  }
+
+  function animateCounter(el){
+    const target = Number(el.getAttribute('data-count-to') || el.textContent.replace(/\D/g,'') || 0);
+    const duration = el.classList.contains('count-365') ? 850 : 1150;
+    if(reduced){ el.textContent = formatValue(el, target); return; }
+    if(el._raf) cancelAnimationFrame(el._raf);
+    const start = performance.now();
+    el.textContent = formatValue(el, 0);
+    const tick = (now) => {
+      const progress = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = formatValue(el, target * eased);
+      if(progress < 1) el._raf = requestAnimationFrame(tick);
+    };
+    el._raf = requestAnimationFrame(tick);
+  }
+
+  function resetCounter(el){
+    if(el._raf) cancelAnimationFrame(el._raf);
+    el.textContent = formatValue(el, 0);
+  }
+
+  if(!('IntersectionObserver' in window)){
+    counters.forEach(animateCounter);
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        animateCounter(entry.target);
+      } else {
+        resetCounter(entry.target);
+      }
+    });
+  }, { threshold: 0.42 });
+
+  counters.forEach(el => observer.observe(el));
 })();
