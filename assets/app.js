@@ -10,13 +10,13 @@
   function closeMenu(){
     nav.classList.remove('is-open');
     toggle.setAttribute('aria-expanded', 'false');
-    toggle.setAttribute('aria-label', 'Menü öffnen');
+    toggle.setAttribute('aria-label', 'Menu oeffnen');
   }
 
   toggle.addEventListener('click', () => {
     const isOpen = nav.classList.toggle('is-open');
     toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-    toggle.setAttribute('aria-label', isOpen ? 'Menü schliessen' : 'Menü öffnen');
+    toggle.setAttribute('aria-label', isOpen ? 'Menu schliessen' : 'Menu oeffnen');
   });
 
   nav.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
@@ -808,9 +808,25 @@ if(shortsSection){
    page transition (blur/fade)
    ========================================================= */
 (function pageTransitions(){
+  if(window.__SWISSPLOIT_PAGE_TRANSITIONS_BOUND) return;
+  window.__SWISSPLOIT_PAGE_TRANSITIONS_BOUND = true;
+
   const body = document.body;
 
+  function resetTransitionState(){
+    body.classList.remove('is-leaving');
+  }
+
+  resetTransitionState();
+  window.addEventListener('pageshow', resetTransitionState);
+  window.addEventListener('pagehide', resetTransitionState);
+  document.addEventListener('visibilitychange', () => {
+    if(!document.hidden) resetTransitionState();
+  });
+
   document.addEventListener('click', (e) => {
+    if(e.defaultPrevented) return;
+
     const a = e.target.closest('a[data-transition]');
     if(!a) return;
 
@@ -825,6 +841,7 @@ if(shortsSection){
 
     e.preventDefault();
 
+    resetTransitionState();
     body.classList.add('is-leaving');
 
     window.setTimeout(() => {

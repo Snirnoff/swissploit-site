@@ -51,29 +51,35 @@
 <body>
   <header class="site-header" role="banner">
     <div class="wrap headerbar">
-      <a class="brand" href="/index.html" aria-label="Swissploit Home" data-transition>
+      <a class="brand" href="/index.html#intro" aria-label="Swissploit Home" data-transition>
         <img class="brand-logo-image header-logo-image" src="/assets/swissploit-brand-logo.png" alt="Swissploit Logo" width="120" height="49" decoding="async">
+        <span class="brand-text">Swissploit</span>
       </a>
 
-      <nav class="nav" aria-label="Main navigation">
-        <a href="/index.html#services" data-transition>Leistungen</a>
-        <a href="/index.html#soc-light" data-transition>SOC Light</a>
-        <a class="is-active" href="/en/blog/" data-transition>Wissen</a>
-        <a href="/index.html#ueber" data-transition>Über Swissploit</a>
+      <nav id="primaryNav" class="nav" aria-label="Main navigation">
+        <a href="/index.html#sicherheitslage" data-transition>Warum M365</a>
+        <a href="/index.html#security-check" data-transition>Security Check</a>
+        <a href="/index.html#security-care" data-transition>Security Care</a>
+        <a href="/index.html#zusatzmodule" data-transition>Zusatzmodule</a>
         <a href="/index.html#kontakt" data-transition>Kontakt</a>
       </nav>
 
-      <button id="themeToggle"
-        class="switch"
-        aria-pressed="false"
-        aria-label="Darstellung umschalten"
-        title="Dark/Light umschalten">
-        <span class="switch-track"></span>
-        <span class="switch-thumb">
-          <span class="switch-icon sun" aria-hidden="true">☀️</span>
-          <span class="switch-icon moon" aria-hidden="true">🌙</span>
-        </span>
-      </button>
+      <div class="header-actions">
+        <button id="themeToggle"
+          class="switch"
+          aria-pressed="false"
+          aria-label="Darstellung umschalten"
+          title="Dark/Light umschalten">
+          <span class="switch-track"></span>
+          <span class="switch-thumb">
+            <span class="switch-icon sun" aria-hidden="true">&#9728;</span>
+            <span class="switch-icon moon" aria-hidden="true">&#9790;</span>
+          </span>
+        </button>
+        <button id="menuToggle" class="menu-toggle" type="button" aria-expanded="false" aria-controls="primaryNav" aria-label="Menu oeffnen">
+          <span></span><span></span>
+        </button>
+      </div>
     </div>
   </header>
 
@@ -186,10 +192,10 @@
     <div class="wrap">
       <p>© <span id="year"></span> Swissploit.</p>
       <nav class="foot-nav" aria-label="Footer Navigation">
-        <a href="/index.html#services" data-transition>Leistungen</a>
-        <a href="/index.html#soc-light" data-transition>SOC Light</a>
-        <a href="/en/blog/" data-transition>Wissen</a>
-        <a href="/index.html#ueber" data-transition>Über Swissploit</a>
+        <a href="/index.html#sicherheitslage" data-transition>Warum M365</a>
+        <a href="/index.html#security-check" data-transition>Security Check</a>
+        <a href="/index.html#security-care" data-transition>Security Care</a>
+        <a href="/index.html#zusatzmodule" data-transition>Zusatzmodule</a>
         <a href="/index.html#kontakt" data-transition>Kontakt</a>
       </nav>
     </div>

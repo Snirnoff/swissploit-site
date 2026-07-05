@@ -1,5 +1,8 @@
 // assets/transition.js
 (function pageTransitions(){
+  if(window.__SWISSPLOIT_PAGE_TRANSITIONS_BOUND) return;
+  window.__SWISSPLOIT_PAGE_TRANSITIONS_BOUND = true;
+
   const body = document.body;
 
   // Entfernt "leaving" Zustände zuverlässig
@@ -15,8 +18,14 @@
     // e.persisted === true -> aus bfcache
     resetTransitionState();
   });
+  window.addEventListener('pagehide', resetTransitionState);
+  document.addEventListener('visibilitychange', () => {
+    if(!document.hidden) resetTransitionState();
+  });
 
   document.addEventListener('click', (e) => {
+    if(e.defaultPrevented) return;
+
     const a = e.target.closest('a[data-transition]');
     if(!a) return;
 

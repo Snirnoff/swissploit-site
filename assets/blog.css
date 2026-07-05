@@ -118,6 +118,24 @@
   background: color-mix(in oklab, var(--accent) 12%, var(--panel));
 }
 
+#blogPosts{
+  scroll-margin-top: 84px;
+}
+
+.blog-scroll-cue{
+  display: none;
+  justify-items: center;
+  margin-top: 18px;
+}
+
+.blog-scroll-cue .intro-scroll-hint{
+  margin-top: 0 !important;
+}
+
+.blog-scroll-cue .intro-arrow{
+  margin: 12px auto 0;
+}
+
 .blog-grid-section{
   padding-top: 60px;
 }
@@ -134,6 +152,28 @@
 
 @media (max-width: 640px){
   .blog-grid{ grid-template-columns: 1fr; }
+}
+
+@media (max-width: 768px){
+  .blog-breadcrumbs{
+    padding-top: 86px;
+  }
+
+  .blog-hero{
+    min-height: calc(100svh - 142px);
+    display: grid;
+    align-items: center;
+    padding-top: 46px;
+    padding-bottom: 44px;
+  }
+
+  .blog-scroll-cue{
+    display: grid;
+  }
+
+  .blog-grid-section{
+    padding-top: 56px;
+  }
 }
 
 .blog-card{

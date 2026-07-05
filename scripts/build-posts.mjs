@@ -288,6 +288,60 @@ function renderIndexJsonLd(posts, lang) {
   return JSON.stringify(data).replace(/</g, "\\u003c");
 }
 
+function renderPrimaryNavHtml(lang) {
+  return `<nav id="primaryNav" class="nav" aria-label="${lang === "en" ? "Main navigation" : "Hauptnavigation"}">
+        <a href="/index.html#sicherheitslage" data-transition>Warum M365</a>
+        <a href="/index.html#security-check" data-transition>Security Check</a>
+        <a href="/index.html#security-care" data-transition>Security Care</a>
+        <a href="/index.html#zusatzmodule" data-transition>Zusatzmodule</a>
+        <a href="/index.html#kontakt" data-transition>Kontakt</a>
+      </nav>`;
+}
+
+function renderHeaderActionsHtml() {
+  return `<div class="header-actions">
+        <button id="themeToggle"
+          class="switch"
+          aria-pressed="false"
+          aria-label="Darstellung umschalten"
+          title="Dark/Light umschalten">
+          <span class="switch-track"></span>
+          <span class="switch-thumb">
+            <span class="switch-icon sun" aria-hidden="true">&#9728;</span>
+            <span class="switch-icon moon" aria-hidden="true">&#9790;</span>
+          </span>
+        </button>
+        <button id="menuToggle" class="menu-toggle" type="button" aria-expanded="false" aria-controls="primaryNav" aria-label="Menu oeffnen">
+          <span></span><span></span>
+        </button>
+      </div>`;
+}
+
+function renderSiteHeaderHtml(lang) {
+  return `<header class="site-header" role="banner">
+    <div class="wrap headerbar">
+      <a class="brand" href="/index.html#intro" aria-label="Swissploit Home" data-transition>
+        <img class="brand-logo-image header-logo-image" src="/assets/swissploit-brand-logo.png" alt="Swissploit Logo" width="120" height="49" decoding="async">
+        <span class="brand-text">Swissploit</span>
+      </a>
+
+      ${renderPrimaryNavHtml(lang)}
+
+      ${renderHeaderActionsHtml()}
+    </div>
+  </header>`;
+}
+
+function renderFooterNavHtml() {
+  return `<nav class="foot-nav" aria-label="Footer Navigation">
+        <a href="/index.html#sicherheitslage" data-transition>Warum M365</a>
+        <a href="/index.html#security-check" data-transition>Security Check</a>
+        <a href="/index.html#security-care" data-transition>Security Care</a>
+        <a href="/index.html#zusatzmodule" data-transition>Zusatzmodule</a>
+        <a href="/index.html#kontakt" data-transition>Kontakt</a>
+      </nav>`;
+}
+
 function getRelatedPosts(allPosts, currentPost, lang, limit = 3) {
   return allPosts
     .filter((candidate) => candidate.id !== currentPost.id)
@@ -476,8 +530,6 @@ function renderBlogIndexPage(posts, lang) {
     ? "Practical posts about cybersecurity, Microsoft 365, Windows, phishing and modern IT."
     : "Beiträge zu Cybersecurity, Microsoft 365, Windows, Phishing und moderner IT – verständlich und praxisnah.";
   const pageUrl = isEn ? `${BASE_URL}/en/blog/` : `${BASE_URL}/blog/`;
-  const blogHref = isEn ? "/en/blog/" : "/blog/";
-  const navBlogHref = blogHref;
   const cardsHtml = posts
     .filter((post) => Boolean(post.i18n?.[lang] || post.i18n?.[post.defaultLang]))
     .map((post, idx) => renderPostCard(post, lang, idx))
@@ -530,33 +582,7 @@ function renderBlogIndexPage(posts, lang) {
 </head>
 
 <body>
-  <header class="site-header" role="banner">
-    <div class="wrap headerbar">
-      <a class="brand" href="/index.html" aria-label="Swissploit Home" data-transition>
-        <img class="brand-logo-image header-logo-image" src="/assets/swissploit-brand-logo.png" alt="Swissploit Logo" width="120" height="49" decoding="async">
-      </a>
-
-      <nav class="nav" aria-label="${isEn ? "Main navigation" : "Hauptnavigation"}">
-        <a href="/index.html#services" data-transition>Leistungen</a>
-        <a href="/index.html#soc-light" data-transition>SOC Light</a>
-        <a class="is-active" href="${navBlogHref}" data-transition>Wissen</a>
-        <a href="/index.html#ueber" data-transition>Über Swissploit</a>
-        <a href="/index.html#kontakt" data-transition>Kontakt</a>
-      </nav>
-
-      <button id="themeToggle"
-        class="switch"
-        aria-pressed="false"
-        aria-label="Darstellung umschalten"
-        title="Dark/Light umschalten">
-        <span class="switch-track"></span>
-        <span class="switch-thumb">
-          <span class="switch-icon sun" aria-hidden="true">☀️</span>
-          <span class="switch-icon moon" aria-hidden="true">🌙</span>
-        </span>
-      </button>
-    </div>
-  </header>
+  ${renderSiteHeaderHtml(lang)}
 
   <main id="main">
     <nav class="wrap blog-breadcrumbs" aria-label="Breadcrumb">
@@ -585,10 +611,15 @@ function renderBlogIndexPage(posts, lang) {
           <a class="lang-link ${isEn ? "" : "is-active"}" href="/blog/" hreflang="de" lang="de" data-lang-switch="de">DE</a>
           <a class="lang-link ${isEn ? "is-active" : ""}" href="/en/blog/" hreflang="en" lang="en" data-lang-switch="en">EN</a>
         </nav>
+
+        <div class="blog-scroll-cue">
+          <p class="intro-scroll-hint blog-scroll-hint">${isEn ? "Scroll to reveal blog posts." : "Scrollen, um Blogartikel sichtbar zu machen."}</p>
+          <a class="intro-arrow blog-scroll-arrow" href="#blogPosts" aria-label="${escapeAttr(isEn ? "Scroll to blog posts" : "Zu den Blogartikeln scrollen")}">&#8595;</a>
+        </div>
       </div>
     </section>
 
-    <section class="section blog-grid-section">
+    <section id="blogPosts" class="section blog-grid-section">
       <div class="wrap">
         <section aria-labelledby="blogListHeading">
           <h2 id="blogListHeading" class="sr-only">${isEn ? "Blog posts" : "Blogartikel"}</h2>
@@ -604,13 +635,7 @@ function renderBlogIndexPage(posts, lang) {
   <footer class="site-footer" role="contentinfo">
     <div class="wrap">
       <p>© <span id="year"></span> Swissploit.</p>
-      <nav class="foot-nav" aria-label="Footer Navigation">
-        <a href="/index.html#services" data-transition>Leistungen</a>
-        <a href="/index.html#soc-light" data-transition>SOC Light</a>
-        <a href="${navBlogHref}" data-transition>Wissen</a>
-        <a href="/index.html#ueber" data-transition>Über Swissploit</a>
-        <a href="/index.html#kontakt" data-transition>Kontakt</a>
-      </nav>
+      ${renderFooterNavHtml()}
     </div>
   </footer>
 
@@ -636,7 +661,6 @@ function renderStaticPostPage(post, lang, allPosts) {
     post?.urls?.en ||
     `${BASE_URL}/blog/`;
   const blogHref = lang === "en" ? "/en/blog/" : "/blog/";
-  const navBlogHref = blogHref;
   const ui = lang === "de"
     ? {
         about: "Über Swissploit",
@@ -707,33 +731,7 @@ function renderStaticPostPage(post, lang, allPosts) {
 </head>
 
 <body>
-  <header class="site-header" role="banner">
-    <div class="wrap headerbar">
-      <a class="brand" href="/index.html" aria-label="Swissploit Home" data-transition>
-        <img class="brand-logo-image header-logo-image" src="/assets/swissploit-brand-logo.png" alt="Swissploit Logo" width="120" height="49" decoding="async">
-      </a>
-
-      <nav class="nav" aria-label="${lang === "de" ? "Hauptnavigation" : "Main navigation"}">
-        <a href="/index.html#services" data-transition>Leistungen</a>
-        <a href="/index.html#soc-light" data-transition>SOC Light</a>
-        <a class="is-active" href="${navBlogHref}" data-transition>Wissen</a>
-        <a href="/index.html#ueber" data-transition>Über Swissploit</a>
-        <a href="/index.html#kontakt" data-transition>Kontakt</a>
-      </nav>
-
-      <button id="themeToggle"
-        class="switch"
-        aria-pressed="false"
-        aria-label="Darstellung umschalten"
-        title="Dark/Light umschalten">
-        <span class="switch-track"></span>
-        <span class="switch-thumb">
-          <span class="switch-icon sun" aria-hidden="true">☀️</span>
-          <span class="switch-icon moon" aria-hidden="true">🌙</span>
-        </span>
-      </button>
-    </div>
-  </header>
+  ${renderSiteHeaderHtml(lang)}
 
   <main id="main">
     <nav class="wrap blog-breadcrumbs" aria-label="Breadcrumb">
@@ -774,13 +772,7 @@ function renderStaticPostPage(post, lang, allPosts) {
   <footer class="site-footer" role="contentinfo">
     <div class="wrap">
       <p>© <span id="year"></span> Swissploit.</p>
-      <nav class="foot-nav" aria-label="Footer Navigation">
-        <a href="/index.html#services" data-transition>Leistungen</a>
-        <a href="/index.html#soc-light" data-transition>SOC Light</a>
-        <a href="${navBlogHref}" data-transition>Wissen</a>
-        <a href="/index.html#ueber" data-transition>Über Swissploit</a>
-        <a href="/index.html#kontakt" data-transition>Kontakt</a>
-      </nav>
+      ${renderFooterNavHtml()}
     </div>
   </footer>
 

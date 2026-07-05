@@ -73,9 +73,3 @@ For major section redesigns:
 - first improve structure and content hierarchy
 - then improve styling
 - then add subtle motion only if it supports the section
-
-## Current priorities
-1. Upgrade About section to feel more premium and more distinctive.
-2. Refine scroll experience with subtle depth/parallax only where beneficial.
-3. Improve visual consistency across hero, about, featured video, and cards.
-4. Reduce duplicated CSS/JS when touching affected areas.
