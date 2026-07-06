@@ -10125,7 +10125,7 @@ body.home-page::after{
   font-size:25px;
   line-height:1.1;
   letter-spacing:-.05em;
-  max-width: 14ch;
+  max-width:none;
 }
 .home-page .care-card-head p{
   color:rgba(236,244,247,.74);
@@ -10634,6 +10634,252 @@ body.home-page::after{
   .service-flow-card-v28{min-height:auto;}
   .coverage-card-v28{min-height:auto;}
   .other-services-v28 .detail-related-v27{grid-template-columns:1fr;}
+}
+
+/* v29: Security Care package detail pages */
+.home-page .care-list-label-v29{
+  margin:0 0 -6px;
+  color:#d9fbff;
+  font-size:12px;
+  font-weight:950;
+  letter-spacing:.09em;
+  text-transform:uppercase;
+}
+.service-care-detail-v29 .service-detail-hero-v27{
+  padding-bottom:clamp(70px,8vw,120px);
+}
+.service-care-detail-v29 .care-recommendation-v29{
+  display:inline-flex;
+  margin-top:14px;
+  border:1px solid rgba(74,179,195,.38);
+  background:rgba(74,179,195,.13);
+  color:#d9fbff;
+  border-radius:999px;
+  padding:8px 12px;
+  font-size:12px;
+  font-weight:950;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+.service-care-detail-v29 .care-hero-copy-v29{
+  max-width:860px;
+  margin:0 auto;
+  color:rgba(238,246,248,.72);
+  font-size:clamp(16px,1.55vw,19px);
+  line-height:1.72;
+}
+.care-hero-benefits-v29{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px;
+  max-width:850px;
+  margin:28px auto 0;
+  padding:0;
+  list-style:none;
+}
+.care-hero-benefits-v29 li,
+.care-risk-grid-v29 article{
+  position:relative;
+  border:1px solid rgba(255,255,255,.105);
+  background:rgba(255,255,255,.045);
+  border-radius:18px;
+  padding:14px 16px 14px 38px;
+  color:rgba(238,246,248,.84);
+  font-weight:780;
+  line-height:1.45;
+}
+.care-hero-benefits-v29 li::before,
+.care-risk-grid-v29 article::before{
+  content:"";
+  position:absolute;
+  left:16px;
+  top:1.18em;
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:#4ab3c3;
+  box-shadow:0 0 18px rgba(74,179,195,.55);
+}
+.care-problem-grid-v29{
+  display:grid;
+  grid-template-columns:minmax(0,1.15fr) minmax(280px,.55fr);
+  gap:22px;
+  align-items:stretch;
+}
+.care-text-panel-v29,
+.care-question-card-v29,
+.care-group-card-v29,
+.care-term-card-v29,
+.care-result-v29,
+.care-final-cta-v29,
+.care-compare-v29{
+  border:1px solid rgba(255,255,255,.11);
+  background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.028));
+  border-radius:28px;
+  padding:clamp(24px,3vw,38px);
+  box-shadow:0 24px 80px rgba(0,0,0,.24);
+}
+.care-text-panel-v29 h2,
+.care-result-v29 h2,
+.care-final-cta-v29 h2{
+  color:#fff;
+  font-size:clamp(30px,4vw,58px);
+  line-height:1;
+  letter-spacing:-.055em;
+  margin:10px 0 16px;
+}
+.care-text-panel-v29 p,
+.care-result-v29 p,
+.care-final-cta-v29 p{
+  color:rgba(236,244,247,.76);
+  font-size:clamp(16px,1.45vw,19px);
+  line-height:1.72;
+}
+.care-question-card-v29{
+  background:radial-gradient(circle at 20% 0%,rgba(74,179,195,.18),transparent 42%),linear-gradient(180deg,rgba(255,255,255,.075),rgba(255,255,255,.03));
+}
+.care-question-card-v29 h3,
+.care-group-card-v29 h3,
+.care-term-card-v29 h3{
+  color:#fff;
+  letter-spacing:-.035em;
+  line-height:1.08;
+  margin:0 0 16px;
+}
+.care-question-card-v29 ul,
+.care-group-card-v29 ul{
+  display:grid;
+  gap:11px;
+  margin:0;
+  padding-left:18px;
+  color:rgba(236,244,247,.76);
+  line-height:1.58;
+}
+.care-fit-grid-v29{
+  grid-template-columns:repeat(3,minmax(0,1fr));
+}
+.care-group-grid-v29,
+.care-term-grid-v29{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:18px;
+  margin-top:30px;
+}
+.care-group-card-v29{
+  min-height:260px;
+}
+.care-term-card-v29{
+  background:linear-gradient(180deg,rgba(74,179,195,.075),rgba(255,255,255,.028));
+}
+.care-term-card-v29 p{
+  color:rgba(236,244,247,.74);
+  line-height:1.68;
+  margin:0;
+}
+.care-risk-grid-v29{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:14px;
+  margin-top:30px;
+}
+.care-steps-grid-v29{
+  counter-reset:care-step;
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:14px;
+  margin:30px 0 0;
+  padding:0;
+  list-style:none;
+}
+.care-steps-grid-v29 li{
+  min-height:150px;
+  border:1px solid rgba(74,179,195,.18);
+  background:linear-gradient(180deg,rgba(74,179,195,.085),rgba(255,255,255,.03));
+  border-radius:22px;
+  padding:20px;
+  color:rgba(238,246,248,.84);
+  font-weight:760;
+  line-height:1.45;
+}
+.care-steps-grid-v29 span{
+  display:block;
+  margin-bottom:14px;
+  color:#4ab3c3;
+  font-size:13px;
+  font-weight:950;
+  letter-spacing:.12em;
+}
+.care-result-v29,
+.care-final-cta-v29{
+  max-width:980px;
+  text-align:center;
+}
+.care-result-v29{
+  margin:0 auto;
+}
+.care-final-cta-v29{
+  margin:0 auto;
+  background:radial-gradient(circle at 50% 0%,rgba(74,179,195,.18),transparent 44%),linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.03));
+}
+.care-final-cta-v29 .hero-actions-v7{
+  justify-content:center;
+  margin-top:24px;
+}
+.care-compare-v29{
+  overflow-x:auto;
+  padding:0;
+}
+.care-compare-table-v29{
+  width:100%;
+  min-width:820px;
+  border-collapse:collapse;
+  color:rgba(236,244,247,.8);
+  font-size:14px;
+}
+.care-compare-table-v29 th,
+.care-compare-table-v29 td{
+  border-bottom:1px solid rgba(255,255,255,.085);
+  padding:15px 16px;
+  text-align:right;
+  vertical-align:middle;
+}
+.care-compare-table-v29 th:first-child,
+.care-compare-table-v29 td:first-child{
+  text-align:left;
+}
+.care-compare-table-v29 thead th{
+  color:#fff;
+  background:rgba(255,255,255,.045);
+  font-size:12px;
+  font-weight:950;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+.care-compare-table-v29 tbody th{
+  color:rgba(238,246,248,.86);
+  font-weight:800;
+}
+.care-compare-table-v29 .is-current{
+  color:#d9fbff;
+  background:rgba(74,179,195,.075);
+}
+@media (max-width:1050px){
+  .care-fit-grid-v29,
+  .care-risk-grid-v29,
+  .care-steps-grid-v29{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .care-problem-grid-v29{grid-template-columns:1fr;}
+}
+@media (max-width:760px){
+  .care-hero-benefits-v29,
+  .care-group-grid-v29,
+  .care-term-grid-v29,
+  .care-fit-grid-v29,
+  .care-risk-grid-v29,
+  .care-steps-grid-v29{grid-template-columns:1fr;}
+  .care-hero-benefits-v29 li,
+  .care-risk-grid-v29 article{padding-right:14px;}
+  .care-steps-grid-v29 li{min-height:auto;}
+  .care-final-cta-v29 .hero-actions-v7 .btn{width:100%; justify-content:center;}
 }
 
 /* Final shared mobile navigation guard. */
