@@ -289,12 +289,24 @@ function renderIndexJsonLd(posts, lang) {
 }
 
 function renderPrimaryNavHtml(lang) {
+  const items = lang === "en"
+    ? [
+        { href: "/index.html#sicherheitslage", label: "Security overview" },
+        { href: "/index.html#security-care", label: "Microsoft 365 Care" },
+        { href: "/en/blog/", label: "Blog" },
+        { href: "/index.html#ueber", label: "About Swissploit" },
+        { href: "/index.html#kontakt", label: "Contact" }
+      ]
+    : [
+        { href: "/index.html#sicherheitslage", label: "Sicherheitslage" },
+        { href: "/index.html#security-care", label: "Microsoft 365 Care" },
+        { href: "/blog/", label: "Blog" },
+        { href: "/index.html#ueber", label: "Über Swissploit" },
+        { href: "/index.html#kontakt", label: "Kontakt" }
+      ];
+
   return `<nav id="primaryNav" class="nav" aria-label="${lang === "en" ? "Main navigation" : "Hauptnavigation"}">
-        <a href="/index.html#sicherheitslage" data-transition>Warum M365</a>
-        <a href="/index.html#security-check" data-transition>Security Check</a>
-        <a href="/index.html#security-care" data-transition>Security Care</a>
-        <a href="/index.html#zusatzmodule" data-transition>Zusatzmodule</a>
-        <a href="/index.html#kontakt" data-transition>Kontakt</a>
+        ${items.map((item) => `<a href="${item.href}" data-transition>${item.label}</a>`).join("\n        ")}
       </nav>`;
 }
 
@@ -322,7 +334,6 @@ function renderSiteHeaderHtml(lang) {
     <div class="wrap headerbar">
       <a class="brand" href="/index.html#intro" aria-label="Swissploit Home" data-transition>
         <img class="brand-logo-image header-logo-image" src="/assets/swissploit-brand-logo.png" alt="Swissploit Logo" width="120" height="49" decoding="async">
-        <span class="brand-text">Swissploit</span>
       </a>
 
       ${renderPrimaryNavHtml(lang)}
@@ -332,13 +343,25 @@ function renderSiteHeaderHtml(lang) {
   </header>`;
 }
 
-function renderFooterNavHtml() {
-  return `<nav class="foot-nav" aria-label="Footer Navigation">
-        <a href="/index.html#sicherheitslage" data-transition>Warum M365</a>
-        <a href="/index.html#security-check" data-transition>Security Check</a>
-        <a href="/index.html#security-care" data-transition>Security Care</a>
-        <a href="/index.html#zusatzmodule" data-transition>Zusatzmodule</a>
-        <a href="/index.html#kontakt" data-transition>Kontakt</a>
+function renderFooterNavHtml(lang) {
+  const items = lang === "en"
+    ? [
+        { href: "/index.html#sicherheitslage", label: "Security overview" },
+        { href: "/index.html#security-care", label: "Microsoft 365 Care" },
+        { href: "/en/blog/", label: "Blog" },
+        { href: "/index.html#ueber", label: "About Swissploit" },
+        { href: "/index.html#kontakt", label: "Contact" }
+      ]
+    : [
+        { href: "/index.html#sicherheitslage", label: "Sicherheitslage" },
+        { href: "/index.html#security-care", label: "Microsoft 365 Care" },
+        { href: "/blog/", label: "Blog" },
+        { href: "/index.html#ueber", label: "Über Swissploit" },
+        { href: "/index.html#kontakt", label: "Kontakt" }
+      ];
+
+  return `<nav class="foot-nav" aria-label="${lang === "en" ? "Footer navigation" : "Footer Navigation"}">
+        ${items.map((item) => `<a href="${item.href}" data-transition>${item.label}</a>`).join("\n        ")}
       </nav>`;
 }
 

@@ -83,7 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
         entry.target.classList.remove("visible");
       }
     });
-  }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+  }, { threshold: 0.05, rootMargin: '0px 0px -5% 0px' });
 
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
@@ -120,8 +120,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       });
     }, {
-      threshold: 0.12,
-      rootMargin: '0px 0px -12% 0px'
+      threshold: 0.05,
+      rootMargin: '0px 0px -5% 0px'
     });
 
     sections.forEach(section => mobileSectionObserver.observe(section));
@@ -189,10 +189,10 @@ document.addEventListener("DOMContentLoaded", () => {
           entry.target.classList.remove('is-visible');
         }
       });
-    }, { threshold: 0.25 });
+    }, { threshold: 0.05, rootMargin: '0px 0px -5% 0px' });
 
     heroItems.forEach((item, index) => {
-      item.style.transitionDelay = `${index * 80}ms`;
+      item.style.transitionDelay = `${index * 35}ms`;
       heroObserver.observe(item);
     });
   }
@@ -271,14 +271,14 @@ document.addEventListener("DOMContentLoaded", () => {
           entry.target.classList.remove('is-visible');
         }
       });
-    }, { threshold: 0.18 });
+    }, { threshold: 0.05, rootMargin: '0px 0px -5% 0px' });
 
     sectionSelectors.forEach(selector => {
       const section = document.querySelector(selector);
       if(!section) return;
 
       Array.from(section.querySelectorAll('.mobile-reveal')).forEach((item, index) => {
-        item.style.setProperty('--mobile-reveal-delay', `${Math.min(index * 60, 420)}ms`);
+        item.style.setProperty('--mobile-reveal-delay', `${Math.min(index * 35, 140)}ms`);
         mobileRevealObserver.observe(item);
       });
     });
@@ -332,7 +332,7 @@ document.addEventListener("DOMContentLoaded", () => {
           entry.target.classList.remove('is-visible');
         }
       });
-    }, { threshold: 0.2 });
+    }, { threshold: 0.05, rootMargin: '0px 0px -5% 0px' });
 
     items.forEach(el => observer.observe(el));
   }
@@ -1372,7 +1372,7 @@ if(shortsSection){
         resetCounter(entry.target);
       }
     });
-  }, { threshold: 0.42 });
+  }, { threshold: 0.05, rootMargin: '0px 0px -5% 0px' });
 
   counters.forEach(el => observer.observe(el));
 })();
