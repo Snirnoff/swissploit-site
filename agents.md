@@ -73,3 +73,17 @@ For major section redesigns:
 - first improve structure and content hierarchy
 - then improve styling
 - then add subtle motion only if it supports the section
+
+## Product strategy
+
+The website should focus on one primary commercial offer:
+
+Swissploit Microsoft 365 Security Care.
+
+Do not split this offer into Essential, Professional, Premium or other public package tiers unless explicitly requested. The public website should present one clear Microsoft 365 Care service that covers the most important security needs for Swiss SMEs.
+
+Position the service as ongoing Microsoft 365 security care for Swiss SMEs without an internal security department. It should cover accounts, MFA, admin rights, Outlook, Exchange, Teams, SharePoint, OneDrive, external sharing, security alerts, Secure Score, management reporting and first response for Microsoft 365 security incidents.
+
+Additional services such as backup, Intune, Defender rollout, Purview, DLP, phishing simulations, ISO preparation, cyber insurance readiness or incident response should be treated as follow-up projects or upsells, not as equal homepage products.
+
+Avoid overpromising. Do not claim that Swissploit makes companies completely secure. Use credible wording such as: reduce risk, improve control, create clear priorities, support incident readiness and provide a trusted security contact.
