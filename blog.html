@@ -3,14 +3,15 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Swissploit Blog Redirect</title>
+  <title>Swissploit Learn Redirect</title>
   <meta name="robots" content="noindex,follow" />
-  <meta name="description" content="Legacy blog redirect page for the new static Swissploit blog index." />
-  <link rel="canonical" href="https://swissploit.ch/blog/" />
+  <meta name="description" content="Legacy redirect page for Swissploit Learn." />
+  <meta http-equiv="refresh" content="0; url=/learn/" />
+  <link rel="canonical" href="https://swissploit.ch/learn/" />
   <script>
     (function () {
       const savedLang = localStorage.getItem("swissploit-blog-lang");
-      const target = savedLang === "en" ? "/en/blog/" : "/blog/";
+      const target = savedLang === "en" ? "/en/learn/" : "/learn/";
       window.location.replace(target);
     })();
   </script>
@@ -29,8 +30,8 @@
 <body>
   <main>
     <h1>Weiterleitung…</h1>
-    <p>Die Blog-Übersicht wurde auf eine statische URL umgestellt.</p>
-    <p><a href="/blog/">Zum Blog</a></p>
+    <p>Der Wissensbereich ist neu unter Learn erreichbar.</p>
+    <p><a href="/learn/">Zu Learn</a></p>
   </main>
 </body>
 </html>

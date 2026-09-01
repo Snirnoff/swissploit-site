@@ -860,10 +860,10 @@ if(shortsSection){
 
   const headerOffset = (header ? header.offsetHeight : 72) + 70;
 
-  // Blog pages: keep Blog active
+  // Learn indexes and legacy blog article pages: keep Learn active
   const p = (location.pathname || "").toLowerCase();
-  if (p.includes("blog.html") || p.includes("blog-post.html")) {
-    const blogLink = links.find(a => (a.getAttribute("href") || "").toLowerCase().includes("blog.html"));
+  if (p.includes("/learn/") || p.includes("/blog/") || p.includes("blog.html") || p.includes("blog-post.html")) {
+    const blogLink = links.find(a => (a.getAttribute("href") || "").toLowerCase().includes("/learn/"));
     links.forEach(a => a.classList.remove("is-active"));
     if (blogLink) blogLink.classList.add("is-active");
     return;

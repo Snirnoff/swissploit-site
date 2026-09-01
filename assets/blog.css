@@ -1,4 +1,4 @@
-/* assets/blog.css – shared styling for static DE/EN blog index pages */
+/* assets/blog.css – shared styling for static DE/EN Learn index pages */
 
 .blog-breadcrumbs{
   padding-top: 98px;
@@ -36,6 +36,19 @@
   display: grid;
   justify-content: center;
   gap: 10px;
+  font-size: clamp(38px, 6vw, 72px);
+  line-height: 1.05;
+  letter-spacing: -.04em;
+  text-align: center;
+}
+
+.blog-lead{
+  max-width: 760px;
+  margin: 0 auto;
+  color: color-mix(in oklab, var(--fg) 72%, transparent);
+  font-size: clamp(16px, 2vw, 20px);
+  line-height: 1.6;
+  text-align: center;
 }
 
 .blog-hero .blog-brand{

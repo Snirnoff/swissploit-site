@@ -9,8 +9,85 @@ const POSTS_DIR = path.join(ROOT, "posts");
 const OUT_FILE = path.join(ROOT, "assets", "blog-posts.js");
 const BLOG_DIR = path.join(ROOT, "blog");
 const EN_BLOG_DIR = path.join(ROOT, "en", "blog");
+const LEARN_DIR = path.join(ROOT, "learn");
+const EN_LEARN_DIR = path.join(ROOT, "en", "learn");
 const BASE_URL = "https://swissploit.ch";
 const SITEMAP_FILE = path.join(ROOT, "sitemap.xml");
+
+const LEARN_TOPICS = [
+  {
+    id: "phishing-betrug",
+    image: "/assets/blog/h355-014.png",
+    title: {
+      de: "Phishing & Betrug",
+      en: "Phishing & scams"
+    },
+    description: {
+      de: "Gefälschte Nachrichten, Webseiten und Betrugsmaschen erkennen.",
+      en: "Recognise fake messages, websites and common scam patterns."
+    }
+  },
+  {
+    id: "accounts-passwoerter",
+    image: "/assets/blog/021_tn.webp",
+    title: {
+      de: "Accounts & Passwörter",
+      en: "Accounts & passwords"
+    },
+    description: {
+      de: "Konten besser schützen und Übernahmen verhindern.",
+      en: "Protect accounts more effectively and prevent takeovers."
+    }
+  },
+  {
+    id: "social-engineering",
+    visual: "conversation",
+    title: {
+      de: "Social Engineering",
+      en: "Social engineering"
+    },
+    description: {
+      de: "Verstehen, wie Angreifer Vertrauen und menschliches Verhalten ausnutzen.",
+      en: "Understand how attackers exploit trust and human behaviour."
+    }
+  },
+  {
+    id: "security-alltag",
+    visual: "mobile",
+    title: {
+      de: "Security im Alltag",
+      en: "Everyday security"
+    },
+    description: {
+      de: "Smartphone, WLAN, QR-Codes und digitale Alltagsrisiken.",
+      en: "Smartphones, Wi-Fi, QR codes and everyday digital risks."
+    }
+  },
+  {
+    id: "privatsphaere-datenschutz",
+    visual: "privacy",
+    title: {
+      de: "Privatsphäre & Datenschutz",
+      en: "Privacy & data protection"
+    },
+    description: {
+      de: "Persönliche Daten verstehen und besser kontrollieren.",
+      en: "Understand personal data and take greater control of it."
+    }
+  },
+  {
+    id: "security-buero",
+    visual: "office",
+    title: {
+      de: "Security im Büro",
+      en: "Security at work"
+    },
+    description: {
+      de: "Digitale Risiken am Arbeitsplatz erkennen und richtig reagieren.",
+      en: "Recognise digital risks at work and respond appropriately."
+    }
+  }
+];
 
 function asArray(v) {
   if (!v) return [];
@@ -192,14 +269,46 @@ function renderMetaHtml(post, lang) {
   `.trim();
 }
 
-function renderPostCard(post, lang, idx) {
+function normalizeFilterValue(value) {
+  return String(value || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .trim();
+}
+
+function getLearnTopic(post) {
+  const tags = new Set((post.tags || []).map(normalizeFilterValue));
+
+  if (tags.has("social-engineering")) return "social-engineering";
+  if (tags.has("phishing") || tags.has("scam") || tags.has("betrug")) return "phishing-betrug";
+  if (tags.has("mfa") || tags.has("microsoft-authenticator") || tags.has("two-factor-authentication") || tags.has("passwort")) {
+    return "accounts-passwoerter";
+  }
+  if (tags.has("datenschutz") || tags.has("privacy") || tags.has("privatsphare") || tags.has("personliche-daten")) {
+    return "privatsphaere-datenschutz";
+  }
+  if (tags.has("smartphone") || tags.has("wlan") || tags.has("qr-code") || tags.has("alltag")) {
+    return "security-alltag";
+  }
+  if (post.slug === "onedrive-restore-deleted-files") return "security-buero";
+
+  return "other";
+}
+
+function getLearnTopicLabel(topicId, lang) {
+  const topic = LEARN_TOPICS.find((item) => item.id === topicId);
+  return topic?.title?.[lang] || topic?.title?.de || (lang === "en" ? "More security content" : "Weitere Security-Inhalte");
+}
+
+function renderPostCard(post, lang, topicId) {
   const txt = post.i18n?.[lang] || post.i18n?.[post.defaultLang] || post.i18n?.de || post.i18n?.en || {};
   const href =
     (lang === "en" && post?.urls?.en) ||
     post?.urls?.de ||
     post?.urls?.en ||
-    "/blog/";
-  const tags = (post.tags || []).slice(0, 4).map((x) => `#${escapeHtml(x)}`).join(" ");
+    (lang === "en" ? "/en/learn/" : "/learn/");
+  const tags = (post.tags || []).slice(0, 3).map((x) => `#${escapeHtml(x)}`).join(" ");
   const excerpt = String(txt.excerpt || "").trim();
   const searchText = [
     txt.title || "",
@@ -207,10 +316,15 @@ function renderPostCard(post, lang, idx) {
     (post.tags || []).join(" ")
   ].join(" ").toLowerCase();
 
+  const titleId = `learn-card-title-${String(post.slug || post.id || "post").replace(/[^a-z0-9-]/gi, "-")}`;
+  const filterTags = (post.tags || []).map(normalizeFilterValue).join("|");
+
   return `
     <article
       class="blog-card"
-      aria-labelledby="blog-card-title-${idx}"
+      aria-labelledby="${escapeAttr(titleId)}"
+      data-topic="${escapeAttr(topicId)}"
+      data-tags="${escapeAttr(filterTags)}"
       data-search="${escapeAttr(searchText)}">
       <a class="blog-card-link" href="${escapeAttr(href.replace(BASE_URL, ""))}" aria-label="${escapeAttr(txt.title || "")}" data-transition>
         <div class="blog-thumb">
@@ -229,23 +343,117 @@ function renderPostCard(post, lang, idx) {
         </div>
 
         <div class="blog-card-body">
-          <div class="blog-meta">
-            ${post.date ? `<time class="blog-date" datetime="${escapeAttr(post.date)}">${escapeHtml(formatDate(post.date))}</time>` : ""}
-            <span class="blog-tags" title="${escapeAttr((post.tags || []).join(" "))}">${tags}</span>
-          </div>
+          <span class="learn-card-category">${escapeHtml(getLearnTopicLabel(topicId, lang))}</span>
 
-          <h2 class="blog-card-title" id="blog-card-title-${idx}">${escapeHtml(txt.title || "")}</h2>
+          <h3 class="blog-card-title" id="${escapeAttr(titleId)}">${escapeHtml(txt.title || "")}</h3>
           <p class="blog-card-excerpt">${escapeHtml(excerpt)}</p>
+          <span class="blog-tags" title="${escapeAttr((post.tags || []).join(" "))}">${tags}</span>
         </div>
       </a>
     </article>
   `;
 }
 
+function renderTopicVisual(topic, lang) {
+  if (topic.image) {
+    return `<img src="${escapeAttr(topic.image)}" alt="" loading="lazy" decoding="async">`;
+  }
+
+  const icons = {
+    conversation: `<svg viewBox="0 0 64 64" aria-hidden="true"><path d="M13 15h27a8 8 0 0 1 8 8v10a8 8 0 0 1-8 8H27L15 50l3-9h-5a8 8 0 0 1-8-8V23a8 8 0 0 1 8-8Z"/><path d="M23 26h14M23 33h9"/></svg>`,
+    mobile: `<svg viewBox="0 0 64 64" aria-hidden="true"><rect x="14" y="7" width="28" height="50" rx="6"/><path d="M24 15h8M26 49h4M48 22l9 4v8c0 8-4 13-9 16-5-3-9-8-9-16v-8l9-4Z"/></svg>`,
+    privacy: `<svg viewBox="0 0 64 64" aria-hidden="true"><path d="M7 32s9-15 25-15 25 15 25 15-9 15-25 15S7 32 7 32Z"/><circle cx="32" cy="32" r="7"/><path d="M47 11 17 53"/></svg>`,
+    office: `<svg viewBox="0 0 64 64" aria-hidden="true"><path d="M10 55V17l22-8v46M32 22h22v33M5 55h54M18 22h6M18 32h6M18 42h6M41 31h5M41 41h5"/></svg>`
+  };
+
+  return `<span class="learn-topic-symbol" aria-hidden="true">${icons[topic.visual] || icons.privacy}</span><span class="sr-only">${escapeHtml(topic.title?.[lang] || topic.title?.de || "")}</span>`;
+}
+
+function renderTopicCard(topic, lang, hasContent) {
+  const title = topic.title?.[lang] || topic.title?.de || "";
+  const description = topic.description?.[lang] || topic.description?.de || "";
+  const target = hasContent ? `#topic-${topic.id}` : "#learn-content";
+
+  return `
+    <a class="learn-topic-card learn-topic-card--${escapeAttr(topic.visual || "image")}" href="${target}" data-topic-link="${escapeAttr(topic.id)}">
+      <span class="learn-topic-visual">${renderTopicVisual(topic, lang)}</span>
+      <span class="learn-topic-copy">
+        <strong>${escapeHtml(title)}</strong>
+        <span>${escapeHtml(description)}</span>
+      </span>
+      <span class="learn-topic-arrow" aria-hidden="true">↘</span>
+    </a>
+  `;
+}
+
+function renderLearnTopicSections(posts, lang) {
+  const classified = new Map(LEARN_TOPICS.map((topic) => [topic.id, []]));
+  const other = [];
+
+  posts.forEach((post) => {
+    const topicId = getLearnTopic(post);
+    if (classified.has(topicId)) classified.get(topicId).push(post);
+    else other.push(post);
+  });
+
+  const sections = LEARN_TOPICS.map((topic) => {
+    const topicPosts = classified.get(topic.id) || [];
+    if (!topicPosts.length) return "";
+    const title = topic.title?.[lang] || topic.title?.de || "";
+
+    return `
+      <section class="learn-article-group" id="topic-${escapeAttr(topic.id)}" data-topic-section="${escapeAttr(topic.id)}" aria-labelledby="topic-heading-${escapeAttr(topic.id)}">
+        <div class="learn-group-heading">
+          <h2 id="topic-heading-${escapeAttr(topic.id)}">${escapeHtml(title)}</h2>
+          <span>${topicPosts.length} ${lang === "en" ? (topicPosts.length === 1 ? "article" : "articles") : (topicPosts.length === 1 ? "Artikel" : "Artikel")}</span>
+        </div>
+        <div class="blog-grid">
+          ${topicPosts.map((post) => renderPostCard(post, lang, topic.id)).join("")}
+        </div>
+      </section>
+    `;
+  }).join("");
+
+  const otherSection = other.length ? `
+    <section class="learn-article-group learn-article-group--other" id="topic-other" data-topic-section="other" aria-labelledby="topic-heading-other">
+      <div class="learn-group-heading">
+        <h2 id="topic-heading-other">${lang === "en" ? "More security content" : "Weitere Security-Inhalte"}</h2>
+        <span>${other.length} ${lang === "en" ? (other.length === 1 ? "article" : "articles") : "Artikel"}</span>
+      </div>
+      <div class="blog-grid">
+        ${other.map((post) => renderPostCard(post, lang, "other")).join("")}
+      </div>
+    </section>
+  ` : "";
+
+  return {
+    html: sections + otherSection,
+    topicCounts: new Map([...classified].map(([topicId, topicPosts]) => [topicId, topicPosts.length]))
+  };
+}
+
+function renderLearnTagOptions(posts, lang) {
+  const labels = new Map();
+
+  posts.forEach((post) => {
+    (post.tags || []).forEach((tag) => {
+      const value = normalizeFilterValue(tag);
+      if (value && !labels.has(value)) labels.set(value, String(tag));
+    });
+  });
+
+  const options = [...labels.entries()]
+    .sort((a, b) => a[1].localeCompare(b[1], lang))
+    .map(([value, label]) => `<option value="${escapeAttr(value)}">#${escapeHtml(label)}</option>`)
+    .join("");
+
+  return `<option value="">${lang === "en" ? "All tags" : "Alle Tags"}</option>${options}`;
+}
+
 function renderIndexAlternateLinks(lang) {
-  const canonical = lang === "en" ? `${BASE_URL}/en/blog/` : `${BASE_URL}/blog/`;
-  const de = `${BASE_URL}/blog/`;
-  const en = `${BASE_URL}/en/blog/`;
+  const canonical = lang === "en" ? `${BASE_URL}/en/learn/` : `${BASE_URL}/learn/`;
+  const de = `${BASE_URL}/learn/`;
+  const en = `${BASE_URL}/en/learn/`;
 
   return `
   <link rel="canonical" href="${escapeAttr(canonical)}" />
@@ -255,12 +463,12 @@ function renderIndexAlternateLinks(lang) {
 }
 
 function renderIndexJsonLd(posts, lang) {
-  const pageUrl = lang === "en" ? `${BASE_URL}/en/blog/` : `${BASE_URL}/blog/`;
+  const pageUrl = lang === "en" ? `${BASE_URL}/en/learn/` : `${BASE_URL}/learn/`;
 
   const data = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    name: lang === "en" ? "Swissploit Blog – English" : "Swissploit Blog",
+    name: lang === "en" ? "Swissploit Learn – English" : "Swissploit Learn",
     url: pageUrl,
     inLanguage: lang,
     mainEntity: {
@@ -293,14 +501,14 @@ function renderPrimaryNavHtml(lang) {
     ? [
         { href: "/index.html#sicherheitslage", label: "Security overview" },
         { href: "/index.html#security-care", label: "Microsoft 365 Care" },
-        { href: "/en/blog/", label: "Blog" },
+        { href: "/en/learn/", label: "Learn" },
         { href: "/index.html#ueber", label: "About Swissploit" },
         { href: "/index.html#kontakt", label: "Contact" }
       ]
     : [
         { href: "/index.html#sicherheitslage", label: "Sicherheitslage" },
         { href: "/index.html#security-care", label: "Microsoft 365 Care" },
-        { href: "/blog/", label: "Blog" },
+        { href: "/learn/", label: "Learn" },
         { href: "/index.html#ueber", label: "Über Swissploit" },
         { href: "/index.html#kontakt", label: "Kontakt" }
       ];
@@ -348,14 +556,14 @@ function renderFooterNavHtml(lang) {
     ? [
         { href: "/index.html#sicherheitslage", label: "Security overview" },
         { href: "/index.html#security-care", label: "Microsoft 365 Care" },
-        { href: "/en/blog/", label: "Blog" },
+        { href: "/en/learn/", label: "Learn" },
         { href: "/index.html#ueber", label: "About Swissploit" },
         { href: "/index.html#kontakt", label: "Contact" }
       ]
     : [
         { href: "/index.html#sicherheitslage", label: "Sicherheitslage" },
         { href: "/index.html#security-care", label: "Microsoft 365 Care" },
-        { href: "/blog/", label: "Blog" },
+        { href: "/learn/", label: "Learn" },
         { href: "/index.html#ueber", label: "Über Swissploit" },
         { href: "/index.html#kontakt", label: "Kontakt" }
       ];
@@ -407,7 +615,7 @@ function renderRelatedPostsHtml(post, allPosts, lang) {
             (lang === "en" && item?.urls?.en) ||
             item?.urls?.de ||
             item?.urls?.en ||
-            "/blog/";
+            (lang === "en" ? "/en/learn/" : "/learn/");
 
           return `
             <article class="post-related-card blog-card">
@@ -432,7 +640,7 @@ function renderPostAlternateLinks(post, currentLang) {
     (currentLang === "en" && post?.urls?.en) ||
     post?.urls?.de ||
     post?.urls?.en ||
-    `${BASE_URL}/blog/`;
+    `${BASE_URL}${currentLang === "en" ? "/en/learn/" : "/learn/"}`;
 
   const links = [
     `<link rel="canonical" href="${escapeAttr(canonical)}" />`
@@ -452,12 +660,12 @@ function renderPostAlternateLinks(post, currentLang) {
 }
 
 function renderBreadcrumbJsonLd(post, lang, title) {
-  const blogUrl = lang === "en" ? `${BASE_URL}/en/blog/` : `${BASE_URL}/blog/`;
+  const learnUrl = lang === "en" ? `${BASE_URL}/en/learn/` : `${BASE_URL}/learn/`;
   const postUrl =
     (lang === "en" && post?.urls?.en) ||
     post?.urls?.de ||
     post?.urls?.en ||
-    blogUrl;
+    learnUrl;
 
   return JSON.stringify({
     "@context": "https://schema.org",
@@ -472,8 +680,8 @@ function renderBreadcrumbJsonLd(post, lang, title) {
       {
         "@type": "ListItem",
         position: 2,
-        name: "Blog",
-        item: blogUrl
+        name: "Learn",
+        item: learnUrl
       },
       {
         "@type": "ListItem",
@@ -490,7 +698,7 @@ function renderPostJsonLd(post, lang, txt) {
     (lang === "en" && post?.urls?.en) ||
     post?.urls?.de ||
     post?.urls?.en ||
-    `${BASE_URL}/blog/`;
+    `${BASE_URL}${lang === "en" ? "/en/learn/" : "/learn/"}`;
 
   const data = {
     "@context": "https://schema.org",
@@ -545,18 +753,22 @@ function renderPostLangToggle(post, currentLang) {
 
 function renderBlogIndexPage(posts, lang) {
   const isEn = lang === "en";
-  const pageTitle = isEn ? "Swissploit Blog – English" : "Swissploit Blog";
+  const pageTitle = isEn
+    ? "Learn | Cyber Security explained simply | Swissploit"
+    : "Learn | Cyber Security einfach erklärt | Swissploit";
   const metaDescription = isEn
-    ? "Swissploit blog with practical posts about cybersecurity, Microsoft 365, Windows, phishing and modern IT."
-    : "Blog von Swissploit mit Beiträgen zu Cybersecurity, Phishing, Microsoft 365, Windows und praxisnahen IT-Tipps.";
+    ? "Cyber Security explained simply: phishing, scams, accounts, passwords, privacy and digital security made easy to understand."
+    : "Cyber Security einfach erklärt: Phishing, Scams, Accounts, Passwörter, Datenschutz und digitale Sicherheit verständlich erklärt.";
   const ogDescription = isEn
-    ? "Practical posts about cybersecurity, Microsoft 365, Windows, phishing and modern IT."
-    : "Beiträge zu Cybersecurity, Microsoft 365, Windows, Phishing und moderner IT – verständlich und praxisnah.";
-  const pageUrl = isEn ? `${BASE_URL}/en/blog/` : `${BASE_URL}/blog/`;
-  const cardsHtml = posts
-    .filter((post) => Boolean(post.i18n?.[lang] || post.i18n?.[post.defaultLang]))
-    .map((post, idx) => renderPostCard(post, lang, idx))
+    ? "Understand digital threats, spot scams and learn how to protect yourself in everyday life and at work."
+    : "Verstehe digitale Gefahren, erkenne Betrugsversuche und lerne, wie du dich im Alltag und am Arbeitsplatz besser schützt.";
+  const pageUrl = isEn ? `${BASE_URL}/en/learn/` : `${BASE_URL}/learn/`;
+  const availablePosts = posts.filter((post) => Boolean(post.i18n?.[lang] || post.i18n?.[post.defaultLang]));
+  const learnContent = renderLearnTopicSections(availablePosts, lang);
+  const topicCardsHtml = LEARN_TOPICS
+    .map((topic) => renderTopicCard(topic, lang, Boolean(learnContent.topicCounts.get(topic.id))))
     .join("");
+  const tagOptionsHtml = renderLearnTagOptions(availablePosts, lang);
 
   return `<!doctype html>
 <html lang="${lang}" data-theme="dark">
@@ -598,59 +810,109 @@ function renderBlogIndexPage(posts, lang) {
 
   <link rel="stylesheet" href="/assets/styles.css" />
   <link rel="stylesheet" href="/assets/blog.css" />
+  <link rel="stylesheet" href="/assets/learn.css" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 </head>
 
-<body>
+<body class="learn-page">
   ${renderSiteHeaderHtml(lang)}
 
   <main id="main">
     <nav class="wrap blog-breadcrumbs" aria-label="Breadcrumb">
       <ol class="breadcrumb-list">
         <li><a href="/index.html">Home</a></li>
-        <li aria-current="page">Wissen</li>
+        <li aria-current="page">Learn</li>
       </ol>
     </nav>
 
-    <section class="section blog-hero">
-      <div class="wrap">
-        <h1 class="blog-title">
-          <span class="hero-brand blog-brand" aria-label="Swissploit">
-            <span>S</span><span>w</span><span>i</span><span>s</span><span>s</span><span>p</span><span>l</span><span>o</span><span>i</span><span>t</span>
-            <span class="blog-kicker">${isEn ? "BLOG." : "BLOG."}</span>
-          </span>
-        </h1>
+    <section class="section blog-hero learn-hero" aria-labelledby="learn-title">
+      <div class="wrap learn-hero-inner">
+        <p class="learn-eyebrow">Swissploit Learn</p>
+        <h1 class="blog-title" id="learn-title">${isEn ? "Cyber Security explained simply." : "Cyber Security einfach erklärt."}</h1>
+        <p class="blog-lead">${isEn
+          ? "Understand digital threats, spot scams and learn how to protect yourself in everyday life and at work."
+          : "Verstehe digitale Gefahren, erkenne Betrugsversuche und lerne, wie du dich im Alltag und am Arbeitsplatz besser schützt."}</p>
 
-        <div class="blog-search">
-          <label class="sr-only" for="blogSearch">${isEn ? "Search blog" : "Blog durchsuchen"}</label>
-          <input id="blogSearch" type="search" placeholder="${escapeAttr(isEn ? "Search phishing, Windows, M365, OneDrive…" : "Suche nach Phishing, Windows, M365, OneDrive…")}" autocomplete="off">
-          <span class="blog-search-hint">${isEn ? "Search scans title, excerpt and tags." : "Suche durchsucht Titel, Kurztext und Tags."}</span>
+        <div class="blog-search learn-search">
+          <label class="sr-only" for="blogSearch">${isEn ? "Search Learn" : "Learn durchsuchen"}</label>
+          <span class="learn-search-icon" aria-hidden="true"></span>
+          <input id="blogSearch" type="search" placeholder="${escapeAttr(isEn ? "Search for a security topic ..." : "Nach einem Security-Thema suchen ...")}" autocomplete="off" enterkeyhint="search">
+          <span class="blog-search-hint">${isEn ? "Search by title, summary or tag." : "Suche nach Titel, Kurztext oder Tag."}</span>
         </div>
 
         <nav class="lang-toggle" aria-label="${escapeAttr(isEn ? "Choose language" : "Sprache wählen")}">
-          <a class="lang-link ${isEn ? "" : "is-active"}" href="/blog/" hreflang="de" lang="de" data-lang-switch="de">DE</a>
-          <a class="lang-link ${isEn ? "is-active" : ""}" href="/en/blog/" hreflang="en" lang="en" data-lang-switch="en">EN</a>
+          <a class="lang-link ${isEn ? "" : "is-active"}" href="/learn/" hreflang="de" lang="de" data-lang-switch="de">DE</a>
+          <a class="lang-link ${isEn ? "is-active" : ""}" href="/en/learn/" hreflang="en" lang="en" data-lang-switch="en">EN</a>
         </nav>
+      </div>
+    </section>
 
-        <div class="blog-scroll-cue">
-          <p class="intro-scroll-hint blog-scroll-hint">${isEn ? "Scroll to reveal blog posts." : "Scrollen, um Blogartikel sichtbar zu machen."}</p>
-          <a class="intro-arrow blog-scroll-arrow" href="#blogPosts" aria-label="${escapeAttr(isEn ? "Scroll to blog posts" : "Zu den Blogartikeln scrollen")}">&#8595;</a>
+    <section class="section learn-featured" aria-labelledby="featured-title">
+      <div class="wrap">
+        <div class="learn-featured-panel">
+          <div class="learn-featured-copy">
+            <span class="learn-label">${isEn ? "Recommended starting point" : "Empfohlen zum Start"}</span>
+            <h2 id="featured-title">${isEn ? "Social engineering & phishing explained simply" : "Social Engineering & Phishing einfach erklärt"}</h2>
+            <p>${isEn
+              ? "How social engineering works, how to spot phishing and why the sender, links and professional design alone do not guarantee safety."
+              : "Wie Social Engineering funktioniert, woran du Phishing erkennst und warum Absender, Links und professionelles Design allein keine Sicherheit bieten."}</p>
+          </div>
+          <div class="learn-video-frame">
+            <iframe
+              src="https://www.youtube-nocookie.com/embed/n_2DYwpVsS4"
+              title="${escapeAttr(isEn ? "Social engineering and phishing explained simply" : "Social Engineering und Phishing einfach erklärt")}"
+              loading="lazy"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen></iframe>
+          </div>
         </div>
       </div>
     </section>
 
-    <section id="blogPosts" class="section blog-grid-section">
+    <section class="section learn-topics" aria-labelledby="topics-title">
       <div class="wrap">
-        <section aria-labelledby="blogListHeading">
-          <h2 id="blogListHeading" class="sr-only">${isEn ? "Blog posts" : "Blogartikel"}</h2>
-          <div id="blogGrid" class="blog-grid" aria-live="polite">
-            ${cardsHtml}
+        <div class="learn-section-heading">
+          <p class="learn-eyebrow">${isEn ? "Six areas of knowledge" : "Sechs Themenwelten"}</p>
+          <h2 id="topics-title">${isEn ? "Explore topics" : "Themen entdecken"}</h2>
+          <p>${isEn ? "Start with the area that matters to you right now." : "Starte bei dem Thema, das dich gerade beschäftigt."}</p>
+        </div>
+        <div class="learn-topic-grid">
+          ${topicCardsHtml}
+        </div>
+      </div>
+    </section>
+
+    <section id="learn-content" class="section learn-content-section" aria-labelledby="learn-content-title">
+      <div class="wrap">
+        <div class="learn-content-header">
+          <div class="learn-section-heading">
+            <p class="learn-eyebrow">${isEn ? "Knowledge base" : "Wissensbereich"}</p>
+            <h2 id="learn-content-title">${isEn ? "Knowledge by topic" : "Wissen nach Themen"}</h2>
+            <p>${isEn ? "Articles grouped by context instead of publication date." : "Artikel nach Kontext geordnet – nicht nach Veröffentlichungsdatum."}</p>
           </div>
-          <p id="noResults" class="blog-no-results" hidden>${isEn ? "No results. Try another keyword." : "Keine Treffer. Versuch es mit einem anderen Begriff."}</p>
-        </section>
+
+          <div class="learn-filter-bar" aria-label="${escapeAttr(isEn ? "Filter articles" : "Artikel filtern")}">
+            <label for="learnTagFilter">${isEn ? "Filter by tag" : "Nach Tag filtern"}</label>
+            <select id="learnTagFilter">
+              ${tagOptionsHtml}
+            </select>
+            <button id="clearLearnFilters" class="learn-filter-reset" type="button" hidden>${isEn ? "Show all topics" : "Alle Themen zeigen"}</button>
+          </div>
+        </div>
+
+        <div id="blogGrid" class="learn-article-groups" aria-live="polite">
+          ${learnContent.html}
+        </div>
+        <div id="noResults" class="blog-no-results learn-empty-state" role="status" hidden>
+          <strong id="noResultsText">${isEn ? "No matching content found." : "Keine passenden Inhalte gefunden."}</strong>
+          <span>${isEn ? "Try a different search term or reset the filters." : "Versuche einen anderen Suchbegriff oder setze die Filter zurück."}</span>
+          <button id="clearLearnFiltersEmpty" class="learn-filter-reset" type="button">${isEn ? "Reset filters" : "Filter zurücksetzen"}</button>
+        </div>
+        <p id="learnResultStatus" class="sr-only" aria-live="polite"></p>
       </div>
     </section>
   </main>
@@ -667,29 +929,53 @@ function renderBlogIndexPage(posts, lang) {
     window.SWISSPLOIT_INDEX_LANG = ${JSON.stringify(lang)};
   </script>
   <script src="/assets/transition.js"></script>
-  <script src="/assets/blog-index-static.js"></script>
+  <script src="/assets/learn.js"></script>
   <script defer src="/assets/app.js"></script>
+</body>
+</html>`;
+}
+
+function renderLegacyIndexRedirect(lang) {
+  const isEn = lang === "en";
+  const target = isEn ? "/en/learn/" : "/learn/";
+  const canonical = `${BASE_URL}${target}`;
+
+  return `<!doctype html>
+<html lang="${lang}">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>${isEn ? "Redirecting to Learn" : "Weiterleitung zu Learn"} | Swissploit</title>
+  <meta name="robots" content="noindex,follow" />
+  <meta http-equiv="refresh" content="0; url=${target}" />
+  <link rel="canonical" href="${canonical}" />
+  <script>window.location.replace(${JSON.stringify(target)});</script>
+</head>
+<body>
+  <main>
+    <p>${isEn ? "The knowledge section is now available under" : "Der Wissensbereich ist neu unter"} <a href="${target}">Learn</a>.</p>
+  </main>
 </body>
 </html>`;
 }
 
 function renderStaticPostPage(post, lang, allPosts) {
   const txt = post.i18n?.[lang] || post.i18n?.[post.defaultLang] || post.i18n?.de || post.i18n?.en || {};
-  const title = txt.title || "Swissploit – Blog";
+  const title = txt.title || "Swissploit – Learn";
   const description = (txt.excerpt || post?.seo?.description?.[lang] || post?.seo?.description?.de || post?.seo?.description?.en || "").slice(0, 160);
   const image = post?.seo?.image || `${BASE_URL}/assets/swissploit-og.png`;
   const canonical =
     (lang === "en" && post?.urls?.en) ||
     post?.urls?.de ||
     post?.urls?.en ||
-    `${BASE_URL}/blog/`;
-  const blogHref = lang === "en" ? "/en/blog/" : "/blog/";
+    `${BASE_URL}${lang === "en" ? "/en/learn/" : "/learn/"}`;
+  const learnHref = lang === "en" ? "/en/learn/" : "/learn/";
   const ui = lang === "de"
     ? {
         about: "Über Swissploit",
         latest: "Wissen",
         shorts: "Leistungen",
-        blog: "Blog",
+        blog: "Learn",
         back: "← Zurück",
         watch: "▶ Video ansehen"
       }
@@ -697,7 +983,7 @@ function renderStaticPostPage(post, lang, allPosts) {
         about: "Über Swissploit",
         latest: "Wissen",
         shorts: "Leistungen",
-        blog: "Blog",
+        blog: "Learn",
         back: "← Back",
         watch: "▶ Watch video"
       };
@@ -760,7 +1046,7 @@ function renderStaticPostPage(post, lang, allPosts) {
     <nav class="wrap blog-breadcrumbs" aria-label="Breadcrumb">
       <ol class="breadcrumb-list">
         <li><a href="/index.html" data-transition>Home</a></li>
-        <li><a href="${blogHref}" data-transition>Wissen</a></li>
+        <li><a href="${learnHref}" data-transition>Learn</a></li>
         <li aria-current="page">${escapeHtml(title)}</li>
       </ol>
     </nav>
@@ -768,7 +1054,7 @@ function renderStaticPostPage(post, lang, allPosts) {
     <section class="section post-hero">
       <div class="wrap">
         <div class="post-topbar">
-          <a class="post-back" href="${blogHref}" data-transition>${ui.back}</a>
+          <a class="post-back" href="${learnHref}" data-transition>${ui.back}</a>
           ${renderPostLangToggle(post, lang)}
         </div>
 
@@ -917,12 +1203,18 @@ async function main() {
 
   await fs.rm(BLOG_DIR, { recursive: true, force: true });
   await fs.rm(EN_BLOG_DIR, { recursive: true, force: true });
+  await fs.rm(LEARN_DIR, { recursive: true, force: true });
+  await fs.rm(EN_LEARN_DIR, { recursive: true, force: true });
 
   await fs.mkdir(BLOG_DIR, { recursive: true });
   await fs.mkdir(EN_BLOG_DIR, { recursive: true });
+  await fs.mkdir(LEARN_DIR, { recursive: true });
+  await fs.mkdir(EN_LEARN_DIR, { recursive: true });
 
-  await fs.writeFile(path.join(BLOG_DIR, "index.html"), renderBlogIndexPage(posts, "de"), "utf8");
-  await fs.writeFile(path.join(EN_BLOG_DIR, "index.html"), renderBlogIndexPage(posts, "en"), "utf8");
+  await fs.writeFile(path.join(LEARN_DIR, "index.html"), renderBlogIndexPage(posts, "de"), "utf8");
+  await fs.writeFile(path.join(EN_LEARN_DIR, "index.html"), renderBlogIndexPage(posts, "en"), "utf8");
+  await fs.writeFile(path.join(BLOG_DIR, "index.html"), renderLegacyIndexRedirect("de"), "utf8");
+  await fs.writeFile(path.join(EN_BLOG_DIR, "index.html"), renderLegacyIndexRedirect("en"), "utf8");
 
   for (const post of posts) {
     if (post.i18n?.de) {
@@ -948,8 +1240,8 @@ window.SWISSPLOIT_BLOG_POSTS = ${JSON.stringify(posts, null, 2)};
 
   const sitemapEntries = [
     { loc: `${BASE_URL}/` },
-    { loc: `${BASE_URL}/blog/` },
-    { loc: `${BASE_URL}/en/blog/` },
+    { loc: `${BASE_URL}/learn/` },
+    { loc: `${BASE_URL}/en/learn/` },
     ...posts.flatMap((post) => {
       const entries = [];
       if (post.urls?.de) {
@@ -983,7 +1275,7 @@ window.SWISSPLOIT_BLOG_POSTS = ${JSON.stringify(posts, null, 2)};
 
   await fs.writeFile(SITEMAP_FILE, sitemap, "utf8");
 
-  console.log(`✅ Generated static blog indexes and posts`);
+  console.log(`✅ Generated static Learn indexes and blog article URLs`);
   console.log(`✅ Generated ${OUT_FILE} (${posts.length} posts)`);
   console.log(`✅ Generated ${SITEMAP_FILE}`);
 }

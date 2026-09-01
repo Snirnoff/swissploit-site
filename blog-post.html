@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Swissploit Blog Redirect</title>
+  <title>Swissploit Artikel Redirect</title>
   <meta name="robots" content="noindex,follow" />
   <meta name="description" content="Legacy blog redirect page for older Swissploit article links." />
-  <link rel="canonical" href="https://swissploit.ch/blog.html" />
+  <link rel="canonical" href="https://swissploit.ch/learn/" />
 
   <script src="/assets/blog-posts.js"></script>
   <script>
@@ -24,7 +24,7 @@
         (preferredLang === "en" && match?.urls?.en) ||
         match?.urls?.de ||
         match?.urls?.en ||
-        "/blog/";
+        "/learn/";
 
       window.location.replace(target);
     })();
@@ -45,8 +45,8 @@
 <body>
   <main>
     <h1>Weiterleitung…</h1>
-    <p>Der Blogartikel wurde auf eine statische URL umgestellt.</p>
-    <p><a href="/blog/">Zur Blog-Übersicht</a></p>
+    <p>Der Artikel wurde auf eine statische URL umgestellt.</p>
+    <p><a href="/learn/">Zu Learn</a></p>
   </main>
 </body>
 </html>
