@@ -1,6 +1,7 @@
 ---
 id: outlook-fragezeichen-zeichenkodierung-utf8
 date: 2026-02-19
+category: security-buero
 tags: [outlook, microsoft365, encoding, utf-8, classic-outlook, windows]
 thumb: assets/blog/OutlookUml.png
 title: Classic Outlook turns äöü into ?

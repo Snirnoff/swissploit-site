@@ -1,6 +1,7 @@
 ---
 id: wetransfer-phishing-html-onedrive
 date: 2026-01-27
+category: phishing-betrug
 tags: [security, phishing, microsoft365, onedrive, outlook]
 thumb: assets/blog/h355-014.png
 videoUrl: https://www.youtube.com/watch?v=5aVeWRinSxM

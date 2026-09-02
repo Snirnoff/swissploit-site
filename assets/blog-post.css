@@ -42,6 +42,19 @@
   letter-spacing: -0.02em;
 }
 
+.post-kicker{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 8px 0 14px;
+  color: color-mix(in oklab, var(--accent) 84%, var(--fg));
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .14em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
 .post-subline{
   margin: 0 auto;
   max-width: 70ch;
@@ -87,6 +100,23 @@
   font-size: 12px;
   letter-spacing: .02em;
   color: color-mix(in oklab, var(--fg) 82%, transparent);
+}
+
+.post-hero-image{
+  max-width: 960px;
+  margin: 28px auto 0;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: var(--panel);
+  box-shadow: var(--shadow);
+}
+
+.post-hero-image img{
+  width: 100%;
+  aspect-ratio: 16 / 8.5;
+  display: block;
+  object-fit: cover;
 }
 
 /* ===== Content column ===== */
@@ -166,8 +196,18 @@ html[data-theme="dark"] .post-content .blog-callout{
   );
 }
 
+.post-video-section{
+  margin: 34px 0 0;
+  padding-top: 30px;
+  border-top: 1px solid var(--border);
+}
+
+.post-video-section h2{
+  margin-top: 0;
+}
+
 .post-video{
-  margin: 20px 0 26px;
+  margin: 12px 0 0;
   border-radius: 16px;
   overflow: hidden;
   border: 1px solid var(--border);

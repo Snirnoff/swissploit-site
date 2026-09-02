@@ -1,6 +1,7 @@
 ---
 id: mfa-aktivieren-microsoft-authenticator
 date: "2026-03-05"
+category: accounts-passwoerter
 title: "Enable MFA with Microsoft Authenticator: secure your account in minutes"
 excerpt: "If someone has your Microsoft password, they can take over your account. Here’s how to enable MFA with Microsoft Authenticator in a few minutes, step by step."
 tags: [mfa, microsoft-authenticator, two-factor-authentication, security]

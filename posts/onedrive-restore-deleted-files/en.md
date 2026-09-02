@@ -1,6 +1,7 @@
 ---
 id: onedrive-restore-deleted-files
 date: 2026-02-23
+category: security-buero
 title: Restore deleted files in OneDrive
 excerpt: Here’s how to restore files and folders from the Recycle Bin in seconds.
 tags: [onedrive, microsoft-365, windows, cloud, backup, recycle-bin]

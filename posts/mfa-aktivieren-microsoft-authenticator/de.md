@@ -1,6 +1,7 @@
 ---
 id: mfa-aktivieren-microsoft-authenticator
 date: "2026-03-05"
+category: accounts-passwoerter
 title: "MFA aktivieren: Authenticator"
 excerpt: "So aktivierst du MFA mit Microsoft Authenticator in wenigen Minuten"
 tags: [mfa, microsoft-authenticator, two-factor-authentication, security]

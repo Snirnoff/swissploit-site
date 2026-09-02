@@ -13,6 +13,7 @@ const LEARN_DIR = path.join(ROOT, "learn");
 const EN_LEARN_DIR = path.join(ROOT, "en", "learn");
 const BASE_URL = "https://swissploit.ch";
 const SITEMAP_FILE = path.join(ROOT, "sitemap.xml");
+const DEFAULT_POST_IMAGE = "/assets/swissploit-og.png";
 
 const LEARN_TOPICS = [
   {
@@ -64,7 +65,7 @@ const LEARN_TOPICS = [
     }
   },
   {
-    id: "privatsphaere-datenschutz",
+    id: "privacy-datenschutz",
     visual: "privacy",
     title: {
       de: "Privatsphäre & Datenschutz",
@@ -88,6 +89,12 @@ const LEARN_TOPICS = [
     }
   }
 ];
+
+const LEARN_TOPIC_BY_ID = new Map(LEARN_TOPICS.map((topic) => [topic.id, topic]));
+const VALID_LEARN_TOPIC_IDS = new Set(LEARN_TOPICS.map((topic) => topic.id));
+const LEARN_TOPIC_ALIASES = new Map([
+  ["privatsphaere-datenschutz", "privacy-datenschutz"]
+]);
 
 function asArray(v) {
   if (!v) return [];
@@ -160,8 +167,36 @@ function xmlEscape(value) {
 }
 
 function absoluteUrl(urlPath) {
-  const clean = String(urlPath || "").replace(/^\/+/, "");
+  const raw = cleanStr(urlPath);
+  if (!raw) return "";
+  if (/^https?:\/\//i.test(raw)) return raw;
+  const clean = raw.replace(/^\/+/, "");
   return `${BASE_URL}/${clean}`;
+}
+
+function publicAssetUrl(urlPath) {
+  const raw = cleanStr(urlPath);
+  if (!raw) return "";
+  if (/^https?:\/\//i.test(raw)) return raw;
+  return `/${raw.replace(/^\/+/, "")}`;
+}
+
+function getLocalizedText(post, lang) {
+  return post.i18n?.[lang] || post.i18n?.[post.defaultLang] || post.i18n?.de || post.i18n?.en || {};
+}
+
+function getShortDescription(post, lang) {
+  const txt = getLocalizedText(post, lang);
+  return pickFirst(txt.shortDescription, txt.excerpt, post?.seo?.description?.[lang], "");
+}
+
+function getPostImage(post) {
+  return pickFirst(post?.image, post?.thumb, "");
+}
+
+function getPostImageAlt(post, lang, fallbackTitle = "") {
+  const txt = getLocalizedText(post, lang);
+  return pickFirst(txt.imageAlt, fallbackTitle, txt.title, "Swissploit");
 }
 
 function getPostPath(slug, lang = "de") {
@@ -205,56 +240,80 @@ function youtubeEmbedInfo(url) {
 
     const v = u.searchParams.get("v");
     if (u.hostname.includes("youtube.com") && v) {
-      return { embed: `https://www.youtube.com/embed/${v}`, isShort: false };
+      return { embed: `https://www.youtube-nocookie.com/embed/${v}`, isShort: false };
     }
 
     if (u.hostname.includes("youtu.be")) {
       const vid = u.pathname.replace("/", "").trim();
-      if (vid) return { embed: `https://www.youtube.com/embed/${vid}`, isShort: false };
+      if (vid) return { embed: `https://www.youtube-nocookie.com/embed/${vid}`, isShort: false };
     }
 
     if (u.hostname.includes("youtube.com") && u.pathname.startsWith("/shorts/")) {
       const vid = u.pathname.split("/shorts/")[1]?.split(/[?&#/]/)[0];
-      if (vid) return { embed: `https://www.youtube.com/embed/${vid}`, isShort: true };
+      if (vid) return { embed: `https://www.youtube-nocookie.com/embed/${vid}`, isShort: true };
     }
   } catch {}
 
   return null;
 }
 
-function resolveVideoUrl(post, lang) {
-  const direct = post?.i18n?.[lang]?.videoUrl;
-  if (cleanStr(direct)) return cleanStr(direct);
+function resolveVideo(post, lang) {
+  const direct = post?.i18n?.[lang];
+  if (cleanStr(direct?.videoUrl)) {
+    return {
+      url: cleanStr(direct.videoUrl),
+      type: cleanStr(direct.videoType)
+    };
+  }
 
-  const global = post?.videoUrl;
-  if (cleanStr(global)) return cleanStr(global);
+  if (cleanStr(post?.videoUrl)) {
+    return {
+      url: cleanStr(post.videoUrl),
+      type: cleanStr(post.videoType)
+    };
+  }
 
-  const otherLang = lang === "de" ? "en" : "de";
-  const fallback = post?.i18n?.[otherLang]?.videoUrl;
-  if (cleanStr(fallback)) return cleanStr(fallback);
+  return null;
+}
 
-  return "";
+function getVideoSectionHeading(video, info, lang) {
+  const rawType = cleanStr(video?.type).toLowerCase();
+  const isShort = rawType === "short" || rawType === "shorts" || rawType === "60s" || info?.isShort;
+  if (isShort) return lang === "en" ? "Explained in 60 seconds" : "In 60 Sekunden erklärt";
+  return lang === "en" ? "Explained in the video" : "Im Video erklärt";
 }
 
 function renderVideoHtml(post, lang, title, watchLabel) {
-  const videoUrl = resolveVideoUrl(post, lang);
-  if (!videoUrl) return "";
+  const video = resolveVideo(post, lang);
+  if (!video?.url) return "";
 
-  const info = youtubeEmbedInfo(videoUrl);
+  const info = youtubeEmbedInfo(video.url);
+  const heading = getVideoSectionHeading(video, info, lang);
+  const labelId = `post-video-heading-${String(post.slug || post.id || "video").replace(/[^a-z0-9-]/gi, "-")}`;
   if (!info?.embed) {
-    return `<p><a class="post-back" href="${escapeAttr(videoUrl)}" target="_blank" rel="noopener">${escapeHtml(watchLabel)}</a></p>`;
+    return `
+      <section class="post-video-section" aria-labelledby="${escapeAttr(labelId)}">
+        <h2 id="${escapeAttr(labelId)}">${escapeHtml(heading)}</h2>
+        <p><a class="post-back" href="${escapeAttr(video.url)}" target="_blank" rel="noopener">${escapeHtml(watchLabel)}</a></p>
+      </section>
+    `;
   }
 
   return `
-    <div class="post-video">
-      <div class="video-embed ${info.isShort ? "video-embed--shorts" : ""}">
-        <iframe
-          src="${escapeAttr(info.embed)}"
-          title="${escapeAttr(title || "Video")}"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen></iframe>
+    <section class="post-video-section" aria-labelledby="${escapeAttr(labelId)}">
+      <h2 id="${escapeAttr(labelId)}">${escapeHtml(heading)}</h2>
+      <div class="post-video">
+        <div class="video-embed ${info.isShort ? "video-embed--shorts" : ""}">
+          <iframe
+            src="${escapeAttr(info.embed)}"
+            title="${escapeAttr(`${title || "Video"} - ${heading}`)}"
+            loading="lazy"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen></iframe>
+        </div>
       </div>
-    </div>
+    </section>
   `;
 }
 
@@ -277,43 +336,44 @@ function normalizeFilterValue(value) {
     .trim();
 }
 
+function normalizeCategory(value) {
+  const raw = cleanStr(value).toLowerCase();
+  if (!raw) return "";
+  return LEARN_TOPIC_ALIASES.get(raw) || (VALID_LEARN_TOPIC_IDS.has(raw) ? raw : "");
+}
+
+function validateCategory(postSlug, category) {
+  if (category) return category;
+
+  const valid = [...VALID_LEARN_TOPIC_IDS].join(", ");
+  throw new Error(`Missing or invalid Learn category for "${postSlug}". Use one of: ${valid}`);
+}
+
 function getLearnTopic(post) {
-  const tags = new Set((post.tags || []).map(normalizeFilterValue));
-
-  if (tags.has("social-engineering")) return "social-engineering";
-  if (tags.has("phishing") || tags.has("scam") || tags.has("betrug")) return "phishing-betrug";
-  if (tags.has("mfa") || tags.has("microsoft-authenticator") || tags.has("two-factor-authentication") || tags.has("passwort")) {
-    return "accounts-passwoerter";
-  }
-  if (tags.has("datenschutz") || tags.has("privacy") || tags.has("privatsphare") || tags.has("personliche-daten")) {
-    return "privatsphaere-datenschutz";
-  }
-  if (tags.has("smartphone") || tags.has("wlan") || tags.has("qr-code") || tags.has("alltag")) {
-    return "security-alltag";
-  }
-  if (post.slug === "onedrive-restore-deleted-files") return "security-buero";
-
-  return "other";
+  return normalizeCategory(post?.category);
 }
 
 function getLearnTopicLabel(topicId, lang) {
-  const topic = LEARN_TOPICS.find((item) => item.id === topicId);
+  const topic = LEARN_TOPIC_BY_ID.get(normalizeCategory(topicId));
   return topic?.title?.[lang] || topic?.title?.de || (lang === "en" ? "More security content" : "Weitere Security-Inhalte");
 }
 
 function renderPostCard(post, lang, topicId) {
-  const txt = post.i18n?.[lang] || post.i18n?.[post.defaultLang] || post.i18n?.de || post.i18n?.en || {};
+  const txt = getLocalizedText(post, lang);
   const href =
     (lang === "en" && post?.urls?.en) ||
     post?.urls?.de ||
     post?.urls?.en ||
     (lang === "en" ? "/en/learn/" : "/learn/");
   const tags = (post.tags || []).slice(0, 3).map((x) => `#${escapeHtml(x)}`).join(" ");
-  const excerpt = String(txt.excerpt || "").trim();
+  const shortDescription = getShortDescription(post, lang);
+  const image = getPostImage(post);
+  const imageAlt = getPostImageAlt(post, lang, txt.title || "");
   const searchText = [
     txt.title || "",
-    txt.excerpt || "",
-    (post.tags || []).join(" ")
+    shortDescription,
+    (post.tags || []).join(" "),
+    getLearnTopicLabel(topicId, lang)
   ].join(" ").toLowerCase();
 
   const titleId = `learn-card-title-${String(post.slug || post.id || "post").replace(/[^a-z0-9-]/gi, "-")}`;
@@ -328,11 +388,11 @@ function renderPostCard(post, lang, topicId) {
       data-search="${escapeAttr(searchText)}">
       <a class="blog-card-link" href="${escapeAttr(href.replace(BASE_URL, ""))}" aria-label="${escapeAttr(txt.title || "")}" data-transition>
         <div class="blog-thumb">
-          ${post.thumb ? `
+          ${image ? `
             <img
               class="blog-thumb-img"
-              src="/${escapeAttr(String(post.thumb).replace(/^\/+/, ""))}"
-              alt="${escapeAttr(txt.title || "")}"
+              src="${escapeAttr(publicAssetUrl(image))}"
+              alt="${escapeAttr(imageAlt)}"
               loading="lazy"
               decoding="async">
           ` : `
@@ -346,7 +406,7 @@ function renderPostCard(post, lang, topicId) {
           <span class="learn-card-category">${escapeHtml(getLearnTopicLabel(topicId, lang))}</span>
 
           <h3 class="blog-card-title" id="${escapeAttr(titleId)}">${escapeHtml(txt.title || "")}</h3>
-          <p class="blog-card-excerpt">${escapeHtml(excerpt)}</p>
+          <p class="blog-card-excerpt">${escapeHtml(shortDescription)}</p>
           <span class="blog-tags" title="${escapeAttr((post.tags || []).join(" "))}">${tags}</span>
         </div>
       </a>
@@ -574,57 +634,75 @@ function renderFooterNavHtml(lang) {
 }
 
 function getRelatedPosts(allPosts, currentPost, lang, limit = 3) {
+  const canShow = (candidate) =>
+    candidate.slug !== currentPost.slug &&
+    candidate.id !== currentPost.id &&
+    Boolean(candidate.i18n?.[lang] || candidate.i18n?.[candidate.defaultLang]);
+
+  const byKey = new Map();
+  allPosts.forEach((candidate) => {
+    byKey.set(candidate.slug, candidate);
+    byKey.set(candidate.id, candidate);
+  });
+
+  if ((currentPost.relatedArticles || []).length) {
+    const explicit = [];
+    currentPost.relatedArticles.forEach((key) => {
+      const candidate = byKey.get(cleanStr(key));
+      if (candidate && canShow(candidate) && !explicit.some((item) => item.id === candidate.id)) {
+        explicit.push(candidate);
+      }
+    });
+    return explicit.slice(0, limit);
+  }
+
   return allPosts
-    .filter((candidate) => candidate.id !== currentPost.id)
-    .filter((candidate) => Boolean(candidate.i18n?.[lang] || candidate.i18n?.[candidate.defaultLang]))
-    .map((candidate) => {
-      const overlap = (candidate.tags || []).filter((tag) =>
-        (currentPost.tags || []).includes(tag)
-      ).length;
-
-      return {
-        candidate,
-        score: overlap * 10 + (candidate.updated || candidate.date ? 1 : 0)
-      };
-    })
-    .filter((entry) => entry.score > 0)
+    .filter(canShow)
+    .filter((candidate) => candidate.category === currentPost.category)
     .sort((a, b) => {
-      if (b.score !== a.score) return b.score - a.score;
+      const bDate = String(b.updated || b.date || "");
+      const aDate = String(a.updated || a.date || "");
+      if (bDate !== aDate) return bDate.localeCompare(aDate);
 
-      const bDate = String(b.candidate.updated || b.candidate.date || "");
-      const aDate = String(a.candidate.updated || a.candidate.date || "");
-      return bDate.localeCompare(aDate);
+      const aTitle = getLocalizedText(a, lang).title || "";
+      const bTitle = getLocalizedText(b, lang).title || "";
+      return aTitle.localeCompare(bTitle, lang);
     })
-    .slice(0, limit)
-    .map((entry) => entry.candidate);
+    .slice(0, limit);
 }
 
 function renderRelatedPostsHtml(post, allPosts, lang) {
   const related = getRelatedPosts(allPosts, post, lang, 3);
   if (!related.length) return "";
 
-  const heading = lang === "de" ? "Weitere Artikel" : "Related posts";
+  const heading = lang === "de" ? "Weiterlernen" : "Keep learning";
 
   return `
     <aside class="post-related" aria-labelledby="relatedPostsHeading">
       <h2 id="relatedPostsHeading">${escapeHtml(heading)}</h2>
       <div class="post-related-grid">
         ${related.map((item) => {
-          const txt = item.i18n?.[lang] || item.i18n?.[item.defaultLang] || item.i18n?.de || item.i18n?.en || {};
+          const txt = getLocalizedText(item, lang);
           const href =
             (lang === "en" && item?.urls?.en) ||
             item?.urls?.de ||
             item?.urls?.en ||
             (lang === "en" ? "/en/learn/" : "/learn/");
+          const image = getPostImage(item);
+          const imageAlt = getPostImageAlt(item, lang, txt.title || "");
+          const shortDescription = getShortDescription(item, lang);
 
           return `
             <article class="post-related-card blog-card">
               <a class="post-related-card-link blog-card-link" href="${escapeAttr(href.replace(BASE_URL, ""))}" aria-label="${escapeAttr(txt.title || "")}" data-transition>
-                ${item.thumb ? `<div class="post-related-thumb blog-thumb"><img class="blog-thumb-img" src="/${escapeAttr(String(item.thumb).replace(/^\/+/, ""))}" alt="${escapeAttr(txt.title || "")}" loading="lazy" decoding="async"></div>` : ""}
+                <div class="post-related-thumb blog-thumb">
+                  ${image ? `<img class="blog-thumb-img" src="${escapeAttr(publicAssetUrl(image))}" alt="${escapeAttr(imageAlt)}" loading="lazy" decoding="async">` : `<div class="blog-thumb-inner"><span class="blog-thumb-label">POST</span></div>`}
+                </div>
                 <div class="post-related-body blog-card-body">
+                  <span class="learn-card-category">${escapeHtml(getLearnTopicLabel(item.category, lang))}</span>
                   ${item.date ? `<time class="post-related-date blog-date" datetime="${escapeAttr(item.date)}">${escapeHtml(formatDate(item.date))}</time>` : ""}
                   <h3 class="post-related-title blog-card-title">${escapeHtml(txt.title || "")}</h3>
-                  ${txt.excerpt ? `<p class="post-related-excerpt blog-card-excerpt">${escapeHtml(txt.excerpt)}</p>` : ""}
+                  ${shortDescription ? `<p class="post-related-excerpt blog-card-excerpt">${escapeHtml(shortDescription)}</p>` : ""}
                 </div>
               </a>
             </article>
@@ -699,15 +777,17 @@ function renderPostJsonLd(post, lang, txt) {
     post?.urls?.de ||
     post?.urls?.en ||
     `${BASE_URL}${lang === "en" ? "/en/learn/" : "/learn/"}`;
+  const description = pickFirst(txt.seoDescription, getShortDescription(post, lang), post?.seo?.description?.[lang], "");
+  const image = absoluteUrl(getPostImage(post) || DEFAULT_POST_IMAGE);
 
   const data = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     headline: txt.title || undefined,
-    description: (txt.excerpt || post?.seo?.description?.[lang] || "").slice(0, 160) || undefined,
+    description: description.slice(0, 160) || undefined,
     datePublished: post.date || undefined,
     dateModified: post.updated || post.date || undefined,
-    image: post?.seo?.image || undefined,
+    image: image || undefined,
     url: pageUrl,
     mainEntityOfPage: pageUrl,
     inLanguage: lang,
@@ -960,10 +1040,21 @@ function renderLegacyIndexRedirect(lang) {
 }
 
 function renderStaticPostPage(post, lang, allPosts) {
-  const txt = post.i18n?.[lang] || post.i18n?.[post.defaultLang] || post.i18n?.de || post.i18n?.en || {};
+  const txt = getLocalizedText(post, lang);
   const title = txt.title || "Swissploit – Learn";
-  const description = (txt.excerpt || post?.seo?.description?.[lang] || post?.seo?.description?.de || post?.seo?.description?.en || "").slice(0, 160);
-  const image = post?.seo?.image || `${BASE_URL}/assets/swissploit-og.png`;
+  const pageTitle = pickFirst(txt.seoTitle, title);
+  const description = pickFirst(
+    txt.seoDescription,
+    getShortDescription(post, lang),
+    post?.seo?.description?.[lang],
+    post?.seo?.description?.de,
+    post?.seo?.description?.en,
+    ""
+  ).slice(0, 160);
+  const image = absoluteUrl(getPostImage(post) || DEFAULT_POST_IMAGE);
+  const heroImage = getPostImage(post);
+  const heroImageAlt = getPostImageAlt(post, lang, title);
+  const categoryLabel = getLearnTopicLabel(post.category, lang);
   const canonical =
     (lang === "en" && post?.urls?.en) ||
     post?.urls?.de ||
@@ -991,25 +1082,30 @@ function renderStaticPostPage(post, lang, allPosts) {
   const videoHtml = renderVideoHtml(post, lang, title, ui.watch);
   const relatedHtml = renderRelatedPostsHtml(post, allPosts, lang);
   const bodyHtml = txt.content || "";
+  const shortDescription = getShortDescription(post, lang);
+  const heroImageHtml = heroImage ? `
+        <figure class="post-hero-image">
+          <img src="${escapeAttr(publicAssetUrl(heroImage))}" alt="${escapeAttr(heroImageAlt)}" loading="eager" decoding="async">
+        </figure>` : "";
 
   return `<!doctype html>
 <html lang="${lang}" data-theme="dark">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>${escapeHtml(title)} – Swissploit</title>
+  <title>${escapeHtml(pageTitle)} – Swissploit</title>
 
   <meta name="description" content="${escapeAttr(description)}" />
   <meta name="robots" content="index,follow,max-image-preview:large" />
 
-  <meta property="og:title" content="${escapeAttr(title)}">
+  <meta property="og:title" content="${escapeAttr(pageTitle)}">
   <meta property="og:description" content="${escapeAttr(description)}">
   <meta property="og:type" content="article">
   <meta property="og:url" content="${escapeAttr(canonical)}">
   <meta property="og:image" content="${escapeAttr(image)}">
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="${escapeAttr(title)}">
+  <meta name="twitter:title" content="${escapeAttr(pageTitle)}">
   <meta name="twitter:description" content="${escapeAttr(description)}">
   <meta name="twitter:image" content="${escapeAttr(image)}">
 
@@ -1058,19 +1154,21 @@ function renderStaticPostPage(post, lang, allPosts) {
           ${renderPostLangToggle(post, lang)}
         </div>
 
+        <p class="post-kicker">${escapeHtml(categoryLabel)}</p>
         <h1 class="post-title" id="postTitle">${escapeHtml(title)}</h1>
-        <p class="post-subline" id="postSubtitle">${escapeHtml(txt.excerpt || "")}</p>
+        <p class="post-subline" id="postSubtitle">${escapeHtml(shortDescription)}</p>
         <div class="post-meta" id="postMeta">${renderMetaHtml(post, lang)}</div>
+        ${heroImageHtml}
       </div>
     </section>
 
     <section class="section post-wrap">
       <div class="wrap">
         <article class="post-content" id="postContent" aria-labelledby="postTitle">
-          ${videoHtml}
           <div class="post-article">
             ${bodyHtml}
           </div>
+          ${videoHtml}
         </article>
 
         ${relatedHtml}
@@ -1130,28 +1228,45 @@ async function main() {
   for (const [, entry] of byPost.entries()) {
     const de = entry.de ? await readMd(entry.de.file) : null;
     const en = entry.en ? await readMd(entry.en.file) : null;
+    const category = validateCategory(entry.slug, normalizeCategory(pickFirst(de?.data?.category, en?.data?.category, "")));
+    const image = pickFirst(de?.data?.image, en?.data?.image, de?.data?.thumb, en?.data?.thumb, "");
+    const thumb = pickFirst(de?.data?.thumb, en?.data?.thumb, de?.data?.image, en?.data?.image, "");
 
     const meta = {
       id: pickFirst(de?.data?.id, en?.data?.id, entry.slug),
       slug: entry.slug,
-      date: normalizeDate(pickFirst(de?.data?.date, en?.data?.date, "")),
-      updated: normalizeDate(pickFirst(de?.data?.updated, en?.data?.updated, "")),
+      date: normalizeDate(pickFirst(de?.data?.publishedDate, de?.data?.date, en?.data?.publishedDate, en?.data?.date, "")),
+      updated: normalizeDate(pickFirst(de?.data?.updatedDate, de?.data?.updated, en?.data?.updatedDate, en?.data?.updated, "")),
+      category,
       tags: asArray(pickFirst(de?.data?.tags, en?.data?.tags, "")),
-      thumb: pickFirst(de?.data?.thumb, en?.data?.thumb, ""),
+      image,
+      thumb,
+      relatedArticles: asArray(pickFirst(de?.data?.relatedArticles, en?.data?.relatedArticles, "")),
       videoUrl: pickFirst(de?.data?.videoUrlGlobal, en?.data?.videoUrlGlobal, ""),
+      videoType: pickFirst(de?.data?.videoTypeGlobal, en?.data?.videoTypeGlobal, ""),
     };
 
     const i18n = {
       de: de ? {
         title: pickFirst(de.data.title, ""),
+        shortDescription: pickFirst(de.data.shortDescription, de.data.excerpt, ""),
         excerpt: pickFirst(de.data.excerpt, ""),
+        imageAlt: pickFirst(de.data.imageAlt, ""),
+        seoTitle: pickFirst(de.data.seoTitle, ""),
+        seoDescription: pickFirst(de.data.seoDescription, ""),
         videoUrl: pickFirst(de.data.videoUrl, ""),
+        videoType: pickFirst(de.data.videoType, ""),
         content: de.html,
       } : undefined,
       en: en ? {
         title: pickFirst(en.data.title, ""),
+        shortDescription: pickFirst(en.data.shortDescription, en.data.excerpt, ""),
         excerpt: pickFirst(en.data.excerpt, ""),
+        imageAlt: pickFirst(en.data.imageAlt, ""),
+        seoTitle: pickFirst(en.data.seoTitle, ""),
+        seoDescription: pickFirst(en.data.seoDescription, ""),
         videoUrl: pickFirst(en.data.videoUrl, ""),
+        videoType: pickFirst(en.data.videoType, ""),
         content: en.html,
       } : undefined,
     };
@@ -1161,6 +1276,7 @@ async function main() {
 
     if (!meta.videoUrl && deVid && enVid && deVid === enVid) {
       meta.videoUrl = deVid;
+      meta.videoType = pickFirst(i18n.de?.videoType, i18n.en?.videoType, meta.videoType);
       if (i18n.de) delete i18n.de.videoUrl;
       if (i18n.en) delete i18n.en.videoUrl;
     }
@@ -1173,16 +1289,28 @@ async function main() {
     };
 
     const seo = {
-      image: meta.thumb ? absoluteUrl(meta.thumb) : `${BASE_URL}/assets/swissploit-og.png`,
+      image: absoluteUrl(meta.image || DEFAULT_POST_IMAGE),
+      title: {
+        de: pickFirst(i18n.de?.seoTitle, i18n.de?.title, i18n.en?.seoTitle, i18n.en?.title),
+        en: pickFirst(i18n.en?.seoTitle, i18n.en?.title, i18n.de?.seoTitle, i18n.de?.title),
+      },
       description: {
         de: pickFirst(
+          i18n.de?.seoDescription,
+          i18n.de?.shortDescription,
           i18n.de?.excerpt,
+          i18n.en?.seoDescription,
+          i18n.en?.shortDescription,
           i18n.en?.excerpt,
           stripHtml(i18n.de?.content),
           stripHtml(i18n.en?.content)
         ).slice(0, 160),
         en: pickFirst(
+          i18n.en?.seoDescription,
+          i18n.en?.shortDescription,
           i18n.en?.excerpt,
+          i18n.de?.seoDescription,
+          i18n.de?.shortDescription,
           i18n.de?.excerpt,
           stripHtml(i18n.en?.content),
           stripHtml(i18n.de?.content)
