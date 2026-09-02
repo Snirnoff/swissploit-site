@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="de" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Vishing erkennen: Betrug am Telefon | Swissploit – Swissploit</title>
+
+  <meta name="description" content="Was ist Vishing? Erfahre, wie Telefonbetrug funktioniert, welche Warnsignale wichtig sind und wie du bei verdächtigen Anrufen richtig reagierst." />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+
+  <meta property="og:title" content="Vishing erkennen: Betrug am Telefon | Swissploit">
+  <meta property="og:description" content="Was ist Vishing? Erfahre, wie Telefonbetrug funktioniert, welche Warnsignale wichtig sind und wie du bei verdächtigen Anrufen richtig reagierst.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://swissploit.ch/blog/vishing-telefonbetrug/">
+  <meta property="og:image" content="https://swissploit.ch/assets/blog/vishing-telefonbetrug.webp">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Vishing erkennen: Betrug am Telefon | Swissploit">
+  <meta name="twitter:description" content="Was ist Vishing? Erfahre, wie Telefonbetrug funktioniert, welche Warnsignale wichtig sind und wie du bei verdächtigen Anrufen richtig reagierst.">
+  <meta name="twitter:image" content="https://swissploit.ch/assets/blog/vishing-telefonbetrug.webp">
+
+  <link rel="canonical" href="https://swissploit.ch/blog/vishing-telefonbetrug/" />
+  <link rel="alternate" hreflang="de" href="https://swissploit.ch/blog/vishing-telefonbetrug/" />
+  <link rel="alternate" hreflang="x-default" href="https://swissploit.ch/blog/vishing-telefonbetrug/" />
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon-192x192.png">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/assets/JustPlus.png">
+  <meta name="theme-color" content="#05070b">
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Vishing: So erkennst du Betrug am Telefon","description":"Was ist Vishing? Erfahre, wie Telefonbetrug funktioniert, welche Warnsignale wichtig sind und wie du bei verdächtigen Anrufen richtig reagierst.","datePublished":"2026-09-02","dateModified":"2026-09-02","image":"https://swissploit.ch/assets/blog/vishing-telefonbetrug.webp","url":"https://swissploit.ch/blog/vishing-telefonbetrug/","mainEntityOfPage":"https://swissploit.ch/blog/vishing-telefonbetrug/","inLanguage":"de","author":{"@type":"Person","name":"Swissploit"},"publisher":{"@type":"Organization","name":"Swissploit","logo":{"@type":"ImageObject","url":"https://swissploit.ch/assets/swissploit-og.png"}},"keywords":"vishing, telefonbetrug, social-engineering, phishing, bankbetrug, support-scam, security-awareness"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://swissploit.ch/index.html"},{"@type":"ListItem","position":2,"name":"Learn","item":"https://swissploit.ch/learn/"},{"@type":"ListItem","position":3,"name":"Vishing: So erkennst du Betrug am Telefon","item":"https://swissploit.ch/blog/vishing-telefonbetrug/"}]}</script>
+
+  <script>
+    (function () {
+      document.documentElement.setAttribute("data-theme", "dark");
+      try { localStorage.setItem("swissploit-theme", "dark"); } catch (e) {}
+    })();
+  </script>
+
+  <link rel="stylesheet" href="/assets/styles.css" />
+  <link rel="stylesheet" href="/assets/blog-post.css" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <header class="site-header" role="banner">
+    <div class="wrap headerbar">
+      <a class="brand" href="/index.html#intro" aria-label="Swissploit Home" data-transition>
+        <img class="brand-logo-image header-logo-image" src="/assets/swissploit-brand-logo.png" alt="Swissploit Logo" width="120" height="49" decoding="async">
+      </a>
+
+      <nav id="primaryNav" class="nav" aria-label="Hauptnavigation">
+        <a href="/index.html#sicherheitslage" data-transition>Sicherheitslage</a>
+        <a href="/index.html#security-care" data-transition>Microsoft 365 Care</a>
+        <a href="/learn/" data-transition>Learn</a>
+        <a href="/index.html#ueber" data-transition>Über Swissploit</a>
+        <a href="/index.html#kontakt" data-transition>Kontakt</a>
+      </nav>
+
+      <div class="header-actions">
+        <button id="themeToggle"
+          class="switch"
+          aria-pressed="false"
+          aria-label="Darstellung umschalten"
+          title="Dark/Light umschalten">
+          <span class="switch-track"></span>
+          <span class="switch-thumb">
+            <span class="switch-icon sun" aria-hidden="true">&#9728;</span>
+            <span class="switch-icon moon" aria-hidden="true">&#9790;</span>
+          </span>
+        </button>
+        <button id="menuToggle" class="menu-toggle" type="button" aria-expanded="false" aria-controls="primaryNav" aria-label="Menu oeffnen">
+          <span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <nav class="wrap blog-breadcrumbs" aria-label="Breadcrumb">
+      <ol class="breadcrumb-list">
+        <li><a href="/index.html" data-transition>Home</a></li>
+        <li><a href="/learn/" data-transition>Learn</a></li>
+        <li aria-current="page">Vishing: So erkennst du Betrug am Telefon</li>
+      </ol>
+    </nav>
+
+    <section class="section post-hero">
+      <div class="wrap">
+        <div class="post-topbar">
+          <a class="post-back" href="/learn/" data-transition>← Zurück</a>
+          
+    <nav class="lang-toggle" aria-label="Sprache wählen">
+      <a class="lang-link is-active" href="/blog/vishing-telefonbetrug/" hreflang="de" lang="de" data-lang-switch="de">DE</a>
+    </nav>
+  
+        </div>
+
+        <p class="post-kicker">Phishing &amp; Betrug</p>
+        <h1 class="post-title" id="postTitle">Vishing: So erkennst du Betrug am Telefon</h1>
+        <p class="post-subline" id="postSubtitle">Ein angeblicher Bank-, Support- oder Behördenmitarbeiter ruft an und verlangt schnelles Handeln? So erkennst du Vishing und reagierst richtig.</p>
+        <div class="post-meta" id="postMeta"><time class="blog-date" datetime="2026-09-02">02.09.2026</time>
+    
+    <span class="blog-tags">#vishing #telefonbetrug #social-engineering #phishing #bankbetrug #support-scam #security-awareness</span></div>
+        
+        <figure class="post-hero-media post-hero-image">
+          <img src="/assets/blog/vishing-telefonbetrug.webp" alt="Smartphone mit einem verdächtigen Anruf eines angeblichen Support-Mitarbeiters" loading="eager" decoding="async">
+        </figure>
+      </div>
+    </section>
+
+    <section class="section post-wrap">
+      <div class="wrap">
+        <article class="post-content" id="postContent" aria-labelledby="postTitle">
+          <div class="post-article">
+            
+    <aside class="article-callout article-callout--key">
+      <div class="article-callout__heading">
+        <span class="article-callout__icon" aria-hidden="true">✓</span>
+        <strong>Das Wichtigste</strong>
+      </div>
+      <div class="article-callout__content"><p>Vertraue einem Anruf nicht allein wegen der angezeigten Telefonnummer oder weil die Person glaubwürdig wirkt. Gib keine Passwörter, Sicherheitscodes oder MFA-Bestätigungen weiter und rufe die Organisation bei Unsicherheit selbst über eine bekannte offizielle Nummer zurück.</p></div>
+    </aside>
+            <p>Deine Bank ruft angeblich an. Es gebe eine verdächtige Zahlung und du müsstest jetzt sofort handeln.</p>
+<p>Oder der Microsoft-Support meldet sich, weil dein Computer angeblich ein Sicherheitsproblem hat.</p>
+<p>Der Anrufer klingt professionell, kennt vielleicht sogar deinen Namen und die angezeigte Telefonnummer sieht plausibel aus.</p>
+<p>Genau solche Situationen werden beim <strong>Vishing – also Phishing per Telefon –</strong> ausgenutzt.</p>
+<aside class="article-callout article-callout--key">
+  <div class="article-callout__heading"><span class="article-callout__icon" aria-hidden="true">✓</span><strong>Das Wichtigste</strong></div>
+  <div class="article-callout__content">
+    <p>Eine bekannte Telefonnummer oder ein überzeugender Gesprächspartner beweisen nicht, dass ein Anruf echt ist.</p>
+    <p><strong>Gib niemals Passwörter, Sicherheitscodes oder MFA-Bestätigungen weiter. Beende bei Unsicherheit das Gespräch und rufe die Organisation selbst über eine bekannte offizielle Nummer zurück.</strong></p>
+  </div>
+</aside>
+
+<h2>Was ist Vishing?</h2>
+<p>Vishing steht für <strong>Voice Phishing</strong>.</p>
+<p>Statt einer E-Mail oder SMS nutzen Betrüger das Telefon, um Vertrauen aufzubauen und dich zu einer bestimmten Handlung zu bewegen.</p>
+<p>Das kann beispielsweise sein:</p>
+<ul>
+<li>einen Sicherheitscode weiterzugeben</li>
+<li>eine MFA-Anfrage zu bestätigen</li>
+<li>Zugangsdaten einzugeben</li>
+<li>eine Zahlung freizugeben</li>
+<li>eine Fernzugriffssoftware zu installieren</li>
+<li>persönliche oder finanzielle Informationen preiszugeben</li>
+</ul>
+<p>Der Angriff funktioniert vor allem über <strong>Social Engineering</strong>.</p>
+<h2>Typische Geschichten am Telefon</h2>
+<p>Die genaue Geschichte kann sich unterscheiden.</p>
+<p>Häufig geht es aber um angeblich dringende Probleme.</p>
+<p>Zum Beispiel:</p>
+<h3>„Wir sind von Ihrer Bank“</h3>
+<p>Es gebe eine verdächtige Zahlung oder einen Angriff auf dein E-Banking.</p>
+<p>Der Anrufer möchte dir angeblich helfen und verlangt dafür einen Code oder eine Bestätigung.</p>
+<h3>„Wir sind vom technischen Support“</h3>
+<p>Dein Computer sei infiziert oder dein Konto kompromittiert.</p>
+<p>Du sollst eine Software installieren oder dem Anrufer Zugriff auf dein Gerät geben.</p>
+<h3>„Hier ist die Polizei oder eine Behörde“</h3>
+<p>Dir wird ein Problem, ein Verfahren oder eine dringende Sicherheitslage vorgetäuscht.</p>
+<p>Anschliessend wird Geld oder eine andere Handlung verlangt.</p>
+<aside class="article-callout article-callout--info">
+  <div class="article-callout__heading"><span class="article-callout__icon" aria-hidden="true">i</span><strong>Die Geschichte ist nur der Vorwand</strong></div>
+  <div class="article-callout__content">
+    <p>Entscheidend ist nicht, welche Organisation der Anrufer vorgibt zu vertreten. Entscheidend ist, dass du zu einer ungewöhnlichen oder sensiblen Handlung gedrängt wirst.</p>
+  </div>
+</aside>
+
+<h2>Warum wirken solche Anrufe so glaubwürdig?</h2>
+<p>Am Telefon kann ein Angreifer direkt auf deine Reaktionen eingehen.</p>
+<p>Wenn du skeptisch wirst, liefert er sofort eine Erklärung.</p>
+<p>Wenn du eine Frage stellst, reagiert er darauf.</p>
+<p>Dadurch entsteht schnell der Eindruck eines echten Gesprächs mit einem Support- oder Bankmitarbeiter.</p>
+<p>Zusätzlich können Betrüger bereits Informationen über dich kennen – beispielsweise deinen Namen, Arbeitgeber oder andere öffentlich verfügbare Daten.</p>
+<p>Auch die angezeigte Telefonnummer kann manipuliert werden.</p>
+<p>Deshalb gilt:</p>
+<p><strong>Caller-ID ist kein Identitätsnachweis.</strong></p>
+<h2>Typische Warnsignale</h2>
+<p>Du musst nicht jede Variante kennen.</p>
+<p>Achte vor allem darauf, was von dir verlangt wird.</p>
+<ul class="article-checklist">
+<li>Der Anruf kommt unerwartet</li>
+<li>Es wird sofortiger Handlungsdruck aufgebaut</li>
+<li>Du sollst einen Sicherheits- oder MFA-Code nennen</li>
+<li>Du sollst eine Anmeldung bestätigen, die du nicht selbst gestartet hast</li>
+<li>Du sollst Software installieren</li>
+<li>Jemand möchte Fernzugriff auf deinen Computer</li>
+<li>Du sollst Geld überweisen oder eine Zahlung bestätigen</li>
+<li>Der Anrufer möchte, dass du das Gespräch geheim hältst</li>
+<li>Du wirst davon abgehalten, selbst bei der Organisation zurückzurufen</li>
+</ul>
+<p>Mehrere dieser Merkmale zusammen sind ein starkes Warnsignal.</p>
+<h2>Gib niemals Sicherheitscodes weiter</h2>
+<p>Ein besonders wichtiger Punkt sind Einmalcodes und MFA-Bestätigungen.</p>
+<p>Betrüger können versuchen, sich gleichzeitig mit deinen bereits gestohlenen Zugangsdaten anzumelden.</p>
+<p>Der fehlende Faktor ist dann nur noch dein Sicherheitscode.</p>
+<p>Der Anrufer sagt beispielsweise:</p>
+<blockquote>
+<p>„Ich sende Ihnen jetzt einen Code zur Verifikation. Bitte lesen Sie ihn mir vor.“</p>
+</blockquote>
+<p>In Wirklichkeit kann dieser Code gerade eine Anmeldung oder Zahlung freigeben.</p>
+<aside class="article-callout article-callout--warning">
+  <div class="article-callout__heading"><span class="article-callout__icon" aria-hidden="true">!</span><strong>Ein Sicherheitscode ist kein Support-Code</strong></div>
+  <div class="article-callout__content">
+    <p>Codes für Login, MFA oder Zahlungsfreigaben gehören nicht an eine andere Person weitergegeben.</p>
+    <p>Das BACS weist ausdrücklich darauf hin, dass Schweizer Banken am Telefon keine solchen Sicherheits-Token zur Verifikation verlangen. </p>
+  </div>
+</aside>
+
+<h2>Installiere keine Fernzugriffssoftware auf Zuruf</h2>
+<p>Eine weitere bekannte Methode:</p>
+<p>Der angebliche Support bittet dich, eine Software zu installieren, damit er dein Problem „direkt beheben“ könne.</p>
+<p>Mit solchen Programmen kann eine andere Person deinen Bildschirm sehen und unter Umständen deinen Computer bedienen.</p>
+<p>Wenn ein unbekannter Anrufer dich zur Installation von Fernzugriffssoftware auffordert:</p>
+<p><strong>Gespräch beenden.</strong></p>
+<p>Installiere keine Software und gib keinen Zugriff frei.</p>
+<h2>So prüfst du einen Anruf sicher</h2>
+<p>Wenn eine Bank, Behörde oder andere Organisation angeblich dringend etwas von dir benötigt, musst du die Echtheit nicht während des laufenden Gesprächs klären.</p>
+<p>Beende den Anruf.</p>
+<p>Suche anschliessend selbst die offizielle Telefonnummer heraus oder verwende eine Nummer, die du bereits kennst.</p>
+<p>Rufe dort zurück.</p>
+<aside class="article-callout article-callout--action">
+  <div class="article-callout__heading"><span class="article-callout__icon" aria-hidden="true">→</span><strong>Selbst zurückrufen</strong></div>
+  <div class="article-callout__content">
+    <p>Verwende nicht einfach eine Telefonnummer, die dir der Anrufer nennt oder per SMS zusendet.</p>
+    <p>Nutze die offizielle Webseite, deine Bankkarte, einen Vertrag oder einen bereits bekannten Kontakt.</p>
+  </div>
+</aside>
+
+<h2>Was, wenn der Anrufer meinen Namen und meine Daten kennt?</h2>
+<p>Das kann verunsichern.</p>
+<p>Aber auch persönliche Informationen sind kein Beweis dafür, dass jemand wirklich für deine Bank oder eine andere Organisation arbeitet.</p>
+<p>Daten können beispielsweise aus:</p>
+<ul>
+<li>öffentlichen Profilen</li>
+<li>Firmenwebseiten</li>
+<li>Datenlecks</li>
+<li>früheren Betrugsversuchen</li>
+</ul>
+<p>stammen.</p>
+<p>Angreifer nutzen solche Informationen gezielt, um Vertrauen aufzubauen.</p>
+<h2>Was tun, wenn du bereits Informationen weitergegeben hast?</h2>
+<p>Entscheidend ist wieder, <strong>was genau passiert ist</strong>.</p>
+<h3>Passwort weitergegeben</h3>
+<p>Ändere das Passwort sofort über die offizielle Webseite oder App.</p>
+<p>Verwendest du dasselbe Passwort noch bei anderen Diensten, ändere es auch dort.</p>
+<h3>MFA- oder Sicherheitscode weitergegeben</h3>
+<p>Kontrolliere das betroffene Konto auf unbekannte Anmeldungen und ändere das Passwort.</p>
+<p>Bei einem Bankkonto solltest du deine Bank über den offiziellen Kontaktweg informieren.</p>
+<h3>Zahlung bestätigt</h3>
+<p>Kontaktiere deine Bank beziehungsweise dein Finanzinstitut möglichst schnell.</p>
+<h3>Fernzugriff installiert</h3>
+<p>Beende die Verbindung und nutze das Gerät möglichst nicht weiter für sensible Logins, bis die Situation geprüft wurde.</p>
+<p>Bei einem Geschäftsgerät solltest du sofort die interne IT oder Security informieren.</p>
+<h2>Im Unternehmen: Support-Anrufe nicht blind vertrauen</h2>
+<p>Gerade im Arbeitsalltag können angebliche IT-Support-Anrufe glaubwürdig wirken.</p>
+<p>Ein Anrufer kennt vielleicht deinen Namen, deine Firma oder sogar eingesetzte Software.</p>
+<p>Trotzdem solltest du bei ungewöhnlichen Support-Anfragen die internen Prozesse einhalten.</p>
+<ul class="article-checklist">
+<li>interne Support-Kontakte verwenden</li>
+<li>keine Passwörter weitergeben</li>
+<li>keine unerwarteten MFA-Anfragen bestätigen</li>
+<li>Fernzugriff nur über bekannte Prozesse erlauben</li>
+<li>verdächtige Anrufe intern melden</li>
+</ul>
+<h2>Die einfache Regel fürs Telefon</h2>
+<p>Ein seriös klingender Anrufer kann trotzdem ein Betrüger sein.</p>
+<p>Wenn jemand unerwartet <strong>Codes, Zugangsdaten, Geld, Fernzugriff oder eine sofortige Bestätigung</strong> verlangt:</p>
+<p><strong>Gespräch stoppen → keine Daten weitergeben → selbst über einen bekannten Weg zurückrufen.</strong></p>
+<p>Du musst den Betrüger nicht während des Gesprächs entlarven.</p>
+<p>Du musst ihm nur die Möglichkeit nehmen, dich unter Zeitdruck handeln zu lassen.</p>
+          </div>
+        </article>
+
+        
+    <aside class="post-related" aria-labelledby="relatedPostsHeading">
+      <h2 id="relatedPostsHeading">Weiterlernen</h2>
+      <div class="post-related-grid">
+        
+            <article class="post-related-card blog-card">
+              <a class="post-related-card-link blog-card-link" href="/blog/social-engineering/" aria-label="Social Engineering einfach erklärt: Wenn Angreifer Menschen manipulieren" data-transition>
+                <div class="post-related-thumb blog-thumb">
+                  <img class="blog-thumb-img" src="/assets/blog/social-engineering.webp" alt="Darstellung einer verdächtigen digitalen Anfrage, bei der Vertrauen und Zeitdruck zur Manipulation eingesetzt werden" loading="lazy" decoding="async">
+                </div>
+                <div class="post-related-body blog-card-body">
+                  <span class="learn-card-category">Social Engineering</span>
+                  <time class="post-related-date blog-date" datetime="2026-09-02">02.09.2026</time>
+                  <h3 class="post-related-title blog-card-title">Social Engineering einfach erklärt: Wenn Angreifer Menschen manipulieren</h3>
+                  <p class="post-related-excerpt blog-card-excerpt">Social Engineering nutzt Vertrauen, Zeitdruck und menschliches Verhalten statt technischer Sicherheitslücken. Erfahre, wie solche Angriffe funktionieren und wie du sie erkennst.</p>
+                </div>
+              </a>
+            </article>
+          
+            <article class="post-related-card blog-card">
+              <a class="post-related-card-link blog-card-link" href="/blog/phishing-erkennen/" aria-label="Phishing erkennen: Diese Warnsignale solltest du kennen" data-transition>
+                <div class="post-related-thumb blog-thumb">
+                  <img class="blog-thumb-img" src="/assets/blog/phishing-erkennen.webp" alt="Beispiel einer verdächtigen E-Mail mit Fokus auf Absender, Link und dringende Aufforderung" loading="lazy" decoding="async">
+                </div>
+                <div class="post-related-body blog-card-body">
+                  <span class="learn-card-category">Phishing &amp; Betrug</span>
+                  <time class="post-related-date blog-date" datetime="2026-09-02">02.09.2026</time>
+                  <h3 class="post-related-title blog-card-title">Phishing erkennen: Diese Warnsignale solltest du kennen</h3>
+                  <p class="post-related-excerpt blog-card-excerpt">Phishing kann heute täuschend echt aussehen. Lerne, welche Warnsignale wirklich wichtig sind und wie du verdächtige Nachrichten richtig prüfst.</p>
+                </div>
+              </a>
+            </article>
+          
+            <article class="post-related-card blog-card">
+              <a class="post-related-card-link blog-card-link" href="/blog/smishing-phishing-per-sms/" aria-label="Smishing: So erkennst du Phishing per SMS" data-transition>
+                <div class="post-related-thumb blog-thumb">
+                  <img class="blog-thumb-img" src="/assets/blog/smishing-phishing-per-sms.webp" alt="Smartphone mit einer verdächtigen SMS und einem Link zu einer angeblichen Paket-Zustellung" loading="lazy" decoding="async">
+                </div>
+                <div class="post-related-body blog-card-body">
+                  <span class="learn-card-category">Phishing &amp; Betrug</span>
+                  <time class="post-related-date blog-date" datetime="2026-09-02">02.09.2026</time>
+                  <h3 class="post-related-title blog-card-title">Smishing: So erkennst du Phishing per SMS</h3>
+                  <p class="post-related-excerpt blog-card-excerpt">Paket nicht zustellbar, offene Gebühr oder gesperrtes Konto? Betrüger nutzen SMS, um dich auf gefälschte Webseiten zu locken. So erkennst du Smishing.</p>
+                </div>
+              </a>
+            </article>
+          
+      </div>
+    </aside>
+  
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="wrap">
+      <p>© <span id="year"></span> Swissploit.</p>
+      <nav class="foot-nav" aria-label="Footer Navigation">
+        <a href="/index.html#sicherheitslage" data-transition>Sicherheitslage</a>
+        <a href="/index.html#security-care" data-transition>Microsoft 365 Care</a>
+        <a href="/learn/" data-transition>Learn</a>
+        <a href="/index.html#ueber" data-transition>Über Swissploit</a>
+        <a href="/index.html#kontakt" data-transition>Kontakt</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+    window.SWISSPLOIT_CURRENT_LANG = "de";
+  </script>
+
+  <script src="/assets/transition.js"></script>
+  <script src="/assets/app.js"></script>
+  <script src="/assets/blog-index-static.js"></script>
+</body>
+</html>

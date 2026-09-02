@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="de" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>QR-Phishing erkennen: Gefährliche QR-Codes | Swissploit – Swissploit</title>
+
+  <meta name="description" content="Was ist QR-Phishing oder Quishing? Erfahre, wie manipulierte QR-Codes funktionieren, worauf du beim Scannen achten solltest und wie du dich schützt." />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+
+  <meta property="og:title" content="QR-Phishing erkennen: Gefährliche QR-Codes | Swissploit">
+  <meta property="og:description" content="Was ist QR-Phishing oder Quishing? Erfahre, wie manipulierte QR-Codes funktionieren, worauf du beim Scannen achten solltest und wie du dich schützt.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://swissploit.ch/blog/qr-phishing-quishing/">
+  <meta property="og:image" content="https://swissploit.ch/assets/blog/qr-phishing-quishing.webp">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="QR-Phishing erkennen: Gefährliche QR-Codes | Swissploit">
+  <meta name="twitter:description" content="Was ist QR-Phishing oder Quishing? Erfahre, wie manipulierte QR-Codes funktionieren, worauf du beim Scannen achten solltest und wie du dich schützt.">
+  <meta name="twitter:image" content="https://swissploit.ch/assets/blog/qr-phishing-quishing.webp">
+
+  <link rel="canonical" href="https://swissploit.ch/blog/qr-phishing-quishing/" />
+  <link rel="alternate" hreflang="de" href="https://swissploit.ch/blog/qr-phishing-quishing/" />
+  <link rel="alternate" hreflang="x-default" href="https://swissploit.ch/blog/qr-phishing-quishing/" />
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon-192x192.png">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/assets/JustPlus.png">
+  <meta name="theme-color" content="#05070b">
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"QR-Phishing: So erkennst du gefährliche QR-Codes","description":"Was ist QR-Phishing oder Quishing? Erfahre, wie manipulierte QR-Codes funktionieren, worauf du beim Scannen achten solltest und wie du dich schützt.","datePublished":"2026-09-02","dateModified":"2026-09-02","image":"https://swissploit.ch/assets/blog/qr-phishing-quishing.webp","url":"https://swissploit.ch/blog/qr-phishing-quishing/","mainEntityOfPage":"https://swissploit.ch/blog/qr-phishing-quishing/","inLanguage":"de","author":{"@type":"Person","name":"Swissploit"},"publisher":{"@type":"Organization","name":"Swissploit","logo":{"@type":"ImageObject","url":"https://swissploit.ch/assets/swissploit-og.png"}},"keywords":"qr-phishing, quishing, phishing, qr-code, betrug, kreditkarte, parkautomat, smartphone"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://swissploit.ch/index.html"},{"@type":"ListItem","position":2,"name":"Learn","item":"https://swissploit.ch/learn/"},{"@type":"ListItem","position":3,"name":"QR-Phishing: So erkennst du gefährliche QR-Codes","item":"https://swissploit.ch/blog/qr-phishing-quishing/"}]}</script>
+
+  <script>
+    (function () {
+      document.documentElement.setAttribute("data-theme", "dark");
+      try { localStorage.setItem("swissploit-theme", "dark"); } catch (e) {}
+    })();
+  </script>
+
+  <link rel="stylesheet" href="/assets/styles.css" />
+  <link rel="stylesheet" href="/assets/blog-post.css" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <header class="site-header" role="banner">
+    <div class="wrap headerbar">
+      <a class="brand" href="/index.html#intro" aria-label="Swissploit Home" data-transition>
+        <img class="brand-logo-image header-logo-image" src="/assets/swissploit-brand-logo.png" alt="Swissploit Logo" width="120" height="49" decoding="async">
+      </a>
+
+      <nav id="primaryNav" class="nav" aria-label="Hauptnavigation">
+        <a href="/index.html#sicherheitslage" data-transition>Sicherheitslage</a>
+        <a href="/index.html#security-care" data-transition>Microsoft 365 Care</a>
+        <a href="/learn/" data-transition>Learn</a>
+        <a href="/index.html#ueber" data-transition>Über Swissploit</a>
+        <a href="/index.html#kontakt" data-transition>Kontakt</a>
+      </nav>
+
+      <div class="header-actions">
+        <button id="themeToggle"
+          class="switch"
+          aria-pressed="false"
+          aria-label="Darstellung umschalten"
+          title="Dark/Light umschalten">
+          <span class="switch-track"></span>
+          <span class="switch-thumb">
+            <span class="switch-icon sun" aria-hidden="true">&#9728;</span>
+            <span class="switch-icon moon" aria-hidden="true">&#9790;</span>
+          </span>
+        </button>
+        <button id="menuToggle" class="menu-toggle" type="button" aria-expanded="false" aria-controls="primaryNav" aria-label="Menu oeffnen">
+          <span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <nav class="wrap blog-breadcrumbs" aria-label="Breadcrumb">
+      <ol class="breadcrumb-list">
+        <li><a href="/index.html" data-transition>Home</a></li>
+        <li><a href="/learn/" data-transition>Learn</a></li>
+        <li aria-current="page">QR-Phishing: So erkennst du gefährliche QR-Codes</li>
+      </ol>
+    </nav>
+
+    <section class="section post-hero">
+      <div class="wrap">
+        <div class="post-topbar">
+          <a class="post-back" href="/learn/" data-transition>← Zurück</a>
+          
+    <nav class="lang-toggle" aria-label="Sprache wählen">
+      <a class="lang-link is-active" href="/blog/qr-phishing-quishing/" hreflang="de" lang="de" data-lang-switch="de">DE</a>
+    </nav>
+  
+        </div>
+
+        <p class="post-kicker">Phishing &amp; Betrug</p>
+        <h1 class="post-title" id="postTitle">QR-Phishing: So erkennst du gefährliche QR-Codes</h1>
+        <p class="post-subline" id="postSubtitle">Ein QR-Code kann genauso auf eine gefälschte Webseite führen wie ein normaler Link. So erkennst du Quishing und schützt dich beim Scannen.</p>
+        <div class="post-meta" id="postMeta"><time class="blog-date" datetime="2026-09-02">02.09.2026</time>
+    
+    <span class="blog-tags">#qr-phishing #quishing #phishing #qr-code #betrug #kreditkarte #parkautomat #smartphone</span></div>
+        
+        <div class="post-hero-media post-hero-video">
+          <iframe
+            src="https://www.youtube-nocookie.com/embed/VpfXJv_NNdM"
+            title="QR-Phishing: So erkennst du gefährliche QR-Codes – Video"
+            loading="lazy"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen></iframe>
+        </div>
+      </div>
+    </section>
+
+    <section class="section post-wrap">
+      <div class="wrap">
+        <article class="post-content" id="postContent" aria-labelledby="postTitle">
+          <div class="post-article">
+            
+    <aside class="article-callout article-callout--key">
+      <div class="article-callout__heading">
+        <span class="article-callout__icon" aria-hidden="true">✓</span>
+        <strong>Das Wichtigste</strong>
+      </div>
+      <div class="article-callout__content"><p>Ein QR-Code ist im Grunde nur ein versteckter Link. Prüfe nach dem Scannen die Zieladresse, bevor du die Webseite öffnest oder Daten eingibst. Bei öffentlichen QR-Codes lohnt sich zusätzlich ein Blick darauf, ob ein fremder Sticker über den Originalcode geklebt wurde.</p></div>
+    </aside>
+            <p>QR-Code scannen, kurz bezahlen und weiter.</p>
+<p>Genau weil QR-Codes so praktisch sind, hinterfragen wir oft weniger, wohin sie uns eigentlich führen.</p>
+<p>Das nutzen Betrüger beim sogenannten <strong>QR-Phishing oder Quishing</strong> aus.</p>
+<aside class="article-callout article-callout--key">
+  <div class="article-callout__heading"><span class="article-callout__icon" aria-hidden="true">✓</span><strong>Das Wichtigste</strong></div>
+  <div class="article-callout__content">
+    <p>Ein QR-Code ist im Grunde nur eine andere Form eines Links.</p>
+    <p><strong>Prüfe nach dem Scannen die Zieladresse, bevor du die Webseite öffnest oder dort Passwörter, Kreditkartendaten oder andere sensible Informationen eingibst.</strong></p>
+  </div>
+</aside>
+
+<h2>Was ist QR-Phishing?</h2>
+<p>Bei QR-Phishing platzieren Betrüger einen QR-Code, der auf eine gefälschte oder manipulierte Webseite führt.</p>
+<p>Das Ziel ist ähnlich wie bei klassischem Phishing.</p>
+<p>Du sollst beispielsweise:</p>
+<ul>
+<li>Zugangsdaten eingeben</li>
+<li>Kreditkartendaten übermitteln</li>
+<li>eine Zahlung bestätigen</li>
+<li>persönliche Daten preisgeben</li>
+<li>eine App oder Datei herunterladen</li>
+</ul>
+<p>Der Unterschied:</p>
+<p>Statt auf einen sichtbaren Link zu klicken, scannst du einen QR-Code.</p>
+<h2>Warum sind QR-Codes besonders praktisch für Betrüger?</h2>
+<p>Bei einer normalen Internetadresse kannst du zumindest versuchen zu erkennen, wohin ein Link führt.</p>
+<p>Bei einem QR-Code siehst du das Ziel zunächst nicht.</p>
+<p>Du siehst nur das bekannte schwarz-weisse Muster.</p>
+<p>Dadurch fehlt ein wichtiger Hinweis, den du bei einer normalen URL möglicherweise bereits vor dem Klick bemerken würdest.</p>
+<aside class="article-callout article-callout--info">
+  <div class="article-callout__heading"><span class="article-callout__icon" aria-hidden="true">i</span><strong>Der QR-Code selbst sagt nichts über die Vertrauenswürdigkeit aus</strong></div>
+  <div class="article-callout__content">
+    <p>Ein professionell gedruckter QR-Code kann genauso auf eine betrügerische Webseite führen wie ein verdächtiger Link in einer E-Mail.</p>
+  </div>
+</aside>
+
+<h2>QR-Phishing an Parkautomaten</h2>
+<p>Ein besonders anschauliches Beispiel sind öffentliche Parkautomaten.</p>
+<p>Betrüger können einen eigenen QR-Code ausdrucken und über den offiziellen Code kleben.</p>
+<p>Du scannst ihn und landest auf einer Webseite, die wie ein normaler Bezahldienst aussieht.</p>
+<p>Dort sollst du beispielsweise deine Kreditkartendaten eingeben.</p>
+<p>Das Schweizer Bundesamt für Cybersicherheit hat wiederholt vor solchen manipulierten QR-Codes an Parkautomaten gewarnt.</p>
+<h2>Schau dir öffentliche QR-Codes kurz an</h2>
+<p>Bevor du einen QR-Code an einem Parkautomaten, Plakat oder einem anderen öffentlichen Ort scannst, lohnt sich ein kurzer Blick.</p>
+<ul class="article-checklist">
+<li>Wirkt der QR-Code wie ein zusätzlicher Sticker?</li>
+<li>Wurde möglicherweise etwas überklebt?</li>
+<li>Passt das Design zum restlichen Schild oder Automaten?</li>
+<li>Gibt es eine alternative offizielle Bezahlmöglichkeit?</li>
+</ul>
+<p>Manchmal kannst du sogar fühlen, ob ein Aufkleber über dem ursprünglichen Code angebracht wurde.</p>
+<aside class="article-callout article-callout--tip">
+  <div class="article-callout__heading"><span class="article-callout__icon" aria-hidden="true">✓</span><strong>Ein kurzer physischer Check kann helfen</strong></div>
+  <div class="article-callout__content">
+    <p>Das BACS empfiehlt bei öffentlichen QR-Codes ausdrücklich zu prüfen, ob ein fremder Aufkleber über dem Originalcode angebracht wurde. </p>
+  </div>
+</aside>
+
+<h2>Prüfe nach dem Scannen die URL</h2>
+<p>Viele Smartphones zeigen nach dem Scannen zunächst die Internetadresse an.</p>
+<p>Nutze diesen Moment.</p>
+<p>Prüfe:</p>
+<ul class="article-checklist">
+<li>Welche Domain wird geöffnet?</li>
+<li>Passt sie zur erwarteten Organisation?</li>
+<li>Gibt es ungewöhnliche Schreibweisen?</li>
+<li>Sollst du direkt sensible Daten eingeben?</li>
+</ul>
+<p>Wenn du unsicher bist, öffne die Webseite nicht.</p>
+<p>Nutze lieber die offizielle App oder rufe die bekannte Webseite selbst auf.</p>
+<h2>Vorsicht bei Login- und Zahlungsseiten</h2>
+<p>Besonders aufmerksam solltest du werden, wenn du nach dem Scannen plötzlich:</p>
+<ul>
+<li>ein Passwort eingeben</li>
+<li>Kreditkartendaten angeben</li>
+<li>eine Zahlung bestätigen</li>
+<li>eine App installieren</li>
+<li>persönliche Informationen übermitteln</li>
+</ul>
+<p>sollst.</p>
+<p>Ein QR-Code macht eine Webseite nicht vertrauenswürdiger.</p>
+<aside class="article-callout article-callout--warning">
+  <div class="article-callout__heading"><span class="article-callout__icon" aria-hidden="true">!</span><strong>QR-Code + sensible Daten = genauer hinschauen</strong></div>
+  <div class="article-callout__content">
+    <p>Wenn du über einen QR-Code auf eine Login- oder Zahlungsseite gelangst, prüfe die Domain besonders sorgfältig oder nutze stattdessen direkt den bekannten offiziellen Dienst.</p>
+  </div>
+</aside>
+
+<h2>QR-Phishing kann auch per Brief kommen</h2>
+<p>Ein QR-Code auf Papier wirkt häufig vertrauenswürdiger als ein Link in einer verdächtigen E-Mail.</p>
+<p>Auch das kann ausgenutzt werden.</p>
+<p>In der Schweiz wurden bereits Phishing-Briefe mit QR-Codes beobachtet, die Empfänger auf betrügerische Seiten führen sollten. Das BACS dokumentierte unter anderem entsprechende Fälle im Zusammenhang mit angeblichen E-Banking-Aufforderungen.</p>
+<p>Deshalb gilt auch bei einem professionell aussehenden Brief:</p>
+<p><strong>Der Kommunikationskanal allein beweist nicht, dass eine Anfrage echt ist.</strong></p>
+<h2>Ein QR-Code kann mehr als nur Webseiten öffnen</h2>
+<p>QR-Codes können nicht nur URLs enthalten.</p>
+<p>Je nach Inhalt können sie auch zu:</p>
+<ul>
+<li>App-Downloads</li>
+<li>WLAN-Verbindungen</li>
+<li>Dateien</li>
+<li>anderen Aktionen</li>
+</ul>
+<p>führen.</p>
+<p>Deshalb solltest du vor der Bestätigung kurz prüfen, <strong>welche Aktion dein Smartphone tatsächlich ausführen möchte</strong>.</p>
+<h2>Was, wenn du bereits einen verdächtigen QR-Code gescannt hast?</h2>
+<p>Nur das Scannen bedeutet nicht automatisch, dass etwas passiert ist.</p>
+<p>Entscheidend ist wieder, was danach passiert ist.</p>
+<h3>Nur gescannt oder Webseite geöffnet</h3>
+<p>Schliesse die Seite und führe keine weiteren Aktionen aus.</p>
+<h3>Passwort eingegeben</h3>
+<p>Ändere das betroffene Passwort über die offizielle Webseite oder App.</p>
+<h3>Kreditkartendaten eingegeben</h3>
+<p>Kontaktiere deine Bank oder deinen Kartenanbieter möglichst schnell über einen offiziellen Kontaktweg.</p>
+<h3>App oder Datei installiert</h3>
+<p>Das Risiko ist höher. Bei einem Geschäftsgerät solltest du sofort die interne IT oder Security informieren.</p>
+<p>Weitere Schritte findest du im Artikel <strong>„Auf Phishing geklickt – was jetzt?“</strong></p>
+<h2>Die einfache QR-Code-Regel</h2>
+<p>Du musst QR-Codes nicht grundsätzlich meiden.</p>
+<p>Merke dir nur:</p>
+<p><strong>1. Öffentliche QR-Codes kurz auf Manipulation prüfen.</strong></p>
+<p><strong>2. Nach dem Scannen die Zieladresse anschauen.</strong></p>
+<p><strong>3. Bei Passwörtern, Zahlungen oder persönlichen Daten besonders vorsichtig sein.</strong></p>
+<p>Ein QR-Code ist praktisch.</p>
+<p>Aber sicher wird er nicht dadurch, dass du den Link dahinter nicht sehen kannst.</p>
+          </div>
+        </article>
+
+        
+    <aside class="post-related" aria-labelledby="relatedPostsHeading">
+      <h2 id="relatedPostsHeading">Weiterlernen</h2>
+      <div class="post-related-grid">
+        
+            <article class="post-related-card blog-card">
+              <a class="post-related-card-link blog-card-link" href="/blog/gefaehrliche-links-erkennen/" aria-label="Gefährliche Links erkennen: So prüfst du eine URL richtig" data-transition>
+                <div class="post-related-thumb blog-thumb">
+                  <img class="blog-thumb-img" src="/assets/blog/gefaehrliche-links-erkennen.webp" alt="Browser mit einer verdächtigen Internetadresse und hervorgehobener Domain" loading="lazy" decoding="async">
+                </div>
+                <div class="post-related-body blog-card-body">
+                  <span class="learn-card-category">Phishing &amp; Betrug</span>
+                  <time class="post-related-date blog-date" datetime="2026-09-02">02.09.2026</time>
+                  <h3 class="post-related-title blog-card-title">Gefährliche Links erkennen: So prüfst du eine URL richtig</h3>
+                  <p class="post-related-excerpt blog-card-excerpt">Ein Link kann seriös aussehen und trotzdem auf eine gefälschte Webseite führen. Lerne, welche Teile einer URL wirklich wichtig sind.</p>
+                </div>
+              </a>
+            </article>
+          
+            <article class="post-related-card blog-card">
+              <a class="post-related-card-link blog-card-link" href="/blog/phishing-erkennen/" aria-label="Phishing erkennen: Diese Warnsignale solltest du kennen" data-transition>
+                <div class="post-related-thumb blog-thumb">
+                  <img class="blog-thumb-img" src="/assets/blog/phishing-erkennen.webp" alt="Beispiel einer verdächtigen E-Mail mit Fokus auf Absender, Link und dringende Aufforderung" loading="lazy" decoding="async">
+                </div>
+                <div class="post-related-body blog-card-body">
+                  <span class="learn-card-category">Phishing &amp; Betrug</span>
+                  <time class="post-related-date blog-date" datetime="2026-09-02">02.09.2026</time>
+                  <h3 class="post-related-title blog-card-title">Phishing erkennen: Diese Warnsignale solltest du kennen</h3>
+                  <p class="post-related-excerpt blog-card-excerpt">Phishing kann heute täuschend echt aussehen. Lerne, welche Warnsignale wirklich wichtig sind und wie du verdächtige Nachrichten richtig prüfst.</p>
+                </div>
+              </a>
+            </article>
+          
+            <article class="post-related-card blog-card">
+              <a class="post-related-card-link blog-card-link" href="/blog/auf-phishing-geklickt/" aria-label="Auf Phishing geklickt – was jetzt?" data-transition>
+                <div class="post-related-thumb blog-thumb">
+                  <img class="blog-thumb-img" src="/assets/blog/auf-phishing-geklickt.webp" alt="Smartphone mit verdächtiger Phishing-Nachricht und einer Checkliste mit Sicherheitsmassnahmen" loading="lazy" decoding="async">
+                </div>
+                <div class="post-related-body blog-card-body">
+                  <span class="learn-card-category">Phishing &amp; Betrug</span>
+                  <time class="post-related-date blog-date" datetime="2026-09-02">02.09.2026</time>
+                  <h3 class="post-related-title blog-card-title">Auf Phishing geklickt – was jetzt?</h3>
+                  <p class="post-related-excerpt blog-card-excerpt">Auf einen verdächtigen Link geklickt oder Daten eingegeben? Diese Schritte helfen dir, den möglichen Schaden schnell zu begrenzen.</p>
+                </div>
+              </a>
+            </article>
+          
+      </div>
+    </aside>
+  
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="wrap">
+      <p>© <span id="year"></span> Swissploit.</p>
+      <nav class="foot-nav" aria-label="Footer Navigation">
+        <a href="/index.html#sicherheitslage" data-transition>Sicherheitslage</a>
+        <a href="/index.html#security-care" data-transition>Microsoft 365 Care</a>
+        <a href="/learn/" data-transition>Learn</a>
+        <a href="/index.html#ueber" data-transition>Über Swissploit</a>
+        <a href="/index.html#kontakt" data-transition>Kontakt</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+    window.SWISSPLOIT_CURRENT_LANG = "de";
+  </script>
+
+  <script src="/assets/transition.js"></script>
+  <script src="/assets/app.js"></script>
+  <script src="/assets/blog-index-static.js"></script>
+</body>
+</html>

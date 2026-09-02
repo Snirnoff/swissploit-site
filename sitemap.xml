@@ -15,9 +15,14 @@
     <image:image><image:loc>https://swissploit.ch/assets/blog/auf-phishing-geklickt.webp</image:loc></image:image>
   </url>
   <url>
-    <loc>https://swissploit.ch/blog/passwoerter-passwortmanager/</loc>
+    <loc>https://swissploit.ch/blog/ceo-fraud/</loc>
     <lastmod>2026-09-02</lastmod>
-    <image:image><image:loc>https://swissploit.ch/assets/blog/passwoerter-passwortmanager.webp</image:loc></image:image>
+    <image:image><image:loc>https://swissploit.ch/assets/blog/ceo-fraud.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://swissploit.ch/blog/gefaehrliche-links-erkennen/</loc>
+    <lastmod>2026-09-02</lastmod>
+    <image:image><image:loc>https://swissploit.ch/assets/blog/gefaehrliche-links-erkennen.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://swissploit.ch/blog/phishing-erkennen/</loc>
@@ -25,9 +30,34 @@
     <image:image><image:loc>https://swissploit.ch/assets/blog/phishing-erkennen.webp</image:loc></image:image>
   </url>
   <url>
+    <loc>https://swissploit.ch/blog/passwoerter-passwortmanager/</loc>
+    <lastmod>2026-09-02</lastmod>
+    <image:image><image:loc>https://swissploit.ch/assets/blog/passwoerter-passwortmanager.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://swissploit.ch/blog/smishing-phishing-per-sms/</loc>
+    <lastmod>2026-09-02</lastmod>
+    <image:image><image:loc>https://swissploit.ch/assets/blog/smishing-phishing-per-sms.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://swissploit.ch/blog/qr-phishing-quishing/</loc>
+    <lastmod>2026-09-02</lastmod>
+    <image:image><image:loc>https://swissploit.ch/assets/blog/qr-phishing-quishing.webp</image:loc></image:image>
+  </url>
+  <url>
     <loc>https://swissploit.ch/blog/social-engineering/</loc>
     <lastmod>2026-09-02</lastmod>
     <image:image><image:loc>https://swissploit.ch/assets/blog/social-engineering.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://swissploit.ch/blog/verdaechtige-e-mail-im-buero/</loc>
+    <lastmod>2026-09-02</lastmod>
+    <image:image><image:loc>https://swissploit.ch/assets/blog/verdaechtige-e-mail-im-buero.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://swissploit.ch/blog/vishing-telefonbetrug/</loc>
+    <lastmod>2026-09-02</lastmod>
+    <image:image><image:loc>https://swissploit.ch/assets/blog/vishing-telefonbetrug.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://swissploit.ch/blog/cyberseal-fuer-wen-und-was-es-aussagt/</loc>

@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="de" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Smishing erkennen: Phishing per SMS | Swissploit – Swissploit</title>
+
+  <meta name="description" content="Was ist Smishing? Erfahre, wie betrügerische SMS funktionieren, welche Warnsignale wichtig sind und was du tun solltest, wenn du bereits geklickt hast." />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+
+  <meta property="og:title" content="Smishing erkennen: Phishing per SMS | Swissploit">
+  <meta property="og:description" content="Was ist Smishing? Erfahre, wie betrügerische SMS funktionieren, welche Warnsignale wichtig sind und was du tun solltest, wenn du bereits geklickt hast.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://swissploit.ch/blog/smishing-phishing-per-sms/">
+  <meta property="og:image" content="https://swissploit.ch/assets/blog/smishing-phishing-per-sms.webp">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Smishing erkennen: Phishing per SMS | Swissploit">
+  <meta name="twitter:description" content="Was ist Smishing? Erfahre, wie betrügerische SMS funktionieren, welche Warnsignale wichtig sind und was du tun solltest, wenn du bereits geklickt hast.">
+  <meta name="twitter:image" content="https://swissploit.ch/assets/blog/smishing-phishing-per-sms.webp">
+
+  <link rel="canonical" href="https://swissploit.ch/blog/smishing-phishing-per-sms/" />
+  <link rel="alternate" hreflang="de" href="https://swissploit.ch/blog/smishing-phishing-per-sms/" />
+  <link rel="alternate" hreflang="x-default" href="https://swissploit.ch/blog/smishing-phishing-per-sms/" />
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon-192x192.png">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/assets/JustPlus.png">
+  <meta name="theme-color" content="#05070b">
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Smishing: So erkennst du Phishing per SMS","description":"Was ist Smishing? Erfahre, wie betrügerische SMS funktionieren, welche Warnsignale wichtig sind und was du tun solltest, wenn du bereits geklickt hast.","datePublished":"2026-09-02","dateModified":"2026-09-02","image":"https://swissploit.ch/assets/blog/smishing-phishing-per-sms.webp","url":"https://swissploit.ch/blog/smishing-phishing-per-sms/","mainEntityOfPage":"https://swissploit.ch/blog/smishing-phishing-per-sms/","inLanguage":"de","author":{"@type":"Person","name":"Swissploit"},"publisher":{"@type":"Organization","name":"Swissploit","logo":{"@type":"ImageObject","url":"https://swissploit.ch/assets/swissploit-og.png"}},"keywords":"smishing, phishing, sms, betrug, paket-sms, kreditkarte, smartphone, cyber-security"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://swissploit.ch/index.html"},{"@type":"ListItem","position":2,"name":"Learn","item":"https://swissploit.ch/learn/"},{"@type":"ListItem","position":3,"name":"Smishing: So erkennst du Phishing per SMS","item":"https://swissploit.ch/blog/smishing-phishing-per-sms/"}]}</script>
+
+  <script>
+    (function () {
+      document.documentElement.setAttribute("data-theme", "dark");
+      try { localStorage.setItem("swissploit-theme", "dark"); } catch (e) {}
+    })();
+  </script>
+
+  <link rel="stylesheet" href="/assets/styles.css" />
+  <link rel="stylesheet" href="/assets/blog-post.css" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <header class="site-header" role="banner">
+    <div class="wrap headerbar">
+      <a class="brand" href="/index.html#intro" aria-label="Swissploit Home" data-transition>
+        <img class="brand-logo-image header-logo-image" src="/assets/swissploit-brand-logo.png" alt="Swissploit Logo" width="120" height="49" decoding="async">
+      </a>
+
+      <nav id="primaryNav" class="nav" aria-label="Hauptnavigation">
+        <a href="/index.html#sicherheitslage" data-transition>Sicherheitslage</a>
+        <a href="/index.html#security-care" data-transition>Microsoft 365 Care</a>
+        <a href="/learn/" data-transition>Learn</a>
+        <a href="/index.html#ueber" data-transition>Über Swissploit</a>
+        <a href="/index.html#kontakt" data-transition>Kontakt</a>
+      </nav>
+
+      <div class="header-actions">
+        <button id="themeToggle"
+          class="switch"
+          aria-pressed="false"
+          aria-label="Darstellung umschalten"
+          title="Dark/Light umschalten">
+          <span class="switch-track"></span>
+          <span class="switch-thumb">
+            <span class="switch-icon sun" aria-hidden="true">&#9728;</span>
+            <span class="switch-icon moon" aria-hidden="true">&#9790;</span>
+          </span>
+        </button>
+        <button id="menuToggle" class="menu-toggle" type="button" aria-expanded="false" aria-controls="primaryNav" aria-label="Menu oeffnen">
+          <span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <nav class="wrap blog-breadcrumbs" aria-label="Breadcrumb">
+      <ol class="breadcrumb-list">
+        <li><a href="/index.html" data-transition>Home</a></li>
+        <li><a href="/learn/" data-transition>Learn</a></li>
+        <li aria-current="page">Smishing: So erkennst du Phishing per SMS</li>
+      </ol>
+    </nav>
+
+    <section class="section post-hero">
+      <div class="wrap">
+        <div class="post-topbar">
+          <a class="post-back" href="/learn/" data-transition>← Zurück</a>
+          
+    <nav class="lang-toggle" aria-label="Sprache wählen">
+      <a class="lang-link is-active" href="/blog/smishing-phishing-per-sms/" hreflang="de" lang="de" data-lang-switch="de">DE</a>
+    </nav>
+  
+        </div>
+
+        <p class="post-kicker">Phishing &amp; Betrug</p>
+        <h1 class="post-title" id="postTitle">Smishing: So erkennst du Phishing per SMS</h1>
+        <p class="post-subline" id="postSubtitle">Paket nicht zustellbar, offene Gebühr oder gesperrtes Konto? Betrüger nutzen SMS, um dich auf gefälschte Webseiten zu locken. So erkennst du Smishing.</p>
+        <div class="post-meta" id="postMeta"><time class="blog-date" datetime="2026-09-02">02.09.2026</time>
+    
+    <span class="blog-tags">#smishing #phishing #sms #betrug #paket-sms #kreditkarte #smartphone #cyber-security</span></div>
+        
+        <figure class="post-hero-media post-hero-image">
+          <img src="/assets/blog/smishing-phishing-per-sms.webp" alt="Smartphone mit einer verdächtigen SMS und einem Link zu einer angeblichen Paket-Zustellung" loading="eager" decoding="async">
+        </figure>
+      </div>
+    </section>
+
+    <section class="section post-wrap">
+      <div class="wrap">
+        <article class="post-content" id="postContent" aria-labelledby="postTitle">
+          <div class="post-article">
+            
+    <aside class="article-callout article-callout--key">
+      <div class="article-callout__heading">
+        <span class="article-callout__icon" aria-hidden="true">✓</span>
+        <strong>Das Wichtigste</strong>
+      </div>
+      <div class="article-callout__content"><p>Bei unerwarteten SMS mit Links oder Zahlungsaufforderungen solltest du nicht direkt über die Nachricht handeln. Öffne den angeblichen Dienst stattdessen selbst über die offizielle App oder Webseite und prüfe dort, ob wirklich etwas offen ist.</p></div>
+    </aside>
+            <p>Dein Paket könne nicht zugestellt werden. Eine kleine Gebühr sei noch offen. Oder dein Konto müsse dringend bestätigt werden.</p>
+<p>Die SMS enthält praktischerweise gleich den passenden Link.</p>
+<p>Genau solche Situationen werden für <strong>Smishing – also Phishing per SMS –</strong> ausgenutzt.</p>
+<aside class="article-callout article-callout--key">
+  <div class="article-callout__heading"><span class="article-callout__icon" aria-hidden="true">✓</span><strong>Das Wichtigste</strong></div>
+  <div class="article-callout__content">
+    <p>Eine SMS wirkt nicht automatisch vertrauenswürdig, nur weil sie einen bekannten Firmennamen trägt oder im richtigen Nachrichtenverlauf erscheint.</p>
+    <p><strong>Bei unerwarteten Links oder Zahlungsaufforderungen solltest du den betreffenden Dienst selbst über die offizielle App oder Webseite öffnen.</strong></p>
+  </div>
+</aside>
+
+<h2>Was ist Smishing?</h2>
+<p>Der Begriff setzt sich aus <strong>SMS und Phishing</strong> zusammen.</p>
+<p>Betrüger verschicken Nachrichten, die beispielsweise so wirken, als kämen sie von:</p>
+<ul>
+<li>einem Paketdienst</li>
+<li>einer Bank</li>
+<li>einem Mobilfunkanbieter</li>
+<li>einer Behörde</li>
+<li>einem bekannten Onlinedienst</li>
+</ul>
+<p>Der Link in der Nachricht führt anschliessend auf eine gefälschte Webseite.</p>
+<p>Dort sollen häufig Zugangsdaten, Kreditkartendaten oder persönliche Informationen eingegeben werden.</p>
+<h2>Typische Smishing-Nachrichten</h2>
+<p>Besonders häufig funktionieren solche Nachrichten mit Situationen, bei denen eine schnelle Reaktion plausibel erscheint.</p>
+<p>Zum Beispiel:</p>
+<blockquote>
+<p>„Ihr Paket konnte nicht zugestellt werden. Adresse jetzt bestätigen.“</p>
+</blockquote>
+<p>oder:</p>
+<blockquote>
+<p>„CHF 2.95 Zustellgebühr ausstehend.“</p>
+</blockquote>
+<p>oder:</p>
+<blockquote>
+<p>„Ihr Konto wurde eingeschränkt. Jetzt verifizieren.“</p>
+</blockquote>
+<p>Die Beträge sind manchmal bewusst klein.</p>
+<p>Eine Zahlung von wenigen Franken wirkt weniger verdächtig als eine Forderung über mehrere hundert Franken – für die Betrüger sind aber oft die eingegebenen <strong>Kreditkarten- oder Zugangsdaten</strong> das eigentliche Ziel.</p>
+<h2>Woran erkennst du eine verdächtige SMS?</h2>
+<p>Du musst nicht jede Betrugsmasche kennen.</p>
+<p>Achte stattdessen auf die Situation.</p>
+<ul class="article-checklist">
+<li>Du hast die Nachricht nicht erwartet</li>
+<li>Du sollst über einen Link handeln</li>
+<li>Eine Zahlung oder Bestätigung ist angeblich dringend</li>
+<li>Du sollst persönliche oder finanzielle Daten eingeben</li>
+<li>Der Link führt auf eine ungewöhnliche Domain</li>
+<li>Die Nachricht erzeugt Zeitdruck oder Angst</li>
+</ul>
+<p>Ein einzelner Punkt beweist noch keinen Betrug.</p>
+<p>Mehrere davon zusammen sollten dich jedoch aufmerksam machen.</p>
+<h2>Vertraue nicht nur dem angezeigten Absender</h2>
+<p>Auf dem Smartphone erscheint vielleicht ein bekannter Firmenname statt einer unbekannten Nummer.</p>
+<p>Das kann überzeugend wirken.</p>
+<p>Trotzdem ist der angezeigte Absender <strong>kein zuverlässiger Echtheitsbeweis</strong>.</p>
+<aside class="article-callout article-callout--info">
+  <div class="article-callout__heading"><span class="article-callout__icon" aria-hidden="true">i</span><strong>Absender können täuschen</strong></div>
+  <div class="article-callout__content">
+    <p>Bei SMS können Absenderinformationen manipuliert werden. Eine Nachricht sollte deshalb nicht allein aufgrund des angezeigten Namens als vertrauenswürdig eingestuft werden.</p>
+  </div>
+</aside>
+
+<p>Entscheidender ist:</p>
+<p><strong>Hast du die Nachricht erwartet und ist die verlangte Handlung plausibel?</strong></p>
+<h2>So prüfst du die Nachricht sicherer</h2>
+<p>Angenommen, du bekommst eine SMS über ein angebliches Problem mit einem Paket.</p>
+<p>Klicke nicht zuerst auf den Link.</p>
+<p>Öffne stattdessen selbst die offizielle App oder Webseite des Paketdienstes.</p>
+<p>Erwartest du tatsächlich ein Paket, kannst du dort deine Sendung prüfen.</p>
+<p>Dasselbe Prinzip funktioniert auch bei Banken oder anderen Onlinekonten:</p>
+<p><strong>Dienst selbst öffnen statt dem Link aus der SMS folgen.</strong></p>
+<aside class="article-callout article-callout--action">
+  <div class="article-callout__heading"><span class="article-callout__icon" aria-hidden="true">→</span><strong>Eine einfache Gewohnheit</strong></div>
+  <div class="article-callout__content">
+    <p>SMS behauptet, bei einem bekannten Dienst sei etwas nicht in Ordnung?</p>
+    <p><strong>Öffne den Dienst selbst und prüfe die Information dort.</strong></p>
+  </div>
+</aside>
+
+<h2>Vorsicht bei kleinen Zahlungsbeträgen</h2>
+<p>Eine Zustellgebühr von CHF 1.99 oder CHF 2.95 wirkt zunächst harmlos.</p>
+<p>Genau das kann den Angriff glaubwürdiger machen.</p>
+<p>Auf der verlinkten Webseite wirst du beispielsweise aufgefordert:</p>
+<ol>
+<li>deine Adresse einzugeben</li>
+<li>Kreditkartendaten anzugeben</li>
+<li>die Zahlung zu bestätigen</li>
+</ol>
+<p>Der kleine Betrag ist dann nur der Vorwand, um an deine Daten zu gelangen.</p>
+<p>Gib deshalb Kreditkartendaten nicht auf einer Webseite ein, die du über eine unerwartete SMS geöffnet hast.</p>
+<h2>Was, wenn du bereits auf den Link geklickt hast?</h2>
+<p>Ein Klick allein bedeutet nicht automatisch, dass dein Smartphone kompromittiert wurde.</p>
+<p>Entscheidend ist, was du danach gemacht hast.</p>
+<h3>Nur die Webseite geöffnet</h3>
+<p>Schliesse die Seite und führe dort keine weiteren Aktionen aus.</p>
+<h3>Passwort eingegeben</h3>
+<p>Ändere das Passwort über die echte Webseite oder App des betroffenen Dienstes.</p>
+<p>Verwendest du dasselbe Passwort noch bei anderen Diensten, solltest du es auch dort ersetzen.</p>
+<h3>Kreditkartendaten eingegeben</h3>
+<p>Kontaktiere deinen Kartenanbieter beziehungsweise deine Bank möglichst schnell über einen offiziellen Kontaktweg.</p>
+<h3>Datei oder App installiert</h3>
+<p>Das ist kritischer als das reine Öffnen einer Webseite.</p>
+<p>Installiere keine weiteren Programme und hole bei Unsicherheit professionelle Unterstützung. Bei einem Geschäftsgerät solltest du die interne IT oder Security informieren.</p>
+<aside class="article-callout article-callout--warning">
+  <div class="article-callout__heading"><span class="article-callout__icon" aria-hidden="true">!</span><strong>Bei eingegebenen Daten nicht abwarten</strong></div>
+  <div class="article-callout__content">
+    <p>Wenn du Zugangsdaten oder Kreditkarteninformationen eingegeben hast, solltest du reagieren, bevor du bemerkst, dass sie tatsächlich missbraucht wurden.</p>
+  </div>
+</aside>
+
+<h2>Was hilft zusätzlich?</h2>
+<p>Moderne Smartphones und Mobilfunkanbieter können einen Teil verdächtiger Nachrichten automatisch erkennen oder filtern.</p>
+<p>Solche Filter sind hilfreich, aber kein vollständiger Schutz.</p>
+<p>Aktiviere vorhandene Spam- oder SMS-Filter auf deinem Smartphone und halte das Betriebssystem aktuell.</p>
+<p>Entscheidend bleibt trotzdem dein Umgang mit unerwarteten Nachrichten.</p>
+<h2>Die einfache Regel für SMS</h2>
+<p>Wenn eine unerwartete SMS behauptet, du müsstest <strong>zahlen, dich anmelden oder persönliche Daten bestätigen</strong>, nutze nicht direkt den enthaltenen Link.</p>
+<p>Öffne die angebliche Organisation selbst über einen bekannten Weg.</p>
+<p><strong>SMS erhalten → nicht unter Druck klicken → Dienst selbst öffnen → dort prüfen.</strong></p>
+<p>Damit kannst du einen grossen Teil typischer Smishing-Versuche bereits sehr einfach entschärfen.</p>
+          </div>
+        </article>
+
+        
+    <aside class="post-related" aria-labelledby="relatedPostsHeading">
+      <h2 id="relatedPostsHeading">Weiterlernen</h2>
+      <div class="post-related-grid">
+        
+            <article class="post-related-card blog-card">
+              <a class="post-related-card-link blog-card-link" href="/blog/phishing-erkennen/" aria-label="Phishing erkennen: Diese Warnsignale solltest du kennen" data-transition>
+                <div class="post-related-thumb blog-thumb">
+                  <img class="blog-thumb-img" src="/assets/blog/phishing-erkennen.webp" alt="Beispiel einer verdächtigen E-Mail mit Fokus auf Absender, Link und dringende Aufforderung" loading="lazy" decoding="async">
+                </div>
+                <div class="post-related-body blog-card-body">
+                  <span class="learn-card-category">Phishing &amp; Betrug</span>
+                  <time class="post-related-date blog-date" datetime="2026-09-02">02.09.2026</time>
+                  <h3 class="post-related-title blog-card-title">Phishing erkennen: Diese Warnsignale solltest du kennen</h3>
+                  <p class="post-related-excerpt blog-card-excerpt">Phishing kann heute täuschend echt aussehen. Lerne, welche Warnsignale wirklich wichtig sind und wie du verdächtige Nachrichten richtig prüfst.</p>
+                </div>
+              </a>
+            </article>
+          
+            <article class="post-related-card blog-card">
+              <a class="post-related-card-link blog-card-link" href="/blog/auf-phishing-geklickt/" aria-label="Auf Phishing geklickt – was jetzt?" data-transition>
+                <div class="post-related-thumb blog-thumb">
+                  <img class="blog-thumb-img" src="/assets/blog/auf-phishing-geklickt.webp" alt="Smartphone mit verdächtiger Phishing-Nachricht und einer Checkliste mit Sicherheitsmassnahmen" loading="lazy" decoding="async">
+                </div>
+                <div class="post-related-body blog-card-body">
+                  <span class="learn-card-category">Phishing &amp; Betrug</span>
+                  <time class="post-related-date blog-date" datetime="2026-09-02">02.09.2026</time>
+                  <h3 class="post-related-title blog-card-title">Auf Phishing geklickt – was jetzt?</h3>
+                  <p class="post-related-excerpt blog-card-excerpt">Auf einen verdächtigen Link geklickt oder Daten eingegeben? Diese Schritte helfen dir, den möglichen Schaden schnell zu begrenzen.</p>
+                </div>
+              </a>
+            </article>
+          
+            <article class="post-related-card blog-card">
+              <a class="post-related-card-link blog-card-link" href="/blog/social-engineering/" aria-label="Social Engineering einfach erklärt: Wenn Angreifer Menschen manipulieren" data-transition>
+                <div class="post-related-thumb blog-thumb">
+                  <img class="blog-thumb-img" src="/assets/blog/social-engineering.webp" alt="Darstellung einer verdächtigen digitalen Anfrage, bei der Vertrauen und Zeitdruck zur Manipulation eingesetzt werden" loading="lazy" decoding="async">
+                </div>
+                <div class="post-related-body blog-card-body">
+                  <span class="learn-card-category">Social Engineering</span>
+                  <time class="post-related-date blog-date" datetime="2026-09-02">02.09.2026</time>
+                  <h3 class="post-related-title blog-card-title">Social Engineering einfach erklärt: Wenn Angreifer Menschen manipulieren</h3>
+                  <p class="post-related-excerpt blog-card-excerpt">Social Engineering nutzt Vertrauen, Zeitdruck und menschliches Verhalten statt technischer Sicherheitslücken. Erfahre, wie solche Angriffe funktionieren und wie du sie erkennst.</p>
+                </div>
+              </a>
+            </article>
+          
+      </div>
+    </aside>
+  
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="wrap">
+      <p>© <span id="year"></span> Swissploit.</p>
+      <nav class="foot-nav" aria-label="Footer Navigation">
+        <a href="/index.html#sicherheitslage" data-transition>Sicherheitslage</a>
+        <a href="/index.html#security-care" data-transition>Microsoft 365 Care</a>
+        <a href="/learn/" data-transition>Learn</a>
+        <a href="/index.html#ueber" data-transition>Über Swissploit</a>
+        <a href="/index.html#kontakt" data-transition>Kontakt</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+    window.SWISSPLOIT_CURRENT_LANG = "de";
+  </script>
+
+  <script src="/assets/transition.js"></script>
+  <script src="/assets/app.js"></script>
+  <script src="/assets/blog-index-static.js"></script>
+</body>
+</html>

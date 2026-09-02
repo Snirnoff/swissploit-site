@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="de" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gefährliche Links erkennen: URL richtig prüfen | Swissploit – Swissploit</title>
+
+  <meta name="description" content="Wie erkennst du einen gefährlichen Link? Lerne einfach, wie du Domains liest, typische Phishing-URLs erkennst und warum HTTPS allein keine Sicherheit garantiert" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+
+  <meta property="og:title" content="Gefährliche Links erkennen: URL richtig prüfen | Swissploit">
+  <meta property="og:description" content="Wie erkennst du einen gefährlichen Link? Lerne einfach, wie du Domains liest, typische Phishing-URLs erkennst und warum HTTPS allein keine Sicherheit garantiert">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://swissploit.ch/blog/gefaehrliche-links-erkennen/">
+  <meta property="og:image" content="https://swissploit.ch/assets/blog/gefaehrliche-links-erkennen.webp">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Gefährliche Links erkennen: URL richtig prüfen | Swissploit">
+  <meta name="twitter:description" content="Wie erkennst du einen gefährlichen Link? Lerne einfach, wie du Domains liest, typische Phishing-URLs erkennst und warum HTTPS allein keine Sicherheit garantiert">
+  <meta name="twitter:image" content="https://swissploit.ch/assets/blog/gefaehrliche-links-erkennen.webp">
+
+  <link rel="canonical" href="https://swissploit.ch/blog/gefaehrliche-links-erkennen/" />
+  <link rel="alternate" hreflang="de" href="https://swissploit.ch/blog/gefaehrliche-links-erkennen/" />
+  <link rel="alternate" hreflang="x-default" href="https://swissploit.ch/blog/gefaehrliche-links-erkennen/" />
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon-192x192.png">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/assets/JustPlus.png">
+  <meta name="theme-color" content="#05070b">
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Gefährliche Links erkennen: So prüfst du eine URL richtig","description":"Wie erkennst du einen gefährlichen Link? Lerne einfach, wie du Domains liest, typische Phishing-URLs erkennst und warum HTTPS allein keine Sicherheit garantiert","datePublished":"2026-09-02","dateModified":"2026-09-02","image":"https://swissploit.ch/assets/blog/gefaehrliche-links-erkennen.webp","url":"https://swissploit.ch/blog/gefaehrliche-links-erkennen/","mainEntityOfPage":"https://swissploit.ch/blog/gefaehrliche-links-erkennen/","inLanguage":"de","author":{"@type":"Person","name":"Swissploit"},"publisher":{"@type":"Organization","name":"Swissploit","logo":{"@type":"ImageObject","url":"https://swissploit.ch/assets/swissploit-og.png"}},"keywords":"phishing, links, url, domain, fake-login, social-engineering, cyber-security"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://swissploit.ch/index.html"},{"@type":"ListItem","position":2,"name":"Learn","item":"https://swissploit.ch/learn/"},{"@type":"ListItem","position":3,"name":"Gefährliche Links erkennen: So prüfst du eine URL richtig","item":"https://swissploit.ch/blog/gefaehrliche-links-erkennen/"}]}</script>
+
+  <script>
+    (function () {
+      document.documentElement.setAttribute("data-theme", "dark");
+      try { localStorage.setItem("swissploit-theme", "dark"); } catch (e) {}
+    })();
+  </script>
+
+  <link rel="stylesheet" href="/assets/styles.css" />
+  <link rel="stylesheet" href="/assets/blog-post.css" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <header class="site-header" role="banner">
+    <div class="wrap headerbar">
+      <a class="brand" href="/index.html#intro" aria-label="Swissploit Home" data-transition>
+        <img class="brand-logo-image header-logo-image" src="/assets/swissploit-brand-logo.png" alt="Swissploit Logo" width="120" height="49" decoding="async">
+      </a>
+
+      <nav id="primaryNav" class="nav" aria-label="Hauptnavigation">
+        <a href="/index.html#sicherheitslage" data-transition>Sicherheitslage</a>
+        <a href="/index.html#security-care" data-transition>Microsoft 365 Care</a>
+        <a href="/learn/" data-transition>Learn</a>
+        <a href="/index.html#ueber" data-transition>Über Swissploit</a>
+        <a href="/index.html#kontakt" data-transition>Kontakt</a>
+      </nav>
+
+      <div class="header-actions">
+        <button id="themeToggle"
+          class="switch"
+          aria-pressed="false"
+          aria-label="Darstellung umschalten"
+          title="Dark/Light umschalten">
+          <span class="switch-track"></span>
+          <span class="switch-thumb">
+            <span class="switch-icon sun" aria-hidden="true">&#9728;</span>
+            <span class="switch-icon moon" aria-hidden="true">&#9790;</span>
+          </span>
+        </button>
+        <button id="menuToggle" class="menu-toggle" type="button" aria-expanded="false" aria-controls="primaryNav" aria-label="Menu oeffnen">
+          <span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <nav class="wrap blog-breadcrumbs" aria-label="Breadcrumb">
+      <ol class="breadcrumb-list">
+        <li><a href="/index.html" data-transition>Home</a></li>
+        <li><a href="/learn/" data-transition>Learn</a></li>
+        <li aria-current="page">Gefährliche Links erkennen: So prüfst du eine URL richtig</li>
+      </ol>
+    </nav>
+
+    <section class="section post-hero">
+      <div class="wrap">
+        <div class="post-topbar">
+          <a class="post-back" href="/learn/" data-transition>← Zurück</a>
+          
+    <nav class="lang-toggle" aria-label="Sprache wählen">
+      <a class="lang-link is-active" href="/blog/gefaehrliche-links-erkennen/" hreflang="de" lang="de" data-lang-switch="de">DE</a>
+    </nav>
+  
+        </div>
+
+        <p class="post-kicker">Phishing &amp; Betrug</p>
+        <h1 class="post-title" id="postTitle">Gefährliche Links erkennen: So prüfst du eine URL richtig</h1>
+        <p class="post-subline" id="postSubtitle">Ein Link kann seriös aussehen und trotzdem auf eine gefälschte Webseite führen. Lerne, welche Teile einer URL wirklich wichtig sind.</p>
+        <div class="post-meta" id="postMeta"><time class="blog-date" datetime="2026-09-02">02.09.2026</time>
+    
+    <span class="blog-tags">#phishing #links #url #domain #fake-login #social-engineering #cyber-security</span></div>
+        
+        <figure class="post-hero-media post-hero-image">
+          <img src="/assets/blog/gefaehrliche-links-erkennen.webp" alt="Browser mit einer verdächtigen Internetadresse und hervorgehobener Domain" loading="eager" decoding="async">
+        </figure>
+      </div>
+    </section>
+
+    <section class="section post-wrap">
+      <div class="wrap">
+        <article class="post-content" id="postContent" aria-labelledby="postTitle">
+          <div class="post-article">
+            
+    <aside class="article-callout article-callout--key">
+      <div class="article-callout__heading">
+        <span class="article-callout__icon" aria-hidden="true">✓</span>
+        <strong>Das Wichtigste</strong>
+      </div>
+      <div class="article-callout__content"><p>Achte bei einem Link nicht nur auf bekannte Wörter wie Microsoft, Post oder deine Bank. Entscheidend ist, zu welcher tatsächlichen Domain die Adresse gehört. Wenn du unsicher bist, öffne den Dienst lieber selbst über die offizielle App oder eine bekannte Adresse.</p></div>
+    </aside>
+            <p>Eine E-Mail sieht aus wie von Microsoft. Der Button sagt <strong>„Konto bestätigen“</strong> und sogar im Link steht irgendwo „microsoft“.</p>
+<p>Ist er deshalb echt?</p>
+<p>Nicht unbedingt.</p>
+<p>Betrüger gestalten Links bewusst so, dass sie auf den ersten Blick vertrauenswürdig wirken.</p>
+<aside class="article-callout article-callout--key">
+  <div class="article-callout__heading"><span class="article-callout__icon" aria-hidden="true">✓</span><strong>Das Wichtigste</strong></div>
+  <div class="article-callout__content">
+    <p>Suche in einer Internetadresse nicht nur nach einem bekannten Firmennamen.</p>
+    <p><strong>Entscheidend ist, zu welcher tatsächlichen Domain die Adresse gehört. Wenn du unsicher bist, öffne den Dienst selbst statt dem erhaltenen Link zu folgen.</strong></p>
+  </div>
+</aside>
+
+<h2>Was ist eine Domain?</h2>
+<p>Nehmen wir eine einfache Adresse:</p>
+<p><code>https://login.microsoft.com</code></p>
+<p>Der wichtige Teil ist:</p>
+<p><code>microsoft.com</code></p>
+<p><code>login</code> ist lediglich eine Unterdomain von Microsoft.</p>
+<p>Eine Adresse kann aber auch so aussehen:</p>
+<p><code>https://microsoft.login-security.example.com</code></p>
+<p>Hier steht zwar <strong>microsoft</strong> im Link.</p>
+<p>Die Webseite gehört aber zu:</p>
+<p><code>example.com</code></p>
+<aside class="article-callout article-callout--tip">
+  <div class="article-callout__heading"><span class="article-callout__icon" aria-hidden="true">✓</span><strong>Lies eine Adresse auch von rechts</strong></div>
+  <div class="article-callout__content">
+    <p>Bei einer einfachen .ch- oder .com-Adresse ist besonders wichtig, welcher Name direkt zur eigentlichen Domain gehört.</p>
+    <p>Bekannte Begriffe weit vorne in der Adresse können lediglich Unterdomains sein und dich täuschen.</p>
+  </div>
+</aside>
+
+<h2>Ein bekanntes Wort im Link reicht nicht</h2>
+<p>Betrüger können Domains registrieren, die absichtlich vertrauenswürdig wirken.</p>
+<p>Zum Beispiel:</p>
+<p><code>microsoft-konto-sicherheit.example</code></p>
+<p><code>post-paket-zustellung.example</code></p>
+<p><code>meinebank-login.example</code></p>
+<p>Der Firmenname ist vorhanden.</p>
+<p>Die Domain gehört deswegen aber noch lange nicht zu dieser Firma.</p>
+<p>Achte deshalb nicht nur darauf, <strong>ob ein bekannter Name vorkommt</strong>, sondern ob du dich tatsächlich auf der erwarteten offiziellen Domain befindest.</p>
+<h2>Vorsicht bei kleinen Schreibänderungen</h2>
+<p>Manche betrügerischen Domains versuchen, dem Original sehr ähnlich zu sehen.</p>
+<p>Zum Beispiel durch:</p>
+<ul>
+<li>vertauschte Buchstaben</li>
+<li>zusätzliche Bindestriche</li>
+<li>ähnliche Zeichen</li>
+<li>zusätzliche Wörter wie <code>login</code>, <code>secure</code> oder <code>verify</code></li>
+<li>ungewohnte Domain-Endungen</li>
+</ul>
+<p>Gerade auf dem Smartphone können solche Unterschiede leicht übersehen werden.</p>
+<aside class="article-callout article-callout--info">
+  <div class="article-callout__heading"><span class="article-callout__icon" aria-hidden="true">i</span><strong>Die ganze Adresse zählt</strong></div>
+  <div class="article-callout__content">
+    <p>Ein Link kann sehr lang sein und viele vertrauenswürdig klingende Begriffe enthalten. Lass dich davon nicht ablenken und konzentriere dich auf die tatsächliche Domain.</p>
+  </div>
+</aside>
+
+<h2>HTTPS bedeutet nicht automatisch seriös</h2>
+<p>Viele Menschen achten auf:</p>
+<p><code>https://</code></p>
+<p>oder das Schloss-Symbol im Browser.</p>
+<p>HTTPS ist wichtig.</p>
+<p>Es bedeutet vereinfacht gesagt, dass die Verbindung zwischen deinem Browser und der Webseite verschlüsselt ist.</p>
+<p>Es sagt aber <strong>nicht automatisch aus, dass die Webseite vertrauenswürdig ist</strong>.</p>
+<p>Auch eine Phishing-Webseite kann HTTPS verwenden.</p>
+<p>Das Schloss schützt also die Verbindung zur Webseite – es bestätigt nicht, dass die Person hinter der Webseite ehrlich ist.</p>
+<h2>Prüfe den Link vor dem Klick</h2>
+<p>Am Computer kannst du bei vielen Programmen mit der Maus über einen Link fahren, ohne ihn anzuklicken.</p>
+<p>Das tatsächliche Linkziel wird dann angezeigt.</p>
+<p>Auf Smartphones kannst du einen Link je nach App häufig länger gedrückt halten, um eine Vorschau oder Zieladresse zu sehen.</p>
+<p>Prüfe insbesondere:</p>
+<ul class="article-checklist">
+<li>Welche Domain wird tatsächlich geöffnet?</li>
+<li>Passt sie zur angeblichen Organisation?</li>
+<li>Gibt es ungewöhnliche Schreibweisen oder zusätzliche Wörter?</li>
+<li>Hast du die Nachricht und den Link überhaupt erwartet?</li>
+<li>Sollst du dort ein Passwort, Zahlungsdaten oder andere sensible Informationen eingeben?</li>
+</ul>
+<p>Wenn dir etwas merkwürdig vorkommt, musst du den Link nicht weiter untersuchen.</p>
+<p>Nutze einfach einen sicheren anderen Weg.</p>
+<h2>Der sicherste Weg ist oft der einfachste</h2>
+<p>Du bekommst angeblich eine Nachricht von deiner Bank und sollst dich anmelden.</p>
+<p>Statt den Link zu verwenden:</p>
+<p><strong>Öffne deine Banking-App selbst.</strong></p>
+<p>Du bekommst angeblich eine Microsoft-Nachricht zu deinem Konto.</p>
+<p>Statt den Button in der E-Mail zu verwenden:</p>
+<p><strong>Öffne Microsoft über deine gespeicherte Adresse oder App selbst.</strong></p>
+<p>Du bekommst eine Paket-SMS.</p>
+<p>Statt den SMS-Link zu verwenden:</p>
+<p><strong>Öffne die offizielle Webseite oder App des Paketdienstes selbst.</strong></p>
+<aside class="article-callout article-callout--action">
+  <div class="article-callout__heading"><span class="article-callout__icon" aria-hidden="true">→</span><strong>Du musst nicht jeden Link analysieren können</strong></div>
+  <div class="article-callout__content">
+    <p>Wenn eine Nachricht unerwartet eine Anmeldung oder sensible Handlung verlangt, kannst du den Link einfach umgehen und den betreffenden Dienst selbst öffnen.</p>
+  </div>
+</aside>
+
+<h2>Vorsicht bei verkürzten Links</h2>
+<p>Adressen wie verkürzte Links können praktisch sein, weil sie weniger Platz benötigen.</p>
+<p>Dabei ist vor dem Öffnen aber nicht immer direkt sichtbar, welche Webseite sich dahinter befindet.</p>
+<p>Wenn du einen solchen Link unerwartet per E-Mail, SMS oder Messenger erhältst und darüber etwas Sensibles erledigen sollst:</p>
+<p><strong>Öffne stattdessen die bekannte Webseite oder App direkt.</strong></p>
+<h2>QR-Codes sind ebenfalls Links</h2>
+<p>Bei einem QR-Code siehst du die Zieladresse nicht auf den ersten Blick.</p>
+<p>Deshalb gilt dasselbe Prinzip.</p>
+<p>Wenn dein Smartphone nach dem Scannen die URL anzeigt, prüfe sie vor dem Öffnen.</p>
+<p>Besonders vorsichtig solltest du sein, wenn du anschliessend:</p>
+<ul>
+<li>Kreditkartendaten</li>
+<li>Passwörter</li>
+<li>persönliche Informationen</li>
+<li>Login-Daten</li>
+</ul>
+<p>eingeben sollst.</p>
+<h2>Was, wenn du bereits geklickt hast?</h2>
+<p>Ein Klick allein bedeutet nicht automatisch, dass dein Konto oder Smartphone kompromittiert wurde.</p>
+<p>Entscheidend ist, was danach passiert ist.</p>
+<h3>Nur Webseite geöffnet</h3>
+<p>Schliesse sie und führe dort keine weiteren Aktionen aus.</p>
+<h3>Passwort eingegeben</h3>
+<p>Ändere das betroffene Passwort über die offizielle Webseite oder App.</p>
+<h3>Kreditkartendaten eingegeben</h3>
+<p>Kontaktiere deine Bank oder deinen Kartenanbieter über einen offiziellen Kontaktweg.</p>
+<h3>Datei heruntergeladen oder geöffnet</h3>
+<p>Bei einem Geschäftsgerät solltest du die interne IT oder Security informieren.</p>
+<p>Weitere Schritte findest du im Learn-Artikel <strong>„Auf Phishing geklickt – was jetzt?“</strong></p>
+<h2>Die einfache Link-Regel</h2>
+<p>Bei verdächtigen Links musst du keine komplizierte technische Analyse durchführen.</p>
+<p>Merke dir drei Dinge:</p>
+<p><strong>1. Ein bekannter Firmenname irgendwo im Link beweist nichts.</strong></p>
+<p><strong>2. HTTPS beziehungsweise ein Schloss-Symbol macht eine Webseite nicht automatisch seriös.</strong></p>
+<p><strong>3. Bei sensiblen Aktionen ist es oft sicherer, die offizielle App oder Webseite selbst zu öffnen.</strong></p>
+<p>Wenn du bei einer Adresse unsicher bist, musst du nicht herausfinden, ob sie gefährlich ist.</p>
+<p><strong>Du kannst den Link einfach nicht verwenden.</strong></p>
+          </div>
+        </article>
+
+        
+    <aside class="post-related" aria-labelledby="relatedPostsHeading">
+      <h2 id="relatedPostsHeading">Weiterlernen</h2>
+      <div class="post-related-grid">
+        
+            <article class="post-related-card blog-card">
+              <a class="post-related-card-link blog-card-link" href="/blog/phishing-erkennen/" aria-label="Phishing erkennen: Diese Warnsignale solltest du kennen" data-transition>
+                <div class="post-related-thumb blog-thumb">
+                  <img class="blog-thumb-img" src="/assets/blog/phishing-erkennen.webp" alt="Beispiel einer verdächtigen E-Mail mit Fokus auf Absender, Link und dringende Aufforderung" loading="lazy" decoding="async">
+                </div>
+                <div class="post-related-body blog-card-body">
+                  <span class="learn-card-category">Phishing &amp; Betrug</span>
+                  <time class="post-related-date blog-date" datetime="2026-09-02">02.09.2026</time>
+                  <h3 class="post-related-title blog-card-title">Phishing erkennen: Diese Warnsignale solltest du kennen</h3>
+                  <p class="post-related-excerpt blog-card-excerpt">Phishing kann heute täuschend echt aussehen. Lerne, welche Warnsignale wirklich wichtig sind und wie du verdächtige Nachrichten richtig prüfst.</p>
+                </div>
+              </a>
+            </article>
+          
+            <article class="post-related-card blog-card">
+              <a class="post-related-card-link blog-card-link" href="/blog/auf-phishing-geklickt/" aria-label="Auf Phishing geklickt – was jetzt?" data-transition>
+                <div class="post-related-thumb blog-thumb">
+                  <img class="blog-thumb-img" src="/assets/blog/auf-phishing-geklickt.webp" alt="Smartphone mit verdächtiger Phishing-Nachricht und einer Checkliste mit Sicherheitsmassnahmen" loading="lazy" decoding="async">
+                </div>
+                <div class="post-related-body blog-card-body">
+                  <span class="learn-card-category">Phishing &amp; Betrug</span>
+                  <time class="post-related-date blog-date" datetime="2026-09-02">02.09.2026</time>
+                  <h3 class="post-related-title blog-card-title">Auf Phishing geklickt – was jetzt?</h3>
+                  <p class="post-related-excerpt blog-card-excerpt">Auf einen verdächtigen Link geklickt oder Daten eingegeben? Diese Schritte helfen dir, den möglichen Schaden schnell zu begrenzen.</p>
+                </div>
+              </a>
+            </article>
+          
+            <article class="post-related-card blog-card">
+              <a class="post-related-card-link blog-card-link" href="/blog/smishing-phishing-per-sms/" aria-label="Smishing: So erkennst du Phishing per SMS" data-transition>
+                <div class="post-related-thumb blog-thumb">
+                  <img class="blog-thumb-img" src="/assets/blog/smishing-phishing-per-sms.webp" alt="Smartphone mit einer verdächtigen SMS und einem Link zu einer angeblichen Paket-Zustellung" loading="lazy" decoding="async">
+                </div>
+                <div class="post-related-body blog-card-body">
+                  <span class="learn-card-category">Phishing &amp; Betrug</span>
+                  <time class="post-related-date blog-date" datetime="2026-09-02">02.09.2026</time>
+                  <h3 class="post-related-title blog-card-title">Smishing: So erkennst du Phishing per SMS</h3>
+                  <p class="post-related-excerpt blog-card-excerpt">Paket nicht zustellbar, offene Gebühr oder gesperrtes Konto? Betrüger nutzen SMS, um dich auf gefälschte Webseiten zu locken. So erkennst du Smishing.</p>
+                </div>
+              </a>
+            </article>
+          
+      </div>
+    </aside>
+  
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="wrap">
+      <p>© <span id="year"></span> Swissploit.</p>
+      <nav class="foot-nav" aria-label="Footer Navigation">
+        <a href="/index.html#sicherheitslage" data-transition>Sicherheitslage</a>
+        <a href="/index.html#security-care" data-transition>Microsoft 365 Care</a>
+        <a href="/learn/" data-transition>Learn</a>
+        <a href="/index.html#ueber" data-transition>Über Swissploit</a>
+        <a href="/index.html#kontakt" data-transition>Kontakt</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+    window.SWISSPLOIT_CURRENT_LANG = "de";
+  </script>
+
+  <script src="/assets/transition.js"></script>
+  <script src="/assets/app.js"></script>
+  <script src="/assets/blog-index-static.js"></script>
+</body>
+</html>
