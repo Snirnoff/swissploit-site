@@ -109,7 +109,7 @@
     
     <span class="blog-tags">#phishing #incident-response #microsoft-365 #entra-id #azure-ad #exchange-online #mfa #conditional-access #audit-logs #onedrive</span></div>
         
-        <figure class="post-hero-image">
+        <figure class="post-hero-media post-hero-image">
           <img src="/assets/blog/Laptop-repair-in-phishing-crisis.webp" alt="Phishing Checkliste" loading="eager" decoding="async">
         </figure>
       </div>
@@ -119,6 +119,7 @@
       <div class="wrap">
         <article class="post-content" id="postContent" aria-labelledby="postTitle">
           <div class="post-article">
+            
             <p>Phishing ist oft in Minuten passiert – und genau dann zählt ein klarer Ablauf. Diese Checkliste hilft dir, ein betroffenes Microsoft-365/Entra-ID-Konto <strong>schnell zu stabilisieren</strong>, den <strong>Schaden zu begrenzen</strong> und <strong>weitere Kompromittierungen</strong> zu verhindern.</p>
 <h2>Schritt-für-Schritt Lösung für Administratoren</h2>
 <ol>
@@ -264,24 +265,28 @@ In <strong>Entra ID → User → Sign-in logs</strong>:</p>
 <li>Meldung an Datenschutzbeauftragten (bei möglichem Datenabfluss)</li>
 </ul>
 <h2>Häufige Fragen / Troubleshooting</h2>
-<p><strong>Muss ich die ganze Liste machen, wenn „nur“ der Link geklickt wurde?</strong><br>Empfohlen ja – mindestens <strong>Endgeräteprüfung + Sessions abmelden + MFA-Check</strong>, weil Drive-by-Downloads und Session-Theft möglich sind.</p>
-<p><strong>Warum soll das neue Passwort per Telefon mitgeteilt werden?</strong><br>Weil E-Mail/Chat-Kanäle im Incident-Fall potenziell kompromittiert oder mitgelesen sein können.</p>
-<p><strong>Reicht „Passwort ändern“ allein?</strong><br>Meist nicht. Wenn ein Angreifer bereits ein Token/Session hat, bleibt der Zugriff ohne <strong>Sign-out/Revoke sessions</strong> oft bestehen.</p>
-<p><strong>Worauf muss ich bei Inbox-Regeln besonders achten?</strong><br>Auf Regeln, die Mails <strong>weiterleiten</strong>, <strong>löschen</strong>, „als gelesen markieren“ oder Betreff/Absender filtern – das sind klassische Angreifer-Tricks.</p>
-<p><strong>Wie erkenne ich OAuth-Phishing?</strong><br>Wenn Apps plötzlich weitreichende Rechte haben (Mail lesen, Files, Teams), ohne dass das bewusst freigegeben wurde: <strong>Consent entziehen</strong>, App entfernen, Logs prüfen.</p>
-<div class="callout tip">
-  <div class="callout-title"><strong>💡 Tipp</strong></div>
-  Lege diese Checkliste als <strong>runbook</strong> ab und ergänze sie um eure Standard-Tools – im Ernstfall sparen klare Klickpfade Minuten.
-</div>
+<h3>Muss ich die ganze Liste machen, wenn „nur“ der Link geklickt wurde?</h3>
+<p>Empfohlen ja – mindestens <strong>Endgeräteprüfung + Sessions abmelden + MFA-Check</strong>, weil Drive-by-Downloads und Session-Theft möglich sind.</p>
+<h3>Warum soll das neue Passwort per Telefon mitgeteilt werden?</h3>
+<p>Weil E-Mail/Chat-Kanäle im Incident-Fall potenziell kompromittiert oder mitgelesen sein können.</p>
+<h3>Reicht „Passwort ändern“ allein?</h3>
+<p>Meist nicht. Wenn ein Angreifer bereits ein Token/Session hat, bleibt der Zugriff ohne <strong>Sign-out/Revoke sessions</strong> oft bestehen.</p>
+<h3>Worauf muss ich bei Inbox-Regeln besonders achten?</h3>
+<p>Auf Regeln, die Mails <strong>weiterleiten</strong>, <strong>löschen</strong>, „als gelesen markieren“ oder Betreff/Absender filtern – das sind klassische Angreifer-Tricks.</p>
+<h3>Wie erkenne ich OAuth-Phishing?</h3>
+<p>Wenn Apps plötzlich weitreichende Rechte haben (Mail lesen, Files, Teams), ohne dass das bewusst freigegeben wurde: <strong>Consent entziehen</strong>, App entfernen, Logs prüfen.</p>
+<aside class="article-callout article-callout--tip">
+  <div class="article-callout__heading"><span class="article-callout__icon" aria-hidden="true">💡</span><strong>Tipp</strong></div>
+  <div class="article-callout__content"><p>Lege diese Checkliste als <strong>runbook</strong> ab und ergänze sie um eure Standard-Tools – im Ernstfall sparen klare Klickpfade Minuten.</p></div>
+</aside>
 
 <h2>Kurzfassung</h2>
-<ul>
+<ul class="article-checklist">
 <li><strong>Passwort ändern + Sessions beenden + MFA bereinigen</strong> sind die ersten Pflichtschritte.</li>
 <li>Danach <strong>Mailbox-Regeln, Freigaben, Logs, Rollen und Apps</strong> prüfen.</li>
 <li>Bei Verdacht auf Datenabfluss: <strong>Organisationweit eskalieren</strong> (Admin-Resets, global sign-out, Datenschutz).</li>
 </ul>
           </div>
-          
         </article>
 
         
@@ -289,6 +294,34 @@ In <strong>Entra ID → User → Sign-in logs</strong>:</p>
       <h2 id="relatedPostsHeading">Weiterlernen</h2>
       <div class="post-related-grid">
         
+            <article class="post-related-card blog-card">
+              <a class="post-related-card-link blog-card-link" href="/blog/auf-phishing-geklickt/" aria-label="Auf Phishing geklickt – was jetzt?" data-transition>
+                <div class="post-related-thumb blog-thumb">
+                  <img class="blog-thumb-img" src="/assets/blog/auf-phishing-geklickt.webp" alt="Smartphone mit verdächtiger Phishing-Nachricht und einer Checkliste mit Sicherheitsmassnahmen" loading="lazy" decoding="async">
+                </div>
+                <div class="post-related-body blog-card-body">
+                  <span class="learn-card-category">Phishing &amp; Betrug</span>
+                  <time class="post-related-date blog-date" datetime="2026-09-02">02.09.2026</time>
+                  <h3 class="post-related-title blog-card-title">Auf Phishing geklickt – was jetzt?</h3>
+                  <p class="post-related-excerpt blog-card-excerpt">Auf einen verdächtigen Link geklickt oder Daten eingegeben? Diese Schritte helfen dir, den möglichen Schaden schnell zu begrenzen.</p>
+                </div>
+              </a>
+            </article>
+          
+            <article class="post-related-card blog-card">
+              <a class="post-related-card-link blog-card-link" href="/blog/phishing-erkennen/" aria-label="Phishing erkennen: Diese Warnsignale solltest du kennen" data-transition>
+                <div class="post-related-thumb blog-thumb">
+                  <img class="blog-thumb-img" src="/assets/blog/phishing-erkennen.webp" alt="Beispiel einer verdächtigen E-Mail mit Fokus auf Absender, Link und dringende Aufforderung" loading="lazy" decoding="async">
+                </div>
+                <div class="post-related-body blog-card-body">
+                  <span class="learn-card-category">Phishing &amp; Betrug</span>
+                  <time class="post-related-date blog-date" datetime="2026-09-02">02.09.2026</time>
+                  <h3 class="post-related-title blog-card-title">Phishing erkennen: Diese Warnsignale solltest du kennen</h3>
+                  <p class="post-related-excerpt blog-card-excerpt">Phishing kann heute täuschend echt aussehen. Lerne, welche Warnsignale wirklich wichtig sind und wie du verdächtige Nachrichten richtig prüfst.</p>
+                </div>
+              </a>
+            </article>
+          
             <article class="post-related-card blog-card">
               <a class="post-related-card-link blog-card-link" href="/blog/wetransfer-phishing-html-onedrive/" aria-label="Angriff mit HTML" data-transition>
                 <div class="post-related-thumb blog-thumb">

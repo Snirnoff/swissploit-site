@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="de" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Auf Phishing geklickt? Das solltest du jetzt tun | Swissploit – Swissploit</title>
+
+  <meta name="description" content="Auf einen Phishing-Link geklickt oder Zugangsdaten eingegeben? Erfahre Schritt für Schritt, was du jetzt tun solltest, um möglichen Schaden zu begrenzen." />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+
+  <meta property="og:title" content="Auf Phishing geklickt? Das solltest du jetzt tun | Swissploit">
+  <meta property="og:description" content="Auf einen Phishing-Link geklickt oder Zugangsdaten eingegeben? Erfahre Schritt für Schritt, was du jetzt tun solltest, um möglichen Schaden zu begrenzen.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://swissploit.ch/blog/auf-phishing-geklickt/">
+  <meta property="og:image" content="https://swissploit.ch/assets/blog/auf-phishing-geklickt.webp">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Auf Phishing geklickt? Das solltest du jetzt tun | Swissploit">
+  <meta name="twitter:description" content="Auf einen Phishing-Link geklickt oder Zugangsdaten eingegeben? Erfahre Schritt für Schritt, was du jetzt tun solltest, um möglichen Schaden zu begrenzen.">
+  <meta name="twitter:image" content="https://swissploit.ch/assets/blog/auf-phishing-geklickt.webp">
+
+  <link rel="canonical" href="https://swissploit.ch/blog/auf-phishing-geklickt/" />
+  <link rel="alternate" hreflang="de" href="https://swissploit.ch/blog/auf-phishing-geklickt/" />
+  <link rel="alternate" hreflang="x-default" href="https://swissploit.ch/blog/auf-phishing-geklickt/" />
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon-192x192.png">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/assets/JustPlus.png">
+  <meta name="theme-color" content="#05070b">
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Auf Phishing geklickt – was jetzt?","description":"Auf einen Phishing-Link geklickt oder Zugangsdaten eingegeben? Erfahre Schritt für Schritt, was du jetzt tun solltest, um möglichen Schaden zu begrenzen.","datePublished":"2026-09-02","dateModified":"2026-09-02","image":"https://swissploit.ch/assets/blog/auf-phishing-geklickt.webp","url":"https://swissploit.ch/blog/auf-phishing-geklickt/","mainEntityOfPage":"https://swissploit.ch/blog/auf-phishing-geklickt/","inLanguage":"de","author":{"@type":"Person","name":"Swissploit"},"publisher":{"@type":"Organization","name":"Swissploit","logo":{"@type":"ImageObject","url":"https://swissploit.ch/assets/swissploit-og.png"}},"keywords":"phishing, phishing-link, passwort, mfa, kreditkarte, account-sicherheit, security"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://swissploit.ch/index.html"},{"@type":"ListItem","position":2,"name":"Learn","item":"https://swissploit.ch/learn/"},{"@type":"ListItem","position":3,"name":"Auf Phishing geklickt – was jetzt?","item":"https://swissploit.ch/blog/auf-phishing-geklickt/"}]}</script>
+
+  <script>
+    (function () {
+      document.documentElement.setAttribute("data-theme", "dark");
+      try { localStorage.setItem("swissploit-theme", "dark"); } catch (e) {}
+    })();
+  </script>
+
+  <link rel="stylesheet" href="/assets/styles.css" />
+  <link rel="stylesheet" href="/assets/blog-post.css" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <header class="site-header" role="banner">
+    <div class="wrap headerbar">
+      <a class="brand" href="/index.html#intro" aria-label="Swissploit Home" data-transition>
+        <img class="brand-logo-image header-logo-image" src="/assets/swissploit-brand-logo.png" alt="Swissploit Logo" width="120" height="49" decoding="async">
+      </a>
+
+      <nav id="primaryNav" class="nav" aria-label="Hauptnavigation">
+        <a href="/index.html#sicherheitslage" data-transition>Sicherheitslage</a>
+        <a href="/index.html#security-care" data-transition>Microsoft 365 Care</a>
+        <a href="/learn/" data-transition>Learn</a>
+        <a href="/index.html#ueber" data-transition>Über Swissploit</a>
+        <a href="/index.html#kontakt" data-transition>Kontakt</a>
+      </nav>
+
+      <div class="header-actions">
+        <button id="themeToggle"
+          class="switch"
+          aria-pressed="false"
+          aria-label="Darstellung umschalten"
+          title="Dark/Light umschalten">
+          <span class="switch-track"></span>
+          <span class="switch-thumb">
+            <span class="switch-icon sun" aria-hidden="true">&#9728;</span>
+            <span class="switch-icon moon" aria-hidden="true">&#9790;</span>
+          </span>
+        </button>
+        <button id="menuToggle" class="menu-toggle" type="button" aria-expanded="false" aria-controls="primaryNav" aria-label="Menu oeffnen">
+          <span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <nav class="wrap blog-breadcrumbs" aria-label="Breadcrumb">
+      <ol class="breadcrumb-list">
+        <li><a href="/index.html" data-transition>Home</a></li>
+        <li><a href="/learn/" data-transition>Learn</a></li>
+        <li aria-current="page">Auf Phishing geklickt – was jetzt?</li>
+      </ol>
+    </nav>
+
+    <section class="section post-hero">
+      <div class="wrap">
+        <div class="post-topbar">
+          <a class="post-back" href="/learn/" data-transition>← Zurück</a>
+          
+    <nav class="lang-toggle" aria-label="Sprache wählen">
+      <a class="lang-link is-active" href="/blog/auf-phishing-geklickt/" hreflang="de" lang="de" data-lang-switch="de">DE</a>
+    </nav>
+  
+        </div>
+
+        <p class="post-kicker">Phishing &amp; Betrug</p>
+        <h1 class="post-title" id="postTitle">Auf Phishing geklickt – was jetzt?</h1>
+        <p class="post-subline" id="postSubtitle">Auf einen verdächtigen Link geklickt oder Daten eingegeben? Diese Schritte helfen dir, den möglichen Schaden schnell zu begrenzen.</p>
+        <div class="post-meta" id="postMeta"><time class="blog-date" datetime="2026-09-02">02.09.2026</time>
+    
+    <span class="blog-tags">#phishing #phishing-link #passwort #mfa #kreditkarte #account-sicherheit #security</span></div>
+        
+        <figure class="post-hero-media post-hero-image">
+          <img src="/assets/blog/auf-phishing-geklickt.webp" alt="Smartphone mit verdächtiger Phishing-Nachricht und einer Checkliste mit Sicherheitsmassnahmen" loading="eager" decoding="async">
+        </figure>
+      </div>
+    </section>
+
+    <section class="section post-wrap">
+      <div class="wrap">
+        <article class="post-content" id="postContent" aria-labelledby="postTitle">
+          <div class="post-article">
+            
+    <aside class="article-callout article-callout--key">
+      <div class="article-callout__heading">
+        <span class="article-callout__icon" aria-hidden="true">✓</span>
+        <strong>Das Wichtigste</strong>
+      </div>
+      <div class="article-callout__content"><p>Nicht jeder Klick bedeutet automatisch, dass dein Konto oder Gerät kompromittiert wurde. Entscheidend ist, was danach passiert ist: Hast du Daten eingegeben, eine MFA-Anfrage bestätigt oder eine Datei geöffnet? Handle entsprechend und lieber früh als zu spät.</p></div>
+    </aside>
+            <p>Auf einen verdächtigen Link geklickt und erst danach gemerkt, dass etwas nicht stimmt?</p>
+<p>Das ist unangenehm, bedeutet aber <strong>nicht automatisch, dass dein Konto oder Gerät bereits übernommen wurde</strong>.</p>
+<p>Entscheidend ist vor allem, was nach dem Klick passiert ist.</p>
+<aside class="article-callout article-callout--key">
+  <div class="article-callout__heading"><span class="article-callout__icon" aria-hidden="true">✓</span><strong>Das Wichtigste</strong></div>
+  <div class="article-callout__content">
+    <p>Nur einen Link geöffnet? Das Risiko ist normalerweise kleiner, als wenn du zusätzlich ein Passwort eingegeben, eine MFA-Anfrage bestätigt, eine Datei geöffnet oder Zahlungsdaten übermittelt hast.</p>
+    <p><strong>Je mehr Informationen oder Zugriffe du freigegeben hast, desto schneller solltest du reagieren.</strong></p>
+  </div>
+</aside>
+
+<h2>Zuerst: Was genau ist passiert?</h2>
+<p>Versuche kurz einzuordnen, was du auf der verdächtigen Seite gemacht hast.</p>
+<ul class="article-checklist">
+<li>Nur den Link geöffnet</li>
+<li>Benutzername oder Passwort eingegeben</li>
+<li>Eine MFA-Anfrage oder Anmeldung bestätigt</li>
+<li>Eine Datei heruntergeladen oder geöffnet</li>
+<li>Kreditkarten- oder Bankdaten eingegeben</li>
+<li>Persönliche oder vertrauliche Informationen übermittelt</li>
+</ul>
+<p>Je nachdem sind unterschiedliche Massnahmen sinnvoll.</p>
+<h2>Fall 1: Du hast nur auf den Link geklickt</h2>
+<p>Wenn du lediglich eine Webseite geöffnet, aber <strong>keine Daten eingegeben, keine Datei heruntergeladen und nichts bestätigt</strong> hast, ist das Risiko in vielen Fällen deutlich geringer.</p>
+<p>Schliesse die Seite und öffne sie nicht erneut.</p>
+<p>Achte darauf, dass dein Browser und Betriebssystem aktuell sind.</p>
+<p>Prüfe ausserdem, ob durch den Besuch unerwartet eine Datei heruntergeladen wurde.</p>
+<aside class="article-callout article-callout--info">
+  <div class="article-callout__heading"><span class="article-callout__icon" aria-hidden="true">i</span><strong>Ein Klick allein ist nicht automatisch ein erfolgreicher Angriff</strong></div>
+  <div class="article-callout__content">
+    <p>Viele Phishing-Seiten benötigen eine weitere Aktion von dir – beispielsweise die Eingabe eines Passworts. Trotzdem solltest du verdächtige Webseiten schliessen und keine weiteren Aktionen darauf durchführen.</p>
+  </div>
+</aside>
+
+<p>Wenn dein Gerät danach ungewöhnliches Verhalten zeigt, beispielsweise unerwartete Programme, Pop-ups oder Sicherheitsmeldungen, solltest du die Situation genauer prüfen oder professionelle Unterstützung hinzuziehen.</p>
+<h2>Fall 2: Du hast dein Passwort eingegeben</h2>
+<p>Dann solltest du davon ausgehen, dass das Passwort möglicherweise in die Hände von Angreifern gelangt ist.</p>
+<h3>Ändere das Passwort sofort</h3>
+<p>Öffne die <strong>echte Webseite oder App des betroffenen Dienstes direkt</strong>.</p>
+<p>Nutze dafür nicht erneut den Link aus der verdächtigen Nachricht.</p>
+<p>Ändere dort dein Passwort.</p>
+<p>Wähle ein neues Passwort, das du bei keinem anderen Dienst verwendest.</p>
+<h3>Verwendest du dasselbe Passwort noch woanders?</h3>
+<p>Dann ändere es auch dort.</p>
+<p>Das ist besonders wichtig, wenn du dasselbe Passwort beispielsweise für:</p>
+<ul>
+<li>dein E-Mail-Konto</li>
+<li>Microsoft oder Google</li>
+<li>Onlineshops</li>
+<li>soziale Netzwerke</li>
+<li>Cloud-Dienste</li>
+</ul>
+<p>verwendet hast.</p>
+<p>Angreifer testen gestohlene Passwörter häufig auch bei anderen Diensten.</p>
+<aside class="article-callout article-callout--warning">
+  <div class="article-callout__heading"><span class="article-callout__icon" aria-hidden="true">!</span><strong>Besonders kritisch: dein E-Mail-Konto</strong></div>
+  <div class="article-callout__content">
+    <p>Wer Zugriff auf dein E-Mail-Konto erhält, kann unter Umständen Passwort-Zurücksetzungen für viele weitere Konten anfordern.</p>
+    <p>Wurde dein E-Mail-Passwort eingegeben, solltest du deshalb besonders schnell reagieren.</p>
+  </div>
+</aside>
+
+<h2>Fall 3: Du hast eine MFA-Anfrage bestätigt</h2>
+<p>Mehrfaktor-Authentifizierung schützt dein Konto zusätzlich. Sie hilft aber nicht, wenn du eine betrügerische Anmeldung selbst bestätigst.</p>
+<p>Wenn du eine MFA-Anfrage bestätigt hast, die nicht von dir ausgelöst wurde, solltest du die Situation wie eine mögliche Kontoübernahme behandeln.</p>
+<ul class="article-checklist">
+<li>Passwort über die offizielle Webseite ändern</li>
+<li>Aktive Sitzungen abmelden, sofern der Dienst diese Funktion anbietet</li>
+<li>Unbekannte Geräte und Anmeldungen prüfen</li>
+<li>Hinterlegte MFA-Methoden kontrollieren</li>
+<li>Unbekannte Telefonnummern, Apps oder Sicherheitsschlüssel entfernen</li>
+<li>Bei einem Geschäftskonto sofort die interne IT oder Security informieren</li>
+</ul>
+<aside class="article-callout article-callout--action">
+  <div class="article-callout__heading"><span class="article-callout__icon" aria-hidden="true">→</span><strong>Bei einem Firmenkonto: sofort melden</strong></div>
+  <div class="article-callout__content">
+    <p>Wenn es sich um dein geschäftliches Microsoft-365-, Google-Workspace- oder anderes Unternehmenskonto handelt, melde den Vorfall sofort über den vorgesehenen internen Weg.</p>
+    <p>Die IT kann beispielsweise aktive Sitzungen beenden und prüfen, ob bereits verdächtige Anmeldungen stattgefunden haben.</p>
+  </div>
+</aside>
+
+<h2>Fall 4: Du hast eine Datei heruntergeladen oder geöffnet</h2>
+<p>Nicht jeder heruntergeladene Anhang enthält automatisch Schadsoftware.</p>
+<p>Bei einer unerwarteten Datei aus einer verdächtigen Nachricht solltest du aber vorsichtig sein.</p>
+<p>Wenn du die Datei <strong>nur heruntergeladen, aber nicht geöffnet</strong> hast, lösche sie und leere anschliessend gegebenenfalls den Papierkorb.</p>
+<p>Wenn du die Datei bereits geöffnet oder ausgeführt hast, solltest du weitere Massnahmen treffen.</p>
+<h3>Auf einem privaten Gerät</h3>
+<p>Führe mit der vorhandenen Sicherheitssoftware beziehungsweise dem integrierten Virenschutz einen Scan durch.</p>
+<p>Installiere keine angeblichen „Reinigungsprogramme“ von unbekannten Webseiten.</p>
+<p>Wenn sich dein Gerät auffällig verhält oder der Virenschutz etwas findet, hole dir bei Bedarf professionelle Unterstützung.</p>
+<h3>Auf einem Geschäftsgerät</h3>
+<p>Melde den Vorfall möglichst sofort an deine IT- oder Security-Ansprechperson.</p>
+<p>Versuche nicht, den Vorfall selbst zu verbergen oder durch das Löschen einzelner Dateien „aufzuräumen“.</p>
+<p>Für die Untersuchung kann es wichtig sein zu wissen, was genau geöffnet wurde.</p>
+<h2>Fall 5: Du hast Kreditkartendaten eingegeben</h2>
+<p>Wenn du Kreditkartendaten auf einer Phishing-Seite eingegeben hast, solltest du nicht darauf warten, ob tatsächlich eine Abbuchung erfolgt.</p>
+<p>Kontaktiere deinen Kartenanbieter beziehungsweise deine Bank möglichst schnell über einen <strong>offiziellen Kontaktweg</strong>.</p>
+<p>Erkläre, dass die Kartendaten möglicherweise auf einer Phishing-Seite eingegeben wurden.</p>
+<p>Je nach Situation kann die Karte gesperrt oder ersetzt werden.</p>
+<p>Prüfe anschliessend deine Transaktionen auf unbekannte Belastungen.</p>
+<aside class="article-callout article-callout--warning">
+  <div class="article-callout__heading"><span class="article-callout__icon" aria-hidden="true">!</span><strong>Bei finanziellem Schaden</strong></div>
+  <div class="article-callout__content">
+    <p>Wenn bereits unberechtigte Zahlungen erfolgt sind, kontaktiere umgehend dein Finanzinstitut. In der Schweiz kann bei einem finanziellen Schaden zusätzlich eine Anzeige bei der Polizei sinnvoll sein.</p>
+  </div>
+</aside>
+
+<h2>Fall 6: Du hast persönliche oder vertrauliche Daten eingegeben</h2>
+<p>Nicht jedes Phishing zielt auf Passwörter.</p>
+<p>Angreifer interessieren sich beispielsweise auch für:</p>
+<ul>
+<li>Name und Adresse</li>
+<li>Telefonnummer</li>
+<li>Geburtsdatum</li>
+<li>Ausweisdaten</li>
+<li>Kundeninformationen</li>
+<li>interne Unternehmensdaten</li>
+<li>vertrauliche Dokumente</li>
+</ul>
+<p>Was du tun solltest, hängt davon ab, welche Daten betroffen sind.</p>
+<p>Bei Unternehmensdaten solltest du den Vorfall intern melden.</p>
+<p>Bei besonders sensiblen persönlichen Daten solltest du in den folgenden Wochen aufmerksam auf ungewöhnliche Nachrichten, Anrufe oder weitere Betrugsversuche achten.</p>
+<p>Gestohlene Informationen können später verwendet werden, um weitere Angriffe glaubwürdiger erscheinen zu lassen.</p>
+<h2>Prüfe dein Konto auf ungewöhnliche Aktivitäten</h2>
+<p>Wenn Zugangsdaten betroffen waren, wirf einen Blick auf die Sicherheitsinformationen des Kontos.</p>
+<p>Achte beispielsweise auf:</p>
+<ul class="article-checklist">
+<li>unbekannte Anmeldungen</li>
+<li>unbekannte Geräte</li>
+<li>neue MFA-Methoden</li>
+<li>geänderte Wiederherstellungsinformationen</li>
+<li>unbekannte E-Mail-Weiterleitungen oder Regeln</li>
+<li>Nachrichten, die du nicht selbst verschickt hast</li>
+<li>unerwartete Passwort-Zurücksetzungen</li>
+</ul>
+<p>Besonders bei E-Mail-Konten lohnt sich diese Kontrolle.</p>
+<p>Ein Angreifer kann versuchen, seinen Zugriff auch nach einer Passwortänderung aufrechtzuerhalten.</p>
+<h2>Aktiviere MFA, falls du es noch nicht nutzt</h2>
+<p>Wenn der betroffene Dienst Mehrfaktor-Authentifizierung unterstützt und sie noch nicht aktiviert ist, solltest du sie einrichten.</p>
+<p>Dadurch reicht ein gestohlenes Passwort allein normalerweise nicht mehr aus, um sich anzumelden.</p>
+<p>Wichtig ist aber auch:</p>
+<p><strong>Bestätige niemals eine MFA-Anfrage, die du nicht selbst ausgelöst hast.</strong></p>
+<h2>Bei der Arbeit gilt: Melden ist wichtiger als verstecken</h2>
+<p>Vielleicht möchtest du einen Fehlklick zuerst selbst lösen, weil dir die Situation unangenehm ist.</p>
+<p>Bei einem Unternehmenskonto oder Geschäftsgerät solltest du das nicht tun.</p>
+<p>Je früher die zuständige IT oder Security informiert wird, desto schneller kann geprüft werden, ob weitere Massnahmen notwendig sind.</p>
+<aside class="article-callout article-callout--tip">
+  <div class="article-callout__heading"><span class="article-callout__icon" aria-hidden="true">✓</span><strong>Ein schneller Hinweis kann andere schützen</strong></div>
+  <div class="article-callout__content">
+    <p>Wenn dieselbe Phishing-Nachricht an mehrere Mitarbeitende geschickt wurde, kann deine Meldung helfen, weitere Klicks zu verhindern.</p>
+  </div>
+</aside>
+
+<h2>Die wichtigsten Sofortmassnahmen</h2>
+<p>Wenn du nur eine kurze Checkliste brauchst:</p>
+<ul class="article-checklist">
+<li>Verdächtige Seite schliessen</li>
+<li>Keine weiteren Daten eingeben</li>
+<li>Betroffenes Passwort über die offizielle Seite ändern</li>
+<li>Wiederverwendete Passwörter ebenfalls ersetzen</li>
+<li>Aktive Sitzungen und unbekannte Anmeldungen prüfen</li>
+<li>MFA kontrollieren oder aktivieren</li>
+<li>Bei Kartendaten Bank oder Kartenanbieter kontaktieren</li>
+<li>Bei einem Firmenkonto oder Geschäftsgerät sofort intern melden</li>
+<li>Verdächtige Datei nicht erneut öffnen</li>
+<li>Konten in den nächsten Tagen auf ungewöhnliche Aktivitäten beobachten</li>
+</ul>
+<h2>Kann ich die Phishing-Seite melden?</h2>
+<p>Ja.</p>
+<p>Verdächtige Webseiten und Phishing-Versuche können in der Schweiz dem Bundesamt für Cybersicherheit gemeldet werden.</p>
+<p>Eine Meldung hilft dabei, aktuelle Angriffswellen und betrügerische Webseiten zu erkennen.</p>
+<p>Bei einer verdächtigen Nachricht im Unternehmen solltest du zusätzlich den internen Meldeweg verwenden.</p>
+<h2>Was du aus dem Vorfall mitnehmen solltest</h2>
+<p>Ein Phishing-Klick ist nicht bei jeder Situation gleich kritisch.</p>
+<p>Die entscheidende Frage lautet:</p>
+<p><strong>Was hast du nach dem Klick gemacht?</strong></p>
+<p>Nur eine Webseite geöffnet zu haben ist etwas anderes, als Zugangsdaten einzugeben, eine Anmeldung zu bestätigen oder eine Datei auszuführen.</p>
+<p>Wenn du sensible Informationen preisgegeben hast, gilt:</p>
+<p><strong>Schnell reagieren, Zugang absichern und bei geschäftlichen Konten frühzeitig melden.</strong></p>
+<p>Damit lässt sich möglicher Schaden häufig deutlich besser begrenzen.</p>
+          </div>
+        </article>
+
+        
+    <aside class="post-related" aria-labelledby="relatedPostsHeading">
+      <h2 id="relatedPostsHeading">Weiterlernen</h2>
+      <div class="post-related-grid">
+        
+            <article class="post-related-card blog-card">
+              <a class="post-related-card-link blog-card-link" href="/blog/phishing-erkennen/" aria-label="Phishing erkennen: Diese Warnsignale solltest du kennen" data-transition>
+                <div class="post-related-thumb blog-thumb">
+                  <img class="blog-thumb-img" src="/assets/blog/phishing-erkennen.webp" alt="Beispiel einer verdächtigen E-Mail mit Fokus auf Absender, Link und dringende Aufforderung" loading="lazy" decoding="async">
+                </div>
+                <div class="post-related-body blog-card-body">
+                  <span class="learn-card-category">Phishing &amp; Betrug</span>
+                  <time class="post-related-date blog-date" datetime="2026-09-02">02.09.2026</time>
+                  <h3 class="post-related-title blog-card-title">Phishing erkennen: Diese Warnsignale solltest du kennen</h3>
+                  <p class="post-related-excerpt blog-card-excerpt">Phishing kann heute täuschend echt aussehen. Lerne, welche Warnsignale wirklich wichtig sind und wie du verdächtige Nachrichten richtig prüfst.</p>
+                </div>
+              </a>
+            </article>
+          
+      </div>
+    </aside>
+  
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="wrap">
+      <p>© <span id="year"></span> Swissploit.</p>
+      <nav class="foot-nav" aria-label="Footer Navigation">
+        <a href="/index.html#sicherheitslage" data-transition>Sicherheitslage</a>
+        <a href="/index.html#security-care" data-transition>Microsoft 365 Care</a>
+        <a href="/learn/" data-transition>Learn</a>
+        <a href="/index.html#ueber" data-transition>Über Swissploit</a>
+        <a href="/index.html#kontakt" data-transition>Kontakt</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+    window.SWISSPLOIT_CURRENT_LANG = "de";
+  </script>
+
+  <script src="/assets/transition.js"></script>
+  <script src="/assets/app.js"></script>
+  <script src="/assets/blog-index-static.js"></script>
+</body>
+</html>

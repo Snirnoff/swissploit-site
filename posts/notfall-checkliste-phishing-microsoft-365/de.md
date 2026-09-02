@@ -122,28 +122,34 @@ Phishing ist oft in Minuten passiert – und genau dann zählt ein klarer Ablauf
 
 ## Häufige Fragen / Troubleshooting
 
-**Muss ich die ganze Liste machen, wenn „nur“ der Link geklickt wurde?**  
+### Muss ich die ganze Liste machen, wenn „nur“ der Link geklickt wurde?
+
 Empfohlen ja – mindestens **Endgeräteprüfung + Sessions abmelden + MFA-Check**, weil Drive-by-Downloads und Session-Theft möglich sind.
 
-**Warum soll das neue Passwort per Telefon mitgeteilt werden?**  
+### Warum soll das neue Passwort per Telefon mitgeteilt werden?
+
 Weil E-Mail/Chat-Kanäle im Incident-Fall potenziell kompromittiert oder mitgelesen sein können.
 
-**Reicht „Passwort ändern“ allein?**  
+### Reicht „Passwort ändern“ allein?
+
 Meist nicht. Wenn ein Angreifer bereits ein Token/Session hat, bleibt der Zugriff ohne **Sign-out/Revoke sessions** oft bestehen.
 
-**Worauf muss ich bei Inbox-Regeln besonders achten?**  
+### Worauf muss ich bei Inbox-Regeln besonders achten?
+
 Auf Regeln, die Mails **weiterleiten**, **löschen**, „als gelesen markieren“ oder Betreff/Absender filtern – das sind klassische Angreifer-Tricks.
 
-**Wie erkenne ich OAuth-Phishing?**  
+### Wie erkenne ich OAuth-Phishing?
+
 Wenn Apps plötzlich weitreichende Rechte haben (Mail lesen, Files, Teams), ohne dass das bewusst freigegeben wurde: **Consent entziehen**, App entfernen, Logs prüfen.
 
-<div class="callout tip">
-  <div class="callout-title"><strong>💡 Tipp</strong></div>
-  Lege diese Checkliste als <strong>runbook</strong> ab und ergänze sie um eure Standard-Tools – im Ernstfall sparen klare Klickpfade Minuten.
-</div>
+<aside class="article-callout article-callout--tip">
+  <div class="article-callout__heading"><span class="article-callout__icon" aria-hidden="true">💡</span><strong>Tipp</strong></div>
+  <div class="article-callout__content"><p>Lege diese Checkliste als <strong>runbook</strong> ab und ergänze sie um eure Standard-Tools – im Ernstfall sparen klare Klickpfade Minuten.</p></div>
+</aside>
 
 ## Kurzfassung
 
+<!-- article-checklist -->
 - **Passwort ändern + Sessions beenden + MFA bereinigen** sind die ersten Pflichtschritte.
 - Danach **Mailbox-Regeln, Freigaben, Logs, Rollen und Apps** prüfen.
 - Bei Verdacht auf Datenabfluss: **Organisationweit eskalieren** (Admin-Resets, global sign-out, Datenschutz).

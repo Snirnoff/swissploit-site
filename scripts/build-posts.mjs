@@ -223,6 +223,18 @@ function rewriteContentUrls(html) {
   // Add lazy loading to images rendered from markdown.
   out = out.replace(/<img\b(?![^>]*\bloading=)/gi, '<img loading="lazy" decoding="async"');
 
+  // Keep explicitly numbered subheadings easy to scan without changing their semantics.
+  out = out.replace(
+    /<h3>(\d+)\.\s+([^<]+)<\/h3>/gi,
+    '<h3 class="article-numbered-heading"><span class="article-numbered-heading__number">$1</span><span>$2</span></h3>'
+  );
+
+  // Authors opt in to checklist styling; ordinary article lists stay unchanged.
+  out = out.replace(
+    /<!--\s*article-checklist\s*-->\s*<ul>/gi,
+    '<ul class="article-checklist">'
+  );
+
   return out;
 }
 
@@ -276,45 +288,53 @@ function resolveVideo(post, lang) {
   return null;
 }
 
-function getVideoSectionHeading(video, info, lang) {
-  const rawType = cleanStr(video?.type).toLowerCase();
-  const isShort = rawType === "short" || rawType === "shorts" || rawType === "60s" || info?.isShort;
-  if (isShort) return lang === "en" ? "Explained in 60 seconds" : "In 60 Sekunden erklärt";
-  return lang === "en" ? "Explained in the video" : "Im Video erklärt";
-}
-
-function renderVideoHtml(post, lang, title, watchLabel) {
+function renderHeroMediaHtml(post, lang, title, heroImage, heroImageAlt, watchLabel) {
   const video = resolveVideo(post, lang);
-  if (!video?.url) return "";
+  if (video?.url) {
+    const info = youtubeEmbedInfo(video.url);
+    const videoTitle = lang === "en" ? `${title} – video` : `${title} – Video`;
 
-  const info = youtubeEmbedInfo(video.url);
-  const heading = getVideoSectionHeading(video, info, lang);
-  const labelId = `post-video-heading-${String(post.slug || post.id || "video").replace(/[^a-z0-9-]/gi, "-")}`;
-  if (!info?.embed) {
+    if (!info?.embed) {
+      return `
+        <div class="post-hero-media post-hero-video post-hero-video--fallback">
+          <a class="post-back" href="${escapeAttr(video.url)}" target="_blank" rel="noopener">${escapeHtml(watchLabel)}</a>
+        </div>`;
+    }
+
     return `
-      <section class="post-video-section" aria-labelledby="${escapeAttr(labelId)}">
-        <h2 id="${escapeAttr(labelId)}">${escapeHtml(heading)}</h2>
-        <p><a class="post-back" href="${escapeAttr(video.url)}" target="_blank" rel="noopener">${escapeHtml(watchLabel)}</a></p>
-      </section>
-    `;
-  }
-
-  return `
-    <section class="post-video-section" aria-labelledby="${escapeAttr(labelId)}">
-      <h2 id="${escapeAttr(labelId)}">${escapeHtml(heading)}</h2>
-      <div class="post-video">
-        <div class="video-embed ${info.isShort ? "video-embed--shorts" : ""}">
+        <div class="post-hero-media post-hero-video">
           <iframe
             src="${escapeAttr(info.embed)}"
-            title="${escapeAttr(`${title || "Video"} - ${heading}`)}"
+            title="${escapeAttr(videoTitle)}"
             loading="lazy"
             referrerpolicy="strict-origin-when-cross-origin"
             allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowfullscreen></iframe>
-        </div>
+        </div>`;
+  }
+
+  if (!heroImage) return "";
+
+  return `
+        <figure class="post-hero-media post-hero-image">
+          <img src="${escapeAttr(publicAssetUrl(heroImage))}" alt="${escapeAttr(heroImageAlt)}" loading="eager" decoding="async">
+        </figure>`;
+}
+
+function renderKeyTakeawayHtml(post, lang) {
+  const txt = getLocalizedText(post, lang);
+  const keyTakeaway = cleanStr(txt.keyTakeaway);
+  if (!keyTakeaway) return "";
+
+  const label = lang === "en" ? "Key takeaway" : "Das Wichtigste";
+  return `
+    <aside class="article-callout article-callout--key">
+      <div class="article-callout__heading">
+        <span class="article-callout__icon" aria-hidden="true">✓</span>
+        <strong>${escapeHtml(label)}</strong>
       </div>
-    </section>
-  `;
+      <div class="article-callout__content"><p>${escapeHtml(keyTakeaway)}</p></div>
+    </aside>`;
 }
 
 function renderMetaHtml(post, lang) {
@@ -1079,14 +1099,11 @@ function renderStaticPostPage(post, lang, allPosts) {
         watch: "▶ Watch video"
       };
 
-  const videoHtml = renderVideoHtml(post, lang, title, ui.watch);
   const relatedHtml = renderRelatedPostsHtml(post, allPosts, lang);
   const bodyHtml = txt.content || "";
   const shortDescription = getShortDescription(post, lang);
-  const heroImageHtml = heroImage ? `
-        <figure class="post-hero-image">
-          <img src="${escapeAttr(publicAssetUrl(heroImage))}" alt="${escapeAttr(heroImageAlt)}" loading="eager" decoding="async">
-        </figure>` : "";
+  const heroMediaHtml = renderHeroMediaHtml(post, lang, title, heroImage, heroImageAlt, ui.watch);
+  const keyTakeawayHtml = renderKeyTakeawayHtml(post, lang);
 
   return `<!doctype html>
 <html lang="${lang}" data-theme="dark">
@@ -1158,7 +1175,7 @@ function renderStaticPostPage(post, lang, allPosts) {
         <h1 class="post-title" id="postTitle">${escapeHtml(title)}</h1>
         <p class="post-subline" id="postSubtitle">${escapeHtml(shortDescription)}</p>
         <div class="post-meta" id="postMeta">${renderMetaHtml(post, lang)}</div>
-        ${heroImageHtml}
+        ${heroMediaHtml}
       </div>
     </section>
 
@@ -1166,9 +1183,9 @@ function renderStaticPostPage(post, lang, allPosts) {
       <div class="wrap">
         <article class="post-content" id="postContent" aria-labelledby="postTitle">
           <div class="post-article">
+            ${keyTakeawayHtml}
             ${bodyHtml}
           </div>
-          ${videoHtml}
         </article>
 
         ${relatedHtml}
@@ -1254,6 +1271,7 @@ async function main() {
         imageAlt: pickFirst(de.data.imageAlt, ""),
         seoTitle: pickFirst(de.data.seoTitle, ""),
         seoDescription: pickFirst(de.data.seoDescription, ""),
+        keyTakeaway: pickFirst(de.data.keyTakeaway, ""),
         videoUrl: pickFirst(de.data.videoUrl, ""),
         videoType: pickFirst(de.data.videoType, ""),
         content: de.html,
@@ -1265,6 +1283,7 @@ async function main() {
         imageAlt: pickFirst(en.data.imageAlt, ""),
         seoTitle: pickFirst(en.data.seoTitle, ""),
         seoDescription: pickFirst(en.data.seoDescription, ""),
+        keyTakeaway: pickFirst(en.data.keyTakeaway, ""),
         videoUrl: pickFirst(en.data.videoUrl, ""),
         videoType: pickFirst(en.data.videoType, ""),
         content: en.html,

@@ -109,7 +109,7 @@
     
     <span class="blog-tags">#phishing #incident-response #microsoft-365 #entra-id #azure-ad #exchange-online #mfa #conditional-access #audit-logs #onedrive</span></div>
         
-        <figure class="post-hero-image">
+        <figure class="post-hero-media post-hero-image">
           <img src="/assets/blog/Laptop-repair-in-phishing-crisis.webp" alt="Phishing Checkliste" loading="eager" decoding="async">
         </figure>
       </div>
@@ -119,6 +119,7 @@
       <div class="wrap">
         <article class="post-content" id="postContent" aria-labelledby="postTitle">
           <div class="post-article">
+            
             <p>Phishing can escalate within minutes—so you need a clear, repeatable flow. This checklist helps you <strong>stabilize a Microsoft 365/Entra ID account quickly</strong>, <strong>limit the impact</strong>, and <strong>prevent further compromise</strong>.</p>
 <h2>What happened?</h2>
 <p>For the first triage, you need two key facts:</p>
@@ -276,21 +277,28 @@ In <strong>Entra ID → User → Sign-in logs</strong>, look for:</p>
 <li>Notify the data protection officer (if data exfiltration is possible)</li>
 </ul>
 <h2>FAQ / Troubleshooting</h2>
-<p><strong>Do I need the full checklist if the user “only” clicked the link?</strong><br>Recommended yes—at least <strong>endpoint check + session revoke + MFA review</strong>, because drive-by downloads and session theft can happen.</p>
-<p><strong>Why share the new password by phone?</strong><br>Because email/chat channels may be compromised or monitored during an incident.</p>
-<p><strong>Is changing the password enough?</strong><br>Often not. If an attacker already has a token/session, access may continue unless you <strong>sign out/revoke sessions</strong>.</p>
-<p><strong>What mailbox rules are most suspicious?</strong><br>Rules that <strong>forward</strong>, <strong>delete</strong>, mark as read, or filter by sender/subject—classic attacker tactics to hide traces.</p>
-<p><strong>How do I spot OAuth phishing?</strong><br>If an app suddenly has broad permissions (mail, files, Teams) without a clear business reason: <strong>revoke consent</strong>, remove the app, and review logs.</p>
-<h2>Pro tip</h2>
-<p>Store this checklist as an internal <strong>runbook</strong> and add your exact toolchain (EDR, ticketing, SIEM). In a real incident, clear click paths save minutes.</p>
+<h3>Do I need the full checklist if the user “only” clicked the link?</h3>
+<p>Recommended yes—at least <strong>endpoint check + session revoke + MFA review</strong>, because drive-by downloads and session theft can happen.</p>
+<h3>Why share the new password by phone?</h3>
+<p>Because email/chat channels may be compromised or monitored during an incident.</p>
+<h3>Is changing the password enough?</h3>
+<p>Often not. If an attacker already has a token/session, access may continue unless you <strong>sign out/revoke sessions</strong>.</p>
+<h3>What mailbox rules are most suspicious?</h3>
+<p>Rules that <strong>forward</strong>, <strong>delete</strong>, mark as read, or filter by sender/subject—classic attacker tactics to hide traces.</p>
+<h3>How do I spot OAuth phishing?</h3>
+<p>If an app suddenly has broad permissions (mail, files, Teams) without a clear business reason: <strong>revoke consent</strong>, remove the app, and review logs.</p>
+<aside class="article-callout article-callout--tip">
+  <div class="article-callout__heading"><span class="article-callout__icon" aria-hidden="true">💡</span><strong>Pro tip</strong></div>
+  <div class="article-callout__content"><p>Store this checklist as an internal <strong>runbook</strong> and add your exact toolchain (EDR, ticketing, SIEM). In a real incident, clear click paths save minutes.</p></div>
+</aside>
+
 <h2>Summary</h2>
-<ul>
+<ul class="article-checklist">
 <li>First: <strong>password reset + sign-out/revoke sessions + MFA cleanup</strong>.</li>
 <li>Then: check <strong>mailbox rules, sharing, logs, roles, and apps</strong>.</li>
 <li>If exfiltration is suspected: <strong>escalate org-wide</strong> (admin resets, global sign-out, data protection).</li>
 </ul>
           </div>
-          
         </article>
 
         
@@ -298,6 +306,34 @@ In <strong>Entra ID → User → Sign-in logs</strong>, look for:</p>
       <h2 id="relatedPostsHeading">Keep learning</h2>
       <div class="post-related-grid">
         
+            <article class="post-related-card blog-card">
+              <a class="post-related-card-link blog-card-link" href="/blog/auf-phishing-geklickt/" aria-label="Auf Phishing geklickt – was jetzt?" data-transition>
+                <div class="post-related-thumb blog-thumb">
+                  <img class="blog-thumb-img" src="/assets/blog/auf-phishing-geklickt.webp" alt="Smartphone mit verdächtiger Phishing-Nachricht und einer Checkliste mit Sicherheitsmassnahmen" loading="lazy" decoding="async">
+                </div>
+                <div class="post-related-body blog-card-body">
+                  <span class="learn-card-category">Phishing &amp; scams</span>
+                  <time class="post-related-date blog-date" datetime="2026-09-02">02.09.2026</time>
+                  <h3 class="post-related-title blog-card-title">Auf Phishing geklickt – was jetzt?</h3>
+                  <p class="post-related-excerpt blog-card-excerpt">Auf einen verdächtigen Link geklickt oder Daten eingegeben? Diese Schritte helfen dir, den möglichen Schaden schnell zu begrenzen.</p>
+                </div>
+              </a>
+            </article>
+          
+            <article class="post-related-card blog-card">
+              <a class="post-related-card-link blog-card-link" href="/blog/phishing-erkennen/" aria-label="Phishing erkennen: Diese Warnsignale solltest du kennen" data-transition>
+                <div class="post-related-thumb blog-thumb">
+                  <img class="blog-thumb-img" src="/assets/blog/phishing-erkennen.webp" alt="Beispiel einer verdächtigen E-Mail mit Fokus auf Absender, Link und dringende Aufforderung" loading="lazy" decoding="async">
+                </div>
+                <div class="post-related-body blog-card-body">
+                  <span class="learn-card-category">Phishing &amp; scams</span>
+                  <time class="post-related-date blog-date" datetime="2026-09-02">02.09.2026</time>
+                  <h3 class="post-related-title blog-card-title">Phishing erkennen: Diese Warnsignale solltest du kennen</h3>
+                  <p class="post-related-excerpt blog-card-excerpt">Phishing kann heute täuschend echt aussehen. Lerne, welche Warnsignale wirklich wichtig sind und wie du verdächtige Nachrichten richtig prüfst.</p>
+                </div>
+              </a>
+            </article>
+          
             <article class="post-related-card blog-card">
               <a class="post-related-card-link blog-card-link" href="/en/blog/wetransfer-phishing-html-onedrive/" aria-label="HTML Attack" data-transition>
                 <div class="post-related-thumb blog-thumb">

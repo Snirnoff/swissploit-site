@@ -21,5 +21,7 @@ Du hast in OneDrive aus Versehen eine Datei oder einen Ordner gelöscht und find
 ## Ergebnis
 Zurück im OneDrive-Ordner ist alles wieder **genau dort**, wo du es gelöscht hast.
 
-## Profi-Tipp
-Wenn du das OneDrive-Symbol nicht siehst: Startmenü öffnen, nach **OneDrive** suchen, anmelden – und nochmals prüfen. 😉
+<aside class="article-callout article-callout--tip">
+  <div class="article-callout__heading"><span class="article-callout__icon" aria-hidden="true">💡</span><strong>Profi-Tipp</strong></div>
+  <div class="article-callout__content"><p>Wenn du das OneDrive-Symbol nicht siehst: Startmenü öffnen, nach <strong>OneDrive</strong> suchen, anmelden – und nochmals prüfen. 😉</p></div>
+</aside>

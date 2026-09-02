@@ -63,29 +63,35 @@ Wenn jemand dein Microsoft-Passwort hat, kann er dein Konto übernehmen – oft 
 
 ## Häufige Fragen / Troubleshooting
 
-**Ich sehe die Seite „Sicherheitsinfos“ nicht – wo muss ich hin?**  
+### Ich sehe die Seite „Sicherheitsinfos“ nicht – wo muss ich hin?
+
 Gehe direkt auf `mysignins.microsoft.com/security-info` und melde dich an.
 
-**Ich finde das QR-Code-Symbol im Authenticator nicht.**  
+### Ich finde das QR-Code-Symbol im Authenticator nicht.
+
 Öffne die App und suche nach „Konto hinzufügen“/„+“ oder dem QR-Symbol. Je nach Version ist es unten rechts oder im Menü.
 
-**Der Zahlentest kommt nicht oder schlägt fehl.**  
+### Der Zahlentest kommt nicht oder schlägt fehl.
+
 Prüfe Internetverbindung am Handy, schliesse die Authenticator-App komplett und öffne sie neu. Starte den Vorgang am PC nochmals mit „Weiter“.
 
-**Kann ich MFA auch ohne Authenticator-App nutzen?**  
+### Kann ich MFA auch ohne Authenticator-App nutzen?
+
 Meist ja (SMS/Anruf), aber **Authenticator ist empfehlenswert**, weil bequemer und in der Regel sicherer.
 
-**Was, wenn ich mein Handy verliere?**  
+### Was, wenn ich mein Handy verliere?
+
 Lege (falls möglich) eine zweite Methode/Backup an (z. B. zweites Gerät oder alternative Methode), damit du nicht ausgesperrt wirst.
 
-<div class="callout tip">
-  <div class="callout-title"><strong>💡 Tipp</strong></div>
-  Aktiviere nach dem Setup <strong>mindestens eine Backup-Option</strong> (z. B. zweite Methode), damit du bei Gerätewechsel oder Verlust weiterhin Zugriff hast.
-</div>
+<aside class="article-callout article-callout--tip">
+  <div class="article-callout__heading"><span class="article-callout__icon" aria-hidden="true">💡</span><strong>Tipp</strong></div>
+  <div class="article-callout__content"><p>Aktiviere nach dem Setup <strong>mindestens eine Backup-Option</strong> (z. B. zweite Methode), damit du bei Gerätewechsel oder Verlust weiterhin Zugriff hast.</p></div>
+</aside>
 
 
 ## Kurzfassung
 
+<!-- article-checklist -->
 - Öffne `aka.ms/mfasetup` und melde dich an.
 - **Microsoft Authenticator** auswählen, App installieren, **QR-Code scannen**.
 - Zahlentest bestätigen – danach ist MFA aktiv und dein Konto deutlich besser geschützt.

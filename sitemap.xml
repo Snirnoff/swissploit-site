@@ -10,6 +10,26 @@
     <loc>https://swissploit.ch/en/learn/</loc>
   </url>
   <url>
+    <loc>https://swissploit.ch/blog/auf-phishing-geklickt/</loc>
+    <lastmod>2026-09-02</lastmod>
+    <image:image><image:loc>https://swissploit.ch/assets/blog/auf-phishing-geklickt.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://swissploit.ch/blog/passwoerter-passwortmanager/</loc>
+    <lastmod>2026-09-02</lastmod>
+    <image:image><image:loc>https://swissploit.ch/assets/blog/passwoerter-passwortmanager.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://swissploit.ch/blog/phishing-erkennen/</loc>
+    <lastmod>2026-09-02</lastmod>
+    <image:image><image:loc>https://swissploit.ch/assets/blog/phishing-erkennen.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://swissploit.ch/blog/social-engineering/</loc>
+    <lastmod>2026-09-02</lastmod>
+    <image:image><image:loc>https://swissploit.ch/assets/blog/social-engineering.webp</image:loc></image:image>
+  </url>
+  <url>
     <loc>https://swissploit.ch/blog/cyberseal-fuer-wen-und-was-es-aussagt/</loc>
     <lastmod>2026-03-11</lastmod>
     <image:image><image:loc>https://swissploit.ch/assets/blog/cyberseal_TN.webp</image:loc></image:image>

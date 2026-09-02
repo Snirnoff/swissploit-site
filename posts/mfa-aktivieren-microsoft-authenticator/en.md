@@ -63,27 +63,34 @@ If someone has your Microsoft password, they can take over your account — ofte
 
 ## FAQ / Troubleshooting
 
-**I can’t find the “Security info” page — where is it?**  
+### I can’t find the “Security info” page — where is it?
+
 Go directly to `mysignins.microsoft.com/security-info` and sign in.
 
-**I don’t see the QR-code button in the Authenticator app.**  
+### I don’t see the QR-code button in the Authenticator app.
+
 Look for “Add account”, a “+” icon, or a QR icon — the location can vary by version.
 
-**The number test doesn’t show up or fails.**  
+### The number test doesn’t show up or fails.
+
 Check your phone’s internet connection, fully close and reopen the Authenticator app, then restart the step on your PC.
 
-**Can I use MFA without the Authenticator app?**  
+### Can I use MFA without the Authenticator app?
+
 Often yes (SMS/call), but **Authenticator is recommended** because it’s more convenient and typically more secure.
 
-**What if I lose my phone?**  
+### What if I lose my phone?
+
 Add at least one backup method if possible, so you don’t lock yourself out when switching devices.
 
-## Pro tip
-
-After setup, add **at least one backup option** (a second method) so you keep access if you lose or replace your phone.
+<aside class="article-callout article-callout--tip">
+  <div class="article-callout__heading"><span class="article-callout__icon" aria-hidden="true">💡</span><strong>Pro tip</strong></div>
+  <div class="article-callout__content"><p>After setup, add <strong>at least one backup option</strong> (a second method) so you keep access if you lose or replace your phone.</p></div>
+</aside>
 
 ## TL;DR
 
+<!-- article-checklist -->
 - Go to `aka.ms/mfasetup` and sign in.
 - Pick **Microsoft Authenticator**, install it, and **scan the QR code**.
 - Confirm the number test — MFA is enabled and your account is significantly safer.

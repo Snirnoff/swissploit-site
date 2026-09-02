@@ -13,10 +13,10 @@ excerpt: A real Microsoft account takeover!
 
 <p>In this post I break down a real incident (with the video embedded) and explain <strong>what actually happens</strong> and <strong>why an HTML file can be dangerous</strong> even when it looks harmless.</p>
 
-<div class="blog-callout">
-  <p><strong>What this attack is about</strong><br>
-  Attackers use a legit-looking WeTransfer download to deliver an <strong>HTML file</strong>. When opened, it launches a browser and shows a <strong>fake OneDrive/Microsoft login page</strong>. If you type credentials, they get captured.</p>
-</div>
+<aside class="article-callout article-callout--key">
+  <div class="article-callout__heading"><span class="article-callout__icon" aria-hidden="true">✓</span><strong>What this attack is about</strong></div>
+  <div class="article-callout__content"><p>Attackers use a legit-looking WeTransfer download to deliver an <strong>HTML file</strong>. When opened, it launches a browser and shows a <strong>fake OneDrive/Microsoft login page</strong>. If you type credentials, they get captured.</p></div>
+</aside>
 
 ## Why WeTransfer is used so often
 
@@ -39,9 +39,5 @@ excerpt: A real Microsoft account takeover!
 ## How to protect your Microsoft 365 account
 
 <p>Enable <strong>MFA</strong> (Authenticator preferred), use a <strong>password manager</strong>, and review suspicious sign-ins. For businesses, consider Security Defaults or Conditional Access. And teach teams that “HTML file ≠ document”.</p>
-
-## Video
-
-<p>The embedded video shows the incident flow and what to look for in real life.</p>
 
 <p><strong>Key takeaway:</strong> WeTransfer itself isn’t the threat. Attackers use the trusted download flow as camouflage. The danger starts when an HTML file triggers a login prompt.</p>

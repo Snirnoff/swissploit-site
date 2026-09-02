@@ -10,10 +10,10 @@ thumb: "assets/blog/cyberseal_TN.webp"
 
 CyberSeal ist ein Schweizer Gütesiegel für IT-Dienstleister, die für Unternehmen IT-Infrastrukturen aufbauen, betreiben oder mitverantworten.
 
-<div class="callout info">
-  <div class="callout-title"><strong>ℹ️ CyberSeal</strong></div>
-  ist in erster Linie eine Orientierungshilfe für KMU. Sie zeigt, dass ein IT-Dienstleister zentrale Sicherheitsgrundlagen strukturiert umgesetzt und ein Audit bestanden hat.
-</div>
+<aside class="article-callout article-callout--info">
+  <div class="article-callout__heading"><span class="article-callout__icon" aria-hidden="true">ℹ</span><strong>CyberSeal</strong></div>
+  <div class="article-callout__content"><p>ist in erster Linie eine Orientierungshilfe für KMU. Sie zeigt, dass ein IT-Dienstleister zentrale Sicherheitsgrundlagen strukturiert umgesetzt und ein Audit bestanden hat.</p></div>
+</aside>
 
 ## Für wen ist CyberSeal gedacht?
 
@@ -30,10 +30,10 @@ Für KMU ist das Label vor allem relevant, da sie folgendermassen profitieren k�
 - Vereinfachte Wahl des IT-Dienstleisters durch das unabhängige Gütesiegel.
 
 
-<div class="callout tip">
-  <div class="callout-title"><strong>💡 Tipp für KMU:</strong></div>
-  Nutzt CyberSeal als Checkliste-Fragebogen im Auswahlprozess: „Wie löst ihr Patch-Management? Wie ist euer Zugriff auf Kundensysteme geregelt? Wie testet ihr Restore?“
-</div>
+<aside class="article-callout article-callout--tip">
+  <div class="article-callout__heading"><span class="article-callout__icon" aria-hidden="true">💡</span><strong>Tipp für KMU:</strong></div>
+  <div class="article-callout__content"><p>Nutzt CyberSeal als Checkliste-Fragebogen im Auswahlprozess: „Wie löst ihr Patch-Management? Wie ist euer Zugriff auf Kundensysteme geregelt? Wie testet ihr Restore?“</p></div>
+</aside>
 
 ## Was sagt CyberSeal wirklich aus – und was nicht?
 
@@ -44,10 +44,10 @@ Das Label steht sinngemäss für:
 - nachvollziehbare Prozesse,
 - und Mindestanforderungen, die im Audit geprüft werden.
 
-<div class="callout warn">
-  <div class="callout-title"><strong>⚠️ Wichtig</strong></div>
-  CyberSeal ist keine Garantie für absolute Sicherheit. Es ist ein Zeichen dafür, dass die wichtigsten Sicherheitsgrundlagen im KMU-Umfeld systematisch umgesetzt werden – wenn auch nicht „perfekt“, so doch zumindest überprüfbar.
-</div>
+<aside class="article-callout article-callout--warning">
+  <div class="article-callout__heading"><span class="article-callout__icon" aria-hidden="true">⚠</span><strong>Wichtig</strong></div>
+  <div class="article-callout__content"><p>CyberSeal ist keine Garantie für absolute Sicherheit. Es ist ein Zeichen dafür, dass die wichtigsten Sicherheitsgrundlagen im KMU-Umfeld systematisch umgesetzt werden – wenn auch nicht „perfekt“, so doch zumindest überprüfbar.</p></div>
+</aside>
 
 ## Welche Anforderungen muss ein Unternehmen erfüllen?
 
@@ -78,10 +78,10 @@ CyberSeal umfasst unter anderem Themen, die im KMU-Alltag immer wieder über Sic
 - **Physische Sicherheit/Zutrittskontrollen**
 - **Datenschutz & regulatorische Vorgaben**
 
-<div class="callout tip">
-  <div class="callout-title"><strong>💡 Praxis-Interpretation</strong></div>
-  CyberSeal bedeutet mehr als nur „Wir haben eine Firewall“. CyberSeal bedeutet, dass Firewall-Regeln nachvollziehbar sind, geprüft werden und in ein gesamtes Security-Konzept (inkl. Backup/Restore, Zugriff, Prozesse) passen.
-</div>
+<aside class="article-callout article-callout--tip">
+  <div class="article-callout__heading"><span class="article-callout__icon" aria-hidden="true">💡</span><strong>Praxis-Interpretation</strong></div>
+  <div class="article-callout__content"><p>CyberSeal bedeutet mehr als nur „Wir haben eine Firewall“. CyberSeal bedeutet, dass Firewall-Regeln nachvollziehbar sind, geprüft werden und in ein gesamtes Security-Konzept (inkl. Backup/Restore, Zugriff, Prozesse) passen.</p></div>
+</aside>
 
 ## Was darf ein KMU von einem CyberSeal-Partner erwarten?
 
@@ -101,10 +101,10 @@ Nicht direkt. Zwar beschäftigen sich beide mit Informationssicherheit, jedoch m
 - **ISO/IEC 27001**: umfassendes Informationssicherheits-Managementsystem (international, deutlich breiter und aufwendiger)
 - **CyberSeal**: fokussiert auf wirksame Cybersecurity-Massnahmen im KMU-Alltag, praxisnah und Schweizer Kontext
 
-<div class="callout info">
-  <div class="callout-title"><strong>ℹ️ Merke:</strong></div>
-  Die ISO 27001 bewertet ein umfassendes Managementsystem. CyberSeal hingegen prüft, ob die wichtigsten Sicherheitsgrundlagen wirksam umgesetzt sind.
-</div>
+<aside class="article-callout article-callout--info">
+  <div class="article-callout__heading"><span class="article-callout__icon" aria-hidden="true">ℹ</span><strong>Merke:</strong></div>
+  <div class="article-callout__content"><p>Die ISO 27001 bewertet ein umfassendes Managementsystem. CyberSeal hingegen prüft, ob die wichtigsten Sicherheitsgrundlagen wirksam umgesetzt sind.</p></div>
+</aside>
 
 ## Fazit
 

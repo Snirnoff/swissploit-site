@@ -109,9 +109,15 @@
     
     <span class="blog-tags">#security #phishing #microsoft365 #onedrive #outlook</span></div>
         
-        <figure class="post-hero-image">
-          <img src="/assets/blog/h355-014.png" alt="HTML Attack" loading="eager" decoding="async">
-        </figure>
+        <div class="post-hero-media post-hero-video">
+          <iframe
+            src="https://www.youtube-nocookie.com/embed/5aVeWRinSxM"
+            title="HTML Attack – video"
+            loading="lazy"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen></iframe>
+        </div>
       </div>
     </section>
 
@@ -119,14 +125,15 @@
       <div class="wrap">
         <article class="post-content" id="postContent" aria-labelledby="postTitle">
           <div class="post-article">
+            
             <p><strong>WeTransfer phishing</strong> is currently one of the most effective ways to compromise <strong>Microsoft 365 / OneDrive / Outlook accounts</strong> — because the flow looks normal: download link, open file, login.</p>
 
 <p>In this post I break down a real incident (with the video embedded) and explain <strong>what actually happens</strong> and <strong>why an HTML file can be dangerous</strong> even when it looks harmless.</p>
 
-<div class="blog-callout">
-  <p><strong>What this attack is about</strong><br>
-  Attackers use a legit-looking WeTransfer download to deliver an <strong>HTML file</strong>. When opened, it launches a browser and shows a <strong>fake OneDrive/Microsoft login page</strong>. If you type credentials, they get captured.</p>
-</div>
+<aside class="article-callout article-callout--key">
+  <div class="article-callout__heading"><span class="article-callout__icon" aria-hidden="true">✓</span><strong>What this attack is about</strong></div>
+  <div class="article-callout__content"><p>Attackers use a legit-looking WeTransfer download to deliver an <strong>HTML file</strong>. When opened, it launches a browser and shows a <strong>fake OneDrive/Microsoft login page</strong>. If you type credentials, they get captured.</p></div>
+</aside>
 
 <h2>Why WeTransfer is used so often</h2>
 <p>WeTransfer is widely trusted. Attackers exploit that trust to increase clicks and reduce suspicion, compared to unknown file-hosting domains.</p>
@@ -145,27 +152,8 @@
 <h2>How to protect your Microsoft 365 account</h2>
 <p>Enable <strong>MFA</strong> (Authenticator preferred), use a <strong>password manager</strong>, and review suspicious sign-ins. For businesses, consider Security Defaults or Conditional Access. And teach teams that “HTML file ≠ document”.</p>
 
-<h2>Video</h2>
-<p>The embedded video shows the incident flow and what to look for in real life.</p>
-
 <p><strong>Key takeaway:</strong> WeTransfer itself isn’t the threat. Attackers use the trusted download flow as camouflage. The danger starts when an HTML file triggers a login prompt.</p>
           </div>
-          
-    <section class="post-video-section" aria-labelledby="post-video-heading-wetransfer-phishing-html-onedrive">
-      <h2 id="post-video-heading-wetransfer-phishing-html-onedrive">Explained in the video</h2>
-      <div class="post-video">
-        <div class="video-embed ">
-          <iframe
-            src="https://www.youtube-nocookie.com/embed/5aVeWRinSxM"
-            title="HTML Attack - Explained in the video"
-            loading="lazy"
-            referrerpolicy="strict-origin-when-cross-origin"
-            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen></iframe>
-        </div>
-      </div>
-    </section>
-  
         </article>
 
         
@@ -173,6 +161,34 @@
       <h2 id="relatedPostsHeading">Keep learning</h2>
       <div class="post-related-grid">
         
+            <article class="post-related-card blog-card">
+              <a class="post-related-card-link blog-card-link" href="/blog/auf-phishing-geklickt/" aria-label="Auf Phishing geklickt – was jetzt?" data-transition>
+                <div class="post-related-thumb blog-thumb">
+                  <img class="blog-thumb-img" src="/assets/blog/auf-phishing-geklickt.webp" alt="Smartphone mit verdächtiger Phishing-Nachricht und einer Checkliste mit Sicherheitsmassnahmen" loading="lazy" decoding="async">
+                </div>
+                <div class="post-related-body blog-card-body">
+                  <span class="learn-card-category">Phishing &amp; scams</span>
+                  <time class="post-related-date blog-date" datetime="2026-09-02">02.09.2026</time>
+                  <h3 class="post-related-title blog-card-title">Auf Phishing geklickt – was jetzt?</h3>
+                  <p class="post-related-excerpt blog-card-excerpt">Auf einen verdächtigen Link geklickt oder Daten eingegeben? Diese Schritte helfen dir, den möglichen Schaden schnell zu begrenzen.</p>
+                </div>
+              </a>
+            </article>
+          
+            <article class="post-related-card blog-card">
+              <a class="post-related-card-link blog-card-link" href="/blog/phishing-erkennen/" aria-label="Phishing erkennen: Diese Warnsignale solltest du kennen" data-transition>
+                <div class="post-related-thumb blog-thumb">
+                  <img class="blog-thumb-img" src="/assets/blog/phishing-erkennen.webp" alt="Beispiel einer verdächtigen E-Mail mit Fokus auf Absender, Link und dringende Aufforderung" loading="lazy" decoding="async">
+                </div>
+                <div class="post-related-body blog-card-body">
+                  <span class="learn-card-category">Phishing &amp; scams</span>
+                  <time class="post-related-date blog-date" datetime="2026-09-02">02.09.2026</time>
+                  <h3 class="post-related-title blog-card-title">Phishing erkennen: Diese Warnsignale solltest du kennen</h3>
+                  <p class="post-related-excerpt blog-card-excerpt">Phishing kann heute täuschend echt aussehen. Lerne, welche Warnsignale wirklich wichtig sind und wie du verdächtige Nachrichten richtig prüfst.</p>
+                </div>
+              </a>
+            </article>
+          
             <article class="post-related-card blog-card">
               <a class="post-related-card-link blog-card-link" href="/en/blog/notfall-checkliste-phishing-microsoft-365/" aria-label="Phishing Checkliste" data-transition>
                 <div class="post-related-thumb blog-thumb">

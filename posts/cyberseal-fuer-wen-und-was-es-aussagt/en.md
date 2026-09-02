@@ -10,10 +10,10 @@ thumb: "assets/blog/cyberseal_TN.webp"
 
 CyberSeal is a Swiss quality label for IT service providers who build, operate, or share responsibility for IT infrastructures for companies.
 
-<div class="callout info">
-  <div class="callout-title"><strong>ℹ️ CyberSeal</strong></div>
-  is primarily a guide for SMBs. It shows that an IT service provider has implemented key security fundamentals in a structured way and has passed an audit.
-</div>
+<aside class="article-callout article-callout--info">
+  <div class="article-callout__heading"><span class="article-callout__icon" aria-hidden="true">ℹ</span><strong>CyberSeal</strong></div>
+  <div class="article-callout__content"><p>is primarily a guide for SMBs. It shows that an IT service provider has implemented key security fundamentals in a structured way and has passed an audit.</p></div>
+</aside>
 
 ## Who is CyberSeal for?
 
@@ -29,10 +29,10 @@ For SMBs, the label is particularly relevant because they benefit in the followi
 - Faster response and lower costs in case of an incident
 - Easier selection of an IT service provider thanks to the independent quality label
 
-<div class="callout tip">
-  <div class="callout-title"><strong>💡 Tip for SMBs:</strong></div>
-  Use CyberSeal as a checklist in your selection process: “How do you handle patch management? How is access to customer systems governed? How do you test restores?”
-</div>
+<aside class="article-callout article-callout--tip">
+  <div class="article-callout__heading"><span class="article-callout__icon" aria-hidden="true">💡</span><strong>Tip for SMBs:</strong></div>
+  <div class="article-callout__content"><p>Use CyberSeal as a checklist in your selection process: “How do you handle patch management? How is access to customer systems governed? How do you test restores?”</p></div>
+</aside>
 
 ## What does CyberSeal really say — and what does it not?
 
@@ -43,10 +43,10 @@ In practice, the label stands for:
 - traceable processes,
 - and minimum requirements that are checked in an audit.
 
-<div class="callout warn">
-  <div class="callout-title"><strong>⚠️ Important</strong></div>
-  CyberSeal is not a guarantee of absolute security. It is a sign that the most important security fundamentals in the SMB environment are implemented systematically — not “perfectly,” but at least verifiably.
-</div>
+<aside class="article-callout article-callout--warning">
+  <div class="article-callout__heading"><span class="article-callout__icon" aria-hidden="true">⚠</span><strong>Important</strong></div>
+  <div class="article-callout__content"><p>CyberSeal is not a guarantee of absolute security. It is a sign that the most important security fundamentals in the SMB environment are implemented systematically — not “perfectly,” but at least verifiably.</p></div>
+</aside>
 
 ## What requirements must a company meet?
 
@@ -77,10 +77,10 @@ CyberSeal includes, among other things, topics that repeatedly determine securit
 - **Physical security/access controls**
 - **Data protection and regulatory requirements**
 
-<div class="callout tip">
-  <div class="callout-title"><strong>💡 Practical interpretation</strong></div>
-  CyberSeal means more than “we have a firewall.” It means firewall rules are traceable, reviewed, and fit into an overall security concept (including backup/restore, access, and processes).
-</div>
+<aside class="article-callout article-callout--tip">
+  <div class="article-callout__heading"><span class="article-callout__icon" aria-hidden="true">💡</span><strong>Practical interpretation</strong></div>
+  <div class="article-callout__content"><p>CyberSeal means more than “we have a firewall.” It means firewall rules are traceable, reviewed, and fit into an overall security concept (including backup/restore, access, and processes).</p></div>
+</aside>
 
 ## What can an SMB expect from a CyberSeal partner?
 
@@ -100,10 +100,10 @@ Not directly. Both deal with information security, but with different approaches
 - **ISO/IEC 27001**: comprehensive information security management system (international, broader and more demanding)
 - **CyberSeal**: focused on effective cybersecurity measures in the SMB day-to-day reality, practical and tailored to the Swiss context
 
-<div class="callout info">
-  <div class="callout-title"><strong>ℹ️ Key takeaway</strong></div>
-  ISO 27001 evaluates a comprehensive management system. CyberSeal checks whether the most important security fundamentals for SMBs are effectively implemented.
-</div>
+<aside class="article-callout article-callout--info">
+  <div class="article-callout__heading"><span class="article-callout__icon" aria-hidden="true">ℹ</span><strong>Key takeaway</strong></div>
+  <div class="article-callout__content"><p>ISO 27001 evaluates a comprehensive management system. CyberSeal checks whether the most important security fundamentals for SMBs are effectively implemented.</p></div>
+</aside>
 
 ## Conclusion
 

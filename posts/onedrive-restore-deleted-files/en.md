@@ -22,5 +22,7 @@ You deleted a file or folder in OneDrive and can’t find it anymore.
 ## Result
 Go back to your OneDrive folder — everything is back **exactly where it was**.
 
-## Pro tip
-If you don’t see the OneDrive icon, open the Start menu and search for **OneDrive**, then sign in and try again.
+<aside class="article-callout article-callout--tip">
+  <div class="article-callout__heading"><span class="article-callout__icon" aria-hidden="true">💡</span><strong>Pro tip</strong></div>
+  <div class="article-callout__content"><p>If you don’t see the OneDrive icon, open the Start menu and search for <strong>OneDrive</strong>, then sign in and try again.</p></div>
+</aside>

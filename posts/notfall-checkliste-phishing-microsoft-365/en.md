@@ -138,27 +138,34 @@ Treat the account as **compromised**. Run the **full checklist**.
 
 ## FAQ / Troubleshooting
 
-**Do I need the full checklist if the user “only” clicked the link?**  
+### Do I need the full checklist if the user “only” clicked the link?
+
 Recommended yes—at least **endpoint check + session revoke + MFA review**, because drive-by downloads and session theft can happen.
 
-**Why share the new password by phone?**  
+### Why share the new password by phone?
+
 Because email/chat channels may be compromised or monitored during an incident.
 
-**Is changing the password enough?**  
+### Is changing the password enough?
+
 Often not. If an attacker already has a token/session, access may continue unless you **sign out/revoke sessions**.
 
-**What mailbox rules are most suspicious?**  
+### What mailbox rules are most suspicious?
+
 Rules that **forward**, **delete**, mark as read, or filter by sender/subject—classic attacker tactics to hide traces.
 
-**How do I spot OAuth phishing?**  
+### How do I spot OAuth phishing?
+
 If an app suddenly has broad permissions (mail, files, Teams) without a clear business reason: **revoke consent**, remove the app, and review logs.
 
-## Pro tip
-
-Store this checklist as an internal **runbook** and add your exact toolchain (EDR, ticketing, SIEM). In a real incident, clear click paths save minutes.
+<aside class="article-callout article-callout--tip">
+  <div class="article-callout__heading"><span class="article-callout__icon" aria-hidden="true">💡</span><strong>Pro tip</strong></div>
+  <div class="article-callout__content"><p>Store this checklist as an internal <strong>runbook</strong> and add your exact toolchain (EDR, ticketing, SIEM). In a real incident, clear click paths save minutes.</p></div>
+</aside>
 
 ## Summary
 
+<!-- article-checklist -->
 - First: **password reset + sign-out/revoke sessions + MFA cleanup**.
 - Then: check **mailbox rules, sharing, logs, roles, and apps**.
 - If exfiltration is suspected: **escalate org-wide** (admin resets, global sign-out, data protection).
