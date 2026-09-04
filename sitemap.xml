@@ -30,14 +30,14 @@
     <image:image><image:loc>https://swissploit.ch/assets/blog/passwoerter-passwortmanager.webp</image:loc></image:image>
   </url>
   <url>
-    <loc>https://swissploit.ch/blog/qr-phishing-quishing/</loc>
-    <lastmod>2026-09-02</lastmod>
-    <image:image><image:loc>https://swissploit.ch/assets/blog/qr-phishing-quishing.webp</image:loc></image:image>
-  </url>
-  <url>
     <loc>https://swissploit.ch/blog/phishing-erkennen/</loc>
     <lastmod>2026-09-02</lastmod>
     <image:image><image:loc>https://swissploit.ch/assets/blog/phishing-erkennen.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://swissploit.ch/blog/qr-phishing-quishing/</loc>
+    <lastmod>2026-09-02</lastmod>
+    <image:image><image:loc>https://swissploit.ch/assets/blog/qr-phishing-quishing.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://swissploit.ch/blog/smishing-phishing-per-sms/</loc>
