@@ -517,7 +517,8 @@ function renderSiteHeaderHtml(lang) {
   return `<header class="site-header" role="banner">
     <div class="wrap headerbar">
       <a class="brand" href="/index.html#intro" aria-label="Swissploit Home" data-transition>
-        <img class="brand-logo-image header-logo-image" src="/assets/swissploit-brand-logo.png" alt="Swissploit Logo" width="120" height="49" decoding="async">
+        <img class="brand-logo-image header-logo-image" src="/assets/swissploit-brand-logo2.png" alt="Swissploit Logo" width="120" height="49" decoding="async">
+        <span class="brand-text">Swissploit</span>
       </a>
 
       ${renderPrimaryNavHtml(lang)}
@@ -771,10 +772,10 @@ function renderBlogIndexPage(posts, lang) {
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>${escapeHtml(pageTitle)}</title>
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon-192x192.png">
-  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-  <link rel="icon" type="image/png" href="/assets/JustPlus.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/swissploit-brand-logo2.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/swissploit-brand-logo2.png">
+  <link rel="apple-touch-icon" href="/assets/swissploit-brand-logo2.png">
+  <link rel="icon" type="image/png" href="/assets/swissploit-brand-logo2.png">
   <meta name="theme-color" content="#05070b">
 
   <meta name="description" content="${escapeAttr(metaDescription)}" />
@@ -1001,10 +1002,10 @@ function renderStaticPostPage(post, lang, allPosts) {
 
   ${renderPostAlternateLinks(post, lang)}
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon-192x192.png">
-  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-  <link rel="icon" type="image/png" href="/assets/JustPlus.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/swissploit-brand-logo2.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/swissploit-brand-logo2.png">
+  <link rel="apple-touch-icon" href="/assets/swissploit-brand-logo2.png">
+  <link rel="icon" type="image/png" href="/assets/swissploit-brand-logo2.png">
   <meta name="theme-color" content="#05070b">
 
   <script type="application/ld+json">${renderPostJsonLd(post, lang, txt)}</script>
