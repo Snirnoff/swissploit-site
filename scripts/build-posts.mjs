@@ -385,7 +385,6 @@ function renderPostCard(post, lang, topicId) {
     post?.urls?.de ||
     post?.urls?.en ||
     (lang === "en" ? "/en/learn/" : "/learn/");
-  const tags = (post.tags || []).slice(0, 3).map((x) => `#${escapeHtml(x)}`).join(" ");
   const shortDescription = getShortDescription(post, lang);
   const image = getPostImage(post);
   const imageAlt = getPostImageAlt(post, lang, txt.title || "");
@@ -408,18 +407,14 @@ function renderPostCard(post, lang, topicId) {
       data-search="${escapeAttr(searchText)}">
       <a class="blog-card-link" href="${escapeAttr(href.replace(BASE_URL, ""))}" aria-label="${escapeAttr(txt.title || "")}" data-transition>
         <div class="blog-thumb">
-          ${image ? `
-            <img
-              class="blog-thumb-img"
-              src="${escapeAttr(publicAssetUrl(image))}"
-              alt="${escapeAttr(imageAlt)}"
-              loading="lazy"
-              decoding="async">
-          ` : `
-            <div class="blog-thumb-inner">
-              <span class="blog-thumb-label">POST</span>
-            </div>
-          `}
+          ${image ? `<img
+            class="blog-thumb-img"
+            src="${escapeAttr(publicAssetUrl(image))}"
+            alt="${escapeAttr(imageAlt)}"
+            loading="lazy"
+            decoding="async">` : `<div class="blog-thumb-inner">
+            <span class="blog-thumb-label">POST</span>
+          </div>`}
         </div>
 
         <div class="blog-card-body">
@@ -427,107 +422,10 @@ function renderPostCard(post, lang, topicId) {
 
           <h3 class="blog-card-title" id="${escapeAttr(titleId)}">${escapeHtml(txt.title || "")}</h3>
           <p class="blog-card-excerpt">${escapeHtml(shortDescription)}</p>
-          <span class="blog-tags" title="${escapeAttr((post.tags || []).join(" "))}">${tags}</span>
         </div>
       </a>
     </article>
-  `;
-}
-
-function renderTopicVisual(topic, lang) {
-  if (topic.image) {
-    return `<img src="${escapeAttr(topic.image)}" alt="" loading="lazy" decoding="async">`;
-  }
-
-  const icons = {
-    conversation: `<svg viewBox="0 0 64 64" aria-hidden="true"><path d="M13 15h27a8 8 0 0 1 8 8v10a8 8 0 0 1-8 8H27L15 50l3-9h-5a8 8 0 0 1-8-8V23a8 8 0 0 1 8-8Z"/><path d="M23 26h14M23 33h9"/></svg>`,
-    mobile: `<svg viewBox="0 0 64 64" aria-hidden="true"><rect x="14" y="7" width="28" height="50" rx="6"/><path d="M24 15h8M26 49h4M48 22l9 4v8c0 8-4 13-9 16-5-3-9-8-9-16v-8l9-4Z"/></svg>`,
-    privacy: `<svg viewBox="0 0 64 64" aria-hidden="true"><path d="M7 32s9-15 25-15 25 15 25 15-9 15-25 15S7 32 7 32Z"/><circle cx="32" cy="32" r="7"/><path d="M47 11 17 53"/></svg>`,
-    office: `<svg viewBox="0 0 64 64" aria-hidden="true"><path d="M10 55V17l22-8v46M32 22h22v33M5 55h54M18 22h6M18 32h6M18 42h6M41 31h5M41 41h5"/></svg>`
-  };
-
-  return `<span class="learn-topic-symbol" aria-hidden="true">${icons[topic.visual] || icons.privacy}</span><span class="sr-only">${escapeHtml(topic.title?.[lang] || topic.title?.de || "")}</span>`;
-}
-
-function renderTopicCard(topic, lang, hasContent) {
-  const title = topic.title?.[lang] || topic.title?.de || "";
-  const description = topic.description?.[lang] || topic.description?.de || "";
-  const target = hasContent ? `#topic-${topic.id}` : "#learn-content";
-
-  return `
-    <a class="learn-topic-card learn-topic-card--${escapeAttr(topic.visual || "image")}" href="${target}" data-topic-link="${escapeAttr(topic.id)}">
-      <span class="learn-topic-visual">${renderTopicVisual(topic, lang)}</span>
-      <span class="learn-topic-copy">
-        <strong>${escapeHtml(title)}</strong>
-        <span>${escapeHtml(description)}</span>
-      </span>
-      <span class="learn-topic-arrow" aria-hidden="true">↘</span>
-    </a>
-  `;
-}
-
-function renderLearnTopicSections(posts, lang) {
-  const classified = new Map(LEARN_TOPICS.map((topic) => [topic.id, []]));
-  const other = [];
-
-  posts.forEach((post) => {
-    const topicId = getLearnTopic(post);
-    if (classified.has(topicId)) classified.get(topicId).push(post);
-    else other.push(post);
-  });
-
-  const sections = LEARN_TOPICS.map((topic) => {
-    const topicPosts = classified.get(topic.id) || [];
-    if (!topicPosts.length) return "";
-    const title = topic.title?.[lang] || topic.title?.de || "";
-
-    return `
-      <section class="learn-article-group" id="topic-${escapeAttr(topic.id)}" data-topic-section="${escapeAttr(topic.id)}" aria-labelledby="topic-heading-${escapeAttr(topic.id)}">
-        <div class="learn-group-heading">
-          <h2 id="topic-heading-${escapeAttr(topic.id)}">${escapeHtml(title)}</h2>
-          <span>${topicPosts.length} ${lang === "en" ? (topicPosts.length === 1 ? "article" : "articles") : (topicPosts.length === 1 ? "Artikel" : "Artikel")}</span>
-        </div>
-        <div class="blog-grid">
-          ${topicPosts.map((post) => renderPostCard(post, lang, topic.id)).join("")}
-        </div>
-      </section>
-    `;
-  }).join("");
-
-  const otherSection = other.length ? `
-    <section class="learn-article-group learn-article-group--other" id="topic-other" data-topic-section="other" aria-labelledby="topic-heading-other">
-      <div class="learn-group-heading">
-        <h2 id="topic-heading-other">${lang === "en" ? "More security content" : "Weitere Security-Inhalte"}</h2>
-        <span>${other.length} ${lang === "en" ? (other.length === 1 ? "article" : "articles") : "Artikel"}</span>
-      </div>
-      <div class="blog-grid">
-        ${other.map((post) => renderPostCard(post, lang, "other")).join("")}
-      </div>
-    </section>
-  ` : "";
-
-  return {
-    html: sections + otherSection,
-    topicCounts: new Map([...classified].map(([topicId, topicPosts]) => [topicId, topicPosts.length]))
-  };
-}
-
-function renderLearnTagOptions(posts, lang) {
-  const labels = new Map();
-
-  posts.forEach((post) => {
-    (post.tags || []).forEach((tag) => {
-      const value = normalizeFilterValue(tag);
-      if (value && !labels.has(value)) labels.set(value, String(tag));
-    });
-  });
-
-  const options = [...labels.entries()]
-    .sort((a, b) => a[1].localeCompare(b[1], lang))
-    .map(([value, label]) => `<option value="${escapeAttr(value)}">#${escapeHtml(label)}</option>`)
-    .join("");
-
-  return `<option value="">${lang === "en" ? "All tags" : "Alle Tags"}</option>${options}`;
+`;
 }
 
 function renderIndexAlternateLinks(lang) {
@@ -579,22 +477,20 @@ function renderIndexJsonLd(posts, lang) {
 function renderPrimaryNavHtml(lang) {
   const items = lang === "en"
     ? [
-        { href: "/index.html#sicherheitslage", label: "Security overview" },
-        { href: "/index.html#security-care", label: "Microsoft 365 Care" },
-        { href: "/en/learn/", label: "Learn" },
+        { href: "/index.html#services", label: "Services" },
+        { href: "/en/learn/", label: "Learn", current: true },
         { href: "/index.html#ueber", label: "About Swissploit" },
         { href: "/index.html#kontakt", label: "Contact" }
       ]
     : [
-        { href: "/index.html#sicherheitslage", label: "Sicherheitslage" },
-        { href: "/index.html#security-care", label: "Microsoft 365 Care" },
-        { href: "/learn/", label: "Learn" },
+        { href: "/index.html#services", label: "Services" },
+        { href: "/learn/", label: "Learn", current: true },
         { href: "/index.html#ueber", label: "Über Swissploit" },
         { href: "/index.html#kontakt", label: "Kontakt" }
       ];
 
   return `<nav id="primaryNav" class="nav" aria-label="${lang === "en" ? "Main navigation" : "Hauptnavigation"}">
-        ${items.map((item) => `<a href="${item.href}" data-transition>${item.label}</a>`).join("\n        ")}
+        ${items.map((item) => `<a${item.current ? ' class="is-active" aria-current="page"' : ""} href="${item.href}" data-transition>${item.label}</a>`).join("\n        ")}
       </nav>`;
 }
 
@@ -634,15 +530,13 @@ function renderSiteHeaderHtml(lang) {
 function renderFooterNavHtml(lang) {
   const items = lang === "en"
     ? [
-        { href: "/index.html#sicherheitslage", label: "Security overview" },
-        { href: "/index.html#security-care", label: "Microsoft 365 Care" },
+        { href: "/index.html#services", label: "Services" },
         { href: "/en/learn/", label: "Learn" },
         { href: "/index.html#ueber", label: "About Swissploit" },
         { href: "/index.html#kontakt", label: "Contact" }
       ]
     : [
-        { href: "/index.html#sicherheitslage", label: "Sicherheitslage" },
-        { href: "/index.html#security-care", label: "Microsoft 365 Care" },
+        { href: "/index.html#services", label: "Services" },
         { href: "/learn/", label: "Learn" },
         { href: "/index.html#ueber", label: "Über Swissploit" },
         { href: "/index.html#kontakt", label: "Kontakt" }
@@ -863,12 +757,12 @@ function renderBlogIndexPage(posts, lang) {
     ? "Understand digital threats, spot scams and learn how to protect yourself in everyday life and at work."
     : "Verstehe digitale Gefahren, erkenne Betrugsversuche und lerne, wie du dich im Alltag und am Arbeitsplatz besser schützt.";
   const pageUrl = isEn ? `${BASE_URL}/en/learn/` : `${BASE_URL}/learn/`;
-  const availablePosts = posts.filter((post) => Boolean(post.i18n?.[lang] || post.i18n?.[post.defaultLang]));
-  const learnContent = renderLearnTopicSections(availablePosts, lang);
-  const topicCardsHtml = LEARN_TOPICS
-    .map((topic) => renderTopicCard(topic, lang, Boolean(learnContent.topicCounts.get(topic.id))))
+  const availablePosts = posts
+    .filter((post) => Boolean(post.i18n?.[lang] || post.i18n?.[post.defaultLang]))
+    .sort((a, b) => String(b.updated || b.date || "").localeCompare(String(a.updated || a.date || "")));
+  const learnCardsHtml = availablePosts
+    .map((post) => renderPostCard(post, lang, getLearnTopic(post)))
     .join("");
-  const tagOptionsHtml = renderLearnTagOptions(availablePosts, lang);
 
   return `<!doctype html>
 <html lang="${lang}" data-theme="dark">
@@ -936,17 +830,19 @@ function renderBlogIndexPage(posts, lang) {
           ? "Understand digital threats, spot scams and learn how to protect yourself in everyday life and at work."
           : "Verstehe digitale Gefahren, erkenne Betrugsversuche und lerne, wie du dich im Alltag und am Arbeitsplatz besser schützt."}</p>
 
-        <div class="blog-search learn-search">
-          <label class="sr-only" for="blogSearch">${isEn ? "Search Learn" : "Learn durchsuchen"}</label>
-          <span class="learn-search-icon" aria-hidden="true"></span>
-          <input id="blogSearch" type="search" placeholder="${escapeAttr(isEn ? "Search for a security topic ..." : "Nach einem Security-Thema suchen ...")}" autocomplete="off" enterkeyhint="search">
-          <span class="blog-search-hint">${isEn ? "Search by title, summary or tag." : "Suche nach Titel, Kurztext oder Tag."}</span>
-        </div>
+        <div class="learn-controls">
+          <div class="blog-search learn-search">
+            <label class="sr-only" for="blogSearch">${isEn ? "Search Learn" : "Learn durchsuchen"}</label>
+            <span class="learn-search-icon" aria-hidden="true"></span>
+            <input id="blogSearch" type="search" placeholder="${escapeAttr(isEn ? "Search for a security topic ..." : "Nach einem Security-Thema suchen ...")}" autocomplete="off" enterkeyhint="search">
+            <span class="blog-search-hint">${isEn ? "Search by title, summary, tag or category." : "Suche nach Titel, Kurztext, Tag oder Kategorie."}</span>
+          </div>
 
-        <nav class="lang-toggle" aria-label="${escapeAttr(isEn ? "Choose language" : "Sprache wählen")}">
-          <a class="lang-link ${isEn ? "" : "is-active"}" href="/learn/" hreflang="de" lang="de" data-lang-switch="de">DE</a>
-          <a class="lang-link ${isEn ? "is-active" : ""}" href="/en/learn/" hreflang="en" lang="en" data-lang-switch="en">EN</a>
-        </nav>
+          <nav class="lang-toggle" aria-label="${escapeAttr(isEn ? "Choose language" : "Sprache wählen")}">
+            <a class="lang-link ${isEn ? "" : "is-active"}" href="/learn/" hreflang="de" lang="de" data-lang-switch="de">DE</a>
+            <a class="lang-link ${isEn ? "is-active" : ""}" href="/en/learn/" hreflang="en" lang="en" data-lang-switch="en">EN</a>
+          </nav>
+        </div>
       </div>
     </section>
 
@@ -973,44 +869,21 @@ function renderBlogIndexPage(posts, lang) {
       </div>
     </section>
 
-    <section class="section learn-topics" aria-labelledby="topics-title">
-      <div class="wrap">
-        <div class="learn-section-heading">
-          <p class="learn-eyebrow">${isEn ? "Six areas of knowledge" : "Sechs Themenwelten"}</p>
-          <h2 id="topics-title">${isEn ? "Explore topics" : "Themen entdecken"}</h2>
-          <p>${isEn ? "Start with the area that matters to you right now." : "Starte bei dem Thema, das dich gerade beschäftigt."}</p>
-        </div>
-        <div class="learn-topic-grid">
-          ${topicCardsHtml}
-        </div>
-      </div>
-    </section>
-
     <section id="learn-content" class="section learn-content-section" aria-labelledby="learn-content-title">
       <div class="wrap">
         <div class="learn-content-header">
           <div class="learn-section-heading">
             <p class="learn-eyebrow">${isEn ? "Knowledge base" : "Wissensbereich"}</p>
-            <h2 id="learn-content-title">${isEn ? "Knowledge by topic" : "Wissen nach Themen"}</h2>
-            <p>${isEn ? "Articles grouped by context instead of publication date." : "Artikel nach Kontext geordnet – nicht nach Veröffentlichungsdatum."}</p>
-          </div>
-
-          <div class="learn-filter-bar" aria-label="${escapeAttr(isEn ? "Filter articles" : "Artikel filtern")}">
-            <label for="learnTagFilter">${isEn ? "Filter by tag" : "Nach Tag filtern"}</label>
-            <select id="learnTagFilter">
-              ${tagOptionsHtml}
-            </select>
-            <button id="clearLearnFilters" class="learn-filter-reset" type="button" hidden>${isEn ? "Show all topics" : "Alle Themen zeigen"}</button>
+            <h2 id="learn-content-title">${isEn ? "All Learn content" : "Alle Learn-Inhalte"}</h2>
+            <p>${isEn ? "The latest content appears first." : "Die neuesten Inhalte erscheinen zuerst."}</p>
           </div>
         </div>
 
-        <div id="blogGrid" class="learn-article-groups" aria-live="polite">
-          ${learnContent.html}
+        <div id="blogGrid" class="blog-grid learn-article-list" aria-live="polite">
+          ${learnCardsHtml}
         </div>
         <div id="noResults" class="blog-no-results learn-empty-state" role="status" hidden>
           <strong id="noResultsText">${isEn ? "No matching content found." : "Keine passenden Inhalte gefunden."}</strong>
-          <span>${isEn ? "Try a different search term or reset the filters." : "Versuche einen anderen Suchbegriff oder setze die Filter zurück."}</span>
-          <button id="clearLearnFiltersEmpty" class="learn-filter-reset" type="button">${isEn ? "Reset filters" : "Filter zurücksetzen"}</button>
         </div>
         <p id="learnResultStatus" class="sr-only" aria-live="polite"></p>
       </div>
@@ -1020,7 +893,7 @@ function renderBlogIndexPage(posts, lang) {
   <footer class="site-footer" role="contentinfo">
     <div class="wrap">
       <p>© <span id="year"></span> Swissploit.</p>
-      ${renderFooterNavHtml()}
+      ${renderFooterNavHtml(lang)}
     </div>
   </footer>
 
@@ -1196,7 +1069,7 @@ function renderStaticPostPage(post, lang, allPosts) {
   <footer class="site-footer" role="contentinfo">
     <div class="wrap">
       <p>© <span id="year"></span> Swissploit.</p>
-      ${renderFooterNavHtml()}
+      ${renderFooterNavHtml(lang)}
     </div>
   </footer>
 
