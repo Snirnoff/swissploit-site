@@ -844,6 +844,11 @@ function renderBlogIndexPage(posts, lang) {
             <a class="lang-link ${isEn ? "is-active" : ""}" href="/en/learn/" hreflang="en" lang="en" data-lang-switch="en">EN</a>
           </nav>
         </div>
+        <div class="learn-progress" aria-live="polite">
+          <span class="learn-progress-label">${isEn ? "Learning progress" : "Lernfortschritt"}</span>
+          <strong id="learnProgressText">${isEn ? "0 articles read · ${posts.length} open" : `0 Artikel gelesen · ${posts.length} offen`}</strong>
+          <span class="learn-progress-bar" aria-hidden="true"><span id="learnProgressBar"></span></span>
+        </div>
       </div>
     </section>
 
@@ -878,6 +883,16 @@ function renderBlogIndexPage(posts, lang) {
             <h2 id="learn-content-title">${isEn ? "All Learn content" : "Alle Learn-Inhalte"}</h2>
             <p>${isEn ? "The latest content appears first." : "Die neuesten Inhalte erscheinen zuerst."}</p>
           </div>
+          <nav class="learn-topic-filter" aria-label="${isEn ? "Learn topic filter" : "Learn Themenfilter"}" role="tablist">
+            ${[
+              ["all", "ALL"],
+              ["phishing-betrug", "PHISHING"],
+              ["m365", "M365"],
+              ["windows", "WINDOWS"],
+              ["privacy-datenschutz", "PRIVACY"],
+              ["security", "SECURITY"]
+            ].map(([value, label], index) => `<button class="filter-chip${index === 0 ? " is-active" : ""}" type="button" role="tab" aria-selected="${index === 0 ? "true" : "false"}" data-learn-filter="${value}">${label}</button>`).join("")}
+          </nav>
         </div>
 
         <div id="blogGrid" class="blog-grid learn-article-list" aria-live="polite">

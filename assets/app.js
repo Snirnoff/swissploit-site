@@ -79,11 +79,12 @@ document.addEventListener("DOMContentLoaded", () => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add("visible");
+        entry.target.classList.add("has-entered");
       } else {
         entry.target.classList.remove("visible");
       }
     });
-  }, { threshold: 0.05, rootMargin: '0px 0px -5% 0px' });
+  }, { threshold: 0.01, rootMargin: '0px 0px 12% 0px' });
 
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
@@ -115,13 +116,14 @@ document.addEventListener("DOMContentLoaded", () => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
+          entry.target.classList.add('has-entered');
         } else {
           entry.target.classList.remove('visible');
         }
       });
     }, {
-      threshold: 0.05,
-      rootMargin: '0px 0px -5% 0px'
+      threshold: 0.01,
+      rootMargin: '0px 0px 12% 0px'
     });
 
     sections.forEach(section => mobileSectionObserver.observe(section));
@@ -475,15 +477,117 @@ if(shortsSection){
 // D) Optionale „magnetische“ Buttons (füge Klasse .magnetic im HTML hinzu)
 (function(){
   const mags = document.querySelectorAll('.btn.magnetic');
+  const desktopQuery = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)');
+  if(!desktopQuery || !desktopQuery.matches) return;
   mags.forEach(btn => {
     btn.addEventListener('mousemove', (e)=>{
       const r = btn.getBoundingClientRect();
       const x = e.clientX - (r.left + r.width/2);
       const y = e.clientY - (r.top + r.height/2);
-      btn.style.transform = `translate(${x*0.06}px, ${y*0.06}px)`;
+      btn.style.transform = `translate(${Math.max(-3, Math.min(3, x*0.06))}px, ${Math.max(-3, Math.min(3, y*0.06))}px)`;
     });
     btn.addEventListener('mouseleave', ()=> btn.style.transform = 'translate(0,0)');
   });
+})();
+
+// Intro wordmark and header transition stay on one animation frame per scroll.
+(function introMotion(){
+  const intro = document.querySelector('.intro-section');
+  const letters = Array.from(document.querySelectorAll('.intro-letter'));
+  if(!intro || !letters.length) return;
+
+  const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let frame = 0;
+  function update(){
+    frame = 0;
+    const progress = Math.min(1, Math.max(0, -intro.getBoundingClientRect().top / Math.max(1, intro.offsetHeight * .72)));
+    letters.forEach(letter => {
+      if(reduced){
+        letter.style.transform = 'translate3d(0, 0, 0) rotate(0deg)';
+        letter.style.opacity = '1';
+        letter.style.filter = 'none';
+        return;
+      }
+      const x = Number(letter.dataset.x || 0) * progress;
+      const y = Number(letter.dataset.y || 0) * progress;
+      const rotation = Number(letter.dataset.r || 0) * progress;
+      letter.style.transform = `translate3d(${x}px, ${y}px, 0) rotate(${rotation}deg)`;
+      letter.style.opacity = String(1 - progress * .18);
+      letter.style.filter = `blur(${(progress * 1.5).toFixed(2)}px)`;
+    });
+    document.querySelector('.site-header')?.classList.toggle('is-intro-passed', progress > .52);
+  }
+  function requestUpdate(){ if(!frame) frame = requestAnimationFrame(update); }
+  update();
+  window.addEventListener('scroll', requestUpdate, { passive: true });
+  window.addEventListener('resize', requestUpdate, { passive: true });
+})();
+
+// Important cards get a restrained local grid/spotlight response on desktop.
+(function cardInteraction(){
+  const cards = document.querySelectorAll('.care-card-v26, .security-check-preview, .blog-card');
+  const desktopQuery = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)');
+  if(!cards.length || !desktopQuery || !desktopQuery.matches) return;
+  cards.forEach(card => {
+    card.addEventListener('pointermove', event => {
+      const rect = card.getBoundingClientRect();
+      card.style.setProperty('--card-x', `${((event.clientX - rect.left) / rect.width) * 100}%`);
+      card.style.setProperty('--card-y', `${((event.clientY - rect.top) / rect.height) * 100}%`);
+    }, { passive: true });
+  });
+})();
+
+// Static articles remember reading progress without requiring an account.
+(function articleProgress(){
+  const article = document.querySelector('.post-article');
+  if(!article) return;
+  const key = `swissploit-read-${location.pathname}`;
+  const readKey = 'swissploit-read-articles';
+  const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let saved = 0;
+  try { saved = Number(localStorage.getItem(`${key}-progress`) || 0); } catch(error) {}
+
+  const bar = document.createElement('div');
+  bar.className = 'article-reading-progress';
+  bar.innerHTML = '<span></span>';
+  document.body.appendChild(bar);
+
+  const status = document.createElement('div');
+  status.className = 'article-reading-status';
+  status.innerHTML = '<span class="article-reading-status-text"></span><button type="button">Weiterlesen</button>';
+  article.parentElement.insertBefore(status, article);
+  const statusText = status.querySelector('span');
+  const continueButton = status.querySelector('button');
+  const locale = document.documentElement.lang === 'en' ? { read: 'Read', continue: 'Continue reading' } : { read: 'Gelesen', continue: 'Weiterlesen' };
+
+  function setRead(){
+    try {
+      const list = new Set(JSON.parse(localStorage.getItem(readKey) || '[]'));
+      list.add(location.pathname);
+      localStorage.setItem(readKey, JSON.stringify(Array.from(list)));
+      localStorage.setItem(`${key}-progress`, '1');
+    } catch(error) {}
+    statusText.textContent = `✓ ${locale.read}`;
+    status.classList.add('is-read');
+  }
+  function update(){
+    const rect = article.getBoundingClientRect();
+    const total = Math.max(1, article.offsetHeight - window.innerHeight * .72);
+    const progress = Math.min(1, Math.max(0, (window.innerHeight * .18 - rect.top) / total));
+    bar.firstElementChild.style.transform = `scaleX(${progress})`;
+    if(progress > .04 && progress < .96){
+      try { localStorage.setItem(`${key}-progress`, String(progress)); } catch(error) {}
+    }
+    const atDocumentEnd = window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 32;
+    if(progress >= .96 || atDocumentEnd) setRead();
+  }
+  statusText.textContent = saved > .04 ? locale.continue : '';
+  continueButton.hidden = !(saved > .04 && saved < .96);
+  continueButton.addEventListener('click', () => window.scrollTo({ top: document.body.scrollHeight * saved, behavior: reduced ? 'auto' : 'smooth' }));
+  let frame = 0;
+  window.addEventListener('scroll', () => { if(!frame) frame = requestAnimationFrame(() => { frame = 0; update(); }); }, { passive: true });
+  window.addEventListener('pagehide', update);
+  update();
 })();
 
 
