@@ -34,8 +34,12 @@
 
   <script>
     (function () {
-      document.documentElement.setAttribute("data-theme", "dark");
-      try { localStorage.setItem("swissploit-theme", "dark"); } catch (e) {}
+      var theme = "dark";
+      try {
+        var savedTheme = localStorage.getItem("swissploit-theme");
+        if (savedTheme === "light" || savedTheme === "dark") theme = savedTheme;
+      } catch (e) {}
+      document.documentElement.setAttribute("data-theme", theme);
     })();
   </script>
 

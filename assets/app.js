@@ -50,8 +50,7 @@ function setTheme(t){
   try { saved = localStorage.getItem('swissploit-theme'); } catch (error) {}
   if(saved){ setTheme(saved); }
   else {
-    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-    setTheme(prefersDark ? 'dark' : 'light');
+    setTheme('dark');
   }
 })();
 

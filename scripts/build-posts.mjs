@@ -804,8 +804,12 @@ function renderBlogIndexPage(posts, lang) {
 
   <script>
     (function () {
-      document.documentElement.setAttribute("data-theme", "dark");
-      try { localStorage.setItem("swissploit-theme", "dark"); } catch (e) {}
+      var theme = "dark";
+      try {
+        var savedTheme = localStorage.getItem("swissploit-theme");
+        if (savedTheme === "light" || savedTheme === "dark") theme = savedTheme;
+      } catch (e) {}
+      document.documentElement.setAttribute("data-theme", theme);
     })();
   </script>
 
@@ -827,6 +831,10 @@ function renderBlogIndexPage(posts, lang) {
         <li><a href="/index.html">Home</a></li>
         <li aria-current="page">Learn</li>
       </ol>
+      <nav class="lang-toggle" aria-label="${isEn ? "Choose language" : "Sprache wählen"}">
+        <a class="lang-link ${isEn ? "" : "is-active"}" href="/learn/" hreflang="de" lang="de" data-lang-switch="de">DE</a>
+        <a class="lang-link ${isEn ? "is-active" : ""}" href="/en/learn/" hreflang="en" lang="en" data-lang-switch="en">EN</a>
+      </nav>
     </nav>
 
     <section class="section blog-hero learn-hero" aria-labelledby="learn-title">
@@ -845,10 +853,6 @@ function renderBlogIndexPage(posts, lang) {
             <span class="blog-search-hint">${isEn ? "Search by title, summary, tag or category." : "Suche nach Titel, Kurztext, Tag oder Kategorie."}</span>
           </div>
 
-          <nav class="lang-toggle" aria-label="${escapeAttr(isEn ? "Choose language" : "Sprache wählen")}">
-            <a class="lang-link ${isEn ? "" : "is-active"}" href="/learn/" hreflang="de" lang="de" data-lang-switch="de">DE</a>
-            <a class="lang-link ${isEn ? "is-active" : ""}" href="/en/learn/" hreflang="en" lang="en" data-lang-switch="en">EN</a>
-          </nav>
         </div>
         <div class="learn-progress" aria-live="polite">
           <span class="learn-progress-label">${isEn ? "Learning progress" : "Lernfortschritt"}</span>
@@ -1043,8 +1047,12 @@ function renderStaticPostPage(post, lang, allPosts) {
 
   <script>
     (function () {
-      document.documentElement.setAttribute("data-theme", "dark");
-      try { localStorage.setItem("swissploit-theme", "dark"); } catch (e) {}
+      var theme = "dark";
+      try {
+        var savedTheme = localStorage.getItem("swissploit-theme");
+        if (savedTheme === "light" || savedTheme === "dark") theme = savedTheme;
+      } catch (e) {}
+      document.documentElement.setAttribute("data-theme", theme);
     })();
   </script>
 

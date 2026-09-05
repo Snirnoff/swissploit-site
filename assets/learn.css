@@ -6,7 +6,20 @@
 }
 
 .learn-page .blog-breadcrumbs{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
   padding-top: 34px;
+}
+
+.learn-page .blog-breadcrumbs .breadcrumb-list{
+  flex: 1 1 auto;
+}
+
+.learn-page .blog-breadcrumbs .lang-toggle{
+  flex: 0 0 auto;
+  margin: 0;
 }
 
 .learn-page .section{
@@ -55,7 +68,7 @@
   display: flex;
   align-items: end;
   gap: 16px;
-  margin-top: 30px;
+  margin: 30px auto 0;
 }
 
 .learn-page .learn-search{
@@ -387,7 +400,7 @@
 }
 .learn-page .blog-card.is-read{ border-color:color-mix(in oklab,#6ebf91 38%,var(--border)); }
 
-.learn-progress{ display:grid; grid-template-columns:auto minmax(0,1fr); gap:5px 14px; max-width:700px; margin-top:22px; text-align:left; }
+.learn-progress{ display:grid; grid-template-columns:auto minmax(0,1fr); gap:5px 14px; max-width:700px; margin:22px auto 0; text-align:left; }
 .learn-progress-label{ color:var(--accent); font-size:11px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; }
 .learn-progress strong{ font-size:14px; font-weight:700; color:color-mix(in oklab,var(--fg) 80%,transparent); }
 .learn-progress-bar{ grid-column:1 / -1; display:block; height:3px; overflow:hidden; background:color-mix(in oklab,var(--fg) 10%,transparent); }
@@ -434,7 +447,12 @@
   }
 
   .learn-page .blog-breadcrumbs{
+    flex-wrap: wrap;
     padding-top: 24px;
+  }
+
+  .learn-page .blog-breadcrumbs .lang-toggle{
+    margin-left: auto;
   }
 
   .learn-page .learn-hero{
@@ -473,10 +491,6 @@
   }
 
   .learn-page .lang-toggle{
-    align-self: flex-start;
-    margin: 0;
-  }
-
   .learn-featured-panel{
     gap: 24px;
     padding: 19px;
