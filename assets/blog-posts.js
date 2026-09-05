@@ -217,61 +217,6 @@ window.SWISSPLOIT_BLOG_POSTS = [
     }
   },
   {
-    "id": "smishing-phishing-per-sms",
-    "slug": "smishing-phishing-per-sms",
-    "date": "2026-09-02",
-    "updated": "",
-    "category": "phishing-betrug",
-    "tags": [
-      "smishing",
-      "phishing",
-      "sms",
-      "betrug",
-      "paket-sms",
-      "kreditkarte",
-      "smartphone",
-      "cyber-security"
-    ],
-    "image": "assets/blog/smishing-phishing-per-sms.webp",
-    "thumb": "assets/blog/smishing-phishing-per-sms.webp",
-    "relatedArticles": [
-      "phishing-erkennen",
-      "auf-phishing-geklickt",
-      "social-engineering"
-    ],
-    "videoUrl": "",
-    "videoType": "",
-    "defaultLang": "de",
-    "urls": {
-      "de": "https://swissploit.ch/blog/smishing-phishing-per-sms/"
-    },
-    "i18n": {
-      "de": {
-        "title": "Smishing: So erkennst du Phishing per SMS",
-        "shortDescription": "Paket nicht zustellbar, offene Gebühr oder gesperrtes Konto? Betrüger nutzen SMS, um dich auf gefälschte Webseiten zu locken. So erkennst du Smishing.",
-        "excerpt": "Paket nicht zustellbar, offene Gebühr oder gesperrtes Konto? Betrüger nutzen SMS, um dich auf gefälschte Webseiten zu locken. So erkennst du Smishing.",
-        "imageAlt": "Smartphone mit einer verdächtigen SMS und einem Link zu einer angeblichen Paket-Zustellung",
-        "seoTitle": "Smishing erkennen: Phishing per SMS | Swissploit",
-        "seoDescription": "Was ist Smishing? Erfahre, wie betrügerische SMS funktionieren, welche Warnsignale wichtig sind und was du tun solltest, wenn du bereits geklickt hast.",
-        "keyTakeaway": "Bei unerwarteten SMS mit Links oder Zahlungsaufforderungen solltest du nicht direkt über die Nachricht handeln. Öffne den angeblichen Dienst stattdessen selbst über die offizielle App oder Webseite und prüfe dort, ob wirklich etwas offen ist.",
-        "videoUrl": "",
-        "videoType": "",
-        "content": "<p>Dein Paket könne nicht zugestellt werden. Eine kleine Gebühr sei noch offen. Oder dein Konto müsse dringend bestätigt werden.</p>\n<p>Die SMS enthält praktischerweise gleich den passenden Link.</p>\n<p>Genau solche Situationen werden für <strong>Smishing – also Phishing per SMS –</strong> ausgenutzt.</p>\n<aside class=\"article-callout article-callout--key\">\n  <div class=\"article-callout__heading\"><span class=\"article-callout__icon\" aria-hidden=\"true\">✓</span><strong>Das Wichtigste</strong></div>\n  <div class=\"article-callout__content\">\n    <p>Eine SMS wirkt nicht automatisch vertrauenswürdig, nur weil sie einen bekannten Firmennamen trägt oder im richtigen Nachrichtenverlauf erscheint.</p>\n    <p><strong>Bei unerwarteten Links oder Zahlungsaufforderungen solltest du den betreffenden Dienst selbst über die offizielle App oder Webseite öffnen.</strong></p>\n  </div>\n</aside>\n\n<h2>Was ist Smishing?</h2>\n<p>Der Begriff setzt sich aus <strong>SMS und Phishing</strong> zusammen.</p>\n<p>Betrüger verschicken Nachrichten, die beispielsweise so wirken, als kämen sie von:</p>\n<ul>\n<li>einem Paketdienst</li>\n<li>einer Bank</li>\n<li>einem Mobilfunkanbieter</li>\n<li>einer Behörde</li>\n<li>einem bekannten Onlinedienst</li>\n</ul>\n<p>Der Link in der Nachricht führt anschliessend auf eine gefälschte Webseite.</p>\n<p>Dort sollen häufig Zugangsdaten, Kreditkartendaten oder persönliche Informationen eingegeben werden.</p>\n<h2>Typische Smishing-Nachrichten</h2>\n<p>Besonders häufig funktionieren solche Nachrichten mit Situationen, bei denen eine schnelle Reaktion plausibel erscheint.</p>\n<p>Zum Beispiel:</p>\n<blockquote>\n<p>„Ihr Paket konnte nicht zugestellt werden. Adresse jetzt bestätigen.“</p>\n</blockquote>\n<p>oder:</p>\n<blockquote>\n<p>„CHF 2.95 Zustellgebühr ausstehend.“</p>\n</blockquote>\n<p>oder:</p>\n<blockquote>\n<p>„Ihr Konto wurde eingeschränkt. Jetzt verifizieren.“</p>\n</blockquote>\n<p>Die Beträge sind manchmal bewusst klein.</p>\n<p>Eine Zahlung von wenigen Franken wirkt weniger verdächtig als eine Forderung über mehrere hundert Franken – für die Betrüger sind aber oft die eingegebenen <strong>Kreditkarten- oder Zugangsdaten</strong> das eigentliche Ziel.</p>\n<h2>Woran erkennst du eine verdächtige SMS?</h2>\n<p>Du musst nicht jede Betrugsmasche kennen.</p>\n<p>Achte stattdessen auf die Situation.</p>\n<ul class=\"article-checklist\">\n<li>Du hast die Nachricht nicht erwartet</li>\n<li>Du sollst über einen Link handeln</li>\n<li>Eine Zahlung oder Bestätigung ist angeblich dringend</li>\n<li>Du sollst persönliche oder finanzielle Daten eingeben</li>\n<li>Der Link führt auf eine ungewöhnliche Domain</li>\n<li>Die Nachricht erzeugt Zeitdruck oder Angst</li>\n</ul>\n<p>Ein einzelner Punkt beweist noch keinen Betrug.</p>\n<p>Mehrere davon zusammen sollten dich jedoch aufmerksam machen.</p>\n<h2>Vertraue nicht nur dem angezeigten Absender</h2>\n<p>Auf dem Smartphone erscheint vielleicht ein bekannter Firmenname statt einer unbekannten Nummer.</p>\n<p>Das kann überzeugend wirken.</p>\n<p>Trotzdem ist der angezeigte Absender <strong>kein zuverlässiger Echtheitsbeweis</strong>.</p>\n<aside class=\"article-callout article-callout--info\">\n  <div class=\"article-callout__heading\"><span class=\"article-callout__icon\" aria-hidden=\"true\">i</span><strong>Absender können täuschen</strong></div>\n  <div class=\"article-callout__content\">\n    <p>Bei SMS können Absenderinformationen manipuliert werden. Eine Nachricht sollte deshalb nicht allein aufgrund des angezeigten Namens als vertrauenswürdig eingestuft werden.</p>\n  </div>\n</aside>\n\n<p>Entscheidender ist:</p>\n<p><strong>Hast du die Nachricht erwartet und ist die verlangte Handlung plausibel?</strong></p>\n<h2>So prüfst du die Nachricht sicherer</h2>\n<p>Angenommen, du bekommst eine SMS über ein angebliches Problem mit einem Paket.</p>\n<p>Klicke nicht zuerst auf den Link.</p>\n<p>Öffne stattdessen selbst die offizielle App oder Webseite des Paketdienstes.</p>\n<p>Erwartest du tatsächlich ein Paket, kannst du dort deine Sendung prüfen.</p>\n<p>Dasselbe Prinzip funktioniert auch bei Banken oder anderen Onlinekonten:</p>\n<p><strong>Dienst selbst öffnen statt dem Link aus der SMS folgen.</strong></p>\n<aside class=\"article-callout article-callout--action\">\n  <div class=\"article-callout__heading\"><span class=\"article-callout__icon\" aria-hidden=\"true\">→</span><strong>Eine einfache Gewohnheit</strong></div>\n  <div class=\"article-callout__content\">\n    <p>SMS behauptet, bei einem bekannten Dienst sei etwas nicht in Ordnung?</p>\n    <p><strong>Öffne den Dienst selbst und prüfe die Information dort.</strong></p>\n  </div>\n</aside>\n\n<h2>Vorsicht bei kleinen Zahlungsbeträgen</h2>\n<p>Eine Zustellgebühr von CHF 1.99 oder CHF 2.95 wirkt zunächst harmlos.</p>\n<p>Genau das kann den Angriff glaubwürdiger machen.</p>\n<p>Auf der verlinkten Webseite wirst du beispielsweise aufgefordert:</p>\n<ol>\n<li>deine Adresse einzugeben</li>\n<li>Kreditkartendaten anzugeben</li>\n<li>die Zahlung zu bestätigen</li>\n</ol>\n<p>Der kleine Betrag ist dann nur der Vorwand, um an deine Daten zu gelangen.</p>\n<p>Gib deshalb Kreditkartendaten nicht auf einer Webseite ein, die du über eine unerwartete SMS geöffnet hast.</p>\n<h2>Was, wenn du bereits auf den Link geklickt hast?</h2>\n<p>Ein Klick allein bedeutet nicht automatisch, dass dein Smartphone kompromittiert wurde.</p>\n<p>Entscheidend ist, was du danach gemacht hast.</p>\n<h3>Nur die Webseite geöffnet</h3>\n<p>Schliesse die Seite und führe dort keine weiteren Aktionen aus.</p>\n<h3>Passwort eingegeben</h3>\n<p>Ändere das Passwort über die echte Webseite oder App des betroffenen Dienstes.</p>\n<p>Verwendest du dasselbe Passwort noch bei anderen Diensten, solltest du es auch dort ersetzen.</p>\n<h3>Kreditkartendaten eingegeben</h3>\n<p>Kontaktiere deinen Kartenanbieter beziehungsweise deine Bank möglichst schnell über einen offiziellen Kontaktweg.</p>\n<h3>Datei oder App installiert</h3>\n<p>Das ist kritischer als das reine Öffnen einer Webseite.</p>\n<p>Installiere keine weiteren Programme und hole bei Unsicherheit professionelle Unterstützung. Bei einem Geschäftsgerät solltest du die interne IT oder Security informieren.</p>\n<aside class=\"article-callout article-callout--warning\">\n  <div class=\"article-callout__heading\"><span class=\"article-callout__icon\" aria-hidden=\"true\">!</span><strong>Bei eingegebenen Daten nicht abwarten</strong></div>\n  <div class=\"article-callout__content\">\n    <p>Wenn du Zugangsdaten oder Kreditkarteninformationen eingegeben hast, solltest du reagieren, bevor du bemerkst, dass sie tatsächlich missbraucht wurden.</p>\n  </div>\n</aside>\n\n<h2>Was hilft zusätzlich?</h2>\n<p>Moderne Smartphones und Mobilfunkanbieter können einen Teil verdächtiger Nachrichten automatisch erkennen oder filtern.</p>\n<p>Solche Filter sind hilfreich, aber kein vollständiger Schutz.</p>\n<p>Aktiviere vorhandene Spam- oder SMS-Filter auf deinem Smartphone und halte das Betriebssystem aktuell.</p>\n<p>Entscheidend bleibt trotzdem dein Umgang mit unerwarteten Nachrichten.</p>\n<h2>Die einfache Regel für SMS</h2>\n<p>Wenn eine unerwartete SMS behauptet, du müsstest <strong>zahlen, dich anmelden oder persönliche Daten bestätigen</strong>, nutze nicht direkt den enthaltenen Link.</p>\n<p>Öffne die angebliche Organisation selbst über einen bekannten Weg.</p>\n<p><strong>SMS erhalten → nicht unter Druck klicken → Dienst selbst öffnen → dort prüfen.</strong></p>\n<p>Damit kannst du einen grossen Teil typischer Smishing-Versuche bereits sehr einfach entschärfen.</p>"
-      }
-    },
-    "seo": {
-      "image": "https://swissploit.ch/assets/blog/smishing-phishing-per-sms.webp",
-      "title": {
-        "de": "Smishing erkennen: Phishing per SMS | Swissploit",
-        "en": "Smishing erkennen: Phishing per SMS | Swissploit"
-      },
-      "description": {
-        "de": "Was ist Smishing? Erfahre, wie betrügerische SMS funktionieren, welche Warnsignale wichtig sind und was du tun solltest, wenn du bereits geklickt hast.",
-        "en": "Was ist Smishing? Erfahre, wie betrügerische SMS funktionieren, welche Warnsignale wichtig sind und was du tun solltest, wenn du bereits geklickt hast."
-      }
-    }
-  },
-  {
     "id": "phishing-erkennen",
     "slug": "phishing-erkennen",
     "date": "2026-09-02",
@@ -372,6 +317,61 @@ window.SWISSPLOIT_BLOG_POSTS = [
       "description": {
         "de": "Was ist QR-Phishing oder Quishing? Erfahre, wie manipulierte QR-Codes funktionieren, worauf du beim Scannen achten solltest und wie du dich schützt.",
         "en": "Was ist QR-Phishing oder Quishing? Erfahre, wie manipulierte QR-Codes funktionieren, worauf du beim Scannen achten solltest und wie du dich schützt."
+      }
+    }
+  },
+  {
+    "id": "smishing-phishing-per-sms",
+    "slug": "smishing-phishing-per-sms",
+    "date": "2026-09-02",
+    "updated": "",
+    "category": "phishing-betrug",
+    "tags": [
+      "smishing",
+      "phishing",
+      "sms",
+      "betrug",
+      "paket-sms",
+      "kreditkarte",
+      "smartphone",
+      "cyber-security"
+    ],
+    "image": "assets/blog/smishing-phishing-per-sms.webp",
+    "thumb": "assets/blog/smishing-phishing-per-sms.webp",
+    "relatedArticles": [
+      "phishing-erkennen",
+      "auf-phishing-geklickt",
+      "social-engineering"
+    ],
+    "videoUrl": "",
+    "videoType": "",
+    "defaultLang": "de",
+    "urls": {
+      "de": "https://swissploit.ch/blog/smishing-phishing-per-sms/"
+    },
+    "i18n": {
+      "de": {
+        "title": "Smishing: So erkennst du Phishing per SMS",
+        "shortDescription": "Paket nicht zustellbar, offene Gebühr oder gesperrtes Konto? Betrüger nutzen SMS, um dich auf gefälschte Webseiten zu locken. So erkennst du Smishing.",
+        "excerpt": "Paket nicht zustellbar, offene Gebühr oder gesperrtes Konto? Betrüger nutzen SMS, um dich auf gefälschte Webseiten zu locken. So erkennst du Smishing.",
+        "imageAlt": "Smartphone mit einer verdächtigen SMS und einem Link zu einer angeblichen Paket-Zustellung",
+        "seoTitle": "Smishing erkennen: Phishing per SMS | Swissploit",
+        "seoDescription": "Was ist Smishing? Erfahre, wie betrügerische SMS funktionieren, welche Warnsignale wichtig sind und was du tun solltest, wenn du bereits geklickt hast.",
+        "keyTakeaway": "Bei unerwarteten SMS mit Links oder Zahlungsaufforderungen solltest du nicht direkt über die Nachricht handeln. Öffne den angeblichen Dienst stattdessen selbst über die offizielle App oder Webseite und prüfe dort, ob wirklich etwas offen ist.",
+        "videoUrl": "",
+        "videoType": "",
+        "content": "<p>Dein Paket könne nicht zugestellt werden. Eine kleine Gebühr sei noch offen. Oder dein Konto müsse dringend bestätigt werden.</p>\n<p>Die SMS enthält praktischerweise gleich den passenden Link.</p>\n<p>Genau solche Situationen werden für <strong>Smishing – also Phishing per SMS –</strong> ausgenutzt.</p>\n<aside class=\"article-callout article-callout--key\">\n  <div class=\"article-callout__heading\"><span class=\"article-callout__icon\" aria-hidden=\"true\">✓</span><strong>Das Wichtigste</strong></div>\n  <div class=\"article-callout__content\">\n    <p>Eine SMS wirkt nicht automatisch vertrauenswürdig, nur weil sie einen bekannten Firmennamen trägt oder im richtigen Nachrichtenverlauf erscheint.</p>\n    <p><strong>Bei unerwarteten Links oder Zahlungsaufforderungen solltest du den betreffenden Dienst selbst über die offizielle App oder Webseite öffnen.</strong></p>\n  </div>\n</aside>\n\n<h2>Was ist Smishing?</h2>\n<p>Der Begriff setzt sich aus <strong>SMS und Phishing</strong> zusammen.</p>\n<p>Betrüger verschicken Nachrichten, die beispielsweise so wirken, als kämen sie von:</p>\n<ul>\n<li>einem Paketdienst</li>\n<li>einer Bank</li>\n<li>einem Mobilfunkanbieter</li>\n<li>einer Behörde</li>\n<li>einem bekannten Onlinedienst</li>\n</ul>\n<p>Der Link in der Nachricht führt anschliessend auf eine gefälschte Webseite.</p>\n<p>Dort sollen häufig Zugangsdaten, Kreditkartendaten oder persönliche Informationen eingegeben werden.</p>\n<h2>Typische Smishing-Nachrichten</h2>\n<p>Besonders häufig funktionieren solche Nachrichten mit Situationen, bei denen eine schnelle Reaktion plausibel erscheint.</p>\n<p>Zum Beispiel:</p>\n<blockquote>\n<p>„Ihr Paket konnte nicht zugestellt werden. Adresse jetzt bestätigen.“</p>\n</blockquote>\n<p>oder:</p>\n<blockquote>\n<p>„CHF 2.95 Zustellgebühr ausstehend.“</p>\n</blockquote>\n<p>oder:</p>\n<blockquote>\n<p>„Ihr Konto wurde eingeschränkt. Jetzt verifizieren.“</p>\n</blockquote>\n<p>Die Beträge sind manchmal bewusst klein.</p>\n<p>Eine Zahlung von wenigen Franken wirkt weniger verdächtig als eine Forderung über mehrere hundert Franken – für die Betrüger sind aber oft die eingegebenen <strong>Kreditkarten- oder Zugangsdaten</strong> das eigentliche Ziel.</p>\n<h2>Woran erkennst du eine verdächtige SMS?</h2>\n<p>Du musst nicht jede Betrugsmasche kennen.</p>\n<p>Achte stattdessen auf die Situation.</p>\n<ul class=\"article-checklist\">\n<li>Du hast die Nachricht nicht erwartet</li>\n<li>Du sollst über einen Link handeln</li>\n<li>Eine Zahlung oder Bestätigung ist angeblich dringend</li>\n<li>Du sollst persönliche oder finanzielle Daten eingeben</li>\n<li>Der Link führt auf eine ungewöhnliche Domain</li>\n<li>Die Nachricht erzeugt Zeitdruck oder Angst</li>\n</ul>\n<p>Ein einzelner Punkt beweist noch keinen Betrug.</p>\n<p>Mehrere davon zusammen sollten dich jedoch aufmerksam machen.</p>\n<h2>Vertraue nicht nur dem angezeigten Absender</h2>\n<p>Auf dem Smartphone erscheint vielleicht ein bekannter Firmenname statt einer unbekannten Nummer.</p>\n<p>Das kann überzeugend wirken.</p>\n<p>Trotzdem ist der angezeigte Absender <strong>kein zuverlässiger Echtheitsbeweis</strong>.</p>\n<aside class=\"article-callout article-callout--info\">\n  <div class=\"article-callout__heading\"><span class=\"article-callout__icon\" aria-hidden=\"true\">i</span><strong>Absender können täuschen</strong></div>\n  <div class=\"article-callout__content\">\n    <p>Bei SMS können Absenderinformationen manipuliert werden. Eine Nachricht sollte deshalb nicht allein aufgrund des angezeigten Namens als vertrauenswürdig eingestuft werden.</p>\n  </div>\n</aside>\n\n<p>Entscheidender ist:</p>\n<p><strong>Hast du die Nachricht erwartet und ist die verlangte Handlung plausibel?</strong></p>\n<h2>So prüfst du die Nachricht sicherer</h2>\n<p>Angenommen, du bekommst eine SMS über ein angebliches Problem mit einem Paket.</p>\n<p>Klicke nicht zuerst auf den Link.</p>\n<p>Öffne stattdessen selbst die offizielle App oder Webseite des Paketdienstes.</p>\n<p>Erwartest du tatsächlich ein Paket, kannst du dort deine Sendung prüfen.</p>\n<p>Dasselbe Prinzip funktioniert auch bei Banken oder anderen Onlinekonten:</p>\n<p><strong>Dienst selbst öffnen statt dem Link aus der SMS folgen.</strong></p>\n<aside class=\"article-callout article-callout--action\">\n  <div class=\"article-callout__heading\"><span class=\"article-callout__icon\" aria-hidden=\"true\">→</span><strong>Eine einfache Gewohnheit</strong></div>\n  <div class=\"article-callout__content\">\n    <p>SMS behauptet, bei einem bekannten Dienst sei etwas nicht in Ordnung?</p>\n    <p><strong>Öffne den Dienst selbst und prüfe die Information dort.</strong></p>\n  </div>\n</aside>\n\n<h2>Vorsicht bei kleinen Zahlungsbeträgen</h2>\n<p>Eine Zustellgebühr von CHF 1.99 oder CHF 2.95 wirkt zunächst harmlos.</p>\n<p>Genau das kann den Angriff glaubwürdiger machen.</p>\n<p>Auf der verlinkten Webseite wirst du beispielsweise aufgefordert:</p>\n<ol>\n<li>deine Adresse einzugeben</li>\n<li>Kreditkartendaten anzugeben</li>\n<li>die Zahlung zu bestätigen</li>\n</ol>\n<p>Der kleine Betrag ist dann nur der Vorwand, um an deine Daten zu gelangen.</p>\n<p>Gib deshalb Kreditkartendaten nicht auf einer Webseite ein, die du über eine unerwartete SMS geöffnet hast.</p>\n<h2>Was, wenn du bereits auf den Link geklickt hast?</h2>\n<p>Ein Klick allein bedeutet nicht automatisch, dass dein Smartphone kompromittiert wurde.</p>\n<p>Entscheidend ist, was du danach gemacht hast.</p>\n<h3>Nur die Webseite geöffnet</h3>\n<p>Schliesse die Seite und führe dort keine weiteren Aktionen aus.</p>\n<h3>Passwort eingegeben</h3>\n<p>Ändere das Passwort über die echte Webseite oder App des betroffenen Dienstes.</p>\n<p>Verwendest du dasselbe Passwort noch bei anderen Diensten, solltest du es auch dort ersetzen.</p>\n<h3>Kreditkartendaten eingegeben</h3>\n<p>Kontaktiere deinen Kartenanbieter beziehungsweise deine Bank möglichst schnell über einen offiziellen Kontaktweg.</p>\n<h3>Datei oder App installiert</h3>\n<p>Das ist kritischer als das reine Öffnen einer Webseite.</p>\n<p>Installiere keine weiteren Programme und hole bei Unsicherheit professionelle Unterstützung. Bei einem Geschäftsgerät solltest du die interne IT oder Security informieren.</p>\n<aside class=\"article-callout article-callout--warning\">\n  <div class=\"article-callout__heading\"><span class=\"article-callout__icon\" aria-hidden=\"true\">!</span><strong>Bei eingegebenen Daten nicht abwarten</strong></div>\n  <div class=\"article-callout__content\">\n    <p>Wenn du Zugangsdaten oder Kreditkarteninformationen eingegeben hast, solltest du reagieren, bevor du bemerkst, dass sie tatsächlich missbraucht wurden.</p>\n  </div>\n</aside>\n\n<h2>Was hilft zusätzlich?</h2>\n<p>Moderne Smartphones und Mobilfunkanbieter können einen Teil verdächtiger Nachrichten automatisch erkennen oder filtern.</p>\n<p>Solche Filter sind hilfreich, aber kein vollständiger Schutz.</p>\n<p>Aktiviere vorhandene Spam- oder SMS-Filter auf deinem Smartphone und halte das Betriebssystem aktuell.</p>\n<p>Entscheidend bleibt trotzdem dein Umgang mit unerwarteten Nachrichten.</p>\n<h2>Die einfache Regel für SMS</h2>\n<p>Wenn eine unerwartete SMS behauptet, du müsstest <strong>zahlen, dich anmelden oder persönliche Daten bestätigen</strong>, nutze nicht direkt den enthaltenen Link.</p>\n<p>Öffne die angebliche Organisation selbst über einen bekannten Weg.</p>\n<p><strong>SMS erhalten → nicht unter Druck klicken → Dienst selbst öffnen → dort prüfen.</strong></p>\n<p>Damit kannst du einen grossen Teil typischer Smishing-Versuche bereits sehr einfach entschärfen.</p>"
+      }
+    },
+    "seo": {
+      "image": "https://swissploit.ch/assets/blog/smishing-phishing-per-sms.webp",
+      "title": {
+        "de": "Smishing erkennen: Phishing per SMS | Swissploit",
+        "en": "Smishing erkennen: Phishing per SMS | Swissploit"
+      },
+      "description": {
+        "de": "Was ist Smishing? Erfahre, wie betrügerische SMS funktionieren, welche Warnsignale wichtig sind und was du tun solltest, wenn du bereits geklickt hast.",
+        "en": "Was ist Smishing? Erfahre, wie betrügerische SMS funktionieren, welche Warnsignale wichtig sind und was du tun solltest, wenn du bereits geklickt hast."
       }
     }
   },
