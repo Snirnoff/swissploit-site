@@ -422,7 +422,8 @@ function renderPostCard(post, lang, topicId) {
 
           <h3 class="blog-card-title" id="${escapeAttr(titleId)}">${escapeHtml(txt.title || "")}</h3>
           <p class="blog-card-excerpt">${escapeHtml(shortDescription)}</p>
-          <span class="learn-card-status" id="${escapeAttr(titleId)}-status" aria-hidden="true">${lang === "en" ? "✓ READ" : "✓ GELESEN"}</span>
+          <span class="learn-card-status" id="${escapeAttr(titleId)}-status" aria-hidden="true"></span>
+          <span class="learn-card-progress" aria-hidden="true" hidden></span>
         </div>
       </a>
     </article>
@@ -530,12 +531,7 @@ function renderSiteHeaderHtml(lang) {
 }
 
 function renderFooterSystemHtml(lang) {
-  return `<a class="footer-system" href="/leistungen/it-sicherheits-compliance-check/" data-transition>
-        <span class="footer-system-label">SWISSPLOIT SYSTEM</span>
-        <span class="footer-system-state"><span aria-hidden="true">●</span> ALL SYSTEMS NORMAL</span>
-        <span class="footer-system-question">${lang === "en" ? "Your Microsoft 365 tenant too?" : "Ihr Microsoft-365-Tenant auch?"}</span>
-        <span class="footer-system-action">Security Check →</span>
-      </a>`;
+  return "";
 }
 
 function renderFooterNavHtml(lang) {

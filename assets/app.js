@@ -92,11 +92,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (isIntersecting) {
           if (target.matches('.blog-card')) target.style.setProperty('--reveal-delay', `${(cardIndex++ % 3) * 50}ms`);
           show(target);
-        } else if (!target.contains(document.activeElement)) {
+        } else if (!target.contains(document.activeElement) && !target.matches('.blog-card')) {
           target.classList.remove('visible');
         }
       });
-    }, { threshold: 0, rootMargin: '0px 0px 120px 0px' });
+    }, { threshold: 0, rootMargin: '0px 0px 280px 0px' });
     items.forEach(item => observer.observe(item));
   }
   items.forEach(item => item.addEventListener('focusin', () => show(item)));
@@ -529,47 +529,95 @@ if(shortsSection){
   reduced.addEventListener('change', reset);
 })();
 
-// Keep existing storage keys, with validated values and monotonic progress.
+// One shared, monotonic source of truth for Learn and article pages.
 const readingState = (() => {
-  const readKey = 'swissploit-read-articles';
-  const normalizePath = path => path.replace(/\/index\.html$/, '/').replace(/\/?$/, '/');
-  function readList() {
-    try {
-      const value = JSON.parse(localStorage.getItem(readKey) || '[]');
-      return new Set(Array.isArray(value) ? value.filter(path => typeof path === 'string').map(normalizePath) : []);
-    } catch (error) { return new Set(); }
+  const stateKey = 'swissploit-reading-state';
+  const legacyReadKey = 'swissploit-read-articles';
+  const legacyPrefix = 'swissploit-read-';
+  const readThreshold = 90;
+
+  function normalizeId(value) {
+    const raw = String(value || '').split(/[?#]/)[0].replace(/\\/g, '/').replace(/\/+$/, '');
+    const parts = raw.split('/').filter(Boolean);
+    const blogIndex = parts.lastIndexOf('blog');
+    return blogIndex >= 0 && parts[blogIndex + 1] ? parts[blogIndex + 1] : (parts.at(-1) || raw);
   }
-  function get(path) {
-    path = normalizePath(path);
-    let progress = 0;
-    let updated = 0;
+
+  function readState() {
     try {
-      progress = Number(localStorage.getItem(`swissploit-read-${path}-progress`));
-      updated = Number(localStorage.getItem(`swissploit-read-${path}-updated`));
+      const value = JSON.parse(localStorage.getItem(stateKey) || '{}');
+      return value && typeof value === 'object' && value.articles && typeof value.articles === 'object'
+        ? value.articles
+        : {};
+    } catch (error) { return {}; }
+  }
+
+  function writeState(articles) {
+    try { localStorage.setItem(stateKey, JSON.stringify({ version: 1, articles })); } catch (error) {}
+  }
+
+  function migrate() {
+    const articles = readState();
+    let changed = false;
+    let legacyRead = [];
+    try {
+      const value = JSON.parse(localStorage.getItem(legacyReadKey) || '[]');
+      legacyRead = Array.isArray(value) ? value : [];
     } catch (error) {}
-    progress = Number.isFinite(progress) ? Math.max(0, Math.min(1, progress)) : 0;
-    const read = readList().has(path) || progress >= .96;
-    return { path, progress: read ? 1 : progress, read, updated: Number.isFinite(updated) ? updated : 0 };
-  }
-  function save(path, progress) {
-    const previous = get(path);
-    const next = Math.max(previous.progress, Math.min(1, Math.max(0, progress)));
-    if (next <= previous.progress) return previous;
-    const read = next >= .96;
-    const updated = Date.now();
-    try {
-      localStorage.setItem(`swissploit-read-${previous.path}-progress`, String(read ? 1 : next));
-      localStorage.setItem(`swissploit-read-${previous.path}-updated`, String(updated));
-      if (read) {
-        const paths = readList();
-        paths.add(previous.path);
-        localStorage.setItem(readKey, JSON.stringify(Array.from(paths)));
+
+    legacyRead.forEach(path => {
+      const id = normalizeId(path);
+      if (id && (!articles[id] || !articles[id].read)) {
+        articles[id] = { progress: 100, read: true, lastVisited: Number(articles[id]?.lastVisited) || 0 };
+        changed = true;
       }
+    });
+
+    try {
+      Object.keys(localStorage).filter(key => key.startsWith(legacyPrefix) && key.endsWith('-progress')).forEach(key => {
+        const path = key.slice(legacyPrefix.length, -'-progress'.length);
+        const id = normalizeId(path);
+        const progress = Number(localStorage.getItem(key));
+        if (!id || !Number.isFinite(progress)) return;
+        const updated = Number(localStorage.getItem(`${legacyPrefix}${path}-updated`));
+        const current = articles[id] || { progress: 0, read: false, lastVisited: 0 };
+        const nextProgress = Math.max(Number(current.progress) || 0, Math.min(100, Math.max(0, progress * 100)));
+        const nextRead = Boolean(current.read) || nextProgress >= readThreshold;
+        if (nextProgress > current.progress || nextRead !== Boolean(current.read)) {
+          articles[id] = { progress: nextRead ? 100 : nextProgress, read: nextRead, lastVisited: Math.max(Number(current.lastVisited) || 0, Number.isFinite(updated) ? updated : 0) };
+          changed = true;
+        }
+      });
     } catch (error) {}
-    return { path: previous.path, progress: read ? 1 : next, read, updated };
+
+    if (changed) writeState(articles);
+    return articles;
   }
-  return { get, save };
+
+  function get(value) {
+    const id = normalizeId(value);
+    const item = migrate()[id] || {};
+    const progress = Math.min(100, Math.max(0, Number(item.progress) || 0));
+    return { id, progress, read: item.read === true, lastVisited: Number(item.lastVisited) || 0 };
+  }
+
+  function save(value, currentProgress) {
+    const id = normalizeId(value);
+    const articles = migrate();
+    const previous = get(id);
+    const measured = Math.min(100, Math.max(0, Number(currentProgress) || 0));
+    const progress = Math.max(previous.progress, measured);
+    const read = previous.read || progress >= readThreshold;
+    if (progress <= previous.progress && read === previous.read) return previous;
+    const next = { progress: read ? 100 : progress, read, lastVisited: Date.now() };
+    articles[id] = next;
+    writeState(articles);
+    return { id, ...next };
+  }
+
+  return { get, save, readThreshold };
 })();
+window.SWISSPLOIT_READING_STATE = readingState;
 
 // Measure the article itself, independent of hero, related content and footer.
 (function articleProgress(){
@@ -600,7 +648,7 @@ const readingState = (() => {
   let hasScrolled = false;
 
   function renderSaved() {
-    const percent = Math.round(saved.progress * 100);
+    const percent = Math.round(saved.progress);
     statusText.textContent = isEnglish ? `${percent}% read` : `${percent} % gelesen`;
     readLabel.setAttribute('aria-hidden', String(!saved.read));
     status.classList.toggle('is-read', saved.read);
@@ -615,12 +663,12 @@ const readingState = (() => {
   function update() {
     frame = 0;
     const { rect, startLine, distance } = geometry();
-    const progress = Math.min(1, Math.max(0, (startLine - rect.top) / distance));
-    bar.firstElementChild.style.transform = `scaleX(${progress})`;
+    const progress = Math.min(100, Math.max(0, ((startLine - rect.top) / distance) * 100));
+    bar.firstElementChild.style.transform = `scaleX(${progress / 100})`;
     // Opening a short article alone does not mark it read.
     if (!hasScrolled || saved.read) return;
-    const measured = rect.bottom <= window.innerHeight * .92 && rect.top <= startLine ? 1 : progress;
-    const rounded = Math.floor(measured * 100) / 100;
+    const measured = rect.bottom <= window.innerHeight * .92 && rect.top <= startLine ? 100 : progress;
+    const rounded = Math.floor(measured);
     if (rounded > saved.progress) {
       saved = readingState.save(location.pathname, rounded);
       renderSaved();

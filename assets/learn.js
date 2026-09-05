@@ -28,18 +28,27 @@
     let readCount = 0;
     let candidate = null;
     cards.forEach(card => {
-      const state = readingState.get(card.dataset.learnPath);
+      const state = window.SWISSPLOIT_READING_STATE.get(card.dataset.learnPath);
       const status = card.querySelector('.learn-card-status');
+      const progress = card.querySelector('.learn-card-progress');
       card.classList.toggle('is-read', state.read);
-      status?.setAttribute('aria-hidden', String(!state.read));
+      card.classList.toggle('is-started', state.progress > 0 && !state.read);
+      if (status) {
+        status.textContent = isEnglish ? '✓ READ' : '✓ GELESEN';
+        status.setAttribute('aria-hidden', String(!state.read));
+      }
+      if (progress) {
+        progress.textContent = isEnglish ? `${Math.round(state.progress)}% read` : `${Math.round(state.progress)} % gelesen`;
+        progress.hidden = state.read || state.progress <= 0;
+      }
       const link = card.querySelector('.blog-card-link');
       if (state.read) {
         readCount += 1;
-        link.setAttribute('aria-describedby', status.id);
+        if (status?.id) link.setAttribute('aria-describedby', status.id);
       } else {
         link.removeAttribute('aria-describedby');
-        if (state.progress > 0 && (!candidate || state.updated > candidate.state.updated ||
-          (state.updated === candidate.state.updated && state.progress > candidate.state.progress))) {
+        if (state.progress > 0 && (!candidate || state.lastVisited > candidate.state.lastVisited ||
+          (state.lastVisited === candidate.state.lastVisited && state.progress > candidate.state.progress))) {
           candidate = { card, state };
         }
       }
@@ -53,7 +62,7 @@
     resume.hidden = !candidate;
     if (!candidate) return;
     const { card, state } = candidate;
-    const percent = Math.round(state.progress * 100);
+    const percent = Math.round(state.progress);
     document.getElementById('learnContinueTitle').textContent = card.querySelector('.blog-card-title').textContent;
     document.getElementById('learnContinueText').textContent = isEnglish ? `${percent}% read` : `${percent} % gelesen`;
     document.getElementById('learnContinueBar').style.transform = `scaleX(${state.progress})`;
@@ -112,7 +121,7 @@
       entering.forEach(card => card.classList.remove('is-filtered-out'));
     };
     if (reduced.matches) showMatches();
-    else requestAnimationFrame(() => requestAnimationFrame(showMatches));
+    else requestAnimationFrame(showMatches);
     if (!reduced.matches) hideTimer = window.setTimeout(() => {
       if (run === filterRun) leaving.forEach(card => { card.hidden = true; });
     }, 220);

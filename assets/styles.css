@@ -11505,31 +11505,8 @@ html .m365-title-number{
 .article-reading-status button{ border:1px solid color-mix(in oklab,var(--accent) 28%,transparent); border-radius:999px; padding:7px 11px; background:color-mix(in oklab,var(--accent) 8%,transparent); color:var(--accent); font:inherit; font-weight:800; cursor:pointer; }
 .article-reading-status button[hidden]{ display:none; }
 
-.footer-system{
-  display:grid;
-  grid-template-columns:1fr;
-  position:relative;
-  gap:3px;
-  min-width:210px;
-  padding:8px 0;
-  color:color-mix(in oklab,var(--fg) 62%,transparent);
-  font-size:10px;
-  line-height:1.6;
-  text-decoration:none;
-}
-.footer-system-label{ font-size:9px; letter-spacing:.14em; }
-.footer-system-state,.footer-system-question{ grid-area:2 / 1; transition:opacity .25s ease; }
-.footer-system-state{ letter-spacing:.06em; }
-.footer-system-state > span{ color:var(--accent); }
-.footer-system-question{ opacity:0; }
-.footer-system-action{ grid-area:3 / 1; color:var(--accent); opacity:0; transition:opacity .25s ease; }
-.footer-system:is(:hover,:focus-visible) .footer-system-state{ opacity:0; }
-.footer-system:is(:hover,:focus-visible) :is(.footer-system-question,.footer-system-action){ opacity:1; }
-.footer-system:focus-visible,.article-reading-status button:focus-visible{ outline:2px solid var(--accent); outline-offset:4px; }
-@media (hover:none), (pointer:coarse){
-  .footer-system-action{ opacity:1; }
-}
+.article-reading-status button:focus-visible{ outline:2px solid var(--accent); outline-offset:4px; }
 @media (prefers-reduced-motion:reduce){
   .reveal,.reveal.has-entered:not(.visible){ opacity:1!important; translate:0 0!important; filter:none!important; scale:1!important; transition:none!important; }
-  .home-page .care-card-v26,.article-reading-status-text,.article-read-label,.footer-system span{ transition:none!important; }
+  .home-page .care-card-v26,.article-reading-status-text,.article-read-label{ transition:none!important; }
 }

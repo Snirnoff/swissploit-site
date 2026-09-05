@@ -378,6 +378,14 @@
   transition:opacity .35s ease;
 }
 .learn-page .blog-card.is-read .learn-card-status{ opacity:1; }
+.learn-card-progress{
+  min-height:18px;
+  color:color-mix(in oklab,var(--fg) 62%,transparent);
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.04em;
+}
+.learn-page .blog-card.is-read{ border-color:color-mix(in oklab,#6ebf91 38%,var(--border)); }
 
 .learn-progress{ display:grid; grid-template-columns:auto minmax(0,1fr); gap:5px 14px; max-width:700px; margin-top:22px; text-align:left; }
 .learn-progress-label{ color:var(--accent); font-size:11px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; }
