@@ -422,6 +422,7 @@ function renderPostCard(post, lang, topicId) {
 
           <h3 class="blog-card-title" id="${escapeAttr(titleId)}">${escapeHtml(txt.title || "")}</h3>
           <p class="blog-card-excerpt">${escapeHtml(shortDescription)}</p>
+          <span class="learn-card-status" id="${escapeAttr(titleId)}-status" aria-hidden="true">${lang === "en" ? "✓ READ" : "✓ GELESEN"}</span>
         </div>
       </a>
     </article>
@@ -526,6 +527,15 @@ function renderSiteHeaderHtml(lang) {
       ${renderHeaderActionsHtml()}
     </div>
   </header>`;
+}
+
+function renderFooterSystemHtml(lang) {
+  return `<a class="footer-system" href="/leistungen/it-sicherheits-compliance-check/" data-transition>
+        <span class="footer-system-label">SWISSPLOIT SYSTEM</span>
+        <span class="footer-system-state"><span aria-hidden="true">●</span> ALL SYSTEMS NORMAL</span>
+        <span class="footer-system-question">${lang === "en" ? "Your Microsoft 365 tenant too?" : "Ihr Microsoft-365-Tenant auch?"}</span>
+        <span class="footer-system-action">Security Check →</span>
+      </a>`;
 }
 
 function renderFooterNavHtml(lang) {
@@ -846,10 +856,18 @@ function renderBlogIndexPage(posts, lang) {
         </div>
         <div class="learn-progress" aria-live="polite">
           <span class="learn-progress-label">${isEn ? "Learning progress" : "Lernfortschritt"}</span>
-          <strong id="learnProgressText">${isEn ? "0 articles read · ${posts.length} open" : `0 Artikel gelesen · ${posts.length} offen`}</strong>
+          <strong id="learnProgressText">${isEn ? `0 articles read · ${availablePosts.length} open` : `0 Artikel gelesen · ${availablePosts.length} offen`}</strong>
           <span class="learn-progress-bar" aria-hidden="true"><span id="learnProgressBar"></span></span>
         </div>
       </div>
+    </section>
+
+    <section id="learnContinue" class="learn-continue wrap" aria-labelledby="learnContinueLabel" hidden>
+      <p class="learn-progress-label" id="learnContinueLabel">${isEn ? "CONTINUE LEARNING" : "WEITERLERNEN"}</p>
+      <h2 id="learnContinueTitle"></h2>
+      <p id="learnContinueText"></p>
+      <span class="learn-progress-bar" aria-hidden="true"><span id="learnContinueBar"></span></span>
+      <a id="learnContinueLink" class="learn-continue-link" aria-describedby="learnContinueTitle" data-transition>${isEn ? "Continue reading →" : "Weiterlesen →"}</a>
     </section>
 
     <section class="section learn-featured" aria-labelledby="featured-title">
@@ -883,7 +901,7 @@ function renderBlogIndexPage(posts, lang) {
             <h2 id="learn-content-title">${isEn ? "All Learn content" : "Alle Learn-Inhalte"}</h2>
             <p>${isEn ? "The latest content appears first." : "Die neuesten Inhalte erscheinen zuerst."}</p>
           </div>
-          <nav class="learn-topic-filter" aria-label="${isEn ? "Learn topic filter" : "Learn Themenfilter"}" role="tablist">
+          <nav class="learn-topic-filter" aria-label="${isEn ? "Learn topic filter" : "Learn Themenfilter"}">
             ${[
               ["all", "ALL"],
               ["phishing-betrug", "PHISHING"],
@@ -891,7 +909,7 @@ function renderBlogIndexPage(posts, lang) {
               ["windows", "WINDOWS"],
               ["privacy-datenschutz", "PRIVACY"],
               ["security", "SECURITY"]
-            ].map(([value, label], index) => `<button class="filter-chip${index === 0 ? " is-active" : ""}" type="button" role="tab" aria-selected="${index === 0 ? "true" : "false"}" data-learn-filter="${value}">${label}</button>`).join("")}
+            ].map(([value, label], index) => `<button class="filter-chip${index === 0 ? " is-active" : ""}" type="button" aria-pressed="${index === 0 ? "true" : "false"}" data-learn-filter="${value}">${label}</button>`).join("")}
           </nav>
         </div>
 
@@ -910,6 +928,7 @@ function renderBlogIndexPage(posts, lang) {
     <div class="wrap">
       <p>© <span id="year"></span> Swissploit.</p>
       ${renderFooterNavHtml(lang)}
+      ${renderFooterSystemHtml(lang)}
     </div>
   </footer>
 
@@ -918,8 +937,8 @@ function renderBlogIndexPage(posts, lang) {
     window.SWISSPLOIT_INDEX_LANG = ${JSON.stringify(lang)};
   </script>
   <script src="/assets/transition.js"></script>
+  <script src="/assets/app.js"></script>
   <script src="/assets/learn.js"></script>
-  <script defer src="/assets/app.js"></script>
 </body>
 </html>`;
 }
@@ -1071,6 +1090,11 @@ function renderStaticPostPage(post, lang, allPosts) {
     <section class="section post-wrap">
       <div class="wrap">
         <article class="post-content" id="postContent" aria-labelledby="postTitle">
+          <div class="article-reading-status">
+            <span class="article-reading-status-text"></span>
+            <span class="article-read-label" aria-hidden="true"></span>
+            <button type="button" hidden></button>
+          </div>
           <div class="post-article">
             ${keyTakeawayHtml}
             ${bodyHtml}
@@ -1086,6 +1110,7 @@ function renderStaticPostPage(post, lang, allPosts) {
     <div class="wrap">
       <p>© <span id="year"></span> Swissploit.</p>
       ${renderFooterNavHtml(lang)}
+      ${renderFooterSystemHtml(lang)}
     </div>
   </footer>
 

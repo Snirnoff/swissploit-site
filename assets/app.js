@@ -39,14 +39,15 @@ const toggle = document.getElementById('themeToggle');
 
 function setTheme(t){
   root.setAttribute('data-theme', t);
-  localStorage.setItem('swissploit-theme', t);
+  try { localStorage.setItem('swissploit-theme', t); } catch (error) {}
 
   // aria-pressed true = dark on (nur wenn Toggle existiert)
   if(toggle) toggle.setAttribute('aria-pressed', t === 'dark' ? 'true' : 'false');
 }
 
 (function initTheme(){
-  const saved = localStorage.getItem('swissploit-theme');
+  let saved;
+  try { saved = localStorage.getItem('swissploit-theme'); } catch (error) {}
   if(saved){ setTheme(saved); }
   else {
     const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -73,70 +74,34 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 
 
-// Reveal Observer — reversible for premium scroll animations
-document.addEventListener("DOMContentLoaded", () => {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("visible");
-        entry.target.classList.add("has-entered");
-      } else {
-        entry.target.classList.remove("visible");
-      }
-    });
-  }, { threshold: 0.01, rootMargin: '0px 0px 12% 0px' });
-
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-  const mobileSectionQuery = window.matchMedia && window.matchMedia('(max-width: 768px)');
-  let mobileSectionObserver = null;
-
-  function disconnectMobileSectionObserver() {
-    if (mobileSectionObserver) {
-      mobileSectionObserver.disconnect();
-      mobileSectionObserver = null;
-    }
-  }
-
-  function applyMobileSectionReveal(isMobile) {
-    const sections = Array.from(document.querySelectorAll('section:not(#about):not(#top):not(#featured):not(#shorts)'));
-    if (!isMobile) {
-      disconnectMobileSectionObserver();
+// One reversible observer; Learn adds its cards before DOMContentLoaded.
+document.addEventListener('DOMContentLoaded', () => {
+  const items = Array.from(document.querySelectorAll('.reveal'));
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let observer;
+  function show(item) { item.classList.add('visible', 'has-entered'); }
+  function setup() {
+    observer?.disconnect();
+    if (reduced.matches || !('IntersectionObserver' in window)) {
+      items.forEach(show);
       return;
     }
-
-    sections.forEach(section => section.classList.add('reveal'));
-    if (!('IntersectionObserver' in window) || (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) {
-      sections.forEach(section => section.classList.add('visible'));
-      return;
-    }
-
-    disconnectMobileSectionObserver();
-    mobileSectionObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          entry.target.classList.add('has-entered');
-        } else {
-          entry.target.classList.remove('visible');
+    observer = new IntersectionObserver(entries => {
+      let cardIndex = 0;
+      entries.forEach(({ target, isIntersecting }) => {
+        if (isIntersecting) {
+          if (target.matches('.blog-card')) target.style.setProperty('--reveal-delay', `${(cardIndex++ % 3) * 50}ms`);
+          show(target);
+        } else if (!target.contains(document.activeElement)) {
+          target.classList.remove('visible');
         }
       });
-    }, {
-      threshold: 0.01,
-      rootMargin: '0px 0px 12% 0px'
-    });
-
-    sections.forEach(section => mobileSectionObserver.observe(section));
+    }, { threshold: 0, rootMargin: '0px 0px 120px 0px' });
+    items.forEach(item => observer.observe(item));
   }
-
-  if (mobileSectionQuery) {
-    applyMobileSectionReveal(mobileSectionQuery.matches);
-    if ('addEventListener' in mobileSectionQuery) {
-      mobileSectionQuery.addEventListener('change', (event) => applyMobileSectionReveal(event.matches));
-    } else if ('addListener' in mobileSectionQuery) {
-      mobileSectionQuery.addListener((event) => applyMobileSectionReveal(event.matches));
-    }
-  }
+  items.forEach(item => item.addEventListener('focusin', () => show(item)));
+  reduced.addEventListener('change', setup);
+  setup();
 });
 
 
@@ -478,15 +443,20 @@ if(shortsSection){
 (function(){
   const mags = document.querySelectorAll('.btn.magnetic');
   const desktopQuery = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)');
-  if(!desktopQuery || !desktopQuery.matches) return;
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+  if(!desktopQuery) return;
   mags.forEach(btn => {
     btn.addEventListener('mousemove', (e)=>{
+      if (!desktopQuery.matches || reduced.matches) return;
       const r = btn.getBoundingClientRect();
       const x = e.clientX - (r.left + r.width/2);
       const y = e.clientY - (r.top + r.height/2);
       btn.style.transform = `translate(${Math.max(-3, Math.min(3, x*0.06))}px, ${Math.max(-3, Math.min(3, y*0.06))}px)`;
     });
-    btn.addEventListener('mouseleave', ()=> btn.style.transform = 'translate(0,0)');
+    const reset = () => btn.style.removeProperty('transform');
+    btn.addEventListener('mouseleave', reset);
+    desktopQuery.addEventListener('change', reset);
+    reduced.addEventListener('change', reset);
   });
 })();
 
@@ -523,70 +493,155 @@ if(shortsSection){
   window.addEventListener('resize', requestUpdate, { passive: true });
 })();
 
-// Important cards get a restrained local grid/spotlight response on desktop.
-(function cardInteraction(){
-  const cards = document.querySelectorAll('.care-card-v26, .security-check-preview, .blog-card');
-  const desktopQuery = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)');
-  if(!cards.length || !desktopQuery || !desktopQuery.matches) return;
-  cards.forEach(card => {
-    card.addEventListener('pointermove', event => {
-      const rect = card.getBoundingClientRect();
-      card.style.setProperty('--card-x', `${((event.clientX - rect.left) / rect.width) * 100}%`);
-      card.style.setProperty('--card-y', `${((event.clientY - rect.top) / rect.height) * 100}%`);
-    }, { passive: true });
-  });
+// Only services increases the existing grid's local visibility.
+(function gridFocus(){
+  const area = document.querySelector('#services.grid-focus');
+  if (!area) return;
+  const desktop = window.matchMedia('(hover: hover) and (pointer: fine)');
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let frame = 0;
+  let x = 0;
+  let y = 0;
+  function reset() {
+    cancelAnimationFrame(frame);
+    frame = 0;
+    area.classList.remove('is-grid-focused');
+    area.style.removeProperty('--grid-x');
+    area.style.removeProperty('--grid-y');
+  }
+  area.addEventListener('pointermove', event => {
+    if (!desktop.matches || reduced.matches || event.pointerType === 'touch') return;
+    x = event.clientX;
+    y = event.clientY;
+    if (frame) return;
+    frame = requestAnimationFrame(() => {
+      frame = 0;
+      const rect = area.getBoundingClientRect();
+      area.style.setProperty('--grid-x', `${x - rect.left}px`);
+      area.style.setProperty('--grid-y', `${y - rect.top}px`);
+      area.classList.add('is-grid-focused');
+    });
+  }, { passive: true });
+  area.addEventListener('pointerleave', reset);
+  area.addEventListener('pointercancel', reset);
+  window.addEventListener('scroll', reset, { passive: true });
+  desktop.addEventListener('change', reset);
+  reduced.addEventListener('change', reset);
 })();
 
-// Static articles remember reading progress without requiring an account.
+// Keep existing storage keys, with validated values and monotonic progress.
+const readingState = (() => {
+  const readKey = 'swissploit-read-articles';
+  const normalizePath = path => path.replace(/\/index\.html$/, '/').replace(/\/?$/, '/');
+  function readList() {
+    try {
+      const value = JSON.parse(localStorage.getItem(readKey) || '[]');
+      return new Set(Array.isArray(value) ? value.filter(path => typeof path === 'string').map(normalizePath) : []);
+    } catch (error) { return new Set(); }
+  }
+  function get(path) {
+    path = normalizePath(path);
+    let progress = 0;
+    let updated = 0;
+    try {
+      progress = Number(localStorage.getItem(`swissploit-read-${path}-progress`));
+      updated = Number(localStorage.getItem(`swissploit-read-${path}-updated`));
+    } catch (error) {}
+    progress = Number.isFinite(progress) ? Math.max(0, Math.min(1, progress)) : 0;
+    const read = readList().has(path) || progress >= .96;
+    return { path, progress: read ? 1 : progress, read, updated: Number.isFinite(updated) ? updated : 0 };
+  }
+  function save(path, progress) {
+    const previous = get(path);
+    const next = Math.max(previous.progress, Math.min(1, Math.max(0, progress)));
+    if (next <= previous.progress) return previous;
+    const read = next >= .96;
+    const updated = Date.now();
+    try {
+      localStorage.setItem(`swissploit-read-${previous.path}-progress`, String(read ? 1 : next));
+      localStorage.setItem(`swissploit-read-${previous.path}-updated`, String(updated));
+      if (read) {
+        const paths = readList();
+        paths.add(previous.path);
+        localStorage.setItem(readKey, JSON.stringify(Array.from(paths)));
+      }
+    } catch (error) {}
+    return { path: previous.path, progress: read ? 1 : next, read, updated };
+  }
+  return { get, save };
+})();
+
+// Measure the article itself, independent of hero, related content and footer.
 (function articleProgress(){
   const article = document.querySelector('.post-article');
-  if(!article) return;
-  const key = `swissploit-read-${location.pathname}`;
-  const readKey = 'swissploit-read-articles';
-  const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let saved = 0;
-  try { saved = Number(localStorage.getItem(`${key}-progress`) || 0); } catch(error) {}
-
+  if (!article) return;
+  let saved = readingState.get(location.pathname);
+  const isEnglish = document.documentElement.lang === 'en';
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
   const bar = document.createElement('div');
   bar.className = 'article-reading-progress';
+  bar.setAttribute('aria-hidden', 'true');
   bar.innerHTML = '<span></span>';
   document.body.appendChild(bar);
 
-  const status = document.createElement('div');
-  status.className = 'article-reading-status';
-  status.innerHTML = '<span class="article-reading-status-text"></span><button type="button">Weiterlesen</button>';
-  article.parentElement.insertBefore(status, article);
-  const statusText = status.querySelector('span');
+  let status = document.querySelector('.article-reading-status');
+  if (!status) {
+    status = document.createElement('div');
+    status.className = 'article-reading-status';
+    status.innerHTML = '<span class="article-reading-status-text"></span><span class="article-read-label"></span><button type="button" hidden></button>';
+    article.before(status);
+  }
+  const statusText = status.querySelector('.article-reading-status-text');
+  const readLabel = status.querySelector('.article-read-label');
   const continueButton = status.querySelector('button');
-  const locale = document.documentElement.lang === 'en' ? { read: 'Read', continue: 'Continue reading' } : { read: 'Gelesen', continue: 'Weiterlesen' };
-
-  function setRead(){
-    try {
-      const list = new Set(JSON.parse(localStorage.getItem(readKey) || '[]'));
-      list.add(location.pathname);
-      localStorage.setItem(readKey, JSON.stringify(Array.from(list)));
-      localStorage.setItem(`${key}-progress`, '1');
-    } catch(error) {}
-    statusText.textContent = `✓ ${locale.read}`;
-    status.classList.add('is-read');
-  }
-  function update(){
-    const rect = article.getBoundingClientRect();
-    const total = Math.max(1, article.offsetHeight - window.innerHeight * .72);
-    const progress = Math.min(1, Math.max(0, (window.innerHeight * .18 - rect.top) / total));
-    bar.firstElementChild.style.transform = `scaleX(${progress})`;
-    if(progress > .04 && progress < .96){
-      try { localStorage.setItem(`${key}-progress`, String(progress)); } catch(error) {}
-    }
-    const atDocumentEnd = window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 32;
-    if(progress >= .96 || atDocumentEnd) setRead();
-  }
-  statusText.textContent = saved > .04 ? locale.continue : '';
-  continueButton.hidden = !(saved > .04 && saved < .96);
-  continueButton.addEventListener('click', () => window.scrollTo({ top: document.body.scrollHeight * saved, behavior: reduced ? 'auto' : 'smooth' }));
+  readLabel.textContent = isEnglish ? '✓ READ' : '✓ GELESEN';
+  continueButton.textContent = isEnglish ? 'Continue reading' : 'Weiterlesen';
   let frame = 0;
-  window.addEventListener('scroll', () => { if(!frame) frame = requestAnimationFrame(() => { frame = 0; update(); }); }, { passive: true });
+  let hasScrolled = false;
+
+  function renderSaved() {
+    const percent = Math.round(saved.progress * 100);
+    statusText.textContent = isEnglish ? `${percent}% read` : `${percent} % gelesen`;
+    readLabel.setAttribute('aria-hidden', String(!saved.read));
+    status.classList.toggle('is-read', saved.read);
+    continueButton.hidden = saved.read || saved.progress <= 0;
+  }
+  function geometry() {
+    const rect = article.getBoundingClientRect();
+    const startLine = window.innerHeight * .18;
+    const distance = Math.max(1, rect.height - window.innerHeight * .72);
+    return { rect, startLine, distance };
+  }
+  function update() {
+    frame = 0;
+    const { rect, startLine, distance } = geometry();
+    const progress = Math.min(1, Math.max(0, (startLine - rect.top) / distance));
+    bar.firstElementChild.style.transform = `scaleX(${progress})`;
+    // Opening a short article alone does not mark it read.
+    if (!hasScrolled || saved.read) return;
+    const measured = rect.bottom <= window.innerHeight * .92 && rect.top <= startLine ? 1 : progress;
+    const rounded = Math.floor(measured * 100) / 100;
+    if (rounded > saved.progress) {
+      saved = readingState.save(location.pathname, rounded);
+      renderSaved();
+    }
+  }
+  function requestUpdate() { if (!frame) frame = requestAnimationFrame(update); }
+  continueButton.addEventListener('click', () => {
+    const { rect, startLine, distance } = geometry();
+    window.scrollTo({ top: window.scrollY + rect.top - startLine + distance * saved.progress, behavior: reduced.matches ? 'auto' : 'smooth' });
+  });
+  window.addEventListener('scroll', () => {
+    hasScrolled = true;
+    requestUpdate();
+  }, { passive: true });
+  window.addEventListener('resize', requestUpdate, { passive: true });
   window.addEventListener('pagehide', update);
+  document.addEventListener('visibilitychange', () => { if (document.hidden) update(); });
+  window.addEventListener('storage', () => { saved = readingState.get(location.pathname); renderSaved(); });
+  window.addEventListener('pageshow', () => { saved = readingState.get(location.pathname); renderSaved(); requestUpdate(); });
+  if ('ResizeObserver' in window) new ResizeObserver(requestUpdate).observe(article);
+  renderSaved();
   update();
 })();
 

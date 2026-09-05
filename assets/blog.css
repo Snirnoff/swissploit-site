@@ -221,7 +221,7 @@
 }
 
 @media (max-width: 768px){
-  .blog-card:first-child{
+  body:not(.learn-page) .blog-card:first-child{
     opacity: 1 !important;
     transform: none !important;
     translate: 0 0 !important;

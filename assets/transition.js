@@ -43,6 +43,10 @@
     // falls wir aus bfcache kommen und noch was hängt:
     resetTransitionState();
 
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      window.location.href = url.href;
+      return;
+    }
     body.classList.add('is-leaving');
 
     window.setTimeout(() => {

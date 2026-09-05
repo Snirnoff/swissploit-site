@@ -10,14 +10,14 @@
   let blogCardObserver = null;
 
   if (lang) {
-    localStorage.setItem("swissploit-blog-lang", lang);
+    try { localStorage.setItem("swissploit-blog-lang", lang); } catch (error) {}
   }
 
   document.querySelectorAll("[data-lang-switch]").forEach((link) => {
     link.addEventListener("click", () => {
       const nextLang = link.getAttribute("data-lang-switch");
       if (nextLang) {
-        localStorage.setItem("swissploit-blog-lang", nextLang);
+        try { localStorage.setItem("swissploit-blog-lang", nextLang); } catch (error) {}
       }
     });
   });
