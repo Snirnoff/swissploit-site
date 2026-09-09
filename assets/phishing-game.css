@@ -1,0 +1,141 @@
+/* Loaded only when PHISH ESCAPE starts. Ocean colors are independent of the page theme. */
+html.phish-playing{overscroll-behavior:none}
+.phish-game{--sea-ink:#e3f2ef;--sea-muted:#a3c4c9;--sea-accent:#79c5cb;position:fixed;inset:0;width:100%;max-width:none;height:100vh;height:100dvh;max-height:none;margin:0;padding:0;border:0;overflow:hidden;color:var(--sea-ink);background:#071e30;font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.5;touch-action:none;overscroll-behavior:none}
+.phish-game::backdrop{background:#031421e8}
+.phish-game[open]{animation:phish-dive .85s cubic-bezier(.2,.7,.2,1) both}
+.phish-canvas{position:absolute;inset:0;width:100%;height:100%;image-rendering:pixelated;touch-action:none}
+.phish-surface{position:absolute;inset:0;pointer-events:none;z-index:8;background:linear-gradient(180deg,#b8dacf90 0,#4ab3c336 3%,transparent 12%);animation:phish-water 1.4s cubic-bezier(.2,.65,.2,1) both}
+.phish-bar{position:absolute;z-index:10;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:clamp(18px,3vw,34px) clamp(20px,4vw,64px);padding-top:max(20px,env(safe-area-inset-top));gap:20px}
+.phish-wordmark{font-size:16px;letter-spacing:-.05em;font-weight:800;line-height:1.1;white-space:nowrap}
+.phish-wordmark b{color:#7dc2c8}
+.phish-wordmark>span{display:block;margin-top:6px;font:7px ui-monospace,monospace;letter-spacing:.2em;color:#a3c4c9}
+.phish-bar-actions{display:flex;align-items:center;gap:18px}
+.phish-game button{font-family:inherit;cursor:pointer}
+.phish-game button:focus-visible{outline:3px solid #e0d5ac;outline-offset:5px}
+.phish-pause,.phish-exit{min-height:44px;border:0;background:transparent;color:#bdd6d9;padding:8px 0;font-size:12px}
+.phish-exit span{margin-left:8px;color:var(--sea-accent)}
+.phish-pause:hover,.phish-exit:hover{color:white}
+.phish-progress{position:absolute;z-index:4;top:32px;left:50%;transform:translateX(-50%);display:flex;gap:32px;padding:0;margin:0;list-style:none}
+.phish-progress li{display:flex;align-items:center;gap:8px;font:10px ui-monospace,monospace;letter-spacing:.07em;color:#9bbbc1}
+.phish-progress li>span{display:grid;place-items:center;width:22px;height:22px;border:1px solid #a1c0c14d;border-radius:50%;font-size:9px}
+.phish-progress li[aria-current]{color:#edf5e9}
+.phish-progress li[aria-current]>span,.phish-progress li.is-done>span{color:#092e3c;background:#8bcbd0;border-color:#8bcbd0}
+.phish-content{position:absolute;inset:0;z-index:3;pointer-events:none}
+.phish-content button{pointer-events:auto}
+.phish-question{position:absolute;top:clamp(108px,16vh,164px);left:6%;right:6%;text-align:center;animation:phish-reveal .55s ease both}
+.phish-game .phish-eyebrow{margin:0 0 14px;color:#8dc8ce;font:10px ui-monospace,monospace;letter-spacing:.2em;line-height:1.5}
+.phish-question h2{max-width:24ch;margin:0 auto 14px;font-size:clamp(26px,3.15vw,45px);font-weight:600;letter-spacing:-.045em;line-height:1.13;text-wrap:balance;color:#e3f2ef}
+.phish-question>p:last-child{margin:0;color:#afcdd1;font-size:13px}
+.phish-game :is(h1,h2):focus{outline:none}
+.phish-choices{position:absolute;left:46%;right:12%;top:41%;display:grid;gap:clamp(13px,2.6vh,25px);pointer-events:none;animation:phish-reveal .65s .12s ease both}
+.phish-choice{position:relative;display:flex;align-items:center;gap:16px;width:100%;min-height:clamp(64px,9vh,90px);padding:16px 21px;border:1px solid #95c1c54d;border-radius:5px;background:linear-gradient(110deg,#0d3047ed,#10374be0);color:#e3f2ef;text-align:left;transition:background .2s,border-color .2s,box-shadow .2s;box-shadow:0 8px 25px #03152230}
+.phish-choice::before{content:'';position:absolute;left:-5px;top:calc(50% - 5px);width:8px;height:8px;border:1px solid #85c6cc;background:#2f8391;transform:rotate(45deg)}
+.phish-choice:hover,.phish-choice.is-target{border-color:#90d2d5;background:#18495bee;box-shadow:0 0 28px #4ab3c320}
+.phish-choice-number{flex:0 0 auto;color:#8cafb7;font:10px ui-monospace,monospace}
+.phish-choice-text{min-width:0;font-size:clamp(14px,1.3vw,19px);line-height:1.5;overflow-wrap:anywhere}
+code.phish-choice-text{font:clamp(12px,1.05vw,16px)/1.65 ui-monospace,"SFMono-Regular",Consolas,monospace}
+.phish-choice-arrow{margin-left:auto;color:#91cbd0;font-size:18px}
+.phish-controls{position:absolute;bottom:max(23px,env(safe-area-inset-bottom));left:clamp(20px,4vw,64px);right:clamp(20px,4vw,64px);z-index:3;display:flex;align-items:center;justify-content:space-between;gap:20px;color:#a9c7c8;font-size:11px;pointer-events:none}
+.phish-controls>span:last-child{font:8px ui-monospace,monospace;letter-spacing:.15em;white-space:nowrap}
+.phish-intro{position:absolute;top:46%;left:5%;right:5%;transform:translateY(-50%);text-align:center}
+.phish-intro h1{margin:0;font-size:clamp(68px,12vw,180px);line-height:1;font-weight:800;letter-spacing:-.07em;color:#e3efe5}
+.phish-intro>p:not(.phish-eyebrow){font-size:clamp(19px,2.8vw,30px);letter-spacing:-.025em;color:#dce9de;margin:24px 0 8px}
+.phish-intro>span{display:block;font-size:14px;color:#a9cbd0}
+.phish-intro>p:not(.phish-eyebrow),.phish-intro>span{animation:phish-reveal .75s .55s both}
+.phish-intro>span{animation-delay:1.2s}
+.phish-feedback{position:absolute;top:51%;left:50%;width:min(690px,calc(100% - 48px));max-height:calc(100% - 185px);padding:clamp(26px,4vw,48px);transform:translate(-50%,-50%);overflow:auto;overscroll-behavior:contain;touch-action:pan-y;pointer-events:auto;text-align:center;border:1px solid #78b1bd4d;border-radius:10px;background:linear-gradient(140deg,#103449f5,#071f32fa);box-shadow:0 30px 100px #02141f55;animation:phish-panel .5s ease both}
+.phish-feedback h2{margin:0 0 18px;font-size:clamp(30px,4vw,49px);line-height:1.1;font-weight:600;letter-spacing:-.045em;color:#e6f2ec}
+.phish-feedback>p:not(.phish-eyebrow){margin:15px auto;color:#bed2d6;font-size:15px;line-height:1.7;max-width:53ch}
+.phish-feedback>p strong{display:block;color:#edf2e8;font-weight:600}
+.phish-feedback .phish-feedback-note{color:#e2ece5}
+.phish-check-seal{display:grid;place-items:center;margin:0 auto 22px;width:48px;height:48px;border:1px solid #79c5cb73;color:#c5e4d2;border-radius:50%;font-size:23px}
+.phish-next{display:inline-flex;align-items:center;justify-content:center;gap:20px;min-height:48px;padding:13px 23px;margin-top:16px;border:1px solid #87ccd0;border-radius:5px;background:#8acbd0;color:#092e3c;font-size:13px;font-weight:600;transition:background .2s}
+.phish-next:hover{background:#b3e1dc}
+.phish-xray{width:min(800px,calc(100% - 48px));padding-block:30px}
+.phish-xray h2{font-size:clamp(28px,3.5vw,42px);margin-bottom:12px}
+.phish-feedback .phish-xray-intro{font-size:12px;max-width:62ch;margin:10px auto 18px}
+.phish-url{position:relative;min-height:136px;padding:20px 12px 65px;border-block:1px solid #78a9b333;background:#06223266;overflow:hidden}
+.phish-url-parts{font:clamp(12px,1.7vw,20px)/1.6 ui-monospace,"SFMono-Regular",Consolas,monospace;overflow-wrap:anywhere;color:#ccdedc}
+.phish-subdomain{animation:phish-subdomain .85s calc(.6s + var(--part)*.38s) both}
+.phish-url-parts strong{font-weight:400;color:#e8e2c6}
+.phish-domain-focus{position:absolute;bottom:17px;left:0;right:0;color:#d9f1e4;font:600 clamp(27px,4vw,42px)/1.2 ui-monospace,monospace;letter-spacing:-.04em;animation:phish-domain .7s 1.5s both}
+.phish-scan{position:absolute;top:0;bottom:0;left:0;width:2px;background:#a8e2df;box-shadow:0 0 26px 8px #4ab3c355;animation:phish-scan 2s .3s both}
+.phish-feedback .phish-xray-label{font:8px ui-monospace,monospace;letter-spacing:.2em;color:#8cc9cd;margin:12px 0 20px;animation:phish-reveal .7s 1.7s both}
+.phish-feedback .phish-domain-tip{font-size:12px;color:#d3e5df}
+.phish-domain-tip span{font-size:11px;color:#9cbdc5}
+.phish-escape h2{font-size:clamp(40px,7vw,90px);line-height:1.05;font-weight:600;letter-spacing:-.065em;margin:0}
+.phish-game[data-phase="escape"] .phish-content{animation:phish-escape-copy 3s both}
+.phish-paused{position:absolute;z-index:9;inset:85px 0 60px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#061d30ed;text-align:center}
+.phish-paused[hidden]{display:none}
+.phish-paused p{font-size:clamp(24px,4vw,42px);letter-spacing:-.04em;margin:0}
+.phish-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
+@keyframes phish-dive{from{opacity:0;transform:translateY(35%)}to{opacity:1;transform:translateY(0)}}
+@keyframes phish-water{from{transform:translateY(100%);opacity:1}to{transform:translateY(-12%);opacity:0}}
+@keyframes phish-reveal{from{opacity:0;translate:0 10px}to{opacity:1;translate:0 0}}
+@keyframes phish-panel{from{opacity:0;translate:0 10px}to{opacity:1;translate:0 0}}
+@keyframes phish-subdomain{from{opacity:1}to{opacity:.2}}
+@keyframes phish-domain{from{opacity:0;transform:translateY(8px) scale(.9)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes phish-scan{0%{left:100%;opacity:0}15%{opacity:.65}85%{opacity:.65}100%{left:0;opacity:0}}
+@keyframes phish-escape-copy{0%,65%{opacity:1}100%{opacity:0}}
+@media(min-width:1600px){.phish-choices{right:16%;left:49%}}
+@media(max-width:900px){
+.phish-progress{top:91px;gap:26px}
+.phish-question{top:155px}
+.phish-choices{left:36%;right:8%;top:43%}
+.phish-feedback{top:55%;max-height:calc(100% - 215px)}
+.phish-bar{padding-inline:24px}
+}
+@media(max-width:600px){
+.phish-bar{padding:14px 20px;padding-top:max(14px,env(safe-area-inset-top))}
+.phish-wordmark{font-size:14px}
+.phish-bar-actions{gap:14px}
+.phish-pause,.phish-exit{font-size:11px}
+.phish-progress{top:max(83px,calc(env(safe-area-inset-top) + 69px));gap:24px;width:max-content}
+.phish-progress li{font-size:8px;gap:6px}
+.phish-progress li>span{width:20px;height:20px}
+.phish-question{top:calc(130px + env(safe-area-inset-top));left:20px;right:20px}
+.phish-question h2{font-size:28px;max-width:20ch;margin-bottom:12px}
+.phish-game .phish-eyebrow{font-size:8px;margin-bottom:12px}
+.phish-question>p:last-child{font-size:11px;max-width:29ch;margin-inline:auto}
+.phish-choices{left:20%;right:20px;top:43%;gap:16px}
+.phish-choice{min-height:75px;padding:14px 13px;gap:10px}
+.phish-choice-text{font-size:14px}
+code.phish-choice-text{font-size:12px}
+.phish-choice-number{font-size:8px}
+.phish-choice-arrow{display:none}
+.phish-controls{bottom:max(23px,env(safe-area-inset-bottom));left:20px;right:20px;flex-direction:column;gap:8px;font-size:10px;text-align:center}
+.phish-controls>span:last-child{font-size:7px}
+.phish-feedback{top:53%;width:calc(100% - 32px);max-height:calc(100% - 220px);padding:25px 20px}
+.phish-feedback>p:not(.phish-eyebrow){font-size:13px;line-height:1.65}
+.phish-feedback h2{font-size:31px}
+.phish-feedback .phish-xray-intro{font-size:11px}
+.phish-xray{padding:23px 17px}
+.phish-url{padding:14px 4px 62px;min-height:131px}
+.phish-url-parts{font-size:11px;line-height:1.8}
+.phish-feedback .phish-xray-label{font-size:7px;margin:11px 0 15px}
+.phish-feedback .phish-domain-tip{font-size:11px}
+.phish-domain-tip span{font-size:10px}
+.phish-next{font-size:12px;padding:12px 18px;margin-top:12px}
+.phish-intro{top:47%}
+}
+@media(max-height:720px){
+.phish-question{top:118px}.phish-question h2{font-size:26px}.phish-choices{top:42%;gap:11px}.phish-choice{min-height:61px;padding-block:11px}
+.phish-feedback{top:54%;max-height:calc(100% - 180px)}
+.phish-controls{bottom:14px}
+}
+@media(max-height:500px) and (orientation:landscape){
+.phish-bar{padding:8px 20px}.phish-progress{top:25px;font-size:8px;gap:16px}.phish-wordmark{font-size:13px}
+.phish-question{top:90px;left:4%;right:58%;text-align:left}.phish-question h2{font-size:26px}
+.phish-question>p:last-child{font-size:11px}.phish-choices{top:95px;left:48%;right:6%;gap:9px}
+.phish-choice{min-height:56px;padding:9px 12px}.phish-choice-text{font-size:12px}
+.phish-feedback{top:55%;max-height:calc(100% - 100px);width:68%;padding:20px}
+.phish-controls{bottom:10px;font-size:9px}.phish-controls>span:last-child{display:none}
+}
+@media(prefers-reduced-motion:reduce){
+.phish-game,.phish-game *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+.phish-surface,.phish-scan{display:none}
+.phish-subdomain{opacity:.25}
+}
+
+.phish-game.is-surfacing{animation:phish-surface-out .8s ease both;pointer-events:none}
+@keyframes phish-surface-out{from{opacity:1}to{opacity:0}}
