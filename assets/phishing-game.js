@@ -2,9 +2,10 @@ import { Ocean } from './phishing-art.js';
 
 const LEVELS = [
   { name: 'DOMAIN REEF', question: 'Welchem Link würdest du vertrauen?', hint: 'Schwimm zu einem Link. Oder wähle ihn direkt aus.', options: ['microsoft-login-security.example.com', 'login.microsoftonline.com', 'login.microsoftonline.security-check.example.com'], correct: 1 },
-  { name: 'CONTEXT CURRENT', question: 'Zeitdruck. Oder kurz nachdenken?', hint: 'Welchem Impuls folgst du?', options: ['DRINGEND: Dein Passwort läuft gleich ab.', 'Habe ich diese Aktion überhaupt erwartet?'], correct: 1 },
-  { name: 'REPORT NET', question: 'Verdächtige Nachricht entdeckt. Was jetzt?', hint: 'Finde den Weg durch das Netz.', options: ['IGNORIEREN', 'WEITERLEITEN', 'MELDEN'], correct: 2 }
+  { name: 'CONTEXT CURRENT', question: 'Zeitdruck. Oder kurz nachdenken?', hint: 'Welchem Impuls folgst du?', options: ['DRINGEND: Dein Passwort läuft gleich ab.', 'Habe ich diese Aktion überhaupt erwartet?', 'Erst klicken, später prüfen.'], correct: 1 },
+  { name: 'REPORT REEF', question: 'Verdächtige Nachricht entdeckt. Was jetzt?', hint: 'Lass dich nicht ködern. Wähle den sicheren nächsten Schritt.', options: ['IGNORIEREN', 'WEITERLEITEN', 'MELDEN'], correct: 2 }
 ];
+const LAST_CHANCE = { name: 'LETZTE CHANCE · DU KANNST DICH LÖSEN', question: 'Geklickt. Was hilft jetzt?', hint: 'Dein nächster Schritt zählt. Auch jetzt noch.', options: ['Abwarten und nichts sagen.', 'Weitere Anweisungen im Link befolgen.', 'Den Vorfall sofort deiner IT melden.'], correct: 2 };
 const clamp = (n,a,b) => Math.min(b,Math.max(a,n));
 let activeGame = null;
 let stylesheet;
@@ -31,9 +32,10 @@ class PhishEscape {
   constructor(trigger) {
     this.trigger=trigger;this.events=new AbortController();this.reducedQuery=matchMedia('(prefers-reduced-motion: reduce)');
     this.reduced=this.reducedQuery.matches;this.phase='intro';this.level=0;this.elapsed=0;this.time=0;
-    this.fish={x:.18,y:.57,vx:0,vy:0,angle:0,facing:1};this.target={x:.18,y:.57};
-    this.keys=new Set();this.targets=[];this.selected=null;this.pendingChoice=null;this.hover=-1;this.dwell=0;
-    this.camera=0;this.ascent=0;this.netOpen=0;this.netGoal=0;this.paused=false;this.frame=0;this.lastTime=0;
+    this.fish={x:.18,y:.8,vx:0,vy:0,angle:0,facing:1};this.target={x:.18,y:.8};
+    this.danger=0;this.lastChance=false;this.resolved=false;this.hook=null;
+    this.keys=new Set();this.targets=[];this.selected=null;this.hover=-1;this.dwell=0;
+    this.camera=0;this.escapeProgress=0;this.escapeHooks=[];this.paused=false;this.frame=0;this.lastTime=0;
     this.dialog=document.createElement('dialog');
     this.dialog.className='phish-game';this.dialog.setAttribute('aria-label','PHISH ESCAPE – interaktive Phishing-Challenge');
     this.dialog.innerHTML=`
@@ -95,18 +97,21 @@ class PhishEscape {
   }
   setPhase(phase) {
     this.phase=phase;this.elapsed=0;this.dialog.dataset.phase=phase;
-    this.pointerActive=false;this.keys.clear();this.hover=-1;this.dwell=0;this.pendingChoice=null;
+    this.pointerActive=false;this.keys.clear();this.hover=-1;this.dwell=0;
   }
-  showLevel(index) {
-    this.level=index;this.setPhase('choice');this.camera=index*90;this.selected=null;
-    const level=LEVELS[index];
+  currentLevel() {return this.lastChance ? LAST_CHANCE : LEVELS[this.level];}
+  safePosition() {return {x:.16,y:.8-this.danger*.64};}
+  showLevel(index,lastChance=false) {
+    this.level=index;this.lastChance=lastChance;this.setPhase('choice');this.camera=index*90;this.selected=null;this.hook=null;
+    this.dialog.classList.toggle('phish-last-chance',lastChance);
+    const level=this.currentLevel();
     this.content.innerHTML=`<div class="phish-question"><p class="phish-eyebrow">${level.name}</p><h2 tabindex="-1">${level.question}</h2><p>${level.hint}</p></div><div class="phish-choices" role="group" aria-label="${level.question}"></div>`;
     const choices=this.content.querySelector('.phish-choices');
     level.options.forEach((label,i)=>{
       const button=document.createElement('button');
       button.type='button';button.className='phish-choice';button.dataset.choice=i;
       const number=document.createElement('span');number.className='phish-choice-number';number.textContent=String(i+1).padStart(2,'0');number.setAttribute('aria-hidden','true');
-      const text=document.createElement(index===0?'code':'span');text.className='phish-choice-text';
+      const text=document.createElement(index===0&&!lastChance?'code':'span');text.className='phish-choice-text';
       // Equal treatment of every URL; no segmentation or solution hint before the decision.
       text.textContent=label;
       const arrow=document.createElement('span');arrow.className='phish-choice-arrow';arrow.textContent='→';arrow.setAttribute('aria-hidden','true');
@@ -114,28 +119,33 @@ class PhishEscape {
       this.on(button,'click',()=>this.swimTo(i));
     });
     this.content.querySelector('h2').focus({preventScroll:true});
-    this.target={x:.18,y:matchMedia('(max-width: 600px)').matches ? .37 : .56};
+    this.target=this.safePosition();
+    if(lastChance)this.live.textContent='Die Leine hält dich nahe der Oberfläche. Ein sicherer nächster Schritt löst dich.';
     this.on(choices,'animationend',()=>this.measureTargets());
     this.measureTargets();this.updateProgress();this.schedule();
   }
   measureTargets() {
-    if(this.phase!=='choice') {this.targets=[];return;}
+    if(!['choice','answer','hook'].includes(this.phase)) {this.targets=[];return;}
     const bounds=this.canvas.getBoundingClientRect();
-    this.targets=[...this.content.querySelectorAll('.phish-choice')].map(button=>{
+    this.targets=[...this.content.querySelectorAll('.phish-choice')].map((button,i)=>{
       const r=button.getBoundingClientRect();
-      return {button,x:(r.left-bounds.left+8)/bounds.width,y:(r.top-bounds.top+r.height/2)/bounds.height,left:(r.left-bounds.left)/bounds.width,right:(r.right-bounds.left)/bounds.width,top:(r.top-bounds.top)/bounds.height,bottom:(r.bottom-bounds.top)/bounds.height};
+      const spacing=bounds.width<=600?9:18;
+      return {button,x:(r.left-bounds.left-12-i*spacing)/bounds.width,y:(r.top-bounds.top+r.height/2)/bounds.height,left:(r.left-bounds.left)/bounds.width,right:(r.right-bounds.left)/bounds.width,top:(r.top-bounds.top)/bounds.height,bottom:(r.bottom-bounds.top)/bounds.height};
     });
+    if(this.selected!==null&&!this.resolved&&this.targets[this.selected]){
+      const {x,y}=this.targets[this.selected];this.hook={x,y};
+    }
   }
   updateProgress() {
     this.dialog.querySelectorAll('.phish-progress li').forEach((li,i)=>{
-      const done=i<this.level || ['escape','surface'].includes(this.phase) || (i===this.level&&this.phase==='feedback'&&(this.level!==2||this.selected===LEVELS[2].correct));
+      const done=this.lastChance || i<this.level || ['escape','return'].includes(this.phase) || (i===this.level&&this.phase==='feedback'&&(this.level!==2||this.selected===LEVELS[2].correct));
       li.classList.toggle('is-done',done);
-      if(i===this.level)li.setAttribute('aria-current','step');else li.removeAttribute('aria-current');
+      if(i===this.level&&!this.lastChance)li.setAttribute('aria-current','step');else li.removeAttribute('aria-current');
       li.querySelector('span').textContent=done?'✓':String(i+1).padStart(2,'0');
     });
   }
   pointer(event) {
-    if(this.phase!=='choice'||this.pendingChoice!==null||this.paused) return;
+    if(this.phase!=='choice'||this.paused) return;
     if(event.pointerType==='touch'&&event.type==='pointermove'&&event.buttons===0) return;
     const bounds=this.canvas.getBoundingClientRect();
     this.target={x:clamp((event.clientX-bounds.left)/bounds.width,.04,.96),y:clamp((event.clientY-bounds.top)/bounds.height,.16,.9)};
@@ -149,25 +159,53 @@ class PhishEscape {
     }
   }
   swimTo(index) {
-    if(this.phase!=='choice'||this.pendingChoice!==null||this.paused) return;
-    this.pendingChoice=index;this.elapsed=0;this.keys.clear();this.pointerActive=false;
-    this.target={x:this.targets[index].x,y:this.targets[index].y};
-    this.targets.forEach((target,i)=>{target.button.setAttribute('aria-disabled','true');target.button.classList.toggle('is-target',i===index);});
-    this.live.textContent='Dein Fisch schwimmt zum gewählten Weg.';
-    this.schedule();
+    if(this.phase!=='choice'||this.paused||!this.targets[index]) return;
+    this.choose(index);
   }
   choose(index) {
-    const correct=index===LEVELS[this.level].correct;
-    this.selected=index;this.setPhase('feedback');
-    this.target={x:correct ? .32 : .17,y:.72};this.targets=[];
-    if(!correct&&!this.reduced) {this.fish.vx=-.28;this.fish.angle=-.12;}
-    if(this.level===0) this.domainReveal(index,correct);
-    else if(this.level===1) this.feedback('CHECK 2 ✓',correct?'Kontext prüfen.':'Kurz innehalten.',correct?'Unerwartete Nachrichten verdienen einen zweiten Blick.':'Zeitdruck soll dich zum schnellen Handeln bewegen. Habe ich diese Aktion überhaupt erwartet?','Unerwartete Nachrichten verdienen einen zweiten Blick.','Weiter zum Netz →',()=>this.showLevel(2));
+    const level=this.currentLevel(),correct=index===level.correct;
+    this.selected=index;this.resolved=false;this.setPhase('answer');
+    this.hook={x:this.targets[index].x,y:this.targets[index].y};
+    this.target={x:this.fish.x,y:this.fish.y};
+    this.targets.forEach(({button},i)=>{
+      button.setAttribute('aria-disabled','true');button.classList.remove('is-target');
+      button.classList.toggle('is-correct',i===level.correct);
+      button.classList.toggle('is-wrong',i===index&&!correct);
+      if(i===level.correct||i===index){
+        const result=i===level.correct?'Richtig':'Nicht sicher';
+        button.setAttribute('aria-label',button.querySelector('.phish-choice-text').textContent+'. '+result);
+        button.querySelector('.phish-choice-number').textContent=i===level.correct?'✓':'×';
+      }
+    });
+    this.live.textContent=correct?'Richtig. Der Haken löst sich. Dein Fisch gewinnt sichere Tiefe.':
+      'Nicht sicher. Richtig ist: '+level.options[level.correct]+'. Die Leine zieht deinen Fisch weiter nach oben.';
+    this.schedule();
+  }
+  resolveHook() {
+    const correct=this.selected===this.currentLevel().correct;
+    // Depth belongs to the run, never to the current question. No visible score.
+    this.danger=correct ? (this.lastChance?0:Math.max(0,this.danger-.12)) : Math.min(1,this.danger+.42);
+    this.hook={x:this.fish.x+(this.ocean.width<400?1.35:1.7)*11/this.ocean.width,y:this.fish.y};
+    this.resolved=true;this.target=this.safePosition();
+    if(!correct&&!this.reduced)this.fish.vy=-.22;
+  }
+  showExplanation() {
+    const index=this.selected,correct=index===this.currentLevel().correct;
+    if(this.level===2)this.escapeHooks=this.targets.filter((_,i)=>i!==this.currentLevel().correct).map(({x,y})=>({x,y}));
+    this.setPhase('feedback');this.targets=[];
+    if(this.lastChance){
+      if(correct){
+        this.feedback('DIE LEINE IST LOS','Dein nächster Schritt zählt.','Melde die Nachricht über den vorgesehenen Meldeweg oder direkt deiner IT.','Auch nach einem Klick kannst du noch richtig handeln.','Freischwimmen →',()=>this.finishRun());
+      }else{
+        this.feedback('DU KANNST DICH NOCH LÖSEN','Hol deine IT dazu.','Melde die Nachricht über den vorgesehenen Meldeweg oder direkt deiner IT.','Ein sicherer nächster Schritt genügt.','Noch einmal entscheiden →',()=>this.showLevel(this.level,true));
+      }
+    }
+    else if(this.level===0) this.domainReveal(index,correct);
+    else if(this.level===1) this.feedback('CHECK 2 ✓',correct?'Kontext prüfen.':'Kurz innehalten.',correct?'Unerwartete Nachrichten verdienen einen zweiten Blick.':'Zeitdruck soll dich zum schnellen Handeln bewegen. Habe ich diese Aktion überhaupt erwartet?','Unerwartete Nachrichten verdienen einen zweiten Blick.','Weiter durch das Riff →',()=>this.showLevel(2));
     else if(correct) {
-      this.netGoal=1;
-      this.feedback('CHECK 3 ✓','Im Zweifel melden.','Melde die Nachricht über den vorgesehenen Meldeweg oder direkt deiner IT.','So kann deine IT prüfen und andere warnen.','Zur Oberfläche →',()=>this.escape());
+      this.feedback('CHECK 3 ✓','Im Zweifel melden.','Melde die Nachricht über den vorgesehenen Meldeweg oder direkt deiner IT.','So kann deine IT prüfen und andere warnen.','Ins offene Wasser →',()=>this.finishRun());
     } else {
-      this.feedback('EIN SICHERER AUSWEG','Mach deine IT aufmerksam.',index===0?'Ignorieren schützt andere noch nicht. Deine Meldung hilft, die Nachricht zu prüfen.':'Leite die Nachricht nicht ungezielt an andere weiter. Nutze den vorgesehenen Meldeweg zu deiner IT.','Im Zweifel melden.','Melden & freischwimmen →',()=>{this.netGoal=1;this.escape();});
+      this.feedback('EIN SICHERER AUSWEG','Mach deine IT aufmerksam.',index===0?'Ignorieren schützt andere noch nicht. Deine Meldung hilft, die Nachricht zu prüfen.':'Leite die Nachricht nicht ungezielt an andere weiter. Nutze den vorgesehenen Meldeweg zu deiner IT.','Im Zweifel melden.','Melden & freischwimmen →',()=>this.finishRun());
     }
     this.updateProgress();this.content.querySelector('h2').focus({preventScroll:true});this.schedule();
   }
@@ -196,19 +234,25 @@ class PhishEscape {
     this.content.innerHTML=`<div class="phish-feedback"><span class="phish-check-seal" aria-hidden="true">✓</span><p class="phish-eyebrow">${eyebrow}</p><h2 tabindex="-1">${title}</h2><p>${description}</p>${description===note?'':`<p class="phish-feedback-note">${note}</p>`}<button type="button" class="phish-next">${next}</button></div>`;
     this.on(this.content.querySelector('button'),'click',action);
   }
+  finishRun() {
+    // A mostly unsafe run remains near the surface even after partial recovery.
+    if(this.danger>=.7)this.showLevel(this.level,true);
+    else this.escape();
+  }
   escape() {
-    this.setPhase('escape');this.netGoal=1;this.updateProgress();
+    this.setPhase('escape');this.hook=null;this.updateProgress();
+    this.escapeStart={x:this.fish.x,y:this.fish.y,camera:this.ocean.camera};
+    this.fish.vx=0;this.fish.vy=0;this.fish.angle=0;this.fish.facing=1;
     this.content.innerHTML='<div class="phish-intro phish-escape"><p class="phish-eyebrow">STOP · CHECK · REPORT</p><h2 tabindex="-1">Der Weg ist frei.</h2><p>Ein paar Sekunden machen den Unterschied.</p></div>';
     this.content.querySelector('h2').focus({preventScroll:true});
-    this.target={x:.5,y:.08};this.schedule();
+    this.target={x:this.fish.x,y:this.fish.y};this.schedule();
   }
-  surface() {
-    this.setPhase('surface');
-    document.getElementById('simulation-result-title').textContent='Wieder frei.';
+  returnToPage() {
+    this.setPhase('return');
     Object.assign(document.body.style,this.oldBodyStyle);
     document.documentElement.classList.remove('phish-playing');
     document.getElementById('simulation-takeaways').scrollIntoView({behavior:'instant',block:'start'});
-    this.dialog.classList.add('is-surfacing');
+    this.dialog.classList.add('is-returning');
   }
   togglePause() {
     this.paused=!this.paused;
@@ -222,13 +266,23 @@ class PhishEscape {
   }
   update(dt) {
     this.time+=dt;this.elapsed+=dt;
-    if(this.phase==='surface'&&this.elapsed>(this.reduced ? .1 : .8)){this.close(true);return;}
+    if(this.phase==='return'&&this.elapsed>(this.reduced ? .1 : .8)){this.close(true);return;}
     if(this.phase==='intro'&&this.elapsed>(this.reduced ? .25 : 3.2)) this.showLevel(0);
     if(this.phase==='escape'){
-      this.ascent=clamp(this.elapsed/(this.reduced ? .4 : 3),0,1);
-      if(this.ascent>=1){this.surface();return;}
+      this.escapeProgress=clamp(this.elapsed/(this.reduced ? .4 : 3),0,1);
+      this.target={x:this.escapeStart.x+(.92-this.escapeStart.x)*this.escapeProgress,y:this.escapeStart.y};
+      this.camera=this.escapeStart.camera+this.escapeProgress*this.ocean.width*2.4;
+      if(this.escapeProgress>=1){this.returnToPage();return;}
     }
-    this.netOpen+=(this.netGoal-this.netOpen)*(this.reduced ? 1 : Math.min(1,dt*2.8));
+    if(this.phase==='answer'&&this.elapsed>.38){
+      this.setPhase('hook');
+      const nose=(this.ocean.width<400?1.35:1.7)*11/this.ocean.width;
+      this.target={x:Math.max(.07,this.hook.x-nose),y:this.safePosition().y};
+    }
+    if(this.phase==='hook'){
+      if(!this.resolved&&this.elapsed>(this.reduced ? .12 : .55))this.resolveHook();
+      if(this.elapsed>(this.reduced ? .65 : 1.9))this.showExplanation();
+    }
     const f=this.fish;
     if(this.keys.size&&this.phase==='choice'){
       let dx=(this.keys.has('d')||this.keys.has('arrowright')?1:0)-(this.keys.has('a')||this.keys.has('arrowleft')?1:0);
@@ -244,13 +298,13 @@ class PhishEscape {
       if(Math.abs(f.vx)>.01)f.facing=f.vx>0?1:-1;
       const angle=clamp(f.vy*2*f.facing,-.3,.3);f.angle+=(angle-f.angle)*Math.min(1,dt*6);
       if(Math.abs(f.vx)<.006 && this.phase==='choice')f.facing=1;
+      if(this.phase==='hook'&&this.resolved&&this.selected!==this.currentLevel().correct){
+        f.facing=1;f.angle=-.28+Math.sin(this.elapsed*27)*.13;
+      }
     }
     if(this.phase==='choice'){
-      if(this.pendingChoice!==null){
-        const distance=Math.hypot(this.target.x-f.x,this.target.y-f.y);
-        if((distance<.045&&this.elapsed>.35)||this.elapsed>(this.reduced ? .12 : 1.35)) this.choose(this.pendingChoice);
-      }else if(this.pointerActive||this.keys.size){
-        const index=this.targets.findIndex(target=>f.x>=target.left-.04&&f.x<=target.right&&f.y>=target.top&&f.y<=target.bottom);
+      if(this.pointerActive||this.keys.size){
+        const index=this.targets.findIndex(target=>f.x>=Math.min(target.left-.04,target.x-.035)&&f.x<=target.right&&f.y>=target.top&&f.y<=target.bottom);
         if(index!==this.hover){this.hover=index;this.dwell=0;}
         if(index>=0) {
           this.dwell+=dt;
@@ -262,7 +316,17 @@ class PhishEscape {
   }
   draw(dt) {
     if(!this.ocean) return;
-    this.ocean.draw(this.time,dt,{fish:this.fish,reduced:this.reduced,camera:this.camera,ascent:this.ascent,net:this.level===2?1:0,netOpen:this.netOpen,targets:this.level===0&&this.phase==='choice'?this.targets.map((t,i)=>({...t,active:i===this.hover||i===this.pendingChoice})):[]});
+    const correct=this.selected===this.currentLevel().correct;
+    const reacting=this.phase==='hook';
+    const targets=['choice','answer','hook'].includes(this.phase)?this.targets.map((t,i)=>({
+      x:i===this.selected&&this.resolved?this.hook.x:t.x,y:i===this.selected&&this.resolved?this.hook.y:t.y,lureX:t.left,active:i===this.hover||i===this.selected,
+      selected:i===this.selected,correct,reacting,resolved:this.resolved,
+      approach:this.reduced?1:clamp(this.elapsed/.55,0,1),
+      progress:this.reduced?1:clamp((this.elapsed-.55)/.85,0,1)
+    })):['escape','return'].includes(this.phase)?this.escapeHooks.map(t=>({...t,x:t.x-(this.ocean.camera-this.escapeStart.camera)/this.ocean.width})):[];
+    this.ocean.draw(this.time,dt,{fish:this.fish,reduced:this.reduced,camera:this.camera,escapeProgress:this.escapeProgress,
+      danger:this.danger,tether:this.danger>0&&(this.phase==='feedback'||(this.lastChance&&this.phase==='choice')),
+      resisting:reacting&&this.resolved&&!correct,targets});
   }
   schedule() {
     if(this.closed) return;
@@ -277,7 +341,7 @@ class PhishEscape {
     if(this.closed) return;
     this.draw(dt);
     // Reduced-motion feedback is fully still, with no background animation loop.
-    if(!this.reduced || ['intro','escape','surface'].includes(this.phase) || this.pendingChoice!==null || this.keys.size || this.hover>=0) this.schedule();
+    if(!this.reduced || ['intro','answer','hook','escape','return'].includes(this.phase) || this.keys.size || this.hover>=0) this.schedule();
   }
   close(completed,restoreTrigger=false,unloading=false) {
     if(this.closed)return;
@@ -288,7 +352,6 @@ class PhishEscape {
     window.scrollTo({top:this.scrollY||0,behavior:'instant'});activeGame=null;
     if(unloading)return;
     const heading=document.getElementById('simulation-result-title');
-    if(completed)heading.textContent='Wieder frei.';
     if(restoreTrigger)this.trigger.focus({preventScroll:true});
     else {
       document.getElementById('simulation-takeaways').scrollIntoView({behavior:'instant',block:'start'});

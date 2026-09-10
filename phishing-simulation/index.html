@@ -71,25 +71,25 @@
     <section class="section simulation-hero" aria-labelledby="simulation-title">
       <div class="wrap simulation-hero-inner">
         <div class="simulation-hero-copy">
-          <p class="simulation-badge"><span aria-hidden="true">✓</span> Kontrollierte Simulation</p>
+          <p class="simulation-badge"><span aria-hidden="true">✓</span> Kontrollierte Phishing-Simulation</p>
           <h1 id="simulation-title">Zum Glück war es nur eine <span>Simulation.</span></h1>
-          <p class="simulation-lead">Du hast einen Link aus einer kontrollierten Phishing-Simulation geöffnet. Es besteht kein Grund zur Sorge – die Nachricht war Teil eines autorisierten Security-Tests.</p>
-          <p class="simulation-followup">Jetzt schauen wir, ob du erkennst, was andere übersehen.</p>
+          <p class="simulation-lead">Alles gut – dies war ein autorisierter Sicherheitstest.</p>
+          <p class="simulation-followup">Teste dich in einer kurzen Phishing-Übung.</p>
           <div class="simulation-actions">
-            <a class="btn primary simulation-start" href="#simulation-takeaways" data-phish-start>Schwimm dich frei <span aria-hidden="true">→</span></a>
+            <a class="btn primary simulation-start" href="#simulation-takeaways" data-phish-start>Phishing-Übung starten <span aria-hidden="true">→</span></a>
             <a class="simulation-skip" href="#simulation-takeaways">Challenge überspringen</a>
           </div>
           <p class="simulation-meta">3 Entscheidungen <span aria-hidden="true">·</span> ca. 30 Sekunden <span aria-hidden="true">·</span> dein Tempo</p>
           <p id="simulation-status" class="simulation-load-status" role="status"></p>
         </div>
-        <figure class="simulation-preview">
+        <button type="button" class="simulation-preview" data-phish-start aria-label="Phishing-Übung starten: Phish Escape">
           <img src="/assets/phishing-game/reef.png" width="640" height="640" alt="Ein kleiner türkisfarbener Fisch zwischen Korallen und Lichtstrahlen im Ozean." fetchpriority="high">
-          <figcaption>
+          <span class="simulation-preview-caption">
             <span class="simulation-preview-kicker">EINE KLEINE FLUCHT MIT AHA-EFFEKT</span>
             <strong>PHISH<br><span>ESCAPE</span><span class="simulation-preview-dot">.</span></strong>
             <span class="simulation-preview-bottom"><span>Ein Fisch. Drei Entscheidungen.</span><span aria-hidden="true">→</span></span>
-          </figcaption>
-        </figure>
+          </span>
+        </button>
       </div>
     </section>
 
@@ -97,7 +97,7 @@
       <div class="wrap">
         <div class="simulation-result-heading">
           <p class="learn-eyebrow">STOP · CHECK · REPORT</p>
-          <h2 id="simulation-result-title" tabindex="-1">Fünf Sekunden. Ein zweiter Blick.</h2>
+          <h2 id="simulation-result-title" tabindex="-1">So reagierst du richtig.</h2>
         </div>
         <ol class="simulation-checks">
           <li><span class="simulation-check-number" aria-hidden="true">01</span><div><h3>STOP</h3><p>Nicht reflexartig reagieren.</p></div></li>
@@ -124,14 +124,12 @@
           </div>
           <div>
             <div class="learn-video-frame simulation-video-frame">
-              <button type="button" class="simulation-video-load" data-simulation-video aria-label="Video laden: Phishing wirklich erkennen. Verbindet mit YouTube.">
-                <span class="simulation-video-caption" aria-hidden="true">SWISSPLOIT LEARN<span>Ein zweiter Blick<br>macht den Unterschied.</span></span>
-                <span class="simulation-play" aria-hidden="true">▶</span>
-                <span class="simulation-video-label">Video laden <span aria-hidden="true">→</span></span>
-              </button>
+              <iframe src="https://www.youtube-nocookie.com/embed/n_2DYwpVsS4"
+                title="Phishing wirklich erkennen – Swissploit Learn"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>
             </div>
-            <p class="simulation-video-consent">Mit «Video laden» wird eine Verbindung zu YouTube hergestellt. Dabei erhält YouTube unter anderem deine IP-Adresse.</p>
-            <noscript><p><a href="https://www.youtube.com/watch?v=n_2DYwpVsS4" rel="noreferrer">Video auf YouTube ansehen</a> (JavaScript ist deaktiviert).</p></noscript>
+            <p class="simulation-video-consent">Der eingebettete Player verbindet sich mit YouTube. Dabei erhält YouTube unter anderem deine IP-Adresse.</p>
           </div>
         </div>
       </div>

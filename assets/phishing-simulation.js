@@ -1,11 +1,12 @@
 // The landing page stays useful without JavaScript; the game loads on demand.
-const start = document.querySelector('[data-phish-start]');
+const starts = document.querySelectorAll('[data-phish-start]');
 const status = document.getElementById('simulation-status');
 let loading = false;
 
-start?.addEventListener('click', async event => {
+async function startSimulation(event) {
   event.preventDefault();
   if (loading) return;
+  const start = event.currentTarget;
   loading = true;
   start.setAttribute('aria-busy', 'true');
   status.textContent = 'Der Ozean wird bereitgemacht …';
@@ -20,18 +21,6 @@ start?.addEventListener('click', async event => {
     loading = false;
     start.removeAttribute('aria-busy');
   }
-});
+}
 
-// No YouTube request, thumbnail request or third-party connection before consent.
-document.querySelector('[data-simulation-video]')?.addEventListener('click', event => {
-  const frame = document.createElement('iframe');
-  frame.src = 'https://www.youtube-nocookie.com/embed/n_2DYwpVsS4';
-  frame.title = 'Phishing wirklich erkennen – Swissploit Learn';
-  frame.loading = 'lazy';
-  frame.referrerPolicy = 'strict-origin-when-cross-origin';
-  frame.allow = 'encrypted-media; picture-in-picture; fullscreen';
-  frame.allowFullscreen = true;
-  const host = event.currentTarget.closest('.learn-video-frame');
-  host.replaceChildren(frame);
-  frame.focus();
-});
+starts.forEach(start => start.addEventListener('click', startSimulation));

@@ -29,8 +29,16 @@ html.phish-playing{overscroll-behavior:none}
 .phish-game :is(h1,h2):focus{outline:none}
 .phish-choices{position:absolute;left:46%;right:12%;top:41%;display:grid;gap:clamp(13px,2.6vh,25px);pointer-events:none;animation:phish-reveal .65s .12s ease both}
 .phish-choice{position:relative;display:flex;align-items:center;gap:16px;width:100%;min-height:clamp(64px,9vh,90px);padding:16px 21px;border:1px solid #95c1c54d;border-radius:5px;background:linear-gradient(110deg,#0d3047ed,#10374be0);color:#e3f2ef;text-align:left;transition:background .2s,border-color .2s,box-shadow .2s;box-shadow:0 8px 25px #03152230}
-.phish-choice::before{content:'';position:absolute;left:-5px;top:calc(50% - 5px);width:8px;height:8px;border:1px solid #85c6cc;background:#2f8391;transform:rotate(45deg)}
+.phish-choice::before{content:'';position:absolute;left:-5px;top:calc(50% - 3px);width:5px;height:5px;border:1px solid #85c6cc;border-radius:50%;background:#164656}
 .phish-choice:hover,.phish-choice.is-target{border-color:#90d2d5;background:#18495bee;box-shadow:0 0 28px #4ab3c320}
+.phish-choice.is-correct{border-color:#83cbb0;background:linear-gradient(110deg,#174b43f7,#123b38f2);box-shadow:inset 3px 0 #83cbb0,0 8px 25px #03152230}
+.phish-choice.is-wrong{border-color:#d39791;background:linear-gradient(110deg,#573638f7,#3b2934f2);box-shadow:inset 3px 0 #d39791,0 8px 25px #03152230}
+.phish-choice.is-correct :is(.phish-choice-number,.phish-choice-arrow){color:#ade4ca}
+.phish-choice.is-wrong :is(.phish-choice-number,.phish-choice-arrow){color:#f0b7af}
+.phish-choice[aria-disabled="true"]{cursor:default}
+.phish-choice.is-correct .phish-choice-number,.phish-choice.is-wrong .phish-choice-number{font-size:17px}
+.phish-game[data-phase="hook"] .phish-choice:not(.is-correct):not(.is-wrong){opacity:.55}
+.phish-last-chance .phish-eyebrow{color:#dfbbab}
 .phish-choice-number{flex:0 0 auto;color:#8cafb7;font:10px ui-monospace,monospace}
 .phish-choice-text{min-width:0;font-size:clamp(14px,1.3vw,19px);line-height:1.5;overflow-wrap:anywhere}
 code.phish-choice-text{font:clamp(12px,1.05vw,16px)/1.65 ui-monospace,"SFMono-Regular",Consolas,monospace}
@@ -97,7 +105,7 @@ code.phish-choice-text{font:clamp(12px,1.05vw,16px)/1.65 ui-monospace,"SFMono-Re
 .phish-question h2{font-size:28px;max-width:20ch;margin-bottom:12px}
 .phish-game .phish-eyebrow{font-size:8px;margin-bottom:12px}
 .phish-question>p:last-child{font-size:11px;max-width:29ch;margin-inline:auto}
-.phish-choices{left:20%;right:20px;top:43%;gap:16px}
+.phish-choices{left:24%;right:20px;top:43%;gap:16px}
 .phish-choice{min-height:75px;padding:14px 13px;gap:10px}
 .phish-choice-text{font-size:14px}
 code.phish-choice-text{font-size:12px}
@@ -123,6 +131,9 @@ code.phish-choice-text{font-size:12px}
 .phish-feedback{top:54%;max-height:calc(100% - 180px)}
 .phish-controls{bottom:14px}
 }
+@media(max-width:600px) and (max-height:650px) and (orientation:portrait){
+.phish-choices{top:46%}
+}
 @media(max-height:500px) and (orientation:landscape){
 .phish-bar{padding:8px 20px}.phish-progress{top:25px;font-size:8px;gap:16px}.phish-wordmark{font-size:13px}
 .phish-question{top:90px;left:4%;right:58%;text-align:left}.phish-question h2{font-size:26px}
@@ -132,10 +143,12 @@ code.phish-choice-text{font-size:12px}
 .phish-controls{bottom:10px;font-size:9px}.phish-controls>span:last-child{display:none}
 }
 @media(prefers-reduced-motion:reduce){
-.phish-game,.phish-game *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+.phish-game,.phish-game *,.phish-game::backdrop{animation:none!important;transition:none!important;scroll-behavior:auto!important}
 .phish-surface,.phish-scan{display:none}
 .phish-subdomain{opacity:.25}
 }
 
-.phish-game.is-surfacing{animation:phish-surface-out .8s ease both;pointer-events:none}
-@keyframes phish-surface-out{from{opacity:1}to{opacity:0}}
+.phish-game.is-returning{animation:phish-return .8s ease both;pointer-events:none}
+.phish-game.is-returning::backdrop{animation:phish-return .8s ease both}
+.phish-game.is-returning .phish-content{opacity:0}
+@keyframes phish-return{from{opacity:1}to{opacity:0}}
