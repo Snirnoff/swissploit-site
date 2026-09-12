@@ -92,7 +92,7 @@ export async function launchBrowser() {
         return { send, evaluate, waitFor, errors, requests, routeErrors,
           async go(url, ready = true) { await send('Page.navigate', { url }); if (ready) await waitFor('document.getElementById("hub-startup")?.hidden === true'); },
           async reload() { await send('Page.reload', { ignoreCache: true }); await pause(80); await waitFor('document.getElementById("hub-startup")?.hidden === true'); },
-          async key(key, modifiers = 0) { await send('Input.dispatchKeyEvent', { type: 'keyDown', key, code: key, windowsVirtualKeyCode: key === 'Escape' ? 27 : key === 'Tab' ? 9 : key === 'Enter' ? 13 : undefined, modifiers }); await send('Input.dispatchKeyEvent', { type: 'keyUp', key, code: key, modifiers }); },
+          async key(key, modifiers = 0) { const windowsVirtualKeyCode = key === 'Escape' ? 27 : key === 'Tab' ? 9 : key === 'Enter' ? 13 : undefined; await send('Input.dispatchKeyEvent', { type: 'keyDown', key, code: key, windowsVirtualKeyCode, modifiers }); await send('Input.dispatchKeyEvent', { type: 'keyUp', key, code: key, windowsVirtualKeyCode, modifiers }); if (key === 'Enter') await send('Runtime.evaluate', { expression: 'if (document.activeElement instanceof HTMLButtonElement) document.activeElement.click()', userGesture: true }); },
           async close() { listeners.delete(listener); await call('Target.disposeBrowserContext', { browserContextId }); },
         };
       },
