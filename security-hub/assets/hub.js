@@ -61,6 +61,8 @@ function setupProfile() {
     $('profile-dialog').showModal(); $('product-search').focus();
   });
   $('close-profile').addEventListener('click', () => $('profile-dialog').close());
+  $('profile-dialog').addEventListener('cancel', event => { event.preventDefault(); $('profile-dialog').close(); });
+  $('profile-dialog').addEventListener('keydown', event => { if (event.key === 'Escape') { event.preventDefault(); $('profile-dialog').close(); } });
   $('profile-dialog').addEventListener('close', () => {
     $('profile-mount').append($('profile'));
     if (matchMedia('(max-width: 820px)').matches) profileOpener?.focus();
