@@ -1,0 +1,822 @@
+{
+  "schema_version": 1,
+  "data_mode": "demo",
+  "generated_at": "2026-09-12T22:02:33Z",
+  "last_success_at": "2026-09-12T22:02:33Z",
+  "sources": [
+    {
+      "id": "demo-vendor",
+      "label": "Fiktive Herstellerbelege",
+      "type": "vendor",
+      "status": "demo",
+      "url": null,
+      "vendor_ids": []
+    },
+    {
+      "id": "demo-news",
+      "label": "Fiktive Kontextquelle",
+      "type": "news",
+      "status": "demo",
+      "url": null,
+      "vendor_ids": []
+    },
+    {
+      "id": "demo-cisa",
+      "label": "Fiktiver KEV-Übungsbeleg",
+      "type": "cisa",
+      "status": "demo",
+      "url": null,
+      "vendor_ids": []
+    }
+  ],
+  "items": [
+    {
+      "id": "DEMO-001",
+      "type": "vulnerability",
+      "title": "DEMO · Anmeldepfad in Microsoft 365 prüfen",
+      "product_ids": [
+        "microsoft.microsoft-365",
+        "microsoft.entra-id"
+      ],
+      "cve_ids": [],
+      "advisory": {
+        "id": "DEMO-001-ADVISORY",
+        "vendor_id": "microsoft",
+        "verified": true,
+        "source_id": "DEMO-001-vendor"
+      },
+      "canonical_url": "https://example.invalid/security-hub/demo-001/hersteller",
+      "published_at": "2026-09-08T08:00:00Z",
+      "updated_at": "2026-09-12T17:00:00Z",
+      "revision": 2,
+      "summary": "Fiktiver Übungsfall: Ein Beispielszenario meldet bestätigte Ausnutzung eines Anmeldepfads. Schwere und konkrete Versionen sind nicht belegt.",
+      "summary_source_id": "DEMO-001-vendor",
+      "recommended_action": "Im Übungsszenario zuerst Produktzuordnung und vorhandene Version prüfen; anschliessend die fiktiven Quellen vergleichen. Keine Änderung an realen Systemen aus diesen DEMO-Daten ableiten.",
+      "action_source_id": "DEMO-001-vendor",
+      "sources": [
+        {
+          "id": "DEMO-001-vendor",
+          "registry_id": "demo-vendor",
+          "label": "Fiktiver Herstellerbeleg · DEMO-001",
+          "url": "https://example.invalid/security-hub/demo-001/hersteller",
+          "type": "vendor",
+          "evidence": [
+            "identity",
+            "products",
+            "summary",
+            "action",
+            "cvss",
+            "exploit",
+            "kev",
+            "versions"
+          ]
+        }
+      ],
+      "cvss": [],
+      "exploit_evidence": [
+        {
+          "status": "confirmed",
+          "source_id": "DEMO-001-vendor",
+          "cve_id": null
+        }
+      ],
+      "kev_evidence": [],
+      "versions": []
+    },
+    {
+      "id": "DEMO-002",
+      "type": "vulnerability",
+      "title": "DEMO · FortiOS: ältere offene Meldung",
+      "product_ids": [
+        "fortinet.fortios"
+      ],
+      "cve_ids": [],
+      "advisory": {
+        "id": "DEMO-002-ADVISORY",
+        "vendor_id": "fortinet",
+        "verified": true,
+        "source_id": "DEMO-002-vendor"
+      },
+      "canonical_url": "https://example.invalid/security-hub/demo-002/hersteller",
+      "published_at": "2026-08-10T08:00:00Z",
+      "updated_at": "2026-08-12T10:00:00Z",
+      "revision": 1,
+      "summary": "Fiktiver Übungsfall: Dieser ältere Fall zeigt, warum eine hohe offene Priorität auch ausserhalb eines kurzen Zeitfensters sichtbar bleiben soll.",
+      "summary_source_id": "DEMO-002-vendor",
+      "recommended_action": "Im Übungsszenario zuerst Produktzuordnung und vorhandene Version prüfen; anschliessend die fiktiven Quellen vergleichen. Keine Änderung an realen Systemen aus diesen DEMO-Daten ableiten.",
+      "action_source_id": "DEMO-002-vendor",
+      "sources": [
+        {
+          "id": "DEMO-002-vendor",
+          "registry_id": "demo-vendor",
+          "label": "Fiktiver Herstellerbeleg · DEMO-002",
+          "url": "https://example.invalid/security-hub/demo-002/hersteller",
+          "type": "vendor",
+          "evidence": [
+            "identity",
+            "products",
+            "summary",
+            "action",
+            "cvss",
+            "exploit",
+            "kev",
+            "versions"
+          ]
+        }
+      ],
+      "cvss": [
+        {
+          "score": 9.8,
+          "version": "3.1",
+          "vector": null,
+          "source_id": "DEMO-002-vendor",
+          "cve_id": null
+        }
+      ],
+      "exploit_evidence": [],
+      "kev_evidence": [],
+      "versions": [
+        {
+          "product_id": "fortinet.fortios",
+          "affected": "DEMO-Zweig A (fiktiv)",
+          "fixed": "DEMO-Fix A (fiktiv)",
+          "source_id": "DEMO-002-vendor"
+        }
+      ]
+    },
+    {
+      "id": "DEMO-003",
+      "type": "vulnerability",
+      "title": "DEMO · UniFi Protect: Einordnung ohne CVSS",
+      "product_ids": [
+        "ubiquiti.unifi-protect"
+      ],
+      "cve_ids": [],
+      "advisory": {
+        "id": "DEMO-003-ADVISORY",
+        "vendor_id": "ubiquiti",
+        "verified": true,
+        "source_id": "DEMO-003-vendor"
+      },
+      "canonical_url": "https://example.invalid/security-hub/demo-003/hersteller",
+      "published_at": "2026-09-08T08:00:00Z",
+      "updated_at": "2026-09-11T10:00:00Z",
+      "revision": 1,
+      "summary": "Fiktiver Übungsfall: Die Produktzuordnung ist belegt, eine CVSS-Bewertung fehlt. Daraus folgt keine Aussage über ein vorhandenes System.",
+      "summary_source_id": "DEMO-003-vendor",
+      "recommended_action": "Im Übungsszenario zuerst Produktzuordnung und vorhandene Version prüfen; anschliessend die fiktiven Quellen vergleichen. Keine Änderung an realen Systemen aus diesen DEMO-Daten ableiten.",
+      "action_source_id": "DEMO-003-vendor",
+      "sources": [
+        {
+          "id": "DEMO-003-vendor",
+          "registry_id": "demo-vendor",
+          "label": "Fiktiver Herstellerbeleg · DEMO-003",
+          "url": "https://example.invalid/security-hub/demo-003/hersteller",
+          "type": "vendor",
+          "evidence": [
+            "identity",
+            "products",
+            "summary",
+            "action",
+            "cvss",
+            "exploit",
+            "kev",
+            "versions"
+          ]
+        }
+      ],
+      "cvss": [],
+      "exploit_evidence": [],
+      "kev_evidence": [],
+      "versions": []
+    },
+    {
+      "id": "DEMO-004",
+      "type": "vulnerability",
+      "title": "DEMO · ESXi und vCenter: zwei getrennte Versionsangaben",
+      "product_ids": [
+        "vmware.vmware-esxi",
+        "vmware.vmware-vcenter"
+      ],
+      "cve_ids": [],
+      "advisory": {
+        "id": "DEMO-004-ADVISORY",
+        "vendor_id": "vmware",
+        "verified": true,
+        "source_id": "DEMO-004-vendor"
+      },
+      "canonical_url": "https://example.invalid/security-hub/demo-004/hersteller",
+      "published_at": "2026-09-08T08:00:00Z",
+      "updated_at": "2026-09-11T10:00:00Z",
+      "revision": 1,
+      "summary": "Fiktiver Übungsfall: Ein gemeinsames Übungs-Advisory betrifft zwei Produkte. Der fiktive Fix ist nur für den ESXi-Zweig angegeben.",
+      "summary_source_id": "DEMO-004-vendor",
+      "recommended_action": "Im Übungsszenario zuerst Produktzuordnung und vorhandene Version prüfen; anschliessend die fiktiven Quellen vergleichen. Keine Änderung an realen Systemen aus diesen DEMO-Daten ableiten.",
+      "action_source_id": "DEMO-004-vendor",
+      "sources": [
+        {
+          "id": "DEMO-004-vendor",
+          "registry_id": "demo-vendor",
+          "label": "Fiktiver Herstellerbeleg · DEMO-004",
+          "url": "https://example.invalid/security-hub/demo-004/hersteller",
+          "type": "vendor",
+          "evidence": [
+            "identity",
+            "products",
+            "summary",
+            "action",
+            "cvss",
+            "exploit",
+            "kev",
+            "versions"
+          ]
+        }
+      ],
+      "cvss": [
+        {
+          "score": 9.1,
+          "version": "3.1",
+          "vector": null,
+          "source_id": "DEMO-004-vendor",
+          "cve_id": null
+        }
+      ],
+      "exploit_evidence": [],
+      "kev_evidence": [],
+      "versions": [
+        {
+          "product_id": "vmware.vmware-esxi",
+          "affected": "DEMO-Zweig A (fiktiv)",
+          "fixed": "DEMO-Fix A (fiktiv)",
+          "source_id": "DEMO-004-vendor"
+        },
+        {
+          "product_id": "vmware.vmware-vcenter",
+          "affected": "DEMO-Zweig B (fiktiv)",
+          "fixed": null,
+          "source_id": "DEMO-004-vendor"
+        }
+      ]
+    },
+    {
+      "id": "DEMO-005",
+      "type": "vulnerability",
+      "title": "DEMO · Veeam ONE: Quellen bewerten die Schwere unterschiedlich",
+      "product_ids": [
+        "veeam.veeam-one"
+      ],
+      "cve_ids": [],
+      "advisory": {
+        "id": "DEMO-005-ADVISORY",
+        "vendor_id": "veeam",
+        "verified": true,
+        "source_id": "DEMO-005-vendor"
+      },
+      "canonical_url": "https://example.invalid/security-hub/demo-005/hersteller",
+      "published_at": "2026-09-08T08:00:00Z",
+      "updated_at": "2026-09-11T10:00:00Z",
+      "revision": 1,
+      "summary": "Fiktiver Übungsfall: Der fiktive Hersteller bewertet mit 7.5, die Kontextquelle mit 9.8. Beide Werte bleiben sichtbar; die Herstellerbewertung hat Vorrang.",
+      "summary_source_id": "DEMO-005-vendor",
+      "recommended_action": "Im Übungsszenario zuerst Produktzuordnung und vorhandene Version prüfen; anschliessend die fiktiven Quellen vergleichen. Keine Änderung an realen Systemen aus diesen DEMO-Daten ableiten.",
+      "action_source_id": "DEMO-005-vendor",
+      "sources": [
+        {
+          "id": "DEMO-005-vendor",
+          "registry_id": "demo-vendor",
+          "label": "Fiktiver Herstellerbeleg · DEMO-005",
+          "url": "https://example.invalid/security-hub/demo-005/hersteller",
+          "type": "vendor",
+          "evidence": [
+            "identity",
+            "products",
+            "summary",
+            "action",
+            "cvss",
+            "exploit",
+            "kev",
+            "versions"
+          ]
+        },
+        {
+          "id": "DEMO-005-news",
+          "registry_id": "demo-news",
+          "label": "Fiktiver News-Beleg · DEMO-005",
+          "url": "https://example.invalid/security-hub/demo-005/kontext",
+          "type": "news",
+          "evidence": [
+            "cvss",
+            "exploit"
+          ]
+        }
+      ],
+      "cvss": [
+        {
+          "score": 7.5,
+          "version": "3.1",
+          "vector": null,
+          "source_id": "DEMO-005-vendor",
+          "cve_id": null
+        },
+        {
+          "score": 9.8,
+          "version": "3.1",
+          "vector": null,
+          "source_id": "DEMO-005-news",
+          "cve_id": null
+        }
+      ],
+      "exploit_evidence": [
+        {
+          "status": "reported",
+          "source_id": "DEMO-005-news",
+          "cve_id": null
+        }
+      ],
+      "kev_evidence": [],
+      "versions": []
+    },
+    {
+      "id": "DEMO-006",
+      "type": "vulnerability",
+      "title": "DEMO · Edge: Produktbezug vor allgemeinem Browserbezug",
+      "product_ids": [
+        "microsoft.edge"
+      ],
+      "cve_ids": [],
+      "advisory": {
+        "id": "DEMO-006-ADVISORY",
+        "vendor_id": "microsoft",
+        "verified": true,
+        "source_id": "DEMO-006-vendor"
+      },
+      "canonical_url": "https://example.invalid/security-hub/demo-006/hersteller",
+      "published_at": "2026-09-08T08:00:00Z",
+      "updated_at": "2026-09-11T10:00:00Z",
+      "revision": 1,
+      "summary": "Fiktiver Übungsfall: Dieses Beispiel ist ausschliesslich Microsoft Edge zugeordnet. Chrome, Brave und andere Browser sind nicht automatisch betroffen.",
+      "summary_source_id": "DEMO-006-vendor",
+      "recommended_action": "Im Übungsszenario zuerst Produktzuordnung und vorhandene Version prüfen; anschliessend die fiktiven Quellen vergleichen. Keine Änderung an realen Systemen aus diesen DEMO-Daten ableiten.",
+      "action_source_id": "DEMO-006-vendor",
+      "sources": [
+        {
+          "id": "DEMO-006-vendor",
+          "registry_id": "demo-vendor",
+          "label": "Fiktiver Herstellerbeleg · DEMO-006",
+          "url": "https://example.invalid/security-hub/demo-006/hersteller",
+          "type": "vendor",
+          "evidence": [
+            "identity",
+            "products",
+            "summary",
+            "action",
+            "cvss",
+            "exploit",
+            "kev",
+            "versions"
+          ]
+        }
+      ],
+      "cvss": [],
+      "exploit_evidence": [],
+      "kev_evidence": [],
+      "versions": []
+    },
+    {
+      "id": "DEMO-007",
+      "type": "security_news",
+      "title": "DEMO · iOS/iPadOS: Veröffentlichung einordnen",
+      "product_ids": [
+        "apple.ios-ipados"
+      ],
+      "cve_ids": [],
+      "advisory": {
+        "id": "DEMO-007-ADVISORY",
+        "vendor_id": "apple",
+        "verified": true,
+        "source_id": "DEMO-007-vendor"
+      },
+      "canonical_url": "https://example.invalid/security-hub/demo-007/hersteller",
+      "published_at": "2026-09-08T08:00:00Z",
+      "updated_at": "2026-09-11T10:00:00Z",
+      "revision": 1,
+      "summary": "Fiktiver Übungsfall: Eine beispielhafte Produktmeldung enthält keine Angaben zu CVEs, CVSS oder Ausnutzung.",
+      "summary_source_id": "DEMO-007-vendor",
+      "recommended_action": "Im Übungsszenario zuerst Produktzuordnung und vorhandene Version prüfen; anschliessend die fiktiven Quellen vergleichen. Keine Änderung an realen Systemen aus diesen DEMO-Daten ableiten.",
+      "action_source_id": "DEMO-007-vendor",
+      "sources": [
+        {
+          "id": "DEMO-007-vendor",
+          "registry_id": "demo-vendor",
+          "label": "Fiktiver Herstellerbeleg · DEMO-007",
+          "url": "https://example.invalid/security-hub/demo-007/hersteller",
+          "type": "vendor",
+          "evidence": [
+            "identity",
+            "products",
+            "summary",
+            "action",
+            "cvss",
+            "exploit",
+            "kev",
+            "versions"
+          ]
+        }
+      ],
+      "cvss": [],
+      "exploit_evidence": [],
+      "kev_evidence": [],
+      "versions": []
+    },
+    {
+      "id": "DEMO-008",
+      "type": "known_issue",
+      "title": "DEMO · Windows 11: Update kann Druckablauf unterbrechen",
+      "product_ids": [
+        "microsoft.windows-11"
+      ],
+      "cve_ids": [],
+      "advisory": {
+        "id": "DEMO-008-ADVISORY",
+        "vendor_id": "microsoft",
+        "verified": true,
+        "source_id": "DEMO-008-vendor"
+      },
+      "canonical_url": "https://example.invalid/security-hub/demo-008/hersteller",
+      "published_at": "2026-09-08T08:00:00Z",
+      "updated_at": "2026-09-11T10:00:00Z",
+      "revision": 1,
+      "summary": "Fiktiver Übungsfall: Dieser betriebliche Übungsfall zeigt ein bekanntes Update-Problem. Eine Schwachstellenbewertung ist dafür nicht anwendbar.",
+      "summary_source_id": "DEMO-008-vendor",
+      "recommended_action": "Im Übungsszenario zuerst Produktzuordnung und vorhandene Version prüfen; anschliessend die fiktiven Quellen vergleichen. Keine Änderung an realen Systemen aus diesen DEMO-Daten ableiten.",
+      "action_source_id": "DEMO-008-vendor",
+      "sources": [
+        {
+          "id": "DEMO-008-vendor",
+          "registry_id": "demo-vendor",
+          "label": "Fiktiver Herstellerbeleg · DEMO-008",
+          "url": "https://example.invalid/security-hub/demo-008/hersteller",
+          "type": "vendor",
+          "evidence": [
+            "identity",
+            "products",
+            "summary",
+            "action",
+            "cvss",
+            "exploit",
+            "kev",
+            "versions"
+          ]
+        }
+      ],
+      "cvss": [],
+      "exploit_evidence": [],
+      "kev_evidence": [],
+      "versions": []
+    },
+    {
+      "id": "DEMO-009",
+      "type": "vulnerability",
+      "title": "DEMO · Synology DSM: Ausnutzung und KEV als ein Signal",
+      "product_ids": [
+        "synology.dsm"
+      ],
+      "cve_ids": [],
+      "advisory": {
+        "id": "DEMO-009-ADVISORY",
+        "vendor_id": "synology",
+        "verified": true,
+        "source_id": "DEMO-009-vendor"
+      },
+      "canonical_url": "https://example.invalid/security-hub/demo-009/hersteller",
+      "published_at": "2026-09-08T08:00:00Z",
+      "updated_at": "2026-09-11T10:00:00Z",
+      "revision": 1,
+      "summary": "Fiktiver Übungsfall: Bestätigte Ausnutzung und ein fiktiver KEV-Verweis beschreiben denselben Sachverhalt. Die Priorisierung zählt sie einmal.",
+      "summary_source_id": "DEMO-009-vendor",
+      "recommended_action": "Im Übungsszenario zuerst Produktzuordnung und vorhandene Version prüfen; anschliessend die fiktiven Quellen vergleichen. Keine Änderung an realen Systemen aus diesen DEMO-Daten ableiten.",
+      "action_source_id": "DEMO-009-vendor",
+      "sources": [
+        {
+          "id": "DEMO-009-vendor",
+          "registry_id": "demo-vendor",
+          "label": "Fiktiver Herstellerbeleg · DEMO-009",
+          "url": "https://example.invalid/security-hub/demo-009/hersteller",
+          "type": "vendor",
+          "evidence": [
+            "identity",
+            "products",
+            "summary",
+            "action",
+            "cvss",
+            "exploit",
+            "kev",
+            "versions"
+          ]
+        },
+        {
+          "id": "DEMO-009-kev",
+          "registry_id": "demo-cisa",
+          "label": "Fiktiver KEV-Beleg · DEMO-009",
+          "url": "https://example.invalid/security-hub/demo-009/kev",
+          "type": "cisa",
+          "evidence": [
+            "kev"
+          ]
+        }
+      ],
+      "cvss": [
+        {
+          "score": 8.1,
+          "version": "3.1",
+          "vector": null,
+          "source_id": "DEMO-009-vendor",
+          "cve_id": null
+        }
+      ],
+      "exploit_evidence": [
+        {
+          "status": "confirmed",
+          "source_id": "DEMO-009-vendor",
+          "cve_id": null
+        }
+      ],
+      "kev_evidence": [
+        {
+          "status": "listed",
+          "source_id": "DEMO-009-kev",
+          "cve_id": null
+        }
+      ],
+      "versions": [
+        {
+          "product_id": "synology.dsm",
+          "affected": "DEMO-Zweig A (fiktiv)",
+          "fixed": "DEMO-Fix A (fiktiv)",
+          "source_id": "DEMO-009-vendor"
+        }
+      ]
+    },
+    {
+      "id": "DEMO-010",
+      "type": "vulnerability",
+      "title": "DEMO · HP PC/BIOS: Hardwaremodell zuerst zuordnen",
+      "product_ids": [
+        "hp.pc-bios"
+      ],
+      "cve_ids": [],
+      "advisory": {
+        "id": "DEMO-010-ADVISORY",
+        "vendor_id": "hp",
+        "verified": true,
+        "source_id": "DEMO-010-vendor"
+      },
+      "canonical_url": "https://example.invalid/security-hub/demo-010/hersteller",
+      "published_at": "2026-09-08T08:00:00Z",
+      "updated_at": "2026-09-11T10:00:00Z",
+      "revision": 1,
+      "summary": "Fiktiver Übungsfall: Die Angaben beziehen sich auf HP PCs. Sie werden weder HPE-Servern noch HP Druckern pauschal zugeordnet.",
+      "summary_source_id": "DEMO-010-vendor",
+      "recommended_action": "Im Übungsszenario zuerst Produktzuordnung und vorhandene Version prüfen; anschliessend die fiktiven Quellen vergleichen. Keine Änderung an realen Systemen aus diesen DEMO-Daten ableiten.",
+      "action_source_id": "DEMO-010-vendor",
+      "sources": [
+        {
+          "id": "DEMO-010-vendor",
+          "registry_id": "demo-vendor",
+          "label": "Fiktiver Herstellerbeleg · DEMO-010",
+          "url": "https://example.invalid/security-hub/demo-010/hersteller",
+          "type": "vendor",
+          "evidence": [
+            "identity",
+            "products",
+            "summary",
+            "action",
+            "cvss",
+            "exploit",
+            "kev",
+            "versions"
+          ]
+        }
+      ],
+      "cvss": [
+        {
+          "score": 6.5,
+          "version": "3.1",
+          "vector": null,
+          "source_id": "DEMO-010-vendor",
+          "cve_id": null
+        }
+      ],
+      "exploit_evidence": [],
+      "kev_evidence": [],
+      "versions": []
+    },
+    {
+      "id": "DEMO-011",
+      "type": "vulnerability",
+      "title": "DEMO · HPE iLO/Server: Versionsangaben noch offen",
+      "product_ids": [
+        "hpe.ilo-server"
+      ],
+      "cve_ids": [],
+      "advisory": {
+        "id": "DEMO-011-ADVISORY",
+        "vendor_id": "hpe",
+        "verified": true,
+        "source_id": "DEMO-011-vendor"
+      },
+      "canonical_url": "https://example.invalid/security-hub/demo-011/hersteller",
+      "published_at": "2026-09-08T08:00:00Z",
+      "updated_at": "2026-09-11T10:00:00Z",
+      "revision": 1,
+      "summary": "Fiktiver Übungsfall: Ein separater HPE-Übungsfall mit hoher Bewertung, aber ohne belastbare Versionsangaben.",
+      "summary_source_id": "DEMO-011-vendor",
+      "recommended_action": "Im Übungsszenario zuerst Produktzuordnung und vorhandene Version prüfen; anschliessend die fiktiven Quellen vergleichen. Keine Änderung an realen Systemen aus diesen DEMO-Daten ableiten.",
+      "action_source_id": "DEMO-011-vendor",
+      "sources": [
+        {
+          "id": "DEMO-011-vendor",
+          "registry_id": "demo-vendor",
+          "label": "Fiktiver Herstellerbeleg · DEMO-011",
+          "url": "https://example.invalid/security-hub/demo-011/hersteller",
+          "type": "vendor",
+          "evidence": [
+            "identity",
+            "products",
+            "summary",
+            "action",
+            "cvss",
+            "exploit",
+            "kev",
+            "versions"
+          ]
+        }
+      ],
+      "cvss": [
+        {
+          "score": 8.2,
+          "version": "3.1",
+          "vector": null,
+          "source_id": "DEMO-011-vendor",
+          "cve_id": null
+        }
+      ],
+      "exploit_evidence": [],
+      "kev_evidence": [],
+      "versions": []
+    },
+    {
+      "id": "DEMO-012",
+      "type": "vulnerability",
+      "title": "DEMO · Chromium: Komponente separat beobachten",
+      "product_ids": [
+        "chromium.chromium"
+      ],
+      "cve_ids": [],
+      "advisory": {
+        "id": "DEMO-012-ADVISORY",
+        "vendor_id": "chromium",
+        "verified": true,
+        "source_id": "DEMO-012-vendor"
+      },
+      "canonical_url": "https://example.invalid/security-hub/demo-012/hersteller",
+      "published_at": "2026-09-08T08:00:00Z",
+      "updated_at": "2026-09-11T10:00:00Z",
+      "revision": 1,
+      "summary": "Fiktiver Übungsfall: Der fiktive Beleg betrifft die Komponente Chromium. Eine Zuordnung zu bestimmten Browser-Releases fehlt.",
+      "summary_source_id": "DEMO-012-vendor",
+      "recommended_action": "Im Übungsszenario zuerst Produktzuordnung und vorhandene Version prüfen; anschliessend die fiktiven Quellen vergleichen. Keine Änderung an realen Systemen aus diesen DEMO-Daten ableiten.",
+      "action_source_id": "DEMO-012-vendor",
+      "sources": [
+        {
+          "id": "DEMO-012-vendor",
+          "registry_id": "demo-vendor",
+          "label": "Fiktiver Herstellerbeleg · DEMO-012",
+          "url": "https://example.invalid/security-hub/demo-012/hersteller",
+          "type": "vendor",
+          "evidence": [
+            "identity",
+            "products",
+            "summary",
+            "action",
+            "cvss",
+            "exploit",
+            "kev",
+            "versions"
+          ]
+        }
+      ],
+      "cvss": [
+        {
+          "score": 6.1,
+          "version": "3.1",
+          "vector": null,
+          "source_id": "DEMO-012-vendor",
+          "cve_id": null
+        }
+      ],
+      "exploit_evidence": [],
+      "kev_evidence": [],
+      "versions": []
+    },
+    {
+      "id": "DEMO-013",
+      "type": "vulnerability",
+      "title": "DEMO · 7-Zip: Archivverarbeitung genauer einordnen",
+      "product_ids": [
+        "7zip.archiver"
+      ],
+      "cve_ids": [],
+      "advisory": {
+        "id": "DEMO-013-ADVISORY",
+        "vendor_id": "7zip",
+        "verified": true,
+        "source_id": "DEMO-013-vendor"
+      },
+      "canonical_url": "https://example.invalid/security-hub/demo-013/hersteller",
+      "published_at": "2026-09-08T08:00:00Z",
+      "updated_at": "2026-09-11T10:00:00Z",
+      "revision": 1,
+      "summary": "Fiktiver Übungsfall: Ein unbestätigter Übungsbericht beschreibt eine mögliche Ausnutzung. Der Status bleibt gemeldet, nicht bestätigt.",
+      "summary_source_id": "DEMO-013-vendor",
+      "recommended_action": "Im Übungsszenario zuerst Produktzuordnung und vorhandene Version prüfen; anschliessend die fiktiven Quellen vergleichen. Keine Änderung an realen Systemen aus diesen DEMO-Daten ableiten.",
+      "action_source_id": "DEMO-013-vendor",
+      "sources": [
+        {
+          "id": "DEMO-013-vendor",
+          "registry_id": "demo-vendor",
+          "label": "Fiktiver Herstellerbeleg · DEMO-013",
+          "url": "https://example.invalid/security-hub/demo-013/hersteller",
+          "type": "vendor",
+          "evidence": [
+            "identity",
+            "products",
+            "summary",
+            "action",
+            "cvss",
+            "exploit",
+            "kev",
+            "versions"
+          ]
+        }
+      ],
+      "cvss": [],
+      "exploit_evidence": [
+        {
+          "status": "reported",
+          "source_id": "DEMO-013-vendor",
+          "cve_id": null
+        }
+      ],
+      "kev_evidence": [],
+      "versions": []
+    },
+    {
+      "id": "DEMO-014",
+      "type": "known_issue",
+      "title": "DEMO · QNAP: Sicherungsauftrag nach Update überprüfen",
+      "product_ids": [
+        "qnap.qts",
+        "qnap.quts-hero"
+      ],
+      "cve_ids": [],
+      "advisory": {
+        "id": "DEMO-014-ADVISORY",
+        "vendor_id": "qnap",
+        "verified": true,
+        "source_id": "DEMO-014-vendor"
+      },
+      "canonical_url": "https://example.invalid/security-hub/demo-014/hersteller",
+      "published_at": "2026-09-08T08:00:00Z",
+      "updated_at": "2026-09-11T10:00:00Z",
+      "revision": 1,
+      "summary": "Fiktiver Übungsfall: Im Szenario kann ein Update einen geplanten Sicherungsauftrag beeinflussen. Erfolg und Wiederherstellbarkeit wären separat zu prüfen.",
+      "summary_source_id": "DEMO-014-vendor",
+      "recommended_action": "Im Übungsszenario zuerst Produktzuordnung und vorhandene Version prüfen; anschliessend die fiktiven Quellen vergleichen. Keine Änderung an realen Systemen aus diesen DEMO-Daten ableiten.",
+      "action_source_id": "DEMO-014-vendor",
+      "sources": [
+        {
+          "id": "DEMO-014-vendor",
+          "registry_id": "demo-vendor",
+          "label": "Fiktiver Herstellerbeleg · DEMO-014",
+          "url": "https://example.invalid/security-hub/demo-014/hersteller",
+          "type": "vendor",
+          "evidence": [
+            "identity",
+            "products",
+            "summary",
+            "action",
+            "cvss",
+            "exploit",
+            "kev",
+            "versions"
+          ]
+        }
+      ],
+      "cvss": [],
+      "exploit_evidence": [],
+      "kev_evidence": [],
+      "versions": []
+    }
+  ]
+}

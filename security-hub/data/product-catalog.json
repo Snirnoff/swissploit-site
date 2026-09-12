@@ -1,0 +1,1021 @@
+{
+  "schema_version": 1,
+  "vendors": [
+    {
+      "vendor_id": "microsoft",
+      "label": "Microsoft"
+    },
+    {
+      "vendor_id": "fortinet",
+      "label": "Fortinet"
+    },
+    {
+      "vendor_id": "ubiquiti",
+      "label": "Ubiquiti"
+    },
+    {
+      "vendor_id": "sophos",
+      "label": "Sophos"
+    },
+    {
+      "vendor_id": "cisco",
+      "label": "Cisco"
+    },
+    {
+      "vendor_id": "palo-alto",
+      "label": "Palo Alto Networks"
+    },
+    {
+      "vendor_id": "vmware",
+      "label": "VMware"
+    },
+    {
+      "vendor_id": "veeam",
+      "label": "Veeam"
+    },
+    {
+      "vendor_id": "apple",
+      "label": "Apple"
+    },
+    {
+      "vendor_id": "google",
+      "label": "Google"
+    },
+    {
+      "vendor_id": "mozilla",
+      "label": "Mozilla"
+    },
+    {
+      "vendor_id": "chromium",
+      "label": "Chromium Project"
+    },
+    {
+      "vendor_id": "brave",
+      "label": "Brave"
+    },
+    {
+      "vendor_id": "opera",
+      "label": "Opera"
+    },
+    {
+      "vendor_id": "vivaldi",
+      "label": "Vivaldi"
+    },
+    {
+      "vendor_id": "canonical",
+      "label": "Canonical"
+    },
+    {
+      "vendor_id": "debian",
+      "label": "Debian"
+    },
+    {
+      "vendor_id": "redhat",
+      "label": "Red Hat"
+    },
+    {
+      "vendor_id": "linux",
+      "label": "Linux"
+    },
+    {
+      "vendor_id": "hp",
+      "label": "HP"
+    },
+    {
+      "vendor_id": "hpe",
+      "label": "HPE"
+    },
+    {
+      "vendor_id": "dell",
+      "label": "Dell"
+    },
+    {
+      "vendor_id": "lenovo",
+      "label": "Lenovo"
+    },
+    {
+      "vendor_id": "intel",
+      "label": "Intel"
+    },
+    {
+      "vendor_id": "amd",
+      "label": "AMD"
+    },
+    {
+      "vendor_id": "synology",
+      "label": "Synology"
+    },
+    {
+      "vendor_id": "qnap",
+      "label": "QNAP"
+    },
+    {
+      "vendor_id": "adobe",
+      "label": "Adobe"
+    },
+    {
+      "vendor_id": "atlassian",
+      "label": "Atlassian"
+    },
+    {
+      "vendor_id": "notepad-plus-plus",
+      "label": "Notepad++"
+    },
+    {
+      "vendor_id": "7zip",
+      "label": "7-Zip"
+    },
+    {
+      "vendor_id": "rarlab",
+      "label": "RARLAB"
+    },
+    {
+      "vendor_id": "videolan",
+      "label": "VideoLAN"
+    },
+    {
+      "vendor_id": "java",
+      "label": "Java / OpenJDK"
+    },
+    {
+      "vendor_id": "putty",
+      "label": "PuTTY"
+    },
+    {
+      "vendor_id": "openssh",
+      "label": "OpenSSH"
+    },
+    {
+      "vendor_id": "git",
+      "label": "Git"
+    },
+    {
+      "vendor_id": "keepass",
+      "label": "KeePass"
+    },
+    {
+      "vendor_id": "keepassxc",
+      "label": "KeePassXC"
+    },
+    {
+      "vendor_id": "teamviewer",
+      "label": "TeamViewer"
+    },
+    {
+      "vendor_id": "anydesk",
+      "label": "AnyDesk"
+    },
+    {
+      "vendor_id": "zoom",
+      "label": "Zoom"
+    },
+    {
+      "vendor_id": "docker",
+      "label": "Docker"
+    },
+    {
+      "vendor_id": "apache",
+      "label": "Apache"
+    },
+    {
+      "vendor_id": "nginx",
+      "label": "nginx"
+    },
+    {
+      "vendor_id": "openssl",
+      "label": "OpenSSL Project"
+    }
+  ],
+  "products": [
+    {
+      "vendor_id": "microsoft",
+      "product_id": "microsoft.windows-10",
+      "label": "Windows 10",
+      "category": "Plattform",
+      "aliases": [
+        "Microsoft Windows 10"
+      ]
+    },
+    {
+      "vendor_id": "microsoft",
+      "product_id": "microsoft.windows-11",
+      "label": "Windows 11",
+      "category": "Plattform",
+      "aliases": [
+        "Microsoft Windows 11"
+      ]
+    },
+    {
+      "vendor_id": "microsoft",
+      "product_id": "microsoft.windows-server",
+      "label": "Windows Server",
+      "category": "Plattform",
+      "aliases": []
+    },
+    {
+      "vendor_id": "microsoft",
+      "product_id": "microsoft.microsoft-365",
+      "label": "Microsoft 365",
+      "category": "Plattform",
+      "aliases": [
+        "M365",
+        "Microsoft365"
+      ]
+    },
+    {
+      "vendor_id": "microsoft",
+      "product_id": "microsoft.office",
+      "label": "Microsoft Office",
+      "category": "Plattform",
+      "aliases": [
+        "Office"
+      ]
+    },
+    {
+      "vendor_id": "microsoft",
+      "product_id": "microsoft.teams",
+      "label": "Microsoft Teams",
+      "category": "Plattform",
+      "aliases": [
+        "Teams"
+      ]
+    },
+    {
+      "vendor_id": "microsoft",
+      "product_id": "microsoft.exchange",
+      "label": "Exchange",
+      "category": "Plattform",
+      "aliases": [
+        "Microsoft Exchange",
+        "Exchange Server"
+      ]
+    },
+    {
+      "vendor_id": "microsoft",
+      "product_id": "microsoft.sharepoint",
+      "label": "SharePoint",
+      "category": "Plattform",
+      "aliases": [
+        "Microsoft SharePoint"
+      ]
+    },
+    {
+      "vendor_id": "microsoft",
+      "product_id": "microsoft.azure",
+      "label": "Azure",
+      "category": "Plattform",
+      "aliases": [
+        "Microsoft Azure"
+      ]
+    },
+    {
+      "vendor_id": "microsoft",
+      "product_id": "microsoft.entra-id",
+      "label": "Entra ID",
+      "category": "Plattform",
+      "aliases": [
+        "Microsoft Entra ID"
+      ]
+    },
+    {
+      "vendor_id": "microsoft",
+      "product_id": "microsoft.sql-server",
+      "label": "SQL Server",
+      "category": "Plattform",
+      "aliases": [
+        "Microsoft SQL Server"
+      ]
+    },
+    {
+      "vendor_id": "microsoft",
+      "product_id": "microsoft.hyper-v",
+      "label": "Hyper-V",
+      "category": "Plattform",
+      "aliases": [
+        "Microsoft Hyper-V"
+      ]
+    },
+    {
+      "vendor_id": "microsoft",
+      "product_id": "microsoft.edge",
+      "label": "Microsoft Edge",
+      "category": "Plattform",
+      "aliases": [
+        "Edge"
+      ]
+    },
+    {
+      "vendor_id": "microsoft",
+      "product_id": "microsoft.vscode",
+      "label": "Visual Studio Code",
+      "category": "Plattform",
+      "aliases": [
+        "VS Code",
+        "VSCode"
+      ]
+    },
+    {
+      "vendor_id": "fortinet",
+      "product_id": "fortinet.fortios",
+      "label": "FortiOS",
+      "category": "Netzwerk",
+      "aliases": []
+    },
+    {
+      "vendor_id": "fortinet",
+      "product_id": "fortinet.fortimanager",
+      "label": "FortiManager",
+      "category": "Netzwerk",
+      "aliases": []
+    },
+    {
+      "vendor_id": "fortinet",
+      "product_id": "fortinet.fortianalyzer",
+      "label": "FortiAnalyzer",
+      "category": "Netzwerk",
+      "aliases": []
+    },
+    {
+      "vendor_id": "fortinet",
+      "product_id": "fortinet.forticlient",
+      "label": "FortiClient",
+      "category": "Netzwerk",
+      "aliases": []
+    },
+    {
+      "vendor_id": "fortinet",
+      "product_id": "fortinet.fortiweb",
+      "label": "FortiWeb",
+      "category": "Netzwerk",
+      "aliases": []
+    },
+    {
+      "vendor_id": "fortinet",
+      "product_id": "fortinet.fortiproxy",
+      "label": "FortiProxy",
+      "category": "Netzwerk",
+      "aliases": []
+    },
+    {
+      "vendor_id": "fortinet",
+      "product_id": "fortinet.fortisase",
+      "label": "FortiSASE",
+      "category": "Netzwerk",
+      "aliases": []
+    },
+    {
+      "vendor_id": "ubiquiti",
+      "product_id": "ubiquiti.unifi-os",
+      "label": "UniFi OS",
+      "category": "Netzwerk",
+      "aliases": []
+    },
+    {
+      "vendor_id": "ubiquiti",
+      "product_id": "ubiquiti.unifi-network",
+      "label": "UniFi Network",
+      "category": "Netzwerk",
+      "aliases": []
+    },
+    {
+      "vendor_id": "ubiquiti",
+      "product_id": "ubiquiti.unifi-protect",
+      "label": "UniFi Protect",
+      "category": "Netzwerk",
+      "aliases": []
+    },
+    {
+      "vendor_id": "ubiquiti",
+      "product_id": "ubiquiti.unifi-access",
+      "label": "UniFi Access",
+      "category": "Netzwerk",
+      "aliases": []
+    },
+    {
+      "vendor_id": "ubiquiti",
+      "product_id": "ubiquiti.unifi-talk",
+      "label": "UniFi Talk",
+      "category": "Netzwerk",
+      "aliases": []
+    },
+    {
+      "vendor_id": "ubiquiti",
+      "product_id": "ubiquiti.unifi-connect",
+      "label": "UniFi Connect",
+      "category": "Netzwerk",
+      "aliases": []
+    },
+    {
+      "vendor_id": "ubiquiti",
+      "product_id": "ubiquiti.unifi-wifi",
+      "label": "UniFi WiFi",
+      "category": "Netzwerk",
+      "aliases": []
+    },
+    {
+      "vendor_id": "sophos",
+      "product_id": "sophos.sophos-firewall",
+      "label": "Sophos Firewall",
+      "category": "Security",
+      "aliases": []
+    },
+    {
+      "vendor_id": "sophos",
+      "product_id": "sophos.sophos-endpoint",
+      "label": "Sophos Endpoint",
+      "category": "Security",
+      "aliases": []
+    },
+    {
+      "vendor_id": "sophos",
+      "product_id": "sophos.sophos-central",
+      "label": "Sophos Central",
+      "category": "Security",
+      "aliases": []
+    },
+    {
+      "vendor_id": "sophos",
+      "product_id": "sophos.sophos-mobile",
+      "label": "Sophos Mobile",
+      "category": "Security",
+      "aliases": []
+    },
+    {
+      "vendor_id": "cisco",
+      "product_id": "cisco.cisco-ios-xe",
+      "label": "Cisco IOS XE",
+      "category": "Netzwerk",
+      "aliases": []
+    },
+    {
+      "vendor_id": "cisco",
+      "product_id": "cisco.cisco-ios-xr",
+      "label": "Cisco IOS XR",
+      "category": "Netzwerk",
+      "aliases": []
+    },
+    {
+      "vendor_id": "cisco",
+      "product_id": "cisco.cisco-nx-os",
+      "label": "Cisco NX-OS",
+      "category": "Netzwerk",
+      "aliases": []
+    },
+    {
+      "vendor_id": "cisco",
+      "product_id": "cisco.cisco-asa",
+      "label": "Cisco ASA",
+      "category": "Netzwerk",
+      "aliases": []
+    },
+    {
+      "vendor_id": "cisco",
+      "product_id": "cisco.cisco-firepower",
+      "label": "Cisco Firepower",
+      "category": "Netzwerk",
+      "aliases": []
+    },
+    {
+      "vendor_id": "cisco",
+      "product_id": "cisco.cisco-ise",
+      "label": "Cisco ISE",
+      "category": "Netzwerk",
+      "aliases": []
+    },
+    {
+      "vendor_id": "cisco",
+      "product_id": "cisco.cisco-webex",
+      "label": "Cisco Webex",
+      "category": "Netzwerk",
+      "aliases": []
+    },
+    {
+      "vendor_id": "palo-alto",
+      "product_id": "palo-alto.pan-os",
+      "label": "PAN-OS",
+      "category": "Security",
+      "aliases": []
+    },
+    {
+      "vendor_id": "palo-alto",
+      "product_id": "palo-alto.globalprotect",
+      "label": "GlobalProtect",
+      "category": "Security",
+      "aliases": []
+    },
+    {
+      "vendor_id": "palo-alto",
+      "product_id": "palo-alto.prisma-access",
+      "label": "Prisma Access",
+      "category": "Security",
+      "aliases": []
+    },
+    {
+      "vendor_id": "palo-alto",
+      "product_id": "palo-alto.cortex-xdr",
+      "label": "Cortex XDR",
+      "category": "Security",
+      "aliases": []
+    },
+    {
+      "vendor_id": "palo-alto",
+      "product_id": "palo-alto.panorama",
+      "label": "Panorama",
+      "category": "Security",
+      "aliases": []
+    },
+    {
+      "vendor_id": "vmware",
+      "product_id": "vmware.vmware-esxi",
+      "label": "VMware ESXi",
+      "category": "Virtualisierung",
+      "aliases": []
+    },
+    {
+      "vendor_id": "vmware",
+      "product_id": "vmware.vmware-vcenter",
+      "label": "VMware vCenter",
+      "category": "Virtualisierung",
+      "aliases": []
+    },
+    {
+      "vendor_id": "vmware",
+      "product_id": "vmware.vmware-workstation",
+      "label": "VMware Workstation",
+      "category": "Virtualisierung",
+      "aliases": []
+    },
+    {
+      "vendor_id": "vmware",
+      "product_id": "vmware.vmware-fusion",
+      "label": "VMware Fusion",
+      "category": "Virtualisierung",
+      "aliases": []
+    },
+    {
+      "vendor_id": "vmware",
+      "product_id": "vmware.vmware-cloud-foundation",
+      "label": "VMware Cloud Foundation",
+      "category": "Virtualisierung",
+      "aliases": []
+    },
+    {
+      "vendor_id": "veeam",
+      "product_id": "veeam.veeam-backup-and-replication",
+      "label": "Veeam Backup & Replication",
+      "category": "Backup",
+      "aliases": []
+    },
+    {
+      "vendor_id": "veeam",
+      "product_id": "veeam.veeam-one",
+      "label": "Veeam ONE",
+      "category": "Backup",
+      "aliases": []
+    },
+    {
+      "vendor_id": "veeam",
+      "product_id": "veeam.veeam-service-provider-console",
+      "label": "Veeam Service Provider Console",
+      "category": "Backup",
+      "aliases": []
+    },
+    {
+      "vendor_id": "veeam",
+      "product_id": "veeam.veeam-agent",
+      "label": "Veeam Agent",
+      "category": "Backup",
+      "aliases": []
+    },
+    {
+      "vendor_id": "veeam",
+      "product_id": "veeam.veeam-backup-for-microsoft-365",
+      "label": "Veeam Backup for Microsoft 365",
+      "category": "Backup",
+      "aliases": []
+    },
+    {
+      "vendor_id": "apple",
+      "product_id": "apple.macos",
+      "label": "macOS",
+      "category": "Plattform",
+      "aliases": []
+    },
+    {
+      "vendor_id": "apple",
+      "product_id": "apple.ios-ipados",
+      "label": "iOS/iPadOS",
+      "category": "Plattform",
+      "aliases": [
+        "iOS",
+        "iPadOS"
+      ]
+    },
+    {
+      "vendor_id": "apple",
+      "product_id": "apple.watchos",
+      "label": "watchOS",
+      "category": "Plattform",
+      "aliases": []
+    },
+    {
+      "vendor_id": "apple",
+      "product_id": "apple.safari",
+      "label": "Safari",
+      "category": "Plattform",
+      "aliases": []
+    },
+    {
+      "vendor_id": "google",
+      "product_id": "google.chrome",
+      "label": "Google Chrome",
+      "category": "Plattform",
+      "aliases": [
+        "Chrome"
+      ]
+    },
+    {
+      "vendor_id": "google",
+      "product_id": "google.android",
+      "label": "Android",
+      "category": "Plattform",
+      "aliases": []
+    },
+    {
+      "vendor_id": "google",
+      "product_id": "google.pixel",
+      "label": "Pixel",
+      "category": "Plattform",
+      "aliases": []
+    },
+    {
+      "vendor_id": "mozilla",
+      "product_id": "mozilla.firefox",
+      "label": "Firefox",
+      "category": "Browser",
+      "aliases": []
+    },
+    {
+      "vendor_id": "mozilla",
+      "product_id": "mozilla.firefox-esr",
+      "label": "Firefox ESR",
+      "category": "Browser",
+      "aliases": []
+    },
+    {
+      "vendor_id": "mozilla",
+      "product_id": "mozilla.thunderbird",
+      "label": "Thunderbird",
+      "category": "Browser",
+      "aliases": []
+    },
+    {
+      "vendor_id": "chromium",
+      "product_id": "chromium.chromium",
+      "label": "Chromium",
+      "category": "Komponente",
+      "aliases": []
+    },
+    {
+      "vendor_id": "brave",
+      "product_id": "brave.brave",
+      "label": "Brave",
+      "category": "Browser",
+      "aliases": []
+    },
+    {
+      "vendor_id": "opera",
+      "product_id": "opera.opera",
+      "label": "Opera",
+      "category": "Browser",
+      "aliases": []
+    },
+    {
+      "vendor_id": "vivaldi",
+      "product_id": "vivaldi.vivaldi",
+      "label": "Vivaldi",
+      "category": "Browser",
+      "aliases": []
+    },
+    {
+      "vendor_id": "canonical",
+      "product_id": "canonical.ubuntu",
+      "label": "Ubuntu",
+      "category": "Betriebssystem",
+      "aliases": []
+    },
+    {
+      "vendor_id": "debian",
+      "product_id": "debian.debian",
+      "label": "Debian",
+      "category": "Betriebssystem",
+      "aliases": []
+    },
+    {
+      "vendor_id": "redhat",
+      "product_id": "redhat.rhel",
+      "label": "Red Hat Enterprise Linux",
+      "category": "Betriebssystem",
+      "aliases": [
+        "RHEL"
+      ]
+    },
+    {
+      "vendor_id": "linux",
+      "product_id": "linux.linux-kernel",
+      "label": "Linux Kernel",
+      "category": "Komponente",
+      "aliases": []
+    },
+    {
+      "vendor_id": "hp",
+      "product_id": "hp.pc-bios",
+      "label": "HP PC/BIOS",
+      "category": "Hardware",
+      "aliases": [
+        "HP PC",
+        "HP BIOS"
+      ]
+    },
+    {
+      "vendor_id": "hp",
+      "product_id": "hp.printers",
+      "label": "HP Drucker",
+      "category": "Hardware",
+      "aliases": [
+        "HP Printer"
+      ]
+    },
+    {
+      "vendor_id": "hp",
+      "product_id": "hp.poly",
+      "label": "HP Poly",
+      "category": "Hardware",
+      "aliases": []
+    },
+    {
+      "vendor_id": "hpe",
+      "product_id": "hpe.ilo-server",
+      "label": "HPE iLO/Server",
+      "category": "Hardware",
+      "aliases": [
+        "HPE iLO",
+        "HPE Server"
+      ]
+    },
+    {
+      "vendor_id": "dell",
+      "product_id": "dell.pc-bios",
+      "label": "Dell PC/BIOS",
+      "category": "Hardware",
+      "aliases": [
+        "Dell BIOS"
+      ]
+    },
+    {
+      "vendor_id": "dell",
+      "product_id": "dell.servers",
+      "label": "Dell Server",
+      "category": "Hardware",
+      "aliases": [
+        "Dell PowerEdge"
+      ]
+    },
+    {
+      "vendor_id": "lenovo",
+      "product_id": "lenovo.pc-bios",
+      "label": "Lenovo PC/BIOS",
+      "category": "Hardware",
+      "aliases": [
+        "Lenovo BIOS"
+      ]
+    },
+    {
+      "vendor_id": "intel",
+      "product_id": "intel.firmware",
+      "label": "Intel Prozessoren/Firmware",
+      "category": "Hardware",
+      "aliases": [
+        "Intel Firmware"
+      ]
+    },
+    {
+      "vendor_id": "amd",
+      "product_id": "amd.firmware",
+      "label": "AMD Prozessoren/Firmware",
+      "category": "Hardware",
+      "aliases": [
+        "AMD Firmware"
+      ]
+    },
+    {
+      "vendor_id": "synology",
+      "product_id": "synology.dsm",
+      "label": "Synology DSM",
+      "category": "NAS",
+      "aliases": [
+        "DSM"
+      ]
+    },
+    {
+      "vendor_id": "qnap",
+      "product_id": "qnap.qts",
+      "label": "QNAP QTS",
+      "category": "NAS",
+      "aliases": [
+        "QTS"
+      ]
+    },
+    {
+      "vendor_id": "qnap",
+      "product_id": "qnap.quts-hero",
+      "label": "QNAP QuTS hero",
+      "category": "NAS",
+      "aliases": [
+        "QuTS hero"
+      ]
+    },
+    {
+      "vendor_id": "adobe",
+      "product_id": "adobe.adobe-acrobat-reader",
+      "label": "Adobe Acrobat/Reader",
+      "category": "Software",
+      "aliases": []
+    },
+    {
+      "vendor_id": "adobe",
+      "product_id": "adobe.adobe-photoshop",
+      "label": "Adobe Photoshop",
+      "category": "Software",
+      "aliases": []
+    },
+    {
+      "vendor_id": "adobe",
+      "product_id": "adobe.adobe-coldfusion",
+      "label": "Adobe ColdFusion",
+      "category": "Software",
+      "aliases": []
+    },
+    {
+      "vendor_id": "adobe",
+      "product_id": "adobe.adobe-experience-manager",
+      "label": "Adobe Experience Manager",
+      "category": "Software",
+      "aliases": []
+    },
+    {
+      "vendor_id": "adobe",
+      "product_id": "adobe.adobe-illustrator",
+      "label": "Adobe Illustrator",
+      "category": "Software",
+      "aliases": []
+    },
+    {
+      "vendor_id": "atlassian",
+      "product_id": "atlassian.confluence",
+      "label": "Confluence",
+      "category": "Software",
+      "aliases": []
+    },
+    {
+      "vendor_id": "atlassian",
+      "product_id": "atlassian.jira",
+      "label": "Jira",
+      "category": "Software",
+      "aliases": []
+    },
+    {
+      "vendor_id": "atlassian",
+      "product_id": "atlassian.bitbucket",
+      "label": "Bitbucket",
+      "category": "Software",
+      "aliases": []
+    },
+    {
+      "vendor_id": "notepad-plus-plus",
+      "product_id": "notepad-plus-plus.editor",
+      "label": "Notepad++",
+      "category": "Software",
+      "aliases": [
+        "Notepad plus plus"
+      ]
+    },
+    {
+      "vendor_id": "7zip",
+      "product_id": "7zip.archiver",
+      "label": "7-Zip",
+      "category": "Software",
+      "aliases": [
+        "7zip"
+      ]
+    },
+    {
+      "vendor_id": "rarlab",
+      "product_id": "rarlab.winrar",
+      "label": "WinRAR",
+      "category": "Software",
+      "aliases": []
+    },
+    {
+      "vendor_id": "videolan",
+      "product_id": "videolan.vlc",
+      "label": "VLC",
+      "category": "Software",
+      "aliases": []
+    },
+    {
+      "vendor_id": "java",
+      "product_id": "java.runtime",
+      "label": "Java/OpenJDK",
+      "category": "Laufzeit",
+      "aliases": [
+        "Java",
+        "OpenJDK"
+      ]
+    },
+    {
+      "vendor_id": "putty",
+      "product_id": "putty.putty",
+      "label": "PuTTY",
+      "category": "Remote",
+      "aliases": []
+    },
+    {
+      "vendor_id": "openssh",
+      "product_id": "openssh.openssh",
+      "label": "OpenSSH",
+      "category": "Remote",
+      "aliases": []
+    },
+    {
+      "vendor_id": "git",
+      "product_id": "git.git",
+      "label": "Git",
+      "category": "Entwicklung",
+      "aliases": []
+    },
+    {
+      "vendor_id": "keepass",
+      "product_id": "keepass.keepass",
+      "label": "KeePass",
+      "category": "Software",
+      "aliases": []
+    },
+    {
+      "vendor_id": "keepassxc",
+      "product_id": "keepassxc.keepassxc",
+      "label": "KeePassXC",
+      "category": "Software",
+      "aliases": []
+    },
+    {
+      "vendor_id": "teamviewer",
+      "product_id": "teamviewer.teamviewer",
+      "label": "TeamViewer",
+      "category": "Remote",
+      "aliases": []
+    },
+    {
+      "vendor_id": "anydesk",
+      "product_id": "anydesk.anydesk",
+      "label": "AnyDesk",
+      "category": "Remote",
+      "aliases": []
+    },
+    {
+      "vendor_id": "zoom",
+      "product_id": "zoom.zoom",
+      "label": "Zoom",
+      "category": "Kommunikation",
+      "aliases": []
+    },
+    {
+      "vendor_id": "docker",
+      "product_id": "docker.docker",
+      "label": "Docker",
+      "category": "Infrastruktur",
+      "aliases": []
+    },
+    {
+      "vendor_id": "apache",
+      "product_id": "apache.apache-http-server",
+      "label": "Apache HTTP Server",
+      "category": "Infrastruktur",
+      "aliases": []
+    },
+    {
+      "vendor_id": "nginx",
+      "product_id": "nginx.nginx",
+      "label": "nginx",
+      "category": "Infrastruktur",
+      "aliases": []
+    },
+    {
+      "vendor_id": "openssl",
+      "product_id": "openssl.openssl",
+      "label": "OpenSSL",
+      "category": "Komponente",
+      "aliases": []
+    }
+  ]
+}

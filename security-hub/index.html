@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="de-CH" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="theme-color" content="#071014">
+  <meta name="description" content="Lokale DEMO des Swissploit Security Hub: Meldungen zum Produktprofil, klare Prioritäten und teilbare Briefings.">
+  <title>Security Hub · Lokale DEMO | Swissploit</title>
+  <link rel="icon" href="/assets/swissploit-brand-logo2.png" type="image/png">
+  <link rel="stylesheet" href="./assets/hub.css">
+  <script src="./assets/theme.js"></script>
+</head>
+<body class="security-hub-page">
+  <a class="hub-skip" href="#hub-main">Zum Inhalt</a>
+  <header class="hub-header">
+    <div class="hub-shell hub-header-inner">
+      <a class="hub-brand" href="/index.html" aria-label="Swissploit Startseite">
+        <img src="/assets/swissploit-brand-logo2.png" width="96" height="40" alt="Swissploit">
+        <span>SECURITY HUB</span>
+      </a>
+      <nav class="hub-nav" id="hub-nav" aria-label="Hauptnavigation">
+        <a href="/index.html#services">Services</a><a href="/learn/">Learn</a><a href="/index.html#kontakt">Kontakt</a>
+      </nav>
+      <div class="hub-actions">
+        <button class="hub-button hub-theme" id="hub-theme" type="button" aria-pressed="true" aria-label="Dunkle Darstellung">◐ <span>Darstellung</span></button>
+        <button class="hub-button hub-menu" id="hub-menu" type="button" aria-expanded="false" aria-controls="hub-nav">Menü</button>
+      </div>
+    </div>
+  </header>
+  <main class="hub-shell" id="hub-main" tabindex="-1">
+    <section class="hub-hero" aria-labelledby="hub-title">
+      <div class="hub-eyebrow">DEIN SECURITY BRIEF · LOKALE VORSCHAU</div>
+      <div class="hub-hero-row">
+        <div><h1 id="hub-title">Was verdient deine<br class="hub-desktop-break"> Aufmerksamkeit?</h1>
+        <p class="hub-lead">Die wichtigsten Themen für dein Produktprofil.<br>Nachvollziehbar priorisiert. Mit Quellen. Bereit zum Teilen.</p></div>
+        <button class="hub-button hub-primary hub-mobile-profile" id="hub-open-profile" type="button" disabled>Produktprofil wählen</button>
+      </div>
+      <div class="hub-data-strip" aria-label="Datenstatus">
+        <strong class="hub-badge" id="hub-mode">DEMO · fiktive Beispieldaten</strong>
+        <span id="hub-data-date">Datenstand wird geladen.</span>
+        <span id="hub-transport">Quelle: mitgeliefertes JSON</span>
+      </div>
+      <p class="hub-note">Keine Live-Meldungen. Keine Erkennung installierter Versionen. Eine Produktauswahl ist eine Watchlist, kein Nachweis einer Betroffenheit.</p>
+      <div class="hub-metrics" id="hub-metrics" aria-label="Kennzahlen"><p>Kennzahlen werden nach dem Laden angezeigt.</p></div>
+    </section>
+    <div class="hub-notice" id="hub-startup" role="status">Der Hub wird geladen. Falls dieser Hinweis bestehen bleibt: JavaScript und den lokalen HTTP-Server prüfen. <a href="./README.md">Startanleitung</a></div>
+    <noscript><p class="hub-notice">JavaScript ist deaktiviert. Für Produktauswahl und Meldungen JavaScript aktivieren und diese Seite über den lokalen Server öffnen.</p></noscript>
+    <div class="hub-notice" id="hub-warning" hidden></div>
+    <div class="hub-notice" id="hub-storage-warning" hidden></div>
+    <div class="hub-workspace">
+      <aside id="hub-profile-mount" aria-label="Produktprofil">
+        <section class="hub-profile" id="hub-profile" aria-labelledby="hub-profile-title">
+          <div class="hub-panel-heading"><div><div class="hub-eyebrow">DEINE WATCHLIST</div><h2 id="hub-profile-title">Produktprofil</h2></div><button class="hub-button hub-close-profile" id="hub-close-profile" type="button">Schliessen</button></div>
+          <p class="hub-note">Wähle deine Produkte. Das Profil bleibt in diesem Browser.</p>
+          <label class="hub-field">Hersteller oder Produkt<input id="hub-product-search" type="search" placeholder="Windows, FortiOS, Veeam …" maxlength="120" autocomplete="off"></label>
+          <div class="hub-profile-tools"><button class="hub-text-button" id="hub-suggest" type="button">KMU-Vorschlag auswählen</button><button class="hub-text-button" id="hub-clear-profile" type="button">Auswahl entfernen</button></div>
+          <div class="hub-product-tree" id="hub-product-tree"><p class="hub-note">Produktkatalog wird geladen.</p></div>
+          <div class="hub-profile-footer"><span id="hub-selected-count">0 ausgewählt</span><button class="hub-button hub-primary" id="hub-apply-profile" type="button" disabled>Profil anwenden</button></div>
+          <p class="hub-note hub-coverage-note">Ein auswählbares Produkt bedeutet keine aktive Quellenabdeckung.</p>
+        </section>
+      </aside>
+      <div class="hub-content">
+        <p class="hub-profile-hint" id="hub-profile-hint">Ohne Produktprofil siehst du alle Meldungen. Wähle links oder über «Produktprofil wählen» deine Produkte.</p>
+        <section class="hub-overview" aria-labelledby="hub-overview-title">
+          <div class="hub-section-heading"><div><div class="hub-eyebrow">ZUERST PRÜFEN</div><h2 id="hub-overview-title">Deine Übersicht</h2></div><a class="hub-text-link" href="#hub-feed-title" id="hub-show-all">Alle passenden Meldungen ↓</a></div>
+          <p class="hub-note">Bis zu fünf offene Themen für dein Profil, unabhängig von den Listenfiltern.</p>
+          <ol class="hub-top-list" id="hub-top-list"></ol>
+        </section>
+        <form class="hub-toolbar" id="hub-filters" aria-label="Meldungen filtern">
+          <div class="hub-toolbar-top"><label class="hub-field hub-feed-search">Meldungen durchsuchen<input id="hub-search" name="q" type="search" placeholder="Titel, Produkt, CVE oder Zusammenfassung …" maxlength="200" autocomplete="off"></label>
+            <label class="hub-field">Produktbezug<select name="scope"><option value="stack">Mein Stack</option><option value="all">Alle Produkte</option></select></label></div>
+          <div class="hub-filter-row">
+            <label class="hub-field">Bearbeitung<select name="status"><option value="open">Offen</option><option value="reviewed">Geprüft</option><option value="not_affected">Nicht betroffen</option><option value="all">Alle Status</option></select></label>
+            <label class="hub-field">Fachliches Update<select name="days"><option value="all">Alle Zeiträume</option><option value="1">24 Stunden</option><option value="7">7 Tage</option><option value="30">30 Tage</option></select></label>
+            <label class="hub-field">Sortierung<select name="sort"><option value="priority">Priorität</option><option value="updated">Letztes Update</option></select></label>
+          </div>
+          <div class="hub-filter-row hub-filter-bottom"><label class="hub-check"><input type="checkbox" name="exploited"> Aktiv ausgenutzt (bestätigt/KEV)</label><label class="hub-check"><input type="checkbox" name="known">Known Issues</label><button class="hub-text-button" type="reset">Filter zurücksetzen</button></div>
+        </form>
+        <div class="hub-notice" id="hub-older" hidden></div>
+        <div class="hub-notice" id="hub-deep-notice" hidden></div>
+        <section aria-labelledby="hub-feed-title">
+          <div class="hub-section-heading hub-feed-heading"><div><div class="hub-eyebrow">NACHVOLLZIEHBAR PRIORISIERT</div><h2 id="hub-feed-title" tabindex="-1">Meldungen</h2></div><span class="hub-note" id="hub-result-count" role="status"></span></div>
+          <div class="hub-cards" id="hub-cards"></div>
+          <div class="hub-empty" id="hub-empty" hidden><h3>Keine passenden Meldungen.</h3><p>Erweitere das Produktprofil oder setze die Filter zurück.</p><button class="hub-button" id="hub-empty-reset" type="button">Filter zurücksetzen</button></div>
+          <button class="hub-button hub-load-more" id="hub-load-more" type="button" hidden>Mehr laden</button>
+        </section>
+        <section class="hub-transparency" aria-labelledby="hub-transparency-title"><div class="hub-eyebrow">TRANSPARENZ</div><h2 id="hub-transparency-title">Einordnen statt vermuten.</h2>
+          <div class="hub-transparency-grid"><div><h3>Quellen & Daten</h3><p id="hub-source-note">Fiktive lokale Fälle zeigen den Ablauf. Es sind keine Collector aktiv.</p></div><div><h3>Dein Bearbeitungsstand</h3><p>Geprüft und Nicht betroffen sind persönliche Notizen. Sie belegen weder einen Patch noch Compliance. Keine Synchronisation.</p></div><div><h3>Arbeitspriorität · Regel 1</h3><p>Bestätigte Ausnutzung/KEV zuerst, danach belegte Schwere. Dein Profil bestimmt die Relevanz. Unbekannt bleibt unbekannt.</p></div></div>
+          <details class="hub-method"><summary>Regeln und Grenzen im Detail</summary><p>P1: Ausnutzung bestätigt oder KEV gelistet; P2: CVSS ab 9; P3: gemeldete Ausnutzung, CVSS ab 7 oder Known Issue; P4: weitere Einordnung. Innerhalb einer Stufe zuerst Profiltreffer, dann fachliches Update. KEV und derselbe Ausnutzungsbeleg zählen einmal. Ein verfügbarer Patch erhöht die Priorität nicht. Schwere und Arbeitspriorität sind getrennt; die Stufen sind keine Risikowahrscheinlichkeit.</p><p>Sammelbulletins behalten ihre CVE-bezogenen Fakten. News ersetzen keine Herstellerbelege. Aussagen zur eigenen Installation erfordern eine separate Prüfung.</p><a href="./README.md">Technische Dokumentation</a></details>
+        </section>
+      </div>
+    </div>
+  </main>
+  <footer class="hub-footer hub-shell"><span>© <span id="hub-year">2026</span> Swissploit · Security Hub Preview</span><nav aria-label="Footer"><a href="/index.html">Startseite</a><a href="/learn/">Learn</a><a href="/index.html#kontakt">Kontakt</a></nav></footer>
+  <dialog class="hub-dialog hub-profile-dialog" id="hub-profile-dialog" aria-labelledby="hub-profile-title"></dialog>
+  <dialog class="hub-dialog" id="hub-share-dialog" aria-labelledby="hub-share-title"><div class="hub-panel-heading"><h2 id="hub-share-title">Briefing teilen</h2><button class="hub-button" id="hub-share-close" type="button">Schliessen</button></div><p id="hub-share-help" class="hub-note"></p><label class="hub-field">Vollständiger Text<textarea id="hub-share-text" rows="14" readonly></textarea></label><div class="hub-actions"><button class="hub-button hub-primary" id="hub-share-copy" type="button">Text kopieren</button><a class="hub-button" id="hub-share-download" download="swissploit-demo-briefing.txt">TXT herunterladen</a></div><p class="hub-note" id="hub-copy-status" role="status"></p></dialog>
+  <div class="hub-toast" id="hub-status" role="status" aria-live="polite" aria-atomic="true"></div>
+  <script type="module" src="./assets/hub.js"></script>
+</body>
+</html>
