@@ -6,20 +6,25 @@
 .phishing-simulation-page :is(a,button,summary):focus-visible{outline:3px solid var(--accent);outline-offset:5px}
 .simulation-skip-nav{position:fixed;top:12px;left:16px;z-index:100;padding:12px 20px;color:var(--bg);background:var(--fg);transform:translateY(-160%)}
 .simulation-skip-nav:focus{transform:none}
+.simulation-notice{padding:clamp(18px,2.4vw,30px) 0}
+.simulation-notice-inner{position:relative;display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:clamp(22px,3vw,38px);min-height:300px;padding:clamp(30px,4.5vw,58px);overflow:hidden;border:1px solid #4ab3c382;border-radius:16px;background:radial-gradient(ellipse at 8% 0%,#4ab3c338,transparent 55%),linear-gradient(135deg,#0a3442 0%,#071e2a 58%,#082d38 100%);box-shadow:0 24px 70px #00182042,0 0 42px #4ab3c31c,inset 0 1px #b8f8ff24;color:#f5fbfc}
+.simulation-notice-inner::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,#ffffff0a,transparent 35%)}
+.simulation-notice-icon{position:relative;z-index:1;display:grid;place-items:center;width:72px;aspect-ratio:1;border:1px solid #86f7ff80;border-radius:50%;background:#4ab3c31c;box-shadow:0 0 30px #4ab3c32e;color:#9cf5ff;font-size:34px;font-weight:600}
+.simulation-notice-copy{position:relative;z-index:1;min-width:0}
+.phishing-simulation-page .simulation-notice-eyebrow{margin:0 0 12px;color:#86eaf3;font:800 11px/1.4 ui-monospace,monospace;letter-spacing:.16em}
+.simulation-notice h2{max-width:25ch;margin:0 0 15px;font-size:clamp(28px,3.25vw,46px);font-weight:600;line-height:1.12;letter-spacing:-.045em;text-wrap:balance}
+.simulation-notice p{max-width:74ch;margin:0;font-size:15px;line-height:1.7;color:#d2e2e5;text-wrap:pretty}
+.phishing-simulation-page .simulation-notice-reassurance{margin:0 0 8px;color:#fff;font-size:clamp(17px,1.7vw,20px);font-weight:600;line-height:1.5}
+.simulation-notice .simulation-notice-contact{margin-top:20px;padding-top:16px;border-top:1px solid #9de8ef2e;font-size:12px;color:#a9c1c6}
 .phishing-simulation-page .simulation-hero{padding:clamp(52px,6vw,92px) 0 clamp(56px,6vw,90px)}
 .simulation-hero-inner{display:grid;grid-template-columns:1.08fr 1fr;align-items:center;gap:clamp(36px,5vw,76px);text-align:left}
 .simulation-hero-copy{min-width:0}
-.phishing-simulation-page .simulation-badge{display:inline-flex;align-items:center;gap:10px;margin:0 0 27px;padding:11px 15px;border:1px solid var(--accent);border-radius:5px;color:var(--fg);background:var(--panel);font-size:clamp(13px,1.2vw,15px);font-weight:600;line-height:1.4;letter-spacing:.025em}
-.simulation-badge span{color:var(--accent);font-size:20px}
 .simulation-hero h1{max-width:12ch;margin:0 0 25px;font-size:clamp(42px,4.6vw,66px);font-weight:600;letter-spacing:-.055em;line-height:1.055;text-wrap:balance}
 .simulation-hero h1>span{color:var(--accent)}
-.phishing-simulation-page .simulation-lead{max-width:48ch;margin:0;color:color-mix(in oklab,var(--fg) 74%,var(--bg));font-size:16px;line-height:1.75}
-.phishing-simulation-page .simulation-followup{max-width:39ch;margin:22px 0 25px;font-size:15px;line-height:1.65;color:var(--fg)}
+.phishing-simulation-page .simulation-lead{max-width:48ch;margin:0 0 25px;color:color-mix(in oklab,var(--fg) 74%,var(--bg));font-size:16px;line-height:1.75}
 .simulation-actions{display:flex;flex-wrap:wrap;align-items:center;gap:18px 22px}
 html[data-theme] .phishing-simulation-page .btn.simulation-start{background:var(--accent);color:#052c36;border-color:var(--accent);border-radius:8px}
 html[data-theme] .phishing-simulation-page .btn.simulation-start:hover{background:#74cad4;color:#052c36;border-color:#74cad4;scale:1}
-.simulation-skip{padding:10px 0;color:color-mix(in oklab,var(--fg) 70%,var(--bg));font-size:12px;text-underline-offset:5px;text-decoration-color:var(--border-strong)}
-.simulation-skip:hover{color:var(--fg)}
 .phishing-simulation-page .simulation-meta{margin:18px 0 0;color:color-mix(in oklab,var(--fg) 57%,var(--bg));font-size:11px}
 .simulation-meta span{margin:0 5px}
 .phishing-simulation-page .simulation-load-status{margin:8px 0 0;font-size:12px}
@@ -73,6 +78,9 @@ html[data-theme="light"] .phishing-simulation-page .learn-eyebrow,html[data-them
 @media(max-width:900px){
 .simulation-hero-inner{gap:30px}.simulation-preview{min-height:500px}.simulation-actions{gap:10px 18px}}
 @media(max-width:700px){
+.simulation-notice-inner{grid-template-columns:1fr;gap:18px;min-height:0;padding:28px 24px}
+.simulation-notice-icon{width:52px;font-size:25px}
+.simulation-notice h2{font-size:clamp(27px,8vw,36px)}
 .simulation-hero-inner{grid-template-columns:1fr;gap:38px}
 .simulation-hero h1{font-size:clamp(43px,8.7vw,60px);max-width:14ch}
 .simulation-preview{min-height:0;aspect-ratio:1.18}

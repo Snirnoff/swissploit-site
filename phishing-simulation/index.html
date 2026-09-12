@@ -68,18 +68,30 @@
   </header>
 
   <main id="main">
+    <section class="simulation-notice" aria-labelledby="simulation-notice-title">
+      <div class="wrap">
+        <div class="simulation-notice-inner">
+          <span class="simulation-notice-icon" aria-hidden="true">✓</span>
+          <div class="simulation-notice-copy">
+            <p class="simulation-notice-eyebrow">KONTROLLIERTE PHISHING-SIMULATION</p>
+            <h2 id="simulation-notice-title">Du hast auf einen Link aus einer Phishing-Simulation geklickt.</h2>
+            <p class="simulation-notice-reassurance">Keine Sorge – das war kein echter Angriff.</p>
+            <p>Bei einem echten Phishing-Angriff könnte ein solcher Klick jedoch ein Risiko darstellen. Genau dafür gibt es diese Simulation.</p>
+            <p class="simulation-notice-contact">Fragen zur konkreten Nachricht? Wende dich an deine interne IT oder die für Security/Informatik verantwortliche Person.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="section simulation-hero" aria-labelledby="simulation-title">
       <div class="wrap simulation-hero-inner">
         <div class="simulation-hero-copy">
-          <p class="simulation-badge"><span aria-hidden="true">✓</span> Kontrollierte Phishing-Simulation</p>
           <h1 id="simulation-title">Zum Glück war es nur eine <span>Simulation.</span></h1>
-          <p class="simulation-lead">Alles gut – dies war ein autorisierter Sicherheitstest.</p>
-          <p class="simulation-followup">Teste dich in einer kurzen Phishing-Übung.</p>
+          <p class="simulation-lead">Teste dich in 30 Sekunden mit einer kleinen Phishing-Übung.</p>
           <div class="simulation-actions">
             <a class="btn primary simulation-start" href="#simulation-takeaways" data-phish-start>Phishing-Übung starten <span aria-hidden="true">→</span></a>
-            <a class="simulation-skip" href="#simulation-takeaways">Challenge überspringen</a>
           </div>
-          <p class="simulation-meta">3 Entscheidungen <span aria-hidden="true">·</span> ca. 30 Sekunden <span aria-hidden="true">·</span> dein Tempo</p>
+          <p class="simulation-meta">3 Entscheidungen <span aria-hidden="true">·</span> ca. 30 Sekunden</p>
           <p id="simulation-status" class="simulation-load-status" role="status"></p>
         </div>
         <button type="button" class="simulation-preview" data-phish-start aria-label="Phishing-Übung starten: Phish Escape">
