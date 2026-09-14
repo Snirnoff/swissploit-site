@@ -146,6 +146,11 @@ export function matchesProfile(item, profile) { return item.product_ids.some(id 
 export function priority(item, profile = []) {
   const relevant = matchesProfile(item, profile);
   const reasons = [profile.length ? relevant ? 'Passt zu deinem Produktprofil.' : 'Ausserhalb deines Produktprofils.' : 'Kein Produktprofil angewendet; alle Produkte sichtbar.'];
+  if (item.collector_priority) {
+    const tier = Number(item.collector_priority.label.slice(1));
+    return { tier, label: ['','Zuerst prüfen','Zeitnah prüfen','Prüfung einplanen','Einordnen'][tier], collector_label: item.collector_priority.label, reasons: [...reasons, ...item.collector_priority.reasons], relevant,
+      rule_version: item.collector_priority.rule_version, score: item.collector_priority.score };
+  }
   const sev = severity(item);
   let tier = 4;
   if (activeExploitation(item)) {
@@ -236,7 +241,7 @@ export function buildBriefing(item, feed, catalog, base) {
     `CVE: ${item.cve_ids.join(', ') || 'keine angegeben'}`,
     `Produkte: ${item.product_ids.map(id => catalog.products.find(p => p.product_id === id)?.label || id).join(', ') || 'Zuordnung unbekannt'}`,
     ...(item.unresolved_products?.length ? [`Unsichere Zuordnung: ${item.unresolved_products.join(', ')}`] : []),
-    `Arbeitspriorität: P${p.tier} · ${p.label} (Regel ${RULE_VERSION}, ohne persönliches Profil)`,
+    `Arbeitspriorität: P${p.tier} · ${p.label} (Regel ${p.rule_version}, ohne persönliches Profil)`,
     ...p.reasons.slice(1), `Schwere: ${severity(item).label}`, 'CVSS:', ...cvssLines(item),
     `Ausnutzung: ${EXPLOIT_LABELS[exploitState(item)]}`,
     ...item.exploit_evidence.map(e => `${scope(e)}${EXPLOIT_LABELS[e.status]} (${sourceLabel(item, e.source_id)})`),

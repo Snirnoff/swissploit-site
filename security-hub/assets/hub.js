@@ -1,4 +1,5 @@
 import { CONFIG, createStore, loadCatalog, loadFeed, validProfile, validStatuses, validVisit } from './data.js';
+import { createSecurityDataClient, loadSelectedFeeds, mergeProductFeeds } from './contract.js';
 import { groupIssues, priority, severity, conflicts, filterIssues, sortIssues, matchesProfile, statusFor, isOpen,
   olderOpenPriorities, activeExploitation, exploitState, kevState, sourceLabel, formatDate, parseIssueHash, issueLink,
   buildBriefing, mailtoFor, versionLines, cvssLines, relatedIssues, TYPE_LABELS, STATUS_LABELS, EXPLOIT_LABELS, KEV_LABELS } from './logic.js';
@@ -15,7 +16,7 @@ const button = (label, action, className = 'hub-button') => {
 };
 const list = lines => { const node = el('ul', 'hub-evidence-list'); lines.forEach(line => node.append(el('li', '', line))); return node; };
 const store = createStore({ onWarning: text => { $('storage-warning').textContent = text; $('storage-warning').hidden = false; } });
-const state = { catalog: null, feed: null, items: [], profile: [], draft: new Set(), statuses: {}, previousVisit: null, count: 25, pinned: null };
+const state = { catalog: null, fullCatalog: null, manifest: null, feed: null, items: [], profile: [], draft: new Set(), statuses: {}, previousVisit: null, count: 25, pinned: null, mode: 'brief', expanded: false };
 const base = CONFIG.linkBase || new URL('../', import.meta.url).href;
 let toastTimer, downloadURL, shareOpener, profileOpener;
 function announce(text) {
@@ -30,7 +31,9 @@ function profileItems() { return state.items.filter(i => !state.profile.length |
 function resetFilters() { $('filters').reset(); state.count = 25; render(); }
 
 function setupChrome() {
-  $('year').textContent = new Date().getFullYear();
+  const year = new Date().getFullYear();
+  $('year').textContent = year;
+  document.getElementById('year').textContent = year;
   const setTheme = theme => {
     document.documentElement.dataset.theme = theme;
     $('theme').setAttribute('aria-pressed', String(theme === 'dark'));
@@ -42,6 +45,14 @@ function setupChrome() {
     setTheme(theme); store.set('theme', theme, value => ['dark', 'light'].includes(value));
   });
   const closeMenu = () => { $('nav').dataset.open = 'false'; $('menu').setAttribute('aria-expanded', 'false'); };
+  const siteMenu = document.getElementById('menuToggle'), siteNav = document.getElementById('primaryNav');
+  const closeSiteMenu = () => { siteNav?.classList.remove('is-open'); siteMenu?.setAttribute('aria-expanded', 'false'); siteMenu?.setAttribute('aria-label', 'Menü öffnen'); };
+  siteMenu?.addEventListener('click', () => {
+    const open = siteMenu.getAttribute('aria-expanded') !== 'true';
+    siteMenu.setAttribute('aria-expanded', String(open)); siteMenu.setAttribute('aria-label', open ? 'Menü schliessen' : 'Menü öffnen');
+    siteNav?.classList.toggle('is-open', open);
+  });
+  siteNav?.querySelectorAll('a').forEach(link => link.addEventListener('click', closeSiteMenu));
   $('menu').addEventListener('click', () => {
     const open = $('menu').getAttribute('aria-expanded') !== 'true';
     $('nav').dataset.open = String(open); $('menu').setAttribute('aria-expanded', String(open));
@@ -50,8 +61,9 @@ function setupChrome() {
   $('header');
   document.addEventListener('keydown', event => {
     if (event.key === 'Escape' && $('menu').getAttribute('aria-expanded') === 'true') { closeMenu(); $('menu').focus(); }
+    if (event.key === 'Escape' && siteMenu?.getAttribute('aria-expanded') === 'true') { closeSiteMenu(); siteMenu.focus(); }
   });
-  matchMedia('(min-width: 601px)').addEventListener('change', closeMenu);
+  matchMedia('(min-width: 601px)').addEventListener('change', event => { closeMenu(); if (event.matches) closeSiteMenu(); });
 }
 
 function setupProfile() {
@@ -73,14 +85,15 @@ function setupProfile() {
   $('product-search').addEventListener('input', renderProducts);
   $('clear-profile').addEventListener('click', () => { state.draft.clear(); renderProducts(); announce('Auswahl entfernt. Mit «Profil anwenden» übernehmen.'); });
   $('suggest').addEventListener('click', () => {
-    state.draft = new Set(['microsoft.windows-11', 'microsoft.windows-server', 'microsoft.microsoft-365', 'microsoft.edge', 'fortinet.fortios', 'ubiquiti.unifi-network', 'ubiquiti.unifi-os', 'vmware.vmware-esxi', 'vmware.vmware-vcenter', 'veeam.veeam-backup-and-replication']);
+    state.draft = new Set(['microsoft.windows-11', 'microsoft.windows-server', 'microsoft.microsoft-365', 'microsoft.edge', 'fortinet.fortios', 'ubiquiti.unifi-os'].filter(id => !state.manifest || state.manifest.available_products.some(product => product.product_id === id)));
     renderProducts(); announce('KMU-Vorschlag ausgewählt. Passe ihn an und wende das Profil an.');
   });
-  $('apply-profile').addEventListener('click', () => {
+  $('apply-profile').addEventListener('click', async () => {
     state.profile = [...state.draft]; store.set('profile', state.profile, validProfile);
     state.count = 25;
     if ($('profile-dialog').open) $('profile-dialog').close();
-    render(); announce(`Profil angewendet: ${state.profile.length} Produkte. ${state.profile.length ? 'Die Watchlist ist keine Erkennung deiner Installation.' : 'Alle Meldungen sichtbar.'}`);
+    if (state.manifest) await activateDataset('brief'); else render();
+    announce(`Profil angewendet: ${state.profile.length} Produkte. ${state.profile.length ? 'Die Watchlist ist keine Erkennung deiner Installation.' : 'Wähle Produkte, um aktuelle Meldungen zu laden.'}`);
   });
 }
 function renderProducts() {
@@ -89,7 +102,7 @@ function renderProducts() {
   const q = $('product-search').value.trim().toLocaleLowerCase('de-CH');
   const fragment = document.createDocumentFragment();
   for (const vendor of state.catalog.vendors) {
-    const products = state.catalog.products.filter(p => p.vendor_id === vendor.vendor_id
+    const products = state.catalog.products.filter(p => (!state.manifest || state.manifest.available_products.some(item => item.product_id === p.product_id)) && p.vendor_id === vendor.vendor_id
       && (!q || `${vendor.label} ${p.label} ${p.aliases.join(' ')}`.toLocaleLowerCase('de-CH').includes(q)));
     if (!products.length) continue;
     const group = el('details', 'hub-vendor'); group.dataset.vendor = vendor.vendor_id;
@@ -131,7 +144,7 @@ function renderOverview() {
     [relevant.filter(activeExploitation).length, 'Ausnutzung bestätigt / KEV'], [recent, state.previousVisit ? 'Updates seit letztem Besuch' : 'Erster Besuch · kein Vergleich']];
   $('metrics').replaceChildren(...metrics.map(([count, label]) => { const m = el('div', 'hub-metric'); m.append(el('strong', '', String(count)), el('span', '', label)); return m; }));
   $('profile-hint').textContent = state.profile.length ? `${state.profile.length} Produkte in deinem Profil. Ergebnisse passen zur Watchlist; eine tatsächliche Betroffenheit muss separat geprüft werden.`
-    : 'Ohne Produktprofil siehst du alle Meldungen. Wähle links oder über «Produktprofil wählen» deine Produkte.';
+    : 'Wähle links oder über «Produktprofil wählen» deine Produkte. Ohne Auswahl lädt der Hub keine Produktfeeds.';
   const top = sortIssues(open, { profile: state.profile }).slice(0, 5);
   $('top-list').replaceChildren(...top.map(item => {
     const row = el('li'), link = el('a', '', item.title); link.href = issueLink(item.id, base);
@@ -199,7 +212,9 @@ function renderCard(item) {
   const badge = text => el('span', 'hub-badge', text);
   if (state.feed.data_mode === 'demo') tags.append(el('span', 'hub-badge hub-demo-tag', item.id));
   tags.append(badge(TYPE_LABELS[item.type]));
-  for (const id of item.product_ids) tags.append(badge(state.catalog.products.find(p => p.product_id === id)?.label || id));
+  for (const id of item.selected_product_ids || item.product_ids) tags.append(badge(state.catalog.products.find(p => p.product_id === id)?.label || id));
+  if (item.lifecycle && item.lifecycle !== 'CURRENT') tags.append(badge(item.lifecycle === 'NEW' ? 'Neu' : item.lifecycle === 'CHANGED' ? 'Aktualisiert' : 'Historisch'));
+  if (activeExploitation(item)) tags.append(el('span', 'hub-badge hub-exploited-tag', 'Aktiv ausgenutzt'));
   const title = el('h3', '', item.title); title.id = `${card.id}-title`; card.setAttribute('aria-labelledby', title.id);
   heading.append(tags, title); const rating = el('div', 'hub-priority'); rating.append(el('strong', '', `P${p.tier}`), el('span', '', 'Priorität')); top.append(heading, rating);
   const meta = el('div', 'hub-card-meta');
@@ -247,13 +262,19 @@ function render() {
     $('deep-notice').hidden = false;
   }
 }
-function openDeepLink() {
+async function openDeepLink() {
   if (!state.feed) return;
   const parsed = parseIssueHash(location.hash);
   state.pinned = null; $('deep-notice').hidden = true;
-  const item = parsed.id ? state.items.find(i => i.id === parsed.id || i.alias_ids.includes(parsed.id)) : null;
+  let item = parsed.id ? state.items.find(i => i.id === parsed.id || i.alias_ids.includes(parsed.id)) : null;
+  if (parsed.id && !item && state.manifest && state.profile.length && state.mode === 'brief') {
+    $('deep-notice').textContent = `Direktlink zu «${parsed.id}» wird in den aktuellen Meldungen gesucht.`;
+    $('deep-notice').hidden = false;
+    await activateDataset('current', { quiet: true });
+    item = state.items.find(i => i.id === parsed.id || i.alias_ids.includes(parsed.id));
+  }
   if (parsed.error || (parsed.id && !item)) {
-    $('deep-notice').textContent = parsed.error || `Die Meldung «${parsed.id}» ist im geladenen Datensatz nicht enthalten.`;
+    $('deep-notice').textContent = parsed.error || `Die Meldung «${parsed.id}» ist in den ausgewählten Produktfeeds nicht enthalten.`;
     $('deep-notice').hidden = false; announce($('deep-notice').textContent);
   }
   if (item) state.pinned = item.id;
@@ -264,7 +285,6 @@ function openDeepLink() {
     card.focus({ preventScroll: true }); card.scrollIntoView({ block: 'start', behavior: 'instant' });
   }
 }
-
 function showShare(text, help) {
   if (!$('share-dialog').open) shareOpener = document.activeElement;
   $('share-text').value = text; $('share-help').textContent = help; $('copy-status').textContent = '';
@@ -300,35 +320,109 @@ function setupSharing() {
     catch { $('share-text').focus(); $('share-text').select(); $('copy-status').textContent = 'Automatisches Kopieren ist gesperrt. Der vollständige Text ist ausgewählt; bitte Strg+C / ⌘C verwenden.'; }
   });
 }
+let dataClient;
+function liveEnvelope() {
+  return { data_mode: 'live', generated_at: state.manifest.generated_at, last_success_at: state.manifest.generated_at,
+    collector_version: state.manifest.collector_version, feed_status: state.manifest.feed_status, sources: [] };
+}
+function updateDataMeta(failures = []) {
+  if (state.feed.data_mode === 'demo') {
+    $('mode').textContent = 'DEMO · fiktive Ersatzdaten';
+    $('data-date').textContent = `Ersatzdaten: ${formatDate(state.feed.generated_at)}`;
+    $('transport').textContent = 'Live-Daten nicht verfügbar';
+    $('health').hidden = true;
+    return;
+  }
+  const health = state.manifest.source_health_summary;
+  $('mode').textContent = state.mode === 'brief' ? 'AKTUELLE KURZÜBERSICHT' : state.mode === 'current' ? 'ALLE AKTUELLEN MELDUNGEN' : 'BEKANNT AKTIV AUSGENUTZT';
+  $('data-date').textContent = `Datenstand: ${formatDate(state.manifest.generated_at)}`;
+  $('transport').textContent = `${health.success_count}/${health.success_count + health.failure_count} Quellen aktuell${failures.length ? ` · ${failures.length} Produktfeed${failures.length === 1 ? '' : 's'} nicht verfügbar` : ''}`;
+  $('health').hidden = state.manifest.feed_status !== 'degraded' && !failures.length;
+}
+async function useFallback(reason) {
+  const loaded = await loadFeed({ store });
+  if (!loaded.feed) throw new Error(`${reason} ${loaded.warnings.join(' ')}`);
+  state.manifest = null; state.feed = loaded.feed; state.items = groupIssues(loaded.feed.items, state.catalog); state.mode = 'fallback';
+  $('dataset-note').textContent = `${reason} Deshalb werden klar gekennzeichnete, fiktive Ersatzdaten angezeigt.`;
+  $('dataset-note').hidden = false; $('load-current').hidden = true; updateDataMeta(); renderProducts(); render();
+}
+async function activateDataset(kind, { quiet = false } = {}) {
+  if (!state.manifest) return;
+  state.mode = kind; state.count = 25; state.pinned = null;
+  const control = kind === 'current' ? $('load-current') : $('filters').elements.exploited;
+  control.disabled = true; $('cards').setAttribute('aria-busy', 'true');
+  if (!quiet) announce(kind === 'brief' ? 'Kurzüberblick wird geladen.' : kind === 'current' ? 'Alle aktuellen Meldungen werden geladen.' : 'Bekannt aktiv ausgenutzte Meldungen werden geladen.');
+  try {
+    if (!state.profile.length) {
+      state.feed = liveEnvelope(); state.items = [];
+      $('dataset-note').textContent = 'Wähle ein Produktprofil. Bis dahin wird nur das Manifest geladen.';
+      $('dataset-note').hidden = false; $('load-current').hidden = true; updateDataMeta(); render(); return;
+    }
+    const result = await loadSelectedFeeds(dataClient, state.manifest, state.profile, kind);
+    if (!result.feeds.length && result.failures.length) return useFallback('Die ausgewählten Live-Produktfeeds konnten nicht geladen werden.');
+    state.feed = liveEnvelope(); state.items = mergeProductFeeds(result.feeds); state.expanded ||= kind === 'current';
+    const hasMore = kind === 'brief' && result.feeds.some(feed => feed.has_more);
+    const total = result.feeds.reduce((sum, feed) => sum + (feed.total_current_count || feed.issue_count), 0);
+    $('dataset-note').textContent = kind === 'brief' && hasMore
+      ? `${state.items.length} priorisierte Meldungen im Kurzüberblick; insgesamt ${total} aktuelle Produktmeldungen vor der produktübergreifenden Deduplizierung.`
+      : kind === 'known_exploited' ? 'Diese Ansicht enthält absichtlich auch historische, bekannt ausgenutzte Schwachstellen.' : '';
+    $('dataset-note').hidden = !$('dataset-note').textContent;
+    $('load-current').hidden = !hasMore;
+    $('load-current').textContent = `Alle aktuellen Meldungen laden (${total})`;
+    $('warning').hidden = !result.failures.length;
+    if (result.failures.length) $('warning').textContent = `Teilweiser Datenstand: ${result.failures.map(failure => failure.product_id).join(', ')} konnte nicht geladen werden. Verfügbare Produktfeeds werden weiterhin angezeigt.`;
+    $('source-note').textContent = 'Quellen und Evidenz sind pro Meldung aufgeführt. Die Website sammelt oder verändert keine Security-Intelligence-Daten.';
+    updateDataMeta(result.failures); render();
+  } finally { control.disabled = false; $('cards').removeAttribute('aria-busy'); }
+}
+function setupDataControls() {
+  $('load-current').addEventListener('click', () => activateDataset('current').catch(error => announce(error.message)));
+  $('filters').elements.exploited.addEventListener('change', event => {
+    if (!state.manifest) { render(); return; }
+    activateDataset(event.target.checked ? 'known_exploited' : state.expanded ? 'current' : 'brief').catch(error => announce(error.message));
+  });
+  $('health').addEventListener('click', async () => {
+    $('health-dialog').showModal();
+    try {
+      const health = await dataClient.loadSourceHealth(), listNode = el('ul', 'hub-source-list');
+      for (const source of health.sources || []) {
+        const row = el('li'); row.append(el('strong', '', source.source), el('small', '', source.status === 'ok'
+          ? `Aktuell · ${source.records_used} Datensätze verwendet` : `Nicht verfügbar · ${source.error_message || 'Keine Details geliefert'}`)); listNode.append(row);
+      }
+      $('health-content').replaceChildren(listNode);
+    } catch (error) { $('health-content').textContent = `Quellendetails konnten nicht geladen werden: ${error.message}`; }
+  });
+  $('health-close').addEventListener('click', () => $('health-dialog').close());
+}
 async function start() {
-  setupChrome(); setupProfile(); setupSharing();
-  const [catalog, loaded] = await Promise.all([loadCatalog(), loadFeed({ store })]);
-  state.catalog = catalog;
-  state.profile = store.get('profile', [], validProfile).filter(id => catalog.products.some(p => p.product_id === id));
+  setupChrome(); setupProfile(); setupSharing(); setupDataControls();
+  dataClient = createSecurityDataClient();
+  const catalogPromise = loadCatalog();
+  const manifestResult = await dataClient.loadManifest().then(manifest => ({ manifest })).catch(error => ({ error }));
+  state.catalog = state.fullCatalog = await catalogPromise;
+  state.profile = store.get('profile', [], validProfile);
+  if (manifestResult.manifest) {
+    state.manifest = manifestResult.manifest;
+    const available = new Set(state.manifest.available_products.map(product => product.product_id));
+    state.profile = state.profile.filter(id => available.has(id));
+  }
   state.draft = new Set(state.profile);
   state.statuses = store.get('statuses', {}, validStatuses, 1_000_000);
   state.previousVisit = store.get('visit', null, validVisit);
-  renderProducts();
-  $('apply-profile').disabled = false; $('open-profile').disabled = false;
-  if (!loaded.feed) throw new Error(loaded.warnings.join(' '));
-  state.feed = loaded.feed; state.items = groupIssues(loaded.feed.items, catalog);
-  $('mode').textContent = state.feed.data_mode === 'demo' ? 'DEMO · fiktive Beispieldaten' : 'LIVE-DATENSATZ';
-  $('data-date').textContent = `Datenstand: ${formatDate(state.feed.generated_at)}`;
-  $('transport').textContent = `Transport: ${loaded.transport}${loaded.stale ? ' · veraltet' : ''}`;
-  $('source-note').textContent = `${state.feed.data_mode === 'demo' ? '14 fiktive lokale Übungsfälle. Beispiel-URLs sind keine echten Herstellerquellen.' : 'Quellen sind pro Thema mit Evidenzbezug aufgeführt.'} Letzter Erfolg: ${formatDate(state.feed.last_success_at)}. Keine Collector in dieser Website aktiv.`;
-  if (loaded.warnings.length) { $('warning').textContent = loaded.warnings.join(' '); $('warning').hidden = false; }
+  renderProducts(); $('apply-profile').disabled = false; $('open-profile').disabled = false;
+  if (manifestResult.error) await useFallback(`Das Live-Manifest ist nicht verfügbar: ${manifestResult.error.message}`);
+  else await activateDataset('brief');
   $('filters').addEventListener('submit', event => event.preventDefault());
-  $('filters').addEventListener('input', () => { state.count = 25; render(); });
-  $('filters').addEventListener('reset', () => { setTimeout(() => { state.count = 25; render(); }, 0); });
+  $('filters').addEventListener('input', event => { if (event.target.name === 'exploited') return; state.count = 25; render(); });
+  $('filters').addEventListener('reset', () => { setTimeout(() => { state.count = 25; if (state.manifest && state.mode === 'known_exploited') activateDataset(state.expanded ? 'current' : 'brief'); else render(); }, 0); });
   $('empty-reset').addEventListener('click', resetFilters);
   $('show-all').addEventListener('click', () => resetFilters());
   $('load-more').addEventListener('click', () => {
-    const before = Math.min(state.count, filterIssues(state.items, filters(), state.profile, state.statuses, catalog).length);
-    state.count += 25; render();
-    const firstNew = $('cards').children[before]; firstNew?.focus(); announce('Weitere Meldungen geladen.');
+    const before = Math.min(state.count, filterIssues(state.items, filters(), state.profile, state.statuses, state.catalog).length);
+    state.count += 25; render(); $('cards').children[before]?.focus(); announce('Weitere Meldungen angezeigt.');
   });
-  window.addEventListener('hashchange', openDeepLink);
-  openDeepLink();
+  window.addEventListener('hashchange', () => openDeepLink().catch(error => announce(error.message)));
+  await openDeepLink();
   store.set('visit', new Date().toISOString(), validVisit);
   $('startup').hidden = true;
 }

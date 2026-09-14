@@ -216,6 +216,13 @@ html[data-theme="light"] {
 .foot-nav a { margin-right: 12px; text-decoration: none; color: var(--fg); opacity: .9; }
 .foot-nav a:hover { color: var(--accent); opacity: 1; }
 
+.security-hub-entry { padding: 34px var(--wrap) 46px; text-align: center; }
+.security-hub-entry a { display: inline-flex; flex-direction: column; gap: 5px; max-width: 100%; padding: 14px 22px; border: 1px solid var(--border-strong); border-radius: 999px; color: var(--fg); text-decoration: none; transition: border-color .25s ease, box-shadow .25s ease, transform .25s ease; }
+.security-hub-entry a:hover { border-color: var(--accent); box-shadow: 0 0 28px rgba(74,179,195,.12); transform: translateY(-2px); }
+.security-hub-entry-label { color: var(--accent-2); font-size: 11px; font-weight: 700; letter-spacing: .14em; }
+.security-hub-entry-copy { color: color-mix(in oklab, var(--fg) 72%, transparent); font-size: 13px; }
+@media (prefers-reduced-motion: reduce) { .security-hub-entry a { transition: none; } }
+
 
 /* ========== 4) COMPONENTS ========== */
 /* 4.1) iOS-style theme switch */

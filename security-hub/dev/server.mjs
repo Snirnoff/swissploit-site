@@ -6,10 +6,11 @@ import { createReadStream } from 'node:fs';
 import { pipeline } from 'node:stream/promises';
 
 export const ROOT = fileURLToPath(new URL('../../', import.meta.url));
+export const DATA_ROOT = fileURLToPath(new URL('../../../swissploit-security-data/docs/', import.meta.url));
 const MIME = { '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.mjs': 'text/javascript; charset=utf-8', '.json': 'application/json; charset=utf-8', '.md': 'text/plain; charset=utf-8', '.txt': 'text/plain; charset=utf-8', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.webp': 'image/webp', '.avif': 'image/avif', '.svg': 'image/svg+xml', '.ico': 'image/x-icon', '.woff2': 'font/woff2', '.mp4': 'video/mp4', '.webm': 'video/webm' };
 const inside = (root, target) => target === root || target.startsWith(root.endsWith(path.sep) ? root : root + path.sep);
-export async function createPreviewServer({ root = ROOT, logger = console } = {}) {
-  const realRoot = await realpath(root);
+export async function createPreviewServer({ root = ROOT, dataRoot = DATA_ROOT, logger = console } = {}) {
+  const realRoot = await realpath(root), realDataRoot = await realpath(dataRoot);
   return http.createServer(async (req, res) => {
     const fail = (code, message) => { res.writeHead(code, { 'Content-Type': 'text/plain; charset=utf-8', 'X-Content-Type-Options': 'nosniff' }); res.end(message); };
     if (!['GET', 'HEAD'].includes(req.method)) { res.setHeader('Allow', 'GET, HEAD'); fail(405, 'Nur GET und HEAD erlaubt.'); return; }
@@ -20,8 +21,11 @@ export async function createPreviewServer({ root = ROOT, logger = console } = {}
       || pathname.split('/').some(part => part.startsWith('.') || ['node_modules', 'posts', 'scripts'].includes(part))) { fail(403, 'Dieser Pfad ist nicht öffentlich.'); return; }
     // Developer code and test fixtures do not belong in the public preview.
     if (/^\/security-hub\/(dev|tests)(\/|$)/.test(pathname)) { fail(403, 'Entwicklerdateien werden nicht ausgeliefert.'); return; }
-    let filename = path.resolve(realRoot, '.' + pathname);
-    if (!inside(realRoot, filename)) { fail(403, 'Pfad ausserhalb der Vorschau.'); return; }
+    const servesData = pathname.startsWith('/security-data/');
+    const requestRoot = servesData ? realDataRoot : realRoot;
+    const relativePath = servesData ? pathname.slice('/security-data'.length) : pathname;
+    let filename = path.resolve(requestRoot, '.' + relativePath);
+    if (!inside(requestRoot, filename)) { fail(403, 'Pfad ausserhalb der Vorschau.'); return; }
     try {
       let info = await stat(filename);
       if (info.isDirectory()) {
@@ -29,7 +33,7 @@ export async function createPreviewServer({ root = ROOT, logger = console } = {}
         filename = path.join(filename, 'index.html'); info = await stat(filename);
       }
       const realFile = await realpath(filename);
-      if (!inside(realRoot, realFile) || !info.isFile()) { fail(403, 'Datei ausserhalb der Vorschau.'); return; }
+      if (!inside(requestRoot, realFile) || !info.isFile()) { fail(403, 'Datei ausserhalb der Vorschau.'); return; }
       const type = MIME[path.extname(realFile).toLowerCase()];
       if (!type) { fail(403, 'Dateityp nicht freigegeben.'); return; }
       res.writeHead(200, { 'Content-Type': type, 'Content-Length': info.size, 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff', ...(pathname.startsWith('/security-hub/') ? { 'X-Robots-Tag': 'noindex, nofollow' } : {}) });

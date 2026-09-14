@@ -16,7 +16,9 @@ test('Vorhandener Chromium-Browser: vollständiger lokaler UI-Durchlauf', { time
   const browser = await launchBrowser(); t.after(() => browser.close());
   t.diagnostic(`Browser: ${browser.executable}`);
   const base = `http://127.0.0.1:${server.address().port}`;
-  const runPage = async (options, fn) => { const page = await browser.page(options); try { await fn(page); assert.deepEqual(page.routeErrors, []); } finally { await page.close(); } };
+  const runPage = async (options, fn) => { const { live = false, routes = {}, ...rest } = options;
+    const page = await browser.page({ ...rest, routes: live ? routes : { '/security-data/manifest.json': { fail: true }, ...routes } });
+    try { await fn(page); assert.deepEqual(page.routeErrors, []); } finally { await page.close(); } };
 
   await t.test('360/768/1440 px, Dark/Light, kein horizontaler Scroll, keine externen Requests', async () => {
     for (const width of [360, 768, 1440]) {
