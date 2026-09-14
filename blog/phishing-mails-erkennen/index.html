@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="de" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Phishing-Mails erkennen: 7 einfache Checks | Swissploit – Swissploit</title>
+
+  <meta name="description" content="Wie erkennst du eine Phishing-Mail? Prüfe Kontext, Absender, Links, Dringlichkeit und Login-Aufforderungen mit diesen 7 einfachen Tipps." />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+
+  <meta property="og:title" content="Phishing-Mails erkennen: 7 einfache Checks | Swissploit">
+  <meta property="og:description" content="Wie erkennst du eine Phishing-Mail? Prüfe Kontext, Absender, Links, Dringlichkeit und Login-Aufforderungen mit diesen 7 einfachen Tipps.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://swissploit.ch/blog/phishing-mails-erkennen/">
+  <meta property="og:image" content="https://swissploit.ch/assets/blog/phishing-mails-erkennen.webp">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Phishing-Mails erkennen: 7 einfache Checks | Swissploit">
+  <meta name="twitter:description" content="Wie erkennst du eine Phishing-Mail? Prüfe Kontext, Absender, Links, Dringlichkeit und Login-Aufforderungen mit diesen 7 einfachen Tipps.">
+  <meta name="twitter:image" content="https://swissploit.ch/assets/blog/phishing-mails-erkennen.webp">
+
+  <link rel="canonical" href="https://swissploit.ch/blog/phishing-mails-erkennen/" />
+  <link rel="alternate" hreflang="de" href="https://swissploit.ch/blog/phishing-mails-erkennen/" />
+  <link rel="alternate" hreflang="x-default" href="https://swissploit.ch/blog/phishing-mails-erkennen/" />
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/swissploit-brand-logo2.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/swissploit-brand-logo2.png">
+  <link rel="apple-touch-icon" href="/assets/swissploit-brand-logo2.png">
+  <link rel="icon" type="image/png" href="/assets/swissploit-brand-logo2.png">
+  <meta name="theme-color" content="#05070b">
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Phishing-Mails erkennen: Diese 7 Dinge solltest du prüfen","description":"Wie erkennst du eine Phishing-Mail? Prüfe Kontext, Absender, Links, Dringlichkeit und Login-Aufforderungen mit diesen 7 einfachen Tipps.","datePublished":"2026-09-14","dateModified":"2026-09-14","image":"https://swissploit.ch/assets/blog/phishing-mails-erkennen.webp","url":"https://swissploit.ch/blog/phishing-mails-erkennen/","mainEntityOfPage":"https://swissploit.ch/blog/phishing-mails-erkennen/","inLanguage":"de","author":{"@type":"Person","name":"Swissploit"},"publisher":{"@type":"Organization","name":"Swissploit","logo":{"@type":"ImageObject","url":"https://swissploit.ch/assets/swissploit-og.png"}},"keywords":"phishing, phishing-mail, e-mail, betrug, social-engineering, links, fake-login, security-awareness"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://swissploit.ch/index.html"},{"@type":"ListItem","position":2,"name":"Learn","item":"https://swissploit.ch/learn/"},{"@type":"ListItem","position":3,"name":"Phishing-Mails erkennen: Diese 7 Dinge solltest du prüfen","item":"https://swissploit.ch/blog/phishing-mails-erkennen/"}]}</script>
+
+  <script>
+    (function () {
+      var theme = "dark";
+      try {
+        var savedTheme = localStorage.getItem("swissploit-theme");
+        if (savedTheme === "light" || savedTheme === "dark") theme = savedTheme;
+      } catch (e) {}
+      document.documentElement.setAttribute("data-theme", theme);
+    })();
+  </script>
+
+  <link rel="stylesheet" href="/assets/styles.css" />
+  <link rel="stylesheet" href="/assets/blog-post.css" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <header class="site-header" role="banner">
+    <div class="wrap headerbar">
+      <a class="brand" href="/index.html#intro" aria-label="Swissploit Home" data-transition>
+        <img class="brand-logo-image header-logo-image" src="/assets/swissploit-brand-logo2.png" alt="Swissploit Logo" width="120" height="49" decoding="async">
+        <span class="brand-text">Swissploit</span>
+      </a>
+
+      <nav id="primaryNav" class="nav" aria-label="Hauptnavigation">
+        <a href="/index.html#services" data-transition>Services</a>
+        <a class="is-active" aria-current="page" href="/learn/" data-transition>Learn</a>
+        <a href="/index.html#ueber" data-transition>Über Swissploit</a>
+        <a href="/index.html#kontakt" data-transition>Kontakt</a>
+      </nav>
+
+      <div class="header-actions">
+        <button id="themeToggle"
+          class="switch"
+          aria-pressed="false"
+          aria-label="Darstellung umschalten"
+          title="Dark/Light umschalten">
+          <span class="switch-track"></span>
+          <span class="switch-thumb">
+            <span class="switch-icon sun" aria-hidden="true">&#9728;</span>
+            <span class="switch-icon moon" aria-hidden="true">&#9790;</span>
+          </span>
+        </button>
+        <button id="menuToggle" class="menu-toggle" type="button" aria-expanded="false" aria-controls="primaryNav" aria-label="Menu oeffnen">
+          <span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <nav class="wrap blog-breadcrumbs" aria-label="Breadcrumb">
+      <ol class="breadcrumb-list">
+        <li><a href="/index.html" data-transition>Home</a></li>
+        <li><a href="/learn/" data-transition>Learn</a></li>
+        <li aria-current="page">Phishing-Mails erkennen: Diese 7 Dinge solltest du prüfen</li>
+      </ol>
+    </nav>
+
+    <section class="section post-hero">
+      <div class="wrap">
+        <div class="post-topbar">
+          <a class="post-back" href="/learn/" data-transition>← Zurück</a>
+          
+    <nav class="lang-toggle" aria-label="Sprache wählen">
+      <a class="lang-link is-active" href="/blog/phishing-mails-erkennen/" hreflang="de" lang="de" data-lang-switch="de">DE</a>
+    </nav>
+  
+        </div>
+
+        <p class="post-kicker">Phishing &amp; Betrug</p>
+        <h1 class="post-title" id="postTitle">Phishing-Mails erkennen: Diese 7 Dinge solltest du prüfen</h1>
+        <p class="post-subline" id="postSubtitle">7 einfache Checks, mit denen du verdächtige E-Mails, Links und Login-Aufforderungen besser beurteilen kannst.</p>
+        <div class="post-meta" id="postMeta"><time class="blog-date" datetime="2026-09-14">14.09.2026</time>
+    
+    <span class="blog-tags">#phishing #phishing-mail #e-mail #betrug #social-engineering #links #fake-login #security-awareness</span></div>
+        
+        <div class="post-hero-media post-hero-video">
+          <iframe
+            src="https://www.youtube-nocookie.com/embed/rTf4mqmvhUc"
+            title="Phishing-Mails erkennen: Diese 7 Dinge solltest du prüfen – Video"
+            loading="lazy"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen></iframe>
+        </div>
+      </div>
+    </section>
+
+    <section class="section post-wrap">
+      <div class="wrap">
+        <article class="post-content" id="postContent" aria-labelledby="postTitle">
+          <div class="article-reading-status">
+            <span class="article-reading-status-text"></span>
+            <span class="article-read-label" aria-hidden="true"></span>
+            <button type="button" hidden></button>
+          </div>
+          <div class="post-article">
+            
+            <p>Schlechtes Deutsch, komische Formulierungen und offensichtliche Rechtschreibfehler?</p>
+<p>Das kann auf Phishing hindeuten – <strong>darauf verlassen solltest du dich aber nicht mehr.</strong></p>
+<p>Texte lassen sich heute mit KI-Tools in Sekunden verbessern, übersetzen und professioneller formulieren. Gleichzeitig schreiben auch echte Menschen nicht immer perfekte E-Mails.</p>
+<p>Eine fehlerfreie Nachricht ist deshalb genauso wenig ein Echtheitsbeweis wie ein Rechtschreibfehler automatisch Phishing bedeutet.</p>
+<aside class="article-callout article-callout--key">
+  <div class="article-callout__heading"><span class="article-callout__icon" aria-hidden="true">✓</span><strong>Die bessere Strategie</strong></div>
+  <div class="article-callout__content">
+    <p>Versuche nicht, Phishing nur am Aussehen einer Nachricht zu erkennen.</p>
+    <p>Prüfe stattdessen <strong>Kontext, Absender, verlangte Handlung, Dringlichkeit, Links und Login-Aufforderungen.</strong></p>
+  </div>
+</aside>
+
+<h2>1. Passt die Nachricht überhaupt zum Kontext?</h2>
+<p>Das ist einer der einfachsten und gleichzeitig stärksten Checks.</p>
+<p>Du erhältst plötzlich:</p>
+<ul>
+<li>eine Rechnung</li>
+<li>eine Datei</li>
+<li>eine Passwortänderung</li>
+<li>eine Paketbenachrichtigung</li>
+<li>eine Sicherheitswarnung</li>
+<li>eine Zahlungsaufforderung</li>
+</ul>
+<p>Frage dich zuerst:</p>
+<p><strong>Habe ich das überhaupt erwartet?</strong></p>
+<p>Wenn aus dem Nichts eine Rechnung kommt oder du angeblich dein Passwort ändern musst, obwohl du nichts ausgelöst hast, ist das ein Grund genauer hinzuschauen.</p>
+<p>Eine unerwartete Nachricht ist nicht automatisch Phishing.</p>
+<p>Aber:</p>
+<p><strong>Je weniger die Nachricht zu deiner aktuellen Situation passt, desto vorsichtiger solltest du sein.</strong></p>
+<h2>2. Prüfe den tatsächlichen Absender</h2>
+<p>Schau nicht nur auf den Namen, der gross in deinem Mailprogramm angezeigt wird.</p>
+<p>Dort kann problemlos stehen:</p>
+<p><strong>Microsoft Support</strong></p>
+<p><strong>Deine Bank</strong></p>
+<p>oder sogar der Name einer dir bekannten Person.</p>
+<p>Interessanter ist die tatsächliche E-Mail-Adresse dahinter.</p>
+<p>In Outlook kannst du die Absenderinformationen öffnen und kontrollieren, von welcher Adresse die Nachricht tatsächlich kommt.</p>
+<!-- BILDPLATZHALTER 1
+
+HIER SPÄTER SCREENSHOT EINFÜGEN:
+
+Ideal:
+Screenshot aus Outlook mit einer Beispiel-Mail.
+Markiere:
+1. angezeigter Absendername
+2. tatsächliche E-Mail-Adresse
+
+Dateivorschlag:
+assets/blog/phishing-mail-absender-pruefen.webp
+
+Später ersetzen durch:
+
+<figure class="post-figure">
+  <img loading="lazy" decoding="async" src="/assets/blog/phishing-mail-absender-pruefen.webp" alt="Outlook zeigt den sichtbaren Absendernamen und die tatsächliche E-Mail-Adresse">
+  <figcaption>Prüfe nicht nur den angezeigten Namen, sondern die tatsächliche E-Mail-Adresse.</figcaption>
+</figure>
+
+-->
+
+<p>Passt die Domain überhaupt zum angeblichen Absender?</p>
+<p>Eine Microsoft-Nachricht von einer völlig fremden Domain wäre beispielsweise ein deutliches Warnsignal.</p>
+<p>Wichtig:</p>
+<p><strong>Auch eine korrekt aussehende Absenderadresse beweist nicht automatisch, dass eine Nachricht sicher ist.</strong></p>
+<p>Ein echtes E-Mail-Konto kann kompromittiert worden sein oder eine Nachricht kann auf andere Weise glaubwürdig wirken.</p>
+<p>Der Absender ist deshalb <strong>ein Check von mehreren</strong>.</p>
+<h2>3. Hinterfrage die Art der Anfrage</h2>
+<p>Manchmal sieht die E-Mail völlig normal aus.</p>
+<p>Verdächtig ist erst das, was du tun sollst.</p>
+<p>Zum Beispiel:</p>
+<ul>
+<li>plötzlich Geld überweisen</li>
+<li>eine neue Bankverbindung verwenden</li>
+<li>mehrere Geschenkkarten kaufen</li>
+<li>Zugangsdaten senden</li>
+<li>persönliche Daten übermitteln</li>
+<li>Sicherheitscodes weitergeben</li>
+<li>vertrauliche Dokumente verschicken</li>
+</ul>
+<p>Frage dich:</p>
+<p><strong>Ist es normal, dass diese Person genau das von mir verlangt?</strong></p>
+<p>Ein angeblicher Chef, der plötzlich Geschenkkarten benötigt oder eine dringende Zahlung ausserhalb des normalen Prozesses verlangt, sollte beispielsweise überprüft werden.</p>
+<p>Nicht nur die Nachricht zählt.</p>
+<p><strong>Die verlangte Handlung ist oft das wichtigere Warnsignal.</strong></p>
+<h2>4. Achte auf künstliche Dringlichkeit</h2>
+<p>Angreifer möchten, dass du handelst, bevor du nachdenkst.</p>
+<p>Deshalb tauchen in Phishing-Mails häufig Aussagen auf wie:</p>
+<blockquote>
+<p>„Sofort handeln.“</p>
+</blockquote>
+<blockquote>
+<p>„Ihr Konto wird gesperrt.“</p>
+</blockquote>
+<blockquote>
+<p>„Bestätigen Sie Ihre Daten innerhalb von 24 Stunden.“</p>
+</blockquote>
+<blockquote>
+<p>„Dringende Zahlung erforderlich.“</p>
+</blockquote>
+<p>Zeitdruck allein bedeutet noch nicht, dass eine Nachricht gefälscht ist.</p>
+<p>Aber wenn eine Nachricht gleichzeitig:</p>
+<p><strong>unerwartet + dringend + sicherheitsrelevant</strong></p>
+<p>ist, solltest du besonders vorsichtig werden.</p>
+<aside class="article-callout article-callout--tip">
+  <div class="article-callout__heading"><span class="article-callout__icon" aria-hidden="true">✓</span><strong>Ein einfacher Trick</strong></div>
+  <div class="article-callout__content">
+    <p>Je mehr dich eine Nachricht zu einer schnellen Entscheidung drängt, desto wichtiger ist es, bewusst langsamer zu werden.</p>
+  </div>
+</aside>
+
+<h2>5. Prüfe Links und Anhänge vor dem Öffnen</h2>
+<p>Ein Button kann beispielsweise mit <strong>„Dokument anzeigen“</strong> beschriftet sein.</p>
+<p>Das bedeutet aber nicht, dass er tatsächlich zu deinem Dokument führt.</p>
+<p>Am Computer kannst du bei vielen Programmen mit der Maus über einen Link fahren, <strong>ohne ihn anzuklicken</strong>.</p>
+<p>Dadurch siehst du das tatsächliche Linkziel.</p>
+<!-- BILDPLATZHALTER 2
+
+HIER SPÄTER SCREENSHOT EINFÜGEN:
+
+Ideal:
+Screenshot einer Mail mit Button oder Link.
+Maus befindet sich über dem Link.
+Das eingeblendete tatsächliche Linkziel ist sichtbar.
+
+Dateivorschlag:
+assets/blog/phishing-linkziel-pruefen.webp
+
+Später ersetzen durch:
+
+<figure class="post-figure">
+  <img loading="lazy" decoding="async" src="/assets/blog/phishing-linkziel-pruefen.webp" alt="Linkziel einer verdächtigen E-Mail vor dem Anklicken prüfen">
+  <figcaption>Fahre mit der Maus über einen Link, ohne ihn anzuklicken, und kontrolliere das tatsächliche Ziel.</figcaption>
+</figure>
+
+-->
+
+<p>Achte dabei besonders auf die Domain.</p>
+<p>Ein Link kann beispielsweise so aussehen:</p>
+<p><code>https://microsoft.login-security.example.com</code></p>
+<p>Obwohl dort <strong>microsoft</strong> steht, gehört diese Adresse tatsächlich zu:</p>
+<p><code>example.com</code></p>
+<p>Wenn du Domains noch nicht sicher lesen kannst, findest du hier eine ausführlichere Erklärung:</p>
+<p><a href="/blog/gefaehrliche-links-erkennen/">Gefährliche Links erkennen: So prüfst du eine URL richtig</a></p>
+<p>Bei unerwarteten Anhängen gilt dasselbe Prinzip:</p>
+<p><strong>Nicht öffnen, nur weil Dateiname und E-Mail plausibel aussehen.</strong></p>
+<h2>6. Sei besonders vorsichtig bei Login-Aufforderungen</h2>
+<p>Du klickst auf einen Link.</p>
+<p>Danach erscheint plötzlich eine Microsoft-, Google- oder andere Login-Seite.</p>
+<p>Genau hier solltest du stoppen.</p>
+<p>Phishing-Seiten können echte Login-Seiten optisch sehr überzeugend kopieren.</p>
+<p>Das Ziel ist häufig, dass du dort:</p>
+<ul>
+<li>deine E-Mail-Adresse</li>
+<li>dein Passwort</li>
+<li>oder weitere Anmeldeinformationen</li>
+</ul>
+<p>eingibst.</p>
+<!-- BILDPLATZHALTER 3 – OPTIONAL
+
+Dieses Bild würde ich nur verwenden, wenn du einen guten eigenen Screenshot hast.
+
+Ideal:
+Beispiel einer Fake-Login-Seite.
+Oben Browser-Adresszeile sichtbar.
+Falsche Domain markieren.
+
+Dateivorschlag:
+assets/blog/phishing-fake-login.webp
+
+Später ersetzen durch:
+
+<figure class="post-figure">
+  <img loading="lazy" decoding="async" src="/assets/blog/phishing-fake-login.webp" alt="Gefälschte Login-Seite mit verdächtiger Domain in der Browser-Adresszeile">
+  <figcaption>Eine Login-Seite kann perfekt aussehen. Entscheidend ist unter anderem, auf welcher Domain du dich tatsächlich befindest.</figcaption>
+</figure>
+
+-->
+
+<p>Bei einer unerwarteten Login-Aufforderung ist eine einfache Reaktion oft die sicherste:</p>
+<p><strong>Seite schliessen und den Dienst selbst über die bekannte Webseite oder App öffnen.</strong></p>
+<p>Im Unternehmen solltest du eine verdächtige Login-Aufforderung über den vorgesehenen IT- oder Security-Kanal melden.</p>
+<h2>7. Verifiziere ungewöhnliche Anfragen über einen zweiten Kanal</h2>
+<p>Dir kommt eine E-Mail komisch vor?</p>
+<p>Dann überprüfe die Anfrage unabhängig.</p>
+<p>Wichtig ist das Wort <strong>unabhängig</strong>.</p>
+<p>Verwende nicht:</p>
+<ul>
+<li>die Telefonnummer aus der verdächtigen E-Mail</li>
+<li>einen Link aus der E-Mail</li>
+<li>Kontaktdaten aus dem Anhang</li>
+<li>die Antwortfunktion derselben Nachricht</li>
+</ul>
+<p>Nutze stattdessen einen Kontaktweg, den du bereits kennst.</p>
+<p>Wenn angeblich dein Chef eine ungewöhnliche Zahlung verlangt, ist beispielsweise ein kurzer Anruf über die dir bekannte Telefonnummer deutlich besser.</p>
+<p>Auch eine Teams-Nachricht ist bei besonders sensiblen Anfragen nicht immer die beste Kontrolle.</p>
+<p><strong>Wenn möglich: kurz anrufen und nachfragen.</strong></p>
+<p>Du musst die Phishing-Mail nicht technisch entlarven.</p>
+<p>Du musst nur verhindern, dass eine gefälschte Anfrage dich zu einer falschen Handlung bringt.</p>
+<h2>Spezialtipp: QR-Codes und Bilder sind ebenfalls klickbar</h2>
+<p>Phishing versteckt sich nicht nur hinter klassischen Textlinks.</p>
+<p>Auch ein QR-Code in einer E-Mail kann dich auf eine betrügerische Webseite führen.</p>
+<p>Dasselbe gilt für Bilder und Buttons.</p>
+<p>Ein grosses Microsoft-Logo, eine Grafik mit „Dokument öffnen“ oder ein QR-Code kann technisch einfach ein Link sein.</p>
+<p>Deshalb gilt auch hier:</p>
+<p><strong>Nicht dem Design vertrauen – kontrollieren, wohin die Aktion führt.</strong></p>
+<p>Mehr zu QR-Code-Phishing findest du hier:</p>
+<p><a href="/blog/qr-phishing-quishing/">QR-Phishing: So erkennst du gefährliche QR-Codes</a></p>
+<h2>Die 7 Punkte als schnelle Checkliste</h2>
+<p>Bevor du bei einer verdächtigen E-Mail handelst, prüfe:</p>
+<ul class="article-checklist">
+<li><strong>Kontext:</strong> Habe ich diese Nachricht überhaupt erwartet?</li>
+<li><strong>Absender:</strong> Welche tatsächliche E-Mail-Adresse steckt dahinter?</li>
+<li><strong>Anfrage:</strong> Ist das, was von mir verlangt wird, normal?</li>
+<li><strong>Dringlichkeit:</strong> Soll ich unter Zeitdruck handeln?</li>
+<li><strong>Links & Anhänge:</strong> Wohin führen sie und habe ich sie erwartet?</li>
+<li><strong>Login:</strong> Warum soll ich mich plötzlich anmelden?</li>
+<li><strong>Verifikation:</strong> Kann ich die Anfrage über einen bekannten zweiten Kanal bestätigen?</li>
+</ul>
+
+<aside class="article-callout article-callout--key">
+  <div class="article-callout__heading"><span class="article-callout__icon" aria-hidden="true">✓</span><strong>Merksatz</strong></div>
+  <div class="article-callout__content">
+    <p><strong>Unerwartete Nachricht + ungewöhnliche Handlung + Zeitdruck = nicht automatisch reagieren.</strong></p>
+    <p>Stoppen, unabhängig prüfen und erst danach handeln.</p>
+  </div>
+</aside>
+
+<h2>Was, wenn du bereits geklickt hast?</h2>
+<p>Dann ist die wichtigste Frage:</p>
+<p><strong>Was hast du danach gemacht?</strong></p>
+<p>Nur eine Webseite geöffnet zu haben ist etwas anderes, als ein Passwort einzugeben, eine MFA-Anfrage zu bestätigen oder eine Datei auszuführen.</p>
+<p>Wenn du bereits Daten eingegeben oder etwas geöffnet hast, findest du hier die nächsten Schritte:</p>
+<p><a href="/blog/auf-phishing-geklickt/">Auf Phishing geklickt – was jetzt?</a></p>
+<p>Je schneller du bei tatsächlich eingegebenen Zugangsdaten reagierst, desto besser lässt sich möglicher Schaden begrenzen.</p>
+          </div>
+        </article>
+
+        
+    <aside class="post-related" aria-labelledby="relatedPostsHeading">
+      <h2 id="relatedPostsHeading">Weiterlernen</h2>
+      <div class="post-related-grid">
+        
+            <article class="post-related-card blog-card">
+              <a class="post-related-card-link blog-card-link" href="/blog/phishing-erkennen/" aria-label="Phishing erkennen: Diese Warnsignale solltest du kennen" data-transition>
+                <div class="post-related-thumb blog-thumb">
+                  <img class="blog-thumb-img" src="/assets/blog/phishing-erkennen.webp" alt="Beispiel einer verdächtigen E-Mail mit Fokus auf Absender, Link und dringende Aufforderung" loading="lazy" decoding="async">
+                </div>
+                <div class="post-related-body blog-card-body">
+                  <span class="learn-card-category">Phishing &amp; Betrug</span>
+                  <time class="post-related-date blog-date" datetime="2026-09-02">02.09.2026</time>
+                  <h3 class="post-related-title blog-card-title">Phishing erkennen: Diese Warnsignale solltest du kennen</h3>
+                  <p class="post-related-excerpt blog-card-excerpt">Phishing kann heute täuschend echt aussehen. Lerne, welche Warnsignale wirklich wichtig sind und wie du verdächtige Nachrichten richtig prüfst.</p>
+                </div>
+              </a>
+            </article>
+          
+            <article class="post-related-card blog-card">
+              <a class="post-related-card-link blog-card-link" href="/blog/gefaehrliche-links-erkennen/" aria-label="Gefährliche Links erkennen: So prüfst du eine URL richtig" data-transition>
+                <div class="post-related-thumb blog-thumb">
+                  <img class="blog-thumb-img" src="/assets/blog/gefaehrliche-links-erkennen.webp" alt="Browser mit einer verdächtigen Internetadresse und hervorgehobener Domain" loading="lazy" decoding="async">
+                </div>
+                <div class="post-related-body blog-card-body">
+                  <span class="learn-card-category">Phishing &amp; Betrug</span>
+                  <time class="post-related-date blog-date" datetime="2026-09-02">02.09.2026</time>
+                  <h3 class="post-related-title blog-card-title">Gefährliche Links erkennen: So prüfst du eine URL richtig</h3>
+                  <p class="post-related-excerpt blog-card-excerpt">Ein Link kann seriös aussehen und trotzdem auf eine gefälschte Webseite führen. Lerne, welche Teile einer URL wirklich wichtig sind.</p>
+                </div>
+              </a>
+            </article>
+          
+            <article class="post-related-card blog-card">
+              <a class="post-related-card-link blog-card-link" href="/blog/auf-phishing-geklickt/" aria-label="Auf Phishing geklickt – was jetzt?" data-transition>
+                <div class="post-related-thumb blog-thumb">
+                  <img class="blog-thumb-img" src="/assets/blog/auf-phishing-geklickt.webp" alt="Smartphone mit verdächtiger Phishing-Nachricht und einer Checkliste mit Sicherheitsmassnahmen" loading="lazy" decoding="async">
+                </div>
+                <div class="post-related-body blog-card-body">
+                  <span class="learn-card-category">Phishing &amp; Betrug</span>
+                  <time class="post-related-date blog-date" datetime="2026-09-02">02.09.2026</time>
+                  <h3 class="post-related-title blog-card-title">Auf Phishing geklickt – was jetzt?</h3>
+                  <p class="post-related-excerpt blog-card-excerpt">Auf einen verdächtigen Link geklickt oder Daten eingegeben? Diese Schritte helfen dir, den möglichen Schaden schnell zu begrenzen.</p>
+                </div>
+              </a>
+            </article>
+          
+      </div>
+    </aside>
+  
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="wrap">
+      <p>© <span id="year"></span> Swissploit.</p>
+      <nav class="foot-nav" aria-label="Footer Navigation">
+        <a href="/index.html#services" data-transition>Services</a>
+        <a href="/learn/" data-transition>Learn</a>
+        <a href="/index.html#ueber" data-transition>Über Swissploit</a>
+        <a href="/index.html#kontakt" data-transition>Kontakt</a>
+      </nav>
+      
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+    window.SWISSPLOIT_CURRENT_LANG = "de";
+  </script>
+
+  <script src="/assets/transition.js"></script>
+  <script src="/assets/app.js"></script>
+  <script src="/assets/blog-index-static.js"></script>
+</body>
+</html>

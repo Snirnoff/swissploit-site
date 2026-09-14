@@ -10,6 +10,11 @@
     <loc>https://swissploit.ch/en/learn/</loc>
   </url>
   <url>
+    <loc>https://swissploit.ch/blog/phishing-mails-erkennen/</loc>
+    <lastmod>2026-09-14</lastmod>
+    <image:image><image:loc>https://swissploit.ch/assets/blog/phishing-mails-erkennen.webp</image:loc></image:image>
+  </url>
+  <url>
     <loc>https://swissploit.ch/blog/auf-phishing-geklickt/</loc>
     <lastmod>2026-09-02</lastmod>
     <image:image><image:loc>https://swissploit.ch/assets/blog/auf-phishing-geklickt.webp</image:loc></image:image>
@@ -45,11 +50,6 @@
     <image:image><image:loc>https://swissploit.ch/assets/blog/smishing-phishing-per-sms.webp</image:loc></image:image>
   </url>
   <url>
-    <loc>https://swissploit.ch/blog/social-engineering/</loc>
-    <lastmod>2026-09-02</lastmod>
-    <image:image><image:loc>https://swissploit.ch/assets/blog/social-engineering.webp</image:loc></image:image>
-  </url>
-  <url>
     <loc>https://swissploit.ch/blog/verdaechtige-e-mail-im-buero/</loc>
     <lastmod>2026-09-02</lastmod>
     <image:image><image:loc>https://swissploit.ch/assets/blog/verdaechtige-e-mail-im-buero.webp</image:loc></image:image>
@@ -58,6 +58,11 @@
     <loc>https://swissploit.ch/blog/vishing-telefonbetrug/</loc>
     <lastmod>2026-09-02</lastmod>
     <image:image><image:loc>https://swissploit.ch/assets/blog/vishing-telefonbetrug.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://swissploit.ch/blog/social-engineering/</loc>
+    <lastmod>2026-09-02</lastmod>
+    <image:image><image:loc>https://swissploit.ch/assets/blog/social-engineering.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://swissploit.ch/blog/cyberseal-fuer-wen-und-was-es-aussagt/</loc>
