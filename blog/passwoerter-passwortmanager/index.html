@@ -45,13 +45,14 @@
 
   <link rel="stylesheet" href="/assets/styles.css" />
   <link rel="stylesheet" href="/assets/blog-post.css" />
+  <link rel="stylesheet" href="/assets/learn-article.css" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 </head>
 
-<body>
+<body class="learn-article-page">
   <header class="site-header" role="banner">
     <div class="wrap headerbar">
       <a class="brand" href="/index.html#intro" aria-label="Swissploit Home" data-transition>
@@ -107,7 +108,7 @@
 
         <p class="post-kicker">Accounts &amp; Passwörter</p>
         <h1 class="post-title" id="postTitle">Sichere Passwörter &amp; Passwortmanager: So schützt du deine Konten</h1>
-        <p class="post-subline" id="postSubtitle">Ein starkes Passwort muss vor allem lang und einzigartig sein. Erfahre, warum Passwortmanager sinnvoll sind und welche Regeln wirklich wichtig sind.</p>
+
         <div class="post-meta" id="postMeta"><time class="blog-date" datetime="2026-09-02">02.09.2026</time>
     
     <span class="blog-tags">#passwoerter #passwortmanager #account-sicherheit #datenleck #credential-stuffing #mfa #cyber-security</span></div>
@@ -126,15 +127,9 @@
             <span class="article-read-label" aria-hidden="true"></span>
             <button type="button" hidden></button>
           </div>
+<details class="article-toc"><summary>In diesem Artikel</summary><nav aria-label="In diesem Artikel"><ul><li><a href="#warum-dasselbe-passwort-gefahrlich-ist">Warum dasselbe Passwort gefährlich ist</a></li><li><a href="#wie-sieht-ein-gutes-passwort-aus">Wie sieht ein gutes Passwort aus?</a></li><li><a href="#wie-soll-ich-mir-so-viele-passworter-merken">Wie soll ich mir so viele Passwörter merken?</a></li><li><a href="#ist-es-sicher-alle-passworter-an-einem-ort-zu-speichern">Ist es sicher, alle Passwörter an einem Ort zu speichern?</a></li><li><a href="#lass-den-passwortmanager-passworter-erzeugen">Lass den Passwortmanager Passwörter erzeugen</a></li><li><a href="#autofill-kann-zusatzlich-helfen">Autofill kann zusätzlich helfen</a></li><li><a href="#welche-konten-sind-besonders-wichtig">Welche Konten sind besonders wichtig?</a></li><li><a href="#zusatzlich-mfa-aktivieren">Zusätzlich MFA aktivieren</a></li><li><a href="#was-tun-wenn-ein-passwort-geleakt-wurde">Was tun, wenn ein Passwort geleakt wurde?</a></li><li><a href="#die-einfache-passwort-regel">Die einfache Passwort-Regel</a></li></ul></nav></details>
           <div class="post-article">
             
-    <aside class="article-callout article-callout--key">
-      <div class="article-callout__heading">
-        <span class="article-callout__icon" aria-hidden="true">✓</span>
-        <strong>Das Wichtigste</strong>
-      </div>
-      <div class="article-callout__content"><p>Verwende für jedes wichtige Konto ein eigenes Passwort. Ein Passwortmanager hilft dir, lange und zufällige Passwörter zu erstellen, ohne sie alle selbst merken zu müssen. Besonders wichtige Konten solltest du zusätzlich mit MFA schützen.</p></div>
-    </aside>
             <p>Ein Passwort für E-Mail, Onlineshopping, Streaming und Social Media?</p>
 <p>Praktisch – aber riskant.</p>
 <p>Denn sobald dieses eine Passwort bei einem Datenleck oder durch Phishing gestohlen wird, können Angreifer versuchen, sich damit auch bei deinen anderen Konten anzumelden.</p>
@@ -146,16 +141,16 @@
   </div>
 </aside>
 
-<h2>Warum dasselbe Passwort gefährlich ist</h2>
+<h2 id="warum-dasselbe-passwort-gefahrlich-ist">Warum dasselbe Passwort gefährlich ist</h2>
 <p>Stell dir vor, du verwendest dasselbe Passwort bei einem Onlineshop und für dein E-Mail-Konto.</p>
 <p>Der Onlineshop wird gehackt und dein Passwort gelangt in falsche Hände.</p>
 <p>Angreifer können nun automatisiert ausprobieren, ob dieselben Zugangsdaten auch bei Microsoft, Google, Instagram oder anderen Diensten funktionieren.</p>
 <p>Diese Methode nennt man <strong>Credential Stuffing</strong>.</p>
 <p>Das Problem ist also nicht nur das gehackte Konto.</p>
 <p>Das Problem entsteht vor allem dann, wenn <strong>ein einziges gestohlenes Passwort mehrere deiner Konten öffnet</strong>.</p>
-<h2>Wie sieht ein gutes Passwort aus?</h2>
+<h2 id="wie-sieht-ein-gutes-passwort-aus">Wie sieht ein gutes Passwort aus?</h2>
 <p>Wenn du ein Passwort selbst erstellen und merken musst, gilt:</p>
-<h3>Lieber lang als unnötig kompliziert</h3>
+<h3 id="lieber-lang-als-unnotig-kompliziert">Lieber lang als unnötig kompliziert</h3>
 <p>Eine gute Orientierung sind <strong>mindestens 15 Zeichen</strong>.</p>
 <p>Eine längere Passphrase kann beispielsweise leichter zu merken sein als eine kurze Kombination aus zufälligen Sonderzeichen.</p>
 <p>Wichtig ist aber:</p>
@@ -163,7 +158,7 @@
 <p>Schlecht wäre beispielsweise:</p>
 <p><code>Sommer2026!</code></p>
 <p>Denn solche typischen Kombinationen können automatisiert ausprobiert werden.</p>
-<h3>Für jedes Konto ein eigenes Passwort</h3>
+<h3 id="fur-jedes-konto-ein-eigenes-passwort">Für jedes Konto ein eigenes Passwort</h3>
 <p>Das ist wichtiger als regelmäßig kleine Änderungen am selben Passwort vorzunehmen.</p>
 <p>Aus:</p>
 <p><code>MeinPasswort2025!</code></p>
@@ -177,13 +172,13 @@
   </div>
 </aside>
 
-<h2>Wie soll ich mir so viele Passwörter merken?</h2>
+<h2 id="wie-soll-ich-mir-so-viele-passworter-merken">Wie soll ich mir so viele Passwörter merken?</h2>
 <p>Am besten gar nicht.</p>
 <p>Genau dafür gibt es <strong>Passwortmanager</strong>.</p>
 <p>Ein Passwortmanager speichert deine Zugangsdaten in einem verschlüsselten Tresor und kann für jedes Konto ein eigenes zufälliges Passwort erzeugen.</p>
 <p>Du musst dir dadurch nicht mehr 50 verschiedene Passwörter merken.</p>
 <p>Im Idealfall merkst du dir nur noch das starke Hauptpasswort für deinen Passwortmanager.</p>
-<h2>Ist es sicher, alle Passwörter an einem Ort zu speichern?</h2>
+<h2 id="ist-es-sicher-alle-passworter-an-einem-ort-zu-speichern">Ist es sicher, alle Passwörter an einem Ort zu speichern?</h2>
 <p>Diese Frage ist berechtigt.</p>
 <p>Ein Passwortmanager enthält sehr wertvolle Informationen und muss deshalb gut geschützt werden.</p>
 <p>Trotzdem ist ein seriöser Passwortmanager für die meisten Menschen deutlich praktikabler als der Versuch, für jedes Konto ein eigenes starkes Passwort auswendig zu lernen. Passwortmanager erleichtern gerade die Verwendung langer und einzigartiger Passwörter.</p>
@@ -202,7 +197,7 @@
   </div>
 </aside>
 
-<h2>Lass den Passwortmanager Passwörter erzeugen</h2>
+<h2 id="lass-den-passwortmanager-passworter-erzeugen">Lass den Passwortmanager Passwörter erzeugen</h2>
 <p>Du musst gute Passwörter nicht selbst erfinden.</p>
 <p>Die meisten Passwortmanager können lange, zufällige Passwörter automatisch generieren.</p>
 <p>Zum Beispiel:</p>
@@ -210,12 +205,12 @@
 <p>So ein Passwort musst du nicht auswendig lernen.</p>
 <p>Der Passwortmanager übernimmt das Speichern und Einfügen.</p>
 <p>Das macht es deutlich einfacher, wirklich <strong>für jeden Dienst ein anderes Passwort</strong> zu verwenden.</p>
-<h2>Autofill kann zusätzlich helfen</h2>
+<h2 id="autofill-kann-zusatzlich-helfen">Autofill kann zusätzlich helfen</h2>
 <p>Ein weiterer Vorteil eines Passwortmanagers ist das automatische Ausfüllen von Zugangsdaten.</p>
 <p>Passwortmanager orientieren sich dabei normalerweise an der Webseite beziehungsweise Domain, für die ein Login gespeichert wurde.</p>
 <p>Wenn dein Passwortmanager auf einer vermeintlichen Microsoft-Login-Seite plötzlich keine gespeicherten Microsoft-Zugangsdaten anbietet, kann das deshalb ein zusätzliches Warnsignal sein.</p>
 <p>Es ersetzt aber nicht die Kontrolle der Webseite.</p>
-<h2>Welche Konten sind besonders wichtig?</h2>
+<h2 id="welche-konten-sind-besonders-wichtig">Welche Konten sind besonders wichtig?</h2>
 <p>Nicht alle Konten haben dieselbe Bedeutung.</p>
 <p>Besonders gut solltest du Konten schützen, über die weitere Konten zurückgesetzt oder persönliche Daten erreicht werden können.</p>
 <p>Dazu gehören vor allem:</p>
@@ -229,7 +224,7 @@
 </ul>
 <p>Gerade dein E-Mail-Konto ist zentral.</p>
 <p>Wer Zugriff darauf bekommt, kann häufig Passwort-Zurücksetzungen für weitere Dienste anfordern.</p>
-<h2>Zusätzlich MFA aktivieren</h2>
+<h2 id="zusatzlich-mfa-aktivieren">Zusätzlich MFA aktivieren</h2>
 <p>Auch ein gutes Passwort kann gestohlen werden.</p>
 <p>Zum Beispiel durch:</p>
 <ul>
@@ -248,7 +243,7 @@
   </div>
 </aside>
 
-<h2>Was tun, wenn ein Passwort geleakt wurde?</h2>
+<h2 id="was-tun-wenn-ein-passwort-geleakt-wurde">Was tun, wenn ein Passwort geleakt wurde?</h2>
 <p>Wenn du erfährst, dass ein Passwort möglicherweise kompromittiert wurde:</p>
 <ul class="article-checklist">
 <li>Passwort beim betroffenen Dienst ändern</li>
@@ -259,7 +254,7 @@
 </ul>
 <p>Besonders wichtig ist der zweite Punkt.</p>
 <p>Ein neues Passwort beim betroffenen Dienst hilft wenig, wenn das gestohlene Passwort weiterhin fünf andere Konten schützt.</p>
-<h2>Die einfache Passwort-Regel</h2>
+<h2 id="die-einfache-passwort-regel">Die einfache Passwort-Regel</h2>
 <p>Du musst dir keine komplizierten Passwortregeln merken.</p>
 <p>Für den Alltag reichen drei Grundsätze:</p>
 <p><strong>1. Jedes Konto bekommt ein eigenes Passwort.</strong></p>
@@ -291,7 +286,7 @@
             <article class="post-related-card blog-card">
               <a class="post-related-card-link blog-card-link" href="/blog/auf-phishing-geklickt/" aria-label="Auf Phishing geklickt – was jetzt?" data-transition>
                 <div class="post-related-thumb blog-thumb">
-                  <img class="blog-thumb-img" src="/assets/blog/auf-phishing-geklickt.webp" alt="Smartphone mit verdächtiger Phishing-Nachricht und einer Checkliste mit Sicherheitsmassnahmen" loading="lazy" decoding="async">
+                  <img class="blog-thumb-img" src="/assets/blog/auf-phishing-geklickt.webp" alt="Illustration: Warnsymbol in einer E-Mail auf einem Monitor neben einer Papiercheckliste" loading="lazy" decoding="async">
                 </div>
                 <div class="post-related-body blog-card-body">
                   <span class="learn-card-category">Phishing &amp; Betrug</span>

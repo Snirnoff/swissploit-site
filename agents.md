@@ -87,3 +87,7 @@ Position the service as ongoing Microsoft 365 security care for Swiss SMEs witho
 Additional services such as backup, Intune, Defender rollout, Purview, DLP, phishing simulations, ISO preparation, cyber insurance readiness or incident response should be treated as follow-up projects or upsells, not as equal homepage products.
 
 Avoid overpromising. Do not claim that Swissploit makes companies completely secure. Use credible wording such as: reduce risk, improve control, create clear priorities, support incident readiness and provide a trusted security contact.
+
+## Learn articles
+
+For article authoring and shared article components, follow [docs/LEARN-AUTHORING.md](docs/LEARN-AUTHORING.md). The non-published template is [docs/templates/learn-article.de.md](docs/templates/learn-article.de.md).

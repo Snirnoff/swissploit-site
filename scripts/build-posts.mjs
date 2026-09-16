@@ -1,8 +1,8 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import fg from "fast-glob";
-import matter from "gray-matter";
-import { marked } from "marked";
+import { pathToFileURL } from "node:url";
+import { parseArticle, prepareArticle, renderArticleToc } from "./learn-article.mjs";
 
 const ROOT = process.cwd();
 const POSTS_DIR = path.join(ROOT, "posts");
@@ -223,18 +223,6 @@ function rewriteContentUrls(html) {
   // Add lazy loading to images rendered from markdown.
   out = out.replace(/<img\b(?![^>]*\bloading=)/gi, '<img loading="lazy" decoding="async"');
 
-  // Keep explicitly numbered subheadings easy to scan without changing their semantics.
-  out = out.replace(
-    /<h3>(\d+)\.\s+([^<]+)<\/h3>/gi,
-    '<h3 class="article-numbered-heading"><span class="article-numbered-heading__number">$1</span><span>$2</span></h3>'
-  );
-
-  // Authors opt in to checklist styling; ordinary article lists stay unchanged.
-  out = out.replace(
-    /<!--\s*article-checklist\s*-->\s*<ul>/gi,
-    '<ul class="article-checklist">'
-  );
-
   return out;
 }
 
@@ -302,7 +290,7 @@ function renderHeroMediaHtml(post, lang, title, heroImage, heroImageAlt, watchLa
     }
 
     return `
-        <div class="post-hero-media post-hero-video">
+        <div class="post-hero-media post-hero-video${info.isShort || video.type === "short" ? " post-hero-video--short" : ""}">
           <iframe
             src="${escapeAttr(info.embed)}"
             title="${escapeAttr(videoTitle)}"
@@ -324,7 +312,7 @@ function renderHeroMediaHtml(post, lang, title, heroImage, heroImageAlt, watchLa
 function renderKeyTakeawayHtml(post, lang) {
   const txt = getLocalizedText(post, lang);
   const keyTakeaway = cleanStr(txt.keyTakeaway);
-  if (!keyTakeaway) return "";
+  if (!keyTakeaway || /class=["'][^"']*\barticle-callout--key\b/.test(txt.content || "")) return "";
 
   const label = lang === "en" ? "Key takeaway" : "Das Wichtigste";
   return `
@@ -356,13 +344,13 @@ function normalizeFilterValue(value) {
     .trim();
 }
 
-function normalizeCategory(value) {
+export function normalizeCategory(value) {
   const raw = cleanStr(value).toLowerCase();
   if (!raw) return "";
   return LEARN_TOPIC_ALIASES.get(raw) || (VALID_LEARN_TOPIC_IDS.has(raw) ? raw : "");
 }
 
-function validateCategory(postSlug, category) {
+export function validateCategory(postSlug, category) {
   if (category) return category;
 
   const valid = [...VALID_LEARN_TOPIC_IDS].join(", ");
@@ -967,7 +955,7 @@ function renderLegacyIndexRedirect(lang) {
 </html>`;
 }
 
-function renderStaticPostPage(post, lang, allPosts) {
+export function renderStaticPostPage(post, lang, allPosts) {
   const txt = getLocalizedText(post, lang);
   const title = txt.title || "Swissploit – Learn";
   const pageTitle = pickFirst(txt.seoTitle, title);
@@ -1008,7 +996,9 @@ function renderStaticPostPage(post, lang, allPosts) {
       };
 
   const relatedHtml = renderRelatedPostsHtml(post, allPosts, lang);
-  const bodyHtml = txt.content || "";
+  const article = prepareArticle(txt.content || "");
+  const bodyHtml = article.html;
+  const tocHtml = renderArticleToc(article, lang);
   const shortDescription = getShortDescription(post, lang);
   const heroMediaHtml = renderHeroMediaHtml(post, lang, title, heroImage, heroImageAlt, ui.watch);
   const keyTakeawayHtml = renderKeyTakeawayHtml(post, lang);
@@ -1058,13 +1048,14 @@ function renderStaticPostPage(post, lang, allPosts) {
 
   <link rel="stylesheet" href="/assets/styles.css" />
   <link rel="stylesheet" href="/assets/blog-post.css" />
+  <link rel="stylesheet" href="/assets/learn-article.css" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 </head>
 
-<body>
+<body class="learn-article-page">
   ${renderSiteHeaderHtml(lang)}
 
   <main id="main">
@@ -1085,7 +1076,7 @@ function renderStaticPostPage(post, lang, allPosts) {
 
         <p class="post-kicker">${escapeHtml(categoryLabel)}</p>
         <h1 class="post-title" id="postTitle">${escapeHtml(title)}</h1>
-        <p class="post-subline" id="postSubtitle">${escapeHtml(shortDescription)}</p>
+${!/article-callout--key/.test(bodyHtml) && !keyTakeawayHtml && shortDescription ? `<p class="post-subline" id="postSubtitle">${escapeHtml(shortDescription)}</p>` : ""}
         <div class="post-meta" id="postMeta">${renderMetaHtml(post, lang)}</div>
         ${heroMediaHtml}
       </div>
@@ -1099,6 +1090,7 @@ function renderStaticPostPage(post, lang, allPosts) {
             <span class="article-read-label" aria-hidden="true"></span>
             <button type="button" hidden></button>
           </div>
+${tocHtml}
           <div class="post-article">
             ${keyTakeawayHtml}
             ${bodyHtml}
@@ -1130,19 +1122,18 @@ function renderStaticPostPage(post, lang, allPosts) {
 </html>`;
 }
 
-async function readMd(filePath) {
+export async function readMd(filePath) {
   const raw = await fs.readFile(filePath, "utf8");
-  const parsed = matter(raw);
-  const html = marked.parse(parsed.content || "", { mangle: false, headerIds: false });
+  const parsed = parseArticle(raw, path.relative(ROOT, filePath));
 
   return {
     data: parsed.data || {},
-    html: rewriteContentUrls(String(html || "").trim()),
+    html: prepareArticle(rewriteContentUrls(String(parsed.html || "").trim())).html,
   };
 }
 
 async function main() {
-  const mdFiles = await fg(["posts/*/*.md"], { cwd: ROOT, absolute: true });
+  const mdFiles = (await fg(["posts/*/*.md"], { cwd: ROOT, absolute: true })).sort();
   const byPost = new Map();
 
   for (const file of mdFiles) {
@@ -1163,7 +1154,7 @@ async function main() {
   for (const [, entry] of byPost.entries()) {
     const de = entry.de ? await readMd(entry.de.file) : null;
     const en = entry.en ? await readMd(entry.en.file) : null;
-    const category = validateCategory(entry.slug, normalizeCategory(pickFirst(de?.data?.category, en?.data?.category, "")));
+    const category = validateCategory([entry.de?.file, entry.en?.file].filter(Boolean).map(file => path.relative(ROOT, file)).join(", "), normalizeCategory(pickFirst(de?.data?.category, en?.data?.category, "")));
     const image = pickFirst(de?.data?.image, en?.data?.image, de?.data?.thumb, en?.data?.thumb, "");
     const thumb = pickFirst(de?.data?.thumb, en?.data?.thumb, de?.data?.image, en?.data?.image, "");
 
@@ -1266,6 +1257,12 @@ async function main() {
 
   posts.sort((a, b) => String(b.updated || b.date || "").localeCompare(String(a.updated || a.date || "")));
 
+  for (const directory of [BLOG_DIR, EN_BLOG_DIR, LEARN_DIR, EN_LEARN_DIR]) {
+    const relative = path.relative(ROOT, path.resolve(directory));
+    if (!["blog", path.join("en", "blog"), "learn", path.join("en", "learn")].includes(relative)) {
+      throw new Error(`Unsafe generated output path: ${directory}`);
+    }
+  }
   await fs.rm(BLOG_DIR, { recursive: true, force: true });
   await fs.rm(EN_BLOG_DIR, { recursive: true, force: true });
   await fs.rm(LEARN_DIR, { recursive: true, force: true });
@@ -1345,7 +1342,7 @@ window.SWISSPLOIT_BLOG_POSTS = ${JSON.stringify(posts, null, 2)};
   console.log(`✅ Generated ${SITEMAP_FILE}`);
 }
 
-main().catch((err) => {
+if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) main().catch((err) => {
   console.error("❌ build-posts failed:\n", err);
   process.exit(1);
 });

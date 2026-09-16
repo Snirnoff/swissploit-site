@@ -46,13 +46,14 @@
 
   <link rel="stylesheet" href="/assets/styles.css" />
   <link rel="stylesheet" href="/assets/blog-post.css" />
+  <link rel="stylesheet" href="/assets/learn-article.css" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 </head>
 
-<body>
+<body class="learn-article-page">
   <header class="site-header" role="banner">
     <div class="wrap headerbar">
       <a class="brand" href="/index.html#intro" aria-label="Swissploit Home" data-transition>
@@ -108,7 +109,7 @@
 
         <p class="post-kicker">Phishing &amp; scams</p>
         <h1 class="post-title" id="postTitle">Phishing Checkliste</h1>
-        <p class="post-subline" id="postSubtitle">Phishing happens fast: this Microsoft 365/Entra ID emergency checklist shows how to secure accounts immediately and minimize follow-up damage.</p>
+<p class="post-subline" id="postSubtitle">Phishing happens fast: this Microsoft 365/Entra ID emergency checklist shows how to secure accounts immediately and minimize follow-up damage.</p>
         <div class="post-meta" id="postMeta"><time class="blog-date" datetime="2026-02-26">26.02.2026</time>
     
     <span class="blog-tags">#phishing #incident-response #microsoft-365 #entra-id #azure-ad #exchange-online #mfa #conditional-access #audit-logs #onedrive</span></div>
@@ -127,10 +128,11 @@
             <span class="article-read-label" aria-hidden="true"></span>
             <button type="button" hidden></button>
           </div>
+
           <div class="post-article">
             
             <p>Phishing can escalate within minutes—so you need a clear, repeatable flow. This checklist helps you <strong>stabilize a Microsoft 365/Entra ID account quickly</strong>, <strong>limit the impact</strong>, and <strong>prevent further compromise</strong>.</p>
-<h2>What happened?</h2>
+<h2 id="what-happened">What happened?</h2>
 <p>For the first triage, you need two key facts:</p>
 <ul>
 <li>Did the user <strong>only click the link</strong>?</li>
@@ -138,7 +140,7 @@
 </ul>
 <p><strong>Scenario A – Link clicked only</strong><br>Usually lower risk (no password entered). Focus: <strong>endpoint checks</strong> (downloads, malware, browser/session).</p>
 <p><strong>Scenario B – Password entered</strong><br>Treat the account as <strong>compromised</strong>. Run the <strong>full checklist</strong>.</p>
-<h2>Step-by-step fix</h2>
+<h2 id="step-by-step-fix">Step-by-step fix</h2>
 <ol>
 <li><p><strong>Change the password immediately</strong></p>
 <ul>
@@ -285,23 +287,23 @@ In <strong>Entra ID → User → Sign-in logs</strong>, look for:</p>
 <li>Global sign-out for the entire organization</li>
 <li>Notify the data protection officer (if data exfiltration is possible)</li>
 </ul>
-<h2>FAQ / Troubleshooting</h2>
-<h3>Do I need the full checklist if the user “only” clicked the link?</h3>
+<h2 id="faq-troubleshooting">FAQ / Troubleshooting</h2>
+<h3 id="do-i-need-the-full-checklist-if-the-user-only-clicked-the-link">Do I need the full checklist if the user “only” clicked the link?</h3>
 <p>Recommended yes—at least <strong>endpoint check + session revoke + MFA review</strong>, because drive-by downloads and session theft can happen.</p>
-<h3>Why share the new password by phone?</h3>
+<h3 id="why-share-the-new-password-by-phone">Why share the new password by phone?</h3>
 <p>Because email/chat channels may be compromised or monitored during an incident.</p>
-<h3>Is changing the password enough?</h3>
+<h3 id="is-changing-the-password-enough">Is changing the password enough?</h3>
 <p>Often not. If an attacker already has a token/session, access may continue unless you <strong>sign out/revoke sessions</strong>.</p>
-<h3>What mailbox rules are most suspicious?</h3>
+<h3 id="what-mailbox-rules-are-most-suspicious">What mailbox rules are most suspicious?</h3>
 <p>Rules that <strong>forward</strong>, <strong>delete</strong>, mark as read, or filter by sender/subject—classic attacker tactics to hide traces.</p>
-<h3>How do I spot OAuth phishing?</h3>
+<h3 id="how-do-i-spot-oauth-phishing">How do I spot OAuth phishing?</h3>
 <p>If an app suddenly has broad permissions (mail, files, Teams) without a clear business reason: <strong>revoke consent</strong>, remove the app, and review logs.</p>
 <aside class="article-callout article-callout--tip">
   <div class="article-callout__heading"><span class="article-callout__icon" aria-hidden="true">💡</span><strong>Pro tip</strong></div>
   <div class="article-callout__content"><p>Store this checklist as an internal <strong>runbook</strong> and add your exact toolchain (EDR, ticketing, SIEM). In a real incident, clear click paths save minutes.</p></div>
 </aside>
 
-<h2>Summary</h2>
+<h2 id="summary">Summary</h2>
 <ul class="article-checklist">
 <li>First: <strong>password reset + sign-out/revoke sessions + MFA cleanup</strong>.</li>
 <li>Then: check <strong>mailbox rules, sharing, logs, roles, and apps</strong>.</li>
@@ -316,23 +318,9 @@ In <strong>Entra ID → User → Sign-in logs</strong>, look for:</p>
       <div class="post-related-grid">
         
             <article class="post-related-card blog-card">
-              <a class="post-related-card-link blog-card-link" href="/blog/phishing-mails-erkennen/" aria-label="Phishing-Mails erkennen: Diese 7 Dinge solltest du prüfen" data-transition>
-                <div class="post-related-thumb blog-thumb">
-                  <img class="blog-thumb-img" src="/assets/blog/phishing-mails-erkennen.webp" alt="Verdächtige E-Mail mit markiertem Absender, Link und Login-Aufforderung" loading="lazy" decoding="async">
-                </div>
-                <div class="post-related-body blog-card-body">
-                  <span class="learn-card-category">Phishing &amp; scams</span>
-                  <time class="post-related-date blog-date" datetime="2026-09-14">14.09.2026</time>
-                  <h3 class="post-related-title blog-card-title">Phishing-Mails erkennen: Diese 7 Dinge solltest du prüfen</h3>
-                  <p class="post-related-excerpt blog-card-excerpt">7 einfache Checks, mit denen du verdächtige E-Mails, Links und Login-Aufforderungen besser beurteilen kannst.</p>
-                </div>
-              </a>
-            </article>
-          
-            <article class="post-related-card blog-card">
               <a class="post-related-card-link blog-card-link" href="/blog/auf-phishing-geklickt/" aria-label="Auf Phishing geklickt – was jetzt?" data-transition>
                 <div class="post-related-thumb blog-thumb">
-                  <img class="blog-thumb-img" src="/assets/blog/auf-phishing-geklickt.webp" alt="Smartphone mit verdächtiger Phishing-Nachricht und einer Checkliste mit Sicherheitsmassnahmen" loading="lazy" decoding="async">
+                  <img class="blog-thumb-img" src="/assets/blog/auf-phishing-geklickt.webp" alt="Illustration: Warnsymbol in einer E-Mail auf einem Monitor neben einer Papiercheckliste" loading="lazy" decoding="async">
                 </div>
                 <div class="post-related-body blog-card-body">
                   <span class="learn-card-category">Phishing &amp; scams</span>
@@ -344,15 +332,29 @@ In <strong>Entra ID → User → Sign-in logs</strong>, look for:</p>
             </article>
           
             <article class="post-related-card blog-card">
-              <a class="post-related-card-link blog-card-link" href="/blog/ceo-fraud/" aria-label="CEO Fraud: Wenn der Chef angeblich dringend Geld braucht" data-transition>
+              <a class="post-related-card-link blog-card-link" href="/blog/gefaehrliche-links-erkennen/" aria-label="Gefährliche Links erkennen: So prüfst du eine URL richtig" data-transition>
                 <div class="post-related-thumb blog-thumb">
-                  <img class="blog-thumb-img" src="/assets/blog/ceo-fraud.webp" alt="Mitarbeiter erhält eine ungewöhnliche dringende Zahlungsanfrage von einer angeblichen Führungskraft" loading="lazy" decoding="async">
+                  <img class="blog-thumb-img" src="/assets/blog/gefaehrliche-links-erkennen.webp" alt="Illustration: Monitor mit zwei ?hnlich geschriebenen, farblich hervorgehobenen Domains" loading="lazy" decoding="async">
                 </div>
                 <div class="post-related-body blog-card-body">
                   <span class="learn-card-category">Phishing &amp; scams</span>
                   <time class="post-related-date blog-date" datetime="2026-09-02">02.09.2026</time>
-                  <h3 class="post-related-title blog-card-title">CEO Fraud: Wenn der Chef angeblich dringend Geld braucht</h3>
-                  <p class="post-related-excerpt blog-card-excerpt">Eine dringende Zahlungsanfrage vom Chef kann echt wirken – und trotzdem Betrug sein. So erkennst du CEO Fraud und reagierst richtig.</p>
+                  <h3 class="post-related-title blog-card-title">Gefährliche Links erkennen: So prüfst du eine URL richtig</h3>
+                  <p class="post-related-excerpt blog-card-excerpt">Ein Link kann seriös aussehen und trotzdem auf eine gefälschte Webseite führen. Lerne, welche Teile einer URL wirklich wichtig sind.</p>
+                </div>
+              </a>
+            </article>
+          
+            <article class="post-related-card blog-card">
+              <a class="post-related-card-link blog-card-link" href="/blog/phishing-mails-erkennen/" aria-label="Phishing-Mails erkennen: Diese 7 Dinge solltest du prüfen" data-transition>
+                <div class="post-related-thumb blog-thumb">
+                  <img class="blog-thumb-img" src="/assets/blog/phishing-mails-erkennen.webp" alt="Illustration: Person vor einer E-Mail mit markierten Absender-, Anhang- und Linksymbolen" loading="lazy" decoding="async">
+                </div>
+                <div class="post-related-body blog-card-body">
+                  <span class="learn-card-category">Phishing &amp; scams</span>
+                  <time class="post-related-date blog-date" datetime="2026-09-14">14.09.2026</time>
+                  <h3 class="post-related-title blog-card-title">Phishing-Mails erkennen: Diese 7 Dinge solltest du prüfen</h3>
+                  <p class="post-related-excerpt blog-card-excerpt">7 einfache Checks, mit denen du verdächtige E-Mails, Links und Login-Aufforderungen besser beurteilen kannst.</p>
                 </div>
               </a>
             </article>

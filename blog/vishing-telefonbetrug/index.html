@@ -45,13 +45,14 @@
 
   <link rel="stylesheet" href="/assets/styles.css" />
   <link rel="stylesheet" href="/assets/blog-post.css" />
+  <link rel="stylesheet" href="/assets/learn-article.css" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 </head>
 
-<body>
+<body class="learn-article-page">
   <header class="site-header" role="banner">
     <div class="wrap headerbar">
       <a class="brand" href="/index.html#intro" aria-label="Swissploit Home" data-transition>
@@ -107,7 +108,7 @@
 
         <p class="post-kicker">Phishing &amp; Betrug</p>
         <h1 class="post-title" id="postTitle">Vishing: So erkennst du Betrug am Telefon</h1>
-        <p class="post-subline" id="postSubtitle">Ein angeblicher Bank-, Support- oder Behördenmitarbeiter ruft an und verlangt schnelles Handeln? So erkennst du Vishing und reagierst richtig.</p>
+
         <div class="post-meta" id="postMeta"><time class="blog-date" datetime="2026-09-02">02.09.2026</time>
     
     <span class="blog-tags">#vishing #telefonbetrug #social-engineering #phishing #bankbetrug #support-scam #security-awareness</span></div>
@@ -126,15 +127,9 @@
             <span class="article-read-label" aria-hidden="true"></span>
             <button type="button" hidden></button>
           </div>
+<details class="article-toc"><summary>In diesem Artikel</summary><nav aria-label="In diesem Artikel"><ul><li><a href="#was-ist-vishing">Was ist Vishing?</a></li><li><a href="#typische-geschichten-am-telefon">Typische Geschichten am Telefon</a></li><li><a href="#warum-wirken-solche-anrufe-so-glaubwurdig">Warum wirken solche Anrufe so glaubwürdig?</a></li><li><a href="#typische-warnsignale">Typische Warnsignale</a></li><li><a href="#gib-niemals-sicherheitscodes-weiter">Gib niemals Sicherheitscodes weiter</a></li><li><a href="#installiere-keine-fernzugriffssoftware-auf-zuruf">Installiere keine Fernzugriffssoftware auf Zuruf</a></li><li><a href="#so-prufst-du-einen-anruf-sicher">So prüfst du einen Anruf sicher</a></li><li><a href="#was-wenn-der-anrufer-meinen-namen-und-meine-daten-kennt">Was, wenn der Anrufer meinen Namen und meine Daten kennt?</a></li><li><a href="#was-tun-wenn-du-bereits-informationen-weitergegeben-hast">Was tun, wenn du bereits Informationen weitergegeben hast?</a></li><li><a href="#im-unternehmen-support-anrufe-nicht-blind-vertrauen">Im Unternehmen: Support-Anrufe nicht blind vertrauen</a></li><li><a href="#die-einfache-regel-furs-telefon">Die einfache Regel fürs Telefon</a></li></ul></nav></details>
           <div class="post-article">
             
-    <aside class="article-callout article-callout--key">
-      <div class="article-callout__heading">
-        <span class="article-callout__icon" aria-hidden="true">✓</span>
-        <strong>Das Wichtigste</strong>
-      </div>
-      <div class="article-callout__content"><p>Vertraue einem Anruf nicht allein wegen der angezeigten Telefonnummer oder weil die Person glaubwürdig wirkt. Gib keine Passwörter, Sicherheitscodes oder MFA-Bestätigungen weiter und rufe die Organisation bei Unsicherheit selbst über eine bekannte offizielle Nummer zurück.</p></div>
-    </aside>
             <p>Deine Bank ruft angeblich an. Es gebe eine verdächtige Zahlung und du müsstest jetzt sofort handeln.</p>
 <p>Oder der Microsoft-Support meldet sich, weil dein Computer angeblich ein Sicherheitsproblem hat.</p>
 <p>Der Anrufer klingt professionell, kennt vielleicht sogar deinen Namen und die angezeigte Telefonnummer sieht plausibel aus.</p>
@@ -147,7 +142,7 @@
   </div>
 </aside>
 
-<h2>Was ist Vishing?</h2>
+<h2 id="was-ist-vishing">Was ist Vishing?</h2>
 <p>Vishing steht für <strong>Voice Phishing</strong>.</p>
 <p>Statt einer E-Mail oder SMS nutzen Betrüger das Telefon, um Vertrauen aufzubauen und dich zu einer bestimmten Handlung zu bewegen.</p>
 <p>Das kann beispielsweise sein:</p>
@@ -160,17 +155,17 @@
 <li>persönliche oder finanzielle Informationen preiszugeben</li>
 </ul>
 <p>Der Angriff funktioniert vor allem über <strong>Social Engineering</strong>.</p>
-<h2>Typische Geschichten am Telefon</h2>
+<h2 id="typische-geschichten-am-telefon">Typische Geschichten am Telefon</h2>
 <p>Die genaue Geschichte kann sich unterscheiden.</p>
 <p>Häufig geht es aber um angeblich dringende Probleme.</p>
 <p>Zum Beispiel:</p>
-<h3>„Wir sind von Ihrer Bank“</h3>
+<h3 id="wir-sind-von-ihrer-bank">„Wir sind von Ihrer Bank“</h3>
 <p>Es gebe eine verdächtige Zahlung oder einen Angriff auf dein E-Banking.</p>
 <p>Der Anrufer möchte dir angeblich helfen und verlangt dafür einen Code oder eine Bestätigung.</p>
-<h3>„Wir sind vom technischen Support“</h3>
+<h3 id="wir-sind-vom-technischen-support">„Wir sind vom technischen Support“</h3>
 <p>Dein Computer sei infiziert oder dein Konto kompromittiert.</p>
 <p>Du sollst eine Software installieren oder dem Anrufer Zugriff auf dein Gerät geben.</p>
-<h3>„Hier ist die Polizei oder eine Behörde“</h3>
+<h3 id="hier-ist-die-polizei-oder-eine-behorde">„Hier ist die Polizei oder eine Behörde“</h3>
 <p>Dir wird ein Problem, ein Verfahren oder eine dringende Sicherheitslage vorgetäuscht.</p>
 <p>Anschliessend wird Geld oder eine andere Handlung verlangt.</p>
 <aside class="article-callout article-callout--info">
@@ -180,7 +175,7 @@
   </div>
 </aside>
 
-<h2>Warum wirken solche Anrufe so glaubwürdig?</h2>
+<h2 id="warum-wirken-solche-anrufe-so-glaubwurdig">Warum wirken solche Anrufe so glaubwürdig?</h2>
 <p>Am Telefon kann ein Angreifer direkt auf deine Reaktionen eingehen.</p>
 <p>Wenn du skeptisch wirst, liefert er sofort eine Erklärung.</p>
 <p>Wenn du eine Frage stellst, reagiert er darauf.</p>
@@ -189,7 +184,7 @@
 <p>Auch die angezeigte Telefonnummer kann manipuliert werden.</p>
 <p>Deshalb gilt:</p>
 <p><strong>Caller-ID ist kein Identitätsnachweis.</strong></p>
-<h2>Typische Warnsignale</h2>
+<h2 id="typische-warnsignale">Typische Warnsignale</h2>
 <p>Du musst nicht jede Variante kennen.</p>
 <p>Achte vor allem darauf, was von dir verlangt wird.</p>
 <ul class="article-checklist">
@@ -204,7 +199,7 @@
 <li>Du wirst davon abgehalten, selbst bei der Organisation zurückzurufen</li>
 </ul>
 <p>Mehrere dieser Merkmale zusammen sind ein starkes Warnsignal.</p>
-<h2>Gib niemals Sicherheitscodes weiter</h2>
+<h2 id="gib-niemals-sicherheitscodes-weiter">Gib niemals Sicherheitscodes weiter</h2>
 <p>Ein besonders wichtiger Punkt sind Einmalcodes und MFA-Bestätigungen.</p>
 <p>Betrüger können versuchen, sich gleichzeitig mit deinen bereits gestohlenen Zugangsdaten anzumelden.</p>
 <p>Der fehlende Faktor ist dann nur noch dein Sicherheitscode.</p>
@@ -221,14 +216,14 @@
   </div>
 </aside>
 
-<h2>Installiere keine Fernzugriffssoftware auf Zuruf</h2>
+<h2 id="installiere-keine-fernzugriffssoftware-auf-zuruf">Installiere keine Fernzugriffssoftware auf Zuruf</h2>
 <p>Eine weitere bekannte Methode:</p>
 <p>Der angebliche Support bittet dich, eine Software zu installieren, damit er dein Problem „direkt beheben“ könne.</p>
 <p>Mit solchen Programmen kann eine andere Person deinen Bildschirm sehen und unter Umständen deinen Computer bedienen.</p>
 <p>Wenn ein unbekannter Anrufer dich zur Installation von Fernzugriffssoftware auffordert:</p>
 <p><strong>Gespräch beenden.</strong></p>
 <p>Installiere keine Software und gib keinen Zugriff frei.</p>
-<h2>So prüfst du einen Anruf sicher</h2>
+<h2 id="so-prufst-du-einen-anruf-sicher">So prüfst du einen Anruf sicher</h2>
 <p>Wenn eine Bank, Behörde oder andere Organisation angeblich dringend etwas von dir benötigt, musst du die Echtheit nicht während des laufenden Gesprächs klären.</p>
 <p>Beende den Anruf.</p>
 <p>Suche anschliessend selbst die offizielle Telefonnummer heraus oder verwende eine Nummer, die du bereits kennst.</p>
@@ -241,7 +236,7 @@
   </div>
 </aside>
 
-<h2>Was, wenn der Anrufer meinen Namen und meine Daten kennt?</h2>
+<h2 id="was-wenn-der-anrufer-meinen-namen-und-meine-daten-kennt">Was, wenn der Anrufer meinen Namen und meine Daten kennt?</h2>
 <p>Das kann verunsichern.</p>
 <p>Aber auch persönliche Informationen sind kein Beweis dafür, dass jemand wirklich für deine Bank oder eine andere Organisation arbeitet.</p>
 <p>Daten können beispielsweise aus:</p>
@@ -253,20 +248,20 @@
 </ul>
 <p>stammen.</p>
 <p>Angreifer nutzen solche Informationen gezielt, um Vertrauen aufzubauen.</p>
-<h2>Was tun, wenn du bereits Informationen weitergegeben hast?</h2>
+<h2 id="was-tun-wenn-du-bereits-informationen-weitergegeben-hast">Was tun, wenn du bereits Informationen weitergegeben hast?</h2>
 <p>Entscheidend ist wieder, <strong>was genau passiert ist</strong>.</p>
-<h3>Passwort weitergegeben</h3>
+<h3 id="passwort-weitergegeben">Passwort weitergegeben</h3>
 <p>Ändere das Passwort sofort über die offizielle Webseite oder App.</p>
 <p>Verwendest du dasselbe Passwort noch bei anderen Diensten, ändere es auch dort.</p>
-<h3>MFA- oder Sicherheitscode weitergegeben</h3>
+<h3 id="mfa-oder-sicherheitscode-weitergegeben">MFA- oder Sicherheitscode weitergegeben</h3>
 <p>Kontrolliere das betroffene Konto auf unbekannte Anmeldungen und ändere das Passwort.</p>
 <p>Bei einem Bankkonto solltest du deine Bank über den offiziellen Kontaktweg informieren.</p>
-<h3>Zahlung bestätigt</h3>
+<h3 id="zahlung-bestatigt">Zahlung bestätigt</h3>
 <p>Kontaktiere deine Bank beziehungsweise dein Finanzinstitut möglichst schnell.</p>
-<h3>Fernzugriff installiert</h3>
+<h3 id="fernzugriff-installiert">Fernzugriff installiert</h3>
 <p>Beende die Verbindung und nutze das Gerät möglichst nicht weiter für sensible Logins, bis die Situation geprüft wurde.</p>
 <p>Bei einem Geschäftsgerät solltest du sofort die interne IT oder Security informieren.</p>
-<h2>Im Unternehmen: Support-Anrufe nicht blind vertrauen</h2>
+<h2 id="im-unternehmen-support-anrufe-nicht-blind-vertrauen">Im Unternehmen: Support-Anrufe nicht blind vertrauen</h2>
 <p>Gerade im Arbeitsalltag können angebliche IT-Support-Anrufe glaubwürdig wirken.</p>
 <p>Ein Anrufer kennt vielleicht deinen Namen, deine Firma oder sogar eingesetzte Software.</p>
 <p>Trotzdem solltest du bei ungewöhnlichen Support-Anfragen die internen Prozesse einhalten.</p>
@@ -277,7 +272,7 @@
 <li>Fernzugriff nur über bekannte Prozesse erlauben</li>
 <li>verdächtige Anrufe intern melden</li>
 </ul>
-<h2>Die einfache Regel fürs Telefon</h2>
+<h2 id="die-einfache-regel-furs-telefon">Die einfache Regel fürs Telefon</h2>
 <p>Ein seriös klingender Anrufer kann trotzdem ein Betrüger sein.</p>
 <p>Wenn jemand unerwartet <strong>Codes, Zugangsdaten, Geld, Fernzugriff oder eine sofortige Bestätigung</strong> verlangt:</p>
 <p><strong>Gespräch stoppen → keine Daten weitergeben → selbst über einen bekannten Weg zurückrufen.</strong></p>

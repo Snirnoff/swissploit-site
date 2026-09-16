@@ -46,13 +46,14 @@
 
   <link rel="stylesheet" href="/assets/styles.css" />
   <link rel="stylesheet" href="/assets/blog-post.css" />
+  <link rel="stylesheet" href="/assets/learn-article.css" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 </head>
 
-<body>
+<body class="learn-article-page">
   <header class="site-header" role="banner">
     <div class="wrap headerbar">
       <a class="brand" href="/index.html#intro" aria-label="Swissploit Home" data-transition>
@@ -108,12 +109,12 @@
 
         <p class="post-kicker">Security at work</p>
         <h1 class="post-title" id="postTitle">Restore deleted files in OneDrive</h1>
-        <p class="post-subline" id="postSubtitle">Here’s how to restore files and folders from the Recycle Bin in seconds.</p>
+<p class="post-subline" id="postSubtitle">Here’s how to restore files and folders from the Recycle Bin in seconds.</p>
         <div class="post-meta" id="postMeta"><time class="blog-date" datetime="2026-02-23">23.02.2026</time>
     
     <span class="blog-tags">#onedrive #microsoft-365 #windows #cloud #backup #papierkorb</span></div>
         
-        <div class="post-hero-media post-hero-video">
+        <div class="post-hero-media post-hero-video post-hero-video--short">
           <iframe
             src="https://www.youtube-nocookie.com/embed/wK_7kSkfQ_g"
             title="Restore deleted files in OneDrive – video"
@@ -133,11 +134,12 @@
             <span class="article-read-label" aria-hidden="true"></span>
             <button type="button" hidden></button>
           </div>
+
           <div class="post-article">
             
-            <h2>Problem</h2>
+            <h2 id="problem">Problem</h2>
 <p>You deleted a file or folder in OneDrive and can’t find it anymore.</p>
-<h2>Solution (Step-by-step)</h2>
+<h2 id="solution-step-by-step">Solution (Step-by-step)</h2>
 <ol>
 <li>Click the <strong>OneDrive icon</strong> in the <strong>bottom-right</strong> corner of Windows.</li>
 <li>Select <strong>View online</strong> to open OneDrive in your browser.</li>
@@ -145,7 +147,7 @@
 <li>Select the deleted <strong>files or folders</strong>.</li>
 <li>Click <strong>Restore</strong>.</li>
 </ol>
-<h2>Result</h2>
+<h2 id="result">Result</h2>
 <p>Go back to your OneDrive folder — everything is back <strong>exactly where it was</strong>.</p>
 <aside class="article-callout article-callout--tip">
   <div class="article-callout__heading"><span class="article-callout__icon" aria-hidden="true">💡</span><strong>Pro tip</strong></div>

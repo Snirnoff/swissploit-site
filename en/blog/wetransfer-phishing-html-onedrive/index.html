@@ -46,13 +46,14 @@
 
   <link rel="stylesheet" href="/assets/styles.css" />
   <link rel="stylesheet" href="/assets/blog-post.css" />
+  <link rel="stylesheet" href="/assets/learn-article.css" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 </head>
 
-<body>
+<body class="learn-article-page">
   <header class="site-header" role="banner">
     <div class="wrap headerbar">
       <a class="brand" href="/index.html#intro" aria-label="Swissploit Home" data-transition>
@@ -108,7 +109,7 @@
 
         <p class="post-kicker">Phishing &amp; scams</p>
         <h1 class="post-title" id="postTitle">HTML Attack</h1>
-        <p class="post-subline" id="postSubtitle">A real Microsoft account takeover!</p>
+
         <div class="post-meta" id="postMeta"><time class="blog-date" datetime="2026-01-27">27.01.2026</time>
     
     <span class="blog-tags">#security #phishing #microsoft365 #onedrive #outlook</span></div>
@@ -133,6 +134,7 @@
             <span class="article-read-label" aria-hidden="true"></span>
             <button type="button" hidden></button>
           </div>
+
           <div class="post-article">
             
             <p><strong>WeTransfer phishing</strong> is currently one of the most effective ways to compromise <strong>Microsoft 365 / OneDrive / Outlook accounts</strong> — because the flow looks normal: download link, open file, login.</p>
@@ -144,21 +146,21 @@
   <div class="article-callout__content"><p>Attackers use a legit-looking WeTransfer download to deliver an <strong>HTML file</strong>. When opened, it launches a browser and shows a <strong>fake OneDrive/Microsoft login page</strong>. If you type credentials, they get captured.</p></div>
 </aside>
 
-<h2>Why WeTransfer is used so often</h2>
+<h2 id="why-wetransfer-is-used-so-often">Why WeTransfer is used so often</h2>
 <p>WeTransfer is widely trusted. Attackers exploit that trust to increase clicks and reduce suspicion, compared to unknown file-hosting domains.</p>
 
-<h2>How the attack unfolds</h2>
+<h2 id="how-the-attack-unfolds">How the attack unfolds</h2>
 <p>You receive an email that looks like shared files, invoices, or documents. The link opens a download-style page. Instead of a PDF/DOCX, you download something like <em>invoice.html</em> or <em>documents.html</em>.</p>
 
 <p>When you open it, your browser shows a convincing <strong>OneDrive/Microsoft login</strong>. Many people assume it’s a normal cloud authentication step — and enter their password.</p>
 
-<h2>Why the HTML file is the key risk</h2>
+<h2 id="why-the-html-file-is-the-key-risk">Why the HTML file is the key risk</h2>
 <p>An HTML file is basically “a web page saved as a file”. When opened, it can render a fake login page, redirect you, or submit what you type to an attacker-controlled server. That’s why “opening a file” can suddenly turn into a credential theft moment.</p>
 
-<h2>How to spot it quickly</h2>
+<h2 id="how-to-spot-it-quickly">How to spot it quickly</h2>
 <p>Check the browser address: is it a real Microsoft domain? Also ask: why is this <strong>.html</strong> instead of a document? If the message adds urgency (“expires soon”, “urgent”, “view now”), treat it as a strong warning sign.</p>
 
-<h2>How to protect your Microsoft 365 account</h2>
+<h2 id="how-to-protect-your-microsoft-365-account">How to protect your Microsoft 365 account</h2>
 <p>Enable <strong>MFA</strong> (Authenticator preferred), use a <strong>password manager</strong>, and review suspicious sign-ins. For businesses, consider Security Defaults or Conditional Access. And teach teams that “HTML file ≠ document”.</p>
 
 <p><strong>Key takeaway:</strong> WeTransfer itself isn’t the threat. Attackers use the trusted download flow as camouflage. The danger starts when an HTML file triggers a login prompt.</p>
@@ -171,23 +173,9 @@
       <div class="post-related-grid">
         
             <article class="post-related-card blog-card">
-              <a class="post-related-card-link blog-card-link" href="/blog/phishing-mails-erkennen/" aria-label="Phishing-Mails erkennen: Diese 7 Dinge solltest du prüfen" data-transition>
-                <div class="post-related-thumb blog-thumb">
-                  <img class="blog-thumb-img" src="/assets/blog/phishing-mails-erkennen.webp" alt="Verdächtige E-Mail mit markiertem Absender, Link und Login-Aufforderung" loading="lazy" decoding="async">
-                </div>
-                <div class="post-related-body blog-card-body">
-                  <span class="learn-card-category">Phishing &amp; scams</span>
-                  <time class="post-related-date blog-date" datetime="2026-09-14">14.09.2026</time>
-                  <h3 class="post-related-title blog-card-title">Phishing-Mails erkennen: Diese 7 Dinge solltest du prüfen</h3>
-                  <p class="post-related-excerpt blog-card-excerpt">7 einfache Checks, mit denen du verdächtige E-Mails, Links und Login-Aufforderungen besser beurteilen kannst.</p>
-                </div>
-              </a>
-            </article>
-          
-            <article class="post-related-card blog-card">
               <a class="post-related-card-link blog-card-link" href="/blog/auf-phishing-geklickt/" aria-label="Auf Phishing geklickt – was jetzt?" data-transition>
                 <div class="post-related-thumb blog-thumb">
-                  <img class="blog-thumb-img" src="/assets/blog/auf-phishing-geklickt.webp" alt="Smartphone mit verdächtiger Phishing-Nachricht und einer Checkliste mit Sicherheitsmassnahmen" loading="lazy" decoding="async">
+                  <img class="blog-thumb-img" src="/assets/blog/auf-phishing-geklickt.webp" alt="Illustration: Warnsymbol in einer E-Mail auf einem Monitor neben einer Papiercheckliste" loading="lazy" decoding="async">
                 </div>
                 <div class="post-related-body blog-card-body">
                   <span class="learn-card-category">Phishing &amp; scams</span>
@@ -199,15 +187,29 @@
             </article>
           
             <article class="post-related-card blog-card">
-              <a class="post-related-card-link blog-card-link" href="/blog/ceo-fraud/" aria-label="CEO Fraud: Wenn der Chef angeblich dringend Geld braucht" data-transition>
+              <a class="post-related-card-link blog-card-link" href="/blog/gefaehrliche-links-erkennen/" aria-label="Gefährliche Links erkennen: So prüfst du eine URL richtig" data-transition>
                 <div class="post-related-thumb blog-thumb">
-                  <img class="blog-thumb-img" src="/assets/blog/ceo-fraud.webp" alt="Mitarbeiter erhält eine ungewöhnliche dringende Zahlungsanfrage von einer angeblichen Führungskraft" loading="lazy" decoding="async">
+                  <img class="blog-thumb-img" src="/assets/blog/gefaehrliche-links-erkennen.webp" alt="Illustration: Monitor mit zwei ?hnlich geschriebenen, farblich hervorgehobenen Domains" loading="lazy" decoding="async">
                 </div>
                 <div class="post-related-body blog-card-body">
                   <span class="learn-card-category">Phishing &amp; scams</span>
                   <time class="post-related-date blog-date" datetime="2026-09-02">02.09.2026</time>
-                  <h3 class="post-related-title blog-card-title">CEO Fraud: Wenn der Chef angeblich dringend Geld braucht</h3>
-                  <p class="post-related-excerpt blog-card-excerpt">Eine dringende Zahlungsanfrage vom Chef kann echt wirken – und trotzdem Betrug sein. So erkennst du CEO Fraud und reagierst richtig.</p>
+                  <h3 class="post-related-title blog-card-title">Gefährliche Links erkennen: So prüfst du eine URL richtig</h3>
+                  <p class="post-related-excerpt blog-card-excerpt">Ein Link kann seriös aussehen und trotzdem auf eine gefälschte Webseite führen. Lerne, welche Teile einer URL wirklich wichtig sind.</p>
+                </div>
+              </a>
+            </article>
+          
+            <article class="post-related-card blog-card">
+              <a class="post-related-card-link blog-card-link" href="/blog/phishing-mails-erkennen/" aria-label="Phishing-Mails erkennen: Diese 7 Dinge solltest du prüfen" data-transition>
+                <div class="post-related-thumb blog-thumb">
+                  <img class="blog-thumb-img" src="/assets/blog/phishing-mails-erkennen.webp" alt="Illustration: Person vor einer E-Mail mit markierten Absender-, Anhang- und Linksymbolen" loading="lazy" decoding="async">
+                </div>
+                <div class="post-related-body blog-card-body">
+                  <span class="learn-card-category">Phishing &amp; scams</span>
+                  <time class="post-related-date blog-date" datetime="2026-09-14">14.09.2026</time>
+                  <h3 class="post-related-title blog-card-title">Phishing-Mails erkennen: Diese 7 Dinge solltest du prüfen</h3>
+                  <p class="post-related-excerpt blog-card-excerpt">7 einfache Checks, mit denen du verdächtige E-Mails, Links und Login-Aufforderungen besser beurteilen kannst.</p>
                 </div>
               </a>
             </article>

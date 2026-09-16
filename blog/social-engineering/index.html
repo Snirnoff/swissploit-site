@@ -45,13 +45,14 @@
 
   <link rel="stylesheet" href="/assets/styles.css" />
   <link rel="stylesheet" href="/assets/blog-post.css" />
+  <link rel="stylesheet" href="/assets/learn-article.css" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 </head>
 
-<body>
+<body class="learn-article-page">
   <header class="site-header" role="banner">
     <div class="wrap headerbar">
       <a class="brand" href="/index.html#intro" aria-label="Swissploit Home" data-transition>
@@ -107,7 +108,7 @@
 
         <p class="post-kicker">Social Engineering</p>
         <h1 class="post-title" id="postTitle">Social Engineering einfach erklärt: Wenn Angreifer Menschen manipulieren</h1>
-        <p class="post-subline" id="postSubtitle">Social Engineering nutzt Vertrauen, Zeitdruck und menschliches Verhalten statt technischer Sicherheitslücken. Erfahre, wie solche Angriffe funktionieren und wie du sie erkennst.</p>
+
         <div class="post-meta" id="postMeta"><time class="blog-date" datetime="2026-09-02">02.09.2026</time>
     
     <span class="blog-tags">#social-engineering #phishing #vishing #betrug #manipulation #security-awareness #cyber-security</span></div>
@@ -132,15 +133,9 @@
             <span class="article-read-label" aria-hidden="true"></span>
             <button type="button" hidden></button>
           </div>
+<details class="article-toc"><summary>In diesem Artikel</summary><nav aria-label="In diesem Artikel"><ul><li><a href="#was-ist-social-engineering">Was ist Social Engineering?</a></li><li><a href="#warum-funktioniert-social-engineering">Warum funktioniert Social Engineering?</a></li><li><a href="#welche-formen-von-social-engineering-gibt-es">Welche Formen von Social Engineering gibt es?</a></li><li><a href="#ein-angriff-kann-mehrere-kanale-kombinieren">Ein Angriff kann mehrere Kanäle kombinieren</a></li><li><a href="#woran-erkennst-du-einen-social-engineering-versuch">Woran erkennst du einen Social-Engineering-Versuch?</a></li><li><a href="#die-wichtigste-schutzmassnahme-uber-einen-zweiten-weg-prufen">Die wichtigste Schutzmassnahme: über einen zweiten Weg prüfen</a></li><li><a href="#gib-passworter-und-sicherheitscodes-niemals-weiter">Gib Passwörter und Sicherheitscodes niemals weiter</a></li><li><a href="#bestatige-keine-unerwarteten-mfa-anfragen">Bestätige keine unerwarteten MFA-Anfragen</a></li><li><a href="#im-unternehmen-prozesse-schutzen-menschen">Im Unternehmen: Prozesse schützen Menschen</a></li><li><a href="#was-tun-bei-einer-verdachtigen-anfrage">Was tun bei einer verdächtigen Anfrage?</a></li><li><a href="#social-engineering-bedeutet-nicht-dass-menschen-das-problem-sind">Social Engineering bedeutet nicht, dass Menschen das Problem sind</a></li><li><a href="#die-einfache-regel-fur-den-alltag">Die einfache Regel für den Alltag</a></li></ul></nav></details>
           <div class="post-article">
             
-    <aside class="article-callout article-callout--key">
-      <div class="article-callout__heading">
-        <span class="article-callout__icon" aria-hidden="true">✓</span>
-        <strong>Das Wichtigste</strong>
-      </div>
-      <div class="article-callout__content"><p>Social Engineering greift nicht primär Technik an, sondern menschliches Verhalten. Besonders häufig werden Vertrauen, Autorität, Zeitdruck, Hilfsbereitschaft und Angst ausgenutzt. Ungewöhnliche oder sensible Anfragen solltest du deshalb über einen unabhängigen Weg überprüfen.</p></div>
-    </aside>
             <p>Ein angeblicher Microsoft-Mitarbeiter ruft dich an. Dein Chef bittet plötzlich per Nachricht um eine dringende Zahlung. Oder eine E-Mail fordert dich auf, dein Konto sofort zu bestätigen.</p>
 <p>Nicht jeder Cyberangriff beginnt mit einer technischen Sicherheitslücke.</p>
 <p>Manchmal versuchen Angreifer einfach, <strong>dich zu einer bestimmten Handlung zu bewegen</strong>.</p>
@@ -153,7 +148,7 @@
   </div>
 </aside>
 
-<h2>Was ist Social Engineering?</h2>
+<h2 id="was-ist-social-engineering">Was ist Social Engineering?</h2>
 <p>Social Engineering bezeichnet Angriffe, bei denen Menschen manipuliert werden sollen.</p>
 <p>Das Ziel kann beispielsweise sein, dass du:</p>
 <ul>
@@ -167,13 +162,13 @@
 </ul>
 <p>Dabei muss der Angreifer nicht zwingend eine technische Schwachstelle ausnutzen.</p>
 <p>Stattdessen versucht er, eine Situation zu schaffen, in der sich die gewünschte Handlung für dich <strong>plausibel oder dringend</strong> anfühlt.</p>
-<h2>Warum funktioniert Social Engineering?</h2>
+<h2 id="warum-funktioniert-social-engineering">Warum funktioniert Social Engineering?</h2>
 <p>Menschen treffen jeden Tag sehr viele Entscheidungen.</p>
 <p>Wir vertrauen bekannten Namen, reagieren auf dringende Situationen und helfen anderen Menschen.</p>
 <p>Das ist grundsätzlich normal und wichtig.</p>
 <p>Angreifer versuchen jedoch genau diese Verhaltensweisen gezielt auszunutzen.</p>
 <p>Besonders häufig spielen folgende Faktoren eine Rolle.</p>
-<h3>Vertrauen</h3>
+<h3 id="vertrauen">Vertrauen</h3>
 <p>Eine Nachricht scheint von einer bekannten Organisation oder Person zu kommen.</p>
 <p>Zum Beispiel:</p>
 <ul>
@@ -185,7 +180,7 @@
 <li>deine Geschäftsleitung</li>
 </ul>
 <p>Je vertrauter der Absender wirkt, desto weniger hinterfragen wir die Anfrage möglicherweise.</p>
-<h3>Autorität</h3>
+<h3 id="autoritat">Autorität</h3>
 <p>Ein Angreifer gibt sich als jemand aus, dessen Anweisungen normalerweise befolgt werden.</p>
 <p>Beispielsweise:</p>
 <ul>
@@ -198,7 +193,7 @@
 <p>Eine Aussage wie:</p>
 <p><strong>„Das muss heute noch erledigt werden. Bitte behandeln Sie die Anfrage vertraulich.“</strong></p>
 <p>kombiniert beispielsweise Autorität mit Zeitdruck.</p>
-<h3>Zeitdruck</h3>
+<h3 id="zeitdruck">Zeitdruck</h3>
 <p>Du sollst reagieren, bevor du genügend Zeit hast, die Situation zu prüfen.</p>
 <p>Typische Beispiele sind:</p>
 <ul>
@@ -214,7 +209,7 @@
   </div>
 </aside>
 
-<h3>Angst</h3>
+<h3 id="angst">Angst</h3>
 <p>Manchmal soll die Sorge vor negativen Konsequenzen eine schnelle Reaktion auslösen.</p>
 <p>Zum Beispiel:</p>
 <ul>
@@ -225,7 +220,7 @@
 <li>Gerät sei angeblich mit Malware infiziert</li>
 </ul>
 <p>Angst kann dazu führen, dass Menschen zuerst handeln und erst danach überprüfen.</p>
-<h3>Hilfsbereitschaft</h3>
+<h3 id="hilfsbereitschaft">Hilfsbereitschaft</h3>
 <p>Nicht jeder Angriff klingt bedrohlich.</p>
 <p>Manche Angreifer wirken freundlich und brauchen scheinbar nur kurz deine Hilfe.</p>
 <p>Zum Beispiel:</p>
@@ -237,7 +232,7 @@
 <p>„Ich habe mein Telefon gewechselt. Kannst du mir diesen Code weitergeben?“</p>
 </blockquote>
 <p>Gerade im Arbeitsalltag kann Hilfsbereitschaft gezielt ausgenutzt werden.</p>
-<h3>Neugier</h3>
+<h3 id="neugier">Neugier</h3>
 <p>Auch Neugier kann ein Auslöser sein.</p>
 <p>Beispielsweise durch Nachrichten wie:</p>
 <ul>
@@ -247,25 +242,25 @@
 <li>„Dokument wurde mit Ihnen geteilt“</li>
 </ul>
 <p>Der Inhalt soll interessant genug wirken, damit du spontan öffnest oder klickst.</p>
-<h2>Welche Formen von Social Engineering gibt es?</h2>
+<h2 id="welche-formen-von-social-engineering-gibt-es">Welche Formen von Social Engineering gibt es?</h2>
 <p>Social Engineering ist kein einzelner Angriff.</p>
 <p>Es ist vielmehr eine Methode, die über verschiedene Kommunikationswege eingesetzt werden kann.</p>
-<h3>Phishing</h3>
+<h3 id="phishing">Phishing</h3>
 <p>Beim klassischen Phishing erfolgt die Kontaktaufnahme meistens über E-Mail.</p>
 <p>Das Ziel ist häufig, dich auf eine gefälschte Webseite zu führen oder einen Anhang zu öffnen.</p>
-<h3>Smishing</h3>
+<h3 id="smishing">Smishing</h3>
 <p>Smishing ist Phishing über SMS oder andere Textnachrichten.</p>
 <p>Typisch sind beispielsweise angebliche Paketbenachrichtigungen oder Meldungen zu Konten und Zahlungen.</p>
-<h3>Vishing</h3>
+<h3 id="vishing">Vishing</h3>
 <p>Vishing bezeichnet Social Engineering per Telefon.</p>
 <p>Ein Angreifer kann sich beispielsweise als Bank, IT-Support oder Behörde ausgeben.</p>
-<h3>QR-Phishing</h3>
+<h3 id="qr-phishing">QR-Phishing</h3>
 <p>Bei QR-Phishing oder Quishing wirst du über einen QR-Code auf eine betrügerische Webseite geführt.</p>
 <p>Der QR-Code kann in einer E-Mail, auf einem Brief oder sogar auf einem physischen Objekt angebracht sein.</p>
-<h3>CEO Fraud</h3>
+<h3 id="ceo-fraud">CEO Fraud</h3>
 <p>Beim CEO Fraud gibt sich ein Angreifer als Führungsperson aus.</p>
 <p>Das Ziel ist häufig eine dringende Zahlung, der Kauf von Geschenkkarten oder die Weitergabe vertraulicher Informationen.</p>
-<h3>Physisches Social Engineering</h3>
+<h3 id="physisches-social-engineering">Physisches Social Engineering</h3>
 <p>Social Engineering findet nicht nur digital statt.</p>
 <p>Ein Angreifer kann beispielsweise versuchen:</p>
 <ul>
@@ -275,7 +270,7 @@
 <li>telefonisch interne Informationen zu sammeln</li>
 </ul>
 <p>Die psychologischen Prinzipien dahinter sind dieselben.</p>
-<h2>Ein Angriff kann mehrere Kanäle kombinieren</h2>
+<h2 id="ein-angriff-kann-mehrere-kanale-kombinieren">Ein Angriff kann mehrere Kanäle kombinieren</h2>
 <p>Moderne Social-Engineering-Angriffe müssen nicht auf einen einzigen Kommunikationsweg beschränkt sein.</p>
 <p>Du erhältst beispielsweise zuerst eine E-Mail.</p>
 <p>Kurz danach ruft angeblich der Support an.</p>
@@ -289,7 +284,7 @@
   </div>
 </aside>
 
-<h2>Woran erkennst du einen Social-Engineering-Versuch?</h2>
+<h2 id="woran-erkennst-du-einen-social-engineering-versuch">Woran erkennst du einen Social-Engineering-Versuch?</h2>
 <p>Es gibt kein einzelnes Merkmal, das jeden Angriff zuverlässig verrät.</p>
 <p>Bestimmte Situationen sollten dich aber aufmerksam machen.</p>
 <ul class="article-checklist">
@@ -305,7 +300,7 @@
 </ul>
 <p>Nicht jedes dieser Merkmale bedeutet automatisch Betrug.</p>
 <p>Mehrere ungewöhnliche Punkte zusammen sind jedoch ein guter Grund, die Situation genauer zu prüfen.</p>
-<h2>Die wichtigste Schutzmassnahme: über einen zweiten Weg prüfen</h2>
+<h2 id="die-wichtigste-schutzmassnahme-uber-einen-zweiten-weg-prufen">Die wichtigste Schutzmassnahme: über einen zweiten Weg prüfen</h2>
 <p>Wenn eine Anfrage ungewöhnlich oder sensibel ist, solltest du sie <strong>nicht über denselben Kommunikationsweg verifizieren, über den sie gekommen ist</strong>.</p>
 <p>Beispiel:</p>
 <p>Du erhältst eine ungewöhnliche E-Mail von deinem Chef.</p>
@@ -329,12 +324,12 @@
   </div>
 </aside>
 
-<h2>Gib Passwörter und Sicherheitscodes niemals weiter</h2>
+<h2 id="gib-passworter-und-sicherheitscodes-niemals-weiter">Gib Passwörter und Sicherheitscodes niemals weiter</h2>
 <p>Seriöse Support-Mitarbeitende benötigen normalerweise nicht dein Passwort.</p>
 <p>Auch MFA-Codes oder Bestätigungscodes solltest du nicht an andere Personen weitergeben.</p>
 <p>Besonders vorsichtig solltest du sein, wenn dich jemand telefonisch durch einen Login führt und dabei Codes oder Bestätigungen verlangt.</p>
 <p>MFA erhöht die Sicherheit eines Kontos deutlich. Social Engineering kann diese zusätzliche Schutzschicht aber umgehen, wenn eine betrügerische Anmeldung von der betroffenen Person selbst bestätigt wird.</p>
-<h2>Bestätige keine unerwarteten MFA-Anfragen</h2>
+<h2 id="bestatige-keine-unerwarteten-mfa-anfragen">Bestätige keine unerwarteten MFA-Anfragen</h2>
 <p>Du erhältst plötzlich eine Anmeldung auf deinem Smartphone, obwohl du dich gerade nirgendwo einloggen möchtest?</p>
 <p>Dann:</p>
 <p><strong>nicht bestätigen.</strong></p>
@@ -345,7 +340,7 @@
 <li>Konto auf unbekannte Anmeldungen prüfen</li>
 <li>bei einem Firmenkonto die IT oder Security informieren</li>
 </ul>
-<h2>Im Unternehmen: Prozesse schützen Menschen</h2>
+<h2 id="im-unternehmen-prozesse-schutzen-menschen">Im Unternehmen: Prozesse schützen Menschen</h2>
 <p>Gute Security sollte nicht davon abhängen, dass jede einzelne Person jede Angriffsmethode kennt.</p>
 <p>Unternehmen können Prozesse schaffen, die Social Engineering schwieriger machen.</p>
 <p>Zum Beispiel:</p>
@@ -359,7 +354,7 @@
 <li>vertrauliche Informationen nur nach klar definierten Regeln weitergeben</li>
 </ul>
 <p>Solche Prozesse helfen auch dann, wenn ein Angriff sehr professionell gemacht ist.</p>
-<h2>Was tun bei einer verdächtigen Anfrage?</h2>
+<h2 id="was-tun-bei-einer-verdachtigen-anfrage">Was tun bei einer verdächtigen Anfrage?</h2>
 <p>Wenn dir eine Situation ungewöhnlich vorkommt:</p>
 <ul class="article-checklist">
 <li>Nicht unter Druck reagieren</li>
@@ -370,7 +365,7 @@
 <li>Verdächtige Nachrichten im Unternehmen melden</li>
 <li>Bei Unsicherheit lieber einmal mehr nachfragen</li>
 </ul>
-<h2>Social Engineering bedeutet nicht, dass Menschen das Problem sind</h2>
+<h2 id="social-engineering-bedeutet-nicht-dass-menschen-das-problem-sind">Social Engineering bedeutet nicht, dass Menschen das Problem sind</h2>
 <p>Menschen sind kein technischer Fehler im System.</p>
 <p>Angreifer nutzen Eigenschaften aus, die im Alltag normalerweise sinnvoll sind:</p>
 <p><strong>Vertrauen, Hilfsbereitschaft, Schnelligkeit und Zusammenarbeit.</strong></p>
@@ -383,7 +378,7 @@
   </div>
 </aside>
 
-<h2>Die einfache Regel für den Alltag</h2>
+<h2 id="die-einfache-regel-fur-den-alltag">Die einfache Regel für den Alltag</h2>
 <p>Wenn jemand unerwartet möchte, dass du <strong>schnell etwas bestätigst, Geld überweist, Zugangsdaten eingibst, einen Sicherheitscode weitergibst oder eine normale Sicherheitsregel umgehst</strong>, halte kurz inne.</p>
 <p>Stelle dir drei Fragen:</p>
 <ul class="article-checklist">
@@ -417,7 +412,7 @@
             <article class="post-related-card blog-card">
               <a class="post-related-card-link blog-card-link" href="/blog/auf-phishing-geklickt/" aria-label="Auf Phishing geklickt – was jetzt?" data-transition>
                 <div class="post-related-thumb blog-thumb">
-                  <img class="blog-thumb-img" src="/assets/blog/auf-phishing-geklickt.webp" alt="Smartphone mit verdächtiger Phishing-Nachricht und einer Checkliste mit Sicherheitsmassnahmen" loading="lazy" decoding="async">
+                  <img class="blog-thumb-img" src="/assets/blog/auf-phishing-geklickt.webp" alt="Illustration: Warnsymbol in einer E-Mail auf einem Monitor neben einer Papiercheckliste" loading="lazy" decoding="async">
                 </div>
                 <div class="post-related-body blog-card-body">
                   <span class="learn-card-category">Phishing &amp; Betrug</span>
