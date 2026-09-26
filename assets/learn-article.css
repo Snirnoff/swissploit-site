@@ -62,12 +62,8 @@ html[data-theme="light"] .learn-article-page {
   line-height: 1.7;
 }
 .learn-article-page .post-article,
-.learn-article-page .article-toc,
-.learn-article-page .article-reading-status { width: 100%; max-width: var(--learn-column); margin-inline: auto; }
+.learn-article-page .article-toc { width: 100%; max-width: var(--learn-column); margin-inline: auto; }
 .learn-article-page .post-article { font-size: inherit; line-height: inherit; }
-.learn-article-page .article-read-label { left: 0; color: var(--learn-link); }
-.learn-article-page .article-reading-status { padding-inline: 0; color: var(--learn-muted); flex-wrap: wrap; }
-.learn-article-page .article-reading-status button { color: var(--learn-link); }
 .learn-article-page .post-content :is(p, ul, ol) { font-size: inherit; line-height: inherit; color: var(--learn-text); text-wrap: pretty; }
 .learn-article-page .post-content p { margin: 0 0 1.2em; }
 .learn-article-page .post-content h2 { margin: 2.8em 0 .75em; padding-top: 0; border: 0; font-size: clamp(1.5rem, 2.5vw, 1.875rem); line-height: 1.3; letter-spacing: -.025em; color: var(--learn-text); }
@@ -150,3 +146,6 @@ html[data-theme="light"] .learn-article-page {
 .learn-article-page :is(.post-kicker, .blog-breadcrumbs a, .post-meta .blog-tags) { color: var(--learn-link) !important; }
 .learn-article-page .post-related a { color: var(--learn-text) !important; }
 .learn-article-page .post-related :is(.post-related-excerpt, .post-related-date, .learn-card-category) { color: var(--learn-muted); }
+
+/* Existing short player, placed within article prose. */
+.learn-article-page .post-inline-short { width: min(100%, 22rem); margin: 2rem auto; }

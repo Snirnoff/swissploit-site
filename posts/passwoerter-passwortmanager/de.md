@@ -98,6 +98,14 @@ Du musst dir dadurch nicht mehr 50 verschiedene Passwörter merken.
 
 Im Idealfall merkst du dir nur noch das starke Hauptpasswort für deinen Passwortmanager.
 
+<div class="post-hero-media post-hero-video post-hero-video--short post-inline-short reveal">
+  <iframe src="https://www.youtube-nocookie.com/embed/ndOP_bDpEvQ"
+    title="Swissploit Video: Passwortmanager erklärt"
+    loading="lazy" referrerpolicy="strict-origin-when-cross-origin"
+    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowfullscreen></iframe>
+</div>
+
 ## Ist es sicher, alle Passwörter an einem Ort zu speichern?
 
 Diese Frage ist berechtigt.

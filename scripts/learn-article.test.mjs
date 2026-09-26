@@ -96,7 +96,7 @@ test('video URL, no autoplay, vertical class, image alt and SEO preserved', () =
 
 test('all documented components go through the production parser', async () => {
   const guide=await fs.readFile('docs/LEARN-AUTHORING.md','utf8');
-  const examples=[...guide.matchAll(/```html\n([\s\S]*?)\n```/g)].map(m=>m[1]).join('\n\n');
+  const examples=[...guide.matchAll(/```html\r?\n([\s\S]*?)\r?\n```/g)].map(m=>m[1]).join('\n\n');
   const html=prepareArticle(parseArticle(examples,'docs/LEARN-AUTHORING.md').html).html;
   for(const variant of ['key','info','tip','warning','danger','example','action','mistake','kmu','summary']) assert.match(html,new RegExp('article-callout--'+variant));
   for(const name of ['article-checklist','article-steps','article-rule','post-figure','article-faq']) assert.ok(html.includes(name));

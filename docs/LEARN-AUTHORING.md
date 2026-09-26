@@ -229,3 +229,39 @@ node scripts/preview.mjs
 Dann `http://127.0.0.1:4173/blog/phishing-mails-erkennen/` öffnen. Vorschau mit Ctrl+C beenden. Generierte HTML-Dateien, `assets/blog-posts.js` und `sitemap.xml` ausschliesslich über den Build aktualisieren. Der Build regeneriert auch die Learn-Übersichten; sein Deployment-Workflow bleibt unverändert. Eine Änderung an einem Artikel-Slug ist eine URL-Änderung und gehört nicht zur normalen Gestaltung.
 
 Optionaler Browsercheck ohne Installation: `node scripts/check-learn-browser.mjs after` mit Node 22+ (native WebSocket) und installiertem Chrome. Unter Windows wird der übliche Chrome-Pfad genutzt; alternativ `CHROME_PATH` auf die vorhandene Browserdatei setzen. Screenshots und Messdaten liegen in einem ausgegebenen temporären Ordner. Externe Fonts und YouTube werden für reproduzierbare lokale Layoutprüfungen blockiert; das testet keine Video-Wiedergabe oder externe Einwilligung.
+
+## Neues YouTube Short zu Learn hinzufügen
+
+1. Bearbeite ausschliesslich `data/youtube-shorts.json` für die Videoinhalte. Der Katalog ist unabhängig von `videoUrl` in Artikel-Frontmatter und von der generierten Datei `assets/blog-posts.js`.
+2. Ergänze einen Datensatz, beispielsweise:
+
+```json
+{
+  "id": "NEUE_VIDEO_ID",
+  "url": "https://www.youtube.com/shorts/NEUE_VIDEO_ID",
+  "title": "Titel des Videos",
+  "description": "Kurze Beschreibung",
+  "tags": ["phishing"],
+  "publishedAt": ""
+}
+```
+
+`NEUE_VIDEO_ID` durch die echte, elfstellige YouTube-ID ersetzen. Pflichtfelder sind `id` und `url`; die URL muss exakt `https://www.youtube.com/shorts/` plus ID sein. Keine Parameter, Duplikate oder anderen Hosts. `title`, `description`, `tags` und `publishedAt` sind optional; leere Texte und leere Listen sind erlaubt. Titel nur aus bestätigten Quellen übernehmen. Ohne Titel erscheint neutral „Swissploit Short N“. `publishedAt` ist ein optionales redaktionelles Datum (`YYYY-MM-DD`), aktuell ohne Einfluss auf die Darstellung.
+
+3. Die Position im JSON-Array bestimmt die Reihenfolge. Keine automatische Datumssortierung. Die Suche berücksichtigt Titel, Beschreibung und Tags; Videos erscheinen ausschliesslich im Video-Filter. Die englische Oberfläche verwendet dieselben Original-Videotitel.
+4. Für die erste Version schützt `scripts/youtube-shorts.test.mjs` ausdrücklich die vom Betreiber freigegebenen **15 IDs in ihrer Reihenfolge**. Bei einer später ausdrücklich freigegebenen Erweiterung auch diese Erwartungsliste und Anzahl anpassen. Die eigentliche Darstellung und der allgemeine Build-Validator benötigen dafür keine Codeänderung.
+5. Aus dem Repository-Stamm ausführen:
+
+```sh
+npm run test:videos
+npm run build:posts
+node --test scripts/learn-article.test.mjs
+node scripts/check-learn-hub-browser.mjs
+node scripts/preview.mjs
+```
+
+`npm run test:videos` prüft Format, eindeutige IDs/URLs und die exakte freigegebene Startliste. Der Build validiert zusätzlich das Datenformat, bevor er Dateien erzeugt. Generierte Learn-HTML-Dateien nicht manuell bearbeiten. Keine YouTube-Abfrage im Build oder Browser zur Ermittlung von Metadaten.
+
+6. Lokal `http://127.0.0.1:4173/learn/` und `/en/learn/` öffnen: Video-Filter, Suche, leere Ergebnisse, Tastatur, Light/Dark und 360/768/1440 px prüfen. Der Browsercheck benötigt vorhandenes Chrome und Node 22+, keine neuen Abhängigkeiten; YouTube/Fonts sind dabei blockiert. Echte Wiedergabe zusätzlich manuell prüfen.
+
+Die Vorschauflächen sind reine lokale Grafik aus CSS. Erst „Video ansehen“ erzeugt einen zentrierten 9:16-Player über den bestehenden `youtube-nocookie.com`-Embed-Pfad, ohne Autoplay. Maximal ein Player bleibt offen; Schliessen, Ausfiltern oder Wechsel zurück zu Artikeln entfernt ihn. Es gibt wie bei den bestehenden Artikeln keine separate Consent-Schaltfläche. Der Hinweis an der Aktion erklärt die Verbindung zu YouTube. Alte Lernfortschrittswerte werden weder gelesen noch gelöscht; Theme und Sprache behalten ihre eigene Speicherung.

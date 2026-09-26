@@ -4,6 +4,8 @@ import fg from "fast-glob";
 import { pathToFileURL } from "node:url";
 import { parseArticle, prepareArticle, renderArticleToc } from "./learn-article.mjs";
 
+import { readShorts } from "./youtube-shorts.mjs";
+
 const ROOT = process.cwd();
 const POSTS_DIR = path.join(ROOT, "posts");
 const OUT_FILE = path.join(ROOT, "assets", "blog-posts.js");
@@ -410,8 +412,6 @@ function renderPostCard(post, lang, topicId) {
 
           <h3 class="blog-card-title" id="${escapeAttr(titleId)}">${escapeHtml(txt.title || "")}</h3>
           <p class="blog-card-excerpt">${escapeHtml(shortDescription)}</p>
-          <span class="learn-card-status" id="${escapeAttr(titleId)}-status" aria-hidden="true"></span>
-          <span class="learn-card-progress" aria-hidden="true" hidden></span>
         </div>
       </a>
     </article>
@@ -464,23 +464,20 @@ function renderIndexJsonLd(posts, lang) {
   return JSON.stringify(data).replace(/</g, "\\u003c");
 }
 
+function siteNavItems(lang) {
+  return [
+    { href: "/index.html#services", label: "Services" },
+    { href: "/index.html#ueber", label: lang === "en" ? "About Swissploit" : "Über Swissploit" },
+    { href: "/index.html#kontakt", label: lang === "en" ? "Contact" : "Kontakt" },
+    { href: lang === "en" ? "/en/learn/" : "/learn/", label: "Learn", current: true }
+  ];
+}
+
 function renderPrimaryNavHtml(lang) {
-  const items = lang === "en"
-    ? [
-        { href: "/index.html#services", label: "Services" },
-        { href: "/en/learn/", label: "Learn", current: true },
-        { href: "/index.html#ueber", label: "About Swissploit" },
-        { href: "/index.html#kontakt", label: "Contact" }
-      ]
-    : [
-        { href: "/index.html#services", label: "Services" },
-        { href: "/learn/", label: "Learn", current: true },
-        { href: "/index.html#ueber", label: "Über Swissploit" },
-        { href: "/index.html#kontakt", label: "Kontakt" }
-      ];
+  const items = siteNavItems(lang);
 
   return `<nav id="primaryNav" class="nav" aria-label="${lang === "en" ? "Main navigation" : "Hauptnavigation"}">
-        ${items.map((item) => `<a${item.current ? ' class="is-active" aria-current="page"' : ""} href="${item.href}" data-transition>${item.label}</a>`).join("\n        ")}
+        ${items.map((item) => `<a${item.current ? ' class="nav-learn is-active" aria-current="page"' : ""} href="${item.href}" data-transition>${item.label}</a>`).join("\n        ")}
       </nav>`;
 }
 
@@ -506,8 +503,8 @@ function renderHeaderActionsHtml() {
 function renderSiteHeaderHtml(lang) {
   return `<header class="site-header" role="banner">
     <div class="wrap headerbar">
-      <a class="brand" href="/index.html#intro" aria-label="Swissploit Home" data-transition>
-        <img class="brand-logo-image header-logo-image" src="/assets/swissploit-brand-logo2.png" alt="Swissploit Logo" width="120" height="49" decoding="async">
+      <a class="brand brand-signature" href="/index.html#intro" aria-label="Swissploit Home" data-transition>
+        <span class="brand-signet" aria-hidden="true"><img class="signet-image" src="/assets/Swissploit_S_blue2.png" alt="" width="1254" height="1254" decoding="async"></span>
         <span class="brand-text">Swissploit</span>
       </a>
 
@@ -523,22 +520,10 @@ function renderFooterSystemHtml(lang) {
 }
 
 function renderFooterNavHtml(lang) {
-  const items = lang === "en"
-    ? [
-        { href: "/index.html#services", label: "Services" },
-        { href: "/en/learn/", label: "Learn" },
-        { href: "/index.html#ueber", label: "About Swissploit" },
-        { href: "/index.html#kontakt", label: "Contact" }
-      ]
-    : [
-        { href: "/index.html#services", label: "Services" },
-        { href: "/learn/", label: "Learn" },
-        { href: "/index.html#ueber", label: "Über Swissploit" },
-        { href: "/index.html#kontakt", label: "Kontakt" }
-      ];
+  const items = siteNavItems(lang);
 
   return `<nav class="foot-nav" aria-label="${lang === "en" ? "Footer navigation" : "Footer Navigation"}">
-        ${items.map((item) => `<a href="${item.href}" data-transition>${item.label}</a>`).join("\n        ")}
+        ${items.map((item) => `<a${item.current ? ' class="nav-learn"' : ""} href="${item.href}" data-transition>${item.label}</a>`).join("\n        ")}
       </nav>`;
 }
 
@@ -740,7 +725,24 @@ function renderPostLangToggle(post, currentLang) {
   `;
 }
 
-function renderBlogIndexPage(posts, lang) {
+function renderShortCard(video, index) {
+  const title = video.title || `Swissploit Short ${index + 1}`;
+  const embed = youtubeEmbedInfo(video.url).embed;
+  const search = [video.title, video.description, ...(video.tags || [])].filter(Boolean).join(" ");
+  return `<article class="learn-video-card" data-video-id="${escapeAttr(video.id)}" data-search="${escapeAttr(search)}">
+    <div class="learn-short-preview">
+      <iframe
+        src="${escapeAttr(embed)}"
+        title="${escapeAttr(title)}"
+        loading="lazy"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen></iframe>
+    </div>
+  </article>`;
+}
+
+function renderBlogIndexPage(posts, lang, videos) {
   const isEn = lang === "en";
   const pageTitle = isEn
     ? "Learn | Cyber Security explained simply | Swissploit"
@@ -766,10 +768,8 @@ function renderBlogIndexPage(posts, lang) {
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>${escapeHtml(pageTitle)}</title>
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/assets/swissploit-brand-logo2.png">
-  <link rel="icon" type="image/png" sizes="192x192" href="/assets/swissploit-brand-logo2.png">
-  <link rel="apple-touch-icon" href="/assets/swissploit-brand-logo2.png">
-  <link rel="icon" type="image/png" href="/assets/swissploit-brand-logo2.png">
+  <link rel="icon" type="image/png" href="/assets/Swissploit_S_blue2.png">
+  <link rel="apple-touch-icon" href="/assets/Swissploit_S_blue2.png">
   <meta name="theme-color" content="#05070b">
 
   <meta name="description" content="${escapeAttr(metaDescription)}" />
@@ -840,69 +840,32 @@ function renderBlogIndexPage(posts, lang) {
             <input id="blogSearch" type="search" placeholder="${escapeAttr(isEn ? "Search for a security topic ..." : "Nach einem Security-Thema suchen ...")}" autocomplete="off" enterkeyhint="search">
             <span class="blog-search-hint">${isEn ? "Search by title, summary, tag or category." : "Suche nach Titel, Kurztext, Tag oder Kategorie."}</span>
           </div>
-
-        </div>
-        <div class="learn-progress" aria-live="polite">
-          <span class="learn-progress-label">${isEn ? "Learning progress" : "Lernfortschritt"}</span>
-          <strong id="learnProgressText">${isEn ? `0 articles read · ${availablePosts.length} open` : `0 Artikel gelesen · ${availablePosts.length} offen`}</strong>
-          <span class="learn-progress-bar" aria-hidden="true"><span id="learnProgressBar"></span></span>
-        </div>
-      </div>
-    </section>
-
-    <section id="learnContinue" class="learn-continue wrap" aria-labelledby="learnContinueLabel" hidden>
-      <p class="learn-progress-label" id="learnContinueLabel">${isEn ? "CONTINUE LEARNING" : "WEITERLERNEN"}</p>
-      <h2 id="learnContinueTitle"></h2>
-      <p id="learnContinueText"></p>
-      <span class="learn-progress-bar" aria-hidden="true"><span id="learnContinueBar"></span></span>
-      <a id="learnContinueLink" class="learn-continue-link" aria-describedby="learnContinueTitle" data-transition>${isEn ? "Continue reading →" : "Weiterlesen →"}</a>
-    </section>
-
-    <section class="section learn-featured" aria-labelledby="featured-title">
-      <div class="wrap">
-        <div class="learn-featured-panel">
-          <div class="learn-featured-copy">
-            <span class="learn-label">${isEn ? "Recommended starting point" : "Empfohlen zum Start"}</span>
-            <h2 id="featured-title">${isEn ? "Social engineering & phishing explained simply" : "Social Engineering & Phishing einfach erklärt"}</h2>
-            <p>${isEn
-              ? "How social engineering works, how to spot phishing and why the sender, links and professional design alone do not guarantee safety."
-              : "Wie Social Engineering funktioniert, woran du Phishing erkennst und warum Absender, Links und professionelles Design allein keine Sicherheit bieten."}</p>
-          </div>
-          <div class="learn-video-frame">
-            <iframe
-              src="https://www.youtube-nocookie.com/embed/n_2DYwpVsS4"
-              title="${escapeAttr(isEn ? "Social engineering and phishing explained simply" : "Social Engineering und Phishing einfach erklärt")}"
-              loading="lazy"
-              referrerpolicy="strict-origin-when-cross-origin"
-              allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowfullscreen></iframe>
-          </div>
+          <nav class="learn-topic-filter" aria-label="${isEn ? "Learn topic filter" : "Learn Themenfilter"}">
+            ${[
+              ["all", isEn ? "All" : "Alle"],
+              ["phishing", "Phishing"],
+              ["fraud", isEn ? "Scams" : "Betrug"],
+              ["links-qr", "Links & QR"],
+              ["passwords", isEn ? "Passwords" : "Passwörter"],
+              ["mfa", "MFA"],
+              ["accounts", "Accounts"],
+              ["workplace", isEn ? "Workplace" : "Arbeitsplatz"]
+            ].map(([value, label], index) => `<button class="filter-chip${index === 0 ? " is-active" : ""}" type="button" aria-pressed="${index === 0 ? "true" : "false"}" data-learn-filter="${value}">${label}</button>`).join("")}
+            <button class="filter-chip learn-video-filter" type="button" aria-pressed="false" data-learn-filter="video"><span aria-hidden="true">&#9654;</span> Video</button>
+          </nav>
         </div>
       </div>
     </section>
 
     <section id="learn-content" class="section learn-content-section" aria-labelledby="learn-content-title">
       <div class="wrap">
-        <div class="learn-content-header">
-          <div class="learn-section-heading">
-            <p class="learn-eyebrow">${isEn ? "Knowledge base" : "Wissensbereich"}</p>
-            <h2 id="learn-content-title">${isEn ? "All Learn content" : "Alle Learn-Inhalte"}</h2>
-            <p>${isEn ? "The latest content appears first." : "Die neuesten Inhalte erscheinen zuerst."}</p>
-          </div>
-          <nav class="learn-topic-filter" aria-label="${isEn ? "Learn topic filter" : "Learn Themenfilter"}">
-            ${[
-              ["all", "ALL"],
-              ["phishing-betrug", "PHISHING"],
-              ["m365", "M365"],
-              ["windows", "WINDOWS"],
-              ["privacy-datenschutz", "PRIVACY"],
-              ["security", "SECURITY"]
-            ].map(([value, label], index) => `<button class="filter-chip${index === 0 ? " is-active" : ""}" type="button" aria-pressed="${index === 0 ? "true" : "false"}" data-learn-filter="${value}">${label}</button>`).join("")}
-          </nav>
-        </div>
+        <h2 id="learn-content-title" class="sr-only">${isEn ? "Learn content" : "Learn-Inhalte"}</h2>
 
         <div id="blogGrid" class="blog-grid learn-article-list" aria-live="polite">
           ${learnCardsHtml}
+        </div>
+        <div id="videoGrid" class="learn-video-grid" hidden>
+          ${videos.map((video, index) => renderShortCard(video, index)).join("\n")}
         </div>
         <div id="noResults" class="blog-no-results learn-empty-state" role="status" hidden>
           <strong id="noResultsText">${isEn ? "No matching content found." : "Keine passenden Inhalte gefunden."}</strong>
@@ -1026,10 +989,8 @@ export function renderStaticPostPage(post, lang, allPosts) {
 
   ${renderPostAlternateLinks(post, lang)}
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/assets/swissploit-brand-logo2.png">
-  <link rel="icon" type="image/png" sizes="192x192" href="/assets/swissploit-brand-logo2.png">
-  <link rel="apple-touch-icon" href="/assets/swissploit-brand-logo2.png">
-  <link rel="icon" type="image/png" href="/assets/swissploit-brand-logo2.png">
+  <link rel="icon" type="image/png" href="/assets/Swissploit_S_blue2.png">
+  <link rel="apple-touch-icon" href="/assets/Swissploit_S_blue2.png">
   <meta name="theme-color" content="#05070b">
 
   <script type="application/ld+json">${renderPostJsonLd(post, lang, txt)}</script>
@@ -1085,11 +1046,6 @@ ${!/article-callout--key/.test(bodyHtml) && !keyTakeawayHtml && shortDescription
     <section class="section post-wrap">
       <div class="wrap">
         <article class="post-content" id="postContent" aria-labelledby="postTitle">
-          <div class="article-reading-status">
-            <span class="article-reading-status-text"></span>
-            <span class="article-read-label" aria-hidden="true"></span>
-            <button type="button" hidden></button>
-          </div>
 ${tocHtml}
           <div class="post-article">
             ${keyTakeawayHtml}
@@ -1133,6 +1089,7 @@ export async function readMd(filePath) {
 }
 
 async function main() {
+  const videos = await readShorts();
   const mdFiles = (await fg(["posts/*/*.md"], { cwd: ROOT, absolute: true })).sort();
   const byPost = new Map();
 
@@ -1273,8 +1230,8 @@ async function main() {
   await fs.mkdir(LEARN_DIR, { recursive: true });
   await fs.mkdir(EN_LEARN_DIR, { recursive: true });
 
-  await fs.writeFile(path.join(LEARN_DIR, "index.html"), renderBlogIndexPage(posts, "de"), "utf8");
-  await fs.writeFile(path.join(EN_LEARN_DIR, "index.html"), renderBlogIndexPage(posts, "en"), "utf8");
+  await fs.writeFile(path.join(LEARN_DIR, "index.html"), renderBlogIndexPage(posts, "de", videos), "utf8");
+  await fs.writeFile(path.join(EN_LEARN_DIR, "index.html"), renderBlogIndexPage(posts, "en", videos), "utf8");
   await fs.writeFile(path.join(BLOG_DIR, "index.html"), renderLegacyIndexRedirect("de"), "utf8");
   await fs.writeFile(path.join(EN_BLOG_DIR, "index.html"), renderLegacyIndexRedirect("en"), "utf8");
 

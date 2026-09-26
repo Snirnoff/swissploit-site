@@ -6,6 +6,74 @@
   const toggle = document.getElementById('menuToggle');
   const nav = document.getElementById('primaryNav');
   if(!toggle || !nav) return;
+  const dialog = document.getElementById('navigationDialog');
+  if (dialog) {
+    const origin = document.createComment('Navigation returns here after closing');
+    nav.before(origin);
+    const close = dialog.querySelector('.menu-close');
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+    let savedY = 0, closing = false;
+    function closeOverlay(destination) {
+      if (!dialog.open || closing) return;
+      closing = true;
+      dialog.classList.remove('is-open');
+      const finish = () => {
+        dialog.close();
+        origin.after(nav);
+        document.body.classList.remove('navigation-open');
+        document.body.style.removeProperty('top');
+        window.scrollTo({ top: savedY, behavior: 'instant' });
+        window.dispatchEvent(new Event('navigation:closed'));
+        toggle.setAttribute('aria-expanded', 'false');
+        closing = false;
+        if (destination) {
+          const target = document.querySelector(destination);
+          if (target) {
+            history.pushState(null, '', destination);
+            target.scrollIntoView({ behavior: reduced.matches ? 'instant' : 'smooth' });
+            const heading = target.querySelector('h1,h2') || target;
+            heading.setAttribute('tabindex', '-1');
+            heading.focus({ preventScroll: true });
+            heading.addEventListener('blur', () => heading.removeAttribute('tabindex'), { once: true });
+          }
+        } else {
+          const returnTarget = getComputedStyle(toggle).visibility === 'hidden' ? nav.querySelector('a') : toggle;
+          returnTarget?.focus({ preventScroll: true });
+        }
+      };
+      setTimeout(finish, reduced.matches ? 0 : 220);
+    }
+    toggle.addEventListener('click', () => {
+      if (dialog.open) return;
+      savedY = window.scrollY;
+      dialog.querySelector('.menu-content').append(nav);
+      document.body.style.top = '-' + savedY + 'px';
+      document.body.classList.add('navigation-open');
+      toggle.setAttribute('aria-expanded', 'true');
+      dialog.showModal();
+      requestAnimationFrame(() => dialog.classList.add('is-open'));
+    });
+    close.addEventListener('click', () => closeOverlay());
+    dialog.addEventListener('cancel', event => { event.preventDefault(); closeOverlay(); });
+    nav.addEventListener('click', event => {
+      const link = event.target.closest('a');
+      if (!link || !dialog.open) return;
+      if (link.getAttribute('href').startsWith('#')) {
+        event.preventDefault();
+        closeOverlay(link.hash);
+      } else closeOverlay();
+    });
+    // Native modal inertness blocks the background; keep Tab on actual controls.
+    dialog.addEventListener('keydown', event => {
+      if (event.key !== 'Tab') return;
+      const controls = [close, ...nav.querySelectorAll('a[href]')];
+      const first = controls[0], last = controls.at(-1);
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+    });
+    document.body.classList.add('navigation-ready');
+    return;
+  }
 
   function closeMenu(){
     nav.classList.remove('is-open');
@@ -64,7 +132,7 @@ if(toggle){
 
 // Dezente Parallax-Translation der BG-Layer
 const parallaxEls = document.querySelectorAll('[data-speed]');
-window.addEventListener('scroll', () => {
+if (parallaxEls.length) window.addEventListener('scroll', () => {
   const y = window.scrollY;
   parallaxEls.forEach(el => {
     const speed = parseFloat(el.getAttribute('data-speed')) || 0;
@@ -73,33 +141,71 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 
 
-// One reversible observer; Learn adds its cards before DOMContentLoaded.
+// One reveal controller. Home uses content blocks, never nested animated sections.
 document.addEventListener('DOMContentLoaded', () => {
-  const items = Array.from(document.querySelectorAll('.reveal'));
-  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const home = document.body.classList.contains('home-page');
+  if (home) {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.remove('reveal'));
+    const selectors = [
+      'main .spl-eyebrow', 'main h1', 'main .spl-section-title', 'main .spl-section-lead',
+      '.business-questions', '.hero-lead-v7', '.hero-proof-row', '.cta-row',
+      '.business-intro-copy', '.product-card', '.principle-grid > div',
+      '.trust-copy-v7 > p:not(.spl-eyebrow)', '.trust-proof-item', '.about-brand-media-v7',
+      '.spl-blog-panel > div > p:not(.spl-eyebrow)', '.spl-blog-panel > .btn',
+      '.social-button-grid-v7', '.contact-questions', '.contact-wrap-v7 > p:not(.spl-eyebrow)'
+    ];
+    document.querySelectorAll(selectors.join(',')).forEach(el => {
+      el.dataset.reveal = '';
+      el.dataset.revealDelay = el.matches('h1,h2') ? '90' : el.matches('.spl-section-lead') ? '160' : '0';
+    });
+    document.querySelectorAll('.product-family, .principle-grid, .trust-proof-grid').forEach(group => {
+      group.dataset.revealGroup = '';
+      [...group.children].forEach((el, index) => { el.dataset.revealDelay = String(index * 90); });
+    });
+  }
+  const items = [...document.querySelectorAll(home ? '[data-reveal]' : '.reveal')];
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  const mobile = matchMedia('(max-width: 760px)');
   let observer;
-  function show(item) { item.classList.add('visible', 'has-entered'); }
+  function show(item) { item.classList.add(home ? 'is-revealed' : 'visible', 'has-entered'); }
   function setup() {
     observer?.disconnect();
+    document.body.classList.remove('reveal-ready');
     if (reduced.matches || !('IntersectionObserver' in window)) {
       items.forEach(show);
       return;
     }
     observer = new IntersectionObserver(entries => {
       let cardIndex = 0;
-      entries.forEach(({ target, isIntersecting }) => {
-        if (isIntersecting) {
-          if (target.matches('.blog-card')) target.style.setProperty('--reveal-delay', `${(cardIndex++ % 3) * 50}ms`);
-          show(target);
-        } else if (!target.contains(document.activeElement) && !target.matches('.blog-card')) {
-          target.classList.remove('visible');
+      entries.forEach(entry => {
+        const { target, isIntersecting, intersectionRect, boundingClientRect, rootBounds } = entry;
+        if (!home) {
+          if (isIntersecting) {
+            if (target.matches('.blog-card')) target.style.setProperty('--reveal-delay', ((cardIndex++ % 3) * 50) + 'ms');
+            show(target);
+          } else if (!target.contains(document.activeElement) && !target.matches('.blog-card')) target.classList.remove('visible');
+          return;
         }
+        // Relative to the viewport for tall mobile cards. Enter at 16%; exit only outside.
+        const visible = intersectionRect.height / Math.max(1, Math.min(boundingClientRect.height, rootBounds.height));
+        if (isIntersecting && visible >= .16) show(target);
+        else if (!isIntersecting && !target.contains(document.activeElement)) target.classList.remove('is-revealed');
       });
-    }, { threshold: 0, rootMargin: '0px 0px 280px 0px' });
-    items.forEach(item => observer.observe(item));
+    }, home ? { threshold: [0, .01, .04, .08, .12, .16, .2, .3, .5, 1], rootMargin: '0px 0px 64px 0px' } : { threshold: 0, rootMargin: '0px 0px 280px 0px' });
+    items.forEach(item => {
+      if (home) {
+        item.style.setProperty('--reveal-delay', (Number(item.dataset.revealDelay || 0) * (mobile.matches ? .45 : 1)) + 'ms');
+        const rect = item.getBoundingClientRect();
+        // Already visible content and deep links never start hidden.
+        if (rect.bottom > 0 && rect.top < innerHeight) show(item);
+      }
+      observer.observe(item);
+    });
+    if (home) document.body.classList.add('reveal-ready');
   }
   items.forEach(item => item.addEventListener('focusin', () => show(item)));
   reduced.addEventListener('change', setup);
+  mobile.addEventListener('change', setup);
   setup();
 });
 
@@ -214,6 +320,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function applyMobileReveal(){
     const items = getMobileRevealItems();
+    if (!items.length) return;
     const isMobile = mobileQuery ? mobileQuery.matches : window.innerWidth <= 768;
     const shouldReduceMotion = reducedMotionQuery && reducedMotionQuery.matches;
 
@@ -440,7 +547,7 @@ if(shortsSection){
 
 // D) Optionale „magnetische“ Buttons (füge Klasse .magnetic im HTML hinzu)
 (function(){
-  const mags = document.querySelectorAll('.btn.magnetic');
+  const mags = document.querySelectorAll('body:not(.home-page) .btn.magnetic');
   const desktopQuery = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)');
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
   if(!desktopQuery) return;
@@ -459,43 +566,82 @@ if(shortsSection){
   });
 })();
 
-// Intro wordmark and header transition stay on one animation frame per scroll.
+// Live Wordmark trajectories, coupled only to the native intro scroll range.
 (function introMotion(){
-  const intro = document.querySelector('.intro-section');
-  const letters = Array.from(document.querySelectorAll('.intro-letter'));
-  if(!intro || !letters.length) return;
+  const intro = document.querySelector('.home-page .intro-scroll-container');
+  if (!intro) return;
+  const stage = intro.querySelector('.intro-stage');
+  const wordmark = intro.querySelector('.intro-wordmark');
+  const letters = Array.from(intro.querySelectorAll('.intro-letter'));
+  const subtitle = intro.querySelector('.intro-subtitle');
+  const arrow = intro.querySelector('.intro-arrow');
+  const header = document.querySelector('.site-header');
+  const stickyCta = document.querySelector('.mobile-sticky-cta');
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const mobile = window.matchMedia('(max-width: 760px)');
+  const trajectories = letters.map(el => ({ x: Number(el.dataset.x), y: Number(el.dataset.y), r: Number(el.dataset.r) }));
+  const clamp = value => Math.min(1, Math.max(0, value));
+  let frame = 0, start = 0, range = 1, end = 0, lastProgress = -1;
+  let mobileScale = .4, stageHeight = 0, headerStart = 0;
 
-  const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let frame = 0;
   function update(){
     frame = 0;
-    const progress = Math.min(1, Math.max(0, -intro.getBoundingClientRect().top / Math.max(1, intro.offsetHeight * .72)));
-    letters.forEach(letter => {
-      if(reduced){
-        letter.style.transform = 'translate3d(0, 0, 0) rotate(0deg)';
-        letter.style.opacity = '1';
-        letter.style.filter = 'none';
-        return;
-      }
-      const x = Number(letter.dataset.x || 0) * progress;
-      const y = Number(letter.dataset.y || 0) * progress;
-      const rotation = Number(letter.dataset.r || 0) * progress;
-      letter.style.transform = `translate3d(${x}px, ${y}px, 0) rotate(${rotation}deg)`;
-      letter.style.opacity = String(1 - progress * .18);
-      letter.style.filter = `blur(${(progress * 1.5).toFixed(2)}px)`;
+    if (document.body.classList.contains('navigation-open')) return;
+    const scrollY = window.scrollY;
+    const progress = clamp((scrollY - start) / range);
+    header?.classList.toggle('is-intro-passed', scrollY >= headerStart);
+    document.body.classList.toggle('intro-passed', scrollY >= headerStart);
+    stickyCta?.classList.toggle('is-visible', mobile.matches && scrollY >= end);
+    if (progress === lastProgress) return;
+    lastProgress = progress;
+    const movement = reduced.matches ? 0 : 1 - Math.pow(1 - clamp((progress - .05) / .65), 3);
+    const multiplier = mobile.matches ? mobileScale : 1;
+    const fade = 1 - clamp((progress - .7) / .3);
+    letters.forEach((letter, index) => {
+      const target = trajectories[index];
+      letter.style.transform = 'translate3d(' + (target.x * multiplier * movement).toFixed(2) + 'px,' + (target.y * multiplier * movement).toFixed(2) + 'px,0) rotate(' + (target.r * multiplier * movement).toFixed(2) + 'deg)';
+      letter.style.opacity = String(1 - .25 * movement);
     });
-    document.querySelector('.site-header')?.classList.toggle('is-intro-passed', progress > .52);
+    wordmark.style.opacity = String(fade);
+    const lift = reduced.matches ? 0 : Math.pow(progress, 1.45);
+    wordmark.style.translate = '0 ' + (-stageHeight * .64 * lift).toFixed(2) + 'px';
+    subtitle.style.translate = '0 ' + (-stageHeight * .24 * lift - (reduced.matches ? 0 : 50 * progress)).toFixed(2) + 'px';
+    subtitle.style.opacity = String(1 - clamp((progress - .5) / .4));
+    subtitle.style.filter = reduced.matches ? 'none' : 'blur(' + (4 * clamp((progress - .65) / .3)).toFixed(2) + 'px)';
+    arrow.style.setProperty('opacity', String(1 - clamp(progress / .09)), 'important');
+    arrow.style.translate = reduced.matches ? 'none' : '0 ' + (-12 * clamp(progress / .09)).toFixed(2) + 'px';
+    arrow.style.visibility = progress >= .09 ? 'hidden' : 'visible';
   }
-  function requestUpdate(){ if(!frame) frame = requestAnimationFrame(update); }
-  update();
+  function requestUpdate(){ if (!frame) frame = requestAnimationFrame(update); }
+  function refresh(){
+    if (document.body.classList.contains('navigation-open')) return;
+    start = intro.getBoundingClientRect().top + window.scrollY;
+    const height = stage.offsetHeight;
+    stageHeight = height;
+    end = start + intro.offsetHeight;
+    headerStart = end - height * .9;
+    // Finish as the released stage leaves; avoid a blank viewport after a pinned fade.
+    range = Math.max(1, intro.offsetHeight - height * .3);
+    // Keep the original .4 mobile travel, reducing only on very narrow screens.
+    const rightSpace = (stage.clientWidth - wordmark.offsetWidth) / 2 - 18;
+    mobileScale = Math.max(.1, Math.min(.4, rightSpace / 220));
+    lastProgress = -1;
+    requestUpdate();
+  }
   window.addEventListener('scroll', requestUpdate, { passive: true });
-  window.addEventListener('resize', requestUpdate, { passive: true });
+  window.addEventListener('resize', refresh, { passive: true });
+  window.addEventListener('pageshow', refresh);
+  window.addEventListener('navigation:closed', refresh);
+  reduced.addEventListener('change', refresh);
+  mobile.addEventListener('change', refresh);
+  document.fonts?.ready.then(refresh);
+  refresh();
 })();
 
 // Only services increases the existing grid's local visibility.
 (function gridFocus(){
   const area = document.querySelector('#services.grid-focus');
-  if (!area) return;
+  if (!area || document.body.classList.contains('home-page')) return;
   const desktop = window.matchMedia('(hover: hover) and (pointer: fine)');
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
   let frame = 0;
@@ -526,170 +672,6 @@ if(shortsSection){
   window.addEventListener('scroll', reset, { passive: true });
   desktop.addEventListener('change', reset);
   reduced.addEventListener('change', reset);
-})();
-
-// One shared, monotonic source of truth for Learn and article pages.
-const readingState = (() => {
-  const stateKey = 'swissploit-reading-state';
-  const legacyReadKey = 'swissploit-read-articles';
-  const legacyPrefix = 'swissploit-read-';
-  const readThreshold = 90;
-
-  function normalizeId(value) {
-    const raw = String(value || '').split(/[?#]/)[0].replace(/\\/g, '/').replace(/\/+$/, '');
-    const parts = raw.split('/').filter(Boolean);
-    const blogIndex = parts.lastIndexOf('blog');
-    return blogIndex >= 0 && parts[blogIndex + 1] ? parts[blogIndex + 1] : (parts.at(-1) || raw);
-  }
-
-  function readState() {
-    try {
-      const value = JSON.parse(localStorage.getItem(stateKey) || '{}');
-      return value && typeof value === 'object' && value.articles && typeof value.articles === 'object'
-        ? value.articles
-        : {};
-    } catch (error) { return {}; }
-  }
-
-  function writeState(articles) {
-    try { localStorage.setItem(stateKey, JSON.stringify({ version: 1, articles })); } catch (error) {}
-  }
-
-  function migrate() {
-    const articles = readState();
-    let changed = false;
-    let legacyRead = [];
-    try {
-      const value = JSON.parse(localStorage.getItem(legacyReadKey) || '[]');
-      legacyRead = Array.isArray(value) ? value : [];
-    } catch (error) {}
-
-    legacyRead.forEach(path => {
-      const id = normalizeId(path);
-      if (id && (!articles[id] || !articles[id].read)) {
-        articles[id] = { progress: 100, read: true, lastVisited: Number(articles[id]?.lastVisited) || 0 };
-        changed = true;
-      }
-    });
-
-    try {
-      Object.keys(localStorage).filter(key => key.startsWith(legacyPrefix) && key.endsWith('-progress')).forEach(key => {
-        const path = key.slice(legacyPrefix.length, -'-progress'.length);
-        const id = normalizeId(path);
-        const progress = Number(localStorage.getItem(key));
-        if (!id || !Number.isFinite(progress)) return;
-        const updated = Number(localStorage.getItem(`${legacyPrefix}${path}-updated`));
-        const current = articles[id] || { progress: 0, read: false, lastVisited: 0 };
-        const nextProgress = Math.max(Number(current.progress) || 0, Math.min(100, Math.max(0, progress * 100)));
-        const nextRead = Boolean(current.read) || nextProgress >= readThreshold;
-        if (nextProgress > current.progress || nextRead !== Boolean(current.read)) {
-          articles[id] = { progress: nextRead ? 100 : nextProgress, read: nextRead, lastVisited: Math.max(Number(current.lastVisited) || 0, Number.isFinite(updated) ? updated : 0) };
-          changed = true;
-        }
-      });
-    } catch (error) {}
-
-    if (changed) writeState(articles);
-    return articles;
-  }
-
-  function get(value) {
-    const id = normalizeId(value);
-    const item = migrate()[id] || {};
-    const progress = Math.min(100, Math.max(0, Number(item.progress) || 0));
-    return { id, progress, read: item.read === true, lastVisited: Number(item.lastVisited) || 0 };
-  }
-
-  function save(value, currentProgress) {
-    const id = normalizeId(value);
-    const articles = migrate();
-    const previous = get(id);
-    const measured = Math.min(100, Math.max(0, Number(currentProgress) || 0));
-    const progress = Math.max(previous.progress, measured);
-    const read = previous.read || progress >= readThreshold;
-    if (progress <= previous.progress && read === previous.read) return previous;
-    const next = { progress: read ? 100 : progress, read, lastVisited: Date.now() };
-    articles[id] = next;
-    writeState(articles);
-    return { id, ...next };
-  }
-
-  return { get, save, readThreshold };
-})();
-window.SWISSPLOIT_READING_STATE = readingState;
-
-// Measure the article itself, independent of hero, related content and footer.
-(function articleProgress(){
-  const article = document.querySelector('.post-article');
-  if (!article) return;
-  let saved = readingState.get(location.pathname);
-  const isEnglish = document.documentElement.lang === 'en';
-  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const bar = document.createElement('div');
-  bar.className = 'article-reading-progress';
-  bar.setAttribute('aria-hidden', 'true');
-  bar.innerHTML = '<span></span>';
-  document.body.appendChild(bar);
-
-  let status = document.querySelector('.article-reading-status');
-  if (!status) {
-    status = document.createElement('div');
-    status.className = 'article-reading-status';
-    status.innerHTML = '<span class="article-reading-status-text"></span><span class="article-read-label"></span><button type="button" hidden></button>';
-    article.before(status);
-  }
-  const statusText = status.querySelector('.article-reading-status-text');
-  const readLabel = status.querySelector('.article-read-label');
-  const continueButton = status.querySelector('button');
-  readLabel.textContent = isEnglish ? '✓ READ' : '✓ GELESEN';
-  continueButton.textContent = isEnglish ? 'Continue reading' : 'Weiterlesen';
-  let frame = 0;
-  let hasScrolled = false;
-
-  function renderSaved() {
-    const percent = Math.round(saved.progress);
-    statusText.textContent = isEnglish ? `${percent}% read` : `${percent} % gelesen`;
-    readLabel.setAttribute('aria-hidden', String(!saved.read));
-    status.classList.toggle('is-read', saved.read);
-    continueButton.hidden = saved.read || saved.progress <= 0;
-  }
-  function geometry() {
-    const rect = article.getBoundingClientRect();
-    const startLine = window.innerHeight * .18;
-    const distance = Math.max(1, rect.height - window.innerHeight * .72);
-    return { rect, startLine, distance };
-  }
-  function update() {
-    frame = 0;
-    const { rect, startLine, distance } = geometry();
-    const progress = Math.min(100, Math.max(0, ((startLine - rect.top) / distance) * 100));
-    bar.firstElementChild.style.transform = `scaleX(${progress / 100})`;
-    // Opening a short article alone does not mark it read.
-    if (!hasScrolled || saved.read) return;
-    const measured = rect.bottom <= window.innerHeight * .92 && rect.top <= startLine ? 100 : progress;
-    const rounded = Math.floor(measured);
-    if (rounded > saved.progress) {
-      saved = readingState.save(location.pathname, rounded);
-      renderSaved();
-    }
-  }
-  function requestUpdate() { if (!frame) frame = requestAnimationFrame(update); }
-  continueButton.addEventListener('click', () => {
-    const { rect, startLine, distance } = geometry();
-    window.scrollTo({ top: window.scrollY + rect.top - startLine + distance * saved.progress, behavior: reduced.matches ? 'auto' : 'smooth' });
-  });
-  window.addEventListener('scroll', () => {
-    hasScrolled = true;
-    requestUpdate();
-  }, { passive: true });
-  window.addEventListener('resize', requestUpdate, { passive: true });
-  window.addEventListener('pagehide', update);
-  document.addEventListener('visibilitychange', () => { if (document.hidden) update(); });
-  window.addEventListener('storage', () => { saved = readingState.get(location.pathname); renderSaved(); });
-  window.addEventListener('pageshow', () => { saved = readingState.get(location.pathname); renderSaved(); requestUpdate(); });
-  if ('ResizeObserver' in window) new ResizeObserver(requestUpdate).observe(article);
-  renderSaved();
-  update();
 })();
 
 
@@ -1340,80 +1322,6 @@ window.SWISSPLOIT_READING_STATE = readingState;
   });
 })();
 
-/* =========================================================
-   SWISSPLOIT V7 - Intro scrollytelling + problem finder
-   ========================================================= */
-(function(){
-  const body = document.body;
-  if(!body || !body.classList.contains('home-page')) return;
-
-  const header = document.querySelector('.site-header');
-  const stickyCta = document.querySelector('.mobile-sticky-cta');
-  const letters = Array.from(document.querySelectorAll('.intro-letter'));
-  const reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  let ticking = false;
-  let vh = Math.max(window.innerHeight || 1, 1);
-
-  const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
-  const easeOutCubic = value => 1 - Math.pow(1 - value, 3);
-
-  function updateHeaderAndCta(scrollY){
-    if(header){
-      header.classList.toggle('is-intro-passed', scrollY > Math.min(180, vh * 0.18));
-    }
-    if(stickyCta){
-      stickyCta.classList.toggle('is-visible', window.innerWidth <= 760 && scrollY > vh * 1.15);
-    }
-  }
-
-  function updateIntroLetters(scrollY){
-    if(!letters.length) return;
-
-    if(reducedMotion){
-      letters.forEach(letter => {
-        letter.style.transform = 'translate3d(0,0,0) rotate(0deg)';
-        letter.style.opacity = '1';
-        letter.style.filter = 'none';
-      });
-      return;
-    }
-
-    const isMobile = window.innerWidth < 768;
-    const multiplier = isMobile ? 0.4 : 1;
-    const maxDistance = vh * (isMobile ? 0.58 : 0.72);
-    const progress = easeOutCubic(clamp(scrollY / maxDistance, 0, 1));
-
-    letters.forEach(letter => {
-      const x = Number(letter.dataset.x || 0) * multiplier * progress;
-      const y = Number(letter.dataset.y || 0) * multiplier * progress;
-      const rotate = Number(letter.dataset.r || 0) * multiplier * progress;
-      letter.style.transform = `translate3d(${x}px, ${y}px, 0) rotate(${rotate}deg)`;
-      letter.style.opacity = String(1 - (0.25 * progress));
-      letter.style.filter = isMobile ? 'none' : `blur(${0.5 * progress}px)`;
-    });
-  }
-
-  function onScroll(){
-    if(ticking) return;
-    ticking = true;
-    window.requestAnimationFrame(() => {
-      const y = window.scrollY || 0;
-      updateHeaderAndCta(y);
-      updateIntroLetters(y);
-      ticking = false;
-    });
-  }
-
-  function onResize(){
-    vh = Math.max(window.innerHeight || 1, 1);
-    onScroll();
-  }
-
-  onResize();
-  window.addEventListener('scroll', onScroll, { passive:true });
-  window.addEventListener('resize', onResize, { passive:true });
-})();
 
 (function(){
   const dataEl = document.getElementById('problemFinderData');

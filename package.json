@@ -3,7 +3,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build:posts": "node scripts/build-posts.mjs"
+    "build:posts": "node scripts/build-posts.mjs",
+    "test:videos": "node scripts/youtube-shorts.mjs && node --test scripts/youtube-shorts.test.mjs"
   },
   "dependencies": {
     "gray-matter": "^4.0.3",

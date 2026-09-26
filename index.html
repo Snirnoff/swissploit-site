@@ -4,25 +4,22 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <title>Cyber Security für Schweizer KMU | Swissploit</title>
+  <title>Cybersecurity &amp; Datenschutz für Schweizer KMU | Swissploit</title>
 
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/swissploit-brand-logo2.png">
-  <link rel="icon" type="image/png" sizes="192x192" href="assets/swissploit-brand-logo2.png">
-  <link rel="apple-touch-icon" href="assets/swissploit-brand-logo2.png">
-  <link rel="icon" type="image/png" href="assets/swissploit-brand-logo2.png">
+  <link rel="icon" type="image/png" href="assets/Swissploit_S_blue2.png">
+  <link rel="apple-touch-icon" href="assets/Swissploit_S_blue2.png">
   <meta name="theme-color" content="#05070b">
 
-  <meta name="description" content="Swissploit macht Cyber-Security-Risiken für Schweizer KMU sichtbar, schafft verständliche Prioritäten und ergänzt Management sowie bestehende IT mit Security-Kompetenz." />
-  <meta name="keywords" content="Cyber Security Schweiz, Security Check KMU, Security Awareness, Security Advisory, Cyber Security Beratung">
+  <meta name="description" content="Swissploit unterstützt Schweizer KMU mit Security Check, Datenschutz Care und Incident Readiness – klar, verständlich und technisch fundiert." />
 
-  <meta property="og:title" content="Swissploit – Cyber Security für Schweizer KMU">
-  <meta property="og:description" content="Risiken sichtbar machen, verständliche Prioritäten schaffen und Security-Entscheidungen gemeinsam mit Ihrer IT begleiten.">
+  <meta property="og:title" content="Cybersecurity &amp; Datenschutz für Schweizer KMU | Swissploit">
+  <meta property="og:description" content="Swissploit unterstützt Schweizer KMU mit Security Check, Datenschutz Care und Incident Readiness – klar, verständlich und technisch fundiert.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://swissploit.ch/">
   <meta property="og:image" content="https://swissploit.ch/assets/swissploit-og.png">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Swissploit – Cyber Security für Schweizer KMU">
-  <meta name="twitter:description" content="Risiken erkennen, Massnahmen priorisieren und Mitarbeitende auf reale digitale Gefahren vorbereiten.">
+  <meta name="twitter:title" content="Cybersecurity &amp; Datenschutz für Schweizer KMU | Swissploit">
+  <meta name="twitter:description" content="Swissploit unterstützt Schweizer KMU mit Security Check, Datenschutz Care und Incident Readiness – klar, verständlich und technisch fundiert.">
   <meta name="twitter:image" content="https://swissploit.ch/assets/swissploit-og.png">
 
   <link rel="canonical" href="https://swissploit.ch/" />
@@ -30,141 +27,209 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-  <script>document.documentElement.classList.add('js');document.documentElement.setAttribute('data-theme','dark');try{localStorage.setItem('swissploit-theme','dark')}catch(e){}</script>
+  <script>document.documentElement.classList.add('js');try{if(localStorage.getItem('swissploit-theme')==='light')document.documentElement.setAttribute('data-theme','light')}catch(e){}</script>
   <link rel="stylesheet" href="assets/styles.css" />
+  <link rel="stylesheet" href="assets/home.css" />
   <script defer src="assets/app.js"></script>
 </head>
 <body class="home-page">
+  <a class="home-skip-link" href="#main">Zum Inhalt</a>
   <header class="site-header" role="banner">
     <div class="wrap headerbar">
-      <a class="brand" href="#intro" aria-label="Swissploit Home">
-        <img class="header-logo-image" src="assets/swissploit-brand-logo2.png" alt="Swissploit Logo" width="120" height="49" decoding="async">
+      <a class="brand brand-signature" href="#intro" aria-label="Swissploit Startseite">
+        <span class="brand-signet" aria-hidden="true"><img class="signet-image" src="assets/Swissploit_S_blue2.png" alt="" width="1254" height="1254" decoding="async"></span>
         <span class="brand-text">Swissploit</span>
       </a>
 
       <nav id="primaryNav" class="nav" aria-label="Hauptnavigation">
         <a href="#services">Services</a>
-        <a href="/learn/" data-transition>Learn</a>
         <a href="#ueber">Über Swissploit</a>
         <a href="#kontakt">Kontakt</a>
+        <a class="nav-learn" href="/learn/" data-transition>Learn</a>
       </nav>
 
       <div class="header-actions">
-        <a class="header-cta" href="mailto:hello@swissploit.ch?subject=Anfrage%20Security%20Check&body=Hallo%20Swissploit%0A%0AIch%20interessiere%20mich%20f%C3%BCr%20einen%20Security%20Check.%0A%0AUnternehmen%3A%0AAnzahl%20Mitarbeitende%3A%0AAktuelle%20Frage%20oder%20Herausforderung%3A%0A%0AFreundliche%20Gr%C3%BCsse%0A">Security Check</a>
-        <button id="menuToggle" class="menu-toggle" type="button" aria-expanded="false" aria-controls="primaryNav" aria-label="Menü öffnen">
-          <span></span><span></span>
-        </button>
+        <a class="header-cta" href="mailto:hello@swissploit.ch?subject=Security%20Check%20anfragen">Security Check</a>
+
       </div>
     </div>
   </header>
 
+  <button id="menuToggle" class="navigation-control" type="button" aria-expanded="false" aria-controls="navigationDialog" aria-label="Menü öffnen">
+    <span></span><span></span>
+  </button>
+  <dialog id="navigationDialog" class="navigation-dialog" aria-label="Hauptnavigation">
+    <button class="navigation-control menu-close" type="button" aria-label="Menü schliessen" autofocus><span></span><span></span></button>
+    <div class="brand-signature menu-brand">
+      <span class="brand-signet" aria-hidden="true"><img class="signet-image" src="assets/Swissploit_S_blue2.png" alt="" width="1254" height="1254" decoding="async"></span>
+      <span class="brand-text">Swissploit</span>
+    </div>
+    <div class="menu-content"></div>
+  </dialog>
+
   <main id="main">
-    <section id="intro" class="intro-section" aria-label="Swissploit Intro">
-      <div class="intro-glow" aria-hidden="true"></div>
-      <div class="intro-grid" aria-hidden="true"></div>
-      <div class="intro-content">
-        <p class="intro-wordmark" aria-label="Swissploit">
-          <span class="intro-letter" data-x="-140" data-y="-80" data-r="-8">S</span>
-          <span class="intro-letter" data-x="-110" data-y="70" data-r="7">w</span>
-          <span class="intro-letter" data-x="-55" data-y="-100" data-r="-5">i</span>
-          <span class="intro-letter" data-x="-25" data-y="90" data-r="5">s</span>
-          <span class="intro-letter" data-x="15" data-y="-70" data-r="-4">s</span>
-          <span class="intro-letter" data-x="60" data-y="80" data-r="6">p</span>
-          <span class="intro-letter" data-x="105" data-y="-60" data-r="-6">l</span>
-          <span class="intro-letter" data-x="145" data-y="65" data-r="8">o</span>
-          <span class="intro-letter" data-x="185" data-y="-85" data-r="-5">i</span>
-          <span class="intro-letter" data-x="220" data-y="55" data-r="6">t</span>
-        </p>
-        <p class="intro-subtitle">Erkennen, was andere übersehen.</p>
-        <a class="intro-arrow" href="#hero" aria-label="Zum Hauptversprechen scrollen">↓</a>
+    <div id="intro" class="intro-scroll-container" aria-label="Swissploit Intro">
+      <div class="intro-section intro-stage">
+        <div class="intro-glow" aria-hidden="true"></div>
+        <div class="intro-grid" aria-hidden="true"></div>
+        <div class="intro-content">
+          <p class="intro-wordmark" role="img" aria-label="Swissploit">
+            <span class="intro-letter" aria-hidden="true" data-x="-140" data-y="-80" data-r="-8">S</span>
+            <span class="intro-letter" aria-hidden="true" data-x="-110" data-y="70" data-r="7">w</span>
+            <span class="intro-letter" aria-hidden="true" data-x="-55" data-y="-100" data-r="-5">i</span>
+            <span class="intro-letter" aria-hidden="true" data-x="-25" data-y="90" data-r="5">s</span>
+            <span class="intro-letter" aria-hidden="true" data-x="15" data-y="-70" data-r="-4">s</span>
+            <span class="intro-letter" aria-hidden="true" data-x="60" data-y="80" data-r="6">p</span>
+            <span class="intro-letter" aria-hidden="true" data-x="105" data-y="-60" data-r="-6">l</span>
+            <span class="intro-letter" aria-hidden="true" data-x="145" data-y="65" data-r="8">o</span>
+            <span class="intro-letter" aria-hidden="true" data-x="185" data-y="-85" data-r="-5">i</span>
+            <span class="intro-letter" aria-hidden="true" data-x="220" data-y="55" data-r="6">t</span>
+          </p>
+          <p class="intro-subtitle">Erkennen, was andere übersehen.</p>
+          <a class="intro-arrow" href="#hero" aria-label="Zum Hauptversprechen scrollen">↓</a>
+        </div>
       </div>
-    </section>
-
-
-    <section id="hero" class="section kmu-hero-v7" aria-label="Hauptversprechen">
+    </div>
+    <section id="hero" class="section kmu-hero-v7" aria-labelledby="hero-title">
       <div class="wrap kmu-hero-wrap-v7">
-        <p class="spl-eyebrow">Cyber Security für Schweizer KMU</p>
-        <h1>Cyber Security klar verstehen.<br>Risiken gezielt reduzieren.</h1>
-        <p class="hero-lead-v7">Swissploit unterstützt Schweizer KMU dabei, Sicherheitsrisiken zu erkennen, die richtigen Massnahmen zu priorisieren und Mitarbeitende auf reale digitale Gefahren vorzubereiten.</p>
-        <div class="hero-proof-row" aria-label="Swissploit Vorteile">
-          <span>Security-Expertise · verständlich für Management · gemeinsam mit Ihrer IT</span>
+        <p class="spl-eyebrow">Cybersecurity &amp; Datenschutz für Schweizer KMU</p>
+        <h1 id="hero-title">Drei Fragen, die jedes Unternehmen beantworten können sollte.</h1>
+        <div class="business-questions" aria-label="Drei Fragen. Drei Services.">
+          <a href="#security-check"><span class="question-number">01</span><strong>Sind wir genügend geschützt?</strong><span class="question-product">Security Check <span aria-hidden="true">↗</span></span></a>
+          <a href="#datenschutz-care"><span class="question-number">02</span><strong>Ist unser Datenschutz geregelt?</strong><span class="question-product">Datenschutz Care <span aria-hidden="true">↗</span></span></a>
+          <a href="#incident-readiness"><span class="question-number">03</span><strong>Wissen wir, was bei einem Cyberangriff zu tun ist?</strong><span class="question-product">Incident Readiness <span aria-hidden="true">↗</span></span></a>
         </div>
+        <p class="hero-lead-v7">Swissploit hilft Schweizer KMU, genau diese Fragen klar zu beantworten – mit strukturierten Checks, konkreten Massnahmen und verständlicher Security-Kompetenz.</p>
+        <div class="hero-proof-row"><span>Schweizer Fokus · technisch fundiert · verständlich für Geschäftsleitung und IT</span></div>
         <div class="cta-row hero-actions-v7">
-          <a class="btn primary magnetic" href="#services">Security Check entdecken</a>
-          <a class="btn magnetic" href="/learn/" data-transition>Security-Wissen entdecken</a>
+          <a class="btn primary magnetic" href="mailto:hello@swissploit.ch?subject=Security%20Check%20anfragen">Security Check anfragen</a>
+          <a class="btn magnetic" href="#services">Services entdecken <span aria-hidden="true">↓</span></a>
         </div>
       </div>
     </section>
 
-<section id="sicherheitslage" class="section stats-v7 reveal" aria-label="Security-Risiken für Management">
-  <div class="wrap stats-v7-wrap">
-    <div class="section-heading-left stats-heading-v7">
-      <p class="spl-eyebrow">Security aus Management-Sicht</p>
-      <h2 class="spl-section-title">Sie haben eine IT. Aber wissen Sie, wo Ihre grössten Security-Risiken liegen?</h2>
-      <p class="spl-section-lead">Cyber Security besteht aus vielen einzelnen Bereichen. Für Geschäftsleitungen ist oft schwer einzuschätzen, was wirklich relevant ist und was zuerst angegangen werden sollte.</p>
-    </div>
-    <div class="management-highlight-v32">
-      <article class="risk-card-v26">
-        <p class="care-kicker-v31">Klarheit vor Komplexität</p>
-        <h3>Swissploit schafft Klarheit und übersetzt Security in konkrete Prioritäten.</h3>
-      </article>
-    </div>
+    <section id="sicherheitslage" class="section reveal" aria-labelledby="perspective-title">
+      <div class="wrap business-intro">
+        <div>
+          <p class="spl-eyebrow">Security aus Unternehmenssicht</p>
+          <h2 id="perspective-title" class="spl-section-title">Security muss nicht kompliziert sein. Sie muss geregelt sein.</h2>
+        </div>
+        <div class="business-intro-copy">
+          <p>Die meisten Unternehmen haben eine IT. Trotzdem bleiben wichtige Fragen offen.</p>
+          <p>Ist unsere Umgebung wirklich ausreichend geschützt? Ist unser Datenschutz sauber organisiert? Und wissen Management und IT, was bei einem Cybervorfall konkret zu tun ist?</p>
+          <p>Swissploit konzentriert sich genau auf diese drei Bereiche.</p>
+          <p class="business-statement">Nicht möglichst viele Security-Produkte. Sondern Klarheit bei den Themen, die im entscheidenden Moment funktionieren müssen.</p>
+        </div>
       </div>
     </section>
 
-    <section id="services" class="section services-v7 grid-focus" aria-label="Swissploit Security Services">
+    <section id="services" class="section services-v7 grid-focus" aria-labelledby="services-title">
       <div class="wrap">
         <div class="section-heading-center reveal">
-          <p class="spl-eyebrow">Services</p>
-          <h2 class="spl-section-title">Drei Bausteine für mehr Security-Klarheit</h2>
-          <p class="spl-section-lead">Vom ersten Überblick bis zur langfristigen Security-Begleitung: Swissploit unterstützt dort, wo zusätzliche Security-Kompetenz einen echten Unterschied macht.</p>
+          <p class="spl-eyebrow">Swissploit Services</p>
+          <h2 id="services-title" class="spl-section-title">Drei Themen. Drei klare Lösungen.</h2>
+          <p class="spl-section-lead">Swissploit unterstützt Schweizer KMU dabei, Risiken zu erkennen, Datenschutz zu regeln und auf Cybervorfälle vorbereitet zu sein.</p>
         </div>
-
-        <div class="care-grid-v26">
-          <article class="care-card-v26 reveal">
+        <div class="care-grid-v26 product-family">
+          <article id="security-check" class="care-card-v26 product-card reveal" aria-labelledby="security-check-title">
             <div class="care-card-head">
-              <p class="care-kicker-v31">01 · Security Check</p>
-              <h3>Wissen, wo Handlungsbedarf besteht.</h3>
-              <p>Wir betrachten die wichtigsten technischen, organisatorischen und menschlichen Security-Bereiche und zeigen verständlich auf, was gut funktioniert und wo Priorität besteht.</p>
+              <p class="product-label"><span>01</span> Security Check</p>
+              <svg class="product-motif" viewBox="0 0 120 48" fill="none" aria-hidden="true"><path d="M14 16V8h16m60 0h16v8M14 32v8h16m60 0h16v-8"/><path d="M30 24h60M44 18v12m16-16v20m16-16v12"/></svg>
+              <h3 id="security-check-title">Risiken erkennen.</h3>
+              <p class="product-question">Sind wir genügend geschützt?</p>
             </div>
-            <ul class="care-list-v26">
-              <li>Management Summary</li>
-              <li>priorisierte Risiken</li>
-              <li>konkreter Massnahmenplan</li>
-              <li>persönliche Ergebnisbesprechung</li>
-            </ul>
-            <a class="btn primary magnetic service-card-cta" href="mailto:hello@swissploit.ch?subject=Anfrage%20Security%20Check&body=Hallo%20Swissploit%0A%0AIch%20interessiere%20mich%20f%C3%BCr%20einen%20Security%20Check.%0A%0AUnternehmen%3A%0AAnzahl%20Mitarbeitende%3A%0AAktuelle%20Frage%20oder%20Herausforderung%3A%0A%0AFreundliche%20Gr%C3%BCsse%0A">Security Check anfragen</a>
+            <div class="product-body">
+              <p>Der Swissploit Security Check zeigt, wo Ihr Unternehmen sicherheitstechnisch wirklich steht. Wir prüfen zentrale technische und organisatorische Sicherheitsbereiche, priorisieren Risiken und zeigen konkrete nächste Schritte auf.</p>
+              <p>Keine endlose Liste theoretischer Empfehlungen. Sondern eine klare Einschätzung, was relevant ist und wo Handlungsbedarf besteht.</p>
+              <h4>Was wir prüfen</h4>
+              <ul class="care-list-v26">
+                <li>Identitäten, MFA &amp; privilegierte Konten</li>
+                <li>Microsoft 365 &amp; Cloud-Konfiguration</li>
+                <li>Endgeräte &amp; zentrale Schutzmassnahmen</li>
+                <li>Backup &amp; Wiederherstellung</li>
+                <li>Mail Security &amp; externe Freigaben</li>
+                <li>Patch- &amp; Vulnerability-Management</li>
+                <li>Awareness &amp; organisatorische Security</li>
+                <li>Grundlegende Incident Readiness</li>
+              </ul>
+            </div>
+            <div class="product-footer">
+              <div class="product-result"><span>Das Ergebnis</span><p>Eine klare Einschätzung. Priorisierte Risiken. Konkrete Massnahmen.</p></div>
+              <a class="btn primary service-card-cta" href="mailto:hello@swissploit.ch?subject=Security%20Check%20anfragen">Security Check anfragen <span aria-hidden="true">↗</span></a>
+            </div>
           </article>
 
-          <article class="care-card-v26 reveal">
+          <article id="datenschutz-care" class="care-card-v26 product-card reveal" aria-labelledby="datenschutz-care-title">
             <div class="care-card-head">
-              <p class="care-kicker-v31">02 · Security Awareness</p>
-              <h3>Mitarbeitende auf reale Angriffe vorbereiten.</h3>
-              <p>Praxisnahe Security Awareness macht Phishing, Social Engineering und aktuelle Betrugsmaschen verständlich und zeigt Mitarbeitenden, wie sie verdächtige Situationen erkennen und richtig reagieren.</p>
+              <p class="product-label"><span>02</span> Datenschutz Care</p>
+              <svg class="product-motif" viewBox="0 0 120 48" fill="none" aria-hidden="true"><rect x="18" y="8" width="22" height="32" rx="3"/><rect x="49" y="8" width="22" height="32" rx="3"/><rect x="80" y="8" width="22" height="32" rx="3"/><path d="M24 18h10m-10 8h10m21-8h10m-10 8h10m21-8h10m-10 8h10"/></svg>
+              <h3 id="datenschutz-care-title">Datenschutz geregelt.</h3>
+              <p class="product-question">Ist unser Datenschutz geregelt?</p>
             </div>
-            <ul class="care-list-v26">
-              <li>Security-Schulungen</li>
-              <li>kontrollierte Phishing-Simulationen</li>
-              <li>Auswertung &amp; Empfehlungen</li>
-              <li>weiterführende Swissploit-Lerninhalte</li>
-            </ul>
-            <a class="btn primary magnetic service-card-cta" href="mailto:hello@swissploit.ch?subject=Anfrage%20Security%20Awareness&body=Hallo%20Swissploit%0A%0AIch%20interessiere%20mich%20f%C3%BCr%20Security%20Awareness.%0A%0AUnternehmen%3A%0AAnzahl%20Mitarbeitende%3A%0AAktuelle%20Frage%20oder%20Herausforderung%3A%0A%0AFreundliche%20Gr%C3%BCsse%0A">Security Awareness anfragen</a>
+            <div class="product-body">
+              <p>Datenschutz darf nicht nur in einer Datenschutzerklärung existieren. Neue Cloud-Dienste, Mitarbeiterdaten, externe Dienstleister, KI-Anwendungen, Auskunftsbegehren oder Datenschutzvorfälle bringen laufend neue Fragen.</p>
+              <p>Swissploit hilft Ihrem Unternehmen, Datenschutz strukturiert zu organisieren und im Alltag nicht aus den Augen zu verlieren.</p>
+              <h4>Wobei wir unterstützen</h4>
+              <ul class="care-list-v26">
+                <li>Organisation &amp; Verantwortlichkeiten</li>
+                <li>Relevante Dokumente &amp; Prozesse</li>
+                <li>Auftragsbearbeiter &amp; externe Dienstleister</li>
+                <li>Neue Cloud- &amp; KI-Dienste</li>
+                <li>Aufbewahrung &amp; Löschung von Personendaten</li>
+                <li>Auskunfts- &amp; Löschbegehren</li>
+                <li>Datenschutzvorfälle</li>
+                <li>Technische &amp; organisatorische Schutzmassnahmen</li>
+              </ul>
+              <p class="product-note">Datenschutz trifft technisches Security-Verständnis: Wir helfen dabei, aus Anforderungen konkrete Prozesse und Schutzmassnahmen zu machen.</p>
+            </div>
+            <div class="product-footer">
+              <div class="product-result"><span>Das Ziel</span><p>Datenschutz ist nicht irgendwo dokumentiert. Er ist im Unternehmen geregelt.</p></div>
+              <a class="btn service-card-cta" href="mailto:hello@swissploit.ch?subject=Datenschutz%20Care%20anfragen">Datenschutz Care anfragen <span aria-hidden="true">↗</span></a>
+            </div>
           </article>
 
-          <article class="care-card-v26 reveal">
+          <article id="incident-readiness" class="care-card-v26 product-card reveal" aria-labelledby="incident-readiness-title">
             <div class="care-card-head">
-              <p class="care-kicker-v31">03 · Security Advisory</p>
-              <h3>Security-Kompetenz, die Ihre IT ergänzt.</h3>
-              <p>Swissploit begleitet Management und IT als Security-Sparringspartner, überprüft relevante Entwicklungen und hilft dabei, die nächsten Sicherheitsmassnahmen sinnvoll zu priorisieren.</p>
+              <p class="product-label"><span>03</span> Incident Readiness</p>
+              <svg class="product-motif" viewBox="0 0 120 48" fill="none" aria-hidden="true"><circle cx="22" cy="24" r="9"/><circle cx="60" cy="24" r="9"/><circle cx="98" cy="24" r="9"/><path d="M31 24h20m18 0h20M42 20l4 4-4 4m38-8 4 4-4 4"/></svg>
+              <h3 id="incident-readiness-title">Auf den Ernstfall vorbereitet sein.</h3>
+              <p class="product-question">Wissen wir, was bei einem Angriff zu tun ist?</p>
             </div>
-            <ul class="care-list-v26">
-              <li>regelmässige Security Reviews</li>
-              <li>Management-Einschätzungen</li>
-              <li>aktualisierte Prioritäten</li>
-              <li>Unterstützung bei Security-Entscheidungen</li>
-            </ul>
-            <a class="btn primary magnetic service-card-cta" href="mailto:hello@swissploit.ch?subject=Anfrage%20Security%20Advisory&body=Hallo%20Swissploit%0A%0AIch%20interessiere%20mich%20f%C3%BCr%20Security%20Advisory.%0A%0AUnternehmen%3A%0AAnzahl%20Mitarbeitende%3A%0AAktuelle%20Frage%20oder%20Herausforderung%3A%0A%0AFreundliche%20Gr%C3%BCsse%0A">Security Advisory anfragen</a>
+            <div class="product-body">
+              <p>Ein Cyberangriff ist der falsche Zeitpunkt, um Zuständigkeiten erstmals zu klären.</p>
+              <p>Wer entscheidet? Wer informiert die Geschäftsleitung? Welche Systeme müssen isoliert werden? Wen kontaktieren wir? Was darf kommuniziert werden? Welche Meldungen müssen geprüft werden?</p>
+              <p>Swissploit hilft Management und IT, diese Fragen vor einem Vorfall zu beantworten.</p>
+              <h4>Was wir vorbereiten</h4>
+              <ul class="care-list-v26">
+                <li>Rollen &amp; Verantwortlichkeiten</li>
+                <li>Eskalationswege</li>
+                <li>Interne &amp; externe Notfallkontakte</li>
+                <li>Entscheidungsabläufe</li>
+                <li>Kommunikationswege</li>
+                <li>Grundlegende technische Sofortmassnahmen</li>
+                <li>Melde- &amp; Dokumentationsprozesse</li>
+                <li>Vorgehen für typische Cybervorfälle</li>
+              </ul>
+              <p class="product-note">Auf Wunsch testen wir den vorbereiteten Ablauf anschliessend gemeinsam in einer realistischen Tabletop-Übung.</p>
+            </div>
+            <div class="product-footer">
+              <div class="product-result"><span>Das Ziel</span><p>Im Ernstfall nicht improvisieren müssen.</p></div>
+              <a class="btn service-card-cta" href="mailto:hello@swissploit.ch?subject=Incident%20Readiness%20anfragen">Incident Readiness anfragen <span aria-hidden="true">↗</span></a>
+            </div>
           </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="prinzip" class="section principle-section reveal" aria-labelledby="principle-title">
+      <div class="wrap">
+        <p class="spl-eyebrow">Swissploit Prinzip</p>
+        <h2 id="principle-title" class="spl-section-title">Klarheit statt Security-Komplexität.</h2>
+        <p class="spl-section-lead">Cybersecurity besteht aus hunderten technischen Einzelthemen. Für ein Unternehmen zählen am Ende drei Dinge: Wo stehen wir? Was ist wirklich kritisch? Was müssen wir als Nächstes tun?</p>
+        <div class="principle-grid">
+          <div><h3>Klar priorisiert</h3><p>Nicht jedes Risiko ist gleich wichtig. Wir helfen, dort anzusetzen, wo Massnahmen den grössten Nutzen bringen.</p></div>
+          <div><h3>Verständlich erklärt</h3><p>Geschäftsleitung und IT sollen dieselbe Situation verstehen und gemeinsam Entscheidungen treffen können.</p></div>
+          <div><h3>Praktisch umsetzbar</h3><p>Keine theoretischen Security-Berichte für die Schublade, sondern konkrete nächste Schritte.</p></div>
         </div>
       </div>
     </section>
@@ -172,26 +237,27 @@
 <section id="ueber" class="section trust-section-v7 reveal" aria-label="Über Swissploit">
       <div class="wrap trust-wrap-v7">
         <div class="trust-copy-v7">
-          <p class="spl-eyebrow">Schweizer Marke</p>
-          <h2 class="spl-section-title">Über Swissploit</h2>
-          <p>Swissploit bringt zusätzliche Security-Kompetenz für Management, Mitarbeitende und bestehende IT-Strukturen.</p>
+          <p class="spl-eyebrow">Über Swissploit</p>
+          <h2 class="spl-section-title">Security verstehen. Risiken erkennen. Richtig handeln.</h2>
+          <p>Swissploit unterstützt Schweizer KMU dort, wo Cybersecurity zur Unternehmensfrage wird. Wir prüfen Sicherheitsrisiken, helfen beim Datenschutz und bereiten Unternehmen auf Cybervorfälle vor.</p>
+          <p>Dabei ersetzen wir bestehende IT-Strukturen nicht. Swissploit ergänzt interne IT-Verantwortliche und bestehende IT-Partner mit zusätzlicher Security-Kompetenz, unabhängiger Einschätzung und klarer Priorisierung.</p>
           <div class="trust-proof-grid" aria-label="Warum KMU Swissploit wählen">
             <div class="trust-proof-item">
               <strong>Verständlich</strong>
-              <small>Security so erklärt, dass Management und Mitarbeitende wissen, was wichtig ist.</small>
+              <small>Security muss nicht unnötig kompliziert erklärt werden.</small>
             </div>
             <div class="trust-proof-item">
-              <strong>Praxisnah</strong>
-              <small>Konkrete Risiken, reale Situationen und umsetzbare Empfehlungen.</small>
+              <strong>Technisch fundiert</strong>
+              <small>Wir betrachten Prozesse und Dokumente ebenso wie Systeme, Identitäten, Zugriffe und konkrete Sicherheitsmassnahmen.</small>
             </div>
             <div class="trust-proof-item">
-              <strong>Schweizer Fokus</strong>
-              <small>Security-Kompetenz mit Verständnis für Schweizer KMU und deren Arbeitsalltag.</small>
+              <strong>Schweizer KMU-Fokus</strong>
+              <small>Pragmatische Security für Unternehmen ohne eigene grosse Security-Abteilung.</small>
             </div>
           </div>
         </div>
-        <div class="about-brand-media-v7" aria-label="Swissploit Markenelement">
-          <img class="about-brand-image" src="assets/swissploit-brand-logo3.jpeg" alt="Swissploit Logo" loading="lazy" decoding="async">
+        <div class="about-brand-media-v7 about-signet" aria-hidden="true">
+          <span class="brand-signet"><img class="signet-image" src="assets/Swissploit_S_blue2.png" alt="" width="1254" height="1254" loading="lazy" decoding="async"></span>
         </div>
       </div>
     </section>
@@ -201,10 +267,11 @@
         <div class="spl-blog-panel">
           <div>
             <p class="spl-eyebrow">Swissploit Learn</p>
-            <h2 class="spl-section-title">Cyber Security verstehen – bevor etwas passiert.</h2>
-            <p>In Swissploit Learn erklären wir Phishing, Scams, Account-Sicherheit, Datenschutz und digitale Risiken einfach und praxisnah.</p>
+            <h2 class="spl-section-title">Cybersecurity und Datenschutz einfach erklärt.</h2>
+            <p>Swissploit Learn erklärt digitale Risiken verständlich – von Phishing, Account-Sicherheit und Hacker-Methoden bis zu Datenschutz, Microsoft 365 und Security im Unternehmen.</p>
+            <p>Praxisnah. Verständlich. Ohne unnötige Panikmache.</p>
           </div>
-          <a class="btn primary magnetic" href="/learn/" data-transition>Alle Security-Themen entdecken</a>
+          <a class="btn magnetic" href="/learn/" data-transition>Alle Themen entdecken <span aria-hidden="true">↗</span></a>
         </div>
       </div>
     </section>
@@ -215,7 +282,7 @@
         <h2 class="spl-section-title">Security-Wissen, das im Alltag ankommt.</h2>
         <p class="spl-section-lead">Swissploit erklärt digitale Gefahren auf YouTube, TikTok, Instagram und LinkedIn – verständlich, praxisnah und ohne Panikmache.</p>
         <div class="social-button-grid-v7" aria-label="Swissploit Plattformen">
-          <a class="btn primary magnetic" href="https://www.youtube.com/@Swissploit" target="_blank" rel="noopener">YouTube</a>
+          <a class="btn magnetic" href="https://www.youtube.com/@Swissploit" target="_blank" rel="noopener">YouTube</a>
           <a class="btn magnetic" href="https://www.tiktok.com/@swissploit" target="_blank" rel="noopener">TikTok</a>
           <a class="btn magnetic" href="https://www.instagram.com/swissploit" target="_blank" rel="noopener">Instagram</a>
           <a class="btn magnetic" href="https://www.linkedin.com/company/swissploit/" target="_blank" rel="noopener">LinkedIn</a>
@@ -226,27 +293,36 @@
 
 <section id="kontakt" class="section contact-v7 reveal" aria-label="Kontakt">
       <div class="wrap contact-wrap-v7">
-        <p class="spl-eyebrow">Kontakt</p>
-        <h2 class="spl-section-title">Wo steht Ihre Security heute?</h2>
-        <p>Der Swissploit Security Check schafft eine verständliche Grundlage für die nächsten sinnvollen Schritte.</p>
+        <p class="spl-eyebrow">Wo steht Ihr Unternehmen?</p>
+        <h2 class="spl-section-title">Drei Fragen. Welche können Sie heute klar beantworten?</h2>
+        <ol class="contact-questions">
+          <li>Sind wir genügend geschützt?</li>
+          <li>Ist unser Datenschutz geregelt?</li>
+          <li>Wissen wir, was bei einem Angriff zu tun ist?</li>
+        </ol>
+        <p>Wenn bei einer dieser Fragen Unsicherheit besteht, schauen wir gemeinsam hin. Swissploit zeigt, wo Ihr Unternehmen steht, welche Risiken relevant sind und welche nächsten Schritte sinnvoll sind.</p>
         <div class="cta-row contact-actions-v7">
-          <a class="btn primary magnetic" href="mailto:hello@swissploit.ch?subject=Anfrage%20Security%20Check&body=Hallo%20Swissploit%0A%0AIch%20interessiere%20mich%20f%C3%BCr%20einen%20Security%20Check.%0A%0AUnternehmen%3A%0AAnzahl%20Mitarbeitende%3A%0AAktuelle%20Frage%20oder%20Herausforderung%3A%0A%0AFreundliche%20Gr%C3%BCsse%0A">Security Check anfragen</a>
-          <a class="btn magnetic" href="/learn/" data-transition>Learn entdecken</a>
+          <a class="btn primary magnetic" href="mailto:hello@swissploit.ch?subject=Security%20Check%20anfragen">Security Check anfragen</a>
+          <a class="btn magnetic" href="mailto:hello@swissploit.ch?subject=Anfrage%20an%20Swissploit">Kontakt aufnehmen</a>
         </div>
       </div>
     </section>
   </main>
 
-  <a class="mobile-sticky-cta" href="mailto:hello@swissploit.ch?subject=Anfrage%20Security%20Check&body=Hallo%20Swissploit%0A%0AIch%20interessiere%20mich%20f%C3%BCr%20einen%20Security%20Check.%0A%0AUnternehmen%3A%0AAnzahl%20Mitarbeitende%3A%0AAktuelle%20Frage%20oder%20Herausforderung%3A%0A%0AFreundliche%20Gr%C3%BCsse%0A">Security Check anfragen</a>
+  <a class="mobile-sticky-cta" href="mailto:hello@swissploit.ch?subject=Security%20Check%20anfragen">Security Check anfragen</a>
 
   <footer class="site-footer" role="contentinfo">
     <div class="wrap">
+      <a class="brand-signature footer-brand" href="#intro" aria-label="Swissploit Startseite">
+        <span class="brand-signet" aria-hidden="true"><img class="signet-image" src="assets/Swissploit_S_blue2.png" alt="" width="1254" height="1254" decoding="async"></span>
+        <span class="brand-text">Swissploit</span>
+      </a>
       <p>© <span id="year"></span> Swissploit. Alle Rechte vorbehalten.</p>
       <nav class="foot-nav" aria-label="Footer Navigation">
         <a href="#services">Services</a>
-        <a href="/learn/" data-transition>Learn</a>
         <a href="#ueber">Über Swissploit</a>
         <a href="#kontakt">Kontakt</a>
+        <a class="nav-learn" href="/learn/" data-transition>Learn</a>
       </nav>
     </div>
   </footer>
@@ -260,20 +336,47 @@
   "name": "Swissploit",
   "url": "https://swissploit.ch/",
   "logo": "https://swissploit.ch/assets/swissploit-brand-logo2.png",
-  "description": "Swissploit macht Cyber-Security-Risiken für Schweizer KMU sichtbar, schafft verständliche Prioritäten und ergänzt Management sowie bestehende IT mit Security-Kompetenz.",
-  "areaServed": {"@type": "Country", "name": "Switzerland"},
+  "description": "Swissploit unterstützt Schweizer KMU mit Security Check, Datenschutz Care und Incident Readiness – klar, verständlich und technisch fundiert.",
+  "areaServed": {
+    "@type": "Country",
+    "name": "Switzerland"
+  },
   "serviceType": [
     "Security Check",
-    "Security Awareness",
-    "Security Advisory"
+    "Datenschutz Care",
+    "Incident Readiness"
   ],
   "hasOfferCatalog": {
     "@type": "OfferCatalog",
-    "name": "Swissploit Security Services",
+    "name": "Swissploit Services",
     "itemListElement": [
-      {"@type":"Offer","itemOffered":{"@type":"Service","name":"Security Check","url":"https://swissploit.ch/#services","description":"Verständliche Einordnung der wichtigsten technischen, organisatorischen und menschlichen Security-Risiken mit priorisiertem Massnahmenplan."}},
-      {"@type":"Offer","itemOffered":{"@type":"Service","name":"Security Awareness","url":"https://swissploit.ch/#services","description":"Praxisnahe Schulungen und kontrollierte Phishing-Simulationen für Mitarbeitende."}},
-      {"@type":"Offer","itemOffered":{"@type":"Service","name":"Security Advisory","url":"https://swissploit.ch/#services","description":"Security-Sparring für Management und bestehende IT mit regelmässigen Reviews und klaren Prioritäten."}}
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Security Check",
+          "url": "https://swissploit.ch/#security-check",
+          "description": "Der Swissploit Security Check zeigt, wo Ihr Unternehmen sicherheitstechnisch wirklich steht. Wir prüfen zentrale technische und organisatorische Sicherheitsbereiche, priorisieren Risiken und zeigen konkrete nächste Schritte auf."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Datenschutz Care",
+          "url": "https://swissploit.ch/#datenschutz-care",
+          "description": "Swissploit hilft Ihrem Unternehmen, Datenschutz strukturiert zu organisieren und im Alltag nicht aus den Augen zu verlieren."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Incident Readiness",
+          "url": "https://swissploit.ch/#incident-readiness",
+          "description": "Ein Cyberangriff ist der falsche Zeitpunkt, um Zuständigkeiten erstmals zu klären."
+        }
+      }
     ]
   },
   "sameAs": [

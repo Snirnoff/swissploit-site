@@ -11495,18 +11495,64 @@ html .m365-title-number{
   .grid-focus.is-grid-focused::before{ opacity:.3; }
 }
 
-.article-reading-progress{ position:fixed; z-index:100; top:0; left:0; right:0; height:2px; pointer-events:none; }
-.article-reading-progress span{ display:block; width:100%; height:100%; transform:scaleX(0); transform-origin:left; background:var(--accent); }
-.article-reading-status{ position:relative; display:flex; align-items:center; justify-content:space-between; gap:12px; min-height:52px; margin:0 auto 18px; max-width:720px; padding:8px 12px; color:color-mix(in oklab,var(--fg) 68%,transparent); font-size:12px; }
-.article-reading-status-text{ transition:opacity .35s ease; }
-.article-read-label{ position:absolute; left:12px; color:var(--accent); font-weight:800; letter-spacing:.06em; opacity:0; transition:opacity .35s ease; }
-.article-reading-status.is-read .article-reading-status-text{ opacity:0; }
-.article-reading-status.is-read .article-read-label{ opacity:1; }
-.article-reading-status button{ border:1px solid color-mix(in oklab,var(--accent) 28%,transparent); border-radius:999px; padding:7px 11px; background:color-mix(in oklab,var(--accent) 8%,transparent); color:var(--accent); font:inherit; font-weight:800; cursor:pointer; }
-.article-reading-status button[hidden]{ display:none; }
 
-.article-reading-status button:focus-visible{ outline:2px solid var(--accent); outline-offset:4px; }
 @media (prefers-reduced-motion:reduce){
   .reveal,.reveal.has-entered:not(.visible){ opacity:1!important; translate:0 0!important; filter:none!important; scale:1!important; transition:none!important; }
-  .home-page .care-card-v26,.article-reading-status-text,.article-read-label{ transition:none!important; }
+  .home-page .care-card-v26{ transition:none!important; }
+}
+
+/* Learn is a separate knowledge area, secondary to the commercial CTA. */
+.site-header #primaryNav.nav a.nav-learn {
+  margin-inline-start: 10px;
+  color: color-mix(in srgb, var(--accent) 70%, var(--fg)) !important;
+  border: 1px solid color-mix(in srgb, var(--accent) 28%, transparent) !important;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 5%, transparent) !important;
+}
+.site-header #primaryNav.nav a.nav-learn:hover,
+.site-header #primaryNav.nav a.nav-learn.is-active {
+  border-color: color-mix(in srgb, var(--accent) 60%, transparent) !important;
+  background: color-mix(in srgb, var(--accent) 10%, transparent) !important;
+}
+#primaryNav.nav a.nav-learn::before {
+  content: ''; display: inline-block; width: 5px; height: 5px; flex: 0 0 5px;
+  margin-inline-end: 8px; border-radius: 50%; background: currentColor; vertical-align: middle;
+}
+.foot-nav a.nav-learn {
+  padding-inline-start: 14px; border-inline-start: 1px solid var(--border-strong);
+  color: color-mix(in srgb, var(--accent) 70%, var(--fg)) !important;
+}
+@media (max-width: 768px) {
+  .site-header #primaryNav.nav a.nav-learn { margin-inline-start: 0; margin-top: 6px; }
+}
+
+/* Learn hub and article headers share the homepage signet sizing and source bounds. */
+:is(.learn-page, .learn-article-page) .brand-signature {
+  --signet-height: 34px;
+  gap: 12px; width: fit-content; flex-shrink: 0;
+}
+:is(.learn-page, .learn-article-page) .brand-signature .brand-signet {
+  position: relative; display: block; flex: 0 0 auto;
+  height: var(--signet-height); width: calc(var(--signet-height) * 455 / 850);
+  overflow: hidden; transition: filter .3s ease;
+}
+:is(.learn-page, .learn-article-page) .brand-signet .signet-image {
+  position: absolute; display: block; height: calc(var(--signet-height) * 1254 / 850);
+  width: auto; max-width: none; object-fit: contain;
+  top: calc(var(--signet-height) * -202 / 850);
+  left: calc(var(--signet-height) * -400 / 850);
+}
+:is(.learn-page, .learn-article-page) .brand-signature .brand-text { display: inline-block !important; }
+@media (hover: hover) and (pointer: fine) {
+  :is(.learn-page, .learn-article-page) .brand-signature:hover .brand-signet { filter: brightness(1.08) drop-shadow(0 0 3px rgba(74,179,195,.18)); }
+}
+@media (max-width: 768px) {
+  :is(.learn-page, .learn-article-page) .brand-signature { --signet-height: 30px; gap: 10px; }
+}
+@media (max-width: 380px) {
+  :is(.learn-page, .learn-article-page) .brand-signature { --signet-height: 28px; }
+  :is(.learn-page, .learn-article-page) .brand-signature .brand-text { font-size: 13px !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  :is(.learn-page, .learn-article-page) .brand-signet { transition: none; }
 }

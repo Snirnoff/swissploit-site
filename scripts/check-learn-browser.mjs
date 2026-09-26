@@ -80,7 +80,7 @@ try {
   await call('Page.navigate',{url:'http://127.0.0.1:4173/blog/phishing-mails-erkennen/'});
   await delay(400);
   const guide=await fs.readFile('docs/LEARN-AUTHORING.md','utf8');
-  const snippets=[...guide.matchAll(/```html\n([\s\S]*?)\n```/g)].map(m=>m[1]).join('\n\n');
+  const snippets=[...guide.matchAll(/```html\r?\n([\s\S]*?)\r?\n```/g)].map(m=>m[1]).join('\n\n');
   const fixture=prepareArticle(parseArticle('<p>Komponentenpr?fung: ? &amp; ?</p>'+snippets+'<p><a href="https://example.com/">https://example.com/'+ 'long'.repeat(80)+'</a></p><pre><code>'+ 'code'.repeat(80)+'</code></pre>','browser-fixture').html).html;
   await evaluate('document.querySelector(".post-article").innerHTML='+JSON.stringify(fixture));
   await evaluate('Promise.all([...document.images].map(i=>{i.loading="eager";return i.decode().catch(()=>{});} ))');
