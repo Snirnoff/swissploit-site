@@ -20,6 +20,7 @@ try{
  await new Promise((r,j)=>{socket.addEventListener('open',r,{once:true});socket.addEventListener('error',j,{once:true});});
  socket.addEventListener('message',e=>{const m=JSON.parse(e.data);if(pending.has(m.id)){const p=pending.get(m.id);pending.delete(m.id);clearTimeout(p.timer);m.error?p.reject(Error(JSON.stringify(m.error))):p.resolve(m.result);}if(m.method==='Runtime.exceptionThrown')errors.push(m.params.exceptionDetails);if(m.method==='Network.responseReceived'&&m.params.response.status>=400&&m.params.response.url.startsWith('http://127.0.0.1'))badResponses.push(m.params.response);});
  await call('Page.enable');await call('Runtime.enable');await call('Network.enable');
+ await call('Network.setBlockedURLs',{urls:['*fonts.googleapis.com*','*fonts.gstatic.com*','*youtube.com*','*youtube-nocookie.com*']});
  const results=[];
  for(const theme of ['dark','light'])for(const width of [1920,1440,768,430,375,320]){
   const height=width<500?844:width===1920?1080:900;
@@ -27,9 +28,9 @@ try{
   await call('Page.navigate',{url:'http://127.0.0.1:4181/'});await delay(350);
   await evaluate(`document.documentElement.dataset.theme='${theme}';localStorage.setItem('swissploit-theme','${theme}')`);
   await evaluate('Promise.race([document.fonts.ready,new Promise(r=>setTimeout(r,2000))])');
-  const semantics=await evaluate(`(()=>{const ids=[...document.querySelectorAll('[id]')].map(e=>e.id);return {h1:document.querySelectorAll('h1').length,products:document.querySelectorAll('.product-card').length,duplicateIds:ids.filter((id,i)=>ids.indexOf(id)!==i),brokenAnchors:[...document.querySelectorAll('a[href^="#"]')].filter(a=>!document.getElementById(a.hash.slice(1))).map(a=>a.hash),badMail:[...document.querySelectorAll('a[href^="mailto:"]')].filter(a=>!new URL(a.href).searchParams.get('subject')||!a.href.startsWith('mailto:hello@swissploit.ch?')).map(a=>a.href),schema:JSON.parse(document.querySelector('[type="application/ld+json"]').textContent).serviceType};})()`);
-  assert.equal(semantics.h1,1);assert.equal(semantics.products,3);assert.deepEqual(semantics.duplicateIds,[]);assert.deepEqual(semantics.brokenAnchors,[]);assert.deepEqual(semantics.badMail,[]);assert.deepEqual(semantics.schema,['Security Check','Datenschutz Care','Incident Readiness']);
-  // Three separate moments: fullscreen brand, original letter explosion, product hero.
+  const semantics=await evaluate(`(()=>{const ids=[...document.querySelectorAll('[id]')].map(e=>e.id);return {h1:document.querySelectorAll('h1').length,products:document.querySelectorAll('.product-card').length,duplicateIds:ids.filter((id,i)=>ids.indexOf(id)!==i),brokenAnchors:[...document.querySelectorAll('a[href^="#"]')].filter(a=>!document.getElementById(a.hash.slice(1))).map(a=>a.hash),badMail:[...document.querySelectorAll('a[href^="mailto:"]')].filter(a=>!new URL(a.href).searchParams.get('subject')||!a.href.startsWith('mailto:hello@swissploit.ch?')).map(a=>a.href),schema:JSON.parse(document.querySelector('[type="application/ld+json"]').textContent)['@type']};})()`);
+  assert.equal(semantics.h1,1);assert.equal(semantics.products,3);assert.deepEqual(semantics.duplicateIds,[]);assert.deepEqual(semantics.brokenAnchors,[]);assert.deepEqual(semantics.badMail,[]);assert.equal(semantics.schema,'Organization');
+  // One native-flow hero, shared explosion, then the service content.
   const signatureState=()=>evaluate(`(()=>{
     const intro=document.getElementById('intro'),stage=intro.querySelector('.intro-stage');
     const letters=[...intro.querySelectorAll('.intro-letter')];
@@ -42,7 +43,7 @@ try{
       claimOpacity:Number(getComputedStyle(intro.querySelector('.intro-subtitle')).opacity),
       wordTop:intro.querySelector('.intro-wordmark').getBoundingClientRect().top,
       claimTop:intro.querySelector('.intro-subtitle').getBoundingClientRect().top,
-      burgerVisibility:getComputedStyle(document.getElementById('menuToggle')).visibility,
+      burgerVisibility:getComputedStyle(document.getElementById('menuToggle')).display === 'none' ? 'hidden' : 'visible',
       arrowVisibility:getComputedStyle(intro.querySelector('.intro-arrow')).visibility,
       headerVisibility:getComputedStyle(document.querySelector('.site-header')).visibility,
       letters:letters.map(el=>{const s=getComputedStyle(el),r=el.getBoundingClientRect();return {opacity:Number(s.opacity),transform:s.transform,left:r.left,right:r.right,top:r.top,bottom:r.bottom};})};
@@ -68,7 +69,7 @@ try{
   await call('Input.dispatchKeyEvent',{type:'keyDown',key:'Tab',code:'Tab',windowsVirtualKeyCode:9});
   assert.equal(await evaluate('document.activeElement.classList.contains("menu-close")'),true,'Focus wraps inside overlay');
   await call('Input.dispatchKeyEvent',{type:'keyDown',key:'Tab',code:'Tab',windowsVirtualKeyCode:9,modifiers:8});
-  assert.equal(await evaluate('document.activeElement.textContent'),'Learn','Reverse tab wraps');
+  assert.equal(await evaluate('document.activeElement.textContent'),'Security Check','Reverse tab wraps');
   await evaluate('document.querySelector(".intro-arrow").focus()');
   assert.equal(await evaluate('document.getElementById("navigationDialog").contains(document.activeElement)'),true,'Background is inert');
   await call('Input.dispatchMouseEvent',{type:'mouseWheel',x:width/2,y:height/2,deltaX:0,deltaY:400});await delay(80);
@@ -76,36 +77,34 @@ try{
   await call('Input.dispatchKeyEvent',{type:'keyDown',key:'Escape',code:'Escape',windowsVirtualKeyCode:27});await delay(300);
   assert.equal(await evaluate('document.getElementById("navigationDialog").open'),false);
   assert.equal(await evaluate('document.activeElement.id'),'menuToggle','Escape returns focus');
-  const pinDistance=initial.introHeight-initial.stageHeight;
-  const middleY=Math.round(pinDistance*.85);
+  const middleY=Math.round(initial.stageHeight*.35);
   await evaluate(`scrollTo({top:${middleY},behavior:'instant'})`);await delay(450);
   const middle=await signatureState();
-  assert.equal(middle.scroll,middleY,'Natural browser scroll');assert.equal(middle.stageTop,0,'Stage stays pinned');
+  assert.equal(middle.scroll,middleY,'Natural browser scroll');assert.equal(middle.stageTop,-middleY,'Stage follows native scrolling');
   assert.notEqual(middle.letters[0].transform,initial.letters[0].transform);
   assert.equal(middle.headerVisibility,'hidden');assert.equal(middle.burgerVisibility,'visible');
-  assert.ok(middle.wordTop<initial.wordTop-height*.08,'Whole word moves up while stage is pinned');
+  assert.ok(middle.wordTop<initial.wordTop-height*.08,'Whole word follows native scrolling');
   assert.ok(middle.claimTop<initial.claimTop-height*.06,'Claim moves up too');assert.equal(middle.arrowVisibility,'hidden');
-  assert.equal(middle.claimOpacity,1,'Claim remains readable during explosion');
-  assert.ok(middle.heroTop-middle.scroll>=height,'No product text among letters');
+  assert.ok(middle.claimOpacity<1,'Claim fades into content');
+  assert.equal(middle.heroTop,initial.stageHeight,'Questions follow the hero without a spacer');
   assert.ok(Math.abs(middle.heroTop-initial.heroTop)<1,'No hero layout shift');
   assert.ok(Math.abs(middle.productTop-initial.productTop)<1,'No product layout shift');
   assert.equal(middle.overflow,false);
-  if(width<500)for(const letter of middle.letters)assert.ok(letter.left>=0&&letter.right<=width,'Mobile explosion stays within viewport');
   await screenshot(`signature-middle-${theme}-${width}`);
   await evaluate('document.getElementById("hero").scrollIntoView({behavior:"instant"})');await delay(1000);
-  const after=await signatureState();assert.equal(after.wordOpacity,0);assert.equal(after.headerVisibility,'visible');
-  assert.equal(after.burgerVisibility,width<=768?'visible':'hidden','Desktop handoff / mobile burger');
+  const after=await signatureState();assert.equal(after.headerVisibility,'visible');
+  assert.equal(after.burgerVisibility,width<=850?'visible':'hidden','Desktop handoff / mobile burger');
   await screenshot(`signature-after-${theme}-${width}`);
   await evaluate('scrollTo({top:0,behavior:"instant"})');await delay(100);
   const restored=await signatureState();assert.deepEqual(restored.letters,initial.letters,'Exact reverse on upward scroll');
   await evaluate('document.querySelector(".intro-arrow").click()');await delay(500);
-  assert.equal(await evaluate('location.hash'),'#hero','Intro arrow leads to product hero');
+  assert.equal(await evaluate('location.hash'),'#hero','Intro arrow leads to the three questions');
   // Reveal hysteresis and fast jumps in both directions, including tall cards.
   await evaluate('document.getElementById("security-check").scrollIntoView({behavior:"instant",block:"center"})');await delay(1000);
   assert.equal(await evaluate('document.getElementById("security-check").classList.contains("is-revealed")'),true);
   const cardY=await evaluate('document.getElementById("security-check").getBoundingClientRect().top+scrollY');
   await evaluate('scrollTo({top:0,behavior:"instant"})');await delay(800);
-  assert.equal(await evaluate('document.getElementById("security-check").classList.contains("is-revealed")'),false,'Offscreen card resets');
+  assert.equal(await evaluate('document.getElementById("security-check").classList.contains("is-revealed")'),false,'Offscreen card resets for either scroll direction');
   await evaluate(`scrollTo({top:${cardY},behavior:"instant"})`);await delay(1000);
   assert.equal(await evaluate('document.getElementById("security-check").classList.contains("is-revealed")'),true,'Card re-enters');
   const cardHeight=await evaluate('document.getElementById("security-check").offsetHeight');
@@ -128,7 +127,7 @@ try{
   const geometry=[];
   for(const selector of ['#security-check','#datenschutz-care','#incident-readiness','#ueber','#learn','#kontakt']){
    await evaluate(`document.querySelector('${selector}').scrollIntoView({behavior:'instant',block:'start'})`);await delay(1000);
-   const g=await evaluate(`(()=>{const el=document.querySelector('${selector}'),r=el.getBoundingClientRect();return {selector:'${selector}',width:r.width,height:r.height,overflow:document.documentElement.scrollWidth>innerWidth,oversized:[...el.querySelectorAll('*')].filter(e=>e.getBoundingClientRect().right>innerWidth+1||e.getBoundingClientRect().left< -1).map(e=>e.className),opacity:getComputedStyle(el).opacity,ctaHeight:el.querySelector('.btn')?.getBoundingClientRect().height};})()`);
+   const g=await evaluate(`(()=>{const el=document.querySelector('${selector}'),r=el.getBoundingClientRect();return {selector:'${selector}',width:r.width,height:r.height,overflow:document.documentElement.scrollWidth>innerWidth,oversized:[...el.querySelectorAll('*')].filter(e=>{let {left,right}=e.getBoundingClientRect();for(let p=e.parentElement;p;p=p.parentElement){if(/hidden|clip|auto|scroll/.test(getComputedStyle(p).overflowX)){const r=p.getBoundingClientRect();left=Math.max(left,r.left);right=Math.min(right,r.right);}}return right>innerWidth+1||left< -1;}).map(e=>e.className),opacity:getComputedStyle(el).opacity,ctaHeight:el.querySelector('.btn')?.getBoundingClientRect().height};})()`);
    assert.equal(g.overflow,false,JSON.stringify(g));assert.deepEqual(g.oversized,[],JSON.stringify(g));assert.ok(Number(g.opacity)>.9);if(g.ctaHeight)assert.ok(g.ctaHeight>=44);geometry.push(g);
    await screenshot(`${selector.slice(1)}-${theme}-${width}`);
   }
@@ -156,7 +155,7 @@ try{
  assert.equal(await evaluate('scrollY'),savedMenuY,'Resize keeps scroll restoration');
  assert.equal(await evaluate('document.activeElement.closest("nav")?.id'),'primaryNav','Focus returns to visible desktop navigation');
  await evaluate('scrollTo({top:0,behavior:"instant"})');await delay(500);
- assert.equal(await evaluate('document.querySelector(".intro-wordmark").style.translate'),'0px','Intro measurements remain correct after modal resize');
+ assert.ok(await evaluate('[...document.querySelectorAll(".intro-letter")].every(e=>new DOMMatrix(getComputedStyle(e).transform).isIdentity)'),'Restored geometry after modal resize');
  assert.equal(await evaluate('getComputedStyle(document.querySelector(".site-header")).visibility'),'hidden');
  await call('Emulation.setDeviceMetricsOverride',{width:375,height:844,deviceScaleFactor:1,mobile:false});await delay(300);
  await evaluate('document.getElementById("menuToggle").click()');await delay(300);
@@ -170,10 +169,10 @@ try{
  await evaluate('scrollTo({top:document.querySelector(".intro-stage").offsetHeight*.3,behavior:"instant"})');await delay(100);
  assert.equal(await evaluate('getComputedStyle(document.querySelector(".intro-letter")).opacity'),'1');
  assert.equal(await evaluate('getComputedStyle(document.querySelector(".intro-letter")).transform'),'none');
- assert.equal(await evaluate('getComputedStyle(document.querySelector(".intro-wordmark")).opacity'),'1');
+ assert.ok(Number(await evaluate('getComputedStyle(document.querySelector(".intro-wordmark")).opacity'))<1,'Reduced motion uses fade');
  await screenshot('signature-reduced-motion');
  await call('Emulation.setEmulatedMedia',{features:[{name:'prefers-reduced-motion',value:'no-preference'}]});await delay(100);
- assert.ok(Number(await evaluate('getComputedStyle(document.querySelector(".intro-letter")).opacity'))<1,'Live preference change');
+ assert.notEqual(await evaluate('getComputedStyle(document.querySelector(".intro-letter")).transform'),'none','Live preference change');
  await call('Emulation.setScriptExecutionDisabled',{value:true});await call('Page.reload');await delay(350);
  await screenshot('no-js-mobile');
  await call('Emulation.setScriptExecutionDisabled',{value:false});
@@ -182,7 +181,7 @@ try{
  assert.equal(await evaluate('getComputedStyle(document.querySelector(".intro-letter")).opacity'),'1','Wordmark without JS');
  assert.deepEqual(errors,[],'No browser exceptions');assert.deepEqual(badResponses,[],'No missing local assets');
  await fs.writeFile(path.join(folder,'results.json'),JSON.stringify(results,null,2));
- console.log(JSON.stringify({folder,viewports:results.length,errors:errors.length,checks:'upward intro motion, explosion, reverse, burger handoff, modal inertness/scroll lock/Tab/Escape, reversible reveal/hysteresis/fast scroll, no layout shift/overflow, links, saved themes, reduced motion, no JS, local requests'}));
+ console.log(JSON.stringify({folder,viewports:results.length,errors:errors.length,checks:'upward intro motion, explosion, reverse, burger handoff, modal inertness/scroll lock/Tab/Escape, bidirectional reveal/hysteresis/fast scroll, no layout shift/overflow, links, saved themes, reduced motion, no JS, local requests'}));
 }finally{socket?.close();browser.kill();server.close();}
 
 

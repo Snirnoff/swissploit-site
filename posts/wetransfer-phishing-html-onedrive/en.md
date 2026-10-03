@@ -1,9 +1,11 @@
 ---
+seoTitle: "WeTransfer phishing: fake OneDrive login | Swissploit"
+seoDescription: "How a WeTransfer link delivers an HTML file with a fake OneDrive login. Learn the warning signs and what to do if you entered your password."
 id: wetransfer-phishing-html-onedrive
 date: 2026-01-27
 category: phishing-betrug
 tags: [security, phishing, microsoft365, onedrive, outlook]
-thumb: assets/blog/h355-014.png
+thumb: assets/blog/h355-014.webp
 videoUrl: https://www.youtube.com/watch?v=5aVeWRinSxM
 title: HTML Attack
 excerpt: A real Microsoft account takeover!

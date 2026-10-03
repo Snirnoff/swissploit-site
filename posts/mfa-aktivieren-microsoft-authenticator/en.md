@@ -1,4 +1,5 @@
 ---
+seoTitle: "Enable MFA with Microsoft Authenticator | Swissploit"
 id: mfa-aktivieren-microsoft-authenticator
 date: "2026-03-05"
 category: accounts-passwoerter
@@ -99,4 +100,4 @@ Add at least one backup method if possible, so you don’t lock yourself out whe
 
 If you think you may have fallen for a phishing attempt (clicked a suspicious link or entered your password), follow these immediate containment steps:
 
-- [Phishing emergency checklist for Microsoft 365 & Entra ID](/blog/notfall-checkliste-phishing-microsoft-365)
+- [Phishing emergency checklist for Microsoft 365 & Entra ID](/en/blog/notfall-checkliste-phishing-microsoft-365/)

@@ -27,42 +27,33 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/navigation.css" />
 </head>
 
 <body class="learn-page phishing-simulation-page">
   <a class="simulation-skip-nav" href="#main">Zum Inhalt</a>
-  <header class="site-header" role="banner">
-    <div class="wrap headerbar">
-      <a class="brand" href="/index.html#intro" aria-label="Swissploit Home" data-transition>
-        <img class="brand-logo-image header-logo-image" src="/assets/swissploit-brand-logo2.png" alt="Swissploit Logo" width="120" height="49" decoding="async">
-        <span class="brand-text">Swissploit</span>
+  <header class="site-header shared-header" role="banner">
+    <div class="site-header-inner">
+      <a class="site-brand" href="/#intro" aria-label="Swissploit Startseite">
+        <span class="site-signet" aria-hidden="true"><img src="/assets/Swissploit_S_blue2.png" alt="" width="1254" height="1254" decoding="async"></span>
+        <span>Swissploit</span>
       </a>
-
-      <nav id="primaryNav" class="nav" aria-label="Hauptnavigation">
-        <a href="/index.html#services" data-transition>Services</a>
-        <a href="/index.html#ueber" data-transition>Über Swissploit</a>
-        <a href="/index.html#kontakt" data-transition>Kontakt</a>
-        <a class="nav-learn" href="/learn/" data-transition>Learn</a>
+      <nav id="primaryNav" class="site-nav" aria-label="Hauptnavigation">
+        <a href="/#services">Services</a>
+        <a href="/#ueber">Über Swissploit</a>
+        <a href="/#kontakt">Kontakt</a>
+        <a class="site-learn" href="/learn/"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 5v12M2 3.5c3-1 5-.5 8 1.5 3-2 5-2.5 8-1.5v12c-3-1-5-.5-8 1.5-3-2-5-2.5-8-1.5z"/></svg>Learn<span aria-hidden="true">↗</span></a>
+        <a class="site-check" href="mailto:hello@swissploit.ch?subject=Security%20Check%20anfragen">Security Check</a>
       </nav>
-
-      <div class="header-actions">
-        <button id="themeToggle"
-          class="switch"
-          aria-pressed="false"
-          aria-label="Darstellung umschalten"
-          title="Dark/Light umschalten">
-          <span class="switch-track"></span>
-          <span class="switch-thumb">
-            <span class="switch-icon sun" aria-hidden="true">&#9728;</span>
-            <span class="switch-icon moon" aria-hidden="true">&#9790;</span>
-          </span>
-        </button>
-        <button id="menuToggle" class="menu-toggle" type="button" aria-expanded="false" aria-controls="primaryNav" aria-label="Menu oeffnen">
-          <span></span><span></span>
-        </button>
-      </div>
+      <button id="themeToggle" class="site-theme" type="button" aria-pressed="true" aria-label="Dunkle Darstellung umschalten" title="Hell / Dunkel"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="7" fill="none"/><path d="M10 3a7 7 0 0 0 0 14z" stroke="none"/></svg></button>
     </div>
   </header>
+  <button id="menuToggle" class="site-menu-control" type="button" aria-expanded="false" aria-controls="navigationDialog" aria-label="Menü öffnen"><span></span><span></span></button>
+  <dialog id="navigationDialog" class="site-menu-dialog" aria-label="Hauptnavigation">
+    <button class="site-menu-control menu-close" type="button" aria-label="Menü schliessen" autofocus><span></span><span></span></button>
+    <span class="site-menu-label">Swissploit</span>
+    <div class="menu-content"></div>
+  </dialog>
 
   <main id="main">
     <section class="simulation-notice" aria-labelledby="simulation-notice-title">

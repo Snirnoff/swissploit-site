@@ -1,7 +1,7 @@
 // assets/app.js
 
 
-// KMU mobile navigation
+// Shared accessible navigation modal
 (function(){
   const toggle = document.getElementById('menuToggle');
   const nav = document.getElementById('primaryNav');
@@ -37,7 +37,7 @@
             heading.addEventListener('blur', () => heading.removeAttribute('tabindex'), { once: true });
           }
         } else {
-          const returnTarget = getComputedStyle(toggle).visibility === 'hidden' ? nav.querySelector('a') : toggle;
+          const returnTarget = getComputedStyle(toggle).display === 'none' ? nav.querySelector('a') : toggle;
           returnTarget?.focus({ preventScroll: true });
         }
       };
@@ -51,6 +51,7 @@
       document.body.classList.add('navigation-open');
       toggle.setAttribute('aria-expanded', 'true');
       dialog.showModal();
+      window.dispatchEvent(new Event('navigation:opened'));
       requestAnimationFrame(() => dialog.classList.add('is-open'));
     });
     close.addEventListener('click', () => closeOverlay());
@@ -75,23 +76,6 @@
     return;
   }
 
-  function closeMenu(){
-    nav.classList.remove('is-open');
-    toggle.setAttribute('aria-expanded', 'false');
-    toggle.setAttribute('aria-label', 'Menu oeffnen');
-  }
-
-  toggle.addEventListener('click', () => {
-    const isOpen = nav.classList.toggle('is-open');
-    toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-    toggle.setAttribute('aria-label', isOpen ? 'Menu schliessen' : 'Menu oeffnen');
-  });
-
-  nav.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
-
-  window.addEventListener('resize', () => {
-    if(window.innerWidth > 760) closeMenu();
-  }, { passive: true });
 })();
 
 // Jahr (falls vorhanden)
@@ -147,18 +131,17 @@ document.addEventListener('DOMContentLoaded', () => {
   if (home) {
     document.querySelectorAll('.reveal').forEach(el => el.classList.remove('reveal'));
     const selectors = [
-      'main .spl-eyebrow', 'main h1', 'main .spl-section-title', 'main .spl-section-lead',
-      '.business-questions', '.hero-lead-v7', '.hero-proof-row', '.cta-row',
-      '.business-intro-copy', '.product-card', '.principle-grid > div',
-      '.trust-copy-v7 > p:not(.spl-eyebrow)', '.trust-proof-item', '.about-brand-media-v7',
-      '.spl-blog-panel > div > p:not(.spl-eyebrow)', '.spl-blog-panel > .btn',
-      '.social-button-grid-v7', '.contact-questions', '.contact-wrap-v7 > p:not(.spl-eyebrow)'
+      '.kmu-hero-wrap-v7', '.section-heading-center', '.business-intro',
+      '.product-card', '.principle-grid',
+      '.trust-wrap-v7',
+      '.spl-blog-panel',
+      '.social-button-grid-v7', '.contact-wrap-v7'
     ];
     document.querySelectorAll(selectors.join(',')).forEach(el => {
       el.dataset.reveal = '';
-      el.dataset.revealDelay = el.matches('h1,h2') ? '90' : el.matches('.spl-section-lead') ? '160' : '0';
+      el.dataset.revealDelay = '0';
     });
-    document.querySelectorAll('.product-family, .principle-grid, .trust-proof-grid').forEach(group => {
+    document.querySelectorAll('.product-family').forEach(group => {
       group.dataset.revealGroup = '';
       [...group.children].forEach((el, index) => { el.dataset.revealDelay = String(index * 90); });
     });
@@ -186,7 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
           } else if (!target.contains(document.activeElement) && !target.matches('.blog-card')) target.classList.remove('visible');
           return;
         }
-        // Relative to the viewport for tall mobile cards. Enter at 16%; exit only outside.
+        // Viewport-relative entry for tall cards; reset only after fully leaving to avoid flicker.
         const visible = intersectionRect.height / Math.max(1, Math.min(boundingClientRect.height, rootBounds.height));
         if (isIntersecting && visible >= .16) show(target);
         else if (!isIntersecting && !target.contains(document.activeElement)) target.classList.remove('is-revealed');
@@ -201,7 +184,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       observer.observe(item);
     });
-    if (home) document.body.classList.add('reveal-ready');
+    document.body.classList.add('reveal-ready');
   }
   items.forEach(item => item.addEventListener('focusin', () => show(item)));
   reduced.addEventListener('change', setup);
@@ -564,78 +547,6 @@ if(shortsSection){
     desktopQuery.addEventListener('change', reset);
     reduced.addEventListener('change', reset);
   });
-})();
-
-// Live Wordmark trajectories, coupled only to the native intro scroll range.
-(function introMotion(){
-  const intro = document.querySelector('.home-page .intro-scroll-container');
-  if (!intro) return;
-  const stage = intro.querySelector('.intro-stage');
-  const wordmark = intro.querySelector('.intro-wordmark');
-  const letters = Array.from(intro.querySelectorAll('.intro-letter'));
-  const subtitle = intro.querySelector('.intro-subtitle');
-  const arrow = intro.querySelector('.intro-arrow');
-  const header = document.querySelector('.site-header');
-  const stickyCta = document.querySelector('.mobile-sticky-cta');
-  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const mobile = window.matchMedia('(max-width: 760px)');
-  const trajectories = letters.map(el => ({ x: Number(el.dataset.x), y: Number(el.dataset.y), r: Number(el.dataset.r) }));
-  const clamp = value => Math.min(1, Math.max(0, value));
-  let frame = 0, start = 0, range = 1, end = 0, lastProgress = -1;
-  let mobileScale = .4, stageHeight = 0, headerStart = 0;
-
-  function update(){
-    frame = 0;
-    if (document.body.classList.contains('navigation-open')) return;
-    const scrollY = window.scrollY;
-    const progress = clamp((scrollY - start) / range);
-    header?.classList.toggle('is-intro-passed', scrollY >= headerStart);
-    document.body.classList.toggle('intro-passed', scrollY >= headerStart);
-    stickyCta?.classList.toggle('is-visible', mobile.matches && scrollY >= end);
-    if (progress === lastProgress) return;
-    lastProgress = progress;
-    const movement = reduced.matches ? 0 : 1 - Math.pow(1 - clamp((progress - .05) / .65), 3);
-    const multiplier = mobile.matches ? mobileScale : 1;
-    const fade = 1 - clamp((progress - .7) / .3);
-    letters.forEach((letter, index) => {
-      const target = trajectories[index];
-      letter.style.transform = 'translate3d(' + (target.x * multiplier * movement).toFixed(2) + 'px,' + (target.y * multiplier * movement).toFixed(2) + 'px,0) rotate(' + (target.r * multiplier * movement).toFixed(2) + 'deg)';
-      letter.style.opacity = String(1 - .25 * movement);
-    });
-    wordmark.style.opacity = String(fade);
-    const lift = reduced.matches ? 0 : Math.pow(progress, 1.45);
-    wordmark.style.translate = '0 ' + (-stageHeight * .64 * lift).toFixed(2) + 'px';
-    subtitle.style.translate = '0 ' + (-stageHeight * .24 * lift - (reduced.matches ? 0 : 50 * progress)).toFixed(2) + 'px';
-    subtitle.style.opacity = String(1 - clamp((progress - .5) / .4));
-    subtitle.style.filter = reduced.matches ? 'none' : 'blur(' + (4 * clamp((progress - .65) / .3)).toFixed(2) + 'px)';
-    arrow.style.setProperty('opacity', String(1 - clamp(progress / .09)), 'important');
-    arrow.style.translate = reduced.matches ? 'none' : '0 ' + (-12 * clamp(progress / .09)).toFixed(2) + 'px';
-    arrow.style.visibility = progress >= .09 ? 'hidden' : 'visible';
-  }
-  function requestUpdate(){ if (!frame) frame = requestAnimationFrame(update); }
-  function refresh(){
-    if (document.body.classList.contains('navigation-open')) return;
-    start = intro.getBoundingClientRect().top + window.scrollY;
-    const height = stage.offsetHeight;
-    stageHeight = height;
-    end = start + intro.offsetHeight;
-    headerStart = end - height * .9;
-    // Finish as the released stage leaves; avoid a blank viewport after a pinned fade.
-    range = Math.max(1, intro.offsetHeight - height * .3);
-    // Keep the original .4 mobile travel, reducing only on very narrow screens.
-    const rightSpace = (stage.clientWidth - wordmark.offsetWidth) / 2 - 18;
-    mobileScale = Math.max(.1, Math.min(.4, rightSpace / 220));
-    lastProgress = -1;
-    requestUpdate();
-  }
-  window.addEventListener('scroll', requestUpdate, { passive: true });
-  window.addEventListener('resize', refresh, { passive: true });
-  window.addEventListener('pageshow', refresh);
-  window.addEventListener('navigation:closed', refresh);
-  reduced.addEventListener('change', refresh);
-  mobile.addEventListener('change', refresh);
-  document.fonts?.ready.then(refresh);
-  refresh();
 })();
 
 // Only services increases the existing grid's local visibility.
@@ -1040,7 +951,7 @@ if(shortsSection){
 
 // ===== NAV ACTIVE SECTION (robust: click locks active until anchor jump finishes) =====
 (function () {
-  const nav = document.querySelector(".site-header .nav");
+  const nav = document.querySelector(".site-header .site-nav");
   if (!nav) return;
 
   const links = Array.from(nav.querySelectorAll("a"));

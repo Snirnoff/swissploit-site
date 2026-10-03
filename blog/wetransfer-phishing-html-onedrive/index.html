@@ -3,32 +3,32 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Angriff mit HTML – Swissploit</title>
+  <title>WeTransfer-Phishing: gefälschtes OneDrive-Login | Swissploit</title>
 
-  <meta name="description" content="So wurde ein Microsoft-Konto übernommen!" />
+  <meta name="description" content="So führt ein WeTransfer-Link über eine HTML-Datei zu einem gefälschten OneDrive-Login. Erkenne Warnsignale und erfahre, wie du richtig reagierst." />
   <meta name="robots" content="index,follow,max-image-preview:large" />
 
-  <meta property="og:title" content="Angriff mit HTML">
-  <meta property="og:description" content="So wurde ein Microsoft-Konto übernommen!">
+  <meta property="og:title" content="WeTransfer-Phishing: gefälschtes OneDrive-Login | Swissploit">
+  <meta property="og:description" content="So führt ein WeTransfer-Link über eine HTML-Datei zu einem gefälschten OneDrive-Login. Erkenne Warnsignale und erfahre, wie du richtig reagierst.">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://swissploit.ch/blog/wetransfer-phishing-html-onedrive/">
-  <meta property="og:image" content="https://swissploit.ch/assets/blog/h355-014.png">
+  <meta property="og:image" content="https://swissploit.ch/assets/blog/h355-014.webp">
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Angriff mit HTML">
-  <meta name="twitter:description" content="So wurde ein Microsoft-Konto übernommen!">
-  <meta name="twitter:image" content="https://swissploit.ch/assets/blog/h355-014.png">
+  <meta name="twitter:title" content="WeTransfer-Phishing: gefälschtes OneDrive-Login | Swissploit">
+  <meta name="twitter:description" content="So führt ein WeTransfer-Link über eine HTML-Datei zu einem gefälschten OneDrive-Login. Erkenne Warnsignale und erfahre, wie du richtig reagierst.">
+  <meta name="twitter:image" content="https://swissploit.ch/assets/blog/h355-014.webp">
 
   <link rel="canonical" href="https://swissploit.ch/blog/wetransfer-phishing-html-onedrive/" />
   <link rel="alternate" hreflang="de" href="https://swissploit.ch/blog/wetransfer-phishing-html-onedrive/" />
   <link rel="alternate" hreflang="en" href="https://swissploit.ch/en/blog/wetransfer-phishing-html-onedrive/" />
   <link rel="alternate" hreflang="x-default" href="https://swissploit.ch/blog/wetransfer-phishing-html-onedrive/" />
 
-  <link rel="icon" type="image/png" href="/assets/Swissploit_S_blue2.png">
-  <link rel="apple-touch-icon" href="/assets/Swissploit_S_blue2.png">
+  <link rel="icon" type="image/png" href="/assets/swissploit-signet-48.png">
+  <link rel="apple-touch-icon" href="/assets/swissploit-signet-180.png">
   <meta name="theme-color" content="#05070b">
 
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Angriff mit HTML","description":"So wurde ein Microsoft-Konto übernommen!","datePublished":"2026-01-27","dateModified":"2026-01-27","image":"https://swissploit.ch/assets/blog/h355-014.png","url":"https://swissploit.ch/blog/wetransfer-phishing-html-onedrive/","mainEntityOfPage":"https://swissploit.ch/blog/wetransfer-phishing-html-onedrive/","inLanguage":"de","author":{"@type":"Person","name":"Swissploit"},"publisher":{"@type":"Organization","name":"Swissploit","logo":{"@type":"ImageObject","url":"https://swissploit.ch/assets/swissploit-og.png"}},"keywords":"security, phishing, microsoft365, onedrive, outlook"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Angriff mit HTML","description":"So führt ein WeTransfer-Link über eine HTML-Datei zu einem gefälschten OneDrive-Login. Erkenne Warnsignale und erfahre, wie du richtig reagierst.","datePublished":"2026-01-27","dateModified":"2026-01-27","image":"https://swissploit.ch/assets/blog/h355-014.webp","url":"https://swissploit.ch/blog/wetransfer-phishing-html-onedrive/","mainEntityOfPage":"https://swissploit.ch/blog/wetransfer-phishing-html-onedrive/","inLanguage":"de","author":{"@type":"Organization","@id":"https://swissploit.ch/#organization","name":"Swissploit","url":"https://swissploit.ch/"},"publisher":{"@type":"Organization","@id":"https://swissploit.ch/#organization","url":"https://swissploit.ch/","name":"Swissploit","logo":{"@type":"ImageObject","url":"https://swissploit.ch/assets/swissploit-brand-logo2.png"}},"keywords":"security, phishing, microsoft365, onedrive, outlook"}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://swissploit.ch/index.html"},{"@type":"ListItem","position":2,"name":"Learn","item":"https://swissploit.ch/learn/"},{"@type":"ListItem","position":3,"name":"Angriff mit HTML","item":"https://swissploit.ch/blog/wetransfer-phishing-html-onedrive/"}]}</script>
 
   <script>
@@ -43,6 +43,7 @@
   </script>
 
   <link rel="stylesheet" href="/assets/styles.css" />
+  <link rel="stylesheet" href="/assets/navigation.css" />
   <link rel="stylesheet" href="/assets/blog-post.css" />
   <link rel="stylesheet" href="/assets/learn-article.css" />
 
@@ -52,38 +53,28 @@
 </head>
 
 <body class="learn-article-page">
-  <header class="site-header" role="banner">
-    <div class="wrap headerbar">
-      <a class="brand brand-signature" href="/index.html#intro" aria-label="Swissploit Home" data-transition>
-        <span class="brand-signet" aria-hidden="true"><img class="signet-image" src="/assets/Swissploit_S_blue2.png" alt="" width="1254" height="1254" decoding="async"></span>
-        <span class="brand-text">Swissploit</span>
+  <header class="site-header shared-header" role="banner">
+    <div class="site-header-inner">
+      <a class="site-brand" href="/#intro" aria-label="Swissploit Startseite">
+        <span class="site-signet" aria-hidden="true"><img src="/assets/Swissploit_S_blue2.png" alt="" width="1254" height="1254" decoding="async"></span>
+        <span>Swissploit</span>
       </a>
-
-      <nav id="primaryNav" class="nav" aria-label="Hauptnavigation">
-        <a href="/index.html#services" data-transition>Services</a>
-        <a href="/index.html#ueber" data-transition>Über Swissploit</a>
-        <a href="/index.html#kontakt" data-transition>Kontakt</a>
-        <a class="nav-learn is-active" aria-current="page" href="/learn/" data-transition>Learn</a>
+      <nav id="primaryNav" class="site-nav" aria-label="Hauptnavigation">
+        <a href="/#services">Services</a>
+        <a href="/#ueber">Über Swissploit</a>
+        <a href="/#kontakt">Kontakt</a>
+        <a class="site-learn is-active" href="/learn/" aria-current="page"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 5v12M2 3.5c3-1 5-.5 8 1.5 3-2 5-2.5 8-1.5v12c-3-1-5-.5-8 1.5-3-2-5-2.5-8-1.5z"/></svg>Learn<span aria-hidden="true">↗</span></a>
+        <a class="site-check" href="mailto:hello@swissploit.ch?subject=Security%20Check%20anfragen">Security Check</a>
       </nav>
-
-      <div class="header-actions">
-        <button id="themeToggle"
-          class="switch"
-          aria-pressed="false"
-          aria-label="Darstellung umschalten"
-          title="Dark/Light umschalten">
-          <span class="switch-track"></span>
-          <span class="switch-thumb">
-            <span class="switch-icon sun" aria-hidden="true">&#9728;</span>
-            <span class="switch-icon moon" aria-hidden="true">&#9790;</span>
-          </span>
-        </button>
-        <button id="menuToggle" class="menu-toggle" type="button" aria-expanded="false" aria-controls="primaryNav" aria-label="Menu oeffnen">
-          <span></span><span></span>
-        </button>
-      </div>
+      <button id="themeToggle" class="site-theme" type="button" aria-pressed="true" aria-label="Dunkle Darstellung umschalten" title="Hell / Dunkel"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="7" fill="none"/><path d="M10 3a7 7 0 0 0 0 14z" stroke="none"/></svg></button>
     </div>
   </header>
+  <button id="menuToggle" class="site-menu-control" type="button" aria-expanded="false" aria-controls="navigationDialog" aria-label="Menü öffnen"><span></span><span></span></button>
+  <dialog id="navigationDialog" class="site-menu-dialog" aria-label="Hauptnavigation">
+    <button class="site-menu-control menu-close" type="button" aria-label="Menü schliessen" autofocus><span></span><span></span></button>
+    <span class="site-menu-label">Swissploit</span>
+    <div class="menu-content"></div>
+  </dialog>
 
   <main id="main">
     <nav class="wrap blog-breadcrumbs" aria-label="Breadcrumb">
@@ -168,7 +159,7 @@
             <article class="post-related-card blog-card">
               <a class="post-related-card-link blog-card-link" href="/blog/auf-phishing-geklickt/" aria-label="Auf Phishing geklickt – was jetzt?" data-transition>
                 <div class="post-related-thumb blog-thumb">
-                  <img class="blog-thumb-img" src="/assets/blog/auf-phishing-geklickt.webp" alt="Illustration: Warnsymbol in einer E-Mail auf einem Monitor neben einer Papiercheckliste" loading="lazy" decoding="async">
+                  <img width="1672" height="941" class="blog-thumb-img" src="/assets/blog/auf-phishing-geklickt.webp" alt="Illustration: Warnsymbol in einer E-Mail auf einem Monitor neben einer Papiercheckliste" loading="lazy" decoding="async">
                 </div>
                 <div class="post-related-body blog-card-body">
                   <span class="learn-card-category">Phishing &amp; Betrug</span>
@@ -182,7 +173,7 @@
             <article class="post-related-card blog-card">
               <a class="post-related-card-link blog-card-link" href="/blog/gefaehrliche-links-erkennen/" aria-label="Gefährliche Links erkennen: So prüfst du eine URL richtig" data-transition>
                 <div class="post-related-thumb blog-thumb">
-                  <img class="blog-thumb-img" src="/assets/blog/gefaehrliche-links-erkennen.webp" alt="Illustration: Monitor mit zwei ?hnlich geschriebenen, farblich hervorgehobenen Domains" loading="lazy" decoding="async">
+                  <img width="1672" height="941" class="blog-thumb-img" src="/assets/blog/gefaehrliche-links-erkennen.webp" alt="Illustration: Monitor mit zwei ?hnlich geschriebenen, farblich hervorgehobenen Domains" loading="lazy" decoding="async">
                 </div>
                 <div class="post-related-body blog-card-body">
                   <span class="learn-card-category">Phishing &amp; Betrug</span>
@@ -196,7 +187,7 @@
             <article class="post-related-card blog-card">
               <a class="post-related-card-link blog-card-link" href="/blog/phishing-mails-erkennen/" aria-label="Phishing-Mails erkennen: Diese 7 Dinge solltest du prüfen" data-transition>
                 <div class="post-related-thumb blog-thumb">
-                  <img class="blog-thumb-img" src="/assets/blog/phishing-mails-erkennen.webp" alt="Illustration: Person vor einer E-Mail mit markierten Absender-, Anhang- und Linksymbolen" loading="lazy" decoding="async">
+                  <img width="1672" height="941" class="blog-thumb-img" src="/assets/blog/phishing-mails-erkennen.webp" alt="Illustration: Person vor einer E-Mail mit markierten Absender-, Anhang- und Linksymbolen" loading="lazy" decoding="async">
                 </div>
                 <div class="post-related-body blog-card-body">
                   <span class="learn-card-category">Phishing &amp; Betrug</span>
@@ -218,9 +209,9 @@
     <div class="wrap">
       <p>© <span id="year"></span> Swissploit.</p>
       <nav class="foot-nav" aria-label="Footer Navigation">
-        <a href="/index.html#services" data-transition>Services</a>
-        <a href="/index.html#ueber" data-transition>Über Swissploit</a>
-        <a href="/index.html#kontakt" data-transition>Kontakt</a>
+        <a href="/#services" data-transition>Services</a>
+        <a href="/#ueber" data-transition>Über Swissploit</a>
+        <a href="/#kontakt" data-transition>Kontakt</a>
         <a class="nav-learn" href="/learn/" data-transition>Learn</a>
       </nav>
       

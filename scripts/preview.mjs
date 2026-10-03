@@ -3,7 +3,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 export function previewServer(root = process.cwd(), port = 4173) {
-  const types = {'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.js':'text/javascript; charset=utf-8','.svg':'image/svg+xml','.png':'image/png','.webp':'image/webp','.jpg':'image/jpeg','.woff2':'font/woff2'};
+  const types = {'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.js':'text/javascript; charset=utf-8','.svg':'image/svg+xml','.png':'image/png','.webp':'image/webp','.jpg':'image/jpeg','.woff2':'font/woff2','.xml':'application/xml; charset=utf-8','.txt':'text/plain; charset=utf-8'};
   return http.createServer(async (req,res) => {
     try {
       const urlPath = decodeURIComponent(new URL(req.url,'http://localhost').pathname);
@@ -14,7 +14,11 @@ export function previewServer(root = process.cwd(), port = 4173) {
       const file = (await fs.stat(target)).isDirectory() ? path.join(target,'index.html') : target;
       res.setHeader('Content-Type',types[path.extname(file)] || 'application/octet-stream');
       res.end(await fs.readFile(file));
-    } catch {res.writeHead(404);res.end('Not found');}
+    } catch {
+      res.writeHead(404, {'Content-Type':'text/html; charset=utf-8'});
+      try { res.end(await fs.readFile(path.join(root, '404.html'))); }
+      catch { res.end('Not found'); }
+    }
   }).listen(port,'127.0.0.1');
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {

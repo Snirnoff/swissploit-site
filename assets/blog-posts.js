@@ -691,19 +691,19 @@ window.SWISSPLOIT_BLOG_POSTS = [
         "shortDescription": "If someone has your Microsoft password, they can take over your account. Here’s how to enable MFA with Microsoft Authenticator in a few minutes, step by step.",
         "excerpt": "If someone has your Microsoft password, they can take over your account. Here’s how to enable MFA with Microsoft Authenticator in a few minutes, step by step.",
         "imageAlt": "",
-        "seoTitle": "",
+        "seoTitle": "Enable MFA with Microsoft Authenticator | Swissploit",
         "seoDescription": "",
         "keyTakeaway": "",
         "videoUrl": "https://youtube.com/shorts/TAYRaRY2-VE?si=PTsL6mFjfgaEe1XQ",
         "videoType": "",
-        "content": "<p>If someone has your Microsoft password, they can take over your account — often without you noticing right away. With <strong>MFA (multi-factor authentication)</strong>, a password alone isn’t enough anymore: sign-ins also require a confirmation on your phone. It’s one of the fastest security wins you can implement, and it only takes a few minutes.</p>\n<h2 id=\"what-happened\">What happened?</h2>\n<ul>\n<li><strong>Passwords aren’t sufficient</strong>: they get leaked, reused, guessed, or phished.</li>\n<li>Attackers often sign in <strong>quietly</strong> and set up forwarding rules or suspicious apps.</li>\n<li><strong>MFA blocks many takeovers</strong> because a second factor (your device) is required.</li>\n</ul>\n<h2 id=\"step-by-step-solution\">Step-by-step solution</h2>\n<ol>\n<li><p><strong>Open the setup page</strong></p>\n<ul>\n<li>In your browser, go to:<ul>\n<li><code>aka.ms/mfasetup</code></li>\n</ul>\n</li>\n</ul>\n</li>\n<li><p><strong>Sign in with your Microsoft account</strong></p>\n<ul>\n<li>Sign in with your Microsoft account.</li>\n<li>You should land on the <strong>Security info</strong> page.</li>\n</ul>\n</li>\n<li><p><strong>If you’re not on “Security info”</strong></p>\n<ul>\n<li>Open this directly:<ul>\n<li><code>mysignins.microsoft.com/security-info</code></li>\n</ul>\n</li>\n</ul>\n</li>\n<li><p><strong>Add a sign-in method</strong></p>\n<ul>\n<li>Click <strong>“Add sign-in method”</strong>.</li>\n</ul>\n</li>\n<li><p><strong>Choose Microsoft Authenticator</strong></p>\n<ul>\n<li>You’ll see multiple methods.</li>\n<li>Recommendation: <strong>Microsoft Authenticator</strong> (fast, secure, convenient).</li>\n<li>Select <strong>Microsoft Authenticator</strong> and click <strong>Next</strong>.</li>\n</ul>\n</li>\n<li><p><strong>Install Microsoft Authenticator on your phone</strong></p>\n<ul>\n<li>Open the <strong>App Store</strong> or <strong>Google Play Store</strong></li>\n<li>Search for <strong>Microsoft Authenticator</strong></li>\n<li>Install it and open the app</li>\n</ul>\n</li>\n<li><p><strong>Show the QR code on your PC</strong></p>\n<ul>\n<li>Click <strong>Next</strong> on your PC — a <strong>QR code</strong> appears.</li>\n</ul>\n</li>\n<li><p><strong>Scan the QR code with your phone</strong></p>\n<ul>\n<li>In the Authenticator app:<ul>\n<li>Tap <strong>Add account</strong> / <strong>+</strong> / the <strong>QR icon</strong></li>\n<li>Scan the QR code on your screen</li>\n</ul>\n</li>\n</ul>\n</li>\n<li><p><strong>Confirm the test (number matching)</strong></p>\n<ul>\n<li>Microsoft will run a test:<ul>\n<li>A <strong>number</strong> appears on your PC</li>\n<li>Confirm/enter that number on your phone</li>\n</ul>\n</li>\n</ul>\n</li>\n<li><p><strong>Done: verify it’s added</strong></p>\n</li>\n</ol>\n<ul>\n<li>If successful, you’ll see a confirmation.</li>\n<li>Your phone now appears under <strong>Security info</strong> as a new sign-in method.</li>\n</ul>\n<h2 id=\"faq-troubleshooting\">FAQ / Troubleshooting</h2>\n<h3 id=\"i-can-t-find-the-security-info-page-where-is-it\">I can’t find the “Security info” page — where is it?</h3>\n<p>Go directly to <code>mysignins.microsoft.com/security-info</code> and sign in.</p>\n<h3 id=\"i-don-t-see-the-qr-code-button-in-the-authenticator-app\">I don’t see the QR-code button in the Authenticator app.</h3>\n<p>Look for “Add account”, a “+” icon, or a QR icon — the location can vary by version.</p>\n<h3 id=\"the-number-test-doesn-t-show-up-or-fails\">The number test doesn’t show up or fails.</h3>\n<p>Check your phone’s internet connection, fully close and reopen the Authenticator app, then restart the step on your PC.</p>\n<h3 id=\"can-i-use-mfa-without-the-authenticator-app\">Can I use MFA without the Authenticator app?</h3>\n<p>Often yes (SMS/call), but <strong>Authenticator is recommended</strong> because it’s more convenient and typically more secure.</p>\n<h3 id=\"what-if-i-lose-my-phone\">What if I lose my phone?</h3>\n<p>Add at least one backup method if possible, so you don’t lock yourself out when switching devices.</p>\n<aside class=\"article-callout article-callout--tip\">\n  <div class=\"article-callout__heading\"><span class=\"article-callout__icon\" aria-hidden=\"true\">💡</span><strong>Pro tip</strong></div>\n  <div class=\"article-callout__content\"><p>After setup, add <strong>at least one backup option</strong> (a second method) so you keep access if you lose or replace your phone.</p></div>\n</aside>\n\n<h2 id=\"tl-dr\">TL;DR</h2>\n<ul class=\"article-checklist\">\n<li>Go to <code>aka.ms/mfasetup</code> and sign in.</li>\n<li>Pick <strong>Microsoft Authenticator</strong>, install it, and <strong>scan the QR code</strong>.</li>\n<li>Confirm the number test — MFA is enabled and your account is significantly safer.</li>\n</ul>\n<h2 id=\"if-you-suspect-phishing\">If you suspect phishing</h2>\n<p>If you think you may have fallen for a phishing attempt (clicked a suspicious link or entered your password), follow these immediate containment steps:</p>\n<ul>\n<li><a href=\"/blog/notfall-checkliste-phishing-microsoft-365\">Phishing emergency checklist for Microsoft 365 &amp; Entra ID</a></li>\n</ul>"
+        "content": "<p>If someone has your Microsoft password, they can take over your account — often without you noticing right away. With <strong>MFA (multi-factor authentication)</strong>, a password alone isn’t enough anymore: sign-ins also require a confirmation on your phone. It’s one of the fastest security wins you can implement, and it only takes a few minutes.</p>\n<h2 id=\"what-happened\">What happened?</h2>\n<ul>\n<li><strong>Passwords aren’t sufficient</strong>: they get leaked, reused, guessed, or phished.</li>\n<li>Attackers often sign in <strong>quietly</strong> and set up forwarding rules or suspicious apps.</li>\n<li><strong>MFA blocks many takeovers</strong> because a second factor (your device) is required.</li>\n</ul>\n<h2 id=\"step-by-step-solution\">Step-by-step solution</h2>\n<ol>\n<li><p><strong>Open the setup page</strong></p>\n<ul>\n<li>In your browser, go to:<ul>\n<li><code>aka.ms/mfasetup</code></li>\n</ul>\n</li>\n</ul>\n</li>\n<li><p><strong>Sign in with your Microsoft account</strong></p>\n<ul>\n<li>Sign in with your Microsoft account.</li>\n<li>You should land on the <strong>Security info</strong> page.</li>\n</ul>\n</li>\n<li><p><strong>If you’re not on “Security info”</strong></p>\n<ul>\n<li>Open this directly:<ul>\n<li><code>mysignins.microsoft.com/security-info</code></li>\n</ul>\n</li>\n</ul>\n</li>\n<li><p><strong>Add a sign-in method</strong></p>\n<ul>\n<li>Click <strong>“Add sign-in method”</strong>.</li>\n</ul>\n</li>\n<li><p><strong>Choose Microsoft Authenticator</strong></p>\n<ul>\n<li>You’ll see multiple methods.</li>\n<li>Recommendation: <strong>Microsoft Authenticator</strong> (fast, secure, convenient).</li>\n<li>Select <strong>Microsoft Authenticator</strong> and click <strong>Next</strong>.</li>\n</ul>\n</li>\n<li><p><strong>Install Microsoft Authenticator on your phone</strong></p>\n<ul>\n<li>Open the <strong>App Store</strong> or <strong>Google Play Store</strong></li>\n<li>Search for <strong>Microsoft Authenticator</strong></li>\n<li>Install it and open the app</li>\n</ul>\n</li>\n<li><p><strong>Show the QR code on your PC</strong></p>\n<ul>\n<li>Click <strong>Next</strong> on your PC — a <strong>QR code</strong> appears.</li>\n</ul>\n</li>\n<li><p><strong>Scan the QR code with your phone</strong></p>\n<ul>\n<li>In the Authenticator app:<ul>\n<li>Tap <strong>Add account</strong> / <strong>+</strong> / the <strong>QR icon</strong></li>\n<li>Scan the QR code on your screen</li>\n</ul>\n</li>\n</ul>\n</li>\n<li><p><strong>Confirm the test (number matching)</strong></p>\n<ul>\n<li>Microsoft will run a test:<ul>\n<li>A <strong>number</strong> appears on your PC</li>\n<li>Confirm/enter that number on your phone</li>\n</ul>\n</li>\n</ul>\n</li>\n<li><p><strong>Done: verify it’s added</strong></p>\n</li>\n</ol>\n<ul>\n<li>If successful, you’ll see a confirmation.</li>\n<li>Your phone now appears under <strong>Security info</strong> as a new sign-in method.</li>\n</ul>\n<h2 id=\"faq-troubleshooting\">FAQ / Troubleshooting</h2>\n<h3 id=\"i-can-t-find-the-security-info-page-where-is-it\">I can’t find the “Security info” page — where is it?</h3>\n<p>Go directly to <code>mysignins.microsoft.com/security-info</code> and sign in.</p>\n<h3 id=\"i-don-t-see-the-qr-code-button-in-the-authenticator-app\">I don’t see the QR-code button in the Authenticator app.</h3>\n<p>Look for “Add account”, a “+” icon, or a QR icon — the location can vary by version.</p>\n<h3 id=\"the-number-test-doesn-t-show-up-or-fails\">The number test doesn’t show up or fails.</h3>\n<p>Check your phone’s internet connection, fully close and reopen the Authenticator app, then restart the step on your PC.</p>\n<h3 id=\"can-i-use-mfa-without-the-authenticator-app\">Can I use MFA without the Authenticator app?</h3>\n<p>Often yes (SMS/call), but <strong>Authenticator is recommended</strong> because it’s more convenient and typically more secure.</p>\n<h3 id=\"what-if-i-lose-my-phone\">What if I lose my phone?</h3>\n<p>Add at least one backup method if possible, so you don’t lock yourself out when switching devices.</p>\n<aside class=\"article-callout article-callout--tip\">\n  <div class=\"article-callout__heading\"><span class=\"article-callout__icon\" aria-hidden=\"true\">💡</span><strong>Pro tip</strong></div>\n  <div class=\"article-callout__content\"><p>After setup, add <strong>at least one backup option</strong> (a second method) so you keep access if you lose or replace your phone.</p></div>\n</aside>\n\n<h2 id=\"tl-dr\">TL;DR</h2>\n<ul class=\"article-checklist\">\n<li>Go to <code>aka.ms/mfasetup</code> and sign in.</li>\n<li>Pick <strong>Microsoft Authenticator</strong>, install it, and <strong>scan the QR code</strong>.</li>\n<li>Confirm the number test — MFA is enabled and your account is significantly safer.</li>\n</ul>\n<h2 id=\"if-you-suspect-phishing\">If you suspect phishing</h2>\n<p>If you think you may have fallen for a phishing attempt (clicked a suspicious link or entered your password), follow these immediate containment steps:</p>\n<ul>\n<li><a href=\"/en/blog/notfall-checkliste-phishing-microsoft-365/\">Phishing emergency checklist for Microsoft 365 &amp; Entra ID</a></li>\n</ul>"
       }
     },
     "seo": {
       "image": "https://swissploit.ch/assets/blog/021_tn.webp",
       "title": {
         "de": "MFA aktivieren: Authenticator",
-        "en": "Enable MFA with Microsoft Authenticator: secure your account in minutes"
+        "en": "Enable MFA with Microsoft Authenticator | Swissploit"
       },
       "description": {
         "de": "So aktivierst du MFA mit Microsoft Authenticator in wenigen Minuten",
@@ -745,7 +745,7 @@ window.SWISSPLOIT_BLOG_POSTS = [
         "shortDescription": "Phishing passiert schnell: Diese Notfall-Checkliste für Microsoft 365/Entra ID zeigt, wie du Konten sofort absicherst und Folgeschäden minimierst.",
         "excerpt": "Phishing passiert schnell: Diese Notfall-Checkliste für Microsoft 365/Entra ID zeigt, wie du Konten sofort absicherst und Folgeschäden minimierst.",
         "imageAlt": "",
-        "seoTitle": "",
+        "seoTitle": "Microsoft 365: Phishing-Notfallcheckliste | Swissploit",
         "seoDescription": "",
         "keyTakeaway": "",
         "videoUrl": "",
@@ -757,7 +757,7 @@ window.SWISSPLOIT_BLOG_POSTS = [
         "shortDescription": "Phishing happens fast: this Microsoft 365/Entra ID emergency checklist shows how to secure accounts immediately and minimize follow-up damage.",
         "excerpt": "Phishing happens fast: this Microsoft 365/Entra ID emergency checklist shows how to secure accounts immediately and minimize follow-up damage.",
         "imageAlt": "",
-        "seoTitle": "",
+        "seoTitle": "Microsoft 365 phishing emergency checklist | Swissploit",
         "seoDescription": "",
         "keyTakeaway": "",
         "videoUrl": "",
@@ -768,8 +768,8 @@ window.SWISSPLOIT_BLOG_POSTS = [
     "seo": {
       "image": "https://swissploit.ch/assets/blog/Laptop-repair-in-phishing-crisis.webp",
       "title": {
-        "de": "Phishing Checkliste",
-        "en": "Phishing Checkliste"
+        "de": "Microsoft 365: Phishing-Notfallcheckliste | Swissploit",
+        "en": "Microsoft 365 phishing emergency checklist | Swissploit"
       },
       "description": {
         "de": "Phishing passiert schnell: Diese Notfall-Checkliste für Microsoft 365/Entra ID zeigt, wie du Konten sofort absicherst und Folgeschäden minimierst.",
@@ -791,8 +791,8 @@ window.SWISSPLOIT_BLOG_POSTS = [
       "backup",
       "papierkorb"
     ],
-    "image": "assets/blog/onedrive-restore.png",
-    "thumb": "assets/blog/onedrive-restore.png",
+    "image": "assets/blog/onedrive-restore.webp",
+    "thumb": "assets/blog/onedrive-restore.webp",
     "relatedArticles": [],
     "videoUrl": "",
     "videoType": "",
@@ -828,7 +828,7 @@ window.SWISSPLOIT_BLOG_POSTS = [
       }
     },
     "seo": {
-      "image": "https://swissploit.ch/assets/blog/onedrive-restore.png",
+      "image": "https://swissploit.ch/assets/blog/onedrive-restore.webp",
       "title": {
         "de": "OneDrive Dateien zurückholen!",
         "en": "Restore deleted files in OneDrive"
@@ -853,8 +853,8 @@ window.SWISSPLOIT_BLOG_POSTS = [
       "classic-outlook",
       "windows"
     ],
-    "image": "assets/blog/OutlookUml.png",
-    "thumb": "assets/blog/OutlookUml.png",
+    "image": "assets/blog/OutlookUml.webp",
+    "thumb": "assets/blog/OutlookUml.webp",
     "relatedArticles": [],
     "videoUrl": "",
     "videoType": "",
@@ -890,7 +890,7 @@ window.SWISSPLOIT_BLOG_POSTS = [
       }
     },
     "seo": {
-      "image": "https://swissploit.ch/assets/blog/OutlookUml.png",
+      "image": "https://swissploit.ch/assets/blog/OutlookUml.webp",
       "title": {
         "de": "Outlook zeigt Umlaute als ?",
         "en": "Classic Outlook turns äöü into ?"
@@ -914,8 +914,8 @@ window.SWISSPLOIT_BLOG_POSTS = [
       "onedrive",
       "outlook"
     ],
-    "image": "assets/blog/h355-014.png",
-    "thumb": "assets/blog/h355-014.png",
+    "image": "assets/blog/h355-014.webp",
+    "thumb": "assets/blog/h355-014.webp",
     "relatedArticles": [],
     "videoUrl": "https://www.youtube.com/watch?v=5aVeWRinSxM",
     "videoType": "",
@@ -930,8 +930,8 @@ window.SWISSPLOIT_BLOG_POSTS = [
         "shortDescription": "So wurde ein Microsoft-Konto übernommen!",
         "excerpt": "So wurde ein Microsoft-Konto übernommen!",
         "imageAlt": "",
-        "seoTitle": "",
-        "seoDescription": "",
+        "seoTitle": "WeTransfer-Phishing: gefälschtes OneDrive-Login | Swissploit",
+        "seoDescription": "So führt ein WeTransfer-Link über eine HTML-Datei zu einem gefälschten OneDrive-Login. Erkenne Warnsignale und erfahre, wie du richtig reagierst.",
         "keyTakeaway": "",
         "videoType": "",
         "content": "<p><strong>WeTransfer-Phishing</strong> ist aktuell eine der fiesesten Methoden, um <strong>Microsoft 365 / OneDrive / Outlook Accounts</strong> zu übernehmen – weil der Ablauf “normal” wirkt: Download-Link, Datei öffnen, Login.</p>\n\n<p>In diesem Beitrag zeige ich dir den Angriff anhand eines realen Falls – inklusive Video – und erkläre, <strong>warum eine HTML-Datei gefährlich sein kann</strong>, obwohl sie auf den ersten Blick harmlos aussieht.</p>\n\n<aside class=\"article-callout article-callout--key\">\n  <div class=\"article-callout__heading\"><span class=\"article-callout__icon\" aria-hidden=\"true\">✓</span><strong>Worum geht’s?</strong></div>\n  <div class=\"article-callout__content\"><p>Ein Angreifer lockt dich über einen scheinbar legitimen WeTransfer-Link zu einem Download. Statt eines PDFs oder Dokuments bekommst du eine <strong>HTML-Datei</strong>, die ein <strong>Fake OneDrive-Login</strong> öffnet. Sobald du dort dein Passwort eingibst, kann dein Microsoft-Konto kompromittiert werden.</p></div>\n</aside>\n\n<h2 id=\"warum-ausgerechnet-wetransfer\">Warum ausgerechnet WeTransfer?</h2>\n<p>Viele kennen WeTransfer als seriösen Dienst zum Teilen von Dateien. Genau dieses Vertrauen wird ausgenutzt. Ein Link zu WeTransfer löst bei vielen weniger Misstrauen aus als eine unbekannte File-Share-Seite – und genau das erhöht die Klickrate.</p>\n\n<h2 id=\"so-lauft-der-angriff-ab\">So läuft der Angriff ab</h2>\n<p>Das Muster ist fast immer gleich: Du bekommst eine Mail, die nach Dokumenten, Bestellung oder “freigegebenen Dateien” klingt. Der Link führt auf eine Seite, die wie ein normaler Download wirkt. Du lädst eine Datei herunter – häufig mit Namen wie <em>Rechnung.html</em> oder <em>Dokumente.html</em>.</p>\n\n<p>Beim Öffnen startet dein Browser und zeigt eine <strong>täuschend echte OneDrive/Microsoft-Anmeldeseite</strong>. Viele denken: “Ah, Microsoft will kurz bestätigen” – und tippen ihre Zugangsdaten ein.</p>\n\n<h2 id=\"warum-die-html-datei-der-kritische-punkt-ist\">Warum die HTML-Datei der kritische Punkt ist</h2>\n<p>Eine HTML-Datei ist im Prinzip “eine Webseite als Datei”. Öffnest du sie, kann sie eine Login-Seite nachbauen, dich weiterleiten oder Formulareingaben an einen Server senden. Das Gemeine: Ein “Dokument” wirkt harmlos – aber im Browser wird daraus plötzlich ein Login.</p>\n\n<h2 id=\"so-erkennst-du-den-fake-schnell\">So erkennst du den Fake schnell</h2>\n<p>Schau dir die Adresse im Browser an: Ist das wirklich eine saubere Microsoft-Domain? Und frag dich: Warum ist das ein <strong>.html</strong> und kein PDF/DOCX? Wenn zusätzlich Druck aufgebaut wird (“läuft ab”, “dringend”, “sofort ansehen”), ist das fast immer ein Warnsignal.</p>\n\n<h2 id=\"so-schutzt-du-dein-microsoft-365-konto-nachhaltig\">So schützt du dein Microsoft 365 Konto nachhaltig</h2>\n<p>Aktiviere <strong>MFA</strong> (am besten per Authenticator-App), nutze einen <strong>Passwort-Manager</strong> und prüfe verdächtige Logins. Für KMU lohnt sich zusätzlich Security Defaults oder Conditional Access. Und ganz wichtig: Im Team kurz erklären, dass “HTML-Datei ≠ Dokument” ist.</p>\n\n<p><strong>Takeaway:</strong> WeTransfer ist nicht “das Problem”. Der Angreifer nutzt den vertrauten Download-Flow als Tarnung. Kritisch wird es, wenn eine HTML-Datei ein Login auslöst.</p>"
@@ -941,22 +941,22 @@ window.SWISSPLOIT_BLOG_POSTS = [
         "shortDescription": "A real Microsoft account takeover!",
         "excerpt": "A real Microsoft account takeover!",
         "imageAlt": "",
-        "seoTitle": "",
-        "seoDescription": "",
+        "seoTitle": "WeTransfer phishing: fake OneDrive login | Swissploit",
+        "seoDescription": "How a WeTransfer link delivers an HTML file with a fake OneDrive login. Learn the warning signs and what to do if you entered your password.",
         "keyTakeaway": "",
         "videoType": "",
         "content": "<p><strong>WeTransfer phishing</strong> is currently one of the most effective ways to compromise <strong>Microsoft 365 / OneDrive / Outlook accounts</strong> — because the flow looks normal: download link, open file, login.</p>\n\n<p>In this post I break down a real incident (with the video embedded) and explain <strong>what actually happens</strong> and <strong>why an HTML file can be dangerous</strong> even when it looks harmless.</p>\n\n<aside class=\"article-callout article-callout--key\">\n  <div class=\"article-callout__heading\"><span class=\"article-callout__icon\" aria-hidden=\"true\">✓</span><strong>What this attack is about</strong></div>\n  <div class=\"article-callout__content\"><p>Attackers use a legit-looking WeTransfer download to deliver an <strong>HTML file</strong>. When opened, it launches a browser and shows a <strong>fake OneDrive/Microsoft login page</strong>. If you type credentials, they get captured.</p></div>\n</aside>\n\n<h2 id=\"why-wetransfer-is-used-so-often\">Why WeTransfer is used so often</h2>\n<p>WeTransfer is widely trusted. Attackers exploit that trust to increase clicks and reduce suspicion, compared to unknown file-hosting domains.</p>\n\n<h2 id=\"how-the-attack-unfolds\">How the attack unfolds</h2>\n<p>You receive an email that looks like shared files, invoices, or documents. The link opens a download-style page. Instead of a PDF/DOCX, you download something like <em>invoice.html</em> or <em>documents.html</em>.</p>\n\n<p>When you open it, your browser shows a convincing <strong>OneDrive/Microsoft login</strong>. Many people assume it’s a normal cloud authentication step — and enter their password.</p>\n\n<h2 id=\"why-the-html-file-is-the-key-risk\">Why the HTML file is the key risk</h2>\n<p>An HTML file is basically “a web page saved as a file”. When opened, it can render a fake login page, redirect you, or submit what you type to an attacker-controlled server. That’s why “opening a file” can suddenly turn into a credential theft moment.</p>\n\n<h2 id=\"how-to-spot-it-quickly\">How to spot it quickly</h2>\n<p>Check the browser address: is it a real Microsoft domain? Also ask: why is this <strong>.html</strong> instead of a document? If the message adds urgency (“expires soon”, “urgent”, “view now”), treat it as a strong warning sign.</p>\n\n<h2 id=\"how-to-protect-your-microsoft-365-account\">How to protect your Microsoft 365 account</h2>\n<p>Enable <strong>MFA</strong> (Authenticator preferred), use a <strong>password manager</strong>, and review suspicious sign-ins. For businesses, consider Security Defaults or Conditional Access. And teach teams that “HTML file ≠ document”.</p>\n\n<p><strong>Key takeaway:</strong> WeTransfer itself isn’t the threat. Attackers use the trusted download flow as camouflage. The danger starts when an HTML file triggers a login prompt.</p>"
       }
     },
     "seo": {
-      "image": "https://swissploit.ch/assets/blog/h355-014.png",
+      "image": "https://swissploit.ch/assets/blog/h355-014.webp",
       "title": {
-        "de": "Angriff mit HTML",
-        "en": "HTML Attack"
+        "de": "WeTransfer-Phishing: gefälschtes OneDrive-Login | Swissploit",
+        "en": "WeTransfer phishing: fake OneDrive login | Swissploit"
       },
       "description": {
-        "de": "So wurde ein Microsoft-Konto übernommen!",
-        "en": "A real Microsoft account takeover!"
+        "de": "So führt ein WeTransfer-Link über eine HTML-Datei zu einem gefälschten OneDrive-Login. Erkenne Warnsignale und erfahre, wie du richtig reagierst.",
+        "en": "How a WeTransfer link delivers an HTML file with a fake OneDrive login. Learn the warning signs and what to do if you entered your password."
       }
     }
   }

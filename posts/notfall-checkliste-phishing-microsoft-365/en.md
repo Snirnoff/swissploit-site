@@ -1,4 +1,5 @@
 ---
+seoTitle: "Microsoft 365 phishing emergency checklist | Swissploit"
 id: notfall-checkliste-phishing-microsoft-365
 date: "2026-02-26"
 category: phishing-betrug

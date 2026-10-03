@@ -3,7 +3,7 @@ id: outlook-fragezeichen-zeichenkodierung-utf8
 date: 2026-02-19
 category: security-buero
 tags: [outlook, microsoft365, encoding, utf-8, classic-outlook, windows]
-thumb: assets/blog/OutlookUml.png
+thumb: assets/blog/OutlookUml.webp
 title: Outlook zeigt Umlaute als ?
 excerpt: In Classic Outlook werden Sonderzeichen zu Fragezeichen. So löst du es (UTF-8, OWA, Rollback).
 ---

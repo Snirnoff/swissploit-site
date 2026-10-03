@@ -6,7 +6,7 @@ title: Restore deleted files in OneDrive
 excerpt: Here’s how to restore files and folders from the Recycle Bin in seconds.
 tags: [onedrive, microsoft-365, windows, cloud, backup, recycle-bin]
 videoUrl: https://youtube.com/shorts/wK_7kSkfQ_g?si=54cgcVFK9d2fzl4a
-thumb: assets/blog/onedrive-restore.png
+thumb: assets/blog/onedrive-restore.webp
 ---
 
 ## Problem

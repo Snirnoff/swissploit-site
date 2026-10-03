@@ -5,7 +5,7 @@ category: security-buero
 title: OneDrive Dateien zurückholen!
 excerpt: So stellst du Dateien und Ordner in Sekunden wieder her.
 tags: [onedrive, microsoft-365, windows, cloud, backup, papierkorb]
-thumb: assets/blog/onedrive-restore.png
+thumb: assets/blog/onedrive-restore.webp
 ---
 
 ## Problem

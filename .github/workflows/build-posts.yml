@@ -1,4 +1,4 @@
-name: Build blog posts
+﻿name: Build blog posts
 
 on:
   workflow_dispatch:
@@ -7,12 +7,22 @@ on:
     paths:
       - "posts/**"
       - "scripts/**"
+      - "data/youtube-shorts.json"
+      - "leistungen/**"
+      - "index.html"
+      - "404.html"
+      - "robots.txt"
+      - "assets/**"
       - "package.json"
-      # package-lock.json ist optional, darum nicht nötig als Trigger
       - "package-lock.json"
+      - ".github/workflows/build-posts.yml"
 
 permissions:
   contents: write
+
+concurrency:
+  group: build-posts-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
   build:
@@ -20,25 +30,26 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
-
+          node-version: "22"
       - name: Install
-        run: npm install
-
+        run: npm ci
       - name: Build posts
-        run: npm run build:posts
-
-      - name: Commit changes
+        run: npm run build
+      - name: Test and check technical SEO
         run: |
-          if git status --porcelain | grep -E -q "assets/blog-posts.js|sitemap.xml"; then
+          npm run check:headers
+          npm test
+          npm run check:seo
+      - name: Commit generated pages
+        run: |
+          git add assets/blog-posts.js sitemap.xml blog/ en/blog/ learn/ en/learn/ index.html leistungen/ phishing-simulation/index.html
+          if ! git diff --cached --quiet; then
             git config user.name "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
-            git add assets/blog-posts.js sitemap.xml
-            git commit -m "Auto-build blog posts"
+            git commit -m "Auto-build Learn pages and sitemap"
             git push
           else
             echo "No changes to commit."

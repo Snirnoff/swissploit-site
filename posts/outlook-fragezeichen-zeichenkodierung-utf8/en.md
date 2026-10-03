@@ -3,7 +3,7 @@ id: outlook-fragezeichen-zeichenkodierung-utf8
 date: 2026-02-19
 category: security-buero
 tags: [outlook, microsoft365, encoding, utf-8, classic-outlook, windows]
-thumb: assets/blog/OutlookUml.png
+thumb: assets/blog/OutlookUml.webp
 title: Classic Outlook turns äöü into ?
 excerpt: Special characters become question marks in Classic Outlook. Here’s why—and how to fix it (UTF-8, OWA, rollback).
 ---

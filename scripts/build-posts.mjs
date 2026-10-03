@@ -1,6 +1,8 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import fg from "fast-glob";
+import { renderSiteHeaderHtml as renderSharedHeader } from "./site-header.mjs";
+import { addImageDimensions } from "./seo-images.mjs";
 import { pathToFileURL } from "node:url";
 import { parseArticle, prepareArticle, renderArticleToc } from "./learn-article.mjs";
 
@@ -20,7 +22,7 @@ const DEFAULT_POST_IMAGE = "/assets/swissploit-og.png";
 const LEARN_TOPICS = [
   {
     id: "phishing-betrug",
-    image: "/assets/blog/h355-014.png",
+    image: "/assets/blog/h355-014.webp",
     title: {
       de: "Phishing & Betrug",
       en: "Phishing & scams"
@@ -466,53 +468,15 @@ function renderIndexJsonLd(posts, lang) {
 
 function siteNavItems(lang) {
   return [
-    { href: "/index.html#services", label: "Services" },
-    { href: "/index.html#ueber", label: lang === "en" ? "About Swissploit" : "Über Swissploit" },
-    { href: "/index.html#kontakt", label: lang === "en" ? "Contact" : "Kontakt" },
+    { href: "/#services", label: "Services" },
+    { href: "/#ueber", label: lang === "en" ? "About Swissploit" : "Über Swissploit" },
+    { href: "/#kontakt", label: lang === "en" ? "Contact" : "Kontakt" },
     { href: lang === "en" ? "/en/learn/" : "/learn/", label: "Learn", current: true }
   ];
 }
 
-function renderPrimaryNavHtml(lang) {
-  const items = siteNavItems(lang);
-
-  return `<nav id="primaryNav" class="nav" aria-label="${lang === "en" ? "Main navigation" : "Hauptnavigation"}">
-        ${items.map((item) => `<a${item.current ? ' class="nav-learn is-active" aria-current="page"' : ""} href="${item.href}" data-transition>${item.label}</a>`).join("\n        ")}
-      </nav>`;
-}
-
-function renderHeaderActionsHtml() {
-  return `<div class="header-actions">
-        <button id="themeToggle"
-          class="switch"
-          aria-pressed="false"
-          aria-label="Darstellung umschalten"
-          title="Dark/Light umschalten">
-          <span class="switch-track"></span>
-          <span class="switch-thumb">
-            <span class="switch-icon sun" aria-hidden="true">&#9728;</span>
-            <span class="switch-icon moon" aria-hidden="true">&#9790;</span>
-          </span>
-        </button>
-        <button id="menuToggle" class="menu-toggle" type="button" aria-expanded="false" aria-controls="primaryNav" aria-label="Menu oeffnen">
-          <span></span><span></span>
-        </button>
-      </div>`;
-}
-
 function renderSiteHeaderHtml(lang) {
-  return `<header class="site-header" role="banner">
-    <div class="wrap headerbar">
-      <a class="brand brand-signature" href="/index.html#intro" aria-label="Swissploit Home" data-transition>
-        <span class="brand-signet" aria-hidden="true"><img class="signet-image" src="/assets/Swissploit_S_blue2.png" alt="" width="1254" height="1254" decoding="async"></span>
-        <span class="brand-text">Swissploit</span>
-      </a>
-
-      ${renderPrimaryNavHtml(lang)}
-
-      ${renderHeaderActionsHtml()}
-    </div>
-  </header>`;
+  return renderSharedHeader(lang, { learn: true });
 }
 
 function renderFooterSystemHtml(lang) {
@@ -686,15 +650,19 @@ function renderPostJsonLd(post, lang, txt) {
     mainEntityOfPage: pageUrl,
     inLanguage: lang,
     author: {
-      "@type": "Person",
-      name: "Swissploit"
+      "@type": "Organization",
+      "@id": `${BASE_URL}/#organization`,
+      name: "Swissploit",
+      url: `${BASE_URL}/`
     },
     publisher: {
       "@type": "Organization",
+      "@id": `${BASE_URL}/#organization`,
+      url: `${BASE_URL}/`,
       name: "Swissploit",
       logo: {
         "@type": "ImageObject",
-        url: `${BASE_URL}/assets/swissploit-og.png`
+        url: `${BASE_URL}/assets/swissploit-brand-logo2.png`
       }
     },
     keywords: (post.tags || []).join(", ") || undefined
@@ -731,13 +699,11 @@ function renderShortCard(video, index) {
   const search = [video.title, video.description, ...(video.tags || [])].filter(Boolean).join(" ");
   return `<article class="learn-video-card" data-video-id="${escapeAttr(video.id)}" data-search="${escapeAttr(search)}">
     <div class="learn-short-preview">
-      <iframe
-        src="${escapeAttr(embed)}"
-        title="${escapeAttr(title)}"
-        loading="lazy"
-        referrerpolicy="strict-origin-when-cross-origin"
-        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen></iframe>
+      <a class="learn-video-play" href="${escapeAttr(video.url)}" data-video-embed="${escapeAttr(embed)}" aria-label="${escapeAttr(title)}">
+        <img data-src="https://i.ytimg.com/vi/${escapeAttr(video.id)}/hqdefault.jpg" alt="" width="480" height="360" loading="lazy" decoding="async">
+        <span class="learn-video-play-icon" aria-hidden="true">&#9654;</span>
+        <span class="learn-video-title">${escapeHtml(title)}</span>
+      </a>
     </div>
   </article>`;
 }
@@ -745,8 +711,8 @@ function renderShortCard(video, index) {
 function renderBlogIndexPage(posts, lang, videos) {
   const isEn = lang === "en";
   const pageTitle = isEn
-    ? "Learn | Cyber Security explained simply | Swissploit"
-    : "Learn | Cyber Security einfach erklärt | Swissploit";
+    ? "Cybersecurity & data protection explained | Swissploit Learn"
+    : "Cybersecurity & Datenschutz einfach erklärt | Swissploit Learn";
   const metaDescription = isEn
     ? "Cyber Security explained simply: phishing, scams, accounts, passwords, privacy and digital security made easy to understand."
     : "Cyber Security einfach erklärt: Phishing, Scams, Accounts, Passwörter, Datenschutz und digitale Sicherheit verständlich erklärt.";
@@ -768,8 +734,8 @@ function renderBlogIndexPage(posts, lang, videos) {
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>${escapeHtml(pageTitle)}</title>
 
-  <link rel="icon" type="image/png" href="/assets/Swissploit_S_blue2.png">
-  <link rel="apple-touch-icon" href="/assets/Swissploit_S_blue2.png">
+  <link rel="icon" type="image/png" href="/assets/swissploit-signet-48.png">
+  <link rel="apple-touch-icon" href="/assets/swissploit-signet-180.png">
   <meta name="theme-color" content="#05070b">
 
   <meta name="description" content="${escapeAttr(metaDescription)}" />
@@ -802,6 +768,7 @@ function renderBlogIndexPage(posts, lang, videos) {
   </script>
 
   <link rel="stylesheet" href="/assets/styles.css" />
+  <link rel="stylesheet" href="/assets/navigation.css" />
   <link rel="stylesheet" href="/assets/blog.css" />
   <link rel="stylesheet" href="/assets/learn.css" />
 
@@ -921,7 +888,8 @@ function renderLegacyIndexRedirect(lang) {
 export function renderStaticPostPage(post, lang, allPosts) {
   const txt = getLocalizedText(post, lang);
   const title = txt.title || "Swissploit – Learn";
-  const pageTitle = pickFirst(txt.seoTitle, title);
+  const rawPageTitle = pickFirst(txt.seoTitle, title);
+  const pageTitle = /\bSwissploit\b/i.test(rawPageTitle) ? rawPageTitle : `${rawPageTitle} | Swissploit`;
   const description = pickFirst(
     txt.seoDescription,
     getShortDescription(post, lang),
@@ -971,7 +939,7 @@ export function renderStaticPostPage(post, lang, allPosts) {
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>${escapeHtml(pageTitle)} – Swissploit</title>
+  <title>${escapeHtml(pageTitle)}</title>
 
   <meta name="description" content="${escapeAttr(description)}" />
   <meta name="robots" content="index,follow,max-image-preview:large" />
@@ -989,8 +957,8 @@ export function renderStaticPostPage(post, lang, allPosts) {
 
   ${renderPostAlternateLinks(post, lang)}
 
-  <link rel="icon" type="image/png" href="/assets/Swissploit_S_blue2.png">
-  <link rel="apple-touch-icon" href="/assets/Swissploit_S_blue2.png">
+  <link rel="icon" type="image/png" href="/assets/swissploit-signet-48.png">
+  <link rel="apple-touch-icon" href="/assets/swissploit-signet-180.png">
   <meta name="theme-color" content="#05070b">
 
   <script type="application/ld+json">${renderPostJsonLd(post, lang, txt)}</script>
@@ -1008,6 +976,7 @@ export function renderStaticPostPage(post, lang, allPosts) {
   </script>
 
   <link rel="stylesheet" href="/assets/styles.css" />
+  <link rel="stylesheet" href="/assets/navigation.css" />
   <link rel="stylesheet" href="/assets/blog-post.css" />
   <link rel="stylesheet" href="/assets/learn-article.css" />
 
@@ -1230,8 +1199,8 @@ async function main() {
   await fs.mkdir(LEARN_DIR, { recursive: true });
   await fs.mkdir(EN_LEARN_DIR, { recursive: true });
 
-  await fs.writeFile(path.join(LEARN_DIR, "index.html"), renderBlogIndexPage(posts, "de", videos), "utf8");
-  await fs.writeFile(path.join(EN_LEARN_DIR, "index.html"), renderBlogIndexPage(posts, "en", videos), "utf8");
+  await fs.writeFile(path.join(LEARN_DIR, "index.html"), addImageDimensions(renderBlogIndexPage(posts, "de", videos)), "utf8");
+  await fs.writeFile(path.join(EN_LEARN_DIR, "index.html"), addImageDimensions(renderBlogIndexPage(posts, "en", videos)), "utf8");
   await fs.writeFile(path.join(BLOG_DIR, "index.html"), renderLegacyIndexRedirect("de"), "utf8");
   await fs.writeFile(path.join(EN_BLOG_DIR, "index.html"), renderLegacyIndexRedirect("en"), "utf8");
 
@@ -1239,13 +1208,13 @@ async function main() {
     if (post.i18n?.de) {
       const outDir = path.join(BLOG_DIR, post.slug);
       await fs.mkdir(outDir, { recursive: true });
-      await fs.writeFile(path.join(outDir, "index.html"), renderStaticPostPage(post, "de", posts), "utf8");
+      await fs.writeFile(path.join(outDir, "index.html"), addImageDimensions(renderStaticPostPage(post, "de", posts)), "utf8");
     }
 
     if (post.i18n?.en) {
       const outDir = path.join(EN_BLOG_DIR, post.slug);
       await fs.mkdir(outDir, { recursive: true });
-      await fs.writeFile(path.join(outDir, "index.html"), renderStaticPostPage(post, "en", posts), "utf8");
+      await fs.writeFile(path.join(outDir, "index.html"), addImageDimensions(renderStaticPostPage(post, "en", posts)), "utf8");
     }
   }
 
@@ -1257,10 +1226,19 @@ window.SWISSPLOIT_BLOG_POSTS = ${JSON.stringify(posts, null, 2)};
 `;
   await fs.writeFile(OUT_FILE, out, "utf8");
 
+  // Include only public, self-canonical service pages; legacy redirects stay excluded.
+  const serviceEntries = [];
+  for (const file of (await fg("leistungen/*/index.html", { cwd: ROOT })).sort()) {
+    const html = await fs.readFile(path.join(ROOT, file), "utf8");
+    if (/<meta\b[^>]*name=["']robots["'][^>]*content=["'][^"']*noindex/i.test(html) || /http-equiv=["']refresh/i.test(html)) continue;
+    const loc = html.match(/<link\b[^>]*rel=["']canonical["'][^>]*href=["']([^"']+)/i)?.[1];
+    if (loc === BASE_URL + "/" + file.replace(/index\.html$/, "")) serviceEntries.push({ loc });
+  }
   const sitemapEntries = [
     { loc: `${BASE_URL}/` },
     { loc: `${BASE_URL}/learn/` },
     { loc: `${BASE_URL}/en/learn/` },
+    ...serviceEntries,
     ...posts.flatMap((post) => {
       const entries = [];
       if (post.urls?.de) {

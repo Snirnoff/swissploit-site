@@ -8690,6 +8690,7 @@ body.home-page::after{
   line-height:1.08;
   letter-spacing:-.05em;
 }
+.service-page .service-main-card .service-situation-heading,
 .service-page .service-main-card h3{
   margin:28px 0 10px;
   color:#fff;
@@ -10142,6 +10143,7 @@ body.home-page::after{
 .service-page .service-landing-wrap .cta-row{
   justify-content:center;
 }
+.service-page .service-main-card .service-situation-heading,
 .service-page .service-main-card h3,
 .service-page .service-side-card h3{
   margin:28px 0 10px;
@@ -10176,6 +10178,7 @@ body.home-page::after{
   border-radius:22px;
   background:radial-gradient(360px 160px at 0 0, rgba(74,179,195,.08), transparent 70%), rgba(255,255,255,.025);
 }
+.service-page .service-main-card .service-situation-heading,
 .service-page .service-situation-card h3,
 .service-page .service-outcome-card h3{
   margin-top:0;
@@ -11556,3 +11559,25 @@ html .m365-title-number{
 @media (prefers-reduced-motion: reduce) {
   :is(.learn-page, .learn-article-page) .brand-signet { transition: none; }
 }
+
+/* Content stays readable until its reveal observer has been installed. */
+body:not(.reveal-ready) .reveal {
+  opacity: 1; translate: none; filter: none; scale: 1;
+}
+/* Keep navigation usable before initialization and if scripts cannot run. */
+@media (max-width: 768px) {
+  body:not(.home-page):not(.navigation-ready) .site-header .headerbar {
+    display: grid !important; grid-template-columns: 1fr auto !important;
+    grid-template-areas: "brand actions" "nav nav"; height: auto !important; gap: 8px;
+  }
+  body:not(.home-page):not(.navigation-ready) .site-header #primaryNav.nav {
+    display: flex !important; position: static !important; inset: auto !important;
+    grid-area: nav; flex-direction: row !important; flex-wrap: wrap; width: auto !important;
+    min-width: 0; max-height: none; padding: 8px 0 !important; overflow: visible !important;
+    opacity: 1; visibility: visible; transform: none;
+  }
+  body:not(.navigation-ready) .menu-toggle { display: none !important; }
+}
+
+/* Long service names must fit the narrowest shared mobile layout. */
+.service-page :is(.service-landing-title, .spl-section-title) { min-width: 0; overflow-wrap: anywhere; }

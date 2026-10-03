@@ -3,23 +3,23 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Learn | Cyber Security explained simply | Swissploit</title>
+  <title>Cybersecurity &amp; data protection explained | Swissploit Learn</title>
 
-  <link rel="icon" type="image/png" href="/assets/Swissploit_S_blue2.png">
-  <link rel="apple-touch-icon" href="/assets/Swissploit_S_blue2.png">
+  <link rel="icon" type="image/png" href="/assets/swissploit-signet-48.png">
+  <link rel="apple-touch-icon" href="/assets/swissploit-signet-180.png">
   <meta name="theme-color" content="#05070b">
 
   <meta name="description" content="Cyber Security explained simply: phishing, scams, accounts, passwords, privacy and digital security made easy to understand." />
   <meta name="robots" content="index,follow,max-image-preview:large" />
 
-  <meta property="og:title" content="Learn | Cyber Security explained simply | Swissploit">
+  <meta property="og:title" content="Cybersecurity &amp; data protection explained | Swissploit Learn">
   <meta property="og:description" content="Understand digital threats, spot scams and learn how to protect yourself in everyday life and at work.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://swissploit.ch/en/learn/">
   <meta property="og:image" content="https://swissploit.ch/assets/swissploit-og.png">
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Learn | Cyber Security explained simply | Swissploit">
+  <meta name="twitter:title" content="Cybersecurity &amp; data protection explained | Swissploit Learn">
   <meta name="twitter:description" content="Understand digital threats, spot scams and learn how to protect yourself in everyday life and at work.">
   <meta name="twitter:image" content="https://swissploit.ch/assets/swissploit-og.png">
 
@@ -42,6 +42,7 @@
   </script>
 
   <link rel="stylesheet" href="/assets/styles.css" />
+  <link rel="stylesheet" href="/assets/navigation.css" />
   <link rel="stylesheet" href="/assets/blog.css" />
   <link rel="stylesheet" href="/assets/learn.css" />
 
@@ -51,38 +52,28 @@
 </head>
 
 <body class="learn-page">
-  <header class="site-header" role="banner">
-    <div class="wrap headerbar">
-      <a class="brand brand-signature" href="/index.html#intro" aria-label="Swissploit Home" data-transition>
-        <span class="brand-signet" aria-hidden="true"><img class="signet-image" src="/assets/Swissploit_S_blue2.png" alt="" width="1254" height="1254" decoding="async"></span>
-        <span class="brand-text">Swissploit</span>
+  <header class="site-header shared-header" role="banner">
+    <div class="site-header-inner">
+      <a class="site-brand" href="/#intro" aria-label="Swissploit Home">
+        <span class="site-signet" aria-hidden="true"><img src="/assets/Swissploit_S_blue2.png" alt="" width="1254" height="1254" decoding="async"></span>
+        <span>Swissploit</span>
       </a>
-
-      <nav id="primaryNav" class="nav" aria-label="Main navigation">
-        <a href="/index.html#services" data-transition>Services</a>
-        <a href="/index.html#ueber" data-transition>About Swissploit</a>
-        <a href="/index.html#kontakt" data-transition>Contact</a>
-        <a class="nav-learn is-active" aria-current="page" href="/en/learn/" data-transition>Learn</a>
+      <nav id="primaryNav" class="site-nav" aria-label="Main navigation">
+        <a href="/#services">Services</a>
+        <a href="/#ueber">About Swissploit</a>
+        <a href="/#kontakt">Contact</a>
+        <a class="site-learn is-active" href="/en/learn/" aria-current="page"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 5v12M2 3.5c3-1 5-.5 8 1.5 3-2 5-2.5 8-1.5v12c-3-1-5-.5-8 1.5-3-2-5-2.5-8-1.5z"/></svg>Learn<span aria-hidden="true">↗</span></a>
+        <a class="site-check" href="mailto:hello@swissploit.ch?subject=Security%20Check%20anfragen">Security Check</a>
       </nav>
-
-      <div class="header-actions">
-        <button id="themeToggle"
-          class="switch"
-          aria-pressed="false"
-          aria-label="Darstellung umschalten"
-          title="Dark/Light umschalten">
-          <span class="switch-track"></span>
-          <span class="switch-thumb">
-            <span class="switch-icon sun" aria-hidden="true">&#9728;</span>
-            <span class="switch-icon moon" aria-hidden="true">&#9790;</span>
-          </span>
-        </button>
-        <button id="menuToggle" class="menu-toggle" type="button" aria-expanded="false" aria-controls="primaryNav" aria-label="Menu oeffnen">
-          <span></span><span></span>
-        </button>
-      </div>
+      <button id="themeToggle" class="site-theme" type="button" aria-pressed="true" aria-label="Toggle dark theme" title="Light / dark"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="7" fill="none"/><path d="M10 3a7 7 0 0 0 0 14z" stroke="none"/></svg></button>
     </div>
   </header>
+  <button id="menuToggle" class="site-menu-control" type="button" aria-expanded="false" aria-controls="navigationDialog" aria-label="Open menu"><span></span><span></span></button>
+  <dialog id="navigationDialog" class="site-menu-dialog" aria-label="Main navigation">
+    <button class="site-menu-control menu-close" type="button" aria-label="Close menu" autofocus><span></span><span></span></button>
+    <span class="site-menu-label">Swissploit</span>
+    <div class="menu-content"></div>
+  </dialog>
 
   <main id="main">
     <nav class="wrap blog-breadcrumbs" aria-label="Breadcrumb">
@@ -131,7 +122,7 @@
       data-search="auf phishing geklickt – was jetzt? auf einen verdächtigen link geklickt oder daten eingegeben? diese schritte helfen dir, den möglichen schaden schnell zu begrenzen. phishing phishing-link passwort mfa kreditkarte account-sicherheit security phishing &amp; scams">
       <a class="blog-card-link" href="/blog/auf-phishing-geklickt/" aria-label="Auf Phishing geklickt – was jetzt?" data-transition>
         <div class="blog-thumb">
-          <img
+          <img width="1672" height="941"
             class="blog-thumb-img"
             src="/assets/blog/auf-phishing-geklickt.webp"
             alt="Illustration: Warnsymbol in einer E-Mail auf einem Monitor neben einer Papiercheckliste"
@@ -156,7 +147,7 @@
       data-search="gefährliche links erkennen: so prüfst du eine url richtig ein link kann seriös aussehen und trotzdem auf eine gefälschte webseite führen. lerne, welche teile einer url wirklich wichtig sind. phishing links url domain fake-login social-engineering cyber-security phishing &amp; scams">
       <a class="blog-card-link" href="/blog/gefaehrliche-links-erkennen/" aria-label="Gefährliche Links erkennen: So prüfst du eine URL richtig" data-transition>
         <div class="blog-thumb">
-          <img
+          <img width="1672" height="941"
             class="blog-thumb-img"
             src="/assets/blog/gefaehrliche-links-erkennen.webp"
             alt="Illustration: Monitor mit zwei ?hnlich geschriebenen, farblich hervorgehobenen Domains"
@@ -181,7 +172,7 @@
       data-search="phishing-mails erkennen: diese 7 dinge solltest du prüfen 7 einfache checks, mit denen du verdächtige e-mails, links und login-aufforderungen besser beurteilen kannst. phishing phishing-mail e-mail betrug social-engineering links fake-login security-awareness phishing &amp; scams">
       <a class="blog-card-link" href="/blog/phishing-mails-erkennen/" aria-label="Phishing-Mails erkennen: Diese 7 Dinge solltest du prüfen" data-transition>
         <div class="blog-thumb">
-          <img
+          <img width="1672" height="941"
             class="blog-thumb-img"
             src="/assets/blog/phishing-mails-erkennen.webp"
             alt="Illustration: Person vor einer E-Mail mit markierten Absender-, Anhang- und Linksymbolen"
@@ -206,7 +197,7 @@
       data-search="ceo fraud: wenn der chef angeblich dringend geld braucht eine dringende zahlungsanfrage vom chef kann echt wirken – und trotzdem betrug sein. so erkennst du ceo fraud und reagierst richtig. ceo-fraud social-engineering phishing betrug zahlungsbetrug security-awareness kmu phishing &amp; scams">
       <a class="blog-card-link" href="/blog/ceo-fraud/" aria-label="CEO Fraud: Wenn der Chef angeblich dringend Geld braucht" data-transition>
         <div class="blog-thumb">
-          <img
+          <img width="1672" height="941"
             class="blog-thumb-img"
             src="/assets/blog/ceo-fraud.webp"
             alt="Mitarbeiter erhält eine ungewöhnliche dringende Zahlungsanfrage von einer angeblichen Führungskraft"
@@ -231,7 +222,7 @@
       data-search="sichere passwörter &amp; passwortmanager: so schützt du deine konten ein starkes passwort muss vor allem lang und einzigartig sein. erfahre, warum passwortmanager sinnvoll sind und welche regeln wirklich wichtig sind. passwoerter passwortmanager account-sicherheit datenleck credential-stuffing mfa cyber-security accounts &amp; passwords">
       <a class="blog-card-link" href="/blog/passwoerter-passwortmanager/" aria-label="Sichere Passwörter &amp; Passwortmanager: So schützt du deine Konten" data-transition>
         <div class="blog-thumb">
-          <img
+          <img width="1672" height="941"
             class="blog-thumb-img"
             src="/assets/blog/passwoerter-passwortmanager.webp"
             alt="Passwortmanager mit verschiedenen geschützten Benutzerkonten"
@@ -256,7 +247,7 @@
       data-search="phishing erkennen: diese warnsignale solltest du kennen phishing kann heute täuschend echt aussehen. lerne, welche warnsignale wirklich wichtig sind und wie du verdächtige nachrichten richtig prüfst. phishing e-mail betrug social-engineering links online-sicherheit phishing &amp; scams">
       <a class="blog-card-link" href="/blog/phishing-erkennen/" aria-label="Phishing erkennen: Diese Warnsignale solltest du kennen" data-transition>
         <div class="blog-thumb">
-          <img
+          <img width="1672" height="941"
             class="blog-thumb-img"
             src="/assets/blog/phishing-erkennen.webp"
             alt="Beispiel einer verdächtigen E-Mail mit Fokus auf Absender, Link und dringende Aufforderung"
@@ -281,7 +272,7 @@
       data-search="qr-phishing: so erkennst du gefährliche qr-codes ein qr-code kann genauso auf eine gefälschte webseite führen wie ein normaler link. so erkennst du quishing und schützt dich beim scannen. qr-phishing quishing phishing qr-code betrug kreditkarte parkautomat smartphone phishing &amp; scams">
       <a class="blog-card-link" href="/blog/qr-phishing-quishing/" aria-label="QR-Phishing: So erkennst du gefährliche QR-Codes" data-transition>
         <div class="blog-thumb">
-          <img
+          <img width="1672" height="941"
             class="blog-thumb-img"
             src="/assets/blog/qr-phishing-quishing.webp"
             alt="Smartphone scannt einen QR-Code an einem Parkautomaten und zeigt eine verdächtige Zieladresse"
@@ -306,7 +297,7 @@
       data-search="smishing: so erkennst du phishing per sms paket nicht zustellbar, offene gebühr oder gesperrtes konto? betrüger nutzen sms, um dich auf gefälschte webseiten zu locken. so erkennst du smishing. smishing phishing sms betrug paket-sms kreditkarte smartphone cyber-security phishing &amp; scams">
       <a class="blog-card-link" href="/blog/smishing-phishing-per-sms/" aria-label="Smishing: So erkennst du Phishing per SMS" data-transition>
         <div class="blog-thumb">
-          <img
+          <img width="1672" height="941"
             class="blog-thumb-img"
             src="/assets/blog/smishing-phishing-per-sms.webp"
             alt="Smartphone mit einer verdächtigen SMS und einem Link zu einer angeblichen Paket-Zustellung"
@@ -331,7 +322,7 @@
       data-search="social engineering einfach erklärt: wenn angreifer menschen manipulieren social engineering nutzt vertrauen, zeitdruck und menschliches verhalten statt technischer sicherheitslücken. erfahre, wie solche angriffe funktionieren und wie du sie erkennst. social-engineering phishing vishing betrug manipulation security-awareness cyber-security social engineering">
       <a class="blog-card-link" href="/blog/social-engineering/" aria-label="Social Engineering einfach erklärt: Wenn Angreifer Menschen manipulieren" data-transition>
         <div class="blog-thumb">
-          <img
+          <img width="1672" height="941"
             class="blog-thumb-img"
             src="/assets/blog/social-engineering.webp"
             alt="Darstellung einer verdächtigen digitalen Anfrage, bei der Vertrauen und Zeitdruck zur Manipulation eingesetzt werden"
@@ -356,7 +347,7 @@
       data-search="verdächtige e-mail im büro: so reagierst du richtig eine e-mail kommt dir verdächtig vor? diese einfachen schritte helfen dir, ruhig zu prüfen, richtig zu reagieren und andere im unternehmen zu schützen. phishing e-mail security-awareness arbeitsplatz social-engineering security-buero security at work">
       <a class="blog-card-link" href="/blog/verdaechtige-e-mail-im-buero/" aria-label="Verdächtige E-Mail im Büro: So reagierst du richtig" data-transition>
         <div class="blog-thumb">
-          <img
+          <img width="1672" height="941"
             class="blog-thumb-img"
             src="/assets/blog/verdaechtige-e-mail-im-buero.webp"
             alt="Mitarbeiter prüft eine verdächtige E-Mail am Arbeitsplatz"
@@ -381,7 +372,7 @@
       data-search="vishing: so erkennst du betrug am telefon ein angeblicher bank-, support- oder behördenmitarbeiter ruft an und verlangt schnelles handeln? so erkennst du vishing und reagierst richtig. vishing telefonbetrug social-engineering phishing bankbetrug support-scam security-awareness phishing &amp; scams">
       <a class="blog-card-link" href="/blog/vishing-telefonbetrug/" aria-label="Vishing: So erkennst du Betrug am Telefon" data-transition>
         <div class="blog-thumb">
-          <img
+          <img width="1672" height="941"
             class="blog-thumb-img"
             src="/assets/blog/vishing-telefonbetrug.webp"
             alt="Smartphone mit einem verdächtigen Anruf eines angeblichen Support-Mitarbeiters"
@@ -406,7 +397,7 @@
       data-search="cyberseal explained cyberseal is a swiss quality label for it service providers in the smb space. what it really means, which requirements are behind it — and what it does not. cybersecurity schweiz kmu it-dienstleister cyberseal security at work">
       <a class="blog-card-link" href="/en/blog/cyberseal-fuer-wen-und-was-es-aussagt/" aria-label="CyberSeal explained" data-transition>
         <div class="blog-thumb">
-          <img
+          <img width="1280" height="720"
             class="blog-thumb-img"
             src="/assets/blog/cyberseal_TN.webp"
             alt="CyberSeal explained"
@@ -431,7 +422,7 @@
       data-search="enable mfa with microsoft authenticator: secure your account in minutes if someone has your microsoft password, they can take over your account. here’s how to enable mfa with microsoft authenticator in a few minutes, step by step. mfa microsoft-authenticator two-factor-authentication security accounts &amp; passwords">
       <a class="blog-card-link" href="/en/blog/mfa-aktivieren-microsoft-authenticator/" aria-label="Enable MFA with Microsoft Authenticator: secure your account in minutes" data-transition>
         <div class="blog-thumb">
-          <img
+          <img width="1280" height="720"
             class="blog-thumb-img"
             src="/assets/blog/021_tn.webp"
             alt="Enable MFA with Microsoft Authenticator: secure your account in minutes"
@@ -456,7 +447,7 @@
       data-search="phishing checkliste phishing happens fast: this microsoft 365/entra id emergency checklist shows how to secure accounts immediately and minimize follow-up damage. phishing incident-response microsoft-365 entra-id azure-ad exchange-online mfa conditional-access audit-logs onedrive phishing &amp; scams">
       <a class="blog-card-link" href="/en/blog/notfall-checkliste-phishing-microsoft-365/" aria-label="Phishing Checkliste" data-transition>
         <div class="blog-thumb">
-          <img
+          <img width="1280" height="720"
             class="blog-thumb-img"
             src="/assets/blog/Laptop-repair-in-phishing-crisis.webp"
             alt="Phishing Checkliste"
@@ -481,9 +472,9 @@
       data-search="restore deleted files in onedrive here’s how to restore files and folders from the recycle bin in seconds. onedrive microsoft-365 windows cloud backup papierkorb security at work">
       <a class="blog-card-link" href="/en/blog/onedrive-restore-deleted-files/" aria-label="Restore deleted files in OneDrive" data-transition>
         <div class="blog-thumb">
-          <img
+          <img width="1536" height="1024"
             class="blog-thumb-img"
-            src="/assets/blog/onedrive-restore.png"
+            src="/assets/blog/onedrive-restore.webp"
             alt="Restore deleted files in OneDrive"
             loading="lazy"
             decoding="async">
@@ -506,9 +497,9 @@
       data-search="classic outlook turns äöü into ? special characters become question marks in classic outlook. here’s why—and how to fix it (utf-8, owa, rollback). outlook microsoft365 encoding utf-8 classic-outlook windows security at work">
       <a class="blog-card-link" href="/en/blog/outlook-fragezeichen-zeichenkodierung-utf8/" aria-label="Classic Outlook turns äöü into ?" data-transition>
         <div class="blog-thumb">
-          <img
+          <img width="1536" height="1024"
             class="blog-thumb-img"
-            src="/assets/blog/OutlookUml.png"
+            src="/assets/blog/OutlookUml.webp"
             alt="Classic Outlook turns äöü into ?"
             loading="lazy"
             decoding="async">
@@ -531,9 +522,9 @@
       data-search="html attack a real microsoft account takeover! security phishing microsoft365 onedrive outlook phishing &amp; scams">
       <a class="blog-card-link" href="/en/blog/wetransfer-phishing-html-onedrive/" aria-label="HTML Attack" data-transition>
         <div class="blog-thumb">
-          <img
+          <img width="1280" height="720"
             class="blog-thumb-img"
-            src="/assets/blog/h355-014.png"
+            src="/assets/blog/h355-014.webp"
             alt="HTML Attack"
             loading="lazy"
             decoding="async">
@@ -552,167 +543,137 @@
         <div id="videoGrid" class="learn-video-grid" hidden>
           <article class="learn-video-card" data-video-id="ndOP_bDpEvQ" data-search="Gratis Passwortmanager einrichten: Bitwarden einfach erklärt passwort passwortmanager bitwarden">
     <div class="learn-short-preview">
-      <iframe
-        src="https://www.youtube-nocookie.com/embed/ndOP_bDpEvQ"
-        title="Gratis Passwortmanager einrichten: Bitwarden einfach erklärt"
-        loading="lazy"
-        referrerpolicy="strict-origin-when-cross-origin"
-        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen></iframe>
+      <a class="learn-video-play" href="https://www.youtube.com/shorts/ndOP_bDpEvQ" data-video-embed="https://www.youtube-nocookie.com/embed/ndOP_bDpEvQ" aria-label="Gratis Passwortmanager einrichten: Bitwarden einfach erklärt">
+        <img data-src="https://i.ytimg.com/vi/ndOP_bDpEvQ/hqdefault.jpg" alt="" width="480" height="360" loading="lazy" decoding="async">
+        <span class="learn-video-play-icon" aria-hidden="true">&#9654;</span>
+        <span class="learn-video-title">Gratis Passwortmanager einrichten: Bitwarden einfach erklärt</span>
+      </a>
     </div>
   </article>
 <article class="learn-video-card" data-video-id="rTf4mqmvhUc" data-search="Phishing-Mails erkennen 2026: Diese 7 Warnzeichen zählen wirklich phishing phishing-mail e-mail betrug social-engineering links fake-login security-awareness">
     <div class="learn-short-preview">
-      <iframe
-        src="https://www.youtube-nocookie.com/embed/rTf4mqmvhUc"
-        title="Phishing-Mails erkennen 2026: Diese 7 Warnzeichen zählen wirklich"
-        loading="lazy"
-        referrerpolicy="strict-origin-when-cross-origin"
-        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen></iframe>
+      <a class="learn-video-play" href="https://www.youtube.com/shorts/rTf4mqmvhUc" data-video-embed="https://www.youtube-nocookie.com/embed/rTf4mqmvhUc" aria-label="Phishing-Mails erkennen 2026: Diese 7 Warnzeichen zählen wirklich">
+        <img data-src="https://i.ytimg.com/vi/rTf4mqmvhUc/hqdefault.jpg" alt="" width="480" height="360" loading="lazy" decoding="async">
+        <span class="learn-video-play-icon" aria-hidden="true">&#9654;</span>
+        <span class="learn-video-title">Phishing-Mails erkennen 2026: Diese 7 Warnzeichen zählen wirklich</span>
+      </a>
     </div>
   </article>
 <article class="learn-video-card" data-video-id="VpfXJv_NNdM" data-search="Gefälschte QR-Codes in der Schweiz: So schützt du dich qr-phishing quishing phishing qr-code betrug kreditkarte parkautomat smartphone">
     <div class="learn-short-preview">
-      <iframe
-        src="https://www.youtube-nocookie.com/embed/VpfXJv_NNdM"
-        title="Gefälschte QR-Codes in der Schweiz: So schützt du dich"
-        loading="lazy"
-        referrerpolicy="strict-origin-when-cross-origin"
-        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen></iframe>
+      <a class="learn-video-play" href="https://www.youtube.com/shorts/VpfXJv_NNdM" data-video-embed="https://www.youtube-nocookie.com/embed/VpfXJv_NNdM" aria-label="Gefälschte QR-Codes in der Schweiz: So schützt du dich">
+        <img data-src="https://i.ytimg.com/vi/VpfXJv_NNdM/hqdefault.jpg" alt="" width="480" height="360" loading="lazy" decoding="async">
+        <span class="learn-video-play-icon" aria-hidden="true">&#9654;</span>
+        <span class="learn-video-title">Gefälschte QR-Codes in der Schweiz: So schützt du dich</span>
+      </a>
     </div>
   </article>
 <article class="learn-video-card" data-video-id="ObA4FgMQiFg" data-search="Wie gefährlich ist öffentliches WLAN wirklich? wlan security">
     <div class="learn-short-preview">
-      <iframe
-        src="https://www.youtube-nocookie.com/embed/ObA4FgMQiFg"
-        title="Wie gefährlich ist öffentliches WLAN wirklich?"
-        loading="lazy"
-        referrerpolicy="strict-origin-when-cross-origin"
-        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen></iframe>
+      <a class="learn-video-play" href="https://www.youtube.com/shorts/ObA4FgMQiFg" data-video-embed="https://www.youtube-nocookie.com/embed/ObA4FgMQiFg" aria-label="Wie gefährlich ist öffentliches WLAN wirklich?">
+        <img data-src="https://i.ytimg.com/vi/ObA4FgMQiFg/hqdefault.jpg" alt="" width="480" height="360" loading="lazy" decoding="async">
+        <span class="learn-video-play-icon" aria-hidden="true">&#9654;</span>
+        <span class="learn-video-title">Wie gefährlich ist öffentliches WLAN wirklich?</span>
+      </a>
     </div>
   </article>
 <article class="learn-video-card" data-video-id="OF4IE6k3a_w" data-search="MFA aktiviert und trotzdem gehackt? So funktioniert Session-Diebstahl mfa konto session">
     <div class="learn-short-preview">
-      <iframe
-        src="https://www.youtube-nocookie.com/embed/OF4IE6k3a_w"
-        title="MFA aktiviert und trotzdem gehackt? So funktioniert Session-Diebstahl"
-        loading="lazy"
-        referrerpolicy="strict-origin-when-cross-origin"
-        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen></iframe>
+      <a class="learn-video-play" href="https://www.youtube.com/shorts/OF4IE6k3a_w" data-video-embed="https://www.youtube-nocookie.com/embed/OF4IE6k3a_w" aria-label="MFA aktiviert und trotzdem gehackt? So funktioniert Session-Diebstahl">
+        <img data-src="https://i.ytimg.com/vi/OF4IE6k3a_w/hqdefault.jpg" alt="" width="480" height="360" loading="lazy" decoding="async">
+        <span class="learn-video-play-icon" aria-hidden="true">&#9654;</span>
+        <span class="learn-video-title">MFA aktiviert und trotzdem gehackt? So funktioniert Session-Diebstahl</span>
+      </a>
     </div>
   </article>
 <article class="learn-video-card" data-video-id="uOx2rhu9N9Q" data-search="So erkennst du, ob jemand in deinem Google-Konto ist google konto">
     <div class="learn-short-preview">
-      <iframe
-        src="https://www.youtube-nocookie.com/embed/uOx2rhu9N9Q"
-        title="So erkennst du, ob jemand in deinem Google-Konto ist"
-        loading="lazy"
-        referrerpolicy="strict-origin-when-cross-origin"
-        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen></iframe>
+      <a class="learn-video-play" href="https://www.youtube.com/shorts/uOx2rhu9N9Q" data-video-embed="https://www.youtube-nocookie.com/embed/uOx2rhu9N9Q" aria-label="So erkennst du, ob jemand in deinem Google-Konto ist">
+        <img data-src="https://i.ytimg.com/vi/uOx2rhu9N9Q/hqdefault.jpg" alt="" width="480" height="360" loading="lazy" decoding="async">
+        <span class="learn-video-play-icon" aria-hidden="true">&#9654;</span>
+        <span class="learn-video-title">So erkennst du, ob jemand in deinem Google-Konto ist</span>
+      </a>
     </div>
   </article>
 <article class="learn-video-card" data-video-id="56XCKFtkbdU" data-search="Hier siehst du, welche Daten Google über dich gespeichert hat google datenschutz privacy">
     <div class="learn-short-preview">
-      <iframe
-        src="https://www.youtube-nocookie.com/embed/56XCKFtkbdU"
-        title="Hier siehst du, welche Daten Google über dich gespeichert hat"
-        loading="lazy"
-        referrerpolicy="strict-origin-when-cross-origin"
-        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen></iframe>
+      <a class="learn-video-play" href="https://www.youtube.com/shorts/56XCKFtkbdU" data-video-embed="https://www.youtube-nocookie.com/embed/56XCKFtkbdU" aria-label="Hier siehst du, welche Daten Google über dich gespeichert hat">
+        <img data-src="https://i.ytimg.com/vi/56XCKFtkbdU/hqdefault.jpg" alt="" width="480" height="360" loading="lazy" decoding="async">
+        <span class="learn-video-play-icon" aria-hidden="true">&#9654;</span>
+        <span class="learn-video-title">Hier siehst du, welche Daten Google über dich gespeichert hat</span>
+      </a>
     </div>
   </article>
 <article class="learn-video-card" data-video-id="-D0nMsvA0S4" data-search="Microsoft-Konto gehackt? Prüfe sofort Käufe und Abos microsoft konto abos">
     <div class="learn-short-preview">
-      <iframe
-        src="https://www.youtube-nocookie.com/embed/-D0nMsvA0S4"
-        title="Microsoft-Konto gehackt? Prüfe sofort Käufe und Abos"
-        loading="lazy"
-        referrerpolicy="strict-origin-when-cross-origin"
-        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen></iframe>
+      <a class="learn-video-play" href="https://www.youtube.com/shorts/-D0nMsvA0S4" data-video-embed="https://www.youtube-nocookie.com/embed/-D0nMsvA0S4" aria-label="Microsoft-Konto gehackt? Prüfe sofort Käufe und Abos">
+        <img data-src="https://i.ytimg.com/vi/-D0nMsvA0S4/hqdefault.jpg" alt="" width="480" height="360" loading="lazy" decoding="async">
+        <span class="learn-video-play-icon" aria-hidden="true">&#9654;</span>
+        <span class="learn-video-title">Microsoft-Konto gehackt? Prüfe sofort Käufe und Abos</span>
+      </a>
     </div>
   </article>
 <article class="learn-video-card" data-video-id="zHyRgGsss7s" data-search="Konto gehackt? Diese OneDrive-Freigaben musst du löschen onedrive konto freigaben">
     <div class="learn-short-preview">
-      <iframe
-        src="https://www.youtube-nocookie.com/embed/zHyRgGsss7s"
-        title="Konto gehackt? Diese OneDrive-Freigaben musst du löschen"
-        loading="lazy"
-        referrerpolicy="strict-origin-when-cross-origin"
-        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen></iframe>
+      <a class="learn-video-play" href="https://www.youtube.com/shorts/zHyRgGsss7s" data-video-embed="https://www.youtube-nocookie.com/embed/zHyRgGsss7s" aria-label="Konto gehackt? Diese OneDrive-Freigaben musst du löschen">
+        <img data-src="https://i.ytimg.com/vi/zHyRgGsss7s/hqdefault.jpg" alt="" width="480" height="360" loading="lazy" decoding="async">
+        <span class="learn-video-play-icon" aria-hidden="true">&#9654;</span>
+        <span class="learn-video-title">Konto gehackt? Diese OneDrive-Freigaben musst du löschen</span>
+      </a>
     </div>
   </article>
 <article class="learn-video-card" data-video-id="D7kBvkCEgqU" data-search="Microsoft-Konto gehackt? Prüfe diese Outlook-Einstellungen outlook konto microsoft">
     <div class="learn-short-preview">
-      <iframe
-        src="https://www.youtube-nocookie.com/embed/D7kBvkCEgqU"
-        title="Microsoft-Konto gehackt? Prüfe diese Outlook-Einstellungen"
-        loading="lazy"
-        referrerpolicy="strict-origin-when-cross-origin"
-        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen></iframe>
+      <a class="learn-video-play" href="https://www.youtube.com/shorts/D7kBvkCEgqU" data-video-embed="https://www.youtube-nocookie.com/embed/D7kBvkCEgqU" aria-label="Microsoft-Konto gehackt? Prüfe diese Outlook-Einstellungen">
+        <img data-src="https://i.ytimg.com/vi/D7kBvkCEgqU/hqdefault.jpg" alt="" width="480" height="360" loading="lazy" decoding="async">
+        <span class="learn-video-play-icon" aria-hidden="true">&#9654;</span>
+        <span class="learn-video-title">Microsoft-Konto gehackt? Prüfe diese Outlook-Einstellungen</span>
+      </a>
     </div>
   </article>
 <article class="learn-video-card" data-video-id="81h7NNerkEA" data-search="Microsoft-Konto gehackt? Sofort das tun! microsoft konto">
     <div class="learn-short-preview">
-      <iframe
-        src="https://www.youtube-nocookie.com/embed/81h7NNerkEA"
-        title="Microsoft-Konto gehackt? Sofort das tun!"
-        loading="lazy"
-        referrerpolicy="strict-origin-when-cross-origin"
-        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen></iframe>
+      <a class="learn-video-play" href="https://www.youtube.com/shorts/81h7NNerkEA" data-video-embed="https://www.youtube-nocookie.com/embed/81h7NNerkEA" aria-label="Microsoft-Konto gehackt? Sofort das tun!">
+        <img data-src="https://i.ytimg.com/vi/81h7NNerkEA/hqdefault.jpg" alt="" width="480" height="360" loading="lazy" decoding="async">
+        <span class="learn-video-play-icon" aria-hidden="true">&#9654;</span>
+        <span class="learn-video-title">Microsoft-Konto gehackt? Sofort das tun!</span>
+      </a>
     </div>
   </article>
 <article class="learn-video-card" data-video-id="yCcgwlQyvEM" data-search="Diese WhatsApp-Nachricht kostet Familien Tausende Franken whatsapp betrug">
     <div class="learn-short-preview">
-      <iframe
-        src="https://www.youtube-nocookie.com/embed/yCcgwlQyvEM"
-        title="Diese WhatsApp-Nachricht kostet Familien Tausende Franken"
-        loading="lazy"
-        referrerpolicy="strict-origin-when-cross-origin"
-        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen></iframe>
+      <a class="learn-video-play" href="https://www.youtube.com/shorts/yCcgwlQyvEM" data-video-embed="https://www.youtube-nocookie.com/embed/yCcgwlQyvEM" aria-label="Diese WhatsApp-Nachricht kostet Familien Tausende Franken">
+        <img data-src="https://i.ytimg.com/vi/yCcgwlQyvEM/hqdefault.jpg" alt="" width="480" height="360" loading="lazy" decoding="async">
+        <span class="learn-video-play-icon" aria-hidden="true">&#9654;</span>
+        <span class="learn-video-title">Diese WhatsApp-Nachricht kostet Familien Tausende Franken</span>
+      </a>
     </div>
   </article>
 <article class="learn-video-card" data-video-id="Sg2nFP_aDu0" data-search="Microsoft Authenticator einrichten (MFA aktivieren) mfa microsoft-authenticator two-factor-authentication security">
     <div class="learn-short-preview">
-      <iframe
-        src="https://www.youtube-nocookie.com/embed/Sg2nFP_aDu0"
-        title="Microsoft Authenticator einrichten (MFA aktivieren)"
-        loading="lazy"
-        referrerpolicy="strict-origin-when-cross-origin"
-        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen></iframe>
+      <a class="learn-video-play" href="https://www.youtube.com/shorts/Sg2nFP_aDu0" data-video-embed="https://www.youtube-nocookie.com/embed/Sg2nFP_aDu0" aria-label="Microsoft Authenticator einrichten (MFA aktivieren)">
+        <img data-src="https://i.ytimg.com/vi/Sg2nFP_aDu0/hqdefault.jpg" alt="" width="480" height="360" loading="lazy" decoding="async">
+        <span class="learn-video-play-icon" aria-hidden="true">&#9654;</span>
+        <span class="learn-video-title">Microsoft Authenticator einrichten (MFA aktivieren)</span>
+      </a>
     </div>
   </article>
 <article class="learn-video-card" data-video-id="ajXgS-ZX_6A" data-search="Social Engineering: Der Mensch als Angriffsziel social-engineering">
     <div class="learn-short-preview">
-      <iframe
-        src="https://www.youtube-nocookie.com/embed/ajXgS-ZX_6A"
-        title="Social Engineering: Der Mensch als Angriffsziel"
-        loading="lazy"
-        referrerpolicy="strict-origin-when-cross-origin"
-        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen></iframe>
+      <a class="learn-video-play" href="https://www.youtube.com/shorts/ajXgS-ZX_6A" data-video-embed="https://www.youtube-nocookie.com/embed/ajXgS-ZX_6A" aria-label="Social Engineering: Der Mensch als Angriffsziel">
+        <img data-src="https://i.ytimg.com/vi/ajXgS-ZX_6A/hqdefault.jpg" alt="" width="480" height="360" loading="lazy" decoding="async">
+        <span class="learn-video-play-icon" aria-hidden="true">&#9654;</span>
+        <span class="learn-video-title">Social Engineering: Der Mensch als Angriffsziel</span>
+      </a>
     </div>
   </article>
 <article class="learn-video-card" data-video-id="wxXif0Y6HTI" data-search="Social Engineering: Wenn Technik nicht das Problem ist social-engineering">
     <div class="learn-short-preview">
-      <iframe
-        src="https://www.youtube-nocookie.com/embed/wxXif0Y6HTI"
-        title="Social Engineering: Wenn Technik nicht das Problem ist"
-        loading="lazy"
-        referrerpolicy="strict-origin-when-cross-origin"
-        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen></iframe>
+      <a class="learn-video-play" href="https://www.youtube.com/shorts/wxXif0Y6HTI" data-video-embed="https://www.youtube-nocookie.com/embed/wxXif0Y6HTI" aria-label="Social Engineering: Wenn Technik nicht das Problem ist">
+        <img data-src="https://i.ytimg.com/vi/wxXif0Y6HTI/hqdefault.jpg" alt="" width="480" height="360" loading="lazy" decoding="async">
+        <span class="learn-video-play-icon" aria-hidden="true">&#9654;</span>
+        <span class="learn-video-title">Social Engineering: Wenn Technik nicht das Problem ist</span>
+      </a>
     </div>
   </article>
         </div>
@@ -728,9 +689,9 @@
     <div class="wrap">
       <p>© <span id="year"></span> Swissploit.</p>
       <nav class="foot-nav" aria-label="Footer navigation">
-        <a href="/index.html#services" data-transition>Services</a>
-        <a href="/index.html#ueber" data-transition>About Swissploit</a>
-        <a href="/index.html#kontakt" data-transition>Contact</a>
+        <a href="/#services" data-transition>Services</a>
+        <a href="/#ueber" data-transition>About Swissploit</a>
+        <a href="/#kontakt" data-transition>Contact</a>
         <a class="nav-learn" href="/en/learn/" data-transition>Learn</a>
       </nav>
       

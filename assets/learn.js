@@ -9,6 +9,48 @@
   const buttons = [...document.querySelectorAll('[data-learn-filter]')];
   const empty = document.getElementById('noResults');
   const status = document.getElementById('learnResultStatus');
+  // No remote image requests while the video filter is closed. Only nearby cards load.
+  function loadThumbnail(img, priority = false) {
+    if (!img.dataset.src) return;
+    img.loading = priority ? 'eager' : 'lazy';
+    img.fetchPriority = priority ? 'high' : 'low';
+    img.src = img.dataset.src;
+    delete img.dataset.src;
+    thumbnailObserver?.unobserve(img);
+  }
+  const thumbnailObserver = 'IntersectionObserver' in window
+    ? new IntersectionObserver(entries => {
+      entries.forEach(({target, isIntersecting}) => {
+        if (isIntersecting) loadThumbnail(target);
+      });
+    }, {rootMargin: '400px 0px'}) : null;
+  function observeThumbnails() {
+    thumbnailObserver?.disconnect();
+    if (videos.hidden) return;
+    const pending = [...videos.querySelectorAll('article:not([hidden]) img[data-src]')];
+    let prioritized = 0;
+    pending.forEach(img => {
+      const rect = img.getBoundingClientRect();
+      if (rect.top < innerHeight && rect.bottom > 0 && prioritized < 6) {
+        loadThumbnail(img, true);
+        prioritized++;
+      } else if (thumbnailObserver) thumbnailObserver.observe(img);
+      else loadThumbnail(img);
+    });
+  }
+  videos.addEventListener('click', event => {
+    const link = event.target.closest('[data-video-embed]');
+    if (!link || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+    event.preventDefault();
+    const iframe = document.createElement('iframe');
+    iframe.title = link.getAttribute('aria-label');
+    iframe.src = link.dataset.videoEmbed + '?autoplay=1';
+    iframe.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+    iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+    iframe.allowFullscreen = true;
+    link.replaceWith(iframe);
+    iframe.focus();
+  });
   const articleFilters = {
     phishing: ['phishing', 'smishing', 'quishing', 'qr-phishing', 'phishing-mail'],
     fraud: ['betrug', 'ceo-fraud', 'vishing', 'telefonbetrug', 'bankbetrug', 'support-scam', 'social-engineering', 'zahlungsbetrug'],
@@ -59,6 +101,12 @@
       : (isEnglish ? 'No matching content found.' : 'Keine passenden Inhalte gefunden.');
     status.textContent = isEnglish ? `${count} ${videoMode ? 'videos' : 'articles'} shown.`
       : `${count} ${videoMode ? 'Videos' : 'Artikel'} angezeigt.`;
+    // Remove players when filtering them out, so hidden videos cannot keep playing.
+    videos.querySelectorAll('article[hidden] iframe').forEach(iframe => {
+      const card = iframe.closest('article');
+      iframe.replaceWith(card._preview.cloneNode(true));
+    });
+    observeThumbnails();
   }
   searchInput.addEventListener('input', applyFilters);
   searchInput.addEventListener('search', applyFilters);
@@ -70,5 +118,8 @@
     });
     applyFilters();
   }));
+  videos.querySelectorAll('article').forEach(card => {
+    card._preview = card.querySelector('[data-video-embed]').cloneNode(true);
+  });
   applyFilters();
 })();

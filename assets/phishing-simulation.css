@@ -1,4 +1,6 @@
 /* Page-local styling; shared theme, navigation and Learn components remain in use. */
+/* Sticky stays in normal flow: the actual header height supplies the offset, even without JS. */
+.phishing-simulation-page .site-header.shared-header{position:sticky}
 .phishing-simulation-page{--simulation-gap:clamp(64px,8vw,108px)}
 .phishing-simulation-page .section{padding:var(--simulation-gap) 0}
 .phishing-simulation-page .section p{text-wrap:pretty}
