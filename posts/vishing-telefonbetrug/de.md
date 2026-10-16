@@ -4,7 +4,7 @@ date: "2026-09-02"
 category: "phishing-betrug"
 title: "Vishing: So erkennst du Betrug am Telefon"
 excerpt: "Ein angeblicher Bank-, Support- oder Behördenmitarbeiter ruft an und verlangt schnelles Handeln? So erkennst du Vishing und reagierst richtig."
-tags: [vishing, telefonbetrug, social-engineering, phishing, bankbetrug, support-scam, security-awareness]
+tags: [vishing, telefonbetrug, social-engineering, phishing, bankbetrug, support-scam]
 image: "assets/blog/vishing-telefonbetrug.webp"
 imageAlt: "Smartphone mit einem verdächtigen Anruf eines angeblichen Support-Mitarbeiters"
 keyTakeaway: "Vertraue einem Anruf nicht allein wegen der angezeigten Telefonnummer oder weil die Person glaubwürdig wirkt. Gib keine Passwörter, Sicherheitscodes oder MFA-Bestätigungen weiter und rufe die Organisation bei Unsicherheit selbst über eine bekannte offizielle Nummer zurück."

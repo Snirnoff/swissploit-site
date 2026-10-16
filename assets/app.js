@@ -82,6 +82,7 @@
 (function(){
   const y = document.getElementById('year');
   if(y) y.textContent = new Date().getFullYear();
+  document.querySelectorAll('[data-site-year]').forEach(el => { el.textContent = new Date().getFullYear(); });
 })();
 
 
@@ -478,18 +479,25 @@ if(shortsSection){
 (function(){
   const form = document.getElementById('contactForm');
   if(!form) return;
+  const topic = document.getElementById('cf-topic');
+  const requested = new URLSearchParams(location.search).get('anliegen');
+  if (topic && [...topic.options].some(option => option.value === requested)) topic.value = requested;
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
 
     const msg = (document.getElementById('cf-message')?.value || '').trim();
+    if (msg.length < 10) { document.getElementById('cf-message').setCustomValidity('Bitte beschreibe dein Anliegen mit mindestens 10 Zeichen.'); form.reportValidity(); return; }
     const to = 'hello@swissploit.ch';
-    const subject = 'Kontaktanfrage Swissploit';
+    const subject = 'Swissploit · ' + (topic?.value || 'Kontaktanfrage');
     const body = msg ? msg : '';
 
     const mailto = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     window.location.href = mailto;
+    const feedback = document.getElementById('contact-feedback');
+    if (feedback) feedback.textContent = 'Der E-Mail-Entwurf wurde zum Öffnen an dein Mailprogramm übergeben. Bitte dort prüfen und senden. Falls kein Programm öffnet, schreibe an hello@swissploit.ch. Es wurde noch keine Nachricht versendet.';
   });
+  document.getElementById('cf-message')?.addEventListener('input', event => event.target.setCustomValidity(''));
 })();
 
 
@@ -961,6 +969,22 @@ if(shortsSection){
 
   // Learn indexes and legacy blog article pages: keep Learn active
   const p = (location.pathname || "").toLowerCase();
+  if (header.classList.contains('shared-header')) {
+    const update = () => {
+      const section = /\/(learn|blog)\//.test(p) ? (new URLSearchParams(location.search).get('format') === 'video' ? 'shorts' : 'learn')
+        : /\/(quiz-games|phishing-quiz|phishing-simulation)\//.test(p) ? 'quiz-games'
+        : /\/(unternehmen|leistungen)\//.test(p) ? 'business'
+        : p.startsWith('/ueber-swissploit/') ? 'neutral' : '';
+      links.forEach(link => {
+        const active = link.dataset.core === section;
+        link.classList.toggle('is-active', active);
+        if (active) link.setAttribute('aria-current', 'page'); else link.removeAttribute('aria-current');
+      });
+    };
+    update(); window.addEventListener('popstate', update);
+    document.addEventListener('click', event => { if (event.target.closest('[data-learn-filter]')) setTimeout(update, 0); });
+    return;
+  }
   if (p.includes("/learn/") || p.includes("/blog/") || p.includes("blog.html") || p.includes("blog-post.html")) {
     const blogLink = links.find(a => (a.getAttribute("href") || "").toLowerCase().includes("/learn/"));
     links.forEach(a => a.classList.remove("is-active"));

@@ -1,5 +1,10 @@
 # swissploit-site
 
+## Interaktives Phishing-Quiz
+
+Die Seite `/phishing-quiz/` bietet sechs sichere Awareness-Szenarien. Aufbau,
+Erweiterung und Browserprüfungen sind in [docs/PHISHING-QUIZ.md](docs/PHISHING-QUIZ.md) beschrieben.
+
 ## Neuen Learn-Artikel hinzufügen
 
 1. Lege pro Beitrag einen Ordner unter `posts/<slug>/` an.

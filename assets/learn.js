@@ -60,7 +60,7 @@
     accounts: ['account-sicherheit', 'konto', 'login', 'anmeldedaten', 'fake-login', 'credential-stuffing', 'microsoft-authenticator', 'microsoft-365', 'entra-id', 'azure-ad'],
     workplace: ['security-buero', 'ceo-fraud', 'arbeitsplatz', 'mitarbeitende', 'unternehmen', 'kmu']
   };
-  let activeFilter = 'all';
+  let activeFilter = new URLSearchParams(location.search).get('format') === 'video' ? 'video' : 'all';
   function saveLanguage(value) {
     try { localStorage.setItem('swissploit-blog-lang', value); } catch {}
   }
@@ -120,6 +120,11 @@
   }));
   videos.querySelectorAll('article').forEach(card => {
     card._preview = card.querySelector('[data-video-embed]').cloneNode(true);
+  });
+  buttons.forEach(button => {
+    const active = button.dataset.learnFilter === activeFilter;
+    button.classList.toggle('is-active', active);
+    button.setAttribute('aria-pressed', String(active));
   });
   applyFilters();
 })();

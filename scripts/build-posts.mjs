@@ -1,3 +1,4 @@
+import { renderSiteFooterHtml } from './site-footer.mjs';
 import fs from "node:fs/promises";
 import path from "node:path";
 import fg from "fast-glob";
@@ -466,29 +467,8 @@ function renderIndexJsonLd(posts, lang) {
   return JSON.stringify(data).replace(/</g, "\\u003c");
 }
 
-function siteNavItems(lang) {
-  return [
-    { href: "/#services", label: "Services" },
-    { href: "/#ueber", label: lang === "en" ? "About Swissploit" : "Über Swissploit" },
-    { href: "/#kontakt", label: lang === "en" ? "Contact" : "Kontakt" },
-    { href: lang === "en" ? "/en/learn/" : "/learn/", label: "Learn", current: true }
-  ];
-}
-
 function renderSiteHeaderHtml(lang) {
   return renderSharedHeader(lang, { learn: true });
-}
-
-function renderFooterSystemHtml(lang) {
-  return "";
-}
-
-function renderFooterNavHtml(lang) {
-  const items = siteNavItems(lang);
-
-  return `<nav class="foot-nav" aria-label="${lang === "en" ? "Footer navigation" : "Footer Navigation"}">
-        ${items.map((item) => `<a${item.current ? ' class="nav-learn"' : ""} href="${item.href}" data-transition>${item.label}</a>`).join("\n        ")}
-      </nav>`;
 }
 
 function getRelatedPosts(allPosts, currentPost, lang, limit = 3) {
@@ -800,7 +780,7 @@ function renderBlogIndexPage(posts, lang, videos) {
           ? "Understand digital threats, spot scams and learn how to protect yourself in everyday life and at work."
           : "Verstehe digitale Gefahren, erkenne Betrugsversuche und lerne, wie du dich im Alltag und am Arbeitsplatz besser schützt."}</p>
 
-        <div class="learn-controls">
+${isEn ? '' : '        <a class="learn-quiz-link" href="/phishing-quiz/"><span>Interaktiv · 5–8 Minuten</span> Würdest du auf Phishing hereinfallen? <strong>Quiz starten →</strong></a>\n\n'}        <div class="learn-controls">
           <div class="blog-search learn-search">
             <label class="sr-only" for="blogSearch">${isEn ? "Search Learn" : "Learn durchsuchen"}</label>
             <span class="learn-search-icon" aria-hidden="true"></span>
@@ -842,16 +822,10 @@ function renderBlogIndexPage(posts, lang, videos) {
     </section>
   </main>
 
-  <footer class="site-footer" role="contentinfo">
-    <div class="wrap">
-      <p>© <span id="year"></span> Swissploit.</p>
-      ${renderFooterNavHtml(lang)}
-      ${renderFooterSystemHtml(lang)}
-    </div>
-  </footer>
+  ${renderSiteFooterHtml(lang)}
 
   <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
+    
     window.SWISSPLOIT_INDEX_LANG = ${JSON.stringify(lang)};
   </script>
   <script src="/assets/transition.js"></script>
@@ -1027,16 +1001,10 @@ ${tocHtml}
     </section>
   </main>
 
-  <footer class="site-footer" role="contentinfo">
-    <div class="wrap">
-      <p>© <span id="year"></span> Swissploit.</p>
-      ${renderFooterNavHtml(lang)}
-      ${renderFooterSystemHtml(lang)}
-    </div>
-  </footer>
+  ${renderSiteFooterHtml(lang)}
 
   <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
+    
     window.SWISSPLOIT_CURRENT_LANG = ${JSON.stringify(lang)};
   </script>
 
@@ -1236,6 +1204,10 @@ window.SWISSPLOIT_BLOG_POSTS = ${JSON.stringify(posts, null, 2)};
   }
   const sitemapEntries = [
     { loc: `${BASE_URL}/` },
+    { loc: `${BASE_URL}/phishing-quiz/` },
+    { loc: `${BASE_URL}/quiz-games/` },
+    { loc: `${BASE_URL}/unternehmen/` },
+    { loc: `${BASE_URL}/ueber-swissploit/` },
     { loc: `${BASE_URL}/learn/` },
     { loc: `${BASE_URL}/en/learn/` },
     ...serviceEntries,

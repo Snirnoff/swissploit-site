@@ -4,7 +4,7 @@ date: "2026-09-02"
 category: "social-engineering"
 title: "Social Engineering einfach erklärt: Wenn Angreifer Menschen manipulieren"
 excerpt: "Social Engineering nutzt Vertrauen, Zeitdruck und menschliches Verhalten statt technischer Sicherheitslücken. Erfahre, wie solche Angriffe funktionieren und wie du sie erkennst."
-tags: [social-engineering, phishing, vishing, betrug, manipulation, security-awareness, cyber-security]
+tags: [social-engineering, phishing, vishing, betrug, manipulation, cyber-security]
 image: "assets/blog/social-engineering.webp"
 imageAlt: "Darstellung einer verdächtigen digitalen Anfrage, bei der Vertrauen und Zeitdruck zur Manipulation eingesetzt werden"
 videoUrl: "https://www.youtube.com/watch?v=n_2DYwpVsS4"

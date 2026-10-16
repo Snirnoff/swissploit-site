@@ -55,16 +55,16 @@
 <body class="learn-article-page">
   <header class="site-header shared-header" role="banner">
     <div class="site-header-inner">
-      <a class="site-brand" href="/#intro" aria-label="Swissploit Home">
+      <a class="site-brand" href="/" aria-label="Swissploit Home">
         <span class="site-signet" aria-hidden="true"><img src="/assets/Swissploit_S_blue2.png" alt="" width="1254" height="1254" decoding="async"></span>
         <span>Swissploit</span>
       </a>
       <nav id="primaryNav" class="site-nav" aria-label="Main navigation">
-        <a href="/#services">Services</a>
-        <a href="/#ueber">About Swissploit</a>
-        <a href="/#kontakt">Contact</a>
-        <a class="site-learn is-active" href="/en/learn/" aria-current="page"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 5v12M2 3.5c3-1 5-.5 8 1.5 3-2 5-2.5 8-1.5v12c-3-1-5-.5-8 1.5-3-2-5-2.5-8-1.5z"/></svg>Learn<span aria-hidden="true">↗</span></a>
-        <a class="site-check" href="mailto:hello@swissploit.ch?subject=Security%20Check%20anfragen">Security Check</a>
+        <a href="/en/learn/" data-core="learn">Learn</a>
+        <a href="/en/learn/?format=video" data-core="shorts">Videos</a>
+        <a href="/quiz-games/" data-core="quiz-games">Quiz &amp; Games</a>
+        <a href="/unternehmen/" data-core="business">For business</a>
+        <a href="/ueber-swissploit/" data-core="neutral">About Swissploit</a>
       </nav>
       <button id="themeToggle" class="site-theme" type="button" aria-pressed="true" aria-label="Toggle dark theme" title="Light / dark"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="7" fill="none"/><path d="M10 3a7 7 0 0 0 0 14z" stroke="none"/></svg></button>
     </div>
@@ -350,21 +350,13 @@ In <strong>Entra ID → User → Sign-in logs</strong>, look for:</p>
     </section>
   </main>
 
-  <footer class="site-footer" role="contentinfo">
-    <div class="wrap">
-      <p>© <span id="year"></span> Swissploit.</p>
-      <nav class="foot-nav" aria-label="Footer navigation">
-        <a href="/#services" data-transition>Services</a>
-        <a href="/#ueber" data-transition>About Swissploit</a>
-        <a href="/#kontakt" data-transition>Contact</a>
-        <a class="nav-learn" href="/en/learn/" data-transition>Learn</a>
-      </nav>
-      
-    </div>
-  </footer>
+  <footer class="site-footer" role="contentinfo"><div class="site-footer-inner">
+    <span>© <span data-site-year>2026</span> Swissploit</span>
+    <nav aria-label="Footer navigation"><a href="/en/learn/">Learn</a><a href="/en/learn/?format=video">Videos</a><a href="/quiz-games/">Quiz &amp; Games</a><a href="/unternehmen/">For business</a><a href="/ueber-swissploit/">About Swissploit</a><a href="/ueber-swissploit/#kontakt">Contact</a></nav>
+  </div></footer>
 
   <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
+    
     window.SWISSPLOIT_CURRENT_LANG = "en";
   </script>
 

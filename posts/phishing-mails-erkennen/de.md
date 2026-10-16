@@ -4,7 +4,7 @@ category: phishing-betrug
 title: "Phishing-Mails erkennen: Diese 7 Dinge solltest du prüfen"
 excerpt: "Phishing-Mails können heute professionell aussehen und fehlerfrei geschrieben sein. Mit diesen 7 einfachen Checks erkennst du verdächtige E-Mails deutlich besser."
 shortDescription: "7 einfache Checks, mit denen du verdächtige E-Mails, Links und Login-Aufforderungen besser beurteilen kannst."
-tags: [phishing, phishing-mail, e-mail, betrug, social-engineering, links, fake-login, security-awareness]
+tags: [phishing, phishing-mail, e-mail, betrug, social-engineering, links, fake-login]
 image: "assets/blog/phishing-mails-erkennen.webp"
 imageAlt: "Illustration: Person vor einer E-Mail mit markierten Absender-, Anhang- und Linksymbolen"
 videoUrl: "https://www.youtube.com/shorts/rTf4mqmvhUc"

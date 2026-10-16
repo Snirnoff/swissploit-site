@@ -43,7 +43,7 @@ class PhishEscape {
       <div class="phish-surface" aria-hidden="true"></div>
       <header class="phish-bar">
         <span class="phish-wordmark">PHISH <b>ESCAPE.</b><span>BY SWISSPLOIT</span></span>
-        <div class="phish-bar-actions"><button type="button" class="phish-pause" aria-label="Animation pausieren" aria-pressed="false">Pause</button><button type="button" class="phish-exit">Überspringen <span aria-hidden="true">↗</span></button></div>
+        <div class="phish-bar-actions"><button type="button" class="phish-pause" aria-label="Animation pausieren" aria-pressed="false">Pause</button><button type="button" class="phish-exit">Beenden <span aria-hidden="true">↗</span></button></div>
       </header>
       <ol class="phish-progress" aria-label="Die drei Checks"><li aria-current="step"><span>01</span> DOMAIN</li><li><span>02</span> KONTEXT</li><li><span>03</span> MELDEN</li></ol>
       <div class="phish-content"></div>
@@ -66,8 +66,9 @@ class PhishEscape {
     this.content.innerHTML='<div class="phish-intro"><p class="phish-eyebrow">EIN KLEINER PERSPEKTIVENWECHSEL</p><h1 tabindex="-1">PHISHED.</h1><p>Du hast angebissen.</p><span>Finde den sicheren Weg zurück.</span></div>';
     this.content.querySelector('h1').focus();
     if(matchMedia('(pointer: coarse)').matches) this.dialog.querySelector('.phish-control-hint').textContent='Finger bewegen · oder einen Weg antippen';
-    this.on(this.dialog.querySelector('.phish-exit'),'click',()=>this.close(false));
-    this.on(this.dialog,'cancel',event=>{event.preventDefault();this.close(false,true);});
+    const exit = () => { this.close(false,true); location.assign('/quiz-games/'); };
+    this.on(this.dialog.querySelector('.phish-exit'),'click',exit);
+    this.on(this.dialog,'cancel',event=>{event.preventDefault();exit();});
     this.on(this.dialog.querySelector('.phish-pause'),'click',()=>this.togglePause());
     this.on(this.dialog.querySelector('.phish-paused button'),'click',()=>this.togglePause());
     this.on(this.dialog,'pointermove',event=>this.pointer(event));

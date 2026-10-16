@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="de-CH" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Phishing-Quiz: Erkennst du den Angriff? | Swissploit</title>
+  <meta name="description" content="Teste dein Phishing-Radar: neun interaktive Situationen zu E-Mails, Fake-Logins, QR-Phishing, SMS und CEO-Fraud. Kostenlos, sicher simuliert und direkt erklärt.">
+  <link rel="canonical" href="https://swissploit.ch/phishing-quiz/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="de_CH">
+  <meta property="og:title" content="Würdest du auf diesen Angriff hereinfallen?">
+  <meta property="og:description" content="Neun Situationen. Dein geschärfter Blick. Teste dich im interaktiven Swissploit Phishing-Quiz.">
+  <meta property="og:url" content="https://swissploit.ch/phishing-quiz/">
+  <meta property="og:image" content="https://swissploit.ch/assets/swissploit-og.png">
+  <meta property="og:image:alt" content="Swissploit – Cyber Security">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Phishing-Quiz: Erkennst du den Angriff? | Swissploit">
+  <meta name="twitter:description" content="Neun interaktive Situationen zu Phishing, QR-Codes, SMS und Social Engineering. Prüfen, entscheiden und verstehen.">
+  <meta name="twitter:image" content="https://swissploit.ch/assets/swissploit-og.png">
+  <link rel="icon" type="image/png" href="/assets/Swissploit_S_blue2.png">
+  <link rel="apple-touch-icon" href="/assets/Swissploit_S_blue2.png">
+  <meta name="theme-color" content="#05070b">
+  <script>
+    try {
+      const theme = localStorage.getItem('swissploit-theme');
+      if (theme === 'light' || theme === 'dark') document.documentElement.dataset.theme = theme;
+    } catch {}
+  </script>
+  <link rel="stylesheet" href="/assets/styles.css">
+  <link rel="stylesheet" href="/assets/navigation.css" />
+  <link rel="stylesheet" href="/assets/phishing-quiz.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"LearningResource","name":"Swissploit Phishing-Quiz","description":"Neun interaktive Lernsituationen mit direkter Erklärung zu Phishing, Suchresultaten, QR-Codes, Fake-Logins, SMS und CEO-Fraud.","url":"https://swissploit.ch/phishing-quiz/","inLanguage":"de-CH","learningResourceType":"Quiz","isAccessibleForFree":true,"timeRequired":"PT8M","provider":{"@type":"Organization","name":"Swissploit","url":"https://swissploit.ch/"}}
+  </script>
+</head>
+<body class="phishing-quiz-page">
+  <a class="pq-skip" href="#main">Zum Inhalt</a>
+  <header class="site-header shared-header" role="banner">
+    <div class="site-header-inner">
+      <a class="site-brand" href="/" aria-label="Swissploit Startseite">
+        <span class="site-signet" aria-hidden="true"><img src="/assets/Swissploit_S_blue2.png" alt="" width="1254" height="1254" decoding="async"></span>
+        <span>Swissploit</span>
+      </a>
+      <nav id="primaryNav" class="site-nav" aria-label="Hauptnavigation">
+        <a href="/learn/" data-core="learn">Learn</a>
+        <a href="/learn/?format=video" data-core="shorts">Videos</a>
+        <a href="/quiz-games/" data-core="quiz-games">Quiz &amp; Games</a>
+        <a href="/unternehmen/" data-core="business">Für Unternehmen</a>
+        <a href="/ueber-swissploit/" data-core="neutral">Über Swissploit</a>
+      </nav>
+      <button id="themeToggle" class="site-theme" type="button" aria-pressed="true" aria-label="Dunkle Darstellung umschalten" title="Hell / Dunkel"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="7" fill="none"/><path d="M10 3a7 7 0 0 0 0 14z" stroke="none"/></svg></button>
+    </div>
+  </header>
+  <button id="menuToggle" class="site-menu-control" type="button" aria-expanded="false" aria-controls="navigationDialog" aria-label="Menü öffnen"><span></span><span></span></button>
+  <dialog id="navigationDialog" class="site-menu-dialog" aria-label="Hauptnavigation">
+    <button class="site-menu-control menu-close" type="button" aria-label="Menü schliessen" autofocus><span></span><span></span></button>
+    <span class="site-menu-label">Swissploit</span>
+    <div class="menu-content"></div>
+  </dialog>
+  <main id="main">
+    <div id="quiz-intro" class="pq-intro wrap">
+      <nav class="pq-breadcrumb" aria-label="Brotkrümelnavigation"><a href="/learn/">Swissploit Learn</a><span aria-hidden="true">/</span><span aria-current="page">Phishing-Quiz</span></nav>
+      <section class="pq-hero-grid" aria-labelledby="quiz-intro-title">
+        <div class="pq-hero-copy">
+          <p class="pq-eyebrow">DEIN ALLTAG. DEIN ENTSCHEID.</p>
+          <h1 id="quiz-intro-title">Würdest du auf diesen Angriff <span>hereinfallen?</span></h1>
+          <p class="pq-lead">Echte Nachricht oder raffinierte Falle? Prüfe Links, Absender und Webseiten – und entscheide selbst.</p>
+          <ul class="pq-hero-meta" aria-label="Über das Quiz"><li>5–8 Minuten</li><li>9 interaktive Situationen</li><li>Kostenlos</li></ul>
+          <button type="button" class="btn primary" id="quiz-start" disabled>Quiz starten <span aria-hidden="true">→</span></button>
+          <p class="pq-trust">Ohne Anmeldung · keine echten Angriffe</p>
+          <p id="quiz-load-note" class="pq-load-note" role="status">Das interaktive Quiz benötigt JavaScript und lädt gerade. Falls es nicht startet, kannst du in der <a href="/blog/phishing-erkennen/">Anleitung zum Erkennen von Phishing</a> weiterlesen.</p>
+          <noscript><p class="pq-load-note">JavaScript ist deaktiviert. Die <a href="/learn/">Swissploit-Learn-Artikel</a> funktionieren auch ohne JavaScript.</p></noscript>
+        </div>
+        <div class="pq-hero-art" aria-hidden="true">
+          <div class="pq-orbit"></div>
+          <div class="pq-art-mail">
+            <div class="pq-art-mail-top"><span>POSTEINGANG</span><span>01 NEUE NACHRICHT</span></div>
+            <div class="pq-art-sender"><span class="pq-avatar"><span class="pq-ms-mark"><i></i><i></i><i></i><i></i></span></span><div><strong>Microsoft 365 Service</strong><small>Heute, 08:42 · An dich</small></div></div>
+            <h3>Ihr Konto braucht eine Bestätigung.</h3>
+            <div class="pq-art-line"></div><div class="pq-art-line short"></div>
+            <span class="pq-art-cta">Zugriff bestätigen ↗</span>
+          </div>
+          <div class="pq-art-loupe"><small>VERTRAUTER NAME. ABER WESSEN DOMAIN?</small><code>login.microsoftonline.com.<strong>konto-pruefung.swissploit.ch</strong></code></div>
+        </div>
+      </section>
+      <section class="pq-how" aria-labelledby="quiz-how-title"><h2 id="quiz-how-title">Kein Ratespiel.<br>Ein genauer Blick.</h2><ol><li><strong>Prüfe die Details</strong></li><li><strong>Triff deine Entscheidung</strong></li><li><strong>Verstehe das Warum</strong></li></ol></section>
+    </div>
+    <div id="quiz-stage" class="pq-stage wrap" hidden></div>
+  </main>
+  <footer class="site-footer" role="contentinfo"><div class="site-footer-inner">
+    <span>© <span data-site-year>2026</span> Swissploit</span>
+    <nav aria-label="Footernavigation"><a href="/learn/">Learn</a><a href="/learn/?format=video">Videos</a><a href="/quiz-games/">Quiz &amp; Games</a><a href="/unternehmen/">Für Unternehmen</a><a href="/ueber-swissploit/">Über Swissploit</a><a href="/ueber-swissploit/#kontakt">Kontakt</a></nav>
+  </div></footer>
+  <script defer src="/assets/app.js"></script>
+  <script type="module" src="/assets/phishing-quiz.js"></script>
+</body>
+</html>

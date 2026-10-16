@@ -160,7 +160,7 @@ body.home-page { overflow-x: clip; }
 .home-page .contact-questions { list-style: none; counter-reset: question; padding: 0; margin: 34px auto; max-width: 700px; text-align: left; }
 .home-page .contact-questions li { counter-increment: question; display: flex; align-items: baseline; gap: 22px; padding: 15px 0; border-bottom: 1px solid var(--border); color: var(--fg); font-size: clamp(17px,2vw,22px); font-weight: 550; letter-spacing: -.02em; }
 .home-page .contact-questions li::before { content: '0' counter(question); color: var(--home-accent); font-size: 12px; font-weight: 500; }
-.home-page .site-footer { background: transparent; color: var(--home-copy); }
+.home-page .site-footer { background: var(--bg); color: var(--home-copy); border-color: var(--border); }
 /* Reveal hiding is enabled only by the successfully initialized controller. */
 .home-page .reveal { opacity: 1; translate: none; filter: none; scale: 1; }
 html[data-theme="light"] .home-page .spl-eyebrow { color: var(--home-accent) !important; }

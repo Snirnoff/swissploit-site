@@ -9,8 +9,12 @@
     "test": "node --test scripts/*.test.mjs",
     "build:headers": "node scripts/sync-headers.mjs",
     "check:headers": "node scripts/sync-headers.mjs --check",
-    "build": "npm run build:posts && npm run build:headers",
-    "check:motion": "node scripts/check-motion-browser.mjs"
+    "build:pages": "node scripts/build-product-pages.mjs",
+    "build": "npm run build:pages && npm run build:posts && npm run build:headers",
+    "check:motion": "node scripts/check-motion-browser.mjs",
+    "check:quiz": "node scripts/check-phishing-quiz-browser.mjs",
+    "check:premium": "node scripts/check-premium-browser.mjs",
+    "check:rotation": "node scripts/check-rotation-browser.mjs"
   },
   "dependencies": {
     "gray-matter": "^4.0.3",

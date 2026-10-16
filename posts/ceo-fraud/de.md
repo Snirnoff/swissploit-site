@@ -4,7 +4,7 @@ date: "2026-09-02"
 category: "phishing-betrug"
 title: "CEO Fraud: Wenn der Chef angeblich dringend Geld braucht"
 excerpt: "Eine dringende Zahlungsanfrage vom Chef kann echt wirken – und trotzdem Betrug sein. So erkennst du CEO Fraud und reagierst richtig."
-tags: [ceo-fraud, social-engineering, phishing, betrug, zahlungsbetrug, security-awareness, kmu]
+tags: [ceo-fraud, social-engineering, phishing, betrug, zahlungsbetrug, kmu]
 image: "assets/blog/ceo-fraud.webp"
 imageAlt: "Mitarbeiter erhält eine ungewöhnliche dringende Zahlungsanfrage von einer angeblichen Führungskraft"
 keyTakeaway: "Bei ungewöhnlichen Zahlungsanfragen zählt nicht nur, von wem eine Nachricht scheinbar stammt. Prüfe sensible Anfragen über einen unabhängigen Kommunikationsweg und halte bestehende Freigabeprozesse immer ein."

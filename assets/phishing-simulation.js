@@ -24,3 +24,5 @@ async function startSimulation(event) {
 }
 
 starts.forEach(start => start.addEventListener('click', startSimulation));
+// A deliberate game link opens the existing game, including its intro, directly.
+if (new URLSearchParams(location.search).get('play') === '1') starts[0]?.click();

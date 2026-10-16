@@ -122,8 +122,7 @@ window.SWISSPLOIT_BLOG_POSTS = [
       "betrug",
       "social-engineering",
       "links",
-      "fake-login",
-      "security-awareness"
+      "fake-login"
     ],
     "image": "assets/blog/phishing-mails-erkennen.webp",
     "thumb": "assets/blog/phishing-mails-erkennen.webp",
@@ -176,7 +175,6 @@ window.SWISSPLOIT_BLOG_POSTS = [
       "phishing",
       "betrug",
       "zahlungsbetrug",
-      "security-awareness",
       "kmu"
     ],
     "image": "assets/blog/ceo-fraud.webp",
@@ -442,7 +440,6 @@ window.SWISSPLOIT_BLOG_POSTS = [
       "vishing",
       "betrug",
       "manipulation",
-      "security-awareness",
       "cyber-security"
     ],
     "image": "assets/blog/social-engineering.webp",
@@ -492,7 +489,6 @@ window.SWISSPLOIT_BLOG_POSTS = [
     "tags": [
       "phishing",
       "e-mail",
-      "security-awareness",
       "arbeitsplatz",
       "social-engineering",
       "security-buero"
@@ -548,8 +544,7 @@ window.SWISSPLOIT_BLOG_POSTS = [
       "social-engineering",
       "phishing",
       "bankbetrug",
-      "support-scam",
-      "security-awareness"
+      "support-scam"
     ],
     "image": "assets/blog/vishing-telefonbetrug.webp",
     "thumb": "assets/blog/vishing-telefonbetrug.webp",

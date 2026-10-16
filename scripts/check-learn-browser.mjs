@@ -102,7 +102,7 @@ try {
   }
   await call('Emulation.setEmulatedMedia',{features:[{name:'prefers-reduced-motion',value:'reduce'}]});
   results.push({reducedMotion:await evaluate('({animation:getComputedStyle(document.querySelector(".article-callout")).animationName,transition:getComputedStyle(document.querySelector(".post-content a")).transitionDuration})')});
-  for(const url of ['/index.html','/index.html#services','/index.html#sicherheitslage','/leistungen/microsoft-365-security-care/','/learn/','/phishing-simulation/']) {
+  for(const url of ['/index.html','/index.html#services','/index.html#sicherheitslage','/#security-check','/learn/','/phishing-simulation/']) {
    await call('Emulation.setDeviceMetricsOverride',{width:1440,height:900,deviceScaleFactor:1,mobile:false});
    await call('Page.navigate',{url:'http://127.0.0.1:4173'+url});
    await delay(400);

@@ -4,7 +4,7 @@ date: "2026-09-02"
 category: "security-buero"
 title: "Verdächtige E-Mail im Büro: So reagierst du richtig"
 excerpt: "Eine E-Mail kommt dir verdächtig vor? Diese einfachen Schritte helfen dir, ruhig zu prüfen, richtig zu reagieren und andere im Unternehmen zu schützen."
-tags: [phishing, e-mail, security-awareness, arbeitsplatz, social-engineering, security-buero]
+tags: [phishing, e-mail, arbeitsplatz, social-engineering, security-buero]
 image: "assets/blog/verdaechtige-e-mail-im-buero.webp"
 imageAlt: "Mitarbeiter prüft eine verdächtige E-Mail am Arbeitsplatz"
 keyTakeaway: "Wenn dir eine E-Mail ungewöhnlich vorkommt, handle nicht unter Zeitdruck. Klicke nicht vorschnell, prüfe sensible Anfragen über einen unabhängigen Weg und melde verdächtige Nachrichten über den vorgesehenen internen Meldeweg."

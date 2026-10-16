@@ -76,17 +76,17 @@ For major section redesigns:
 
 ## Product strategy
 
-The website should focus on one primary commercial offer:
+The current B2B services are exclusively:
 
-Swissploit Microsoft 365 Security Care.
+- Security Check
+- Datenschutz Care
+- Incident Readiness
 
-Do not split this offer into Essential, Professional, Premium or other public package tiers unless explicitly requested. The public website should present one clear Microsoft 365 Care service that covers the most important security needs for Swiss SMEs.
+Preserve the existing homepage positioning for these three services. Datenschutz Care focuses on organised responsibilities, documents, providers, data lifecycles and privacy processes. Incident Readiness prepares roles, escalation, contacts, decisions and response processes before an incident.
 
-Position the service as ongoing Microsoft 365 security care for Swiss SMEs without an internal security department. It should cover accounts, MFA, admin rights, Outlook, Exchange, Teams, SharePoint, OneDrive, external sharing, security alerts, Secure Score, management reporting and first response for Microsoft 365 security incidents.
+Retired offers must not be presented as current services or reintroduced through CTAs, links, landing pages or structured data. The phishing quiz is an independent learning product and may link to relevant Learn articles and Swissploit videos.
 
-Additional services such as backup, Intune, Defender rollout, Purview, DLP, phishing simulations, ISO preparation, cyber insurance readiness or incident response should be treated as follow-up projects or upsells, not as equal homepage products.
-
-Avoid overpromising. Do not claim that Swissploit makes companies completely secure. Use credible wording such as: reduce risk, improve control, create clear priorities, support incident readiness and provide a trusted security contact.
+Avoid overpromising or guarantees of complete security. Use credible wording about reducing risks, clarifying priorities and preparing for incidents.
 
 ## Learn articles
 

@@ -37,6 +37,26 @@
   text-align: center;
 }
 
+.learn-quiz-link{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  align-items:center;
+  gap:8px 16px;
+  padding:16px 20px;
+  margin:26px auto 0;
+  border:1px solid var(--border-strong);
+  border-radius:12px;
+  background:var(--panel);
+  color:var(--fg);
+  text-decoration:none;
+  font-size:13px;
+}
+.learn-quiz-link span{font-size:11px;color:color-mix(in srgb,var(--fg) 72%,var(--bg));}
+.learn-quiz-link strong{font-weight:600;color:color-mix(in srgb,var(--accent) 65%,var(--fg));}
+.learn-quiz-link:hover{border-color:var(--accent);}
+.learn-quiz-link:focus-visible{outline:3px solid var(--accent);outline-offset:4px;}
+
 .learn-eyebrow,
 .learn-page .section .learn-eyebrow{
   width: fit-content;
